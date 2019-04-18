@@ -1,0 +1,18 @@
+GEM
+  remote: https://rubygems.org/
+  remote: https://stripe.dev/sorbet-repo/super-secret-private-beta/
+  specs:
+    sorbet (0.4.3805)
+      sorbet-static (= 0.4.3805)
+    sorbet-runtime (0.4.3805)
+    sorbet-static (0.4.3805-universal-darwin-14)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  sorbet!
+  sorbet-runtime!
+
+BUNDLED WITH
+   2.0.1
