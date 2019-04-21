@@ -41,6 +41,8 @@ class ModelsRbiFormatter
   end
 
   class ModelFormatter
+    extend T::Sig
+
     sig{params(model_class: T.class_of(ActiveRecord::Base)).void}
     def initialize(model_class)
       @model_class = model_class
