@@ -143,7 +143,8 @@ class ModelsRbiFormatter
 
     sig{returns(String)}
     def draw_class_header
-      "class #{@model_class.name} < #{@model_class.superclass}"
+      "class #{@model_class.name} < #{@model_class.superclass}\n" +
+      "  extend T::Sig"
     end
 
     sig{returns(String)}
