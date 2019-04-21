@@ -47,7 +47,6 @@ class ModelsRbiFormatter
     def initialize(model_class)
       @model_class = model_class
       @columns_hash = model_class.columns_hash
-      @model_methods = model_class.new.methods
       @generated_sigs = ActiveSupport::HashWithIndifferentAccess.new
     end
 
