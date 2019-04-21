@@ -105,7 +105,7 @@ class ModelsRbiFormatter
 
     def populate_single_assoc_getter_setter(assoc_name, reflection)
       # TODO allow people to specify the possible values of polymorphic associations
-      assoc_class = reflection.polymorphic? ? 'T.untyped' : reflection.class_name
+      assoc_class = polymorphic_assoc?(reflection) ? 'T.untyped' : reflection.class_name
       assoc_type = "T.nilable(#{assoc_class})"
       if reflection.belongs_to?
         # if this is a belongs_to connection, we may be able to detect whether
@@ -126,13 +126,19 @@ class ModelsRbiFormatter
 
     def populate_collection_assoc_getter_setter(assoc_name, reflection)
       # TODO allow people to specify the possible values of polymorphic associations
-      assoc_class = reflection.polymorphic? ? 'T.untyped' : reflection.class_name
+      assoc_class = polymorphic_assoc?(reflection) ? 'T.untyped' : reflection.class_name
       @generated_sigs.merge!({
         "#{assoc_name}" => { ret: "ActiveRecord::Relation" },
         "#{assoc_name}=" => {
           args: [ name: :value, arg_type: :req, value_type: "T.any(T::Array[#{assoc_class}], ActiveRecord::Relation)" ],
         },
       })
+    end
+
+    def polymorphic_assoc?(reflection)
+      reflection.through_reflection? ?
+        polymorphic_assoc?(reflection.source_reflection) :
+        reflection.polymorphic?
     end
 
     sig{returns(String)}
