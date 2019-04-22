@@ -50,9 +50,9 @@ class RoutesRbiFormatter
       if r[:name].present?
         <<~MESSAGE
           # Sigs for route #{r[:path]}
-          sig{params(args: T.untyped, kwargs: T.untyped).returns(String)}
+          sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
           def #{r[:name]}_path(*args, **kwargs); end
-          sig{params(args: T.untyped, kwargs: T.untyped).returns(String)}
+          sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
           def #{r[:name]}_url(*args, **kwargs); end
         MESSAGE
       else
