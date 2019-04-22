@@ -30,7 +30,7 @@ class ModelsRbiFormatter
         @buffer << formatter.generate_rbi
       rescue StandardError => ex
         puts "---"
-        puts "Error when handling mode #{@model_class.name}: #{ex}"
+        puts "Error when handling model #{model_class.name}: #{ex}"
       end
     end
     result
