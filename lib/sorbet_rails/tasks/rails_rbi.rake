@@ -20,4 +20,11 @@ namespace :rails_rbi do
     file_path = Rails.root.join('app', 'models', 'models.rbi')
     File.write(file_path, ModelsRbiFormatter.new(all_models).generate_rbi)
   end
+
+  desc 'Generate rbi for a test model'
+  task test_models: :environment do |t, args|
+    all_models = args.extras.map { |m| Object.const_get(m) }
+    file_path = Rails.root.join('app', 'models', 'test_model.rbi')
+    File.write(file_path, ModelsRbiFormatter.new(all_models).generate_rbi)
+  end
 end
