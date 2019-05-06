@@ -192,7 +192,9 @@ class ModelsRbiFormatter
         end
         class #{@model_class.name} < #{@model_class.superclass}
           extend T::Sig
+          extend T::Generic
           extend #{@model_class.name}::NamedScope
+          Elem = type_template(fixed: #{@model_class.name})
       MESSAGE
     end
 
