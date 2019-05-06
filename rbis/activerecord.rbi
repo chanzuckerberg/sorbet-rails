@@ -11,12 +11,24 @@ class ActiveRecord::Relation
 
   sig { params(level: T.nilable(Integer)).returns(T::Array[Elem]) }
   def flatten(level); end
+
+  # This is part of both FinderMethods & Enumerable module.
+  # We need to define here to override the typedef in Enumerable module.
+  # TODO normally this method could return Elem or Array[Elem]
+  # however, we think it's better to limit the interface to returning Elem only
+  sig { params(args: T.untyped).returns(Elem).soft }
+  def find(*args); end
 end
 
 module ActiveRecord::Querying
   extend T::Sig
   extend T::Generic
   Elem = type_member
+
+  # TODO normally this method could return Elem or Array[Elem]
+  # however, we think it's better to limit the interface to returning Elem only
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Elem).soft }
+  def find(*args, &block); end
 end
 
 class ActiveRecord::Base
