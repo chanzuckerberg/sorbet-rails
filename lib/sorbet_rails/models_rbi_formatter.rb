@@ -55,6 +55,12 @@ class ModelsRbiFormatter
       @columns_hash = model_class.columns_hash
       @generated_sigs = ActiveSupport::HashWithIndifferentAccess.new
       @generated_class_sigs = ActiveSupport::HashWithIndifferentAccess.new
+      begin
+        # Load all dynamic instance methods of this model by instantiating a fake model
+        @model_class.new
+      rescue StandardError
+        puts "Note: Unable to create new instance of #{model_class.name}"
+      end
     end
 
     def generate_rbi
@@ -65,7 +71,7 @@ class ModelsRbiFormatter
       @buffer = []
       @buffer << draw_class_header
 
-      @model_class.new.methods.sort.each do |method_name|
+      @model_class.instance_methods.sort.each do |method_name|
         expected_sig = @generated_sigs[method_name]
         next unless expected_sig.present?
 
