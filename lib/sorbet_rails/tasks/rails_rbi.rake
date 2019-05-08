@@ -16,7 +16,7 @@ namespace :rails_rbi do
   task models: :environment do
     # need to eager load to see all models
     Rails.application.eager_load!
-    all_models = ApplicationRecord.descendants
+    all_models = ActiveRecord::Base.descendants
     file_path = Rails.root.join('app', 'models', 'models.rbi')
     File.write(file_path, ModelsRbiFormatter.new(all_models).generate_rbi)
   end
