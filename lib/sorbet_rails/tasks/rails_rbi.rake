@@ -9,7 +9,7 @@ namespace :rails_rbi do
     require "action_dispatch/routing/inspector"
     inspector = ActionDispatch::Routing::RoutesInspector.new(all_routes)
     file_path = Rails.root.join("sorbet", "rails-rbi", "routes.rbi")
-    FileUtils.mkdir_p(file_path)
+    FileUtils.mkdir_p(File.dirname(file_path))
     File.write(file_path, inspector.format(RoutesRbiFormatter.new))
   end
 
