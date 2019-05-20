@@ -280,6 +280,9 @@ class ModelRbiFormatter
 
   def type_for_column_def(column_def)
     strict_type = RUBY_TO_SORBET_TYPE_MAPPING[column_def.type] || 'T.untyped'
+    if column_def.array?
+      strict_type = "T::Array[#{strict_type}]"
+    end
     column_def.null ? "T.nilable(#{strict_type})" : strict_type
   end
 
