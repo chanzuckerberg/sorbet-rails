@@ -31,6 +31,14 @@ module ActiveRecord::Querying
   def find(*args, &block); end
 end
 
+module ActiveRecord::QueryMethods
+  # TODO: where.not is a special case that we replace it with a `where_not` method
+  # `where` when not given parameters will return a `ActiveRecord::QueryMethods::WhereChain`
+  # instance that has a method `not` on it
+  sig { params(opts: T.untyped, rest: T.untyped).returns(T.self_type) }
+  def not(opts = nil, *rest); end
+end
+
 class ActiveRecord::Base
   extend ActiveRecord::Querying
   extend T::Generic
