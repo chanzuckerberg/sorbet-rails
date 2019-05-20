@@ -274,8 +274,9 @@ class ModelRbiFormatter
     (
       [
         "ActiveRecord::AttributeMethods::GeneratedAttributeMethods",
-        "#{@model_class.name}::GeneratedAssociationMethods",
+        "GeneratedAssociationMethods",
         "ActiveRecord::Querying",
+        "ActiveRecord::AttributeMethods::PrimaryKey",
       ].any? { |k| owner_name.include?(k) } ||
       [
         "lib/active_record/enum.rb",
