@@ -1,4 +1,5 @@
-require 'rails'
+require "rails"
+require "sorbet_rails/custom_finder_methods"
 
 class SorbetRails::Railtie < Rails::Railtie
   railtie_name :sorbet_rails
@@ -6,5 +7,12 @@ class SorbetRails::Railtie < Rails::Railtie
   rake_tasks do
     path = File.expand_path(__dir__)
     Dir.glob("#{path}/tasks/**/*.rake").each { |f| load f }
+  end
+
+  initializer "sorbet-rails.initialize" do
+    ActiveSupport.on_load(:active_record) do
+      ActiveRecord::Base.extend SorbetRails::CustomFinderMethods
+      ActiveRecord::Relation.include SorbetRails::CustomFinderMethods
+    end
   end
 end
