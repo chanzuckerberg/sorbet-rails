@@ -142,14 +142,25 @@ class ModelRbiFormatter
 
   def populate_generated_column_methods
     @columns_hash.each do |column_name, column_def|
-      column_type = type_for_column_def(column_def)
-
-      @generated_sigs.merge!({
-        "#{column_name}" => { ret: column_type },
-        "#{column_name}=" => {
-          args: [ name: :value, arg_type: :req, value_type: column_type ],
-        },
-      })
+      if @model_class.defined_enums.has_key?(column_name)
+        # enum attribute is treated differently
+        assignable_type = "T.any(Integer, String, Symbol)"
+        assignable_type = "T.nilable(#{assignable_type})" if column_def.null
+        @generated_sigs.merge!({
+          "#{column_name}" => { ret: "String" },
+          "#{column_name}=" => {
+            args: [ name: :value, arg_type: :req, value_type: assignable_type],
+          },
+        })
+      else
+        column_type = type_for_column_def(column_def)
+        @generated_sigs.merge!({
+          "#{column_name}" => { ret: column_type },
+          "#{column_name}=" => {
+            args: [ name: :value, arg_type: :req, value_type: column_type ],
+          },
+        })
+      end
 
       if column_def.type == :boolean
         @generated_sigs["#{column_name}?"] = {
