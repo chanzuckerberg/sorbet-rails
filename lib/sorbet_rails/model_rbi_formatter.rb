@@ -1,6 +1,5 @@
 # typed: true
 class ModelRbiFormatter
-  extend T::Sig
 
   RUBY_TO_SORBET_TYPE_MAPPING = {
     boolean: 'T::Boolean',
@@ -242,7 +241,6 @@ class ModelRbiFormatter
       reflection.polymorphic?
   end
 
-  sig {returns(String)}
   def draw_class_header
     # We define a custom <ModelName>::Relation class so that it can be extended
     # to contain custom scopes for each models
@@ -265,12 +263,10 @@ class ModelRbiFormatter
     MESSAGE
   end
 
-  sig {returns(String)}
   def draw_class_footer
     "end"
   end
 
-  sig {returns(String)}
   def draw_named_scope_header
     <<~MESSAGE
       module #{@model_class.name}::NamedScope
@@ -278,12 +274,10 @@ class ModelRbiFormatter
     MESSAGE
   end
 
-  sig {returns(String)}
   def draw_named_scope_footer
     "end"
   end
 
-  sig { params(buffer: T::Array[String]).void }
   def generate_column_methods(buffer)
     @columns_hash.each do |column_name, column_def|
       buffer << draw_column_methods(column_name, column_def)
