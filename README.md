@@ -38,4 +38,22 @@ In short:
 - Use `find`, `first` and `last` to fetch a single record
 - Use `find_n`, `first_n`, `last_n` to fetch an array of records.
 
+### `find_by` vs `find_by_<attributes>`
+We've added sigs for `find_by!` and `find_by`. However, we do not generate individual `find_by_<attributes>` methods. Please consider refactor the `find_by_<attributes>` function calls to `find_by` or `find_by!`. It's also recommended by RuboCop to use `find_by` over the dynamic siblings!
 
+### `after_commit` and other callbacks
+Consider codemod-ing `after_commit` callbacks to use instance method functions. Sorbet doesn't support binding an optional block with a different context. Because of this, when using a callback with a custom block, the block is evaluated in the wrong context (Class-level context). 
+
+```
+after_commit do ... end
+```
+codemod to 
+```
+after_commit :after_commit_func
+def after_commit_func
+  ...
+end
+```
+
+See this link for a full list of callbacks available in Rails:
+https://api.rubyonrails.org/classes/ActiveRecord/Callbacks.html
