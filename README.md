@@ -59,8 +59,14 @@ In short:
 - Use `find`, `first` and `last` to fetch a single record
 - Use `find_n`, `first_n`, `last_n` to fetch an array of records.
 
-### `find_by` vs `find_by_<attributes>`
-We've added sigs for `find_by!` and `find_by`. However, we do not generate individual `find_by_<attributes>` methods. Please consider refactor the `find_by_<attributes>` function calls to `find_by` or `find_by!`. It's also recommended by RuboCop to use `find_by` over the dynamic siblings!
+### `find_by_<attributes>`, `<attribute>_changed?`, etc.
+Rails supports dynamic methods based on attribute names, such as `find_by_<attribute>`, `<attribute>_changed?`, etc. They all have static counterparts. Instead of generating all possible dynamic methods that Rails support, we recommend to use of the static version of these methods instead (also recommended by RuboCop). We've added sigs for th
+
+Following are the list of attribute dynamic methods and their static counterpart. The static methods have proper sigs.
+- `find_by_<attributes>` -> `find_by(<attributes>)`
+- `find_by_<attributes>!` -> `find_by!(<attributes>)`
+- `<attribute>_changed?` -> `attribute_changed?(<attribute>)`
+- `saved_change_to_<attribute>?` -> `saved_change_to_attribute?(<attribute>)`
 
 ### `after_commit` and other callbacks
 Consider codemod-ing `after_commit` callbacks to use instance method functions. Sorbet doesn't support binding an optional block with a different context. Because of this, when using a callback with a custom block, the block is evaluated in the wrong context (Class-level context). 
