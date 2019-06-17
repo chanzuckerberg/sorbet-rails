@@ -76,11 +76,14 @@ after_commit do ... end
 ```
 codemod to 
 ```
-after_commit :after_commit_func
-def after_commit_func
+after_commit :after_commit
+def after_commit
   ...
 end
 ```
+
+I've created a gist with codemod commands to convert the code automatically
+https://gist.github.com/manhhung741/d2e0a8f9c4178f328b241dd8b28ccc67
 
 See this link for a full list of callbacks available in Rails:
 https://api.rubyonrails.org/classes/ActiveRecord/Callbacks.html
