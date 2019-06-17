@@ -51,7 +51,7 @@ At the moment, the generation task generate the following signatures
 - Named scopes
 - Model relation class
 
-## Trick & Tips
+## Tips & Tricks
 ### `find`, `first` and `last` 
 These 3 methods can either return a single nilable record or an array of records. Sorbet does not allow us to define multiple sigs for a function. It doesn't support defining one function sig that has varying returning value depending on the input param type. We opt to define the most commonly used sig for these methods, and monkey-patch new functions for the secondary use.
 
