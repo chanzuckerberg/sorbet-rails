@@ -2,7 +2,7 @@ require "rails"
 require "sorbet-rails/custom_finder_methods"
 
 class SorbetRails::Railtie < Rails::Railtie
-  railtie_name :sorbet_rails
+  railtie_name "sorbet-rails"
 
   rake_tasks do
     path = File.expand_path(__dir__)
