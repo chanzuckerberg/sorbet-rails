@@ -1,3 +1,3 @@
 module SorbetRails
-  require 'sorbet_rails/railtie' if defined?(Rails)
+  require 'sorbet-rails/railtie' if defined?(Rails)
 end

@@ -1,5 +1,5 @@
-require("sorbet_rails/model_rbi_formatter")
-require("sorbet_rails/routes_rbi_formatter")
+require("sorbet-rails/model_rbi_formatter")
+require("sorbet-rails/routes_rbi_formatter")
 
 namespace :rails_rbi do
 

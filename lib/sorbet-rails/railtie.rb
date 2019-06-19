@@ -1,5 +1,5 @@
 require "rails"
-require "sorbet_rails/custom_finder_methods"
+require "sorbet-rails/custom_finder_methods"
 
 class SorbetRails::Railtie < Rails::Railtie
   railtie_name :sorbet_rails
