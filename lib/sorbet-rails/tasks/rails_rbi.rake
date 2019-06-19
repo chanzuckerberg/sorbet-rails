@@ -33,17 +33,16 @@ namespace :rails_rbi do
 
   def generate_rbis_for_models(model_classes, available_classes)
     available_class_names = Set.new(available_classes.map { |c| c.name })
-    Hash[
-      model_classes.map do |model_class|
-        begin
-          formatter = ModelRbiFormatter.new(model_class, available_class_names)
-          [model_class.name, formatter.generate_rbi]
-        rescue StandardError => ex
-          puts "---"
-          puts "Error when handling model #{model_class.name}: #{ex}"
-          [model_class.name, ""] # generate empty file
-        end
+    formatted = model_classes.map do |model_class|
+      begin
+        formatter = ModelRbiFormatter.new(model_class, available_class_names)
+        [model_class.name, formatter.generate_rbi]
+      rescue StandardError => ex
+        puts "---"
+        puts "Error when handling model #{model_class.name}: #{ex}"
+        nil
       end
-    ]
+    end
+    Hash[formatted.compact] # remove models with errors
   end
 end
