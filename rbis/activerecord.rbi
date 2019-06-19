@@ -13,6 +13,9 @@ class ActiveRecord::Relation
   sig { params(level: T.nilable(Integer)).returns(T::Array[Elem]) }
   def flatten(level); end
 
+  sig { returns(T::Array[Elem]) }
+  def to_a; end
+
   # This is part of both FinderMethods & Enumerable module.
   # We need to define here to override the typedef in Enumerable module.
   # TODO normally this method could return Elem or Array[Elem]
