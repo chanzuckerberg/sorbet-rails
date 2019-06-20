@@ -22,10 +22,10 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'byebug', '~>11.0.1', '>=11.0.1'
 
   # for testing a gem with a rails app (controller specs)
-  s.add_development_dependency 'bundler', '~>1.3.0', '>=1.3.0'
-  s.add_development_dependency 'rails', '~>5.2.3', '>=5.2.3'
-  s.add_development_dependency 'rspec-rails', '~>3.8.2', '>=3.8.2'
-  s.add_development_dependency 'sqlite3', '~>1.4.1', '>=1.4.1'
-  s.add_development_dependency 'puma', '~>3.12.1', '>=3.12.1'
-  s.add_development_dependency 'listen', '~>3.1.5', '>=3.1.5'
+  s.add_development_dependency 'bundler', '>=1.3.0'
+  s.add_development_dependency 'rails', '>=5.2.3'
+  s.add_development_dependency 'rspec-rails', '>=3.8.2'
+  s.add_development_dependency 'sqlite3', '>=1.4.1'
+  s.add_development_dependency 'puma', '>=3.12.1'
+  s.add_development_dependency 'listen', '>=3.1.5'
 end
