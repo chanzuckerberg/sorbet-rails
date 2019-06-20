@@ -1,4 +1,5 @@
 # sorbet-rails
+[![Gem Version](https://badge.fury.io/rb/sorbet-rails.svg)](https://badge.fury.io/rb/sorbet-rails)
 [![Build Status](https://travis-ci.org/chanzuckerberg/sorbet-rails.svg?branch=master)](https://travis-ci.org/chanzuckerberg/sorbet-rails)
 
 A set of tools to make the [Sorbet](https://sorbet.org) type checker work with Ruby on Rails seamlessly.
