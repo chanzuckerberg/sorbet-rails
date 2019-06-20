@@ -1,5 +1,4 @@
 require "byebug"
-require "byebug/core"
 require "simplecov"
 
 SimpleCov.start

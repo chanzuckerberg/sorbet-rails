@@ -4,10 +4,11 @@ require("sorbet-rails/routes_rbi_formatter")
 namespace :rails_rbi do
 
   desc "Generate rbi for rails routes"
-  task routes: :environment do
+  task :routes, [:root_dir] => :environment do |t, args|
     all_routes = Rails.application.routes.routes
     require "action_dispatch/routing/inspector"
     inspector = ActionDispatch::Routing::RoutesInspector.new(all_routes)
+    root_dir = args[:root_dir] || Rails.root
     file_path = Rails.root.join("sorbet", "rails-rbi", "routes.rbi")
     FileUtils.mkdir_p(File.dirname(file_path))
     File.write(file_path, inspector.format(RoutesRbiFormatter.new))
