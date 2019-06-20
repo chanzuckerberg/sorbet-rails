@@ -18,7 +18,11 @@ namespace :rails_rbi do
   task models: :environment do |t, args|
     # need to eager load to see all models
     Rails.application.eager_load!
-    all_models = ActiveRecord::Base.descendants
+
+    blacklisted_models = []
+    blacklisted_models << ActiveRecord::SchemaMigration if defined?(ActiveRecord::SchemaMigration)
+
+    all_models = ActiveRecord::Base.descendants - blacklisted_models
 
     models_to_generate = args.extras.size > 0 ?
       args.extras.map { |m| Object.const_get(m) } :
@@ -45,5 +49,12 @@ namespace :rails_rbi do
       end
     end
     Hash[formatted.compact] # remove models with errors
+  end
+
+  def blacklisted_models
+    blacklisted_models = []
+    blacklisted_models << ActiveRecord::SchemaMigration if defined?(ActiveRecord::SchemaMigration)
+    blacklisted_models << ApplicationRecord if defined?(ApplicationRecord)
+    blacklisted_models
   end
 end
