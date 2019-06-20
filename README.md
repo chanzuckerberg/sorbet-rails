@@ -16,7 +16,7 @@ This gem adds a few Rake tasks to generate Ruby Interface (RBI) files for dynami
   $ rake rails_rbi:routes
   $ rake rails_rbi:models
 ```
-4. Auto-upgrade the typecheck level of files to "strict":
+4. Auto-upgrade the typecheck level of files:
 ```sh
   $ srb tc --suggest-typed --typed=strict --error-white-list=7022 --autocorrect
 ```
