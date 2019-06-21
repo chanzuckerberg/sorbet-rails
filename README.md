@@ -59,7 +59,7 @@ The generation task currently creates the following signatures:
 
 ### `find`, `first` and `last` 
 
-These 3 methods can either return a single nilable record or an array of records. Sorbet does not allow us to define multiple signatures for a function. It doesn't support defining one function signature that has varying returning value depending on the input parameter type. We opt to define the most commonly used signature for these methods, and monkey-patch new functions for the secondary use case.
+These 3 methods can either return a single nilable record or an array of records. Sorbet does not allow us to define multiple signatures for a function ([except stdlib](https://github.com/chanzuckerberg/sorbet-rails/issues/18)). It doesn't support defining one function signature that has varying returning value depending on the input parameter type. We opt to define the most commonly used signature for these methods, and monkey-patch new functions for the secondary use case.
 
 In short:
 - Use `find`, `first` and `last` to fetch a single record.
