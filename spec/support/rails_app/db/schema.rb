@@ -22,6 +22,9 @@ ActiveRecord::Schema.define(version: 2019_06_20_003739) do
     t.integer "wizard_id", null: false
     t.string "wood_type"
     t.integer "core_type"
+    t.float "flexibility", null: false
+    t.decimal "hardness", null: false, precision: 10, scale: 10
+    t.decimal "reflectance", null: false, precision: 10, scale: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["wizard_id"], name: "index_wands_on_wizard_id"
