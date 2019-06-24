@@ -284,7 +284,7 @@ class ModelRbiFormatter
   def active_record_type_to_sorbet_type(klass)
     case klass
     when ActiveRecord::Type::Json
-      "T.any(Array, Float, Hash, Integer, String)"
+      "T.any(Array, T::Boolean, Float, Hash, Integer, String)"
     when ActiveRecord::Type::Boolean
      "T::Boolean"
     when ActiveRecord::Type::DateTime
