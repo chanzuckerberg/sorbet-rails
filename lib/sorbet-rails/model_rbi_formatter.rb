@@ -302,7 +302,7 @@ class ModelRbiFormatter
     when ActiveRecord::Enum::EnumType, ActiveRecord::Type::Binary, ActiveRecord::Type::String, ActiveRecord::Type::Text
       String
     else
-      T.untyped
+      "T.untyped"
     end
   end
 
