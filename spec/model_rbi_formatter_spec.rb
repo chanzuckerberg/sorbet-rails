@@ -37,7 +37,7 @@ RSpec.describe ModelRbiFormatter do
     formatter = ModelRbiFormatter.new(Wand, ['Wizard', 'Wand', 'SpellBook'])
     expect_match_file(
       formatter.generate_rbi,
-      'spec/test_data/models/expected_wand.rbi'
+      'spec/test_data/models/expected_wand.rbi',
     )
   end
 
