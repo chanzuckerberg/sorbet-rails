@@ -286,7 +286,7 @@ class ModelRbiFormatter
     when ActiveRecord::Type::Json
       "T.any(Array, Float, Hash, Integer, String)"
     when ActiveRecord::Type::Boolean
-      T::Boolean
+     "T::Boolean"
     when ActiveRecord::Type::DateTime
       DateTime
     when ActiveRecord::Type::Date
