@@ -23,7 +23,6 @@ Gem::Specification.new do |s|
 
   # for testing a gem with a rails app (controller specs)
   s.add_development_dependency 'bundler', '>=1.3.0'
-  s.add_development_dependency 'rails', '>=5.2.3'
   s.add_development_dependency 'rspec-rails', '>=3.8.2'
   s.add_development_dependency 'sqlite3', '>=1.4.1'
   s.add_development_dependency 'puma', '>=3.12.1'

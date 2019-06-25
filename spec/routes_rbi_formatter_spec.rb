@@ -11,11 +11,6 @@ RSpec.describe RoutesRbiFormatter do
     require "action_dispatch/routing/inspector"
     inspector = ActionDispatch::Routing::RoutesInspector.new(all_routes)
     formatted = inspector.format(RoutesRbiFormatter.new)
-    # Write the res to a file
-    # file_path = '/tmp/expected_routes.rbi'
-    # FileUtils.mkdir_p(File.dirname(file_path))
-    # File.write(file_path, res)
-    expected_value = File.read('spec/test_data/expected_routes.rbi')
-    expect(formatted).to eql(expected_value)
+    expect_match_file(formatted, 'expected_routes.rbi')
   end
 end

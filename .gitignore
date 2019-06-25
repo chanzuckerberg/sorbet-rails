@@ -50,28 +50,28 @@ build-iPhoneSimulator/
 .rvmrc
 
 # Rails app
-/spec/support/rails_app/tmp/*
-/spec/support/rails_app/.bundle
+/spec/support/**/tmp/*
+/spec/support/**/.bundle
 
 # Ignore the default SQLite database.
-/spec/support/rails_app/db/*.sqlite3
-/spec/support/rails_app/db/*.sqlite3-journal
+/spec/support/**/db/*.sqlite3
+/spec/support/**/db/*.sqlite3-journal
 
 # Ignore all logfiles and tempfiles.
-/spec/support/rails_app/log/*
-/spec/support/rails_app/tmp/*
-!/spec/support/rails_app/log/.keep
-!/spec/support/rails_app/tmp/.keep
+/spec/support/**/log/*
+/spec/support/**/tmp/*
+!/spec/support/**/log/.keep
+!/spec/support/**/tmp/.keep
 
 # Ignore uploaded files in development
-/spec/support/rails_app/storage/*
-!/spec/support/rails_app/storage/.keep
+/spec/support/**/storage/*
+!/spec/support/**/storage/.keep
 
-/spec/support/rails_app/node_modules
-/spec/support/rails_app/yarn-error.log
+/spec/support/**/node_modules
+/spec/support/**/yarn-error.log
 
-/spec/support/rails_app/public/assets
+/spec/support/**/public/assets
 .byebug_history
 
 # Ignore master key for decrypting credentials and more.
-/spec/support/rails_app/config/master.key
+/spec/support/**/config/master.key
