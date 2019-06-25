@@ -8,6 +8,12 @@ class Wizard::Relation < ActiveRecord::Relation
   Elem = type_member(fixed: Wizard)
 end
 
+class Wizard::CollectionProxy < ActiveRecord::Associations::CollectionProxy
+  include Wizard::NamedScope
+  extend T::Generic
+  Elem = type_member(fixed: Wizard)
+end
+
 class Wizard < ApplicationRecord
   extend T::Sig
   extend T::Generic
@@ -68,10 +74,10 @@ module Wizard::InstanceMethods
   sig { params(value: T.nilable(String)).void }
   def parent_email=(value); end
 
-  sig { returns(ActiveRecord::Relation[T.untyped]) }
+  sig { returns(ActiveRecord::Associations::CollectionProxy[T.untyped]) }
   def spell_books(); end
 
-  sig { params(value: T.any(T::Array[SpellBook], ActiveRecord::Relation[T.untyped])).void }
+  sig { params(value: T.any(T::Array[SpellBook], ActiveRecord::Associations::CollectionProxy[T.untyped])).void }
   def spell_books=(value); end
 
   sig { returns(DateTime) }
@@ -113,6 +119,9 @@ module Wizard::ModelRelationShared
 
   sig { params(args: T.untyped).returns(Wizard::Relation) }
   def Slytherin(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::Relation) }
+  def recent(*args); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
   def select(*args, block); end
