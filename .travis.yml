@@ -1,4 +1,7 @@
 language: ruby
+env:
+  - "RAILS_VERSION=5.1.7"
+  - "RAILS_VERSION=5.2.3"
 rvm:
 - 2.4.3
 - 2.5.0
