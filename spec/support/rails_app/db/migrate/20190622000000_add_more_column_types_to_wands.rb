@@ -1,4 +1,4 @@
-class AddMoreTypedColumnsToWands < ActiveRecord::Migration[5.2]
+class AddMoreColumnTypesToWands < ActiveRecord::Migration[5.2]
   def change
     add_column :wands, :flexibility,    :float,   null: false
     add_column :wands, :hardness,       :decimal, null: false, precision: 10, scale: 10

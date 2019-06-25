@@ -3,7 +3,7 @@
 # typed: strong
 
 class Wizard::Relation < ActiveRecord::Relation
-  include Wizard::NamedScope
+  include Wizard::ModelRelationShared
   extend T::Generic
   Elem = type_member(fixed: Wizard)
 end
@@ -17,8 +17,14 @@ end
 class Wizard < ApplicationRecord
   extend T::Sig
   extend T::Generic
-  extend Wizard::NamedScope
+  extend Wizard::ModelRelationShared
+  extend Wizard::ClassMethods
+  include Wizard::InstanceMethods
   Elem = type_template(fixed: Wizard)
+end
+
+module Wizard::InstanceMethods
+  extend T::Sig
 
   sig { returns(T::Boolean) }
   def Gryffindor?(); end
@@ -86,13 +92,15 @@ class Wizard < ApplicationRecord
   sig { params(value: T.nilable(Wand)).void }
   def wand=(value); end
 
+end
+module Wizard::ClassMethods
+  extend T::Sig
+
   sig { returns(T::Hash[T.any(String, Symbol), Integer]) }
-  def self.houses(); end
+  def houses(); end
 
 end
-
-
-module Wizard::NamedScope
+module Wizard::ModelRelationShared
   extend T::Sig
 
   sig { returns(Wizard::Relation) }
