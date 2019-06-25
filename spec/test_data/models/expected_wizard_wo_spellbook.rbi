@@ -104,6 +104,9 @@ module Wizard::NamedScope
   sig { params(args: T.untyped).returns(Wizard::Relation) }
   def Slytherin(*args); end
 
+  sig { params(args: T.untyped).returns(Wizard::Relation) }
+  def recent(*args); end
+
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
   def select(*args, block); end
 

@@ -19,10 +19,19 @@ RSpec.describe ModelRbiFormatter do
     expect(all_models).to eql([
       ActiveRecord::SchemaMigration,
       ApplicationRecord,
+      Potion,
       SpellBook,
       Wand,
       Wizard,
     ])
+  end
+
+  it 'does not throw an error when given an abstract class' do
+    formatter = ModelRbiFormatter.new(Potion, ['Potion'])
+    expect_match_file(
+      formatter.generate_rbi,
+      'spec/test_data/models/expected_potion.rbi',
+    )
   end
 
   it 'generates correct rbi file for Wizard' do
