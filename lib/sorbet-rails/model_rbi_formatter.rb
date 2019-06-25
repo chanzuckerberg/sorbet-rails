@@ -78,10 +78,6 @@ class ModelRbiFormatter
       # puts "Skip method '#{method_name}' because there is no matching method object."
       return
     end
-    if !matched_signature?(method_obj, expected_sig)
-      puts "Skip method '#{method_name}' because it has different signature from expected."
-      return
-    end
     @buffer << generate_method_sig(method_name, expected_sig).indent(2)
   end
 
@@ -261,7 +257,9 @@ class ModelRbiFormatter
   end
 
   def draw_module_or_class_footer
-    "end"
+    <<~MESSAGE
+      end
+    MESSAGE
   end
 
   def draw_module_header(name)
@@ -289,8 +287,6 @@ class ModelRbiFormatter
 
   def active_record_type_to_sorbet_type(klass)
     case klass
-    when ActiveRecord::Type::Json
-      "T.any(Array, T::Boolean, Float, Hash, Integer, String)"
     when ActiveRecord::Type::Boolean
      "T::Boolean"
     when ActiveRecord::Type::DateTime
@@ -308,16 +304,14 @@ class ModelRbiFormatter
     when ActiveRecord::Enum::EnumType, ActiveRecord::Type::Binary, ActiveRecord::Type::String, ActiveRecord::Type::Text
       String
     else
-      "T.untyped"
+      # Json type is only supported in Rails 5.2.3 and above
+      case
+      when Object.const_defined?('ActiveRecord::Type::Json') && klass.is_a?(ActiveRecord::Type::Json)
+        "T.any(Array, T::Boolean, Float, Hash, Integer, String)"
+      else
+        "T.untyped"
+      end
     end
-  end
-
-  def matched_signature?(method_obj, generated_method_def)
-    # use parameters reflection to find method arguments
-    actual_params = method_obj.parameters
-    expected_args = generated_method_def[:args] || []
-    expected_params = expected_args.map { |arg| [arg[:arg_type], arg[:name]] }
-    actual_params == expected_params
   end
 
   def generate_method_sig(method_name, generated_method_def)
