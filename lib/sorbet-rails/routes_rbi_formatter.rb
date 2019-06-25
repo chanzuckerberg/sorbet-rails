@@ -29,7 +29,7 @@ class RoutesRbiFormatter
         "# No routes were found for this grep pattern."
       end
 
-    @buffer << " # For more information about routes, see the Rails guide: https://guides.rubyonrails.org/routing.html."
+    @buffer << "# For more information about routes, see the Rails guide: https://guides.rubyonrails.org/routing.html."
   end
 
   def result

@@ -13,4 +13,15 @@ RSpec.describe RoutesRbiFormatter do
     formatted = inspector.format(RoutesRbiFormatter.new)
     expect_match_file(formatted, 'expected_routes.rbi')
   end
+
+  it 'generates correctly when there is no routes' do
+    empty_set = ActionDispatch::Routing::RouteSet.new
+    empty_set.draw do
+      # no routes
+    end
+    require "action_dispatch/routing/inspector"
+    inspector = ActionDispatch::Routing::RoutesInspector.new(empty_set.routes)
+    formatted = inspector.format(RoutesRbiFormatter.new)
+    expect_match_file(formatted, 'expected_no_routes.rbi')
+  end
 end
