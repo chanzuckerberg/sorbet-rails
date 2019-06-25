@@ -6,6 +6,7 @@
 /pkg/
 /spec/reports/
 /spec/examples.txt
+/spec/support/
 /test/tmp/
 /test/version_tmp/
 /tmp/
@@ -50,6 +51,7 @@ build-iPhoneSimulator/
 .rvmrc
 
 # Rails app
+<<<<<<< HEAD
 /spec/support/**/tmp/*
 /spec/support/**/.bundle
 
@@ -75,3 +77,4 @@ build-iPhoneSimulator/
 
 # Ignore master key for decrypting credentials and more.
 /spec/support/**/config/master.key
+
