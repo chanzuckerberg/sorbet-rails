@@ -27,7 +27,7 @@ RSpec.describe ModelRbiFormatter do
 
   it 'does not throw an error when given an abstract class' do
     formatter = ModelRbiFormatter.new(ApplicationRecord, ['ApplicationRecord'])
-    formatter.generate_rbi
+    expect(formatter.generate_rbi).to_not raise_error
   end
 
   it 'generates correct rbi file for Wizard' do
