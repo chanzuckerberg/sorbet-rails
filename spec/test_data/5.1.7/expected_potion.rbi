@@ -3,7 +3,7 @@
 # typed: strong
 
 class Potion::Relation < ActiveRecord::Relation
-  include Potion::NamedScope
+  include Potion::ModelRelationShared
   extend T::Generic
   Elem = type_member(fixed: Potion)
 end
@@ -17,13 +17,23 @@ end
 class Potion < ApplicationRecord
   extend T::Sig
   extend T::Generic
-  extend Potion::NamedScope
+  extend Potion::ModelRelationShared
+  extend Potion::ClassMethods
+  include Potion::InstanceMethods
   Elem = type_template(fixed: Potion)
+end
+
+module Potion::InstanceMethods
+  extend T::Sig
 
 end
 
+module Potion::ClassMethods
+  extend T::Sig
 
-module Potion::NamedScope
+end
+
+module Potion::ModelRelationShared
   extend T::Sig
 
   sig { returns(Potion::Relation) }
@@ -114,4 +124,5 @@ module Potion::NamedScope
   def except(*args, block); end
 
 end
+
 

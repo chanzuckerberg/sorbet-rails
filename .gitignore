@@ -6,7 +6,6 @@
 /pkg/
 /spec/reports/
 /spec/examples.txt
-/spec/support/
 /test/tmp/
 /test/version_tmp/
 /tmp/
@@ -51,7 +50,6 @@ Gemfile.lock
 .rvmrc
 
 # Rails app
-<<<<<<< HEAD
 /spec/support/**/tmp/*
 /spec/support/**/.bundle
 

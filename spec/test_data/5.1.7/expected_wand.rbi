@@ -8,6 +8,12 @@ class Wand::Relation < ActiveRecord::Relation
   Elem = type_member(fixed: Wand)
 end
 
+class Wand::CollectionProxy < ActiveRecord::Associations::CollectionProxy
+  include Wand::NamedScope
+  extend T::Generic
+  Elem = type_member(fixed: Wand)
+end
+
 class Wand < ApplicationRecord
   extend T::Sig
   extend T::Generic
@@ -137,6 +143,9 @@ module Wand::ModelRelationShared
 
   sig { params(args: T.untyped).returns(Wand::Relation) }
   def phoenix_feather(*args); end
+
+  sig { params(args: T.untyped).returns(Wand::Relation) }
+  def recent(*args); end
 
   sig { params(args: T.untyped).returns(Wand::Relation) }
   def unicorn_tail_hair(*args); end

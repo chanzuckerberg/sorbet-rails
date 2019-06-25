@@ -20,7 +20,7 @@ RSpec.describe ModelRbiFormatter do
     formatter = ModelRbiFormatter.new(Potion, ['Potion'])
     expect_match_file(
       formatter.generate_rbi,
-      'spec/test_data/models/expected_potion.rbi',
+      'expected_potion.rbi',
     )
   end
 
