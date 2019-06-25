@@ -16,14 +16,14 @@ class ModelRbiFormatter
   def initialize(model_class, available_classes)
     @model_class = model_class
     @available_classes = available_classes
-    @columns_hash = model_class.columns_hash
+    @columns_hash = model_class.table_exists? ? model_class.columns_hash : {}
     @generated_sigs = ActiveSupport::HashWithIndifferentAccess.new
     @generated_class_sigs = ActiveSupport::HashWithIndifferentAccess.new
     @generated_scope_sigs = ActiveSupport::HashWithIndifferentAccess.new
     @generated_querying_sigs = ActiveSupport::HashWithIndifferentAccess.new
     begin
       # Load all dynamic instance methods of this model by instantiating a fake model
-      @model_class.new
+      @model_class.new unless @model_class.abstract_class?
     rescue StandardError
       puts "Note: Unable to create new instance of #{model_class.name}"
     end

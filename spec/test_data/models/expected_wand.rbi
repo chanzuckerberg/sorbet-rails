@@ -87,6 +87,9 @@ module Wand::NamedScope
   def phoenix_feather(*args); end
 
   sig { params(args: T.untyped).returns(Wand::Relation) }
+  def recent(*args); end
+
+  sig { params(args: T.untyped).returns(Wand::Relation) }
   def unicorn_tail_hair(*args); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }

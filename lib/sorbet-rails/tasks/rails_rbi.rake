@@ -21,6 +21,7 @@ namespace :rails_rbi do
 
     blacklisted_models = []
     blacklisted_models << ActiveRecord::SchemaMigration if defined?(ActiveRecord::SchemaMigration)
+    blacklisted_models << ApplicationRecord if defined?(ApplicationRecord)
 
     all_models = ActiveRecord::Base.descendants - blacklisted_models
 

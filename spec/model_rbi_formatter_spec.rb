@@ -25,6 +25,11 @@ RSpec.describe ModelRbiFormatter do
     ])
   end
 
+  it 'does not throw an error when given an abstract class' do
+    formatter = ModelRbiFormatter.new(ApplicationRecord, ['ApplicationRecord'])
+    formatter.generate_rbi
+  end
+
   it 'generates correct rbi file for Wizard' do
     formatter = ModelRbiFormatter.new(Wizard, ['Wizard', 'Wand', 'SpellBook'])
     expect_match_file(
