@@ -17,6 +17,27 @@ class Wand < ApplicationRecord
   sig { returns(T::Boolean) }
   def basilisk_horn?(); end
 
+  sig { returns(T::Boolean) }
+  def broken(); end
+
+  sig { params(value: T::Boolean).void }
+  def broken=(value); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def broken?(*args); end
+
+  sig { returns(T.nilable(Date)) }
+  def chosen_at_date(); end
+
+  sig { params(value: T.nilable(Date)).void }
+  def chosen_at_date=(value); end
+
+  sig { returns(T.nilable(Time)) }
+  def chosen_at_time(); end
+
+  sig { params(value: T.nilable(Time)).void }
+  def chosen_at_time=(value); end
+
   sig { returns(String) }
   def core_type(); end
 
@@ -32,14 +53,44 @@ class Wand < ApplicationRecord
   sig { returns(T::Boolean) }
   def dragon_heartstring?(); end
 
+  sig { returns(Float) }
+  def flexibility(); end
+
+  sig { params(value: Float).void }
+  def flexibility=(value); end
+
+  sig { returns(BigDecimal) }
+  def hardness(); end
+
+  sig { params(value: BigDecimal).void }
+  def hardness=(value); end
+
   sig { returns(Integer) }
   def id(); end
 
   sig { params(value: Integer).void }
   def id=(value); end
 
+  sig { returns(T.any(Array, T::Boolean, Float, Hash, Integer, String)) }
+  def maker_info(); end
+
+  sig { params(value: T.any(Array, T::Boolean, Float, Hash, Integer, String)).void }
+  def maker_info=(value); end
+
   sig { returns(T::Boolean) }
   def phoenix_feather?(); end
+
+  sig { returns(Integer) }
+  def reflectance(); end
+
+  sig { params(value: Integer).void }
+  def reflectance=(value); end
+
+  sig { returns(T.nilable(T.any(Array, T::Boolean, Float, Hash, Integer, String))) }
+  def spell_history(); end
+
+  sig { params(value: T.nilable(T.any(Array, T::Boolean, Float, Hash, Integer, String))).void }
+  def spell_history=(value); end
 
   sig { returns(T::Boolean) }
   def unicorn_tail_hair?(); end

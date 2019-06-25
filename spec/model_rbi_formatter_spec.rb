@@ -43,7 +43,6 @@ RSpec.describe ModelRbiFormatter do
     expect_match_file(
       formatter.generate_rbi,
       'spec/test_data/models/expected_wand.rbi',
-      save_to_file: true,
     )
   end
 
