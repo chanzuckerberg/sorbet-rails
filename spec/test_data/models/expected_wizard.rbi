@@ -8,6 +8,12 @@ class Wizard::Relation < ActiveRecord::Relation
   Elem = type_member(fixed: Wizard)
 end
 
+class Wizard::CollectionProxy < ActiveRecord::Associations::CollectionProxy
+  include Wizard::NamedScope
+  extend T::Generic
+  Elem = type_member(fixed: Wizard)
+end
+
 class Wizard < ApplicationRecord
   extend T::Sig
   extend T::Generic
@@ -62,10 +68,10 @@ class Wizard < ApplicationRecord
   sig { params(value: T.nilable(String)).void }
   def parent_email=(value); end
 
-  sig { returns(SpellBook::Relation) }
+  sig { returns(SpellBook::CollectionProxy) }
   def spell_books(); end
 
-  sig { params(value: T.any(T::Array[SpellBook], SpellBook::Relation)).void }
+  sig { params(value: T.any(T::Array[SpellBook], SpellBook::CollectionProxy)).void }
   def spell_books=(value); end
 
   sig { returns(DateTime) }
