@@ -3,7 +3,7 @@
 # typed: strong
 
 class Wand::Relation < ActiveRecord::Relation
-  include Wand::NamedScope
+  include Wand::ModelRelationShared
   extend T::Generic
   Elem = type_member(fixed: Wand)
 end
@@ -17,8 +17,14 @@ end
 class Wand < ApplicationRecord
   extend T::Sig
   extend T::Generic
-  extend Wand::NamedScope
+  extend Wand::ModelRelationShared
+  extend Wand::ClassMethods
+  include Wand::InstanceMethods
   Elem = type_template(fixed: Wand)
+end
+
+module Wand::InstanceMethods
+  extend T::Sig
 
   sig { returns(T::Boolean) }
   def basilisk_horn?(); end
@@ -119,16 +125,21 @@ class Wand < ApplicationRecord
   sig { params(value: Integer).void }
   def wizard_id=(value); end
 
+  sig { returns(T.nilable(String)) }
+  def wood_type(); end
+
   sig { params(value: T.nilable(String)).void }
   def wood_type=(value); end
 
+end
+module Wand::ClassMethods
+  extend T::Sig
+
   sig { returns(T::Hash[T.any(String, Symbol), Integer]) }
-  def self.core_types(); end
+  def core_types(); end
 
 end
-
-
-module Wand::NamedScope
+module Wand::ModelRelationShared
   extend T::Sig
 
   sig { returns(Wand::Relation) }

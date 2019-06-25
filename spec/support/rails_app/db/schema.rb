@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_20_003739) do
+ActiveRecord::Schema.define(version: 2019_06_22_000000) do
 
   create_table "spell_books", force: :cascade do |t|
     t.string "name"
@@ -22,16 +22,16 @@ ActiveRecord::Schema.define(version: 2019_06_20_003739) do
     t.integer "wizard_id", null: false
     t.string "wood_type"
     t.integer "core_type"
-    t.float "flexibility", null: false
-    t.decimal "hardness", null: false, precision: 10, scale: 10
-    t.decimal "reflectance", null: false, precision: 10, scale: 0
-    t.json "spell_history"
-    t.json "maker_info", null: false
-    t.boolean "broken", null: false
-    t.date "chosen_at_date"
-    t.time "chosen_at_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "flexibility", default: 1.0, null: false
+    t.decimal "hardness", precision: 10, scale: 10, default: "7.0", null: false
+    t.decimal "reflectance", precision: 10, default: "0", null: false
+    t.json "spell_history"
+    t.json "maker_info", default: {}, null: false
+    t.boolean "broken", default: false, null: false
+    t.date "chosen_at_date"
+    t.time "chosen_at_time"
     t.index ["wizard_id"], name: "index_wands_on_wizard_id"
   end
 
