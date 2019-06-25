@@ -1,5 +1,5 @@
 #!/bin/bash
-# A simple script to run all specs for all Rails version
+# A simple script to run all specs for all Rails versions
 
 # 5.1.7
 RAILS_VERSION=5.1.7 bundle update && RAILS_VERSION=5.1.7 bundle exec rake
