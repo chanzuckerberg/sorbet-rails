@@ -82,8 +82,8 @@ To run the tests against all supported Rails branches, use:
 You can also switch to a version of Rails with `RAILS_VERSION`:
 
 ```sh
-❯ RAILS_VERSION=5.1.7 bundle update
-❯ RAILS_VERSION=5.1.7 bundle exec rake
+❯ RAILS_VERSION=5.1 bundle update
+❯ RAILS_VERSION=5.1 bundle exec rake
 ```
 
 ### Writing Tests
