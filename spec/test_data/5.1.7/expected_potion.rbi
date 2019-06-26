@@ -9,7 +9,7 @@ class Potion::Relation < ActiveRecord::Relation
 end
 
 class Potion::CollectionProxy < ActiveRecord::Associations::CollectionProxy
-  include Potion::NamedScope
+  include Potion::ModelRelationShared
   extend T::Generic
   Elem = type_member(fixed: Potion)
 end

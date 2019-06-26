@@ -9,7 +9,7 @@ class Wizard::Relation < ActiveRecord::Relation
 end
 
 class Wizard::CollectionProxy < ActiveRecord::Associations::CollectionProxy
-  include Wizard::NamedScope
+  include Wizard::ModelRelationShared
   extend T::Generic
   Elem = type_member(fixed: Wizard)
 end
