@@ -144,12 +144,10 @@ class ModelRbiFormatter
         })
       end
 
-      if column_def.type == :boolean
-        @generated_sigs["#{column_name}?"] = {
-          ret: "T::Boolean",
-          args: [ name: :args, arg_type: :rest, value_type: 'T.untyped' ],
-        }
-      end
+      @generated_sigs["#{column_name}?"] = {
+        ret: "T::Boolean",
+        args: [ name: :args, arg_type: :rest, value_type: 'T.untyped' ],
+      }
     end
   end
 

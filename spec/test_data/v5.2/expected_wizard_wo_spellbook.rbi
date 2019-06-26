@@ -44,11 +44,17 @@ module Wizard::InstanceMethods
   sig { params(value: DateTime).void }
   def created_at=(value); end
 
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def created_at?(*args); end
+
   sig { returns(String) }
   def house(); end
 
   sig { params(value: T.nilable(T.any(Integer, String, Symbol))).void }
   def house=(value); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def house?(*args); end
 
   sig { returns(Integer) }
   def id(); end
@@ -56,11 +62,17 @@ module Wizard::InstanceMethods
   sig { params(value: Integer).void }
   def id=(value); end
 
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def id?(*args); end
+
   sig { returns(T.nilable(String)) }
   def name(); end
 
   sig { params(value: T.nilable(String)).void }
   def name=(value); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def name?(*args); end
 
   sig { returns(T.nilable(String)) }
   def notes(); end
@@ -68,11 +80,17 @@ module Wizard::InstanceMethods
   sig { params(value: T.nilable(String)).void }
   def notes=(value); end
 
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def notes?(*args); end
+
   sig { returns(T.nilable(String)) }
   def parent_email(); end
 
   sig { params(value: T.nilable(String)).void }
   def parent_email=(value); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def parent_email?(*args); end
 
   sig { returns(ActiveRecord::Associations::CollectionProxy[T.untyped]) }
   def spell_books(); end
@@ -85,6 +103,9 @@ module Wizard::InstanceMethods
 
   sig { params(value: DateTime).void }
   def updated_at=(value); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def updated_at?(*args); end
 
   sig { returns(T.nilable(Wand)) }
   def wand(); end
