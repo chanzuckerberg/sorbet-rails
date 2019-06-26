@@ -205,5 +205,3 @@ module Wizard::ModelRelationShared
   def except(*args, block); end
 
 end
-
-
