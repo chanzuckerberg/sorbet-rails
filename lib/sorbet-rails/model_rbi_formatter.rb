@@ -268,12 +268,6 @@ class ModelRbiFormatter
     MESSAGE
   end
 
-  def generate_column_methods(buffer)
-    @columns_hash.each do |column_name, column_def|
-      buffer << draw_column_methods(column_name, column_def)
-    end
-  end
-
   def type_for_column_def(column_def)
     cast_type = ActiveRecord::Base.connection.lookup_cast_type_from_column(column_def)
     strict_type = active_record_type_to_sorbet_type(cast_type)
