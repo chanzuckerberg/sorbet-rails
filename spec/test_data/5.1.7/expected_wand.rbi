@@ -9,7 +9,7 @@ class Wand::Relation < ActiveRecord::Relation
 end
 
 class Wand::CollectionProxy < ActiveRecord::Associations::CollectionProxy
-  include Wand::NamedScope
+  include Wand::ModelRelationShared
   extend T::Generic
   Elem = type_member(fixed: Wand)
 end

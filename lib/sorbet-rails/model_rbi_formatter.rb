@@ -49,11 +49,11 @@ class ModelRbiFormatter
     end
     @buffer << draw_module_or_class_footer
 
-    # <Model>::NamedScope is a fake module added so that when a method is defined
-    # in this module, it'll be added to both the Model class as a class method
-    # and to its relation as an instance method.
+    # <Model>::MODEL_RELATION_SHARED_MODULE_SUFFIX is a fake module added so that
+    # when a method is defined in this module, it'll be added to both the Model class
+    # as a class method and to its relation as an instance method.
     #
-    # We need to define the NamedScope module after the other classes
+    # We need to define the module after the other classes
     # to work around Sorbet loading order bug
     # https://sorbet-ruby.slack.com/archives/CHN2L03NH/p1556065791047300
     @buffer << draw_module_header("#{@model_class.name}::#{MODEL_RELATION_SHARED_MODULE_SUFFIX}")
@@ -64,7 +64,7 @@ class ModelRbiFormatter
       merge(@generated_querying_sigs)
     ).each do |method_name, expected_sig|
       method_obj = @model_class.method(method_name) if @model_class.methods.include?(method_name.to_sym)
-      # this is not a class method because it is added to NamedScope
+      # this is not a class method because it is added to a module
       draw_method(method_name, method_obj, expected_sig)
     end
     @buffer << draw_module_or_class_footer
@@ -240,7 +240,7 @@ class ModelRbiFormatter
       end
 
       class #{@model_class.name}::CollectionProxy < ActiveRecord::Associations::CollectionProxy
-        include #{@model_class.name}::NamedScope
+        include #{@model_class.name}::#{MODEL_RELATION_SHARED_MODULE_SUFFIX}
         extend T::Generic
         Elem = type_member(fixed: #{@model_class.name})
       end
