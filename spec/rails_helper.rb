@@ -14,10 +14,10 @@ rails_version = ENV["RAILS_VERSION"] || "default"
 
 rails_folder =
   case rails_version
-  when "5.1.7"
-    "5.1.7"
+  when "5.1"
+    "v5.1"
   else
-    "5.2.3"
+    "v5.2"
   end
 
 TEST_DATA_FOLDER = "spec/test_data/#{rails_folder}"
