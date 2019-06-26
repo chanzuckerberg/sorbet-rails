@@ -8,6 +8,12 @@ class Potion::Relation < ActiveRecord::Relation
   Elem = type_member(fixed: Potion)
 end
 
+class Potion::CollectionProxy < ActiveRecord::Associations::CollectionProxy
+  include Potion::NamedScope
+  extend T::Generic
+  Elem = type_member(fixed: Potion)
+end
+
 class Potion < ApplicationRecord
   extend T::Sig
   extend T::Generic

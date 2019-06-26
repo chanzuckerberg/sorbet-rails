@@ -8,6 +8,12 @@ class Wand::Relation < ActiveRecord::Relation
   Elem = type_member(fixed: Wand)
 end
 
+class Wand::CollectionProxy < ActiveRecord::Associations::CollectionProxy
+  include Wand::NamedScope
+  extend T::Generic
+  Elem = type_member(fixed: Wand)
+end
+
 class Wand < ApplicationRecord
   extend T::Sig
   extend T::Generic

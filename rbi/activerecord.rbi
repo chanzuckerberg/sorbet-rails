@@ -25,6 +25,23 @@ class ActiveRecord::Relation
   def find(*args); end
 end
 
+class ActiveRecord::Associations::CollectionProxy < ActiveRecord::Relation
+  extend T::Generic
+
+  Elem = type_member
+
+  # -- << and aliases
+  sig { params(records: T.any(Elem, T::Array[Elem])).returns(T.self_type) }
+  def <<(*records); end
+  sig { params(records: T.any(Elem, T::Array[Elem])).returns(T.self_type) }
+  def append(*records); end
+  sig { params(records: T.any(Elem, T::Array[Elem])).returns(T.self_type) }
+  def push(*records); end
+  sig { params(records: T.any(Elem, T::Array[Elem])).returns(T.self_type) }
+  def concat(*records); end
+end
+
+
 module ActiveRecord::Querying::Typed
   extend T::Sig
   extend T::Generic

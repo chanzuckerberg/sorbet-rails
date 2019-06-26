@@ -190,8 +190,8 @@ class ModelRbiFormatter
     # TODO allow people to specify the possible values of polymorphic associations
     assoc_class = assoc_should_be_untyped?(reflection) ? "T.untyped" : reflection.class_name
     relation_class = relation_should_be_untyped?(reflection) ?
-      "ActiveRecord::Relation[T.untyped]" :
-      "#{assoc_class}::Relation"
+      "ActiveRecord::Associations::CollectionProxy[T.untyped]" :
+      "#{assoc_class}::CollectionProxy"
     @generated_sigs.merge!({
       "#{assoc_name}" => { ret: relation_class },
       "#{assoc_name}=" => {
@@ -237,6 +237,12 @@ class ModelRbiFormatter
       # typed: strong
 
       class #{@model_class.name}::Relation < ActiveRecord::Relation
+        include #{@model_class.name}::NamedScope
+        extend T::Generic
+        Elem = type_member(fixed: #{@model_class.name})
+      end
+
+      class #{@model_class.name}::CollectionProxy < ActiveRecord::Associations::CollectionProxy
         include #{@model_class.name}::NamedScope
         extend T::Generic
         Elem = type_member(fixed: #{@model_class.name})
