@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # A simple script to run all specs for all supported Rails branches
 
 # 5.1
