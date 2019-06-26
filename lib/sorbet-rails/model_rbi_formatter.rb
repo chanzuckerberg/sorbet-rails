@@ -68,7 +68,6 @@ class ModelRbiFormatter
       draw_method(method_name, method_obj, expected_sig)
     end
     @buffer << draw_module_or_class_footer
-    @buffer << "\n"
     @buffer.join("\n")
   end
 

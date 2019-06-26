@@ -32,7 +32,7 @@ RSpec.describe ModelRbiFormatter do
     )
   end
 
-  it 'generates strict belongs_to and do not generate overridden methods' do
+  it 'generates strict belongs_to and generate overridden methods' do
     formatter = ModelRbiFormatter.new(Wand, ['Wizard', 'Wand', 'SpellBook'])
     expect_match_file(
       formatter.generate_rbi,

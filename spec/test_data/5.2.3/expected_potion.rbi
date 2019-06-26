@@ -124,5 +124,3 @@ module Potion::ModelRelationShared
   def except(*args, block); end
 
 end
-
-
