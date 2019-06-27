@@ -15,6 +15,8 @@ rails =
     {github: "rails/rails"}
   when "5.1"
     "~> 5.1.7"
+  when "5.2"
+    "~> 5.2.3"
   else
     ">= 5.2.3"
   end
