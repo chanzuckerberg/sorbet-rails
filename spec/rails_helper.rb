@@ -8,8 +8,6 @@ require 'rspec/rails'
 require 'sorbet-rails/railtie'
 require 'rspec/expectations'
 
-load 'sorbet-rails/tasks/rails_rbi.rake'
-
 rails_version = ENV["RAILS_VERSION"] || "default"
 
 rails_folder =
@@ -23,6 +21,8 @@ rails_folder =
 TEST_DATA_FOLDER = "spec/test_data/#{rails_folder}"
 
 require "support/#{rails_folder}/config/environment"
+
+load 'sorbet-rails/tasks/rails_rbi.rake'
 
 ActiveRecord::Migration.maintain_test_schema!
 
