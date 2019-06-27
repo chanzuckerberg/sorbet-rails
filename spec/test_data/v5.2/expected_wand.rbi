@@ -44,11 +44,17 @@ module Wand::InstanceMethods
   sig { params(value: T.nilable(Date)).void }
   def chosen_at_date=(value); end
 
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def chosen_at_date?(*args); end
+
   sig { returns(T.nilable(Time)) }
   def chosen_at_time(); end
 
   sig { params(value: T.nilable(Time)).void }
   def chosen_at_time=(value); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def chosen_at_time?(*args); end
 
   sig { returns(String) }
   def core_type(); end
@@ -56,11 +62,17 @@ module Wand::InstanceMethods
   sig { params(value: T.nilable(T.any(Integer, String, Symbol))).void }
   def core_type=(value); end
 
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def core_type?(*args); end
+
   sig { returns(DateTime) }
   def created_at(); end
 
   sig { params(value: DateTime).void }
   def created_at=(value); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def created_at?(*args); end
 
   sig { returns(T::Boolean) }
   def dragon_heartstring?(); end
@@ -71,11 +83,17 @@ module Wand::InstanceMethods
   sig { params(value: Float).void }
   def flexibility=(value); end
 
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def flexibility?(*args); end
+
   sig { returns(BigDecimal) }
   def hardness(); end
 
   sig { params(value: BigDecimal).void }
   def hardness=(value); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def hardness?(*args); end
 
   sig { returns(Integer) }
   def id(); end
@@ -83,11 +101,17 @@ module Wand::InstanceMethods
   sig { params(value: Integer).void }
   def id=(value); end
 
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def id?(*args); end
+
   sig { returns(T.any(Array, T::Boolean, Float, Hash, Integer, String)) }
   def maker_info(); end
 
   sig { params(value: T.any(Array, T::Boolean, Float, Hash, Integer, String)).void }
   def maker_info=(value); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def maker_info?(*args); end
 
   sig { returns(T::Boolean) }
   def phoenix_feather?(); end
@@ -98,11 +122,17 @@ module Wand::InstanceMethods
   sig { params(value: Integer).void }
   def reflectance=(value); end
 
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def reflectance?(*args); end
+
   sig { returns(T.nilable(T.any(Array, T::Boolean, Float, Hash, Integer, String))) }
   def spell_history(); end
 
   sig { params(value: T.nilable(T.any(Array, T::Boolean, Float, Hash, Integer, String))).void }
   def spell_history=(value); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def spell_history?(*args); end
 
   sig { returns(T::Boolean) }
   def unicorn_tail_hair?(); end
@@ -112,6 +142,9 @@ module Wand::InstanceMethods
 
   sig { params(value: DateTime).void }
   def updated_at=(value); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def updated_at?(*args); end
 
   sig { returns(Wizard) }
   def wizard(); end
@@ -125,11 +158,17 @@ module Wand::InstanceMethods
   sig { params(value: Integer).void }
   def wizard_id=(value); end
 
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def wizard_id?(*args); end
+
   sig { returns(T.nilable(String)) }
   def wood_type(); end
 
   sig { params(value: T.nilable(String)).void }
   def wood_type=(value); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def wood_type?(*args); end
 
 end
 
