@@ -13,10 +13,12 @@ rails =
   case rails_version
   when "master"
     {github: "rails/rails"}
-  when "default"
-    ">= 5.2.3"
+  when "5.1"
+    "~> 5.1.7"
+  when "5.2"
+    "~> 5.2.3"
   else
-    "~> #{rails_version}"
+    ">= 5.2.3"
   end
 
 gem "rails", rails

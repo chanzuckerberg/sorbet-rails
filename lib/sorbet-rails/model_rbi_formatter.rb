@@ -297,7 +297,7 @@ class ModelRbiFormatter
     when ActiveRecord::Enum::EnumType, ActiveRecord::Type::Binary, ActiveRecord::Type::String, ActiveRecord::Type::Text
       String
     else
-      # Json type is only supported in Rails 5.2.3 and above
+      # Json type is only supported in Rails 5.2 and above
       case
       when Object.const_defined?('ActiveRecord::Type::Json') && klass.is_a?(ActiveRecord::Type::Json)
         "T.any(Array, T::Boolean, Float, Hash, Integer, String)"
