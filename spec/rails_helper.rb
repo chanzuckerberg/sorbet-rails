@@ -12,6 +12,8 @@ rails_version = ENV["RAILS_VERSION"] || "default"
 
 rails_folder =
   case rails_version
+  when "4.2"
+    "v4.2"
   when "5.1"
     "v5.1"
   else

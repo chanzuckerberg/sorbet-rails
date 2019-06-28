@@ -217,7 +217,7 @@ class ModelRbiFormatter
   end
 
   def polymorphic_assoc?(reflection)
-    reflection.through_reflection? ?
+    reflection.through_reflection ?
       polymorphic_assoc?(reflection.source_reflection) :
       reflection.polymorphic?
   end
@@ -267,7 +267,10 @@ class ModelRbiFormatter
   end
 
   def type_for_column_def(column_def)
-    cast_type = ActiveRecord::Base.connection.lookup_cast_type_from_column(column_def)
+    cast_type = ActiveRecord::Base.connection.respond_to?(:lookup_cast_type_from_column) ?
+      ActiveRecord::Base.connection.lookup_cast_type_from_column(column_def) :
+      column_def.cast_type
+
     strict_type = active_record_type_to_sorbet_type(cast_type)
 
     if column_def.respond_to?(:array?) && column_def.array?
@@ -292,13 +295,15 @@ class ModelRbiFormatter
       Time
     when ActiveRecord::Type::BigInteger, ActiveRecord::Type::Integer, ActiveRecord::Type::DecimalWithoutScale, ActiveRecord::Type::UnsignedInteger
       Integer
-    when ActiveRecord::Enum::EnumType, ActiveRecord::Type::Binary, ActiveRecord::Type::String, ActiveRecord::Type::Text
+    when ActiveRecord::Type::Binary, ActiveRecord::Type::String, ActiveRecord::Type::Text
       String
     else
       # Json type is only supported in Rails 5.2 and above
       case
       when Object.const_defined?('ActiveRecord::Type::Json') && klass.is_a?(ActiveRecord::Type::Json)
         "T.any(Array, T::Boolean, Float, Hash, Integer, String)"
+      when Object.const_defined?('ActiveRecord::Enum::EnumType') && klass.is_a?(ActiveRecord::Enum::EnumType)
+        String
       else
         "T.untyped"
       end
