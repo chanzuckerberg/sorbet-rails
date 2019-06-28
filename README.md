@@ -66,6 +66,25 @@ The generation task currently creates the following signatures:
 
 ## Tips & Tricks
 
+### Overriding generated signatures
+
+`sorbet-rails` relies on Rails reflection to generate signatures. There are features this gem doesn't support yet such as [serialize](https://github.com/chanzuckerberg/sorbet-rails/issues/49) and [attribute custom types](https://github.com/chanzuckerberg/sorbet-rails/issues/16). The gem also doesn't know the signature of any methods you have overridden. However, it is possible to override the signatures that `sorbet-rails` generates.
+
+For example, here is how to override the signature for a method in a model:
+
+```ruby
+# -- app/models/model_name.rbi --
+
+# typed: strong
+class ModelName
+  sig { returns(T::Hash[...]) }
+  def field_name; end
+
+  sig { params(obj: T::Hash[....]).void }
+  def field_name=(obj); end
+end
+```
+
 ### `find`, `first` and `last`
 
 These 3 methods can either return a single nilable record or an array of records. Sorbet does not allow us to define multiple signatures for a function ([except stdlib](https://github.com/chanzuckerberg/sorbet-rails/issues/18)). It doesn't support defining one function signature that has varying returning value depending on the input parameter type. We opt to define the most commonly used signature for these methods, and monkey-patch new functions for the secondary use case.
