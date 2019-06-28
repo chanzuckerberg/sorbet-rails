@@ -19,10 +19,6 @@ namespace :rails_rbi do
     # need to eager load to see all models
     Rails.application.eager_load!
 
-    blacklisted_models = []
-    blacklisted_models << ActiveRecord::SchemaMigration if defined?(ActiveRecord::SchemaMigration)
-    blacklisted_models << ApplicationRecord if defined?(ApplicationRecord)
-
     all_models = ActiveRecord::Base.descendants - blacklisted_models
 
     models_to_generate = args.extras.size > 0 ?
