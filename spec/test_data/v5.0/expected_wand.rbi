@@ -168,6 +168,9 @@ module Wand::ModelRelationShared
   sig { returns(Wand::Relation) }
   def all(); end
 
+  sig { params(block: T.nilable(T.proc.void)).returns(T.untyped) }
+  def unscoped(block); end
+
   sig { params(args: T.untyped).returns(Wand::Relation) }
   def basilisk_horn(*args); end
 
