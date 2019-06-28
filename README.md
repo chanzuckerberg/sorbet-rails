@@ -64,7 +64,7 @@ The generation task currently creates the following signatures:
 - Named scopes
 - Model relation class
 
-### Overriding generated sigs
+### Overriding generated signatures
 
 `sorbet-rails` rely on Rails reflection to generate the signature. There are features we haven't supported yet such as [serialize](https://github.com/chanzuckerberg/sorbet-rails/issues/49) and [attribute custom type](https://github.com/chanzuckerberg/sorbet-rails/issues/16). We don't know the sig of a method if you have overridden it as well. However, it is possible to override the sigs that `sorbet-rails` generated. 
 
