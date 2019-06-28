@@ -1,5 +1,6 @@
 language: ruby
 env:
+  - "RAILS_VERSION=4.2"
   - "RAILS_VERSION=5.1"
   - "RAILS_VERSION=5.2"
 rvm:
@@ -7,8 +8,10 @@ rvm:
 - 2.5.0
 before_install:
 - gem install bundler -v 2.0.1 --no-doc
+- gem install bundler -v 1.17.3 --no-doc
+install: ./spec/bin/install.sh
 script:
-- bundle exec rake spec
+- ./spec/bin/run_spec.sh
 deploy:
   provider: rubygems
   api_key:
