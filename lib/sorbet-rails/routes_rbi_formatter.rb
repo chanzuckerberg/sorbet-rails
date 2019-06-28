@@ -15,10 +15,9 @@ class RoutesRbiFormatter
   def header(routes)
   end
 
-  def no_routes(routes, filter=nil)
-    puts routes
+  def no_routes(routes=nil, filter=nil)
     @buffer <<
-      if routes.none?
+      if routes.nil? || routes.none?
         <<~MESSAGE
           # You do not have any routes defined!
           # Please add some routes in config/routes.rb.

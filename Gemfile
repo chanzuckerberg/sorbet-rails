@@ -9,16 +9,24 @@ end
 
 rails_version = ENV["RAILS_VERSION"] || "default"
 
-rails =
-  case rails_version
-  when "master"
-    {github: "rails/rails"}
-  when "5.1"
-    "~> 5.1.7"
-  when "5.2"
-    "~> 5.2.3"
-  else
-    ">= 5.2.3"
-  end
-
-gem "rails", rails
+case rails_version
+when "master"
+  gem "rails", {github: "rails/rails"}
+  gem "bundler", ">= 1.3.0"
+when "4.2"
+  gem "rails", "~> 4.2.11"
+  gem "bundler", "~> 1.17.3"
+  gem "sqlite3", "~> 1.3.6"
+when "5.1"
+  gem "rails", "~> 5.1.7"
+  gem "bundler", ">= 2.0"
+  gem "sqlite3", "~> 1.4.1"
+when "5.2"
+  gem "rails", "~> 5.2.3"
+  gem "bundler", ">= 2.0"
+  gem "sqlite3", "~> 1.4.1"
+else
+  gem "rails", ">= 5.2.3"
+  gem "bundler", ">= 2.0"
+  gem "sqlite3", "~> 1.4.1"
+end
