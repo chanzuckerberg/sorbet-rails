@@ -1,11 +1,17 @@
 language: ruby
 env:
-  - "RAILS_VERSION=4.2"
-  - "RAILS_VERSION=5.1"
-  - "RAILS_VERSION=5.2"
+  - RAILS_VERSION=4.2
+  - RAILS_VERSION=5.1
+  - RAILS_VERSION=5.2
 rvm:
-- 2.4.3
-- 2.5.0
+  - 2.3
+  - 2.4
+  - 2.5
+  - 2.6
+  - ruby-head
+matrix:
+  allow_failures:
+    - rvm: ruby-head
 before_install:
 - gem install bundler -v 2.0.1 --no-doc
 - gem install bundler -v 1.17.3 --no-doc
