@@ -76,3 +76,7 @@ Gemfile.lock
 # Ignore master key for decrypting credentials and more.
 /spec/support/**/config/master.key
 
+# Ignore sorbet-rails generated files
+/spec/support/**/sorbet/rails-rbi/**/*
+
+

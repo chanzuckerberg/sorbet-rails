@@ -22,8 +22,6 @@ TEST_DATA_FOLDER = "spec/test_data/#{rails_folder}"
 
 require "support/#{rails_folder}/config/environment"
 
-load 'sorbet-rails/tasks/rails_rbi.rake'
-
 ActiveRecord::Migration.maintain_test_schema!
 
 def expect_match_file(content, file_path)
