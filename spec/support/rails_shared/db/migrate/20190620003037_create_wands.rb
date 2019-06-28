@@ -1,4 +1,4 @@
-class CreateWands < ActiveRecord::Migration[5.1]
+class CreateWands < ActiveRecord::Migration["#{ENV['RAILS_VERSION']}" || "5.2"]
   def change
     create_table :wands do |t|
       t.references :wizard, unique: true, null: false
