@@ -66,20 +66,20 @@ The generation task currently creates the following signatures:
 
 ### Overriding generated signatures
 
-`sorbet-rails` rely on Rails reflection to generate the signature. There are features we haven't supported yet such as [serialize](https://github.com/chanzuckerberg/sorbet-rails/issues/49) and [attribute custom type](https://github.com/chanzuckerberg/sorbet-rails/issues/16). We don't know the sig of a method if you have overridden it as well. However, it is possible to override the sigs that `sorbet-rails` generated. 
+`sorbet-rails` relies on Rails reflection to generate signatures. There are features we haven't supported yet such as [serialize](https://github.com/chanzuckerberg/sorbet-rails/issues/49) and [attribute custom types](https://github.com/chanzuckerberg/sorbet-rails/issues/16). We also don't know the signature of any methods you have overridden. However, it is possible to override the signatures that `sorbet-rails` generates.
 
-For example, here is how to override sig for a method in a model.
+For example, here is how to override the signature for a method in a model:
 
 ```ruby
-# in app/models/<model_name>.rbi
+# in app/models/model_name.rbi
 
 # typed: strong
-class <ModelName>
+class ModelName
   sig { returns(T::Hash[...]) }
-  def <field_name>; end
+  def field_name; end
 
   sig { params(obj: T::Hash[....]).void }
-  def <field_name>=(obj); end
+  def field_name=(obj); end
 end
 ```
 
