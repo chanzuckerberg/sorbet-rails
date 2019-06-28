@@ -64,6 +64,8 @@ The generation task currently creates the following signatures:
 - Named scopes
 - Model relation class
 
+## Tips & Tricks
+
 ### Overriding generated signatures
 
 `sorbet-rails` relies on Rails reflection to generate signatures. There are features we haven't supported yet such as [serialize](https://github.com/chanzuckerberg/sorbet-rails/issues/49) and [attribute custom types](https://github.com/chanzuckerberg/sorbet-rails/issues/16). We also don't know the signature of any methods you have overridden. However, it is possible to override the signatures that `sorbet-rails` generates.
@@ -82,8 +84,6 @@ class ModelName
   def field_name=(obj); end
 end
 ```
-
-## Tips & Tricks
 
 ### `find`, `first` and `last`
 
