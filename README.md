@@ -73,7 +73,7 @@ The generation task currently creates the following signatures:
 For example, here is how to override the signature for a method in a model:
 
 ```ruby
-# in app/models/model_name.rbi
+# -- app/models/model_name.rbi --
 
 # typed: strong
 class ModelName
