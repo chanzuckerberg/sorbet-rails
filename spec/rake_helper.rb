@@ -25,6 +25,10 @@ module TaskExampleGroup
     after(:each) do
       task.all_prerequisite_tasks.each { |prerequisite| tasks[prerequisite].reenable }
       task.reenable
+
+      # clean up generated dir
+      rbi_dir = Rails.root.join("sorbet", "rails-rbi")
+      FileUtils.remove_dir(rbi_dir) if Dir.exists?(rbi_dir)
     end
   end
 end
