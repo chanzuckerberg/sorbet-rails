@@ -68,7 +68,7 @@ The generation task currently creates the following signatures:
 
 ### Overriding generated signatures
 
-`sorbet-rails` relies on Rails reflection to generate signatures. There are features we haven't supported yet such as [serialize](https://github.com/chanzuckerberg/sorbet-rails/issues/49) and [attribute custom types](https://github.com/chanzuckerberg/sorbet-rails/issues/16). We also don't know the signature of any methods you have overridden. However, it is possible to override the signatures that `sorbet-rails` generates.
+`sorbet-rails` relies on Rails reflection to generate signatures. There are features this gem doesn't support yet such as [serialize](https://github.com/chanzuckerberg/sorbet-rails/issues/49) and [attribute custom types](https://github.com/chanzuckerberg/sorbet-rails/issues/16). The gem also doesn't know the signature of any methods you have overridden. However, it is possible to override the signatures that `sorbet-rails` generates.
 
 For example, here is how to override the signature for a method in a model:
 
