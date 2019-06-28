@@ -103,6 +103,18 @@ To update the models, see [`rails_shared/app/models/`](spec/support/rails_shared
 Add database migrations to [`rails_shared/db/migrate/`](spec/support/rails_shared/db/migrate/)
 and remember to run `bundle exec rake db:migrate` in each application directory.
 
+#### Debugging
+
+It is possible to run individual spec file to debug
+```
+> bundle exec rspec spec/model_rbi_formatter_spec.rb
+```
+or a specific test in a file
+```
+> bundle exec rspec spec/model_rbi_formatter_spec.rb:28
+```
+The gem is bundled with [byebug](https://github.com/deivid-rodriguez/byebug). If you're not familiar with byebug, put `byebug` above the line you want the the execution to get started, and check out the [official byebug's guide](https://github.com/deivid-rodriguez/byebug/blob/master/GUIDE.md).
+
 #### Expected Output
 
 If your new tests make changes to the expected output, you can update the expected output
