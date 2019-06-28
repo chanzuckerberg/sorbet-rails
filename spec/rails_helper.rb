@@ -14,6 +14,8 @@ rails_folder =
   case rails_version
   when "4.2"
     "v4.2"
+  when "5.0"
+    "v5.0"
   when "5.1"
     "v5.1"
   else
