@@ -29,7 +29,7 @@ gem 'sorbet-rails'
 ❯ rake rails_rbi:models
 ```
 
-4. Auto-upgrade the typecheck level of files:
+4. Automatically upgrade each file's typecheck level:
 ```sh
 ❯ srb rbi suggest-typed
 ```
