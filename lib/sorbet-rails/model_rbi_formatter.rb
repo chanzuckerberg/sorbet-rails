@@ -342,6 +342,7 @@ class ModelRbiFormatter
         prefix = ""
         prefix = "*" if arg_def[:arg_type] == :rest
         prefix = "**" if arg_def[:arg_type] == :keyrest
+        prefix = "&" if arg_def[:arg_type] == :block
 
         "#{prefix}#{arg_def[:name]}"
       }.join(", ")

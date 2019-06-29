@@ -169,7 +169,7 @@ module Wand::ModelRelationShared
   def all(); end
 
   sig { params(block: T.nilable(T.proc.void)).returns(Wand::Relation) }
-  def unscoped(block); end
+  def unscoped(&block); end
 
   sig { params(args: T.untyped).returns(Wand::Relation) }
   def basilisk_horn(*args); end
@@ -187,69 +187,69 @@ module Wand::ModelRelationShared
   def unicorn_tail_hair(*args); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
-  def select(*args, block); end
+  def select(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
-  def order(*args, block); end
+  def order(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
-  def reorder(*args, block); end
+  def reorder(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
-  def group(*args, block); end
+  def group(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
-  def limit(*args, block); end
+  def limit(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
-  def offset(*args, block); end
+  def offset(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
-  def joins(*args, block); end
+  def joins(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
-  def where(*args, block); end
+  def where(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
-  def rewhere(*args, block); end
+  def rewhere(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
-  def preload(*args, block); end
+  def preload(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
-  def eager_load(*args, block); end
+  def eager_load(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
-  def includes(*args, block); end
+  def includes(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
-  def from(*args, block); end
+  def from(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
-  def lock(*args, block); end
+  def lock(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
-  def readonly(*args, block); end
+  def readonly(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
-  def having(*args, block); end
+  def having(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
-  def create_with(*args, block); end
+  def create_with(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
-  def distinct(*args, block); end
+  def distinct(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
-  def references(*args, block); end
+  def references(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
-  def none(*args, block); end
+  def none(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
-  def unscope(*args, block); end
+  def unscope(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
-  def except(*args, block); end
+  def except(*args, &block); end
 
 end
