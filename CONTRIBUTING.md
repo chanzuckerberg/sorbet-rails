@@ -113,7 +113,7 @@ or a specific test in a file
 ```
 > bundle exec rspec spec/model_rbi_formatter_spec.rb:28
 ```
-The gem is bundled with [byebug](https://github.com/deivid-rodriguez/byebug). If you're not familiar with byebug, put `byebug` above the line you want the the execution to get started, and check out the [official byebug's guide](https://github.com/deivid-rodriguez/byebug/blob/master/GUIDE.md).
+For debugging, you could use [byebug](https://github.com/deivid-rodriguez/byebug), which is installed in development mode. If you're not familiar with byebug, put `byebug` above the line you want the the execution to get started, and check out the [official byebug's guide](https://github.com/deivid-rodriguez/byebug/blob/master/GUIDE.md).
 
 #### Expected Output
 
