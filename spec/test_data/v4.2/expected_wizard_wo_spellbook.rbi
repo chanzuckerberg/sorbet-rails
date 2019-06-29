@@ -129,6 +129,9 @@ module Wizard::ModelRelationShared
   sig { returns(Wizard::Relation) }
   def all(); end
 
+  sig { params(block: T.nilable(T.proc.void)).returns(T.untyped) }
+  def unscoped(block); end
+
   sig { params(args: T.untyped).returns(Wizard::Relation) }
   def Gryffindor(*args); end
 
