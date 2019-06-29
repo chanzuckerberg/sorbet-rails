@@ -31,7 +31,7 @@ gem 'sorbet-rails'
 
 4. Auto-upgrade the typecheck level of files:
 ```sh
-❯ srb tc --suggest-typed --typed=strict --error-white-list=7022 --autocorrect
+❯ srb rbi suggest-typed
 ```
 Because we've generated RBI files for routes and models, a lot more files should be typecheckable now.
 
