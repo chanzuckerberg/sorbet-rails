@@ -139,6 +139,19 @@ Because Sorbet's initial setup tries to flag files at whichever typecheck level 
 
 It is worth going through the list of files that is ignored and resolve them (and auto upgrade the types of other files; see [initial setup](#initial-setup) above). Usually this will make many more files able to be typechecked.
 
+### `unscoped` with a block
+
+[unscoped method](https://apidock.com/rails/ActiveRecord/Scoping/Default/ClassMethods/unscoped) by default, when no block is provided returns a Relation.
+When a block is provided `unscoped` calls the block and returns its result which type is unknown.
+To avoid that either override `unscoped` definition or in your code replace:
+```ruby
+Model.unscoped do … end
+```
+with
+```ruby
+Model.unscoped.scoping do … end
+```
+
 ## Contributing
 
 Contributions and ideas are welcome! Please see [our contributing guide](CONTRIBUTING.md) and don't hesitate to open an issue or send a pull request to improve the functionality of this gem.
