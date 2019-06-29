@@ -72,7 +72,7 @@ module SpellBook::ModelRelationShared
   sig { returns(SpellBook::Relation) }
   def all(); end
 
-  sig { params(block: T.nilable(T.proc.void)).returns(T.untyped) }
+  sig { params(block: T.nilable(T.proc.void)).returns(SpellBook::Relation) }
   def unscoped(block); end
 
   sig { params(args: T.untyped).returns(SpellBook::Relation) }

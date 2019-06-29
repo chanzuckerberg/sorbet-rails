@@ -85,7 +85,7 @@ class ModelRbiFormatter
     # rails/activerecord/lib/active_record/querying.rb:21
     @generated_scope_sigs["all"] = { ret: "#{@model_class.name}::Relation" }
     @generated_scope_sigs["unscoped"] = {
-      ret: "T.untyped",
+      ret: "#{@model_class.name}::Relation",
       args: [
         { name: :block, arg_type: :block, value_type: 'T.nilable(T.proc.void)' },
       ]

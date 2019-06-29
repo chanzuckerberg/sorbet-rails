@@ -39,7 +39,7 @@ module Potion::ModelRelationShared
   sig { returns(Potion::Relation) }
   def all(); end
 
-  sig { params(block: T.nilable(T.proc.void)).returns(T.untyped) }
+  sig { params(block: T.nilable(T.proc.void)).returns(Potion::Relation) }
   def unscoped(block); end
 
   sig { params(args: T.untyped).returns(Potion::Relation) }
