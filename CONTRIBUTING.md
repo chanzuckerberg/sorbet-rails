@@ -69,9 +69,11 @@ The most important files are:
 Tests are written using [RSpec](https://rspec.info/). Each pull request is run against
 multiple versions of both Ruby and Ruby on Rails. A code coverage report is also generated.
 
+### Running Tests
+
 You can run tests using `bundle exec rake`.
 
-By default, tests will run against a Rails 5.2.3 test application.
+By default, tests will run against a Rails 5.2.x test application.
 
 To run the tests against all supported Rails branches, use:
 
@@ -86,6 +88,22 @@ You can also switch to a version of Rails with `RAILS_VERSION`:
 ❯ RAILS_VERSION=5.1 ./spec/bin/run_spec.sh
 ❯ RAILS_VERSION=5.2 ./spec/bin/run_spec.sh
 ```
+
+#### Debugging
+
+It is possible to run only one file's tests:
+```sh
+❯ bundle exec rspec spec/model_rbi_formatter_spec.rb
+```
+Or a specific test in a file:
+```sh
+❯ bundle exec rspec spec/model_rbi_formatter_spec.rb:28
+```
+
+For debugging, you could use [byebug](https://github.com/deivid-rodriguez/byebug), which is
+installed in development mode. If you're not familiar with byebug, add `byebug` where you want
+execution to stop, which will then start a debugger. For more, check out the
+[byebug guide](https://github.com/deivid-rodriguez/byebug/blob/master/GUIDE.md).
 
 ### Writing Tests
 
@@ -102,18 +120,6 @@ and [`rails_shared/app/controller/`](spec/support/rails_shared/app/controller/).
 To update the models, see [`rails_shared/app/models/`](spec/support/rails_shared/app/models/).
 Add database migrations to [`rails_shared/db/migrate/`](spec/support/rails_shared/db/migrate/)
 and remember to run `bundle exec rake db:migrate` in each application directory.
-
-#### Debugging
-
-It is possible to run individual spec file to debug
-```
-> bundle exec rspec spec/model_rbi_formatter_spec.rb
-```
-or a specific test in a file
-```
-> bundle exec rspec spec/model_rbi_formatter_spec.rb:28
-```
-For debugging, you could use [byebug](https://github.com/deivid-rodriguez/byebug), which is installed in development mode. If you're not familiar with byebug, put `byebug` above the line you want the the execution to get started, and check out the [official byebug's guide](https://github.com/deivid-rodriguez/byebug/blob/master/GUIDE.md).
 
 #### Expected Output
 
