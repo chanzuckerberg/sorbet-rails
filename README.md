@@ -29,9 +29,9 @@ gem 'sorbet-rails'
 ❯ rake rails_rbi:models
 ```
 
-4. Auto-upgrade the typecheck level of files:
+4. Automatically upgrade each file's typecheck level:
 ```sh
-❯ srb tc --suggest-typed --typed=strict --error-white-list=7022 --autocorrect
+❯ srb rbi suggest-typed
 ```
 Because we've generated RBI files for routes and models, a lot more files should be typecheckable now.
 
