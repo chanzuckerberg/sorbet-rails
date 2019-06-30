@@ -143,7 +143,7 @@ It is worth going through the list of files that is ignored and resolve them (an
 
 [unscoped method](https://apidock.com/rails/ActiveRecord/Scoping/Default/ClassMethods/unscoped) by default, when no block is provided returns a Relation.
 When a block is provided `unscoped` calls the block and returns its result which type is unknown.
-To avoid that either override `unscoped` definition or in your code replace:
+The gem opts to define `unscoped` as returning a Relation. To avoid that, either override `unscoped` definition or in your code replace:
 ```ruby
 Model.unscoped do … end
 ```
