@@ -84,6 +84,12 @@ class ModelRbiFormatter
     # All is a named scope that most method from ActiveRecord::Querying delegate to
     # rails/activerecord/lib/active_record/querying.rb:21
     @generated_scope_sigs["all"] = { ret: "#{@model_class.name}::Relation" }
+    @generated_scope_sigs["unscoped"] = {
+      ret: "#{@model_class.name}::Relation",
+      args: [
+        { name: :block, arg_type: :block, value_type: 'T.nilable(T.proc.void)' },
+      ]
+    }
     # It's not possible to typedef all methods in ActiveRecord::Querying module to have the
     # matching type. By generating model-specific sig, we can typedef these methods to return
     # <Model>::Relation class.
@@ -336,6 +342,7 @@ class ModelRbiFormatter
         prefix = ""
         prefix = "*" if arg_def[:arg_type] == :rest
         prefix = "**" if arg_def[:arg_type] == :keyrest
+        prefix = "&" if arg_def[:arg_type] == :block
 
         "#{prefix}#{arg_def[:name]}"
       }.join(", ")

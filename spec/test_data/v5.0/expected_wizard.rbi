@@ -129,6 +129,9 @@ module Wizard::ModelRelationShared
   sig { returns(Wizard::Relation) }
   def all(); end
 
+  sig { params(block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
+  def unscoped(&block); end
+
   sig { params(args: T.untyped).returns(Wizard::Relation) }
   def Gryffindor(*args); end
 
@@ -145,78 +148,78 @@ module Wizard::ModelRelationShared
   def recent(*args); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
-  def select(*args, block); end
+  def select(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
-  def order(*args, block); end
+  def order(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
-  def reorder(*args, block); end
+  def reorder(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
-  def group(*args, block); end
+  def group(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
-  def limit(*args, block); end
+  def limit(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
-  def offset(*args, block); end
+  def offset(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
-  def joins(*args, block); end
+  def joins(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
-  def left_joins(*args, block); end
+  def left_joins(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
-  def left_outer_joins(*args, block); end
+  def left_outer_joins(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
-  def where(*args, block); end
+  def where(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
-  def rewhere(*args, block); end
+  def rewhere(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
-  def preload(*args, block); end
+  def preload(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
-  def eager_load(*args, block); end
+  def eager_load(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
-  def includes(*args, block); end
+  def includes(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
-  def from(*args, block); end
+  def from(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
-  def lock(*args, block); end
+  def lock(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
-  def readonly(*args, block); end
+  def readonly(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
-  def or(*args, block); end
+  def or(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
-  def having(*args, block); end
+  def having(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
-  def create_with(*args, block); end
+  def create_with(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
-  def distinct(*args, block); end
+  def distinct(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
-  def references(*args, block); end
+  def references(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
-  def none(*args, block); end
+  def none(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
-  def unscope(*args, block); end
+  def unscope(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
-  def except(*args, block); end
+  def except(*args, &block); end
 
 end
