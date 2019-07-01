@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name          = %q{sorbet-rails}
-  s.version       = "0.2.0"
+  s.version       = "0.3.0"
   s.date          = %q{2019-04-18}
   s.summary       = %q{Set of tools to make Sorbet work with Rails seamlessly.}
   s.authors       = ["Chan Zuckerberg Initiative"]
