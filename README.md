@@ -141,9 +141,9 @@ It is worth going through the list of files that is ignored and resolve them (an
 
 ### `unscoped` with a block
 
-[unscoped method](https://apidock.com/rails/ActiveRecord/Scoping/Default/ClassMethods/unscoped) by default, when no block is provided returns a Relation.
-When a block is provided `unscoped` calls the block and returns its result which type is unknown.
-The gem opts to define `unscoped` as returning a Relation. To avoid that, either override `unscoped` definition or in your code replace:
+[unscoped method](https://apidock.com/rails/ActiveRecord/Scoping/Default/ClassMethods/unscoped) by default, when no block is provided, returns a Relation.
+When a block is provided, `unscoped` calls the block and returns its result, which type is unknown.
+`sorbet-rails` chooses to define `unscoped` as returning a Relation because it's more common and more useful. If you want to avoid that, either override `unscoped` definition or replace in your code:
 ```ruby
 Model.unscoped do … end
 ```
