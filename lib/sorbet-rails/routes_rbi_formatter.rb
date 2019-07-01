@@ -17,18 +17,11 @@ class RoutesRbiFormatter
 
   def no_routes(routes=nil, filter=nil)
     @buffer <<
-      if routes.nil? || routes.none?
-        <<~MESSAGE
-          # You do not have any routes defined!
-          # Please add some routes in config/routes.rb.
-        MESSAGE
-      elsif filter && filter.key?(:controller)
-        "# No routes were found for this controller."
-      elsif filter && filter.key?(:grep)
-        "# No routes were found for this grep pattern."
-      end
-
-    @buffer << "# For more information about routes, see the Rails guide: https://guides.rubyonrails.org/routing.html."
+      <<~MESSAGE
+        # You do not have any routes defined!
+        # Please add some routes in config/routes.rb.
+        # For more information about routes, see the Rails guide: https://guides.rubyonrails.org/routing.html."
+      MESSAGE
   end
 
   def result
