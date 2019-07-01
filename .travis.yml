@@ -12,6 +12,11 @@ rvm:
   - 2.6
   - ruby-head
 matrix:
+  exclude:
+    - rvm: 2.3
+      env: RAILS_VERSION=6.0
+    - rvm: 2.4
+      env: RAILS_VERSION=6.0
   allow_failures:
     - rvm: ruby-head
 before_install:
