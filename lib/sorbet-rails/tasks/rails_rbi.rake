@@ -18,6 +18,10 @@ namespace :rails_rbi do
   task models: :environment do |t, args|
     # need to eager load to see all models
     Rails.application.eager_load!
+    # Rails 6.0 change the loading logic to use Zeitwerk
+    # https://github.com/rails/rails/blob/master/railties/lib/rails/application/finisher.rb#L116
+    # But this is not applied to Rails.application.eager_load! method
+    Zeitwerk::Loader.eager_load_all if defined?(Zeitwerk)
 
     all_models = ActiveRecord::Base.descendants - blacklisted_models
 
