@@ -3,10 +3,10 @@ class Wizard < ApplicationRecord
   validates :name, length: { minimum: 5 }, presence: true
 
   enum house: {
-    'Gryffindor': 0,
-    'Hufflepuff': 1,
-    'Ravenclaw': 2,
-    'Slytherin': 3,
+    Gryffindor: 0,
+    Hufflepuff: 1,
+    Ravenclaw: 2,
+    Slytherin: 3,
   }
 
   has_one :wand

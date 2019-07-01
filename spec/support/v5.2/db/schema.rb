@@ -24,14 +24,14 @@ ActiveRecord::Schema.define(version: 2019_06_22_000000) do
     t.integer "core_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.float "flexibility", default: 1.0, null: false
-    t.decimal "hardness", precision: 10, scale: 10, default: "7.0", null: false
+    t.float "flexibility", default: 0.5, null: false
+    t.decimal "hardness", precision: 10, scale: 10, default: "5.0", null: false
     t.decimal "reflectance", precision: 10, default: "0", null: false
-    t.json "spell_history"
-    t.json "maker_info", default: {}, null: false
     t.boolean "broken", default: false, null: false
     t.date "chosen_at_date"
     t.time "chosen_at_time"
+    t.json "spell_history"
+    t.json "maker_info", default: "{}", null: false
     t.index ["wizard_id"], name: "index_wands_on_wizard_id"
   end
 
