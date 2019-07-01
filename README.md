@@ -11,6 +11,8 @@ This gem adds a few Rake tasks to generate Ruby Interface (RBI) files for dynami
 
 1. Follow the steps [here](https://sorbet.org/docs/adopting) to set up the latest version of Sorbet, up to being able to run `srb tc`.
 
+Note: do not add `sorbet-rails` to your Gemfile yet, until you've set up sorbet. `sorbet-rails` add rbis that may [break](https://github.com/sorbet/sorbet/issues/1158) `srb init` until it is set up.
+
 2. Add `sorbet-rails` to your Gemfile and install them with Bundler.
 
 ```
