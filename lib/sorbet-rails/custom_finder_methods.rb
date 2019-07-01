@@ -1,6 +1,6 @@
 module SorbetRails
   module CustomFinderMethods
-    def find_n(ids)
+    def find_n(*ids)
       find(ids)
     end
 

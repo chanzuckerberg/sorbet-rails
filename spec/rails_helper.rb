@@ -7,6 +7,7 @@ require 'rake'
 require 'rspec/rails'
 require 'sorbet-rails/railtie'
 require 'rspec/expectations'
+require 'database_cleaner'
 
 rails_version = ENV["RAILS_VERSION"] || "default"
 
@@ -29,6 +30,28 @@ TEST_DATA_FOLDER = "spec/test_data/#{rails_folder}"
 require "support/#{rails_folder}/config/environment"
 
 ActiveRecord::Migration.maintain_test_schema!
+
+RSpec.configure do |config|
+  config.before(:suite) do
+    next if ENV["DISABLE_DATABASE_CLEANER"] == 'true'
+    DatabaseCleaner.clean_with(:truncation, {pre_count: true, reset_ids: false})
+  end
+
+  config.around(:each) do |example|
+    if ENV["DISABLE_DATABASE_CLEANER"] == 'true'
+      example.run
+      next
+    end
+    if example.metadata.fetch(:transaction, true)
+      DatabaseCleaner.strategy = :transaction
+    else
+      DatabaseCleaner.strategy = :truncation, {pre_count: true, reset_ids: false}
+    end
+    DatabaseCleaner.start
+    example.run
+    DatabaseCleaner.clean
+  end
+end
 
 def expect_match_file(content, file_path)
   # TODO make this a custom matcher that can be shared in multiple files

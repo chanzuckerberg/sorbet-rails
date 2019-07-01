@@ -24,4 +24,5 @@ Gem::Specification.new do |s|
   # for testing a gem with a rails app (controller specs)
   s.add_development_dependency 'rspec-rails', '>=3.8.2'
   s.add_development_dependency 'puma', '>=3.12.1'
+  s.add_development_dependency 'database_cleaner', '>= 1.7.0'
 end
