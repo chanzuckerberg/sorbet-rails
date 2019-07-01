@@ -5,7 +5,7 @@ class ActiveRecord::Relation
   include Enumerable
   include ActiveRecord::Querying::Typed
 
-  Elem = type_member
+  Elem = type_member(fixed: ActiveRecord::Base)
 
   sig { params(block: T.proc.params(e: Elem).void).void }
   def each(&block); end
@@ -21,14 +21,14 @@ class ActiveRecord::Relation
   # TODO normally this method could return Elem or Array[Elem]
   # however, we think it's better to limit the interface to returning Elem only
   # Use `find_n` as a replacement if you want to get an array from `find`
-  sig { params(args: T.untyped).returns(Elem).soft }
+  sig { params(args: T.untyped).returns(Elem) }
   def find(*args); end
 end
 
 class ActiveRecord::Associations::CollectionProxy < ActiveRecord::Relation
   extend T::Generic
 
-  Elem = type_member
+  Elem = type_member(fixed: ActiveRecord::Base)
 
   # -- << and aliases
   sig { params(records: T.any(Elem, T::Array[Elem])).returns(T.self_type) }
@@ -45,7 +45,7 @@ end
 module ActiveRecord::Querying::Typed
   extend T::Sig
   extend T::Generic
-  Elem = type_member
+  Elem = type_member(fixed: ActiveRecord::Base)
 
   # -- Booleans
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(T::Boolean) }
@@ -94,13 +94,13 @@ module ActiveRecord::Querying::Typed
   # array of element when there is a limit passed in.
   # The more common use case is to find 1 object. We use that as the default sig
   # and add custom first_n, last_n method for the cases that return an array
-  sig { params(limit: T.nilable(Integer)).returns(T.nilable(Elem)).soft }
+  sig { params(limit: T.nilable(Integer)).returns(T.nilable(Elem)) }
   def first(limit = nil); end
-  sig { params(limit: T.nilable(Integer)).returns(T.nilable(Elem)).soft }
+  sig { params(limit: T.nilable(Integer)).returns(T.nilable(Elem)) }
   def last(limit = nil); end
   # Similar to first & last, normally this method could return Elem or Array[Elem]
   # But we enforce that `find` return Elem by default and provide find_n as an alternative
-  sig { params(args: T.any(Integer, String)).returns(Elem).soft }
+  sig { params(args: T.any(Integer, String)).returns(Elem) }
   def find(*args); end
   # These are custom finder methods to provide strong type for secondary use case of first, last & find
   # See sorbet_rails/custom_finder_methods
