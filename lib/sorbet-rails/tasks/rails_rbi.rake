@@ -54,7 +54,6 @@ namespace :rails_rbi do
 
   def blacklisted_models
     blacklisted_models = []
-    blacklisted_models << ActiveRecord::SchemaMigration if defined?(ActiveRecord::SchemaMigration)
     blacklisted_models << ApplicationRecord if defined?(ApplicationRecord)
     blacklisted_models
   end
