@@ -8,10 +8,12 @@ class ModelRbiFormatter
     @model_class = model_class
     @available_classes = available_classes
     @columns_hash = model_class.table_exists? ? model_class.columns_hash : {}
-    @generated_sigs = ActiveSupport::HashWithIndifferentAccess.new
+    @generated_instance_module_sigs = ActiveSupport::HashWithIndifferentAccess.new
+    @generated_instance_sigs = ActiveSupport::HashWithIndifferentAccess.new
     @generated_class_sigs = ActiveSupport::HashWithIndifferentAccess.new
     @generated_scope_sigs = ActiveSupport::HashWithIndifferentAccess.new
     @generated_querying_sigs = ActiveSupport::HashWithIndifferentAccess.new
+    @model_relation_class_name = "#{@model_class.name}::ActiveRecord_Relation"
     begin
       # Load all dynamic instance methods of this model by instantiating a fake model
       @model_class.new unless @model_class.abstract_class?
@@ -33,7 +35,7 @@ class ModelRbiFormatter
 
     @buffer << draw_module_header("#{@model_class.name}::#{MODEL_INSTANCE_MODULE_SUFFIX}")
     @model_class.instance_methods.sort.each do |method_name|
-      expected_sig = @generated_sigs[method_name]
+      expected_sig = @generated_instance_module_sigs[method_name]
       next unless expected_sig.present?
       method_obj = @model_class.instance_method(method_name)
       draw_method(method_name, method_obj, expected_sig)
@@ -45,7 +47,13 @@ class ModelRbiFormatter
     # When this issue is resolved, they might go away by running `srb rbi hidden-definitions`
     # This is a sure way to make it work though.
     # https://github.com/sorbet/sorbet/issues/1161
-    @buffer << draw_module_header("#{@model_class.name}") # ::#{MODEL_CLASS_MODULE_SUFFIX}")
+    @buffer << draw_class_header("#{@model_class.name}") # ::#{MODEL_CLASS_MODULE_SUFFIX}")
+    @model_class.instance_methods.sort.each do |method_name|
+      expected_sig = @generated_instance_sigs[method_name]
+      next unless expected_sig.present?
+      method_obj = @model_class.instance_method(method_name)
+      draw_method(method_name, method_obj, expected_sig)
+    end
     @model_class.methods.sort.each do |method_name|
       expected_sig = @generated_class_sigs[method_name]
       next unless expected_sig.present?
@@ -88,9 +96,9 @@ class ModelRbiFormatter
   def populate_activerecord_querying_methods
     # All is a named scope that most method from ActiveRecord::Querying delegate to
     # rails/activerecord/lib/active_record/querying.rb:21
-    @generated_scope_sigs["all"] = { ret: "#{@model_class.name}::Relation" }
+    @generated_scope_sigs["all"] = { ret: @model_relation_class_name }
     @generated_scope_sigs["unscoped"] = {
-      ret: "#{@model_class.name}::Relation",
+      ret: @model_relation_class_name,
       args: [
         { name: :block, arg_type: :block, value_type: 'T.nilable(T.proc.void)' },
       ]
@@ -110,7 +118,7 @@ class ModelRbiFormatter
           {name: :args, arg_type: :rest, value_type: 'T.untyped'},
           {name: :block, arg_type: :block, value_type: 'T.nilable(T.proc.void)'},
         ],
-        ret: "#{@model_class.name}::Relation",
+        ret: @model_relation_class_name,
       }
     end
   end
@@ -128,7 +136,7 @@ class ModelRbiFormatter
       next unless source_file.include?('lib/active_record/scoping/named.rb')
       @generated_scope_sigs[method_name] = {
         args: [ name: :args, arg_type: :rest, value_type: 'T.untyped' ],
-        ret: "#{@model_class.name}::Relation",
+        ret: @model_relation_class_name,
       }
     end
   end
@@ -139,7 +147,7 @@ class ModelRbiFormatter
         # enum attribute is treated differently
         assignable_type = "T.any(Integer, String, Symbol)"
         assignable_type = "T.nilable(#{assignable_type})" if column_def.null
-        @generated_sigs.merge!({
+        @generated_instance_module_sigs.merge!({
           "#{column_name}" => { ret: "String" },
           "#{column_name}=" => {
             args: [ name: :value, arg_type: :req, value_type: assignable_type],
@@ -147,7 +155,7 @@ class ModelRbiFormatter
         })
       else
         column_type = type_for_column_def(column_def)
-        @generated_sigs.merge!({
+        @generated_instance_module_sigs.merge!({
           "#{column_name}" => { ret: column_type },
           "#{column_name}=" => {
             args: [ name: :value, arg_type: :req, value_type: column_type ],
@@ -155,7 +163,7 @@ class ModelRbiFormatter
         })
       end
 
-      @generated_sigs["#{column_name}?"] = {
+      @generated_instance_module_sigs["#{column_name}?"] = {
         ret: "T::Boolean",
         args: [ name: :args, arg_type: :rest, value_type: 'T.untyped' ],
       }
@@ -172,7 +180,7 @@ class ModelRbiFormatter
 
   def populate_single_assoc_getter_setter(assoc_name, reflection)
     # TODO allow people to specify the possible values of polymorphic associations
-    assoc_class = assoc_should_be_untyped?(reflection) ? "T.untyped" : reflection.class_name
+    assoc_class = assoc_should_be_untyped?(reflection) ? "T.untyped" : "::#{reflection.klass.name}"
     assoc_type = "T.nilable(#{assoc_class})"
     if reflection.belongs_to?
       # if this is a belongs_to connection, we may be able to detect whether
@@ -183,7 +191,7 @@ class ModelRbiFormatter
       end
     end
 
-    @generated_sigs.merge!({
+    @generated_instance_sigs.merge!({
       "#{assoc_name}" => { ret: assoc_type },
       "#{assoc_name}=" => {
         args: [ name: :value, arg_type: :req, value_type: assoc_type ],
@@ -193,11 +201,11 @@ class ModelRbiFormatter
 
   def populate_collection_assoc_getter_setter(assoc_name, reflection)
     # TODO allow people to specify the possible values of polymorphic associations
-    assoc_class = assoc_should_be_untyped?(reflection) ? "T.untyped" : reflection.class_name
+    assoc_class = assoc_should_be_untyped?(reflection) ? "T.untyped" : "::#{reflection.klass.name}"
     relation_class = relation_should_be_untyped?(reflection) ?
-      "ActiveRecord::Associations::CollectionProxy[T.untyped]" :
-      "#{assoc_class}::CollectionProxy"
-    @generated_sigs.merge!({
+      "ActiveRecord::Associations::CollectionProxy" :
+      "#{assoc_class}::ActiveRecord_Associations_CollectionProxy"
+    @generated_instance_sigs.merge!({
       "#{assoc_name}" => { ret: relation_class },
       "#{assoc_name}=" => {
         args: [ name: :value, arg_type: :req, value_type: "T.any(T::Array[#{assoc_class}], #{relation_class})" ],
@@ -209,26 +217,27 @@ class ModelRbiFormatter
     @model_class.defined_enums.each do |enum_name, enum_hash|
       @generated_class_sigs["#{enum_name.pluralize}"] = { ret: "T::Hash[T.any(String, Symbol), Integer]"}
       enum_hash.keys.each do |enum_val|
-        @generated_sigs["#{enum_val}?"] = { ret: "T::Boolean" }
+        @generated_instance_module_sigs["#{enum_val}?"] = { ret: "T::Boolean" }
         @generated_scope_sigs["#{enum_val}"] = {
           args: [ name: :args, arg_type: :rest, value_type: 'T.untyped' ],
-          ret: "#{@model_class.name}::Relation",
+          ret: @model_relation_class_name,
         }
+        # force generating these methods because sorbet's hidden-definitions generate & override them
         @generated_class_sigs["#{enum_val}"] = {
           args: [ name: :args, arg_type: :rest, value_type: 'T.untyped' ],
-          ret: "#{@model_class.name}::Relation",
+          ret: @model_relation_class_name,
         }
       end
     end
   end
 
   def assoc_should_be_untyped?(reflection)
-    polymorphic_assoc?(reflection) || !Object.const_defined?(reflection.class_name)
+    polymorphic_assoc?(reflection) || !Object.const_defined?(reflection.klass.name)
   end
 
   def relation_should_be_untyped?(reflection)
     # only type the relation we'll generate
-    assoc_should_be_untyped?(reflection) || !@available_classes.include?(reflection.class_name)
+    assoc_should_be_untyped?(reflection) || !@available_classes.include?(reflection.klass.name)
   end
 
   def polymorphic_assoc?(reflection)
@@ -245,13 +254,13 @@ class ModelRbiFormatter
       # Please rerun rake rails_rbi:models to regenerate.
       # typed: strong
 
-      class #{@model_class.name}::Relation < ActiveRecord::Relation
+      class #{@model_relation_class_name} < ActiveRecord::Relation
         include #{@model_class.name}::#{MODEL_RELATION_SHARED_MODULE_SUFFIX}
         extend T::Generic
         Elem = type_member(fixed: #{@model_class.name})
       end
 
-      class #{@model_class.name}::CollectionProxy < ActiveRecord::Associations::CollectionProxy
+      class #{@model_class.name}::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
         include #{@model_class.name}::#{MODEL_RELATION_SHARED_MODULE_SUFFIX}
         extend T::Generic
         Elem = type_member(fixed: #{@model_class.name})
@@ -261,8 +270,7 @@ class ModelRbiFormatter
         extend T::Sig
         extend T::Generic
         extend #{@model_class.name}::#{MODEL_RELATION_SHARED_MODULE_SUFFIX}
-        extend #{@model_class.name}::ClassMethods
-        include #{@model_class.name}::InstanceMethods
+        include #{@model_class.name}::#{MODEL_INSTANCE_MODULE_SUFFIX}
         Elem = type_template(fixed: #{@model_class.name})
       end
     MESSAGE
@@ -277,6 +285,13 @@ class ModelRbiFormatter
   def draw_module_header(name)
     <<~MESSAGE
       module #{name}
+        extend T::Sig
+    MESSAGE
+  end
+
+  def draw_class_header(name)
+    <<~MESSAGE
+      class #{name}
         extend T::Sig
     MESSAGE
   end
