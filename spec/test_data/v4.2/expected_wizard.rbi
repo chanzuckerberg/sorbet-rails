@@ -2,13 +2,13 @@
 # Please rerun rake rails_rbi:models to regenerate.
 # typed: strong
 
-class Wizard::Relation < ActiveRecord::Relation
+class Wizard::ActiveRecord_Relation < ActiveRecord::Relation
   include Wizard::ModelRelationShared
   extend T::Generic
   Elem = type_member(fixed: Wizard)
 end
 
-class Wizard::CollectionProxy < ActiveRecord::Associations::CollectionProxy
+class Wizard::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include Wizard::ModelRelationShared
   extend T::Generic
   Elem = type_member(fixed: Wizard)
@@ -18,7 +18,6 @@ class Wizard < ApplicationRecord
   extend T::Sig
   extend T::Generic
   extend Wizard::ModelRelationShared
-  extend Wizard::ClassMethods
   include Wizard::InstanceMethods
   Elem = type_template(fixed: Wizard)
 end
@@ -92,12 +91,6 @@ module Wizard::InstanceMethods
   sig { params(args: T.untyped).returns(T::Boolean) }
   def parent_email?(*args); end
 
-  sig { returns(SpellBook::CollectionProxy) }
-  def spell_books(); end
-
-  sig { params(value: T.any(T::Array[SpellBook], SpellBook::CollectionProxy)).void }
-  def spell_books=(value); end
-
   sig { returns(T.nilable(T.untyped)) }
   def updated_at(); end
 
@@ -107,110 +100,128 @@ module Wizard::InstanceMethods
   sig { params(args: T.untyped).returns(T::Boolean) }
   def updated_at?(*args); end
 
-  sig { returns(T.nilable(Wand)) }
-  def wand(); end
-
-  sig { params(value: T.nilable(Wand)).void }
-  def wand=(value); end
-
 end
 
-module Wizard::ClassMethods
+class Wizard
   extend T::Sig
 
+  sig { returns(::SpellBook::ActiveRecord_Associations_CollectionProxy) }
+  def spell_books(); end
+
+  sig { params(value: T.any(T::Array[::SpellBook], ::SpellBook::ActiveRecord_Associations_CollectionProxy)).void }
+  def spell_books=(value); end
+
+  sig { returns(T.nilable(::Wand)) }
+  def wand(); end
+
+  sig { params(value: T.nilable(::Wand)).void }
+  def wand=(value); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def self.Gryffindor(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def self.Hufflepuff(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def self.Ravenclaw(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def self.Slytherin(*args); end
+
   sig { returns(T::Hash[T.any(String, Symbol), Integer]) }
-  def houses(); end
+  def self.houses(); end
 
 end
 
 module Wizard::ModelRelationShared
   extend T::Sig
 
-  sig { returns(Wizard::Relation) }
+  sig { returns(Wizard::ActiveRecord_Relation) }
   def all(); end
 
-  sig { params(block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
+  sig { params(block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
   def unscoped(&block); end
 
-  sig { params(args: T.untyped).returns(Wizard::Relation) }
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
   def Gryffindor(*args); end
 
-  sig { params(args: T.untyped).returns(Wizard::Relation) }
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
   def Hufflepuff(*args); end
 
-  sig { params(args: T.untyped).returns(Wizard::Relation) }
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
   def Ravenclaw(*args); end
 
-  sig { params(args: T.untyped).returns(Wizard::Relation) }
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
   def Slytherin(*args); end
 
-  sig { params(args: T.untyped).returns(Wizard::Relation) }
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
   def recent(*args); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
   def select(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
   def order(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
   def reorder(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
   def group(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
   def limit(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
   def offset(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
   def joins(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
   def where(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
   def rewhere(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
   def preload(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
   def eager_load(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
   def includes(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
   def from(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
   def lock(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
   def readonly(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
   def having(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
   def create_with(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
   def distinct(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
   def references(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
   def none(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
   def unscope(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
   def except(*args, &block); end
 
 end
