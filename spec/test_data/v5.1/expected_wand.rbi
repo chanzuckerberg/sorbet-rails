@@ -2,13 +2,13 @@
 # Please rerun rake rails_rbi:models to regenerate.
 # typed: strong
 
-class Wand::Relation < ActiveRecord::Relation
+class Wand::ActiveRecord_Relation < ActiveRecord::Relation
   include Wand::ModelRelationShared
   extend T::Generic
   Elem = type_member(fixed: Wand)
 end
 
-class Wand::CollectionProxy < ActiveRecord::Associations::CollectionProxy
+class Wand::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include Wand::ModelRelationShared
   extend T::Generic
   Elem = type_member(fixed: Wand)
@@ -18,7 +18,6 @@ class Wand < ApplicationRecord
   extend T::Sig
   extend T::Generic
   extend Wand::ModelRelationShared
-  extend Wand::ClassMethods
   include Wand::InstanceMethods
   Elem = type_template(fixed: Wand)
 end
@@ -128,12 +127,6 @@ module Wand::InstanceMethods
   sig { params(args: T.untyped).returns(T::Boolean) }
   def updated_at?(*args); end
 
-  sig { returns(Wizard) }
-  def wizard(); end
-
-  sig { params(value: Wizard).void }
-  def wizard=(value); end
-
   sig { returns(Integer) }
   def wizard_id(); end
 
@@ -154,117 +147,135 @@ module Wand::InstanceMethods
 
 end
 
-module Wand::ClassMethods
+class Wand
   extend T::Sig
 
+  sig { returns(::Wizard) }
+  def wizard(); end
+
+  sig { params(value: ::Wizard).void }
+  def wizard=(value); end
+
+  sig { params(args: T.untyped).returns(Wand::ActiveRecord_Relation) }
+  def self.basilisk_horn(*args); end
+
   sig { returns(T::Hash[T.any(String, Symbol), Integer]) }
-  def core_types(); end
+  def self.core_types(); end
+
+  sig { params(args: T.untyped).returns(Wand::ActiveRecord_Relation) }
+  def self.dragon_heartstring(*args); end
+
+  sig { params(args: T.untyped).returns(Wand::ActiveRecord_Relation) }
+  def self.phoenix_feather(*args); end
+
+  sig { params(args: T.untyped).returns(Wand::ActiveRecord_Relation) }
+  def self.unicorn_tail_hair(*args); end
 
 end
 
 module Wand::ModelRelationShared
   extend T::Sig
 
-  sig { returns(Wand::Relation) }
+  sig { returns(Wand::ActiveRecord_Relation) }
   def all(); end
 
-  sig { params(block: T.nilable(T.proc.void)).returns(Wand::Relation) }
+  sig { params(block: T.nilable(T.proc.void)).returns(Wand::ActiveRecord_Relation) }
   def unscoped(&block); end
 
-  sig { params(args: T.untyped).returns(Wand::Relation) }
+  sig { params(args: T.untyped).returns(Wand::ActiveRecord_Relation) }
   def basilisk_horn(*args); end
 
-  sig { params(args: T.untyped).returns(Wand::Relation) }
+  sig { params(args: T.untyped).returns(Wand::ActiveRecord_Relation) }
   def dragon_heartstring(*args); end
 
-  sig { params(args: T.untyped).returns(Wand::Relation) }
+  sig { params(args: T.untyped).returns(Wand::ActiveRecord_Relation) }
   def phoenix_feather(*args); end
 
-  sig { params(args: T.untyped).returns(Wand::Relation) }
+  sig { params(args: T.untyped).returns(Wand::ActiveRecord_Relation) }
   def recent(*args); end
 
-  sig { params(args: T.untyped).returns(Wand::Relation) }
+  sig { params(args: T.untyped).returns(Wand::ActiveRecord_Relation) }
   def unicorn_tail_hair(*args); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::ActiveRecord_Relation) }
   def select(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::ActiveRecord_Relation) }
   def order(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::ActiveRecord_Relation) }
   def reorder(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::ActiveRecord_Relation) }
   def group(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::ActiveRecord_Relation) }
   def limit(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::ActiveRecord_Relation) }
   def offset(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::ActiveRecord_Relation) }
   def joins(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::ActiveRecord_Relation) }
   def left_joins(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::ActiveRecord_Relation) }
   def left_outer_joins(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::ActiveRecord_Relation) }
   def where(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::ActiveRecord_Relation) }
   def rewhere(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::ActiveRecord_Relation) }
   def preload(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::ActiveRecord_Relation) }
   def eager_load(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::ActiveRecord_Relation) }
   def includes(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::ActiveRecord_Relation) }
   def from(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::ActiveRecord_Relation) }
   def lock(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::ActiveRecord_Relation) }
   def readonly(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::ActiveRecord_Relation) }
   def extending(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::ActiveRecord_Relation) }
   def or(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::ActiveRecord_Relation) }
   def having(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::ActiveRecord_Relation) }
   def create_with(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::ActiveRecord_Relation) }
   def distinct(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::ActiveRecord_Relation) }
   def references(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::ActiveRecord_Relation) }
   def none(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::ActiveRecord_Relation) }
   def unscope(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::ActiveRecord_Relation) }
   def merge(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::ActiveRecord_Relation) }
   def except(*args, &block); end
 
 end

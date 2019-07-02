@@ -2,13 +2,13 @@
 # Please rerun rake rails_rbi:models to regenerate.
 # typed: strong
 
-class SpellBook::Relation < ActiveRecord::Relation
+class SpellBook::ActiveRecord_Relation < ActiveRecord::Relation
   include SpellBook::ModelRelationShared
   extend T::Generic
   Elem = type_member(fixed: SpellBook)
 end
 
-class SpellBook::CollectionProxy < ActiveRecord::Associations::CollectionProxy
+class SpellBook::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include SpellBook::ModelRelationShared
   extend T::Generic
   Elem = type_member(fixed: SpellBook)
@@ -18,7 +18,6 @@ class SpellBook < ApplicationRecord
   extend T::Sig
   extend T::Generic
   extend SpellBook::ModelRelationShared
-  extend SpellBook::ClassMethods
   include SpellBook::InstanceMethods
   Elem = type_template(fixed: SpellBook)
 end
@@ -44,12 +43,6 @@ module SpellBook::InstanceMethods
   sig { params(args: T.untyped).returns(T::Boolean) }
   def name?(*args); end
 
-  sig { returns(T.nilable(Wizard)) }
-  def wizard(); end
-
-  sig { params(value: T.nilable(Wizard)).void }
-  def wizard=(value); end
-
   sig { returns(T.nilable(Integer)) }
   def wizard_id(); end
 
@@ -61,114 +54,120 @@ module SpellBook::InstanceMethods
 
 end
 
-module SpellBook::ClassMethods
+class SpellBook
   extend T::Sig
+
+  sig { returns(T.nilable(::Wizard)) }
+  def wizard(); end
+
+  sig { params(value: T.nilable(::Wizard)).void }
+  def wizard=(value); end
 
 end
 
 module SpellBook::ModelRelationShared
   extend T::Sig
 
-  sig { returns(SpellBook::Relation) }
+  sig { returns(SpellBook::ActiveRecord_Relation) }
   def all(); end
 
-  sig { params(block: T.nilable(T.proc.void)).returns(SpellBook::Relation) }
+  sig { params(block: T.nilable(T.proc.void)).returns(SpellBook::ActiveRecord_Relation) }
   def unscoped(&block); end
 
-  sig { params(args: T.untyped).returns(SpellBook::Relation) }
+  sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_Relation) }
   def recent(*args); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::ActiveRecord_Relation) }
   def select(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::ActiveRecord_Relation) }
   def reselect(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::ActiveRecord_Relation) }
   def order(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::ActiveRecord_Relation) }
   def reorder(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::ActiveRecord_Relation) }
   def group(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::ActiveRecord_Relation) }
   def limit(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::ActiveRecord_Relation) }
   def offset(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::ActiveRecord_Relation) }
   def joins(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::ActiveRecord_Relation) }
   def left_joins(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::ActiveRecord_Relation) }
   def left_outer_joins(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::ActiveRecord_Relation) }
   def where(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::ActiveRecord_Relation) }
   def rewhere(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::ActiveRecord_Relation) }
   def preload(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::ActiveRecord_Relation) }
   def extract_associated(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::ActiveRecord_Relation) }
   def eager_load(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::ActiveRecord_Relation) }
   def includes(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::ActiveRecord_Relation) }
   def from(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::ActiveRecord_Relation) }
   def lock(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::ActiveRecord_Relation) }
   def readonly(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::ActiveRecord_Relation) }
   def extending(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::ActiveRecord_Relation) }
   def or(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::ActiveRecord_Relation) }
   def having(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::ActiveRecord_Relation) }
   def create_with(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::ActiveRecord_Relation) }
   def distinct(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::ActiveRecord_Relation) }
   def references(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::ActiveRecord_Relation) }
   def none(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::ActiveRecord_Relation) }
   def unscope(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::ActiveRecord_Relation) }
   def optimizer_hints(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::ActiveRecord_Relation) }
   def merge(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::ActiveRecord_Relation) }
   def except(*args, &block); end
 
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::Relation) }
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::ActiveRecord_Relation) }
   def only(*args, &block); end
 
 end
