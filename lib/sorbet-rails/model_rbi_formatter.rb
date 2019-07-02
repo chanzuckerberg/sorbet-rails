@@ -40,12 +40,17 @@ class ModelRbiFormatter
     end
     @buffer << draw_module_or_class_footer
 
-    @buffer << draw_module_header("#{@model_class.name}::#{MODEL_CLASS_MODULE_SUFFIX}")
+    # TODO Enum methods need to be defined under the class definition because sorbet generates them
+    # in the hidden-definition.rbi
+    # When this issue is resolved, they might go away by running `srb rbi hidden-definitions`
+    # This is a sure way to make it work though.
+    # https://github.com/sorbet/sorbet/issues/1161
+    @buffer << draw_module_header("#{@model_class.name}") # ::#{MODEL_CLASS_MODULE_SUFFIX}")
     @model_class.methods.sort.each do |method_name|
       expected_sig = @generated_class_sigs[method_name]
       next unless expected_sig.present?
       method_obj = @model_class.method(method_name)
-      draw_method(method_name, method_obj, expected_sig)
+      draw_method(method_name, method_obj, expected_sig, is_class_method: true)
     end
     @buffer << draw_module_or_class_footer
 
@@ -71,13 +76,13 @@ class ModelRbiFormatter
     @buffer.join("\n")
   end
 
-  def draw_method(method_name, method_obj, expected_sig)
+  def draw_method(method_name, method_obj, expected_sig, is_class_method: false)
     if !method_obj.present?
       # not very actionable because this could be a method in a newer version of Rails
       # puts "Skip method '#{method_name}' because there is no matching method object."
       return
     end
-    @buffer << generate_method_sig(method_name, expected_sig).indent(2)
+    @buffer << generate_method_sig(method_name, expected_sig, is_class_method).indent(2)
   end
 
   def populate_activerecord_querying_methods
@@ -209,6 +214,10 @@ class ModelRbiFormatter
           args: [ name: :args, arg_type: :rest, value_type: 'T.untyped' ],
           ret: "#{@model_class.name}::Relation",
         }
+        @generated_class_sigs["#{enum_val}"] = {
+          args: [ name: :args, arg_type: :rest, value_type: 'T.untyped' ],
+          ret: "#{@model_class.name}::Relation",
+        }
       end
     end
   end
@@ -316,7 +325,7 @@ class ModelRbiFormatter
     end
   end
 
-  def generate_method_sig(method_name, generated_method_def)
+  def generate_method_sig(method_name, generated_method_def, is_class_method)
     # generated_method_def:
     # {
     # .  ret: <return_type>
@@ -348,13 +357,15 @@ class ModelRbiFormatter
       }.join(", ")
     end
 
+    method_prefix = is_class_method ? 'self.' : ''
+
     return_type = generated_method_def[:ret] ?
       "returns(#{generated_method_def[:ret]})" :
       "void"
 
     <<~MESSAGE
       sig { #{param_sig}#{return_type} }
-      def #{method_name}(#{param_def}); end
+      def #{method_prefix}#{method_name}(#{param_def}); end
     MESSAGE
   end
 end
