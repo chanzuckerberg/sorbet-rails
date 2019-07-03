@@ -25,14 +25,26 @@ end
 module Wizard::InstanceMethods
   extend T::Sig
 
+  sig { void }
+  def Gryffindor!(); end
+
   sig { returns(T::Boolean) }
   def Gryffindor?(); end
+
+  sig { void }
+  def Hufflepuff!(); end
 
   sig { returns(T::Boolean) }
   def Hufflepuff?(); end
 
+  sig { void }
+  def Ravenclaw!(); end
+
   sig { returns(T::Boolean) }
   def Ravenclaw?(); end
+
+  sig { void }
+  def Slytherin!(); end
 
   sig { returns(T::Boolean) }
   def Slytherin?(); end
