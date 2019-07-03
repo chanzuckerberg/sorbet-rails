@@ -25,6 +25,9 @@ end
 module Wand::InstanceMethods
   extend T::Sig
 
+  sig { void }
+  def basilisk_horn!(); end
+
   sig { returns(T::Boolean) }
   def basilisk_horn?(); end
 
@@ -73,6 +76,9 @@ module Wand::InstanceMethods
   sig { params(args: T.untyped).returns(T::Boolean) }
   def created_at?(*args); end
 
+  sig { void }
+  def dragon_heartstring!(); end
+
   sig { returns(T::Boolean) }
   def dragon_heartstring?(); end
 
@@ -112,6 +118,9 @@ module Wand::InstanceMethods
   sig { params(args: T.untyped).returns(T::Boolean) }
   def maker_info?(*args); end
 
+  sig { void }
+  def phoenix_feather!(); end
+
   sig { returns(T::Boolean) }
   def phoenix_feather?(); end
 
@@ -132,6 +141,9 @@ module Wand::InstanceMethods
 
   sig { params(args: T.untyped).returns(T::Boolean) }
   def spell_history?(*args); end
+
+  sig { void }
+  def unicorn_tail_hair!(); end
 
   sig { returns(T::Boolean) }
   def unicorn_tail_hair?(); end

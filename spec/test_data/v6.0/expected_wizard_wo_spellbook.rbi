@@ -25,14 +25,26 @@ end
 module Wizard::InstanceMethods
   extend T::Sig
 
+  sig { void }
+  def Gryffindor!(); end
+
   sig { returns(T::Boolean) }
   def Gryffindor?(); end
+
+  sig { void }
+  def Hufflepuff!(); end
 
   sig { returns(T::Boolean) }
   def Hufflepuff?(); end
 
+  sig { void }
+  def Ravenclaw!(); end
+
   sig { returns(T::Boolean) }
   def Ravenclaw?(); end
+
+  sig { void }
+  def Slytherin!(); end
 
   sig { returns(T::Boolean) }
   def Slytherin?(); end
@@ -108,7 +120,7 @@ class Wizard
   sig { returns(ActiveRecord::Associations::CollectionProxy) }
   def spell_books(); end
 
-  sig { params(value: T.any(T::Array[::SpellBook], ActiveRecord::Associations::CollectionProxy)).void }
+  sig { params(value: T.any(T::Array[T.untyped], ActiveRecord::Associations::CollectionProxy)).void }
   def spell_books=(value); end
 
   sig { returns(T.nilable(::Wand)) }
