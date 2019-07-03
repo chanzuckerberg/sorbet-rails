@@ -142,9 +142,34 @@ class ActiveRecord::Base
   extend ActiveRecord::Querying::Typed
   extend T::Generic
   Elem = type_template(fixed: ActiveRecord::Base)
+  include ActiveRecord::AttributeMethods::Dirty
+  include ActiveModel::Dirty
 end
 
 class ApplicationRecord
   extend T::Generic
   Elem = type_template(fixed: ApplicationRecord)
+end
+
+module ActiveModel::Dirty
+  extend T::Sig
+
+  sig { params(attr: Symbol, from: T.untyped, to: T.untyped).returns(T::Boolean) }
+  def attribute_changed?(attr, from: nil, to: nil); end
+
+  sig { params(attr_name: Symbol).returns(T::Boolean) }
+  def attribute_changed_in_place?(attr_name); end
+
+  sig { params(attr_name: Symbol).returns(T::Boolean) }
+  def attribute_previously_changed?(attr_name); end
+
+  sig { returns(T::Boolean) }
+  def changed?; end
+end
+
+module ActiveRecord::AttributeMethods::Dirty
+  extend T::Sig
+
+  sig { params(attr_name: Symbol, options: T.untyped).returns(T::Boolean) }
+  def saved_change_to_attribute?(attr_name, **options); end
 end
