@@ -1,34 +1,34 @@
 language: ruby
 env:
-  - RAILS_VERSION=4.2
-  - RAILS_VERSION=5.0
-  - RAILS_VERSION=5.1
-  - RAILS_VERSION=5.2
-  - RAILS_VERSION=6.0
+- RAILS_VERSION=4.2
+- RAILS_VERSION=5.0
+- RAILS_VERSION=5.1
+- RAILS_VERSION=5.2
+- RAILS_VERSION=6.0
 rvm:
-  - 2.3
-  - 2.4
-  - 2.5
-  - 2.6
-  - ruby-head
+- 2.3
+- 2.4
+- 2.5
+- 2.6
+- ruby-head
 matrix:
   exclude:
-    - rvm: 2.3
-      env: RAILS_VERSION=6.0
-    - rvm: 2.4
-      env: RAILS_VERSION=6.0
+  - rvm: 2.3
+    env: RAILS_VERSION=6.0
+  - rvm: 2.4
+    env: RAILS_VERSION=6.0
   allow_failures:
-    - rvm: ruby-head
+  - rvm: ruby-head
 before_install:
 - gem install bundler -v 2.0.1 --no-doc
 - gem install bundler -v 1.17.3 --no-doc
-install: ./spec/bin/install.sh
+install: "./spec/bin/install.sh"
 script:
-- ./spec/bin/run_spec.sh
+- "./spec/bin/run_spec.sh"
 deploy:
   provider: rubygems
   api_key:
-    secure: XWpjZ+CzAqa9I/S9xJCFoCYJQ3cVp2Dz3DIWNjfC4H4lhxZokGA0FW/dKS2GFj/hadvw9gN5YYshyJegzm5I024QFexRxdBrmlVYCic/gqRIuK7hNp1IFeQJYK4j2s6HFcYnqn1sRT2EJQjdQVG/2+Dmv46xlpEPZH5yVnmQlIln28mYvXjPAjHgOLewgj7QEvt72jASd93X+YT30wGugVK0F+lWG75VFWBECe4kYebyNJZ+REX4aKnejtQwIhERD6vRHge3XZ2HQ0o0AZpqL8xK3ghjSuV3XOes01zvpg0qnsf4YA+ZaIRDmYPpCoWBoVFw2M4AyUUIHH0olojt0kDZvhhanDOk3pAxHaEN1bp0rs8oH5olXFnAXOm+4tls/ZyUPKCX/6UgibMVn99LOIxESx0fCf6N81rlHbD8lczLYDOkatozqoDYykt2I8mErYJjZSntwzRwRATkbWxb8Kgx60arUdWwzWXyNdN2Cz4Y0wnuY59X80/d7IddJoWClk2YSkyJqeASQytR2WfjRUkuCZnxOWjccajwRl5fOkA2md2Ttq92OZktqYaAz0l2FcVrxcPiGi5aQk+t8ygBtJx9ft2DQvyZQ1W8Sxdox06ql/WXDhq5i/gjq/jhN7Uu7Xs3G5UvxL+OO/2YQqy8rqb4IKuYAOLoNFmFDEQoN2Q=
+    secure: be9j7GAAJNlWDZF/T4T4+G7rNWsh1cHld8Qt6XsnyS9cDzCH4akWqWC4zvZ5Hk/zTKFTWvusYehnkGlzPk9/ymqGCN1q0arpR2u665CRhlnBj1nUMI9ZeYiKLcHrEizcXY3WA7XvnSSlsI61GCL7ysdP/nSI1mQw1Cedekz+Ay9eLaMQQJDKI81VzMGHYbK5aJfGOq3RmDLqMayk6fsRx95b0kZCs59MDgzTy8z/gDbONa56Tv23QfKuSsF35DUhW3cu2QBVCxCCgKz6u+BD/DFhI436hZOBNEiaHNYDIyEM8bd/sUsXNylfUIn2K3Aish3FdVinqJ/FrMq10D78xhn1F69kywGpbYJvj0i/UvJ3FjSQqTIzGmvLki6ypadWe4YvA0oxZlHpt1Cq5473xqWaGLrNG7AY44R70xIqdNBUCa3+rvSNgdDHt7k15Fgo4n4kswpZu/JsINAmRYxbzc6Msei9DflxtG/c1uSJWKisCTz/yMlneDwIDiAtB23bJClKSXg8Ov7U+D4JTnrPRUkx+G6icLVygx8LcPneS9DExgFV7dCz2BejdIVKx3kcQbm/bMt7lhNuIYFfUrvBG9riUngUrHZKwh81oFUrCZFMhAfi6L6EbKAf/sIrruPz4HFfUTJTgNrgtgA9uSNcmC/Gnvgj+lg/Fv9j9448ANs=
   gem: sorbet-rails
   on:
     tags: true
