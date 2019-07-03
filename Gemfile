@@ -39,6 +39,13 @@ else
   gem "sqlite3", "~> 1.4.1"
 end
 
-# TODO: configure to run different version of sorbet
-gem 'sorbet'
-gem 'sorbet-runtime'
+sorbet_version = ENV["SORBET_VERSION"]
+if sorbet_version
+  # mostly used to test against a stable version of Sorbet in Travis.
+  gem 'sorbet', sorbet_version
+  gem 'sorbet-runtime', sorbet_version
+else
+  # prefer to test against latest version because sorbet is updated frequently
+  gem 'sorbet'
+  gem 'sorbet-runtime'
+end
