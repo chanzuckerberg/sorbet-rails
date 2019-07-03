@@ -218,6 +218,7 @@ class ModelRbiFormatter
       @generated_class_sigs["#{enum_name.pluralize}"] = { ret: "T::Hash[T.any(String, Symbol), Integer]"}
       enum_hash.keys.each do |enum_val|
         @generated_instance_module_sigs["#{enum_val}?"] = { ret: "T::Boolean" }
+        @generated_instance_module_sigs["#{enum_val}!"] = { ret: nil }
         @generated_scope_sigs["#{enum_val}"] = {
           args: [ name: :args, arg_type: :rest, value_type: 'T.untyped' ],
           ret: @model_relation_class_name,
