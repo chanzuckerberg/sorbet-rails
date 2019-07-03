@@ -232,7 +232,7 @@ class ModelRbiFormatter
   end
 
   def assoc_should_be_untyped?(reflection)
-    polymorphic_assoc?(reflection) || !Object.const_defined?(reflection.klass.name)
+    polymorphic_assoc?(reflection) || !@available_classes.include?(reflection.klass.name)
   end
 
   def relation_should_be_untyped?(reflection)
