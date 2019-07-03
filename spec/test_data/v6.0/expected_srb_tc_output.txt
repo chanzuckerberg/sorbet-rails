@@ -1,3 +1,10 @@
+/home/dev/sorbet-rails/rbi/activerecord.rbi:158: Method `ActiveModel::Dirty#attribute_changed?` redefined without matching argument count. Expected: `2`, got: `3` https://srb.help/4010
+     158 |  def attribute_changed?(attr, from: nil, to: nil); end
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ./sorbet/rbi/gems/activemodel.rbi:716: Previous definition
+     716 |  def attribute_changed?(attr_name, **options); end
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 ./sorbet_test_cases.rb:4: Method `first!` does not exist on `T.class_of(Wizard)` https://srb.help/7003
      4 |wizard = Wizard.first!
                  ^^^^^^^^^^^^^
@@ -93,4 +100,4 @@
     ./sorbet_test_cases.rb:34:
     34 |T.reveal_type(Wizard.Gryffindor.recent.unscoped)
                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Errors: 12
+Errors: 13
