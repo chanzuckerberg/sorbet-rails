@@ -15887,11 +15887,6 @@ end
 
 Net::HTTPSession = Net::HTTP
 
-<<<<<<< HEAD
-=======
-Net::HTTPSuccess::EXCEPTION_TYPE = Net::HTTPError
-
->>>>>>> srb init in v5.2
 class Net::HTTPSuccess
   extend ::T::Sig
 end

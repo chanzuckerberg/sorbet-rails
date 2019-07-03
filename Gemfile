@@ -38,3 +38,7 @@ else
   gem "bundler", ">= 2.0"
   gem "sqlite3", "~> 1.4.1"
 end
+
+# TODO: configure to run different version of sorbet
+gem 'sorbet'
+gem 'sorbet-runtime'

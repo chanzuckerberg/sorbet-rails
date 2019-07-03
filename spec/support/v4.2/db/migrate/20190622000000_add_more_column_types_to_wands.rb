@@ -1,3 +1,4 @@
+# typed: false
 class AddMoreColumnTypesToWands < ActiveRecord::Migration
   def change
     add_column :wands, :flexibility,    :float,   null: false, default: 0.5

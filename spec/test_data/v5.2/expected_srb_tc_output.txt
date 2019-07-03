@@ -1,0 +1,76 @@
+./sorbet_tc_test.rb:3: Method `first!` does not exist on `T.class_of(Wizard)` https://srb.help/7003
+     3 |wizard = Wizard.first!
+                 ^^^^^^^^^^^^^
+
+./sorbet_tc_test.rb:6: Revealed type: `T.untyped` https://srb.help/7014
+     6 |T.reveal_type(wizard.name) # String
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  From:
+    ./sorbet_tc_test.rb:6:
+     6 |T.reveal_type(wizard.name) # String
+                      ^^^^^^^^^^^
+
+./sorbet_tc_test.rb:7: Revealed type: `T.untyped` https://srb.help/7014
+     7 |T.reveal_type(wizard)
+        ^^^^^^^^^^^^^^^^^^^^^
+  From:
+    ./sorbet_tc_test.rb:3:
+     3 |wizard = Wizard.first!
+                 ^^^^^^^^^^^^^
+
+./sorbet_tc_test.rb:10: Revealed type: `T.untyped` https://srb.help/7014
+    10 |T.reveal_type(wizard.wand) # T.nilable(Wand)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  From:
+    ./sorbet_tc_test.rb:10:
+    10 |T.reveal_type(wizard.wand) # T.nilable(Wand)
+                      ^^^^^^^^^^^
+
+./sorbet_tc_test.rb:11: Revealed type: `T.untyped` https://srb.help/7014
+    11 |T.reveal_type(wizard.spell_books) # SpellBook::CollectionProxy
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  From:
+    ./sorbet_tc_test.rb:11:
+    11 |T.reveal_type(wizard.spell_books) # SpellBook::CollectionProxy
+                      ^^^^^^^^^^^^^^^^^^
+
+./sorbet_tc_test.rb:14: Revealed type: `Wizard::ActiveRecord_Relation` https://srb.help/7014
+    14 |T.reveal_type(Wizard.all) # Wizard::ActiveRecord_Relation
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  From:
+    ./sorbet_tc_test.rb:14:
+    14 |T.reveal_type(Wizard.all) # Wizard::ActiveRecord_Relation
+                      ^^^^^^^^^^
+
+./sorbet_tc_test.rb:15: Revealed type: `Wizard::ActiveRecord_Relation` https://srb.help/7014
+    15 |T.reveal_type(Wizard.recent)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  From:
+    ./sorbet_tc_test.rb:15:
+    15 |T.reveal_type(Wizard.recent)
+                      ^^^^^^^^^^^^^
+
+./sorbet_tc_test.rb:16: Revealed type: `Wizard::ActiveRecord_Relation` https://srb.help/7014
+    16 |T.reveal_type(Wizard.Gryffindor)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  From:
+    ./sorbet_tc_test.rb:16:
+    16 |T.reveal_type(Wizard.Gryffindor)
+                      ^^^^^^^^^^^^^^^^^
+
+./sorbet_tc_test.rb:17: Revealed type: `Wizard::ActiveRecord_Relation` https://srb.help/7014
+    17 |T.reveal_type(Wizard.Gryffindor.recent)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  From:
+    ./sorbet_tc_test.rb:17:
+    17 |T.reveal_type(Wizard.Gryffindor.recent)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^
+
+./sorbet_tc_test.rb:18: Revealed type: `Wizard::ActiveRecord_Relation` https://srb.help/7014
+    18 |T.reveal_type(Wizard.Gryffindor.recent.unscoped)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  From:
+    ./sorbet_tc_test.rb:18:
+    18 |T.reveal_type(Wizard.Gryffindor.recent.unscoped)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Errors: 10
