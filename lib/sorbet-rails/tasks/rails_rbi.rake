@@ -23,7 +23,7 @@ namespace :rails_rbi do
     # But this is not applied to Rails.application.eager_load! method
     Zeitwerk::Loader.eager_load_all if defined?(Zeitwerk)
 
-    all_models = ActiveRecord::Base.descendants - blacklisted_models
+    all_models = Set.new(ActiveRecord::Base.descendants + whitelisted_models - blacklisted_models)
 
     models_to_generate = args.extras.size > 0 ?
       args.extras.map { |m| Object.const_get(m) } :
@@ -56,5 +56,13 @@ namespace :rails_rbi do
     blacklisted_models = []
     blacklisted_models << ApplicationRecord if defined?(ApplicationRecord)
     blacklisted_models
+  end
+
+  def whitelisted_models
+    # force generating these models because they aren't loaded with eager_load!
+    whitelisted_models = []
+    whitelisted_models << ActiveRecord::InternalMetadata if Object.const_defined?('ActiveRecord::InternalMetadata')
+    whitelisted_models << ActiveRecord::SchemaMigration if Object.const_defined?('ActiveRecord::SchemaMigration')
+    whitelisted_models
   end
 end
