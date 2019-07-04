@@ -16,7 +16,7 @@ RSpec.describe 'sorbet' do
 
   it 'returns expected sorbet tc result' do
     # invoke the rake tasks
-    cmd = "cd #{Rails.root.to_path}\; srb tc"
+    cmd = "cd #{Rails.root.to_path}\; bundle exec srb tc"
     stdout, stderr, status = Open3.capture3(cmd)
     expect(stdout).to eql('')
     expect(status.exitstatus).to eql(1) # T.reveal_type is considered an error

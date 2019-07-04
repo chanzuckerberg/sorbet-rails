@@ -11,19 +11,12 @@ else
   rails_dir="$wd/../support/v$RAILS_VERSION"
 fi
 
-echo $RAILS_VERSION
-case $RAILS_VERISON in
-  4.2)
-    bundle_version="_1.17.3_"
-    ;;
-  *)
-    bundle_version=""
-    ;;
-esac
+bundle_version=$([ "$RAILS_VERSION" == 4.2 ] && echo "_1.17.3_" || echo "")
+echo 'bundle version vv '
 echo $bundle_version
+echo 'bundle version ^^ '
 
 # clean up & install gems
-echo $rails_dir
 rm $wd/../../Gemfile.lock 2>/dev/null # clean up Gemfile.lock first
 rm $rails_dir/Gemfile.lock 2>/dev/null
 cd $rails_dir
@@ -37,7 +30,6 @@ if [[ -z $RAILS_VERSION ]]; then
   bundle update && bundle exec rake
 else
   echo "---- Run $RAILS_VERSION ----"
-  echo $bundle_version
   RAILS_VERSION=$RAILS_VERSION bundle $bundle_version update
   RAILS_VERSION=$RAILS_VERSION bundle $bundle_version exec rake
 fi
