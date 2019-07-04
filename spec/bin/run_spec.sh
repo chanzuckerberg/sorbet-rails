@@ -15,8 +15,10 @@ echo $RAILS_VERSION
 case $RAILS_VERISON in
   4.2)
     bundle_version="_1.17.3_"
+    ;;
   *)
     bundle_version=""
+    ;;
 esac
 echo $bundle_version
 
