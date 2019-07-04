@@ -5704,6 +5704,20 @@ class Bundler::Installer
   def self.install(root, definition, options=T.unsafe(nil)); end
 end
 
+class Bundler::LockfileGenerator
+  def definition(); end
+
+  def generate!(); end
+
+  def initialize(definition); end
+
+  def out(); end
+end
+
+class Bundler::LockfileGenerator
+  def self.generate(definition); end
+end
+
 module Bundler::MatchPlatform
   extend ::T::Sig
 end

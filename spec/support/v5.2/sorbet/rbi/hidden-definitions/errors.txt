@@ -1683,6 +1683,12 @@
 # wrong constant name ambiguous_gems
 # wrong constant name ambiguous_gems=
 # wrong constant name install
+# wrong constant name definition
+# wrong constant name generate!
+# wrong constant name initialize
+# wrong constant name out
+# wrong constant name <static-init>
+# wrong constant name generate
 # wrong constant name ==
 # wrong constant name app_cache_dirname
 # wrong constant name app_cache_path

@@ -1,3 +1,4 @@
+# typed: false
 class CreateSpellBooks < ActiveRecord::Migration
   def change
     create_table :spell_books do |t|

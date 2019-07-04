@@ -45,7 +45,11 @@ RSpec.configure do |config|
     if example.metadata.fetch(:transaction, true)
       DatabaseCleaner.strategy = :transaction
     else
-      DatabaseCleaner.strategy = :truncation, {pre_count: true, reset_ids: false}
+      DatabaseCleaner.strategy = :truncation, {
+        pre_count: true,
+        reset_ids: false,
+        except: %w(ar_internal_metadata),
+      }
     end
     DatabaseCleaner.start
     example.run

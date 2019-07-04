@@ -1,0 +1,56 @@
+./sorbet_test_cases.rb:12: Revealed type: `T.nilable(Wand)` https://srb.help/7014
+    12 |T.reveal_type(wizard.wand)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  From:
+    ./sorbet_test_cases.rb:12:
+    12 |T.reveal_type(wizard.wand)
+                      ^^^^^^^^^^^
+
+./sorbet_test_cases.rb:15: Revealed type: `SpellBook::ActiveRecord_Associations_CollectionProxy` https://srb.help/7014
+    15 |T.reveal_type(wizard.spell_books) # SpellBook::CollectionProxy
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  From:
+    ./sorbet_test_cases.rb:15:
+    15 |T.reveal_type(wizard.spell_books) # SpellBook::CollectionProxy
+                      ^^^^^^^^^^^^^^^^^^
+
+./sorbet_test_cases.rb:20: Revealed type: `Wizard::ActiveRecord_Relation` https://srb.help/7014
+    20 |T.reveal_type(Wizard.all) # Wizard::ActiveRecord_Relation
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  From:
+    ./sorbet_test_cases.rb:20:
+    20 |T.reveal_type(Wizard.all) # Wizard::ActiveRecord_Relation
+                      ^^^^^^^^^^
+
+./sorbet_test_cases.rb:24: Revealed type: `Wizard::ActiveRecord_Relation` https://srb.help/7014
+    24 |T.reveal_type(Wizard.recent)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  From:
+    ./sorbet_test_cases.rb:24:
+    24 |T.reveal_type(Wizard.recent)
+                      ^^^^^^^^^^^^^
+
+./sorbet_test_cases.rb:28: Revealed type: `Wizard::ActiveRecord_Relation` https://srb.help/7014
+    28 |T.reveal_type(Wizard.Gryffindor)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  From:
+    ./sorbet_test_cases.rb:28:
+    28 |T.reveal_type(Wizard.Gryffindor)
+                      ^^^^^^^^^^^^^^^^^
+
+./sorbet_test_cases.rb:32: Revealed type: `Wizard::ActiveRecord_Relation` https://srb.help/7014
+    32 |T.reveal_type(Wizard.Gryffindor.recent)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  From:
+    ./sorbet_test_cases.rb:32:
+    32 |T.reveal_type(Wizard.Gryffindor.recent)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^
+
+./sorbet_test_cases.rb:34: Revealed type: `Wizard::ActiveRecord_Relation` https://srb.help/7014
+    34 |T.reveal_type(Wizard.Gryffindor.recent.unscoped)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  From:
+    ./sorbet_test_cases.rb:34:
+    34 |T.reveal_type(Wizard.Gryffindor.recent.unscoped)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Errors: 7

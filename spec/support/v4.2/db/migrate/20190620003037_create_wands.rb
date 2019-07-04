@@ -1,3 +1,4 @@
+# typed: false
 class CreateWands < ActiveRecord::Migration
   def change
     create_table :wands do |t|

@@ -1,3 +1,4 @@
+# typed: false
 class CreateWizards < ActiveRecord::Migration
   def change
     create_table :wizards do |t|

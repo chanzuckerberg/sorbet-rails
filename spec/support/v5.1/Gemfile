@@ -37,5 +37,18 @@ group :development do
   # gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
+gem 'sorbet-rails', path: '../../../.'
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 # gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+sorbet_version = ENV["SORBET_VERSION"]
+if sorbet_version
+  # mostly used to test against a stable version of Sorbet in Travis.
+  gem 'sorbet', sorbet_version
+  gem 'sorbet-runtime', sorbet_version
+else
+  # prefer to test against latest version because sorbet is updated frequently
+  gem 'sorbet'
+  gem 'sorbet-runtime'
+end
