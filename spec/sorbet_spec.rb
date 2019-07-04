@@ -8,6 +8,12 @@ RSpec.describe 'sorbet' do
       house: :Gryffindor,
     )
   end
+  let!(:book) do
+    SpellBook.create!(
+      name: 'Fantastic Beasts',
+      wizard: harry,
+    )
+  end
 
   before(:each) do
     Rake::Task['rails_rbi:routes'].invoke

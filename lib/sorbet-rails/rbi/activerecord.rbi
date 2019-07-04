@@ -91,6 +91,12 @@ class ActiveRecord::Associations::CollectionProxy < ActiveRecord::Relation
   def push(*records); end
   sig { params(records: T.any(Elem, T::Array[Elem])).returns(T.self_type) }
   def concat(*records); end
+
+  # -- Overridden finder methods
+  sig { params(args: T.untyped).returns(Elem) }
+  def find(*args); end
+  sig { params(limit: T.nilable(Integer)).returns(T.nilable(Elem)) }
+  def last(limit = nil); end
 end
 
 module SorbetRails::CustomFinderMethods
@@ -123,7 +129,7 @@ module ActiveRecord::QueryMethods
 end
 
 class ActiveRecord::Base
-  include SorbetRails::CustomFinderMethods
+  extend SorbetRails::CustomFinderMethods
   extend T::Generic
   Elem = type_template(fixed: ActiveRecord::Base)
   include ActiveRecord::AttributeMethods::Dirty
