@@ -1683,12 +1683,6 @@
 # wrong constant name ambiguous_gems
 # wrong constant name ambiguous_gems=
 # wrong constant name install
-# wrong constant name definition
-# wrong constant name generate!
-# wrong constant name initialize
-# wrong constant name out
-# wrong constant name <static-init>
-# wrong constant name generate
 # wrong constant name ==
 # wrong constant name app_cache_dirname
 # wrong constant name app_cache_path
@@ -2055,7 +2049,6 @@
 # wrong constant name detect$2
 # wrong constant name each_entry
 # wrong constant name each_with_index$2
-# wrong constant name each_with_object
 # wrong constant name entries$1
 # wrong constant name find$2
 # wrong constant name find_index$2
@@ -2082,6 +2075,7 @@
 # undefined method `initialize$1' for class `Enumerator'
 # undefined method `with_index$2' for class `Enumerator'
 # wrong constant name each$2
+# wrong constant name each_with_index
 # wrong constant name initialize$1
 # wrong constant name with_index$2
 # wrong constant name each
@@ -6658,10 +6652,6 @@
 # uninitialized constant Net::HTTP::DigestAuth
 # uninitialized constant Net::HTTP::Persistent
 # uninitialized constant Net::HTTP::Persistent
-# wrong constant name HTTPInformationCode$1
-# wrong constant name HTTPInformationCode$1
-# wrong constant name HTTPSuccessCode$1
-# wrong constant name HTTPSuccessCode$1
 # uninitialized constant Net::IMAP::OPENSSL_FIPS
 # uninitialized constant Net::IMAP::OPENSSL_LIBRARY_VERSION
 # uninitialized constant Net::IMAP::OPENSSL_VERSION
@@ -9114,9 +9104,10 @@
 # wrong constant name <static-init>
 # wrong constant name cyan
 # wrong constant name emojify
+# wrong constant name init
 # wrong constant name main
 # wrong constant name make_step
-# wrong constant name parse_command
+# wrong constant name usage
 # wrong constant name yellow
 # wrong constant name <static-init>
 # wrong constant name real_ancestors
@@ -9173,6 +9164,15 @@
 # wrong constant name <static-init>
 # wrong constant name main
 # wrong constant name output_file
+# wrong constant name <static-init>
+# wrong constant name <Class:CustomFinderMethods>
+# wrong constant name <Class:Railtie>
+# wrong constant name find_n
+# wrong constant name first_n
+# wrong constant name last_n
+# wrong constant name <static-init>
+# uninitialized constant SorbetRails::Railtie::ABSTRACT_RAILTIES
+# wrong constant name <static-init>
 # wrong constant name <static-init>
 # uninitialized constant SortedSet::InspectKey
 # wrong constant name initialize

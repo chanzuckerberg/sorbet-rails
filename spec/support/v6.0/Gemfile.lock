@@ -144,9 +144,9 @@ DEPENDENCIES
   byebug
   puma (~> 3.11)
   rails (~> 6.0.0.rc1)
-  sorbet (= 0.4.4386)
+  sorbet
   sorbet-rails!
-  sorbet-runtime (= 0.4.4386)
+  sorbet-runtime
   sqlite3 (~> 1.4)
   tzinfo-data
 

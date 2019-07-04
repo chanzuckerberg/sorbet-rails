@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'rake_helper'
 
 RSpec.describe 'rake rails_rbi:models', type: :task do
   let!(:expected_dir_path) { Rails.root.join("sorbet", "rails-rbi", "models") }
