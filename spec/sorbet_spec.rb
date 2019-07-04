@@ -27,9 +27,9 @@ RSpec.describe 'sorbet' do
     expect(stdout).to eql('')
     expect(status.exitstatus).to eql(1) # T.reveal_type is considered an error
     expected_file_path = 'expected_srb_tc_output.txt'
-    if ENV['SORBET_VERSION']
-      expected_file_path = File.join(ENV['SORBET_VERSION'], expected_file_path)
-    end
+    # if ENV['SORBET_VERSION']
+    #   expected_file_path = File.join(ENV['SORBET_VERSION'], expected_file_path)
+    # end
     expect_match_file(stderr, expected_file_path)
   end
 
