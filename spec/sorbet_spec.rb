@@ -20,10 +20,6 @@ RSpec.describe 'sorbet' do
       'bundle', 'exec', 'srb', 'tc',
       chdir: Rails.root.to_path,
     )
-    gemfile = File.read(Rails.root.join('Gemfile.lock'))
-    puts 'Gemfile.lock content'
-    puts gemfile
-    puts '----'
     expect(stdout).to eql('')
     expect(status.exitstatus).to eql(1) # T.reveal_type is considered an error
     expected_file_path = 'expected_srb_tc_output.txt'
