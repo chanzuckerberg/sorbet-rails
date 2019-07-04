@@ -14,12 +14,12 @@ fi
 bundle_version=$([ "$RAILS_VERSION" == 4.2 ] && echo "_1.17.3_" || echo "")
 
 # clean up & install gems
-rm $wd/../../Gemfile.lock 2>/dev/null # clean up Gemfile.lock first, for local runs
-echo " ---- Bundle Install in RAILS DIR ----"
+rm $wd/../../Gemfile.lock 2>/dev/null # clean up Gemfile.lock first
+echo " ---- Bundle install inRAILS DIR ----"
 cd $rails_dir
 echo $rails_dir
 echo $(pwd)
-bundle $bundle_version update
+bundle $bundle_version install
 echo $(ls)
 
 # move back to current dir to run test
