@@ -1,11 +1,7 @@
 language: ruby
 env:
   matrix:
-  - RAILS_VERSION=4.2 SORBET_VERSION=0.4.4378
-  - RAILS_VERSION=5.0 SORBET_VERSION=0.4.4378
-  - RAILS_VERSION=5.1 SORBET_VERSION=0.4.4378
   - RAILS_VERSION=5.2 SORBET_VERSION=0.4.4378
-  - RAILS_VERSION=6.0 SORBET_VERSION=0.4.4378
   - RAILS_VERSION=4.2
   - RAILS_VERSION=5.0
   - RAILS_VERSION=5.1
@@ -25,10 +21,6 @@ matrix:
     env: RAILS_VERSION=6.0
   - rvm: 2.4
     env: RAILS_VERSION=6.0
-  - rvm: 2.3
-    env: RAILS_VERSION=6.0 SORBET_VERSION=0.4.4378
-  - rvm: 2.4
-    env: RAILS_VERSION=6.0 SORBET_VERSION=0.4.4378
   allow_failures:
   - rvm: ruby-head
 before_install:

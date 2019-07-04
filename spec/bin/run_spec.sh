@@ -12,9 +12,6 @@ else
 fi
 
 bundle_version=$([ "$RAILS_VERSION" == 4.2 ] && echo "_1.17.3_" || echo "")
-echo 'bundle version vv '
-echo $bundle_version
-echo 'bundle version ^^ '
 
 # clean up & install gems
 rm $wd/../../Gemfile.lock 2>/dev/null # clean up Gemfile.lock first
