@@ -3,31 +3,38 @@
 
 # need to use bash so that $wd returns the location of the script
 wd="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-rm $wd/../../Gemfile.lock 2>/dev/null # clean up Gemfile.lock first
+current_dir=$(pwd)
 
-case $RAILS_VERSION in
-  4.2)
-    echo 'run spec with Rails 4.2'
-    RAILS_VERSION=4.2 bundle _1.17.3_ update && RAILS_VERSION=4.2 bundle _1.17.3_ exec rake
-    ;;
-  5.0)
-    echo 'run spec with Rails 5.0'
-    RAILS_VERSION=5.0 bundle update && RAILS_VERSION=5.0 bundle exec rake
-    ;;
-  5.1)
-    echo 'run spec with Rails 5.1'
-    RAILS_VERSION=5.1 bundle update && RAILS_VERSION=5.1 bundle exec rake
-    ;;
-  5.2)
-    echo 'run spec with Rails 5.2'
-    RAILS_VERSION=5.2 bundle update && RAILS_VERSION=5.2 bundle exec rake
-    ;;
-  6.0)
-    echo 'run spec with Rails 6.0'
-    RAILS_VERSION=6.0 bundle update && RAILS_VERSION=6.0 bundle exec rake
-    ;;
-  *)
-    echo 'run default'
-    bundle update && bundle exec rake
-    ;;
-esac
+if [[ -z $RAILS_VERSION ]]; then
+  rails_dir="$wd/../support/v5.2"
+else
+  rails_dir="$wd/../support/v$RAILS_VERSION"
+fi
+
+echo $RAILS_VERSION
+if [[ $RAILS_VERISON = 4.2 ]]; then
+  bundle_version="_1.17.3_"
+else
+  bundle_version=""
+fi
+echo $bundle_version
+
+# clean up & install gems
+echo $rails_dir
+rm $wd/../../Gemfile.lock 2>/dev/null # clean up Gemfile.lock first
+rm $rails_dir/Gemfile.lock 2>/dev/null
+cd $rails_dir
+bundle $bundle_version install
+
+# move back to current dir to run test
+cd $current_dir
+
+if [[ -z $RAILS_VERSION ]]; then
+  echo "---- Run DEFAULT ----"
+  bundle update && bundle exec rake
+else
+  echo "---- Run $RAILS_VERSION ----"
+  echo $bundle_version
+  RAILS_VERSION=$RAILS_VERSION bundle $bundle_version update
+  RAILS_VERSION=$RAILS_VERSION bundle $bundle_version exec rake
+fi

@@ -1,96 +1,56 @@
-sorbet_test_cases.rb:4: Method `first!` does not exist on `T.class_of(Wizard)` https://srb.help/7003
-     4 |wizard = Wizard.first!
-                 ^^^^^^^^^^^^^
-
-sorbet_test_cases.rb:5: The typechecker was unable to infer the type of the asserted value https://srb.help/7007
-     5 |T.assert_type!(wizard, Wizard)
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  Got T.untyped originating from:
-    sorbet_test_cases.rb:4:
-     4 |wizard = Wizard.first!
-                 ^^^^^^^^^^^^^
-  You may need to add additional `sig` annotations
-
-sorbet_test_cases.rb:8: The typechecker was unable to infer the type of the asserted value https://srb.help/7007
-     8 |T.assert_type!(wizard.name, String)
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  Got T.untyped originating from:
-    sorbet_test_cases.rb:8:
-     8 |T.assert_type!(wizard.name, String)
-                       ^^^^^^^^^^^
-  You may need to add additional `sig` annotations
-
-sorbet_test_cases.rb:11: The typechecker was unable to infer the type of the asserted value https://srb.help/7007
-    11 |T.assert_type!(wizard.wand, T.nilable(Wand))
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  Got T.untyped originating from:
-    sorbet_test_cases.rb:11:
-    11 |T.assert_type!(wizard.wand, T.nilable(Wand))
-                       ^^^^^^^^^^^
-  You may need to add additional `sig` annotations
-
-sorbet_test_cases.rb:12: Revealed type: `T.untyped` https://srb.help/7014
+./sorbet_test_cases.rb:12: Revealed type: `T.nilable(Wand)` https://srb.help/7014
     12 |T.reveal_type(wizard.wand)
         ^^^^^^^^^^^^^^^^^^^^^^^^^^
   From:
-    sorbet_test_cases.rb:12:
+    ./sorbet_test_cases.rb:12:
     12 |T.reveal_type(wizard.wand)
                       ^^^^^^^^^^^
 
-sorbet_test_cases.rb:14: The typechecker was unable to infer the type of the asserted value https://srb.help/7007
-    14 |T.assert_type!(wizard.spell_books, ActiveRecord::Associations::CollectionProxy)
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  Got T.untyped originating from:
-    sorbet_test_cases.rb:14:
-    14 |T.assert_type!(wizard.spell_books, ActiveRecord::Associations::CollectionProxy)
-                       ^^^^^^^^^^^^^^^^^^
-  You may need to add additional `sig` annotations
-
-sorbet_test_cases.rb:15: Revealed type: `T.untyped` https://srb.help/7014
+./sorbet_test_cases.rb:15: Revealed type: `SpellBook::ActiveRecord_Associations_CollectionProxy` https://srb.help/7014
     15 |T.reveal_type(wizard.spell_books) # SpellBook::CollectionProxy
         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   From:
-    sorbet_test_cases.rb:15:
+    ./sorbet_test_cases.rb:15:
     15 |T.reveal_type(wizard.spell_books) # SpellBook::CollectionProxy
                       ^^^^^^^^^^^^^^^^^^
 
-sorbet_test_cases.rb:20: Revealed type: `Wizard::ActiveRecord_Relation` https://srb.help/7014
+./sorbet_test_cases.rb:20: Revealed type: `Wizard::ActiveRecord_Relation` https://srb.help/7014
     20 |T.reveal_type(Wizard.all) # Wizard::ActiveRecord_Relation
         ^^^^^^^^^^^^^^^^^^^^^^^^^
   From:
-    sorbet_test_cases.rb:20:
+    ./sorbet_test_cases.rb:20:
     20 |T.reveal_type(Wizard.all) # Wizard::ActiveRecord_Relation
                       ^^^^^^^^^^
 
-sorbet_test_cases.rb:24: Revealed type: `Wizard::ActiveRecord_Relation` https://srb.help/7014
+./sorbet_test_cases.rb:24: Revealed type: `Wizard::ActiveRecord_Relation` https://srb.help/7014
     24 |T.reveal_type(Wizard.recent)
         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   From:
-    sorbet_test_cases.rb:24:
+    ./sorbet_test_cases.rb:24:
     24 |T.reveal_type(Wizard.recent)
                       ^^^^^^^^^^^^^
 
-sorbet_test_cases.rb:28: Revealed type: `Wizard::ActiveRecord_Relation` https://srb.help/7014
+./sorbet_test_cases.rb:28: Revealed type: `Wizard::ActiveRecord_Relation` https://srb.help/7014
     28 |T.reveal_type(Wizard.Gryffindor)
         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   From:
-    sorbet_test_cases.rb:28:
+    ./sorbet_test_cases.rb:28:
     28 |T.reveal_type(Wizard.Gryffindor)
                       ^^^^^^^^^^^^^^^^^
 
-sorbet_test_cases.rb:32: Revealed type: `Wizard::ActiveRecord_Relation` https://srb.help/7014
+./sorbet_test_cases.rb:32: Revealed type: `Wizard::ActiveRecord_Relation` https://srb.help/7014
     32 |T.reveal_type(Wizard.Gryffindor.recent)
         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   From:
-    sorbet_test_cases.rb:32:
+    ./sorbet_test_cases.rb:32:
     32 |T.reveal_type(Wizard.Gryffindor.recent)
                       ^^^^^^^^^^^^^^^^^^^^^^^^
 
-sorbet_test_cases.rb:34: Revealed type: `Wizard::ActiveRecord_Relation` https://srb.help/7014
+./sorbet_test_cases.rb:34: Revealed type: `Wizard::ActiveRecord_Relation` https://srb.help/7014
     34 |T.reveal_type(Wizard.Gryffindor.recent.unscoped)
         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   From:
-    sorbet_test_cases.rb:34:
+    ./sorbet_test_cases.rb:34:
     34 |T.reveal_type(Wizard.Gryffindor.recent.unscoped)
                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Errors: 12
+Errors: 7

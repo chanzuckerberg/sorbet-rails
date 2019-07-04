@@ -12,11 +12,11 @@ sorbet_test_cases.rb:5: The typechecker was unable to infer the type of the asse
   You may need to add additional `sig` annotations
 
 sorbet_test_cases.rb:8: The typechecker was unable to infer the type of the asserted value https://srb.help/7007
-     8 |T.assert_type!(wizard.name, String)
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+     8 |T.assert_type!(wizard.name, T.nilable(String))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   Got T.untyped originating from:
     sorbet_test_cases.rb:8:
-     8 |T.assert_type!(wizard.name, String)
+     8 |T.assert_type!(wizard.name, T.nilable(String))
                        ^^^^^^^^^^^
   You may need to add additional `sig` annotations
 

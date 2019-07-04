@@ -146,7 +146,7 @@ class ActiveRecord::Base
   include ActiveModel::Dirty
 end
 
-class ApplicationRecord
+class ApplicationRecord < ActiveRecord::Base
   extend T::Generic
   Elem = type_template(fixed: ApplicationRecord)
 end
@@ -154,8 +154,10 @@ end
 module ActiveModel::Dirty
   extend T::Sig
 
-  sig { params(attr: Symbol, from: T.untyped, to: T.untyped).returns(T::Boolean) }
-  def attribute_changed?(attr, from: nil, to: nil); end
+  # TODO this method has a different sig in rails v6.0
+  # It is best put it in sorbet-typed based on version of the gem
+  # sig { params(attr: Symbol, from: T.untyped, to: T.untyped).returns(T::Boolean) }
+  # def attribute_changed?(attr, from: nil, to: nil); end
 
   sig { params(attr_name: Symbol).returns(T::Boolean) }
   def attribute_changed_in_place?(attr_name); end

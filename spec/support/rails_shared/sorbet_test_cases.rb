@@ -5,7 +5,7 @@ wizard = Wizard.first!
 T.assert_type!(wizard, Wizard)
 
 # -- model columns
-T.assert_type!(wizard.name, String)
+T.assert_type!(wizard.name, T.nilable(String))
 
 # -- model associations
 T.assert_type!(wizard.wand, T.nilable(Wand))
