@@ -12,11 +12,12 @@ else
 fi
 
 echo $RAILS_VERSION
-if [[ $RAILS_VERISON = 4.2 ]]; then
-  bundle_version="_1.17.3_"
-else
-  bundle_version=""
-fi
+case $RAILS_VERISON in
+  4.2)
+    bundle_version="_1.17.3_"
+  *)
+    bundle_version=""
+esac
 echo $bundle_version
 
 # clean up & install gems
