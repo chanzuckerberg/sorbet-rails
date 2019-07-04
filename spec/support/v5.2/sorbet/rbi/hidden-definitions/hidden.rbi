@@ -3168,6 +3168,10 @@ module ActiveRecord::Base::GeneratedAssociationMethods
   extend ::T::Sig
 end
 
+class ActiveRecord::Base
+  extend ::SorbetRails::CustomFinderMethods
+end
+
 module ActiveRecord::Batches
   ORDER_IGNORE_MESSAGE = ::T.let(nil, ::T.untyped)
 end
@@ -3785,6 +3789,7 @@ class ActiveRecord::Relation
   include ::ActiveModel::ForbiddenAttributesProtection
   include ::ActiveRecord::SpawnMethods
   include ::ActiveRecord::Calculations
+  include ::SorbetRails::CustomFinderMethods
   CLAUSE_METHODS = ::T.let(nil, ::T.untyped)
   INVALID_METHODS_FOR_DELETE_ALL = ::T.let(nil, ::T.untyped)
   MULTI_VALUE_METHODS = ::T.let(nil, ::T.untyped)
@@ -5704,20 +5709,6 @@ class Bundler::Installer
   def self.install(root, definition, options=T.unsafe(nil)); end
 end
 
-class Bundler::LockfileGenerator
-  def definition(); end
-
-  def generate!(); end
-
-  def initialize(definition); end
-
-  def out(); end
-end
-
-class Bundler::LockfileGenerator
-  def self.generate(definition); end
-end
-
 module Bundler::MatchPlatform
   extend ::T::Sig
 end
@@ -5992,7 +5983,7 @@ class Bundler::Settings::Mirror
 end
 
 class Bundler::Settings::Mirrors
-  def each(); end
+  def each(&blk); end
 
   def for(uri); end
 
@@ -7009,8 +7000,6 @@ module Enumerable
 
   def each_entry(*_); end
 
-  def each_with_object(_); end
-
   def grep_v(_); end
 
   def lazy(); end
@@ -7036,11 +7025,13 @@ end
 
 class Enumerator
   include ::ActiveSupport::ToJsonWithActiveSupportEncoder
+  def each_with_index(); end
+
 end
 
 class Enumerator::Generator
   include ::ActiveSupport::ToJsonWithActiveSupportEncoder
-  def each(*_); end
+  def each(*_, &blk); end
 
   def initialize(*_); end
 end
@@ -7674,7 +7665,7 @@ class Etc::Group
   extend ::Enumerable
   def self.[](*_); end
 
-  def self.each(); end
+  def self.each(&blk); end
 
   def self.members(); end
 end
@@ -7714,7 +7705,7 @@ class Etc::Passwd
   extend ::Enumerable
   def self.[](*_); end
 
-  def self.each(); end
+  def self.each(&blk); end
 
   def self.members(); end
 end
@@ -8213,7 +8204,7 @@ class Gem::AvailableSet
 
   def all_specs(); end
 
-  def each(); end
+  def each(&blk); end
 
   def each_spec(); end
 
@@ -9045,7 +9036,7 @@ end
 
 class Gem::List
   include ::ActiveSupport::ToJsonWithActiveSupportEncoder
-  def each(); end
+  def each(&blk); end
 
   def initialize(value=T.unsafe(nil), tail=T.unsafe(nil)); end
 
@@ -9350,7 +9341,7 @@ class Gem::Package::TarReader
   include ::Enumerable
   def close(); end
 
-  def each(); end
+  def each(&blk); end
 
   def each_entry(); end
 
@@ -10372,7 +10363,7 @@ class Gem::Resolver::Molinillo::DependencyGraph
 
   def detach_vertex_named(name); end
 
-  def each(); end
+  def each(&blk); end
 
   def log(); end
 
@@ -10492,7 +10483,7 @@ class Gem::Resolver::Molinillo::DependencyGraph::Log
 
   def detach_vertex_named(graph, name); end
 
-  def each(); end
+  def each(&blk); end
 
   def pop!(graph); end
 
@@ -10797,7 +10788,7 @@ class Gem::Resolver::RequirementList
   include ::Enumerable
   def add(req); end
 
-  def each(); end
+  def each(&blk); end
 
   def empty?(); end
 
@@ -11245,7 +11236,7 @@ class Gem::SourceList
 
   def delete(source); end
 
-  def each(); end
+  def each(&blk); end
 
   def each_source(&b); end
 
@@ -11662,7 +11653,7 @@ class Gem::Specification
 
   def self.dirs=(dirs); end
 
-  def self.each(); end
+  def self.each(&blk); end
 
   def self.each_gemspec(dirs); end
 
@@ -15315,6 +15306,8 @@ module MethodSource
   extend ::T::Sig
 end
 
+Methods = T::Private::Methods
+
 module Mime
   ALL = ::T.let(nil, ::T.untyped)
   EXTENSION_LOOKUP = ::T.let(nil, ::T.untyped)
@@ -15705,6 +15698,8 @@ class Net::HTTPIMUsed
   extend ::T::Sig
 end
 
+Net::HTTPInformation::EXCEPTION_TYPE = Net::HTTPError
+
 class Net::HTTPInformation
   extend ::T::Sig
 end
@@ -15886,6 +15881,8 @@ class Net::HTTPServiceUnavailable
 end
 
 Net::HTTPSession = Net::HTTP
+
+Net::HTTPSuccess::EXCEPTION_TYPE = Net::HTTPError
 
 class Net::HTTPSuccess
   extend ::T::Sig
@@ -16861,7 +16858,7 @@ class ObjectSpace::WeakMap
 
   def []=(_, _1); end
 
-  def each(); end
+  def each(&blk); end
 
   def each_key(); end
 
@@ -19578,7 +19575,7 @@ end
 
 class Rack::Multipart::Parser::Collector
   include ::Enumerable
-  def each(); end
+  def each(&blk); end
 
   def initialize(tempfile); end
 
@@ -22280,11 +22277,13 @@ module Sorbet::Private::Main
 
   def self.emojify(emoji, msg); end
 
+  def self.init(); end
+
   def self.main(argv); end
 
   def self.make_step(step); end
 
-  def self.parse_command(argv); end
+  def self.usage(); end
 
   def self.yellow(msg); end
 end
@@ -22430,6 +22429,31 @@ module Sorbet::Private
 end
 
 class Sorbet
+  extend ::T::Sig
+end
+
+module SorbetRails
+end
+
+module SorbetRails::CustomFinderMethods
+  def find_n(*ids); end
+
+  def first_n(n); end
+
+  def last_n(n); end
+end
+
+module SorbetRails::CustomFinderMethods
+  extend ::T::Sig
+end
+
+class SorbetRails::Railtie
+end
+
+class SorbetRails::Railtie
+end
+
+module SorbetRails
   extend ::T::Sig
 end
 
@@ -23481,7 +23505,7 @@ class ThreadSafe::Util::VolatileTuple
 
   def compare_and_set(i, old_value, new_value); end
 
-  def each(); end
+  def each(&blk); end
 
   def initialize(size); end
 
@@ -24214,7 +24238,7 @@ class Zlib::GzipReader
   include ::Enumerable
   def bytes(); end
 
-  def each(*_); end
+  def each(*_, &blk); end
 
   def each_byte(); end
 
