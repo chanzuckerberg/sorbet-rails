@@ -101,4 +101,22 @@ sorbet_test_cases.rb:34: Revealed type: `Wizard::ActiveRecord_Relation` https://
     sorbet_test_cases.rb:34:
     34 |T.reveal_type(Wizard.Gryffindor.recent.unscoped)
                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Errors: 13
+
+sorbet_test_cases.rb:85: The typechecker was unable to infer the type of the asserted value https://srb.help/7007
+    85 |  T.assert_type!(w, Wizard) # TODO this doesn't work on Rails 4.2 or 5.0
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  Got T.untyped originating from:
+    sorbet_test_cases.rb:84:
+    84 |Wizard.all.map do |w|
+                           ^
+  You may need to add additional `sig` annotations
+
+sorbet_test_cases.rb:96: The typechecker was unable to infer the type of the asserted value https://srb.help/7007
+    96 |  T.assert_type!(sp, SpellBook) # TODO this doesn't work on Rails 4.2 or 5.0
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  Got T.untyped originating from:
+    sorbet_test_cases.rb:95:
+    95 |wizard.spell_books.map do |sp|
+                                   ^^
+  You may need to add additional `sig` annotations
+Errors: 15
