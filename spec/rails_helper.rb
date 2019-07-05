@@ -31,10 +31,16 @@ require "support/#{rails_folder}/config/environment"
 
 ActiveRecord::Migration.maintain_test_schema!
 
+require 'rake_helper'
+
 RSpec.configure do |config|
   config.before(:suite) do
     next if ENV["DISABLE_DATABASE_CLEANER"] == 'true'
-    DatabaseCleaner.clean_with(:truncation, {pre_count: true, reset_ids: false})
+    DatabaseCleaner.clean_with(:truncation, {
+      pre_count: true,
+      reset_ids: false,
+      except: %w(ar_internal_metadata),
+    })
   end
 
   config.around(:each) do |example|
@@ -42,15 +48,10 @@ RSpec.configure do |config|
       example.run
       next
     end
-    if example.metadata.fetch(:transaction, true)
-      DatabaseCleaner.strategy = :transaction
-    else
-      DatabaseCleaner.strategy = :truncation, {
-        pre_count: true,
-        reset_ids: false,
-        except: %w(ar_internal_metadata),
-      }
-    end
+    DatabaseCleaner.strategy = :truncation, {
+      pre_count: true,
+      reset_ids: false,
+    }
     DatabaseCleaner.start
     example.run
     DatabaseCleaner.clean

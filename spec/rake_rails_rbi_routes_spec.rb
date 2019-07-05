@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'rake_helper'
 
 RSpec.describe 'rake rails_rbi:routes', type: :task do
   it "preloads the Rails environment" do

@@ -1,6 +1,10 @@
 require("sorbet-rails/model_rbi_formatter")
 require("sorbet-rails/routes_rbi_formatter")
 
+# this is ugly but it's a way to get the current directory of this script
+# maybe someone coming along will know a better way
+@@sorbet_rails_rake_dir = File.dirname(__FILE__)
+
 namespace :rails_rbi do
 
   desc "Generate rbi for rails routes"
@@ -23,6 +27,8 @@ namespace :rails_rbi do
     # But this is not applied to Rails.application.eager_load! method
     Zeitwerk::Loader.eager_load_all if defined?(Zeitwerk)
 
+    copy_bundled_rbi
+
     all_models = Set.new(ActiveRecord::Base.descendants + whitelisted_models - blacklisted_models)
 
     models_to_generate = args.extras.size > 0 ?
@@ -35,6 +41,13 @@ namespace :rails_rbi do
       FileUtils.mkdir_p(File.dirname(file_path))
       File.write(file_path, contents)
     end
+  end
+
+  def copy_bundled_rbi
+    bundled_rbi_path = File.join(@@sorbet_rails_rake_dir, "..", "rbi", ".")
+    copy_to_path = Rails.root.join("sorbet", "rails-rbi")
+    FileUtils.mkdir_p(File.dirname(copy_to_path))
+    FileUtils.cp_r(bundled_rbi_path, copy_to_path)
   end
 
   def generate_rbis_for_models(model_classes, available_classes)

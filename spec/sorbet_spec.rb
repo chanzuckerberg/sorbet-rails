@@ -8,6 +8,12 @@ RSpec.describe 'sorbet' do
       house: :Gryffindor,
     )
   end
+  let!(:book) do
+    SpellBook.create!(
+      name: 'Fantastic Beasts',
+      wizard: harry,
+    )
+  end
 
   before(:each) do
     Rake::Task['rails_rbi:routes'].invoke
@@ -15,7 +21,6 @@ RSpec.describe 'sorbet' do
   end
 
   it 'returns expected sorbet tc result' do
-    # invoke the rake tasks
     stdout, stderr, status = Open3.capture3(
       'bundle', 'exec', 'srb', 'tc',
       chdir: Rails.root.to_path,
@@ -34,5 +39,13 @@ RSpec.describe 'sorbet' do
     expect {
       load(file_path)
     }.to_not raise_error
+  end
+
+  it 'runs with srb tc --lsp' do
+    stdout, stderr, status = Open3.capture3(
+      'bundle', 'exec', 'srb', 'tc', '--lsp',
+      chdir: Rails.root.to_path,
+    )
+    expect(status.exitstatus).to eql(0)
   end
 end
