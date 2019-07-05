@@ -1377,6 +1377,7 @@
 # wrong constant name dump
 # wrong constant name ignore_tables
 # wrong constant name ignore_tables=
+# wrong constant name set_value_for
 # wrong constant name <Class:BindMap>
 # wrong constant name <Class:Params>
 # wrong constant name <Class:PartialQuery>
@@ -1653,7 +1654,6 @@
 # A copy of ApplicationRecord::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of ApplicationRecord::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of ApplicationRecord::ActiveRecord_Relation has been removed from the module tree but is still active!
-# wrong constant name <static-init>
 # wrong constant name <static-init>
 # wrong constant name <static-init>
 # wrong constant name recent
@@ -7659,8 +7659,6 @@
 # wrong constant name glob$1
 # uninitialized constant Potion::ACTIONS
 # wrong constant name <Class:ActiveRecord_AssociationRelation>
-# wrong constant name <Class:ActiveRecord_Associations_CollectionProxy>
-# wrong constant name <Class:ActiveRecord_Relation>
 # uninitialized constant Potion::BLACKLISTED_CLASS_METHODS
 # uninitialized constant Potion::CALLBACKS
 # uninitialized constant Potion::CALLBACK_FILTER_TYPES
@@ -7690,7 +7688,6 @@
 # A copy of Potion::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of Potion::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of Potion::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# wrong constant name <static-init>
 # A copy of Potion::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of Potion::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of Potion::ActiveRecord_Relation has been removed from the module tree but is still active!
@@ -7699,8 +7696,6 @@
 # A copy of Potion::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of Potion::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of Potion::ActiveRecord_Relation has been removed from the module tree but is still active!
-# wrong constant name <static-init>
-# wrong constant name <static-init>
 # wrong constant name <static-init>
 # undefined method `curry$1' for class `Proc'
 # wrong constant name ===
@@ -11035,13 +11030,14 @@
 # wrong constant name main
 # wrong constant name output_file
 # wrong constant name <static-init>
+# uninitialized constant SorbetRails::Railtie::ABSTRACT_RAILTIES
+# wrong constant name <static-init>
+# wrong constant name <static-init>
 # uninitialized constant SortedSet::InspectKey
 # wrong constant name initialize
 # wrong constant name setup
 # uninitialized constant SpellBook::ACTIONS
 # wrong constant name <Class:ActiveRecord_AssociationRelation>
-# wrong constant name <Class:ActiveRecord_Associations_CollectionProxy>
-# wrong constant name <Class:ActiveRecord_Relation>
 # uninitialized constant SpellBook::BLACKLISTED_CLASS_METHODS
 # uninitialized constant SpellBook::CALLBACKS
 # uninitialized constant SpellBook::CALLBACK_FILTER_TYPES
@@ -11073,7 +11069,6 @@
 # A copy of SpellBook::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of SpellBook::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of SpellBook::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# wrong constant name <static-init>
 # A copy of SpellBook::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of SpellBook::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of SpellBook::ActiveRecord_Relation has been removed from the module tree but is still active!
@@ -11082,13 +11077,11 @@
 # A copy of SpellBook::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of SpellBook::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of SpellBook::ActiveRecord_Relation has been removed from the module tree but is still active!
-# wrong constant name <static-init>
 # wrong constant name build_wizard
 # wrong constant name create_wizard
 # wrong constant name create_wizard!
 # wrong constant name wizard
 # wrong constant name wizard=
-# wrong constant name <static-init>
 # wrong constant name <static-init>
 # wrong constant name result
 # undefined method `[]$2' for class `String'
@@ -11752,8 +11745,6 @@
 # wrong constant name <static-init>
 # uninitialized constant Wand::ACTIONS
 # wrong constant name <Class:ActiveRecord_AssociationRelation>
-# wrong constant name <Class:ActiveRecord_Associations_CollectionProxy>
-# wrong constant name <Class:ActiveRecord_Relation>
 # uninitialized constant Wand::BLACKLISTED_CLASS_METHODS
 # uninitialized constant Wand::CALLBACKS
 # uninitialized constant Wand::CALLBACK_FILTER_TYPES
@@ -11786,7 +11777,6 @@
 # A copy of Wand::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of Wand::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of Wand::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# wrong constant name <static-init>
 # A copy of Wand::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of Wand::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of Wand::ActiveRecord_Relation has been removed from the module tree but is still active!
@@ -11795,24 +11785,15 @@
 # A copy of Wand::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of Wand::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of Wand::ActiveRecord_Relation has been removed from the module tree but is still active!
-# wrong constant name <static-init>
 # wrong constant name build_wizard
 # wrong constant name create_wizard
 # wrong constant name create_wizard!
 # wrong constant name wizard
 # wrong constant name wizard=
 # wrong constant name <static-init>
-# wrong constant name <static-init>
-# wrong constant name basilisk_horn
-# wrong constant name core_types
-# wrong constant name dragon_heartstring
-# wrong constant name phoenix_feather
-# wrong constant name unicorn_tail_hair
 # wrong constant name warn
 # uninitialized constant Wizard::ACTIONS
 # wrong constant name <Class:ActiveRecord_AssociationRelation>
-# wrong constant name <Class:ActiveRecord_Associations_CollectionProxy>
-# wrong constant name <Class:ActiveRecord_Relation>
 # uninitialized constant Wizard::BLACKLISTED_CLASS_METHODS
 # uninitialized constant Wizard::CALLBACKS
 # uninitialized constant Wizard::CALLBACK_FILTER_TYPES
@@ -11857,7 +11838,6 @@
 # A copy of Wizard::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of Wizard::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of Wizard::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# wrong constant name <static-init>
 # A copy of Wizard::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of Wizard::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of Wizard::ActiveRecord_Relation has been removed from the module tree but is still active!
@@ -11866,7 +11846,7 @@
 # A copy of Wizard::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of Wizard::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of Wizard::ActiveRecord_Relation has been removed from the module tree but is still active!
-# wrong constant name <static-init>
+# wrong constant name arel_table
 # wrong constant name build_wand
 # wrong constant name create_wand
 # wrong constant name create_wand!
@@ -11877,11 +11857,6 @@
 # wrong constant name wand
 # wrong constant name wand=
 # wrong constant name <static-init>
-# wrong constant name <static-init>
-# uninitialized constant Wizard::Gryffindor
-# uninitialized constant Wizard::Hufflepuff
-# uninitialized constant Wizard::Ravenclaw
-# uninitialized constant Wizard::Slytherin
 # wrong constant name after_add_for_spell_books
 # wrong constant name after_add_for_spell_books=
 # wrong constant name after_add_for_spell_books?
@@ -11894,7 +11869,6 @@
 # wrong constant name before_remove_for_spell_books
 # wrong constant name before_remove_for_spell_books=
 # wrong constant name before_remove_for_spell_books?
-# wrong constant name houses
 # wrong constant name <Class:BufError>
 # wrong constant name <Class:DataError>
 # wrong constant name <Class:Deflate>

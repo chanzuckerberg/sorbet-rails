@@ -3916,6 +3916,10 @@ class ActiveRecord::Scoping::ScopeRegistry
   VALID_SCOPE_TYPES = ::T.let(nil, ::T.untyped)
 end
 
+class ActiveRecord::Scoping::ScopeRegistry
+  def self.set_value_for(*args, &block); end
+end
+
 module ActiveRecord::Scoping
   extend ::T::Sig
 end
@@ -15737,8 +15741,6 @@ module Net::HTTP::ProxyDelta
   extend ::T::Sig
 end
 
-Net::HTTP::ProxyMod = Net::HTTP::ProxyDelta
-
 class Net::HTTP::Put
   extend ::T::Sig
 end
@@ -15778,8 +15780,6 @@ class Net::HTTPBadResponse
   extend ::T::Sig
 end
 
-Net::HTTPClientError::EXCEPTION_TYPE = Net::HTTPServerException
-
 class Net::HTTPClientError
   extend ::T::Sig
 end
@@ -15818,7 +15818,13 @@ class Net::HTTPFatalError
   extend ::T::Sig
 end
 
-Net::HTTPFatalErrorCode = Net::HTTPClientError
+class Net::HTTPClientError
+end
+
+Net::HTTPFatalErrorCode::EXCEPTION_TYPE = Net::HTTPServerException
+
+class Net::HTTPClientError
+end
 
 class Net::HTTPForbidden
   extend ::T::Sig
@@ -16042,13 +16048,17 @@ class Net::HTTPSeeOther
   extend ::T::Sig
 end
 
-Net::HTTPServerError::EXCEPTION_TYPE = Net::HTTPFatalError
-
 class Net::HTTPServerError
   extend ::T::Sig
 end
 
-Net::HTTPServerErrorCode = Net::HTTPServerError
+class Net::HTTPServerError
+end
+
+Net::HTTPServerErrorCode::EXCEPTION_TYPE = Net::HTTPFatalError
+
+class Net::HTTPServerError
+end
 
 class Net::HTTPServerException
   extend ::T::Sig
@@ -16058,15 +16068,27 @@ class Net::HTTPServiceUnavailable
   extend ::T::Sig
 end
 
-Net::HTTPSession = Net::HTTP
+class Net::HTTP
+end
 
-Net::HTTPSuccess::EXCEPTION_TYPE = Net::HTTPError
+Net::HTTPSession::ProxyDelta = Net::HTTP::ProxyDelta
+
+Net::HTTPSession::ProxyMod = Net::HTTP::ProxyDelta
+
+class Net::HTTP
+end
 
 class Net::HTTPSuccess
   extend ::T::Sig
 end
 
-Net::HTTPSuccessCode = Net::HTTPSuccess
+class Net::HTTPSuccess
+end
+
+Net::HTTPSuccessCode::EXCEPTION_TYPE = Net::HTTPError
+
+class Net::HTTPSuccess
+end
 
 class Net::HTTPSwitchProtocol
   extend ::T::Sig
@@ -17982,9 +18004,6 @@ end
 
 module Potion::GeneratedAssociationMethods
   extend ::T::Sig
-end
-
-class Potion
 end
 
 class Proc
@@ -25702,6 +25721,16 @@ class Sorbet
   extend ::T::Sig
 end
 
+class SorbetRails::Railtie
+end
+
+class SorbetRails::Railtie
+end
+
+module SorbetRails
+  extend ::T::Sig
+end
+
 class SortedSet
   def initialize(*args, &block); end
 end
@@ -25756,9 +25785,6 @@ end
 
 module SpellBook::GeneratedAssociationMethods
   extend ::T::Sig
-end
-
-class SpellBook
 end
 
 class StandardError
@@ -27283,18 +27309,6 @@ module Wand::GeneratedAssociationMethods
   extend ::T::Sig
 end
 
-class Wand
-  def self.basilisk_horn(*args); end
-
-  def self.core_types(); end
-
-  def self.dragon_heartstring(*args); end
-
-  def self.phoenix_feather(*args); end
-
-  def self.unicorn_tail_hair(*args); end
-end
-
 module Warning
   def warn(_); end
 end
@@ -27375,6 +27389,7 @@ end
 
 class Wizard::ActiveRecord_Relation
   include ::ActiveRecord::Delegation::ClassSpecificRelation
+  def arel_table(*args, &block); end
 end
 
 class Wizard::ActiveRecord_Relation
@@ -27406,14 +27421,6 @@ module Wizard::GeneratedAssociationMethods
 end
 
 class Wizard
-  def self.Gryffindor(*args); end
-
-  def self.Hufflepuff(*args); end
-
-  def self.Ravenclaw(*args); end
-
-  def self.Slytherin(*args); end
-
   def self.after_add_for_spell_books(); end
 
   def self.after_add_for_spell_books=(val); end
@@ -27437,8 +27444,6 @@ class Wizard
   def self.before_remove_for_spell_books=(val); end
 
   def self.before_remove_for_spell_books?(); end
-
-  def self.houses(); end
 end
 
 YAML = Psych

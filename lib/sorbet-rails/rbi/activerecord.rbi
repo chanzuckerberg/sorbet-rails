@@ -82,6 +82,12 @@ class ActiveRecord::Associations::CollectionProxy < ActiveRecord::Relation
 
   Elem = type_member(fixed: ActiveRecord::Base)
 
+  sig { params(block: T.proc.params(e: Elem).void).void }
+  def each(&block); end
+
+  sig { returns(T::Array[Elem]) }
+  def to_a; end
+
   # -- << and aliases
   sig { params(records: T.any(Elem, T::Array[Elem])).returns(T.self_type) }
   def <<(*records); end
@@ -95,8 +101,8 @@ class ActiveRecord::Associations::CollectionProxy < ActiveRecord::Relation
   # -- Overridden finder methods
   sig { params(args: T.untyped).returns(Elem) }
   def find(*args); end
-  sig { params(limit: T.nilable(Integer)).returns(T.nilable(Elem)) }
-  def last(limit = nil); end
+  # sig { params(limit: T.nilable(Integer)).returns(T.nilable(Elem)) }
+  # def last(limit = nil); end
 end
 
 module SorbetRails::CustomFinderMethods
@@ -132,8 +138,6 @@ class ActiveRecord::Base
   extend SorbetRails::CustomFinderMethods
   extend T::Generic
   Elem = type_template(fixed: ActiveRecord::Base)
-  include ActiveRecord::AttributeMethods::Dirty
-  include ActiveModel::Dirty
 
   # -- place here to avoid conflicts with sorbet generated gem rbis
 
@@ -195,37 +199,9 @@ class ActiveRecord::Base
   def self.find_by(arg, *args); end
   sig { params(arg: T.untyped, args: T.untyped).returns(Elem) }
   def self.find_by!(arg, *args); end
-
-  sig { params(attr_name: Symbol, options: T.untyped).returns(T::Boolean) }
-  def attribute_changed?(attr_name, **options); end
 end
 
 class ApplicationRecord < ActiveRecord::Base
   extend T::Generic
   Elem = type_template(fixed: ApplicationRecord)
-end
-
-module ActiveModel::Dirty
-  extend T::Sig
-
-  # TODO this method has a different sig in rails v6.0
-  # It is best put it in sorbet-typed based on version of the gem
-  # sig { params(attr: Symbol, from: T.untyped, to: T.untyped).returns(T::Boolean) }
-  # def attribute_changed?(attr, from: nil, to: nil); end
-
-  sig { params(attr_name: Symbol).returns(T::Boolean) }
-  def attribute_changed_in_place?(attr_name); end
-
-  sig { params(attr_name: Symbol).returns(T::Boolean) }
-  def attribute_previously_changed?(attr_name); end
-
-  sig { returns(T::Boolean) }
-  def changed?; end
-end
-
-module ActiveRecord::AttributeMethods::Dirty
-  extend T::Sig
-
-  sig { params(attr_name: Symbol, options: T.untyped).returns(T::Boolean) }
-  def saved_change_to_attribute?(attr_name, **options); end
 end
