@@ -22,8 +22,9 @@ RSpec.describe 'sorbet' do
     )
   end
 
-  before(:each) do
-    if ENV['TEST_SRB_INIT'] && !Dir.exists?(Rails.root.join('sorbet'))
+  before(:all) do
+    puts 'env var: ', ENV['TEST_SRB_INIT']
+    if ENV['TEST_SRB_INIT']
       # only initialize sorbet once for all tests because it is slow
       puts 'run srb init'
       stdout, stderr, status = Open3.capture3(
@@ -36,6 +37,9 @@ RSpec.describe 'sorbet' do
         Rails.root.to_path,
       )
     end
+  end
+
+  before(:each) do
     Rake::Task['rails_rbi:routes'].invoke
     Rake::Task['rails_rbi:models'].invoke
   end
