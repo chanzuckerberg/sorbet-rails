@@ -23,15 +23,13 @@ RSpec.describe 'sorbet' do
   end
 
   before(:all) do
-    puts 'env var: ', ENV['TEST_SRB_INIT']
     if ENV['TEST_SRB_INIT']
       # only initialize sorbet once for all tests because it is slow
-      puts 'run srb init'
       stdout, stderr, status = Open3.capture3(
         {'SRB_YES' => '1'}, 'bundle', 'exec', 'srb', 'init',
         chdir: Rails.root.to_path,
       )
-      puts 'copy sorbet_test_cases'
+      # copy test case over after initializing otherwise it'll override the `typed:` indicator
       res = FileUtils.symlink(
         Rails.root.join('..', 'rails_shared', 'sorbet_test_cases.rb'),
         Rails.root.to_path,
