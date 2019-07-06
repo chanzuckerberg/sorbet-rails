@@ -1,14 +1,11 @@
 language: ruby
 env:
   matrix:
-  # TODO switch back once master sorbet is working
-  - RAILS_VERSION=5.2 SORBET_VERSION=0.4.4386
   - RAILS_VERSION=4.2
   - RAILS_VERSION=5.0
   - RAILS_VERSION=5.1
   - RAILS_VERSION=5.2
   - RAILS_VERSION=6.0
-  - TEST_SRB_INIT=true
   global:
     secure: S3rpBSDgDQjhA11/80dZ4RUlBP3XLJWOgvcl1eySFdXqHCZGS5p8Fa97yEvZHWiPInUTNhdvyQ5LHlgzu1CCZ9+MOykpEgYo+1yIueriv9Ia5PUNFbwhRp2eBkluSUMPNPOxf15mUlgAGdScnssRL9zftYel29dw4yg+BQnnkLOqpnLO7wHTjouEmp7M8Y/1j0ScIZ0tZL1ovDq70Lst+TJKHm4jdBbwoNmILIwNBgnzZT1LdAuaXVHEmwLvy0GLvClewuSmToJ4jyjuJorCjyMhyoBLrutSuN4KaJcSlP/LVtH4ZCFkFDayDMiVcSyUE3asSnL3yxGL0K99lgwNk4D58WWic7N+0UKnGoiMQOHC9EIsQKaxfXMOpO+Cq5wYhgmFzPGF4iL6ZBNCehcc+ToBojprmJw/0Ev71OS2YGvu5SZpYco5AvJeR73IUA2K0rjUEeY3gXm60aIac09kQuuminN3hUkJ894YoA35B8IEU0uW2uL5n/vX2Y8SD6RV8csbKlhpJmphYYWQQOYjHuFoW4MVnnrFHq6YIUDQpi6/We3I4xH3kvfjIpSemrYOmfF4PPXCarWA7ryI9ytR7BloQ0NQH7hqp1hbKN86LAy8zanW08xNOrxI7VDdbtV1k6mf+wiV1W2Vo54HYEDIw0+jwmW/uKWatTyRo5AUsMc=
 rvm:
@@ -18,29 +15,16 @@ rvm:
 - 2.6
 - ruby-head
 matrix:
+  include:
+  - rvm: 2.5
+    env: RAILS_VERSION=5.2 SORBET_VERSION=0.4.4386
+  - rvm: 2.5
+    env: TEST_SRB_INIT=true
   exclude:
   - rvm: 2.3
     env: RAILS_VERSION=6.0
   - rvm: 2.4
     env: RAILS_VERSION=6.0
-  # only need to have 1 test with specific sorbet version
-  - rvm: 2.3
-    env: RAILS_VERSION=5.2 SORBET_VERSION=0.4.4386
-  - rvm: 2.4
-    env: RAILS_VERSION=5.2 SORBET_VERSION=0.4.4386
-  - rvm: 2.6
-    env: RAILS_VERSION=5.2 SORBET_VERSION=0.4.4386
-  - rvm: ruby-head
-    env: RAILS_VERSION=5.2 SORBET_VERSION=0.4.4386
-  # only need to have 1 test with srb init
-  - rvm: 2.3
-    env: TEST_SRB_INIT=true
-  - rvm: 2.4
-    env: TEST_SRB_INIT=true
-  - rvm: 2.6
-    env: TEST_SRB_INIT=true
-  - rvm: ruby-head
-    env: TEST_SRB_INIT=true
   allow_failures:
   - rvm: ruby-head
   - env: RAILS_VERSION=5.2
