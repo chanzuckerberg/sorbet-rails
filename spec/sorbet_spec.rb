@@ -14,6 +14,13 @@ RSpec.describe 'sorbet' do
       wizard: harry,
     )
   end
+  let!(:wand) do
+    Wand.create!(
+      wizard: harry,
+      core_type: :phoenix_feather,
+      wood_type: "holly",
+    )
+  end
 
   before(:each) do
     Rake::Task['rails_rbi:routes'].invoke
