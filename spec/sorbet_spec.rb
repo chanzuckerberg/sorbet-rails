@@ -25,12 +25,14 @@ RSpec.describe 'sorbet' do
   before(:each) do
     if ENV['TEST_SRB_INIT'] && !Dir.exists?(Rails.root.join('sorbet'))
       # only initialize sorbet once for all tests because it is slow
+      puts 'run srb init'
       stdout, stderr, status = Open3.capture3(
         {'SRB_YES' => '1'}, 'bundle', 'exec', 'srb', 'init',
         chdir: Rails.root.to_path,
       )
-      res = FileUtils.cp(
-        Rails.root.join('..', 'rails_symlinks', 'sorbet_test_cases.rb'),
+      puts 'copy sorbet_test_cases'
+      res = FileUtils.symlink(
+        Rails.root.join('..', 'rails_shared', 'sorbet_test_cases.rb'),
         Rails.root.to_path,
       )
     end
