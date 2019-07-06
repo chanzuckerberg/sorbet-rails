@@ -8,5 +8,7 @@ RAILS_VERSION=5.0 bash $wd/run_spec.sh
 RAILS_VERSION=5.1 bash $wd/run_spec.sh
 RAILS_VERSION=6.0 bash $wd/run_spec.sh
 
+TEST_SRB_INIT=1 bash $wd/run_spec.sh
+
 # Always end with the default version, which is Rails 5.2
 sh $wd/run_spec.sh
