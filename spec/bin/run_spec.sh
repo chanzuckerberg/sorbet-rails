@@ -6,7 +6,11 @@ wd="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 current_dir=$(pwd)
 
 if [[ -z $RAILS_VERSION ]]; then
-  rails_dir="$wd/../support/v5.2"
+  if [[ -z $TEST_SRB_INIT ]]; then
+    rails_dir="$wd/../support/v5.2"
+  else
+    rails_dir="$wd/../support/v5.2-no-sorbet"
+  fi
 else
   rails_dir="$wd/../support/v$RAILS_VERSION"
 fi
@@ -15,6 +19,12 @@ bundle_version=$([ "$RAILS_VERSION" == 4.2 ] && echo "_1.17.3_" || echo "")
 
 # clean up & install gems
 rm $wd/../../Gemfile.lock 2>/dev/null # clean up Gemfile.lock first
+bundle $bundle_version install
+
+echo $rails_dir
+
+# update gems in rails_dir
+cd $rails_dir
 bundle $bundle_version install
 
 # move back to current dir to run test
