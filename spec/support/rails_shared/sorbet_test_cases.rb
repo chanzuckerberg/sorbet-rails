@@ -9,7 +9,7 @@ T.assert_type!(wizard.name, T.nilable(String))
 
 # -- model associations
 T.assert_type!(wizard.wand, T.nilable(Wand))
-T.reveal_type(wizard.wand)
+T.assert_type!(T.must(wizard.wand).wizard, Wizard)
 
 T.assert_type!(wizard.spell_books, ActiveRecord::Associations::CollectionProxy)
 T.reveal_type(wizard.spell_books) # SpellBook::CollectionProxy
@@ -32,6 +32,16 @@ T.assert_type!(Wizard.Gryffindor.recent, ActiveRecord::Relation)
 T.reveal_type(Wizard.Gryffindor.recent)
 T.assert_type!(Wizard.Gryffindor.recent.unscoped, ActiveRecord::Relation)
 T.reveal_type(Wizard.Gryffindor.recent.unscoped)
+
+# ActiveRecord Querying
+T.assert_type!(Wizard.where(id: 1), ActiveRecord::Relation)
+T.reveal_type(Wizard.where(id: 1)) # Wizard::Relation
+T.assert_type!(Wizard.preload(:spell_books), ActiveRecord::Relation)
+T.reveal_type(Wizard.preload(:spell_books)) # Wizard::Relation
+T.assert_type!(Wizard.eager_load(:spell_books), ActiveRecord::Relation)
+T.reveal_type(Wizard.eager_load(:spell_books)) # Wizard::Relation
+T.assert_type!(Wizard.order(:id), ActiveRecord::Relation)
+T.reveal_type(Wizard.order(:id)) # Wizard::Relation
 
 # Finder methods -- Model
 T.assert_type!(Wizard.exists?(name: 'Test'), T::Boolean)
@@ -98,3 +108,13 @@ end
 wizard.spell_books.to_a.map do |sp|
   T.assert_type!(sp, SpellBook) # This works on Rails 4.2
 end
+
+# Model columns
+T.assert_type!(wizard.id, Integer)
+T.assert_type!(wizard.id?, T::Boolean)
+T.assert_type!(wizard.notes, T.nilable(String))
+T.assert_type!(wizard.house, String)
+
+# Model enum
+T.assert_type!(wizard.Gryffindor?, T::Boolean)
+T.assert_type!(Wizard.houses, T::Hash[T.any(String, Symbol), Integer])

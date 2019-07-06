@@ -1,11 +1,3 @@
-sorbet_test_cases.rb:12: Revealed type: `T.nilable(Wand)` https://srb.help/7014
-    12 |T.reveal_type(wizard.wand)
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  From:
-    sorbet_test_cases.rb:12:
-    12 |T.reveal_type(wizard.wand)
-                      ^^^^^^^^^^^
-
 sorbet_test_cases.rb:14: Argument does not have asserted type `ActiveRecord::Associations::CollectionProxy` https://srb.help/7007
     14 |T.assert_type!(wizard.spell_books, ActiveRecord::Associations::CollectionProxy)
         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -101,4 +93,68 @@ sorbet_test_cases.rb:34: Revealed type: `Wizard::ActiveRecord_Relation` https://
     sorbet_test_cases.rb:34:
     34 |T.reveal_type(Wizard.Gryffindor.recent.unscoped)
                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Errors: 13
+
+sorbet_test_cases.rb:37: Argument does not have asserted type `ActiveRecord::Relation` https://srb.help/7007
+    37 |T.assert_type!(Wizard.where(id: 1), ActiveRecord::Relation)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  Got Wizard::ActiveRecord_Relation originating from:
+    sorbet_test_cases.rb:37:
+    37 |T.assert_type!(Wizard.where(id: 1), ActiveRecord::Relation)
+                       ^^^^^^^^^^^^^^^^^^^
+
+sorbet_test_cases.rb:38: Revealed type: `Wizard::ActiveRecord_Relation` https://srb.help/7014
+    38 |T.reveal_type(Wizard.where(id: 1)) # Wizard::Relation
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  From:
+    sorbet_test_cases.rb:38:
+    38 |T.reveal_type(Wizard.where(id: 1)) # Wizard::Relation
+                      ^^^^^^^^^^^^^^^^^^^
+
+sorbet_test_cases.rb:39: Argument does not have asserted type `ActiveRecord::Relation` https://srb.help/7007
+    39 |T.assert_type!(Wizard.preload(:spell_books), ActiveRecord::Relation)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  Got Wizard::ActiveRecord_Relation originating from:
+    sorbet_test_cases.rb:39:
+    39 |T.assert_type!(Wizard.preload(:spell_books), ActiveRecord::Relation)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet_test_cases.rb:40: Revealed type: `Wizard::ActiveRecord_Relation` https://srb.help/7014
+    40 |T.reveal_type(Wizard.preload(:spell_books)) # Wizard::Relation
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  From:
+    sorbet_test_cases.rb:40:
+    40 |T.reveal_type(Wizard.preload(:spell_books)) # Wizard::Relation
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet_test_cases.rb:41: Argument does not have asserted type `ActiveRecord::Relation` https://srb.help/7007
+    41 |T.assert_type!(Wizard.eager_load(:spell_books), ActiveRecord::Relation)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  Got Wizard::ActiveRecord_Relation originating from:
+    sorbet_test_cases.rb:41:
+    41 |T.assert_type!(Wizard.eager_load(:spell_books), ActiveRecord::Relation)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet_test_cases.rb:42: Revealed type: `Wizard::ActiveRecord_Relation` https://srb.help/7014
+    42 |T.reveal_type(Wizard.eager_load(:spell_books)) # Wizard::Relation
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  From:
+    sorbet_test_cases.rb:42:
+    42 |T.reveal_type(Wizard.eager_load(:spell_books)) # Wizard::Relation
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet_test_cases.rb:43: Argument does not have asserted type `ActiveRecord::Relation` https://srb.help/7007
+    43 |T.assert_type!(Wizard.order(:id), ActiveRecord::Relation)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  Got Wizard::ActiveRecord_Relation originating from:
+    sorbet_test_cases.rb:43:
+    43 |T.assert_type!(Wizard.order(:id), ActiveRecord::Relation)
+                       ^^^^^^^^^^^^^^^^^
+
+sorbet_test_cases.rb:44: Revealed type: `Wizard::ActiveRecord_Relation` https://srb.help/7014
+    44 |T.reveal_type(Wizard.order(:id)) # Wizard::Relation
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  From:
+    sorbet_test_cases.rb:44:
+    44 |T.reveal_type(Wizard.order(:id)) # Wizard::Relation
+                      ^^^^^^^^^^^^^^^^^
+Errors: 20
