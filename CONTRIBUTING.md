@@ -85,8 +85,10 @@ You can also switch to a version of Rails with `RAILS_VERSION`:
 
 ```sh
 ❯ RAILS_VERSION=4.2 ./spec/bin/run_spec.sh
+❯ RAILS_VERSION=5.0 ./spec/bin/run_spec.sh
 ❯ RAILS_VERSION=5.1 ./spec/bin/run_spec.sh
 ❯ RAILS_VERSION=5.2 ./spec/bin/run_spec.sh
+❯ RAILS_VERSION=6.0 ./spec/bin/run_spec.sh
 ```
 
 #### Debugging
@@ -107,7 +109,7 @@ execution to stop, which will then start a debugger. For more, check out the
 
 ### Writing Tests
 
-Tests are in the `_spec.rb` files in the [`spec/`](spec/) directory.
+Tests are in the `_spec.rb` files in the [`spec/`](spec/) directory. Sorbet's `srb tc` test cases are in [`spec/support/rails_shared/sorbet_test_cases.rb`](spec/support/rails_shared/sorbet_test_cases.rb).
 
 Rails apps are stored in [`spec/support/`](spec/support/). Code shared across Rails versions
 (models, views, controllers) are in [`spec/support/rails_shared/`](spec/support/rails_shared/)
