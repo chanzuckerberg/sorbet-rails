@@ -14,6 +14,28 @@ RSpec.describe 'sorbet' do
       wizard: harry,
     )
   end
+  let!(:wand) do
+    Wand.create!(
+      wizard: harry,
+      core_type: :phoenix_feather,
+      wood_type: "holly",
+    )
+  end
+
+  before(:all) do
+    if ENV['TEST_SRB_INIT']
+      # only initialize sorbet once for all tests because it is slow
+      stdout, stderr, status = Open3.capture3(
+        {'SRB_YES' => '1'}, 'bundle', 'exec', 'srb', 'init',
+        chdir: Rails.root.to_path,
+      )
+      # copy test case over after initializing otherwise it'll override the `typed:` indicator
+      res = FileUtils.symlink(
+        Rails.root.join('..', 'rails_shared', 'sorbet_test_cases.rb'),
+        Rails.root.to_path,
+      )
+    end
+  end
 
   before(:each) do
     Rake::Task['rails_rbi:routes'].invoke
