@@ -33,7 +33,14 @@ RSpec.describe 'sorbet' do
       res = FileUtils.symlink(
         Rails.root.join('..', 'rails_shared', 'sorbet_test_cases.rb'),
         Rails.root.to_path,
+        force: true,
       )
+    end
+  end
+
+  after(:all) do
+    if ENV['TEST_SRB_INIT']
+      FileUtils.safe_unlink(Rails.root.join('sorbet_test_cases.rb'))
     end
   end
 

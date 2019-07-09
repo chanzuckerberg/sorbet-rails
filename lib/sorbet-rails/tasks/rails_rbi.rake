@@ -1,5 +1,6 @@
 require("sorbet-rails/model_rbi_formatter")
 require("sorbet-rails/routes_rbi_formatter")
+require("sorbet-rails/utils")
 
 # this is ugly but it's a way to get the current directory of this script
 # maybe someone coming along will know a better way
@@ -20,12 +21,7 @@ namespace :rails_rbi do
 
   desc "Generate rbi for rails models. Pass models name to regenrate rbi for only the given models."
   task models: :environment do |t, args|
-    # need to eager load to see all models
-    Rails.application.eager_load!
-    # Rails 6.0 change the loading logic to use Zeitwerk
-    # https://github.com/rails/rails/blob/master/railties/lib/rails/application/finisher.rb#L116
-    # But this is not applied to Rails.application.eager_load! method
-    Zeitwerk::Loader.eager_load_all if defined?(Zeitwerk)
+    SorbetRails::Utils.rails_eager_load_all!
 
     copy_bundled_rbi
 

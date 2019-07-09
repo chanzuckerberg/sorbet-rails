@@ -3,21 +3,6 @@ require 'sorbet-rails/model_rbi_formatter'
 
 RSpec.describe ModelRbiFormatter do
 
-  it 'loads all the models in the app' do
-    expected_models = [
-      Potion,
-      SpellBook,
-      Wand,
-      Wizard,
-    ]
-
-    Rails.application.eager_load!
-    # Needed for Rails 6.0
-    Zeitwerk::Loader.eager_load_all if defined?(Zeitwerk)
-    all_models = ActiveRecord::Base.descendants
-    expect((expected_models - all_models)).to eql([])
-  end
-
   it 'does not throw an error when given an abstract class' do
     formatter = ModelRbiFormatter.new(Potion, ['Potion'])
     expect_match_file(
