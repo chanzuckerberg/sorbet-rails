@@ -5253,10 +5253,6 @@ class BigDecimal
 
   def self.double_fig(); end
 
-  def self.limit(*_); end
-
-  def self.mode(*_); end
-
   def self.save_exception_mode(); end
 
   def self.save_limit(); end
