@@ -25,17 +25,18 @@ gem 'sorbet-rails'
 ❯ bundle install
 ```
 
-3. Generate RBI files for your routes and models:
+3. Generate RBI files for your routes, models, and helpers:
 ```sh
 ❯ rake rails_rbi:routes
 ❯ rake rails_rbi:models
+❯ rake rails_rbi:helpers
 ```
 
 4. Automatically upgrade each file's typecheck level:
 ```sh
 ❯ srb rbi suggest-typed
 ```
-Because we've generated RBI files for routes and models, a lot more files should be typecheckable now.
+Because we've generated RBI files for routes, models, and helpers, a lot more files should be typecheckable now.
 
 ## RBI Files
 
@@ -65,6 +66,14 @@ The generation task currently creates the following signatures:
 - Enum values, checkers & scopes
 - Named scopes
 - Model relation class
+
+### Helpers
+
+This Rake task generates a `helpers.rbi` file that includes a basic module definition which includes the `Kernel` module, to allow for some basic Ruby methods to be used in helpers without Sorbet complaining.
+
+```sh
+❯ rake rails_rbi:helpers
+```
 
 ## Tips & Tricks
 
