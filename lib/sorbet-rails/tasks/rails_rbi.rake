@@ -42,7 +42,18 @@ namespace :rails_rbi do
 
   desc "Generate rbis for rails helpers."
   task helpers: :environment do |t, args|
-    helpers = ApplicationController.modules_for_helpers([:all])
+    SorbetRails::Utils.rails_eager_load_all!
+
+    if ActionController::Base.methods.include?(:modules_for_helpers)
+      helpers = ActionController::Base.modules_for_helpers([:all])
+    end
+
+    # If ActionController::Base doesn't work or doesn't return any helpers,
+    # use ApplicationController.
+    if ApplicationController.methods.include?(:modules_for_helpers) && (helpers.length == 0 || helpers.nil?)
+      helpers = ApplicationController.modules_for_helpers([:all])
+    end
+
     formatter = HelperRbiFormatter.new(helpers)
     file_path = Rails.root.join("sorbet", "rails-rbi", "helpers.rbi")
     FileUtils.mkdir_p(File.dirname(file_path))
