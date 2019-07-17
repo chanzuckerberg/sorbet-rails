@@ -27,7 +27,6 @@ matrix:
     env: RAILS_VERSION=6.0
   allow_failures:
   - rvm: ruby-head
-  - env: RAILS_VERSION=5.2
 before_install:
 - gem install bundler -v 2.0.1 --no-doc
 - gem install bundler -v 1.17.3 --no-doc
