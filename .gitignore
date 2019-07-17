@@ -84,3 +84,12 @@ build-iPhoneSimulator/
 /spec/support/v5.2-no-sorbet/sorbet_test_cases.rb
 /spec/support/v5.2-no-sorbet/sorbet/*
 /spec/support/v5.2-no-sorbet/sorbet/**/*
+
+# editor swap files
+*.swp
+*.swo
+*.swn
+*.swm
+*.swl
+*.swk
+
