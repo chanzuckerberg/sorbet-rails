@@ -215,7 +215,20 @@ class ModelRbiFormatter
 
   def populate_generated_enum_methods
     @model_class.defined_enums.each do |enum_name, enum_hash|
-      @generated_class_sigs["#{enum_name.pluralize}"] = { ret: "T::Hash[T.any(String, Symbol), Integer]"}
+      # Rails documents these values as being integers, but in practice any
+      # type is allowed.
+      value_types = enum_hash.values.map {|x| x.class.to_s }.uniq
+      value_type = if value_types.length > 1
+        "T.any(%s)" % value_types.join(', ')
+      elsif value_types.length == 1
+        # This case not strictly required, it's just neater.
+        value_types.join(', ')
+      else
+        # Default to what Rails documentation says it should be.
+        "Integer"
+      end
+
+      @generated_class_sigs["#{enum_name.pluralize}"] = { ret: "T::Hash[T.any(String, Symbol), #{value_type}]"}
       enum_hash.keys.each do |enum_val|
         @generated_instance_module_sigs["#{enum_val}?"] = { ret: "T::Boolean" }
         @generated_instance_module_sigs["#{enum_val}!"] = { ret: nil }
