@@ -217,7 +217,7 @@ class ModelRbiFormatter
     @model_class.defined_enums.each do |enum_name, enum_hash|
       # Rails documents these values as being integers, but in practice any
       # type is allowed.
-      value_types = enum_hash.values.map {|x| x.class.to_s }.uniq
+      value_types = enum_hash.values.map {|x| x.class.name }.uniq
       value_type = if value_types.length > 1
         "T.any(%s)" % value_types.join(', ')
       elsif value_types.length == 1
