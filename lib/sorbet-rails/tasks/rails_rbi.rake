@@ -44,14 +44,14 @@ namespace :rails_rbi do
   task helpers: :environment do |t, args|
     SorbetRails::Utils.rails_eager_load_all!
 
-    if ActionController::Base.methods.include?(:modules_for_helpers)
-      helpers = ActionController::Base.modules_for_helpers([:all])
+    if ApplicationController.methods.include?(:modules_for_helpers) 
+      helpers = ApplicationController.modules_for_helpers([:all])
     end
 
-    # If ActionController::Base doesn't work or doesn't return any helpers,
-    # use ApplicationController.
-    if ApplicationController.methods.include?(:modules_for_helpers) && (helpers.length == 0 || helpers.nil?)
-      helpers = ApplicationController.modules_for_helpers([:all])
+    # If ApplicationController doesn't work or doesn't return any helpers,
+    # use ActionController::Base.
+    if ActionController::Base.methods.include?(:modules_for_helpers) && (helpers.length == 0 || helpers.nil?)
+      helpers = ActionController::Base.modules_for_helpers([:all])
     end
 
     formatter = HelperRbiFormatter.new(helpers)
