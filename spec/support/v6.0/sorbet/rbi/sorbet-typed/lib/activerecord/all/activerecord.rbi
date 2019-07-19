@@ -41,7 +41,7 @@ class ActiveRecord::Base
 end
 
 class ActiveRecord::Schema
-  sig {params(info: Hash, blk: T.proc.bind(ActiveRecord::Schema).void).void}
+  sig {params(info: T::Hash[T.untyped, T.untyped], blk: T.proc.bind(ActiveRecord::Schema).void).void}
   def self.define(info = nil, &blk); end
 end
 
