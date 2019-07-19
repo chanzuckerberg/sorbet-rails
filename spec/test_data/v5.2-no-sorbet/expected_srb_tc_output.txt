@@ -1,67 +1,3 @@
-sorbet/rails-rbi/models/wand.rbi:112: Malformed type declaration. Generic class without type arguments `Array` https://srb.help/5046
-     112 |  sig { returns(T.any(Array, T::Boolean, Float, Hash, Integer, String)) }
-                                ^^^^^
-  Autocorrect: Use `-a` to autocorrect
-    sorbet/rails-rbi/models/wand.rbi:112: Replace with `T::Array[T.untyped]`
-     112 |  sig { returns(T.any(Array, T::Boolean, Float, Hash, Integer, String)) }
-                                ^^^^^
-
-sorbet/rails-rbi/models/wand.rbi:112: Malformed type declaration. Generic class without type arguments `Hash` https://srb.help/5046
-     112 |  sig { returns(T.any(Array, T::Boolean, Float, Hash, Integer, String)) }
-                                                          ^^^^
-  Autocorrect: Use `-a` to autocorrect
-    sorbet/rails-rbi/models/wand.rbi:112: Replace with `T::Hash[T.untyped, T.untyped]`
-     112 |  sig { returns(T.any(Array, T::Boolean, Float, Hash, Integer, String)) }
-                                                          ^^^^
-
-sorbet/rails-rbi/models/wand.rbi:115: Malformed type declaration. Generic class without type arguments `Array` https://srb.help/5046
-     115 |  sig { params(value: T.any(Array, T::Boolean, Float, Hash, Integer, String)).void }
-                                      ^^^^^
-  Autocorrect: Use `-a` to autocorrect
-    sorbet/rails-rbi/models/wand.rbi:115: Replace with `T::Array[T.untyped]`
-     115 |  sig { params(value: T.any(Array, T::Boolean, Float, Hash, Integer, String)).void }
-                                      ^^^^^
-
-sorbet/rails-rbi/models/wand.rbi:115: Malformed type declaration. Generic class without type arguments `Hash` https://srb.help/5046
-     115 |  sig { params(value: T.any(Array, T::Boolean, Float, Hash, Integer, String)).void }
-                                                                ^^^^
-  Autocorrect: Use `-a` to autocorrect
-    sorbet/rails-rbi/models/wand.rbi:115: Replace with `T::Hash[T.untyped, T.untyped]`
-     115 |  sig { params(value: T.any(Array, T::Boolean, Float, Hash, Integer, String)).void }
-                                                                ^^^^
-
-sorbet/rails-rbi/models/wand.rbi:136: Malformed type declaration. Generic class without type arguments `Array` https://srb.help/5046
-     136 |  sig { returns(T.nilable(T.any(Array, T::Boolean, Float, Hash, Integer, String))) }
-                                          ^^^^^
-  Autocorrect: Use `-a` to autocorrect
-    sorbet/rails-rbi/models/wand.rbi:136: Replace with `T::Array[T.untyped]`
-     136 |  sig { returns(T.nilable(T.any(Array, T::Boolean, Float, Hash, Integer, String))) }
-                                          ^^^^^
-
-sorbet/rails-rbi/models/wand.rbi:136: Malformed type declaration. Generic class without type arguments `Hash` https://srb.help/5046
-     136 |  sig { returns(T.nilable(T.any(Array, T::Boolean, Float, Hash, Integer, String))) }
-                                                                    ^^^^
-  Autocorrect: Use `-a` to autocorrect
-    sorbet/rails-rbi/models/wand.rbi:136: Replace with `T::Hash[T.untyped, T.untyped]`
-     136 |  sig { returns(T.nilable(T.any(Array, T::Boolean, Float, Hash, Integer, String))) }
-                                                                    ^^^^
-
-sorbet/rails-rbi/models/wand.rbi:139: Malformed type declaration. Generic class without type arguments `Array` https://srb.help/5046
-     139 |  sig { params(value: T.nilable(T.any(Array, T::Boolean, Float, Hash, Integer, String))).void }
-                                                ^^^^^
-  Autocorrect: Use `-a` to autocorrect
-    sorbet/rails-rbi/models/wand.rbi:139: Replace with `T::Array[T.untyped]`
-     139 |  sig { params(value: T.nilable(T.any(Array, T::Boolean, Float, Hash, Integer, String))).void }
-                                                ^^^^^
-
-sorbet/rails-rbi/models/wand.rbi:139: Malformed type declaration. Generic class without type arguments `Hash` https://srb.help/5046
-     139 |  sig { params(value: T.nilable(T.any(Array, T::Boolean, Float, Hash, Integer, String))).void }
-                                                                          ^^^^
-  Autocorrect: Use `-a` to autocorrect
-    sorbet/rails-rbi/models/wand.rbi:139: Replace with `T::Hash[T.untyped, T.untyped]`
-     139 |  sig { params(value: T.nilable(T.any(Array, T::Boolean, Float, Hash, Integer, String))).void }
-                                                                          ^^^^
-
 sorbet_test_cases.rb:14: Argument does not have asserted type `ActiveRecord::Associations::CollectionProxy` https://srb.help/7007
     14 |T.assert_type!(wizard.spell_books, ActiveRecord::Associations::CollectionProxy)
         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -221,4 +157,4 @@ sorbet_test_cases.rb:44: Revealed type: `Wizard::ActiveRecord_Relation` https://
     sorbet_test_cases.rb:44:
     44 |T.reveal_type(Wizard.order(:id)) # Wizard::Relation
                       ^^^^^^^^^^^^^^^^^
-Errors: 28
+Errors: 20

@@ -13,3 +13,4 @@ end
 module FooHelper
   include Kernel
 end
+
