@@ -1,3 +1,18 @@
+sorbet/rbi/hidden-definitions/hidden.rbi:25826: Method `String#match?` redefined with mismatched argument attribute `isRepeated`. Expected: `false`, got: `true` https://srb.help/4010
+       25826 |  def match?(*_); end
+                ^^^^^^^^^^^^^^
+    https://github.com/sorbet/sorbet/tree/1e939954f10443473f442246bf38d9ae34fded0e/rbi/core/string.rbi#L484: Previous definition
+     484 |  def match?(arg0, arg1=T.unsafe(nil)); end
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rbi/sorbet-typed/lib/activerecord/all/activerecord.rbi:44: Malformed type declaration. Generic class without type arguments `Hash` https://srb.help/5046
+    44 |  sig {params(info: Hash, blk: T.proc.bind(ActiveRecord::Schema).void).void}
+                            ^^^^
+  Autocorrect: Use `-a` to autocorrect
+    sorbet/rbi/sorbet-typed/lib/activerecord/all/activerecord.rbi:44: Replace with `T::Hash[T.untyped, T.untyped]`
+    44 |  sig {params(info: Hash, blk: T.proc.bind(ActiveRecord::Schema).void).void}
+                            ^^^^
+
 sorbet_test_cases.rb:14: Argument does not have asserted type `ActiveRecord::Associations::CollectionProxy` https://srb.help/7007
     14 |T.assert_type!(wizard.spell_books, ActiveRecord::Associations::CollectionProxy)
         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -175,4 +190,4 @@ sorbet_test_cases.rb:106: The typechecker was unable to infer the type of the as
      105 |wizard.spell_books.map do |sp|
                                      ^^
   You may need to add additional `sig` annotations
-Errors: 22
+Errors: 24

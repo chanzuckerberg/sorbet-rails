@@ -2,10 +2,6 @@
 # Please rerun rake rails_rbi:helpers to regenerate.
 # typed: strong
 
-module FooHelper
-  include Kernel
-end
-
 module BarHelper
   include Kernel
 end
@@ -14,3 +10,6 @@ module BazHelper
   include Kernel
 end
 
+module FooHelper
+  include Kernel
+end

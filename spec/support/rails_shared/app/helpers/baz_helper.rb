@@ -1,0 +1,2 @@
+module BazHelper
+end
