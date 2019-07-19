@@ -109,10 +109,10 @@ module Wand::InstanceMethods
   sig { params(args: T.untyped).returns(T::Boolean) }
   def id?(*args); end
 
-  sig { returns(T.any(Array, T::Boolean, Float, Hash, Integer, String)) }
+  sig { returns(T.any(T::Array[T.untyped], T::Boolean, Float, T::Hash[T.untyped, T.untyped], Integer, String)) }
   def maker_info(); end
 
-  sig { params(value: T.any(Array, T::Boolean, Float, Hash, Integer, String)).void }
+  sig { params(value: T.any(T::Array[T.untyped], T::Boolean, Float, T::Hash[T.untyped, T.untyped], Integer, String)).void }
   def maker_info=(value); end
 
   sig { params(args: T.untyped).returns(T::Boolean) }
@@ -133,10 +133,10 @@ module Wand::InstanceMethods
   sig { params(args: T.untyped).returns(T::Boolean) }
   def reflectance?(*args); end
 
-  sig { returns(T.nilable(T.any(Array, T::Boolean, Float, Hash, Integer, String))) }
+  sig { returns(T.nilable(T.any(T::Array[T.untyped], T::Boolean, Float, T::Hash[T.untyped, T.untyped], Integer, String))) }
   def spell_history(); end
 
-  sig { params(value: T.nilable(T.any(Array, T::Boolean, Float, Hash, Integer, String))).void }
+  sig { params(value: T.nilable(T.any(T::Array[T.untyped], T::Boolean, Float, T::Hash[T.untyped, T.untyped], Integer, String))).void }
   def spell_history=(value); end
 
   sig { params(args: T.untyped).returns(T::Boolean) }
