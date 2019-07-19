@@ -23961,7 +23961,6 @@ module Readline
 end
 
 class Regexp
-  def match?(*_); end
 end
 
 class Regexp
@@ -25823,8 +25822,6 @@ class String
 
   def grapheme_clusters(); end
 
-  def match?(*_); end
-
   def pathmap(spec=T.unsafe(nil), &block); end
 
   def pathmap_explode(); end
@@ -26008,8 +26005,6 @@ end
 
 class Symbol
   def casecmp?(_); end
-
-  def match?(*_); end
 
   def next(); end
 
