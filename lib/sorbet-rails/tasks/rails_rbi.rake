@@ -1,5 +1,6 @@
 require("sorbet-rails/model_rbi_formatter")
 require("sorbet-rails/routes_rbi_formatter")
+require("sorbet-rails/helper_rbi_formatter")
 require("sorbet-rails/utils")
 
 # this is ugly but it's a way to get the current directory of this script
@@ -8,7 +9,7 @@ require("sorbet-rails/utils")
 
 namespace :rails_rbi do
 
-  desc "Generate rbi for rails routes"
+  desc "Generate rbis for rails routes"
   task :routes, [:root_dir] => :environment do |t, args|
     all_routes = Rails.application.routes.routes
     require "action_dispatch/routing/inspector"
@@ -19,7 +20,7 @@ namespace :rails_rbi do
     File.write(file_path, inspector.format(RoutesRbiFormatter.new))
   end
 
-  desc "Generate rbi for rails models. Pass models name to regenrate rbi for only the given models."
+  desc "Generate rbis for rails models. Pass models name to regenerate rbi for only the given models."
   task models: :environment do |t, args|
     SorbetRails::Utils.rails_eager_load_all!
 
@@ -37,6 +38,26 @@ namespace :rails_rbi do
       FileUtils.mkdir_p(File.dirname(file_path))
       File.write(file_path, contents)
     end
+  end
+
+  desc "Generate rbis for rails helpers."
+  task helpers: :environment do |t, args|
+    SorbetRails::Utils.rails_eager_load_all!
+
+    if ApplicationController.methods.include?(:modules_for_helpers) 
+      helpers = ApplicationController.modules_for_helpers([:all])
+    end
+
+    # If ApplicationController doesn't work or doesn't return any helpers,
+    # use ActionController::Base.
+    if ActionController::Base.methods.include?(:modules_for_helpers) && (helpers.length == 0 || helpers.nil?)
+      helpers = ActionController::Base.modules_for_helpers([:all])
+    end
+
+    formatter = HelperRbiFormatter.new(helpers)
+    file_path = Rails.root.join("sorbet", "rails-rbi", "helpers.rbi")
+    FileUtils.mkdir_p(File.dirname(file_path))
+    File.write(file_path, formatter.generate_rbi)
   end
 
   def copy_bundled_rbi

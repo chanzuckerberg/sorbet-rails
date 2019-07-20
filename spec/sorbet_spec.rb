@@ -47,6 +47,7 @@ RSpec.describe 'sorbet' do
   before(:each) do
     Rake::Task['rails_rbi:routes'].invoke
     Rake::Task['rails_rbi:models'].invoke
+    Rake::Task['rails_rbi:helpers'].invoke
   end
 
   it 'returns expected sorbet tc result' do
