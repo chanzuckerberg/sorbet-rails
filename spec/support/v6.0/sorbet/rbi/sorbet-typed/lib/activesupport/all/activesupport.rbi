@@ -66,7 +66,7 @@ class Object
 
   sig do
     params(
-      options: Hash,
+      options: T::Hash[T.untyped, T.untyped],
       block: T.nilable(T.proc.returns(T.untyped))
     ).returns(T.untyped)
   end

@@ -20668,7 +20668,6 @@ end
 
 class Regexp
   include ::ActiveSupport::ToJsonWithActiveSupportEncoder
-  def match?(*_); end
 end
 
 class Regexp
@@ -22518,8 +22517,6 @@ class String
 
   def encode!(*_); end
 
-  def match?(*_); end
-
   def reverse!(); end
 
   def shellescape(); end
@@ -22690,8 +22687,6 @@ end
 class Symbol
   include ::ActiveSupport::ToJsonWithActiveSupportEncoder
   def casecmp?(_); end
-
-  def match?(*_); end
 
   def next(); end
 
