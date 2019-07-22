@@ -24,4 +24,12 @@ module SorbetRails::ModelUtils
   def model_module_name(module_name)
     "#{model_class.name}::#{module_name}"
   end
+
+  def exists_instance_method?(method_name)
+    model_class.method_defined?(method_name)
+  end
+
+  def exists_class_method?(method_name)
+    model_class.respond_to?(method_name)
+  end
 end

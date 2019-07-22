@@ -1,6 +1,7 @@
 require('parlour')
 require('sorbet-rails/model_utils')
 require('sorbet-rails/model_plugins/active_record_enum')
+require('sorbet-rails/model_plugins/active_record_querying')
 class ModelRbiFormatterRefactor
   include SorbetRails::ModelUtils
 
@@ -21,8 +22,10 @@ class ModelRbiFormatterRefactor
 
   def generate_rbi
     # TODO: make this customizable
+    byebug
     plugins = [
       SorbetRails::ModelPlugins::ActiveRecordEnum,
+      SorbetRails::ModelPlugins::ActiveRecordQuerying,
     ]
 
     # Collect the instances of each plugin into an array
@@ -31,7 +34,7 @@ class ModelRbiFormatterRefactor
     end
 
     generator = Parlour::RbiGenerator.new(break_params: 3)
-    Parlour::Plugin.run_plugins(plugin_instances, generator)
+    run_plugins(plugin_instances, generator, allow_failure: false)
     # Generate the base after the plugins because when ConflictResolver merge the modules,
     # it'll put the modules at the last position merged. Putting the base stuff
     # last will keep the order consistent and minimize changes when new plugins are added.
@@ -78,7 +81,7 @@ class ModelRbiFormatterRefactor
     model_rbi = root.create_class(name: self.model_class_name)
     model_rbi.create_extend(name: "T::Sig")
     model_rbi.create_extend(name: "T::Generic")
-    model_rbi.create_include(name: self.model_relation_shared_module_name)
+    model_rbi.create_extend(name: self.model_relation_shared_module_name)
     collection_proxy_rbi.create_constant(
       name: "Elem",
       value: "type_member(fixed: #{self.model_class_name})",
@@ -93,5 +96,16 @@ class ModelRbiFormatterRefactor
     # https://sorbet-ruby.slack.com/archives/CHN2L03NH/p1556065791047300
     model_relation_shared_rbi = root.create_module(name: self.model_relation_shared_module_name)
     model_relation_shared_rbi.create_extend(name: "T::Sig")
+  end
+
+  def run_plugins(plugins, generator, allow_failure: true)
+    plugins.each do |plugin|
+      puts "=== #{plugin.class.name}"
+      generator.current_plugin = plugin
+      plugin.generate(generator.root)
+    rescue Exception => e
+      raise e unless allow_failure
+      puts "!!! This plugin threw an exception: #{e}"
+    end
   end
 end
