@@ -5,10 +5,12 @@ class SorbetRails::ModelPlugins::ActiveRecordEnum < SorbetRails::ModelPlugins::B
 
     enum_module_name = model_module_name("EnumInstanceMethods")
     enum_module_rbi = root.create_module(name: enum_module_name)
+    enum_module_rbi.create_extend(name: "T::Sig")
 
     model_class_rbi = root.create_class(name: self.model_class_name)
-    model_relation_shared_rbi = root.create_module(name: self.model_relation_shared_module_name)
     model_class_rbi.create_include(name: enum_module_name)
+
+    model_relation_shared_rbi = root.create_module(name: self.model_relation_shared_module_name)
 
     # TODO: add any method for signature verification?
     model_class.defined_enums.each do |enum_name, enum_hash|
