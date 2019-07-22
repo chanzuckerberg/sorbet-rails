@@ -3,6 +3,7 @@ require('sorbet-rails/model_utils')
 require('sorbet-rails/model_plugins/active_record_enum')
 require('sorbet-rails/model_plugins/active_record_querying')
 require('sorbet-rails/model_plugins/active_record_named_scope')
+require('sorbet-rails/model_plugins/active_record_attribute')
 class ModelRbiFormatterRefactor
   include SorbetRails::ModelUtils
 
@@ -27,6 +28,7 @@ class ModelRbiFormatterRefactor
       SorbetRails::ModelPlugins::ActiveRecordEnum,
       SorbetRails::ModelPlugins::ActiveRecordNamedScope,
       SorbetRails::ModelPlugins::ActiveRecordQuerying,
+      SorbetRails::ModelPlugins::ActiveRecordAttribute,
     ]
 
     # Collect the instances of each plugin into an array
