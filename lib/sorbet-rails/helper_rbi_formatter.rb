@@ -23,6 +23,7 @@ class HelperRbiFormatter
       rbi += <<~RBI
         module #{helper}
           include Kernel
+          include ActionView::Helpers
         end
 
       RBI

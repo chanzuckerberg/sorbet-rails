@@ -4,13 +4,16 @@
 
 module BarHelper
   include Kernel
+  include ActionView::Helpers
 end
 
 module BazHelper
   include Kernel
+  include ActionView::Helpers
 end
 
 module FooHelper
   include Kernel
+  include ActionView::Helpers
 end
 
