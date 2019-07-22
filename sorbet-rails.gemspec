@@ -15,6 +15,8 @@ Gem::Specification.new do |s|
     `git ls-files -z`.split("\x0").select { |f| f.match(%r{^(test|spec|features)/}) }
   end
 
+  s.add_dependency 'parlour', '~> 0.5'
+
   # Development
   s.add_development_dependency 'rspec', '~> 3.8', '>= 3.8'
   # Debugging
