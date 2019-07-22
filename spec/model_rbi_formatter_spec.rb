@@ -1,6 +1,5 @@
 require 'rails_helper'
 require 'sorbet-rails/model_rbi_formatter'
-require 'sorbet-rails/model_rbi_formatter_refactor'
 
 RSpec.describe ModelRbiFormatter do
 
@@ -13,7 +12,7 @@ RSpec.describe ModelRbiFormatter do
   end
 
   it 'generates correct rbi file for Wizard' do
-    formatter = ModelRbiFormatterRefactor.new(Wizard, ['Wizard', 'Wand', 'SpellBook'])
+    formatter = ModelRbiFormatter.new(Wizard, ['Wizard', 'Wand', 'SpellBook'])
     expect_match_file(
       formatter.generate_rbi,
       'expected_wizard.rbi',

@@ -3,6 +3,7 @@ class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugi
   def generate(root)
     attribute_module_name = self.model_module_name("GeneratedAttributeMethods")
     attribute_module_rbi = root.create_module(name: attribute_module_name)
+    attribute_module_rbi.create_extend(name: "T::Sig")
 
     model_class_rbi = root.create_class(name: self.model_class_name)
     model_class_rbi.create_include(name: attribute_module_name)
