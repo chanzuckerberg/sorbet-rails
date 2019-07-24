@@ -21328,8 +21328,6 @@ module OptionParser::Completion
   def candidate(key, icase=T.unsafe(nil), pat=T.unsafe(nil)); end
 
   def complete(key, icase=T.unsafe(nil), pat=T.unsafe(nil)); end
-
-  def convert(opt=T.unsafe(nil), val=T.unsafe(nil), *_); end
 end
 
 module OptionParser::Completion
@@ -21461,7 +21459,6 @@ class OptionParser::Switch::NoArgument
 end
 
 class OptionParser::Switch::NoArgument
-  def self.incompatible_argument_styles(*_); end
 end
 
 class OptionParser::Switch::OptionalArgument
