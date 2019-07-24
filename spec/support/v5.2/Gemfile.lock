@@ -133,8 +133,5 @@ DEPENDENCIES
   sorbet-runtime
   sqlite3 (~> 1.4.1)
 
-RUBY VERSION
-   ruby 2.4.3p205
-
 BUNDLED WITH
-   2.0.1
+   2.0.2
