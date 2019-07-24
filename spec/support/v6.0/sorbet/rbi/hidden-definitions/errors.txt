@@ -631,7 +631,6 @@
 # wrong constant name rescue_handlers?
 # wrong constant name stylesheets_dir
 # wrong constant name stylesheets_dir=
-# wrong constant name <static-init>
 # wrong constant name __callbacks
 # wrong constant name __callbacks=
 # wrong constant name __callbacks?
@@ -951,12 +950,12 @@
 # wrong constant name <Class:NullSessionHash>
 # wrong constant name handle_unverified_request
 # wrong constant name initialize
-# uninitialized constant #<Class:0x0000559f483628f0>::DOMAIN_REGEXP
-# uninitialized constant #<Class:0x0000559f483628f0>::Elem
+# uninitialized constant #<Class:0x000055906a56ba80>::DOMAIN_REGEXP
+# uninitialized constant #<Class:0x000055906a56ba80>::Elem
 # wrong constant name write
 # wrong constant name <static-init>
-# uninitialized constant #<Class:0x0000559f48362b98>::Elem
-# uninitialized constant #<Class:0x0000559f48362b98>::Unspecified
+# uninitialized constant #<Class:0x000055906a56be18>::Elem
+# uninitialized constant #<Class:0x000055906a56be18>::Unspecified
 # wrong constant name initialize
 # wrong constant name <static-init>
 # wrong constant name <static-init>
@@ -1264,7 +1263,6 @@
 # uninitialized constant ActionMailbox::InboundEmail(Table doesn't exist)::CALLBACKS
 # uninitialized constant ActionMailbox::InboundEmail(Table doesn't exist)::CALLBACK_FILTER_TYPES
 # uninitialized constant ActionMailbox::InboundEmail(Table doesn't exist)::CALL_COMPILABLE_REGEXP
-# wrong constant name <Class:GeneratedAssociationMethods>
 # wrong constant name <Class:GeneratedAttributeMethods>
 # wrong constant name <Class:Incineratable>
 # uninitialized constant ActionMailbox::InboundEmail(Table doesn't exist)::MAX_PASSWORD_LENGTH_ALLOWED
@@ -1283,13 +1281,8 @@
 # wrong constant name create_raw_email_attachment!
 # wrong constant name raw_email
 # wrong constant name raw_email=
-# wrong constant name raw_email_attachment
-# wrong constant name raw_email_attachment=
-# wrong constant name raw_email_blob
-# wrong constant name raw_email_blob=
 # wrong constant name reload_raw_email_attachment
 # wrong constant name reload_raw_email_blob
-# wrong constant name <static-init>
 # wrong constant name <static-init>
 # wrong constant name <Class:Incineration>
 # wrong constant name incinerate
@@ -1305,18 +1298,11 @@
 # wrong constant name route
 # wrong constant name route_later
 # wrong constant name <static-init>
-# wrong constant name <static-init>
-# wrong constant name bounced
-# wrong constant name delivered
-# wrong constant name failed
 # wrong constant name not_bounced
 # wrong constant name not_delivered
 # wrong constant name not_failed
 # wrong constant name not_pending
 # wrong constant name not_processing
-# wrong constant name pending
-# wrong constant name processing
-# wrong constant name statuses
 # wrong constant name with_attached_raw_email
 # uninitialized constant ActionMailbox::IncinerationJob::CALLBACK_FILTER_TYPES
 # wrong constant name perform
@@ -1911,7 +1897,6 @@
 # uninitialized constant ActionText::RichText(Table doesn't exist)::CALLBACKS
 # uninitialized constant ActionText::RichText(Table doesn't exist)::CALLBACK_FILTER_TYPES
 # uninitialized constant ActionText::RichText(Table doesn't exist)::CALL_COMPILABLE_REGEXP
-# wrong constant name <Class:GeneratedAssociationMethods>
 # wrong constant name <Class:GeneratedAttributeMethods>
 # uninitialized constant ActionText::RichText(Table doesn't exist)::MAX_PASSWORD_LENGTH_ALLOWED
 # uninitialized constant ActionText::RichText(Table doesn't exist)::NAME_COMPILABLE_REGEXP
@@ -1956,17 +1941,9 @@
 # wrong constant name embeds=
 # wrong constant name embeds_attachment_ids
 # wrong constant name embeds_attachment_ids=
-# wrong constant name embeds_attachments
-# wrong constant name embeds_attachments=
 # wrong constant name embeds_blob_ids
 # wrong constant name embeds_blob_ids=
-# wrong constant name embeds_blobs
-# wrong constant name embeds_blobs=
-# wrong constant name record
-# wrong constant name record=
 # wrong constant name reload_record
-# wrong constant name <static-init>
-# wrong constant name <static-init>
 # wrong constant name <static-init>
 # wrong constant name after_add_for_embeds_attachments
 # wrong constant name after_add_for_embeds_attachments=
@@ -2410,9 +2387,6 @@
 # uninitialized constant ActiveRecord::ConnectionAdapters::AbstractAdapter::CALLBACK_FILTER_TYPES
 # uninitialized constant ActiveRecord::ConnectionAdapters::SQLite3Adapter::CALLBACK_FILTER_TYPES
 # uninitialized constant ActiveRecord::ConnectionAdapters::SQLite3Adapter::SIMPLE_INT
-# wrong constant name created_at
-# wrong constant name created_at=
-# wrong constant name created_at?
 # wrong constant name created_at_before_last_save
 # wrong constant name created_at_before_type_cast
 # wrong constant name created_at_came_from_user?
@@ -2424,9 +2398,6 @@
 # wrong constant name created_at_previously_changed?
 # wrong constant name created_at_was
 # wrong constant name created_at_will_change!
-# wrong constant name key
-# wrong constant name key=
-# wrong constant name key?
 # wrong constant name key_before_last_save
 # wrong constant name key_before_type_cast
 # wrong constant name key_came_from_user?
@@ -2450,9 +2421,6 @@
 # wrong constant name saved_change_to_updated_at?
 # wrong constant name saved_change_to_value
 # wrong constant name saved_change_to_value?
-# wrong constant name updated_at
-# wrong constant name updated_at=
-# wrong constant name updated_at?
 # wrong constant name updated_at_before_last_save
 # wrong constant name updated_at_before_type_cast
 # wrong constant name updated_at_came_from_user?
@@ -2464,9 +2432,6 @@
 # wrong constant name updated_at_previously_changed?
 # wrong constant name updated_at_was
 # wrong constant name updated_at_will_change!
-# wrong constant name value
-# wrong constant name value=
-# wrong constant name value?
 # wrong constant name value_before_last_save
 # wrong constant name value_before_type_cast
 # wrong constant name value_came_from_user?
@@ -2785,7 +2750,6 @@
 # uninitialized constant ActiveStorage::Attachment(Table doesn't exist)::CALLBACKS
 # uninitialized constant ActiveStorage::Attachment(Table doesn't exist)::CALLBACK_FILTER_TYPES
 # uninitialized constant ActiveStorage::Attachment(Table doesn't exist)::CALL_COMPILABLE_REGEXP
-# wrong constant name <Class:GeneratedAssociationMethods>
 # wrong constant name <Class:GeneratedAttributeMethods>
 # uninitialized constant ActiveStorage::Attachment(Table doesn't exist)::MAX_PASSWORD_LENGTH_ALLOWED
 # uninitialized constant ActiveStorage::Attachment(Table doesn't exist)::NAME_COMPILABLE_REGEXP
@@ -2795,17 +2759,11 @@
 # wrong constant name autosave_associated_records_for_record
 # wrong constant name purge
 # wrong constant name purge_later
-# wrong constant name blob
-# wrong constant name blob=
 # wrong constant name build_blob
 # wrong constant name create_blob
 # wrong constant name create_blob!
-# wrong constant name record
-# wrong constant name record=
 # wrong constant name reload_blob
 # wrong constant name reload_record
-# wrong constant name <static-init>
-# wrong constant name <static-init>
 # wrong constant name <static-init>
 # uninitialized constant ActiveStorage::BaseController::ACTION_OPTIONS
 # uninitialized constant ActiveStorage::BaseController::AUTHENTICITY_TOKEN_LENGTH
@@ -2829,7 +2787,6 @@
 # uninitialized constant ActiveStorage::Blob(Table doesn't exist)::CALLBACKS
 # uninitialized constant ActiveStorage::Blob(Table doesn't exist)::CALLBACK_FILTER_TYPES
 # uninitialized constant ActiveStorage::Blob(Table doesn't exist)::CALL_COMPILABLE_REGEXP
-# wrong constant name <Class:GeneratedAssociationMethods>
 # wrong constant name <Class:GeneratedAttributeMethods>
 # wrong constant name <Class:Identifiable>
 # uninitialized constant ActiveStorage::Blob(Table doesn't exist)::LOCATOR_NAME
@@ -2881,20 +2838,13 @@
 # wrong constant name <static-init>
 # wrong constant name attachment_ids
 # wrong constant name attachment_ids=
-# wrong constant name attachments
-# wrong constant name attachments=
 # wrong constant name build_preview_image_attachment
 # wrong constant name create_preview_image_attachment
 # wrong constant name create_preview_image_attachment!
 # wrong constant name preview_image
 # wrong constant name preview_image=
-# wrong constant name preview_image_attachment
-# wrong constant name preview_image_attachment=
-# wrong constant name preview_image_blob
-# wrong constant name preview_image_blob=
 # wrong constant name reload_preview_image_attachment
 # wrong constant name reload_preview_image_blob
-# wrong constant name <static-init>
 # wrong constant name <static-init>
 # wrong constant name identified?
 # wrong constant name identify
@@ -2905,7 +2855,6 @@
 # wrong constant name representation
 # wrong constant name variable?
 # wrong constant name variant
-# wrong constant name <static-init>
 # wrong constant name <static-init>
 # wrong constant name after_add_for_attachments
 # wrong constant name after_add_for_attachments=
@@ -3223,12 +3172,15 @@
 # uninitialized constant ActiveSupport::TestCase::UNDEFINED
 # uninitialized constant ActiveSupport::TestCase::UNTRACKED
 # uninitialized constant ApplicationController::ACTION_OPTIONS
+# uninitialized constant ApplicationController::AUTHENTICITY_TOKEN_LENGTH
 # uninitialized constant ApplicationController::CALLBACK_FILTER_TYPES
 # uninitialized constant ApplicationController::DEFAULT_PROTECTED_INSTANCE_VARIABLES
 # uninitialized constant ApplicationController::DEFAULT_SEND_FILE_DISPOSITION
 # uninitialized constant ApplicationController::DEFAULT_SEND_FILE_TYPE
 # uninitialized constant ApplicationController::EXCLUDE_PARAMETERS
 # uninitialized constant ApplicationController::MODULES
+# uninitialized constant ApplicationController::NULL_ORIGIN_MESSAGE
+# uninitialized constant ApplicationController::PROTECTED_IVARS
 # uninitialized constant ApplicationController::REDIRECT_OPTIONS
 # uninitialized constant ApplicationController::RENDERERS
 # uninitialized constant ApplicationController::RENDER_FORMATS_IN_PRIORITY
@@ -3244,7 +3196,6 @@
 # uninitialized constant ApplicationRecord(abstract)::NAME_COMPILABLE_REGEXP
 # uninitialized constant ApplicationRecord(abstract)::RESTRICTED_CLASS_METHODS
 # uninitialized constant ApplicationRecord(abstract)::UNASSIGNABLE_KEYS
-# wrong constant name <static-init>
 # wrong constant name <static-init>
 # wrong constant name <static-init>
 # wrong constant name recent
@@ -9027,7 +8978,6 @@
 # uninitialized constant Potion(abstract)::UNASSIGNABLE_KEYS
 # wrong constant name <static-init>
 # wrong constant name <static-init>
-# wrong constant name <static-init>
 # undefined method `curry$1' for class `Proc'
 # wrong constant name ===
 # wrong constant name []
@@ -11169,6 +11119,9 @@
 # wrong constant name main
 # wrong constant name output_file
 # wrong constant name <static-init>
+# uninitialized constant SorbetRails::Railtie::ABSTRACT_RAILTIES
+# wrong constant name <static-init>
+# wrong constant name <static-init>
 # uninitialized constant SortedSet::InspectKey
 # wrong constant name initialize
 # wrong constant name setup
@@ -11176,8 +11129,6 @@
 # uninitialized constant SpellBook(id: integer, name: string, wizard_id: integer)::CALLBACKS
 # uninitialized constant SpellBook(id: integer, name: string, wizard_id: integer)::CALLBACK_FILTER_TYPES
 # uninitialized constant SpellBook(id: integer, name: string, wizard_id: integer)::CALL_COMPILABLE_REGEXP
-# wrong constant name <Class:GeneratedAssociationMethods>
-# wrong constant name <Class:GeneratedAttributeMethods>
 # uninitialized constant SpellBook(id: integer, name: string, wizard_id: integer)::MAX_PASSWORD_LENGTH_ALLOWED
 # uninitialized constant SpellBook(id: integer, name: string, wizard_id: integer)::NAME_COMPILABLE_REGEXP
 # uninitialized constant SpellBook(id: integer, name: string, wizard_id: integer)::RESTRICTED_CLASS_METHODS
@@ -11187,11 +11138,6 @@
 # wrong constant name create_wizard
 # wrong constant name create_wizard!
 # wrong constant name reload_wizard
-# wrong constant name wizard
-# wrong constant name wizard=
-# wrong constant name <static-init>
-# wrong constant name <static-init>
-# wrong constant name <static-init>
 # wrong constant name result
 # undefined method `[]$2' for class `String'
 # undefined method `byteslice$2' for class `String'
@@ -11850,52 +11796,38 @@
 # wrong constant name tag
 # wrong constant name value
 # wrong constant name <static-init>
-# uninitialized constant #<Class:0x0000559f48ea72b0>::ACTIONS
-# uninitialized constant #<Class:0x0000559f48ea72b0>::CALLBACKS
-# uninitialized constant #<Class:0x0000559f48ea72b0>::CALLBACK_FILTER_TYPES
-# uninitialized constant #<Class:0x0000559f48ea72b0>::CALL_COMPILABLE_REGEXP
-# wrong constant name <Class:GeneratedAssociationMethods>
-# wrong constant name <Class:GeneratedAttributeMethods>
-# uninitialized constant #<Class:0x0000559f48ea72b0>::MAX_PASSWORD_LENGTH_ALLOWED
-# uninitialized constant #<Class:0x0000559f48ea72b0>::NAME_COMPILABLE_REGEXP
-# uninitialized constant #<Class:0x0000559f48ea72b0>::RESTRICTED_CLASS_METHODS
-# uninitialized constant #<Class:0x0000559f48ea72b0>::UNASSIGNABLE_KEYS
+# uninitialized constant #<Class:0x0000559069e7ef60>::ACTIONS
+# uninitialized constant #<Class:0x0000559069e7ef60>::CALLBACKS
+# uninitialized constant #<Class:0x0000559069e7ef60>::CALLBACK_FILTER_TYPES
+# uninitialized constant #<Class:0x0000559069e7ef60>::CALL_COMPILABLE_REGEXP
+# uninitialized constant #<Class:0x0000559069e7ef60>::MAX_PASSWORD_LENGTH_ALLOWED
+# uninitialized constant #<Class:0x0000559069e7ef60>::NAME_COMPILABLE_REGEXP
+# uninitialized constant #<Class:0x0000559069e7ef60>::RESTRICTED_CLASS_METHODS
+# uninitialized constant #<Class:0x0000559069e7ef60>::UNASSIGNABLE_KEYS
 # wrong constant name autosave_associated_records_for_wizard
 # wrong constant name wood_type
 # wrong constant name build_wizard
 # wrong constant name create_wizard
 # wrong constant name create_wizard!
 # wrong constant name reload_wizard
-# wrong constant name wizard
-# wrong constant name wizard=
-# wrong constant name <static-init>
-# wrong constant name <static-init>
-# wrong constant name <static-init>
-# wrong constant name basilisk_horn
-# wrong constant name core_types
-# wrong constant name dragon_heartstring
 # wrong constant name not_basilisk_horn
 # wrong constant name not_dragon_heartstring
 # wrong constant name not_phoenix_feather
 # wrong constant name not_unicorn_tail_hair
-# wrong constant name phoenix_feather
-# wrong constant name unicorn_tail_hair
 # wrong constant name warn
 # wrong constant name <Class:RefError>
 # wrong constant name initialize
 # wrong constant name weakref_alive?
 # wrong constant name <static-init>
 # wrong constant name <static-init>
-# uninitialized constant #<Class:0x0000559f48eceae0>::ACTIONS
-# uninitialized constant #<Class:0x0000559f48eceae0>::CALLBACKS
-# uninitialized constant #<Class:0x0000559f48eceae0>::CALLBACK_FILTER_TYPES
-# uninitialized constant #<Class:0x0000559f48eceae0>::CALL_COMPILABLE_REGEXP
-# wrong constant name <Class:GeneratedAssociationMethods>
-# wrong constant name <Class:GeneratedAttributeMethods>
-# uninitialized constant #<Class:0x0000559f48eceae0>::MAX_PASSWORD_LENGTH_ALLOWED
-# uninitialized constant #<Class:0x0000559f48eceae0>::NAME_COMPILABLE_REGEXP
-# uninitialized constant #<Class:0x0000559f48eceae0>::RESTRICTED_CLASS_METHODS
-# uninitialized constant #<Class:0x0000559f48eceae0>::UNASSIGNABLE_KEYS
+# uninitialized constant #<Class:0x000055906a175b60>::ACTIONS
+# uninitialized constant #<Class:0x000055906a175b60>::CALLBACKS
+# uninitialized constant #<Class:0x000055906a175b60>::CALLBACK_FILTER_TYPES
+# uninitialized constant #<Class:0x000055906a175b60>::CALL_COMPILABLE_REGEXP
+# uninitialized constant #<Class:0x000055906a175b60>::MAX_PASSWORD_LENGTH_ALLOWED
+# uninitialized constant #<Class:0x000055906a175b60>::NAME_COMPILABLE_REGEXP
+# uninitialized constant #<Class:0x000055906a175b60>::RESTRICTED_CLASS_METHODS
+# uninitialized constant #<Class:0x000055906a175b60>::UNASSIGNABLE_KEYS
 # wrong constant name after_add_for_spell_books
 # wrong constant name after_add_for_spell_books=
 # wrong constant name after_add_for_spell_books?
@@ -11917,17 +11849,6 @@
 # wrong constant name reload_wand
 # wrong constant name spell_book_ids
 # wrong constant name spell_book_ids=
-# wrong constant name spell_books
-# wrong constant name spell_books=
-# wrong constant name wand
-# wrong constant name wand=
-# wrong constant name <static-init>
-# wrong constant name <static-init>
-# wrong constant name <static-init>
-# uninitialized constant #<Class:0x0000559f48eceae0>::Gryffindor
-# uninitialized constant #<Class:0x0000559f48eceae0>::Hufflepuff
-# uninitialized constant #<Class:0x0000559f48eceae0>::Ravenclaw
-# uninitialized constant #<Class:0x0000559f48eceae0>::Slytherin
 # wrong constant name after_add_for_spell_books
 # wrong constant name after_add_for_spell_books=
 # wrong constant name after_add_for_spell_books?
@@ -11940,7 +11861,6 @@
 # wrong constant name before_remove_for_spell_books
 # wrong constant name before_remove_for_spell_books=
 # wrong constant name before_remove_for_spell_books?
-# wrong constant name houses
 # wrong constant name not_Gryffindor
 # wrong constant name not_Hufflepuff
 # wrong constant name not_Ravenclaw
