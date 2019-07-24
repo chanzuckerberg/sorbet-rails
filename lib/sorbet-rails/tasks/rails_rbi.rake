@@ -44,7 +44,7 @@ namespace :rails_rbi do
   task helpers: :environment do |t, args|
     SorbetRails::Utils.rails_eager_load_all!
 
-    if ApplicationController.methods.include?(:modules_for_helpers) 
+    if ApplicationController.methods.include?(:modules_for_helpers)
       helpers = ApplicationController.modules_for_helpers([:all])
     end
 
@@ -85,6 +85,13 @@ namespace :rails_rbi do
   def blacklisted_models
     blacklisted_models = []
     blacklisted_models << ApplicationRecord if defined?(ApplicationRecord)
+    if Object.const_defined?('ActiveRecord::SchemaMigration')
+      # In Rails 6.0, there are dynamically created SchemaMigration classes like primary::SchemaMigration, etc.
+      # We ignore them because Sorbet cannot typecheck those classes and it's unlikely anyone use
+      # them in code.
+      # https://github.com/rails/rails/blob/7cc27d749c3563e6b278ad01d233cb92ea3b7935/activerecord/lib/active_record/connection_adapters/abstract_adapter.rb#L170
+      blacklisted_models.concat(ActiveRecord::SchemaMigration.descendants)
+    end
     blacklisted_models
   end
 
