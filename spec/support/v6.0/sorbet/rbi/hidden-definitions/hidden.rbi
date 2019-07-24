@@ -2975,7 +2975,6 @@ end
 
 class ActionMailbox::InboundEmail
   include ::ActionMailbox::InboundEmail::GeneratedAttributeMethods
-  include ::ActionMailbox::InboundEmail::GeneratedAssociationMethods
   include ::ActionMailbox::InboundEmail::Routable
   include ::ActionMailbox::InboundEmail::MessageId
   include ::ActionMailbox::InboundEmail::Incineratable
@@ -3001,21 +3000,9 @@ module ActionMailbox::InboundEmail::GeneratedAssociationMethods
 
   def raw_email=(attachable); end
 
-  def raw_email_attachment(); end
-
-  def raw_email_attachment=(value); end
-
-  def raw_email_blob(); end
-
-  def raw_email_blob=(value); end
-
   def reload_raw_email_attachment(); end
 
   def reload_raw_email_blob(); end
-end
-
-module ActionMailbox::InboundEmail::GeneratedAssociationMethods
-  extend ::T::Sig
 end
 
 module ActionMailbox::InboundEmail::GeneratedAttributeMethods
@@ -3075,12 +3062,6 @@ end
 
 class ActionMailbox::InboundEmail
   extend ::ActionMailbox::InboundEmail::MessageId::ClassMethods
-  def self.bounced(*args); end
-
-  def self.delivered(*args); end
-
-  def self.failed(*args); end
-
   def self.not_bounced(*args); end
 
   def self.not_delivered(*args); end
@@ -3090,12 +3071,6 @@ class ActionMailbox::InboundEmail
   def self.not_pending(*args); end
 
   def self.not_processing(*args); end
-
-  def self.pending(*args); end
-
-  def self.processing(*args); end
-
-  def self.statuses(); end
 
   def self.with_attached_raw_email(*args); end
 end
@@ -4392,7 +4367,6 @@ end
 
 class ActionText::RichText
   include ::ActionText::RichText::GeneratedAttributeMethods
-  include ::ActionText::RichText::GeneratedAssociationMethods
   def after_add_for_embeds_attachments(); end
 
   def after_add_for_embeds_attachments=(val); end
@@ -4473,27 +4447,11 @@ module ActionText::RichText::GeneratedAssociationMethods
 
   def embeds_attachment_ids=(ids); end
 
-  def embeds_attachments(); end
-
-  def embeds_attachments=(value); end
-
   def embeds_blob_ids(); end
 
   def embeds_blob_ids=(ids); end
 
-  def embeds_blobs(); end
-
-  def embeds_blobs=(value); end
-
-  def record(); end
-
-  def record=(value); end
-
   def reload_record(); end
-end
-
-module ActionText::RichText::GeneratedAssociationMethods
-  extend ::T::Sig
 end
 
 module ActionText::RichText::GeneratedAttributeMethods
@@ -6158,12 +6116,6 @@ module ActiveRecord::InternalMetadata::GeneratedAssociationMethods
 end
 
 module ActiveRecord::InternalMetadata::GeneratedAttributeMethods
-  def created_at(); end
-
-  def created_at=(value); end
-
-  def created_at?(*args); end
-
   def created_at_before_last_save(*args); end
 
   def created_at_before_type_cast(*args); end
@@ -6185,12 +6137,6 @@ module ActiveRecord::InternalMetadata::GeneratedAttributeMethods
   def created_at_was(*args); end
 
   def created_at_will_change!(*args); end
-
-  def key(); end
-
-  def key=(value); end
-
-  def key?(*args); end
 
   def key_before_last_save(*args); end
 
@@ -6238,12 +6184,6 @@ module ActiveRecord::InternalMetadata::GeneratedAttributeMethods
 
   def saved_change_to_value?(*args); end
 
-  def updated_at(); end
-
-  def updated_at=(value); end
-
-  def updated_at?(*args); end
-
   def updated_at_before_last_save(*args); end
 
   def updated_at_before_type_cast(*args); end
@@ -6265,12 +6205,6 @@ module ActiveRecord::InternalMetadata::GeneratedAttributeMethods
   def updated_at_was(*args); end
 
   def updated_at_will_change!(*args); end
-
-  def value(); end
-
-  def value=(value); end
-
-  def value?(*args); end
 
   def value_before_last_save(*args); end
 
@@ -6305,7 +6239,6 @@ end
 
 module ActiveRecord::InternalMetadata::GeneratedAttributeMethods
   extend ::Mutex_m
-  extend ::T::Sig
 end
 
 module ActiveRecord::LegacyYamlAdapter
@@ -6788,7 +6721,6 @@ end
 
 module ActiveRecord::SchemaMigration::GeneratedAttributeMethods
   extend ::Mutex_m
-  extend ::T::Sig
 end
 
 module ActiveRecord::Scoping::Default
@@ -7217,7 +7149,6 @@ end
 
 class ActiveStorage::Attachment
   include ::ActiveStorage::Attachment::GeneratedAttributeMethods
-  include ::ActiveStorage::Attachment::GeneratedAssociationMethods
   def autosave_associated_records_for_blob(*args); end
 
   def autosave_associated_records_for_record(*args); end
@@ -7228,27 +7159,15 @@ class ActiveStorage::Attachment
 end
 
 module ActiveStorage::Attachment::GeneratedAssociationMethods
-  def blob(); end
-
-  def blob=(value); end
-
   def build_blob(*args, &block); end
 
   def create_blob(*args, &block); end
 
   def create_blob!(*args, &block); end
 
-  def record(); end
-
-  def record=(value); end
-
   def reload_blob(); end
 
   def reload_record(); end
-end
-
-module ActiveStorage::Attachment::GeneratedAssociationMethods
-  extend ::T::Sig
 end
 
 module ActiveStorage::Attachment::GeneratedAttributeMethods
@@ -7257,9 +7176,6 @@ end
 module ActiveStorage::Attachment::GeneratedAttributeMethods
   extend ::Mutex_m
   extend ::T::Sig
-end
-
-class ActiveStorage::Attachment
 end
 
 class ActiveStorage::BaseController
@@ -7277,7 +7193,6 @@ end
 
 class ActiveStorage::Blob
   include ::ActiveStorage::Blob::GeneratedAttributeMethods
-  include ::ActiveStorage::Blob::GeneratedAssociationMethods
   include ::ActiveStorage::Blob::Analyzable
   include ::ActiveStorage::Blob::Identifiable
   include ::ActiveStorage::Blob::Representable
@@ -7374,10 +7289,6 @@ module ActiveStorage::Blob::GeneratedAssociationMethods
 
   def attachment_ids=(ids); end
 
-  def attachments(); end
-
-  def attachments=(value); end
-
   def build_preview_image_attachment(*args, &block); end
 
   def create_preview_image_attachment(*args, &block); end
@@ -7388,21 +7299,9 @@ module ActiveStorage::Blob::GeneratedAssociationMethods
 
   def preview_image=(attachable); end
 
-  def preview_image_attachment(); end
-
-  def preview_image_attachment=(value); end
-
-  def preview_image_blob(); end
-
-  def preview_image_blob=(value); end
-
   def reload_preview_image_attachment(); end
 
   def reload_preview_image_blob(); end
-end
-
-module ActiveStorage::Blob::GeneratedAssociationMethods
-  extend ::T::Sig
 end
 
 module ActiveStorage::Blob::GeneratedAttributeMethods
@@ -8671,6 +8570,10 @@ class Array
   def self.try_convert(_); end
 end
 
+module BarHelper
+  extend ::T::Sig
+end
+
 module Base64
   extend ::T::Sig
 end
@@ -8686,6 +8589,10 @@ class BasicSocket
 end
 
 class BasicSocket
+  extend ::T::Sig
+end
+
+module BazHelper
   extend ::T::Sig
 end
 
@@ -12058,6 +11965,10 @@ class Float
 end
 
 class FloatDomainError
+  extend ::T::Sig
+end
+
+module FooHelper
   extend ::T::Sig
 end
 
@@ -21328,6 +21239,8 @@ module OptionParser::Completion
   def candidate(key, icase=T.unsafe(nil), pat=T.unsafe(nil)); end
 
   def complete(key, icase=T.unsafe(nil), pat=T.unsafe(nil)); end
+
+  def convert(opt=T.unsafe(nil), val=T.unsafe(nil), *_); end
 end
 
 module OptionParser::Completion
@@ -21459,6 +21372,7 @@ class OptionParser::Switch::NoArgument
 end
 
 class OptionParser::Switch::NoArgument
+  def self.incompatible_argument_styles(*_); end
 end
 
 class OptionParser::Switch::OptionalArgument
@@ -21546,9 +21460,6 @@ end
 module Potion::GeneratedAttributeMethods
   extend ::Mutex_m
   extend ::T::Sig
-end
-
-class Potion
 end
 
 class Proc
@@ -24381,6 +24292,7 @@ end
 
 class Regexp
   include ::ActiveSupport::ToJsonWithActiveSupportEncoder
+  def match?(*_); end
 end
 
 class Regexp
@@ -26149,6 +26061,16 @@ class Sorbet
   extend ::T::Sig
 end
 
+class SorbetRails::Railtie
+end
+
+class SorbetRails::Railtie
+end
+
+module SorbetRails
+  extend ::T::Sig
+end
+
 class SortedSet
   def initialize(*args, &block); end
 end
@@ -26159,8 +26081,6 @@ class SortedSet
 end
 
 class SpellBook
-  include ::SpellBook::GeneratedAttributeMethods
-  include ::SpellBook::GeneratedAssociationMethods
   def autosave_associated_records_for_wizard(*args); end
 end
 
@@ -26172,25 +26092,10 @@ module SpellBook::GeneratedAssociationMethods
   def create_wizard!(*args, &block); end
 
   def reload_wizard(); end
-
-  def wizard(); end
-
-  def wizard=(value); end
-end
-
-module SpellBook::GeneratedAssociationMethods
-  extend ::T::Sig
-end
-
-module SpellBook::GeneratedAttributeMethods
 end
 
 module SpellBook::GeneratedAttributeMethods
   extend ::Mutex_m
-  extend ::T::Sig
-end
-
-class SpellBook
 end
 
 class StandardError
@@ -26412,6 +26317,8 @@ end
 class Symbol
   include ::ActiveSupport::ToJsonWithActiveSupportEncoder
   def casecmp?(_); end
+
+  def match?(*_); end
 
   def next(); end
 
@@ -27685,8 +27592,6 @@ class WEBrick::HTTPServlet::AbstractServlet
 end
 
 class Wand
-  include ::Wand::GeneratedAttributeMethods
-  include ::Wand::GeneratedAssociationMethods
   def autosave_associated_records_for_wizard(*args); end
 
   def wood_type(); end
@@ -27700,31 +27605,13 @@ module Wand::GeneratedAssociationMethods
   def create_wizard!(*args, &block); end
 
   def reload_wizard(); end
-
-  def wizard(); end
-
-  def wizard=(value); end
-end
-
-module Wand::GeneratedAssociationMethods
-  extend ::T::Sig
-end
-
-module Wand::GeneratedAttributeMethods
 end
 
 module Wand::GeneratedAttributeMethods
   extend ::Mutex_m
-  extend ::T::Sig
 end
 
 class Wand
-  def self.basilisk_horn(*args); end
-
-  def self.core_types(); end
-
-  def self.dragon_heartstring(*args); end
-
   def self.not_basilisk_horn(*args); end
 
   def self.not_dragon_heartstring(*args); end
@@ -27732,10 +27619,6 @@ class Wand
   def self.not_phoenix_feather(*args); end
 
   def self.not_unicorn_tail_hair(*args); end
-
-  def self.phoenix_feather(*args); end
-
-  def self.unicorn_tail_hair(*args); end
 end
 
 module Warning
@@ -27764,8 +27647,6 @@ class WeakRef
 end
 
 class Wizard
-  include ::Wizard::GeneratedAttributeMethods
-  include ::Wizard::GeneratedAssociationMethods
   def after_add_for_spell_books(); end
 
   def after_add_for_spell_books=(val); end
@@ -27809,37 +27690,13 @@ module Wizard::GeneratedAssociationMethods
   def spell_book_ids(); end
 
   def spell_book_ids=(ids); end
-
-  def spell_books(); end
-
-  def spell_books=(value); end
-
-  def wand(); end
-
-  def wand=(value); end
-end
-
-module Wizard::GeneratedAssociationMethods
-  extend ::T::Sig
-end
-
-module Wizard::GeneratedAttributeMethods
 end
 
 module Wizard::GeneratedAttributeMethods
   extend ::Mutex_m
-  extend ::T::Sig
 end
 
 class Wizard
-  def self.Gryffindor(*args); end
-
-  def self.Hufflepuff(*args); end
-
-  def self.Ravenclaw(*args); end
-
-  def self.Slytherin(*args); end
-
   def self.after_add_for_spell_books(); end
 
   def self.after_add_for_spell_books=(val); end
@@ -27863,8 +27720,6 @@ class Wizard
   def self.before_remove_for_spell_books=(val); end
 
   def self.before_remove_for_spell_books?(); end
-
-  def self.houses(); end
 
   def self.not_Gryffindor(*args); end
 
