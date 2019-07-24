@@ -6,6 +6,8 @@ class SorbetRails::ModelPlugins::ActiveRecordAssoc < SorbetRails::ModelPlugins::
   end
 
   def generate(root)
+    return unless @model_class.reflections.length > 0
+
     assoc_module_name = self.model_module_name("GeneratedAssociationMethods")
     assoc_module_rbi = root.create_module(name: assoc_module_name)
     assoc_module_rbi.create_extend(name: "T::Sig")
@@ -13,7 +15,7 @@ class SorbetRails::ModelPlugins::ActiveRecordAssoc < SorbetRails::ModelPlugins::
     model_class_rbi = root.create_class(name: self.model_class_name)
     model_class_rbi.create_include(name: assoc_module_name)
 
-    @model_class.reflections.each do |assoc_name, reflection|
+    @model_class.reflections.sort.each do |assoc_name, reflection|
       reflection.collection? ?
         populate_collection_assoc_getter_setter(assoc_module_rbi, assoc_name, reflection) :
         populate_single_assoc_getter_setter(assoc_module_rbi, assoc_name, reflection)

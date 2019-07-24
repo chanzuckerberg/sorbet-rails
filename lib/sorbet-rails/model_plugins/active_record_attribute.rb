@@ -1,6 +1,9 @@
 require ('sorbet-rails/model_plugins/base')
 class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugins::Base
   def generate(root)
+    columns_hash = @model_class.table_exists? ? @model_class.columns_hash : {}
+    return unless columns_hash.size > 0
+
     attribute_module_name = self.model_module_name("GeneratedAttributeMethods")
     attribute_module_rbi = root.create_module(name: attribute_module_name)
     attribute_module_rbi.create_extend(name: "T::Sig")
@@ -8,8 +11,7 @@ class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugi
     model_class_rbi = root.create_class(name: self.model_class_name)
     model_class_rbi.create_include(name: attribute_module_name)
 
-    columns_hash = @model_class.table_exists? ? @model_class.columns_hash : {}
-    columns_hash.each do |column_name, column_def|
+    columns_hash.sort.each do |column_name, column_def|
       if @model_class.defined_enums.has_key?(column_name)
         # enum attribute is treated differently
         assignable_type = "T.any(Integer, String, Symbol)"
@@ -24,7 +26,7 @@ class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugi
           parameters: [
             Parameter.new(name: "value", type: assignable_type)
           ],
-          return_type: "String",
+          return_type: nil,
         )
       else
         column_type = type_for_column_def(column_def)

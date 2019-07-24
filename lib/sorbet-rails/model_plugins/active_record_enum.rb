@@ -13,7 +13,7 @@ class SorbetRails::ModelPlugins::ActiveRecordEnum < SorbetRails::ModelPlugins::B
     model_relation_shared_rbi = root.create_module(name: self.model_relation_shared_module_name)
 
     # TODO: add any method for signature verification?
-    model_class.defined_enums.each do |enum_name, enum_hash|
+    model_class.defined_enums.sort.each do |enum_name, enum_hash|
       model_class_rbi.create_method(
         name: enum_name.pluralize,
         return_type: "T::Hash[T.any(String, Symbol), Integer]",
@@ -28,19 +28,9 @@ class SorbetRails::ModelPlugins::ActiveRecordEnum < SorbetRails::ModelPlugins::B
           name: "#{enum_val}!",
           return_type: nil, # void
         )
-        model_relation_shared_rbi.create_method(
-          name: enum_val,
-          parameters: [
-            Parameter.new(name: "*args", type: "T.untyped")
-          ],
-          return_type: self.model_relation_class_name,
-        )
         # force generating these methods because sorbet's hidden-definitions generate & override them
         model_class_rbi.create_method(
           name: "#{enum_val}",
-          parameters: [
-            Parameter.new(name: "*args", type: "T.untyped")
-          ],
           return_type: self.model_relation_class_name,
           class_method: true,
         )
