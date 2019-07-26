@@ -1,3 +1,4 @@
+require("sorbet-rails/application_rbi_formatter")
 require("sorbet-rails/model_rbi_formatter")
 require("sorbet-rails/routes_rbi_formatter")
 require("sorbet-rails/helper_rbi_formatter")
@@ -8,6 +9,15 @@ require("sorbet-rails/utils")
 @@sorbet_rails_rake_dir = File.dirname(__FILE__)
 
 namespace :rails_rbi do
+
+  desc "Generate rbis for rails application"
+  task application: :environment do |t, args|
+    rails_application_class_name = Rails.application.class.name
+    formatter = ApplicationRbiFormatter.new(rails_application_class_name)
+    file_path = Rails.root.join("sorbet", "rails-rbi", "application.rbi")
+    FileUtils.mkdir_p(File.dirname(file_path))
+    File.write(file_path, formatter.generate_rbi)
+  end
 
   desc "Generate rbis for rails routes"
   task :routes, [:root_dir] => :environment do |t, args|

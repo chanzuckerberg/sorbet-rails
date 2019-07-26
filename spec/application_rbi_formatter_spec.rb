@@ -3,7 +3,7 @@ require 'sorbet-rails/application_rbi_formatter'
 
 RSpec.describe ApplicationRbiFormatter do
   it 'returns the expected rbi for an application' do
-    formatter = ApplicationRbiFormatter.new('Hogwarts::Application')
+    formatter = ApplicationRbiFormatter.new(Rails.application.class.name)
     expect_match_file(
       formatter.generate_rbi,
       'expected_application.rbi'
