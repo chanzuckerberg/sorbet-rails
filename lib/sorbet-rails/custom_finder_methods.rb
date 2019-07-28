@@ -1,3 +1,4 @@
+# typed: false
 module SorbetRails
   module CustomFinderMethods
     def find_n(*ids)

@@ -1,3 +1,4 @@
+# typed: true
 require('parlour')
 require('sorbet-rails/model_utils')
 module SorbetRails::ModelPlugins

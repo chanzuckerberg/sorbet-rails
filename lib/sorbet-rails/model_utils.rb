@@ -1,3 +1,4 @@
+# typed: true
 module SorbetRails::ModelUtils
   MODEL_CLASS_MODULE_SUFFIX = "ClassMethods"
   MODEL_INSTANCE_MODULE_SUFFIX = "InstanceMethods"

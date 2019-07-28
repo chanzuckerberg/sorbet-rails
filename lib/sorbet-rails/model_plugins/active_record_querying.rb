@@ -1,3 +1,4 @@
+# typed: true
 require ('sorbet-rails/model_plugins/base')
 class SorbetRails::ModelPlugins::ActiveRecordQuerying < SorbetRails::ModelPlugins::Base
   def generate(root)

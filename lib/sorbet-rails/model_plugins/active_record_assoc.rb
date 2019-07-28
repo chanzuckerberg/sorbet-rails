@@ -1,3 +1,4 @@
+# typed: true
 require ('sorbet-rails/model_plugins/base')
 class SorbetRails::ModelPlugins::ActiveRecordAssoc < SorbetRails::ModelPlugins::Base
   def initialize(model_class, available_classes)
