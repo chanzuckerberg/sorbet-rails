@@ -1,3 +1,4 @@
+# typed: false
 require ('sorbet-rails/model_plugins/base')
 class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugins::Base
   def generate(root)

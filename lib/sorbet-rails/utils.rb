@@ -1,3 +1,4 @@
+# typed: false
 
 module SorbetRails::Utils
   def self.rails_eager_load_all!

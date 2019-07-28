@@ -1,3 +1,4 @@
+# typed: strict
 require "rails"
 require "sorbet-rails/custom_finder_methods"
 
