@@ -5,11 +5,11 @@ class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugi
     return unless columns_hash.size > 0
 
     attribute_module_name = self.model_module_name("GeneratedAttributeMethods")
-    attribute_module_rbi = root.create_module(name: attribute_module_name)
-    attribute_module_rbi.create_extend(name: "T::Sig")
+    attribute_module_rbi = root.create_module(attribute_module_name)
+    attribute_module_rbi.create_extend("T::Sig")
 
-    model_class_rbi = root.create_class(name: self.model_class_name)
-    model_class_rbi.create_include(name: attribute_module_name)
+    model_class_rbi = root.create_class(self.model_class_name)
+    model_class_rbi.create_include(attribute_module_name)
 
     columns_hash.sort.each do |column_name, column_def|
       if @model_class.defined_enums.has_key?(column_name)
@@ -18,33 +18,33 @@ class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugi
         assignable_type = "T.nilable(#{assignable_type})" if column_def.null
 
         attribute_module_rbi.create_method(
-          name: column_name.to_s,
+          column_name.to_s,
           return_type: "String",
         )
         attribute_module_rbi.create_method(
-          name: "#{column_name}=",
+          "#{column_name}=",
           parameters: [
-            Parameter.new(name: "value", type: assignable_type)
+            Parameter.new("value", type: assignable_type)
           ],
           return_type: nil,
         )
       else
         column_type = type_for_column_def(column_def)
         attribute_module_rbi.create_method(
-          name: column_name.to_s,
+          column_name.to_s,
           return_type: column_type.to_s,
         )
         attribute_module_rbi.create_method(
-          name: "#{column_name}=",
+          "#{column_name}=",
           parameters: [
-            Parameter.new(name: "value", type: column_type.to_s)
+            Parameter.new("value", type: column_type.to_s)
           ],
           return_type: nil,
         )
       end
 
       attribute_module_rbi.create_method(
-        name: "#{column_name}?",
+        "#{column_name}?",
         return_type: "T::Boolean",
       )
     end

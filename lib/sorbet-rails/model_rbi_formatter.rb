@@ -67,38 +67,38 @@ class ModelRbiFormatter
     # This is the backbone of the model_rbi_formatter.
     # It could live in a base plugin but I consider it not replacable and better to leave here
     model_relation_rbi = root.create_class(
-      name: self.model_relation_class_name,
+      self.model_relation_class_name,
       superclass: "ActiveRecord::Relation",
     )
-    model_relation_rbi.create_include(name: self.model_relation_shared_module_name)
-    model_relation_rbi.create_extend(name: "T::Sig")
-    model_relation_rbi.create_extend(name: "T::Generic")
+    model_relation_rbi.create_include(self.model_relation_shared_module_name)
+    model_relation_rbi.create_extend("T::Sig")
+    model_relation_rbi.create_extend("T::Generic")
     model_relation_rbi.create_constant(
-      name: "Elem",
+      "Elem",
       value: "type_member(fixed: #{model_class_name})",
     )
 
     collection_proxy_rbi = root.create_class(
-      name: self.model_assoc_proxy_class_name,
+      self.model_assoc_proxy_class_name,
       superclass: "ActiveRecord::Associations::CollectionProxy",
     )
-    collection_proxy_rbi.create_include(name: self.model_relation_shared_module_name)
-    collection_proxy_rbi.create_extend(name: "T::Sig")
-    collection_proxy_rbi.create_extend(name: "T::Generic")
+    collection_proxy_rbi.create_include(self.model_relation_shared_module_name)
+    collection_proxy_rbi.create_extend("T::Sig")
+    collection_proxy_rbi.create_extend("T::Generic")
     collection_proxy_rbi.create_constant(
-      name: "Elem",
+      "Elem",
       value: "type_member(fixed: #{self.model_class_name})",
     )
 
     model_rbi = root.create_class(
-      name: self.model_class_name,
+      self.model_class_name,
       superclass: @model_class.superclass.name,
     )
-    model_rbi.create_extend(name: "T::Sig")
-    model_rbi.create_extend(name: "T::Generic")
-    model_rbi.create_extend(name: self.model_relation_shared_module_name)
+    model_rbi.create_extend("T::Sig")
+    model_rbi.create_extend("T::Generic")
+    model_rbi.create_extend(self.model_relation_shared_module_name)
     model_rbi.create_constant(
-      name: "Elem",
+      "Elem",
       value: "type_template(fixed: #{self.model_class_name})",
     )
 
@@ -109,8 +109,8 @@ class ModelRbiFormatter
     # We need to define the module after the other classes
     # to work around Sorbet loading order bug
     # https://sorbet-ruby.slack.com/archives/CHN2L03NH/p1556065791047300
-    model_relation_shared_rbi = root.create_module(name: self.model_relation_shared_module_name)
-    model_relation_shared_rbi.create_extend(name: "T::Sig")
+    model_relation_shared_rbi = root.create_module(self.model_relation_shared_module_name)
+    model_relation_shared_rbi.create_extend("T::Sig")
   end
 
   def run_plugins(plugins, generator, allow_failure: true)
