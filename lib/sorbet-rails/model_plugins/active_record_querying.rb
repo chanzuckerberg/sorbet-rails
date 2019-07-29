@@ -1,4 +1,4 @@
-# typed: true
+# typed: strict
 require ('sorbet-rails/model_plugins/base')
 class SorbetRails::ModelPlugins::ActiveRecordQuerying < SorbetRails::ModelPlugins::Base
 

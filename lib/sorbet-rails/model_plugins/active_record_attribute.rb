@@ -1,4 +1,4 @@
-# typed: false
+# typed: strict
 require ('sorbet-rails/model_plugins/base')
 class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugins::Base
 
@@ -67,7 +67,7 @@ class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugi
     column_def.null ? "T.nilable(#{strict_type})" : strict_type
   end
 
-  sig { params(klass: BasicObject).returns(T.any(String, Class)) }
+  sig { params(klass: Object).returns(T.any(String, Class)) }
   def active_record_type_to_sorbet_type(klass)
     case klass
     when ActiveRecord::Type::Boolean
