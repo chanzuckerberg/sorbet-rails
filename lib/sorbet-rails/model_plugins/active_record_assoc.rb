@@ -9,11 +9,11 @@ class SorbetRails::ModelPlugins::ActiveRecordAssoc < SorbetRails::ModelPlugins::
     return unless @model_class.reflections.length > 0
 
     assoc_module_name = self.model_module_name("GeneratedAssociationMethods")
-    assoc_module_rbi = root.create_module(name: assoc_module_name)
-    assoc_module_rbi.create_extend(name: "T::Sig")
+    assoc_module_rbi = root.create_module(assoc_module_name)
+    assoc_module_rbi.create_extend("T::Sig")
 
-    model_class_rbi = root.create_class(name: self.model_class_name)
-    model_class_rbi.create_include(name: assoc_module_name)
+    model_class_rbi = root.create_class(self.model_class_name)
+    model_class_rbi.create_include(assoc_module_name)
 
     @model_class.reflections.sort.each do |assoc_name, reflection|
       reflection.collection? ?
@@ -36,13 +36,13 @@ class SorbetRails::ModelPlugins::ActiveRecordAssoc < SorbetRails::ModelPlugins::
     end
 
     assoc_module_rbi.create_method(
-      name: assoc_name.to_s,
+      assoc_name.to_s,
       return_type: assoc_type,
     )
     assoc_module_rbi.create_method(
-      name: "#{assoc_name}=",
+      "#{assoc_name}=",
       parameters: [
-        Parameter.new(name: "value", type: assoc_type)
+        Parameter.new("value", type: assoc_type)
       ],
       return_type: nil,
     )
@@ -56,13 +56,13 @@ class SorbetRails::ModelPlugins::ActiveRecordAssoc < SorbetRails::ModelPlugins::
       "#{assoc_class}::ActiveRecord_Associations_CollectionProxy"
 
     assoc_module_rbi.create_method(
-      name: assoc_name.to_s,
+      assoc_name.to_s,
       return_type: relation_class,
     )
     assoc_module_rbi.create_method(
-      name: "#{assoc_name}=",
+      "#{assoc_name}=",
       parameters: [
-        Parameter.new(name: "value", type: "T.any(T::Array[#{assoc_class}], #{relation_class})")
+        Parameter.new("value", type: "T.any(T::Array[#{assoc_class}], #{relation_class})")
       ],
       return_type: nil,
     )

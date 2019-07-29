@@ -3,15 +3,15 @@ class SorbetRails::ModelPlugins::ActiveRecordQuerying < SorbetRails::ModelPlugin
   def generate(root)
     # All is a named scope that most method from ActiveRecord::Querying delegate to
     # rails/activerecord/lib/active_record/querying.rb:21
-    ar_querying_rbi = root.create_module(name: self.model_relation_shared_module_name)
+    ar_querying_rbi = root.create_module(self.model_relation_shared_module_name)
     ar_querying_rbi.create_method(
-      name: "all",
+      "all",
       return_type: self.model_relation_class_name,
     )
     ar_querying_rbi.create_method(
-      name: "unscoped",
+      "unscoped",
       parameters: [
-        Parameter.new(name: "&block", type: "T.nilable(T.proc.void)"),
+        Parameter.new("&block", type: "T.nilable(T.proc.void)"),
       ],
       return_type: self.model_relation_class_name,
     )
@@ -27,10 +27,10 @@ class SorbetRails::ModelPlugins::ActiveRecordQuerying < SorbetRails::ModelPlugin
     ]
     model_query_relation_methods.each do |method_name|
       ar_querying_rbi.create_method(
-        name: method_name.to_s,
+        method_name.to_s,
         parameters: [
-          Parameter.new(name: "*args", type: "T.untyped"),
-          Parameter.new(name: "&block", type: "T.nilable(T.proc.void)"),
+          Parameter.new("*args", type: "T.untyped"),
+          Parameter.new("&block", type: "T.nilable(T.proc.void)"),
         ],
         return_type: self.model_relation_class_name,
       ) if exists_class_method?(method_name)
