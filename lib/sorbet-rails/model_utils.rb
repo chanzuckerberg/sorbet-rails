@@ -5,10 +5,7 @@ module SorbetRails::ModelUtils
 
   abstract!
 
-  MODEL_CLASS_MODULE_SUFFIX = "ClassMethods"
-  MODEL_INSTANCE_MODULE_SUFFIX = "InstanceMethods"
-
-  sig { abstract.returns(Class) }
+  sig { abstract.returns(T.class_of(ActiveRecord::Base)) }
   def model_class; end
 
   sig { returns(String) }
