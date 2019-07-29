@@ -6,6 +6,7 @@ class SorbetRails::ModelPlugins::ActiveRecordAssoc < SorbetRails::ModelPlugins::
     @columns_hash = @model_class.table_exists? ? @model_class.columns_hash : {}
   end
 
+  sig { implementation.params(root: Parlour::RbiGenerator::Namespace).void }
   def generate(root)
     return unless @model_class.reflections.length > 0
 

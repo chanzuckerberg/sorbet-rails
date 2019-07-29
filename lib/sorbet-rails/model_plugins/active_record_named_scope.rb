@@ -1,6 +1,8 @@
 # typed: true
 require ('sorbet-rails/model_plugins/base')
 class SorbetRails::ModelPlugins::ActiveRecordNamedScope < SorbetRails::ModelPlugins::Base
+
+  sig { implementation.params(root: Parlour::RbiGenerator::Namespace).void }
   def generate(root)
     ar_named_scope_rbi = root.create_module(self.model_relation_shared_module_name)
     @model_class.methods.sort.each do |method_name|
