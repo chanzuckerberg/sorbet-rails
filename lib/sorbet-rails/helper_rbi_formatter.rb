@@ -1,13 +1,13 @@
-# typed: true
+# typed: strict
 require 'parlour'
-
 class HelperRbiFormatter
   extend T::Sig
-  # @param [Array<String>] helpers
+  # @param [Array<Module>] helpers
   # @return [void]
+  sig { params(helpers: T::Array[Module]).void }
   def initialize(helpers)
-    @parlour = Parlour::RbiGenerator.new
-    @helpers = helpers
+    @parlour = T.let(Parlour::RbiGenerator.new, Parlour::RbiGenerator)
+    @helpers = T.let(helpers, T::Array[Module])
   end
 
   # Generates RBI file's contents.
