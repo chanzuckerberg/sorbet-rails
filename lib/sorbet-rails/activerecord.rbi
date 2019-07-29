@@ -1,6 +1,6 @@
 # typed: strong
 
-class ActiveRecord::Base
+class ActiveRecord::Base < Object
   extend T::Sig
 
   sig { returns(T::Boolean) }
@@ -17,4 +17,7 @@ class ActiveRecord::Base
 
   sig { returns(T.untyped) }
   def self.connection; end
+
+  sig { returns(T::Boolean) }
+  def self.abstract_class?; end
 end
