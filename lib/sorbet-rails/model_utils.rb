@@ -1,4 +1,4 @@
-# typed: true
+# typed: strict
 module SorbetRails::ModelUtils
   extend T::Sig
   extend T::Helpers
