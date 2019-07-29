@@ -2,6 +2,7 @@
 require 'parlour'
 
 class HelperRbiFormatter
+  extend T::Sig
   # @param [Array<String>] helpers
   # @return [void]
   def initialize(helpers)
@@ -11,6 +12,7 @@ class HelperRbiFormatter
 
   # Generates RBI file's contents.
   # @return [String]
+  sig {returns(String)}
   def generate_rbi
     puts "-- Generate sigs for helpers --"
 
