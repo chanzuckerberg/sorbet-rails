@@ -1,6 +1,7 @@
 # typed: true
 require ('sorbet-rails/model_plugins/base')
 class SorbetRails::ModelPlugins::ActiveRecordAssoc < SorbetRails::ModelPlugins::Base
+  sig {params(model_class: T.class_of(ActiveRecord::Base), available_classes: T::Set[String]).void}
   def initialize(model_class, available_classes)
     super
     @columns_hash = @model_class.table_exists? ? @model_class.columns_hash : {}

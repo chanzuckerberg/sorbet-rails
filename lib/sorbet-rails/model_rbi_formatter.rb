@@ -7,6 +7,7 @@ require('sorbet-rails/model_plugins/active_record_named_scope')
 require('sorbet-rails/model_plugins/active_record_attribute')
 require('sorbet-rails/model_plugins/active_record_assoc')
 class ModelRbiFormatter
+  extend T::Sig
   include SorbetRails::ModelUtils
 
   attr_reader :model_class
@@ -24,6 +25,7 @@ class ModelRbiFormatter
     end
   end
 
+  sig {returns(String)}
   def generate_rbi
     puts "-- Generate sigs for #{@model_class.name} --"
 
