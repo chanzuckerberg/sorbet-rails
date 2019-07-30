@@ -15,4 +15,3 @@ module FooHelper
   include Kernel
   include ActionView::Helpers
 end
-
