@@ -8,6 +8,12 @@ require("sorbet-rails/utils")
 @@sorbet_rails_rake_dir = File.dirname(__FILE__)
 
 namespace :rails_rbi do
+  desc "Generate rbis for rails models, routes, and helpers."
+  task :all, :environment do |t, args|
+    Rake::Task['rails_rbi:routes'].invoke
+    Rake::Task['rails_rbi:models'].invoke
+    Rake::Task['rails_rbi:helpers'].invoke
+  end
 
   desc "Generate rbis for rails routes"
   task :routes, [:root_dir] => :environment do |t, args|
