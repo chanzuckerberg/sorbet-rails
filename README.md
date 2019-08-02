@@ -30,6 +30,9 @@ gem 'sorbet-rails'
 ❯ rake rails_rbi:routes
 ❯ rake rails_rbi:models
 ❯ rake rails_rbi:helpers
+
+# or run them all at once
+❯ rake rails_rbi:all
 ```
 
 4. Automatically upgrade each file's typecheck level:
