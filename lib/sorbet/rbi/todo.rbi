@@ -66,8 +66,31 @@ module SorbetRails::Utils::Zeitwerk::Loader; end
 module T::InterfaceWrapper::Helpers; end
 module T::InterfaceWrapper::Helpers; end
 module T::InterfaceWrapper::Helpers; end
-module T::InterfaceWrapper::Helpers; end
 module T::Private::Abstract::Hooks; end
 module T::Private::Abstract::Hooks; end
 module T::Private::Abstract::Hooks; end
-module T::Private::Abstract::Hooks; end
+module T::Private::Methods::MethodHooks; end
+module T::Private::Methods::MethodHooks; end
+module T::Private::Methods::MethodHooks; end
+module T::Private::Methods::MethodHooks; end
+module T::Private::Methods::MethodHooks; end
+module T::Private::Methods::MethodHooks; end
+module T::Private::Methods::MethodHooks; end
+module T::Private::Methods::MethodHooks; end
+module T::Private::Methods::MethodHooks; end
+module T::Private::Methods::MethodHooks; end
+module T::Private::Methods::MethodHooks; end
+module T::Private::Methods::SingletonMethodHooks; end
+module T::Private::Methods::SingletonMethodHooks; end
+module T::Private::Methods::SingletonMethodHooks; end
+module T::Private::Methods::SingletonMethodHooks; end
+module T::Private::Methods::SingletonMethodHooks; end
+module T::Private::Methods::SingletonMethodHooks; end
+module T::Private::Methods::SingletonMethodHooks; end
+module T::Private::Methods::SingletonMethodHooks; end
+module T::Private::Methods::SingletonMethodHooks; end
+module T::Private::Methods::SingletonMethodHooks; end
+module T::Private::Methods::SingletonMethodHooks; end
+class ActiveRecord::AttributeMethods::TimeZoneConversion::TimeZoneConverter;
+  def klass; end
+end

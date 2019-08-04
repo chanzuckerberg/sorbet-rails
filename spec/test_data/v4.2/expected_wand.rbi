@@ -69,10 +69,10 @@ module Wand::GeneratedAttributeMethods
   sig { returns(T::Boolean) }
   def core_type?; end
 
-  sig { returns(T.nilable(T.untyped)) }
+  sig { returns(T.nilable(Time)) }
   def created_at; end
 
-  sig { params(value: T.nilable(T.untyped)).void }
+  sig { params(value: T.nilable(Time)).void }
   def created_at=(value); end
 
   sig { returns(T::Boolean) }
@@ -114,10 +114,10 @@ module Wand::GeneratedAttributeMethods
   sig { returns(T::Boolean) }
   def reflectance?; end
 
-  sig { returns(T.nilable(T.untyped)) }
+  sig { returns(T.nilable(Time)) }
   def updated_at; end
 
-  sig { params(value: T.nilable(T.untyped)).void }
+  sig { params(value: T.nilable(Time)).void }
   def updated_at=(value); end
 
   sig { returns(T::Boolean) }

@@ -2,7 +2,7 @@ PATH
   remote: ../../..
   specs:
     sorbet-rails (0.4.0)
-      parlour (~> 0.5)
+      parlour (~> 0.6.0)
 
 GEM
   remote: https://rubygems.org/
@@ -67,7 +67,7 @@ GEM
     minitest (5.11.3)
     nokogiri (1.10.3)
       mini_portile2 (~> 2.4.0)
-    parlour (0.5.1)
+    parlour (0.6.1)
       rainbow (~> 3.0.0)
       sorbet-runtime
     rack (1.6.11)
