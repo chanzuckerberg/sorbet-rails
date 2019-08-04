@@ -67,15 +67,23 @@ class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugi
     column_def.null ? "T.nilable(#{strict_type})" : strict_type
   end
 
-  sig { params(klass: Object).returns(T.any(String, Class)) }
+  sig {
+    params(
+      # in v4.2, datetime can be TimeZoneConverter
+      klass: T.any(Object, ActiveRecord::AttributeMethods::TimeZoneConversion::TimeZoneConverter)
+    ).
+    returns(T.any(String, Class))
+  }
   def active_record_type_to_sorbet_type(klass)
     case klass
     when ActiveRecord::Type::Boolean
-     "T::Boolean"
+      "T::Boolean"
     when ActiveRecord::Type::DateTime
       DateTime
     when ActiveRecord::Type::Date
       Date
+    when ActiveRecord::AttributeMethods::TimeZoneConversion::TimeZoneConverter
+      klass.klass
     when ActiveRecord::Type::Decimal
       BigDecimal
     when ActiveRecord::Type::Float
