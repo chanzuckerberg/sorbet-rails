@@ -59,7 +59,7 @@ RSpec.describe 'sorbet' do
 
   it 'returns expected sorbet tc result' do
     stdout, stderr, status = Open3.capture3(
-      'bundle', 'exec', 'srb', 'tc',
+      'bundle', 'exec', 'srb', 'tc', '--typed=true',
       chdir: Rails.root.to_path,
     )
     expect(stdout).to eql('')

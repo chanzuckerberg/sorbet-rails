@@ -1,0 +1,1 @@
+../../rails_shared/lib/mythical_rbi_plugin.rb
