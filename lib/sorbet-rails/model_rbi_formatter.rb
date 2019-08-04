@@ -1,3 +1,4 @@
+# typed: strict
 require('parlour')
 require('sorbet-rails/model_utils')
 require('sorbet-rails/model_plugins/active_record_enum')
@@ -6,15 +7,25 @@ require('sorbet-rails/model_plugins/active_record_named_scope')
 require('sorbet-rails/model_plugins/active_record_attribute')
 require('sorbet-rails/model_plugins/active_record_assoc')
 class ModelRbiFormatter
+  extend T::Sig
   include SorbetRails::ModelUtils
 
+  sig { implementation.returns(T.class_of(ActiveRecord::Base)) }
   attr_reader :model_class
+
+  sig { returns(T::Set[String]) }
   attr_reader :available_classes
 
+  sig {
+    params(
+      model_class: T.class_of(ActiveRecord::Base),
+      available_classes: T::Set[String],
+    ).
+    void
+  }
   def initialize(model_class, available_classes)
-    @model_class = model_class
-    @available_classes = available_classes
-    @columns_hash = model_class.table_exists? ? model_class.columns_hash : {}
+    @model_class = T.let(model_class, T.class_of(ActiveRecord::Base))
+    @available_classes = T.let(available_classes, T::Set[String])
     begin
       # Load all dynamic instance methods of this model by instantiating a fake model
       @model_class.new unless @model_class.abstract_class?
@@ -23,6 +34,7 @@ class ModelRbiFormatter
     end
   end
 
+  sig {returns(String)}
   def generate_rbi
     puts "-- Generate sigs for #{@model_class.name} --"
 
@@ -63,6 +75,7 @@ class ModelRbiFormatter
     MESSAGE
   end
 
+  sig { params(root: Parlour::RbiGenerator::Namespace).void }
   def generate_base_rbi(root)
     # This is the backbone of the model_rbi_formatter.
     # It could live in a base plugin but I consider it not replacable and better to leave here
@@ -92,7 +105,7 @@ class ModelRbiFormatter
 
     model_rbi = root.create_class(
       self.model_class_name,
-      superclass: @model_class.superclass.name,
+      superclass: T.must(@model_class.superclass).name,
     )
     model_rbi.create_extend("T::Sig")
     model_rbi.create_extend("T::Generic")
@@ -113,6 +126,14 @@ class ModelRbiFormatter
     model_relation_shared_rbi.create_extend("T::Sig")
   end
 
+  sig {
+    params(
+      plugins: T::Array[Parlour::Plugin],
+      generator: Parlour::RbiGenerator,
+      allow_failure: T::Boolean,
+    ).
+    void
+  }
   def run_plugins(plugins, generator, allow_failure: true)
     plugins.each do |plugin|
       begin

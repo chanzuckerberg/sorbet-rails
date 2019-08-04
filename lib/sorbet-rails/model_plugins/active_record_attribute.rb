@@ -1,5 +1,8 @@
+# typed: strict
 require ('sorbet-rails/model_plugins/base')
 class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugins::Base
+
+  sig { implementation.params(root: Parlour::RbiGenerator::Namespace).void }
   def generate(root)
     columns_hash = @model_class.table_exists? ? @model_class.columns_hash : {}
     return unless columns_hash.size > 0
@@ -50,6 +53,7 @@ class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugi
     end
   end
 
+  sig {params(column_def: T.untyped).returns(T.any(String, Class))}
   def type_for_column_def(column_def)
     cast_type = ActiveRecord::Base.connection.respond_to?(:lookup_cast_type_from_column) ?
       ActiveRecord::Base.connection.lookup_cast_type_from_column(column_def) :
@@ -63,14 +67,23 @@ class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugi
     column_def.null ? "T.nilable(#{strict_type})" : strict_type
   end
 
+  sig {
+    params(
+      # in v4.2, datetime can be TimeZoneConverter
+      klass: T.any(Object, ActiveRecord::AttributeMethods::TimeZoneConversion::TimeZoneConverter)
+    ).
+    returns(T.any(String, Class))
+  }
   def active_record_type_to_sorbet_type(klass)
     case klass
     when ActiveRecord::Type::Boolean
-     "T::Boolean"
+      "T::Boolean"
     when ActiveRecord::Type::DateTime
       DateTime
     when ActiveRecord::Type::Date
       Date
+    when ActiveRecord::AttributeMethods::TimeZoneConversion::TimeZoneConverter
+      klass.klass
     when ActiveRecord::Type::Decimal
       BigDecimal
     when ActiveRecord::Type::Float

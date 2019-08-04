@@ -1,5 +1,8 @@
+# typed: strict
 require ('sorbet-rails/model_plugins/base')
 class SorbetRails::ModelPlugins::ActiveRecordEnum < SorbetRails::ModelPlugins::Base
+
+  sig { implementation.params(root: Parlour::RbiGenerator::Namespace).void }
   def generate(root)
     return unless model_class.defined_enums.size > 0
 

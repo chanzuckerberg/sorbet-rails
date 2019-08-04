@@ -1,10 +1,13 @@
+# typed: true
 require ('sorbet-rails/model_plugins/base')
 class SorbetRails::ModelPlugins::ActiveRecordAssoc < SorbetRails::ModelPlugins::Base
+  sig {params(model_class: T.class_of(ActiveRecord::Base), available_classes: T::Set[String]).void}
   def initialize(model_class, available_classes)
     super
     @columns_hash = @model_class.table_exists? ? @model_class.columns_hash : {}
   end
 
+  sig { implementation.params(root: Parlour::RbiGenerator::Namespace).void }
   def generate(root)
     return unless @model_class.reflections.length > 0
 
@@ -68,15 +71,18 @@ class SorbetRails::ModelPlugins::ActiveRecordAssoc < SorbetRails::ModelPlugins::
     )
   end
 
+  sig { params(reflection: T.untyped).returns(T.nilable(T::Boolean)) }
   def assoc_should_be_untyped?(reflection)
     polymorphic_assoc?(reflection) || !@available_classes.include?(reflection.klass.name)
   end
 
+  sig { params(reflection: T.untyped).returns(T.nilable(T::Boolean)) }
   def relation_should_be_untyped?(reflection)
     # only type the relation we'll generate
     assoc_should_be_untyped?(reflection) || !@available_classes.include?(reflection.klass.name)
   end
 
+  sig { params(reflection: T.untyped).returns(T.nilable(T::Boolean)) }
   def polymorphic_assoc?(reflection)
     reflection.through_reflection ?
       polymorphic_assoc?(reflection.source_reflection) :

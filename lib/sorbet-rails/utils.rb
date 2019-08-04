@@ -1,5 +1,9 @@
+# typed: false
 
 module SorbetRails::Utils
+  extend T::Sig
+
+  sig { void }
   def self.rails_eager_load_all!
     # need to eager load to see all models
     Rails.configuration.eager_load_namespaces.each { |ns| ns.try(:eager_load!) }
