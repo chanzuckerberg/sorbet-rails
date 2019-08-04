@@ -1,0 +1,1 @@
+../../../rails_shared/config/initializers/sorbet_rails.rb

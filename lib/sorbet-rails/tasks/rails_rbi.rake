@@ -23,7 +23,7 @@ namespace :rails_rbi do
     root_dir = args[:root_dir] || Rails.root
     file_path = Rails.root.join("sorbet", "rails-rbi", "routes.rbi")
     FileUtils.mkdir_p(File.dirname(file_path))
-    File.write(file_path, inspector.format(RoutesRbiFormatter.new))
+    File.write(file_path, inspector.format(SorbetRails::RoutesRbiFormatter.new))
   end
 
   desc "Generate rbis for rails models. Pass models name to regenerate rbi for only the given models."
@@ -60,7 +60,7 @@ namespace :rails_rbi do
       helpers = ActionController::Base.modules_for_helpers([:all])
     end
 
-    formatter = HelperRbiFormatter.new(helpers)
+    formatter = SorbetRails::HelperRbiFormatter.new(helpers)
     file_path = Rails.root.join("sorbet", "rails-rbi", "helpers.rbi")
     FileUtils.mkdir_p(File.dirname(file_path))
     File.write(file_path, formatter.generate_rbi)
@@ -77,7 +77,7 @@ namespace :rails_rbi do
     available_class_names = Set.new(available_classes.map { |c| c.name })
     formatted = model_classes.map do |model_class|
       begin
-        formatter = ModelRbiFormatter.new(model_class, available_class_names)
+        formatter = SorbetRails::ModelRbiFormatter.new(model_class, available_class_names)
         [model_class.name, formatter.generate_rbi]
       rescue StandardError => ex
         puts "---"

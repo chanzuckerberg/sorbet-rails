@@ -1,13 +1,11 @@
 # typed: strict
 require('parlour')
 require('sorbet-rails/model_utils')
-require('sorbet-rails/model_plugins/active_record_enum')
-require('sorbet-rails/model_plugins/active_record_querying')
-require('sorbet-rails/model_plugins/active_record_named_scope')
-require('sorbet-rails/model_plugins/active_record_attribute')
-require('sorbet-rails/model_plugins/active_record_assoc')
-class ModelRbiFormatter
+require('sorbet-rails/model_plugins/plugins')
+
+class SorbetRails::ModelRbiFormatter
   extend T::Sig
+  extend SorbetRails::ModelPlugins
   include SorbetRails::ModelUtils
 
   sig { implementation.returns(T.class_of(ActiveRecord::Base)) }
@@ -38,17 +36,8 @@ class ModelRbiFormatter
   def generate_rbi
     puts "-- Generate sigs for #{@model_class.name} --"
 
-    # TODO: make this customizable
-    plugins = [
-      SorbetRails::ModelPlugins::ActiveRecordEnum,
-      SorbetRails::ModelPlugins::ActiveRecordNamedScope,
-      SorbetRails::ModelPlugins::ActiveRecordQuerying,
-      SorbetRails::ModelPlugins::ActiveRecordAttribute,
-      SorbetRails::ModelPlugins::ActiveRecordAssoc,
-    ]
-
     # Collect the instances of each plugin into an array
-    plugin_instances = plugins.map do |plugin_klass|
+    plugin_instances = self.class.get_plugins.map do |plugin_klass|
       plugin_klass.new(model_class, available_classes)
     end
 
@@ -141,7 +130,7 @@ class ModelRbiFormatter
         plugin.generate(generator.root)
       rescue Exception => e
         raise e unless allow_failure
-        puts "!!! This plugin threw an exception: #{e}"
+        puts "!!! Plugin #{plugin.class.name} threw an exception: #{e}"
       end
     end
   end
