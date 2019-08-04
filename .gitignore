@@ -84,7 +84,6 @@ build-iPhoneSimulator/
 /spec/support/**/sorbet/rbi/hidden-definitions/**/*
 
 # Ignore sorbet files in v5.2-no-sorbet
-/spec/support/v5.2-no-sorbet/sorbet_test_cases.rb
 /spec/support/v5.2-no-sorbet/sorbet/*
 /spec/support/v5.2-no-sorbet/sorbet/**/*
 

@@ -29,12 +29,6 @@ RSpec.describe 'sorbet' do
         {'SRB_YES' => '1'}, 'bundle', 'exec', 'srb', 'init',
         chdir: Rails.root.to_path,
       )
-      # copy test case over after initializing otherwise it'll override the `typed:` indicator
-      res = FileUtils.symlink(
-        Rails.root.join('..', 'rails_shared', 'sorbet_test_cases.rb'),
-        Rails.root.to_path,
-        force: true,
-      )
     end
 
     # run sorbet-rails rake tasks
@@ -51,15 +45,9 @@ RSpec.describe 'sorbet' do
     puts stderr, status
   end
 
-  after(:all) do
-    if ENV['TEST_SRB_INIT']
-      FileUtils.safe_unlink(Rails.root.join('sorbet_test_cases.rb'))
-    end
-  end
-
   it 'returns expected sorbet tc result' do
     stdout, stderr, status = Open3.capture3(
-      'bundle', 'exec', 'srb', 'tc', '--typed=true',
+      'bundle', 'exec', 'srb', 'tc', '--typed-override=typed-override.yaml',
       chdir: Rails.root.to_path,
     )
     expect(stdout).to eql('')
