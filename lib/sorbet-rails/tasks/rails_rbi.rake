@@ -5,7 +5,7 @@ require("sorbet-rails/utils")
 
 # this is ugly but it's a way to get the current directory of this script
 # maybe someone coming along will know a better way
-RAKE_DIR  = File.dirname(__FILE__)
+RAILS_RBI_RAKE_DIR  = File.dirname(__FILE__)
 
 namespace :rails_rbi do
   desc "Generate rbis for rails models, routes, and helpers."
