@@ -35,11 +35,12 @@ gem 'sorbet-rails'
 ❯ rake rails_rbi:all
 ```
 
-4. Automatically upgrade each file's typecheck level:
+4. Update hidden-definition files and automatically upgrade each file's typecheck level:
 ```sh
+> srb rbi hidden-definitions
 ❯ srb rbi suggest-typed
 ```
-Because we've generated RBI files for routes, models, and helpers, a lot more files should be typecheckable now.
+Because we've generated RBI files for routes, models, and helpers, a lot more files should be typecheckable now. Many methods in `hidden.rbi` may be removed because they are now typed.
 
 ## RBI Files
 
@@ -77,6 +78,35 @@ This Rake task generates a `helpers.rbi` file that includes a basic module defin
 ```sh
 ❯ rake rails_rbi:helpers
 ```
+
+## Extending Model Generation Task with Custom Plugins
+
+It is common in Rails app to define concerns that add extra functionalities to a model. Many gems also add methods to the models. `sorbet-rails` support a customizable plugin system that can be used to add additional RBI generation logic. You can define custom plugins that generate signature for methods provided by gems or by private modules.
+
+### Defining a Custom `ModelPlugin` 
+
+A custom plugin should be a subclass of `SorbetRails::ModelPlugins::Base`. Each plugin would implement a `generate(root)` method that should add additional generation logic for the class.
+```
+# -- lib/my_custom_plugin.rb
+class MyCustomPlugin < SorbetRails::ModelPlugins::Base
+  def generate(root)
+    # TODO: implement the generation logic
+  end
+end
+```
+
+TODO: add documentation about Parlour.
+TODO: add documentation about methods in model_utils
+TODO: add guidance how write generation logic
+TODO: add comment about ActiveRecord::Concerns
+
+### Registering new plugins
+You can register your plugins in an initializer:
+```
+# -- config/initializers/sorbet_rails.rb
+SorbetRails::ModelRbiFormatter.register_plugin(MyCustomPlugin)
+```
+Checkout the default plugins and other customizations [here](https://github.com/chanzuckerberg/sorbet-rails/blob/master/lib/sorbet-rails/model_plugins/plugins.rb). `sorbet-rails` includes a plugins that generate methods for ActiveRecord associations, enums, etc. by default. 
 
 ## Tips & Tricks
 
