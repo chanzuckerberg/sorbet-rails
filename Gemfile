@@ -48,6 +48,4 @@ else
   # prefer to test against latest version because sorbet is updated frequently
   gem 'sorbet'
   gem 'sorbet-runtime'
-  gem 'dalli' # Needed by sorbet.
-  gem 'redis' # Needed by sorbet.
 end
