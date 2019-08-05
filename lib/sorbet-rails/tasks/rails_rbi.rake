@@ -63,7 +63,7 @@ namespace :rails_rbi do
   end
 
   def copy_bundled_rbi
-    sorbet_rails_rake_dir = "#{Dir.pwd}/lib/sorbet-rails/tasks"
+    sorbet_rails_rake_dir = "#{Gem::Specification.find_by_name("sorbet-rails").gem_dir}/lib/sorbet-rails/tasks"
     bundled_rbi_path = File.join(sorbet_rails_rake_dir, "..", "rbi", ".")
     copy_to_path = Rails.root.join("sorbet", "rails-rbi")
     FileUtils.mkdir_p(File.dirname(copy_to_path))
