@@ -1,4 +1,7 @@
 # typed: strong
 module SorbetRails
-  require 'sorbet-rails/railtie' if defined?(Rails)
+  if defined?(Rails)
+    require 'sorbet-rails/railtie'
+    require 'sorbet-rails/model_rbi_formatter'
+  end
 end

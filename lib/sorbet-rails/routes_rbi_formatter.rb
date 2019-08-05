@@ -1,5 +1,5 @@
 # typed: strict
-class RoutesRbiFormatter
+class SorbetRails::RoutesRbiFormatter
   extend T::Sig
 
   sig { void }

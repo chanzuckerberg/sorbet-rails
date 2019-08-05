@@ -189,6 +189,9 @@ class Wand < ApplicationRecord
 
   sig { returns(Wand::ActiveRecord_Relation) }
   def self.basilisk_horn; end
+
+  sig { returns(T::Array[Wand]) }
+  def self.mythicals; end
 end
 
 module Wand::ModelRelationShared

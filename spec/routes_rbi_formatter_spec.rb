@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'sorbet-rails/routes_rbi_formatter'
 
-RSpec.describe RoutesRbiFormatter do
+RSpec.describe SorbetRails::RoutesRbiFormatter do
   it 'sets up Rails Application' do
     expect(Rails.application.routes).to_not be_empty
   end
@@ -10,7 +10,7 @@ RSpec.describe RoutesRbiFormatter do
     all_routes = Rails.application.routes.routes
     require "action_dispatch/routing/inspector"
     inspector = ActionDispatch::Routing::RoutesInspector.new(all_routes)
-    formatted = inspector.format(RoutesRbiFormatter.new)
+    formatted = inspector.format(SorbetRails::RoutesRbiFormatter.new)
     expect_match_file(formatted, 'expected_routes.rbi')
   end
 
@@ -21,7 +21,7 @@ RSpec.describe RoutesRbiFormatter do
     end
     require "action_dispatch/routing/inspector"
     inspector = ActionDispatch::Routing::RoutesInspector.new(empty_set.routes)
-    formatted = inspector.format(RoutesRbiFormatter.new)
+    formatted = inspector.format(SorbetRails::RoutesRbiFormatter.new)
     expect_match_file(formatted, 'expected_no_routes.rbi')
   end
 end

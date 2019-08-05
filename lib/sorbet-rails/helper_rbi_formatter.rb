@@ -1,6 +1,6 @@
 # typed: strict
 require 'parlour'
-class HelperRbiFormatter
+class SorbetRails::HelperRbiFormatter
   extend T::Sig
   # @param [Array<Module>] helpers
   # @return [void]

@@ -1,4 +1,5 @@
 class Wand < ApplicationRecord
+  include Mythical
 
   enum core_type: {
     phoenix_feather: 0,

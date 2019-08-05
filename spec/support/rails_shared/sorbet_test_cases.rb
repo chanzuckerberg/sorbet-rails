@@ -1,4 +1,4 @@
-# typed: true
+# typed: false
 require 'sorbet-runtime'
 
 wizard = Wizard.first!
@@ -118,3 +118,6 @@ T.assert_type!(wizard.house, String)
 # Model enum
 T.assert_type!(wizard.Gryffindor?, T::Boolean)
 T.assert_type!(Wizard.houses, T::Hash[T.any(String, Symbol), Integer])
+
+# Mythical plugin
+T.assert_type!(Wand.mythicals, T::Array[Wand])
