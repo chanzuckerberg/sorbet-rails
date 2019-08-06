@@ -5,7 +5,7 @@ require("sorbet-rails/utils")
 
 # this is ugly but it's a way to get the current directory of this script
 # maybe someone coming along will know a better way
-RAKE_DIR  = File.dirname(__FILE__)
+RAILS_RBI_RAKE_DIR  = File.dirname(__FILE__)
 
 namespace :rails_rbi do
   desc "Generate rbis for rails models, routes, and helpers."
@@ -67,7 +67,7 @@ namespace :rails_rbi do
   end
 
   def copy_bundled_rbi
-    bundled_rbi_path = File.join(RAKE_DIR, "..", "rbi", ".")
+    bundled_rbi_path = File.join(RAILS_RBI_RAKE_DIR, "..", "rbi", ".")
     copy_to_path = Rails.root.join("sorbet", "rails-rbi")
     FileUtils.mkdir_p(File.dirname(copy_to_path))
     FileUtils.cp_r(bundled_rbi_path, copy_to_path)
