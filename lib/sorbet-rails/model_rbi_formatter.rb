@@ -27,8 +27,8 @@ class SorbetRails::ModelRbiFormatter
     begin
       # Load all dynamic instance methods of this model by instantiating a fake model
       @model_class.new unless @model_class.abstract_class?
-    rescue StandardError
-      puts "Note: Unable to create new instance of #{model_class.name}"
+    rescue StandardError => err
+      puts "#{err.class}: Note: Unable to create new instance of #{model_class.name}"
     end
   end
 
