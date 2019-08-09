@@ -42,7 +42,7 @@ module Wizard::GeneratedAttributeMethods
   sig { returns(T::Boolean) }
   def created_at?; end
 
-  sig { returns(String) }
+  sig { returns(T.nilable(String)) }
   def house; end
 
   sig { params(value: T.nilable(T.any(Integer, String, Symbol))).void }
