@@ -7,7 +7,7 @@ class KaminariPlugin < SorbetRails::ModelPlugins::Base
     return unless @model_class.include?(Kaminari::ActiveRecordModelExtension)
 
     # Get the configured Kaminari page method name, or fall back to 'page' if necessary.
-    page_method = Kaminari.config.page_method_name || 'page'
+    page_method = T.unsafe(Kaminari).config.page_method_name || 'page'
 
     ar_querying_rbi = root.create_module(model_relation_shared_module_name)
     ar_querying_rbi.create_method(
