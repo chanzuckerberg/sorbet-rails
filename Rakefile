@@ -8,6 +8,15 @@ task :default => :spec
 namespace :update_spec do
   require 'fileutils'
 
+  desc "Generate Rails apps for all versions."
+  task :all do |t, args|
+    Rake::Task['update_spec:v6_0'].invoke
+    Rake::Task['update_spec:v5_2'].invoke
+    Rake::Task['update_spec:v5_1'].invoke
+    Rake::Task['update_spec:v5_0'].invoke
+    Rake::Task['update_spec:v4_2'].invoke
+  end
+
   desc "Delete the Rails 6 spec directory and regenerate it."
   task :v6_0 do |t, args|
     Bundler.with_clean_env do
@@ -16,8 +25,6 @@ namespace :update_spec do
       system("rails _6.0.0.rc2_ -v")
       system("RAILS_VERSION='6.0' rails _6.0.0.rc2_ new --template spec/generators/rails-template.rb spec/support/v6.0 --skip-javascript --skip-action-cable --skip-test --skip-sprockets --skip-spring --skip-bootsnap --skip-listen")
     end
-
-    puts "Done!"
   end
 
   desc "Delete the Rails 5.2 spec directory and regenerate it."
@@ -28,8 +35,6 @@ namespace :update_spec do
       system("rails _5.2.3_ -v")
       system("RAILS_VERSION='5.2' rails _5.2.3_ new --template spec/generators/rails-template.rb spec/support/v5.2 --skip-javascript --skip-action-cable --skip-test --skip-sprockets --skip-spring --skip-bootsnap --skip-listen")
     end
-
-    puts "Done!"
   end
 
   desc "Delete the Rails 5.1 spec directory and regenerate it."
@@ -40,8 +45,6 @@ namespace :update_spec do
       system("rails _5.1.7_ -v")
       system("RAILS_VERSION='5.1' rails _5.1.7_ new --template spec/generators/rails-template.rb spec/support/v5.1 --skip-javascript --skip-action-cable --skip-test --skip-sprockets --skip-spring --skip-listen")
     end
-
-    puts "Done!"
   end
 
   desc "Delete the Rails 5.0 spec directory and regenerate it."
@@ -52,8 +55,6 @@ namespace :update_spec do
       system("rails _5.0.7_ -v")
       system("RAILS_VERSION='5.0' rails _5.0.7_ new --template spec/generators/rails-template.rb spec/support/v5.0 --skip-javascript --skip-action-cable --skip-test --skip-sprockets --skip-spring --skip-listen")
     end
-
-    puts "Done!"
   end
 
   desc "Delete the Rails 4.2 spec directory and regenerate it."
@@ -64,7 +65,5 @@ namespace :update_spec do
       system("rails _4.2.11_ -v")
       system("RAILS_VERSION='4.2' rails _4.2.11_ new --template spec/generators/rails-template.rb spec/support/v4.2 --skip-javascript --skip-test --skip-sprockets --skip-spring --skip-listen")
     end
-
-    puts "Done!"
   end
 end

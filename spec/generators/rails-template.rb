@@ -192,7 +192,22 @@ def create_migrations
   RUBY
 end
 
+def add_sorbet_test_files
+  file "typed-override.yaml", <<~YAML
+    true:
+    - ./sorbet_test_cases.rb
+  YAML
+
+  copy_file "./sorbet_test_cases.rb", "sorbet_test_cases.rb"
+end
+
+# Get files relative to this template when copying.
+def source_paths
+  [__dir__]
+end
+
 # Main setup
+source_paths
 add_gems
 
 after_bundle do
@@ -203,10 +218,11 @@ after_bundle do
   create_helpers
   create_models
   create_migrations
+  add_sorbet_test_files
   rails_command "db:migrate"
   Bundler.with_clean_env do
     run "SRB_YES=true bundle exec srb init"
     run "bundle exec rake rails_rbi:all"
   end
-  say "Done."
+  say "Done!"
 end
