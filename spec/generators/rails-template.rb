@@ -235,6 +235,7 @@ after_bundle do
   create_migrations
   add_sorbet_test_files
   
+  # Rails 4.2 doesn't have the rails_command method.
   if ['4.2'].include?(ENV["RAILS_VERSION"])
     run "bundle exec rake db:migrate"
   else
