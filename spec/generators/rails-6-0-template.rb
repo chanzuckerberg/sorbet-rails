@@ -119,7 +119,7 @@ end
 
 def create_migrations
   file "db/migrate/20190620000001_create_wizards.rb", <<~'RUBY'
-    class CreateWizards < ActiveRecord::Migration["#{ENV['RAILS_VERSION']}" || "5.2"]
+    class CreateWizards < ActiveRecord::Migration["#{ENV['RAILS_VERSION'] || 5.2}"]
       def change
         create_table :wizards do |t|
           t.string :name
@@ -134,7 +134,7 @@ def create_migrations
   RUBY
 
   file "db/migrate/20190620000002_create_wands.rb", <<~'RUBY'
-    class CreateWands < ActiveRecord::Migration["#{ENV['RAILS_VERSION']}" || "5.2"]
+    class CreateWands < ActiveRecord::Migration["#{ENV['RAILS_VERSION'] || 5.2}"]
       def change
         create_table :wands do |t|
           t.references :wizard, unique: true, null: false
@@ -148,7 +148,7 @@ def create_migrations
   RUBY
 
   file "db/migrate/20190620000003_create_spell_books.rb", <<~'RUBY'
-    class CreateSpellBooks < ActiveRecord::Migration["#{ENV['RAILS_VERSION']}" || "5.2"]
+    class CreateSpellBooks < ActiveRecord::Migration["#{ENV['RAILS_VERSION'] || 5.2}"]
       def change
         create_table :spell_books do |t|
           t.string :name
@@ -159,7 +159,7 @@ def create_migrations
   RUBY
 
   file "db/migrate/20190620000004_add_more_column_types_to_wands.rb", <<~'RUBY'
-    class AddMoreColumnTypesToWands < ActiveRecord::Migration["#{ENV['RAILS_VERSION']}" || "5.2"]
+    class AddMoreColumnTypesToWands < ActiveRecord::Migration["#{ENV['RAILS_VERSION'] || 5.2}"]
       def change
         add_column :wands, :flexibility,    :float,   null: false, default: 0.5
         add_column :wands, :hardness,       :decimal, null: false, precision: 10, scale: 10, default: 5
@@ -190,6 +190,7 @@ after_bundle do
   create_helpers
   create_models
   create_migrations
+  rails_command "db:migrate"
   run "SRB_YES=true bundle exec srb init"
   run "bundle exec rake rails_rbi:all"
   say "Done."
