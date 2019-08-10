@@ -208,6 +208,21 @@ end
 
 # Main setup
 source_paths
+
+if ['4.2', '5.0'].include?(ENV["RAILS_VERSION"])
+  File.open('Gemfile', 'r+') do |f|   
+    out = ""
+    f.each do |line|
+      # We remove sdoc and web-console because they misbehave.
+      # sqlite needs to be limited to 1.3.x or it won't work.
+      out << line.gsub("gem 'sqlite3'", "gem 'sqlite3', '~> 1.3.6'") unless line =~ /gem \'(sdoc|web-console)\'.*/
+    end
+    f.pos = 0
+    f.print out
+    f.truncate(f.pos)
+  end
+end
+
 add_gems
 
 after_bundle do
@@ -219,7 +234,12 @@ after_bundle do
   create_models
   create_migrations
   add_sorbet_test_files
-  rails_command "db:migrate"
+  
+  if ['4.2'].include?(ENV["RAILS_VERSION"])
+    run "bundle exec rake db:migrate"
+  else
+    rails_command "db:migrate"
+  end
   if ENV["RUN_WITH_SORBET"] != 'false'
     Bundler.with_clean_env do
       run "SRB_YES=true bundle exec srb init"
