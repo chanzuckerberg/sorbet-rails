@@ -14,6 +14,7 @@ class SorbetRails::ModelPlugins::ActiveRecordFinderMethods < SorbetRails::ModelP
     create_finder_methods_for(model_assoc_proxy_class_rbi, class_method: false)
   end
 
+  sig { params(class_rbi: Parlour::RbiGenerator::ClassNamespace, class_method: T::Boolean).void }
   def create_finder_methods_for(class_rbi, class_method:)
     class_rbi.create_method(
       "find",
@@ -56,6 +57,14 @@ class SorbetRails::ModelPlugins::ActiveRecordFinderMethods < SorbetRails::ModelP
     end
   end
 
+  sig {
+    params(
+      class_rbi: Parlour::RbiGenerator::ClassNamespace,
+      method_name: String,
+      class_method: T::Boolean,
+    ).
+    void
+  }
   def create_finder_method_pair(class_rbi, method_name, class_method)
     class_rbi.create_method(
       method_name,
