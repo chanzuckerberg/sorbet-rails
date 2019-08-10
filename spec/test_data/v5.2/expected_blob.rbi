@@ -2,6 +2,11 @@
 # Please rerun rake rails_rbi:models[ActiveStorage::Blob] to regenerate.
 
 # typed: strong
+module ActiveStorage::Blob::ActiveRelation_WhereNot
+  sig { params(opts: T.untyped, rest: T.untyped).returns(T.self_type) }
+  def not(opts, *rest); end
+end
+
 module ActiveStorage::Blob::GeneratedAssociationMethods
   extend T::Sig
 
@@ -24,18 +29,21 @@ module ActiveStorage::Blob::GeneratedAssociationMethods
   def preview_image_blob=(value); end
 end
 
-class ActiveStorage::Blob::ActiveRecord_Relation < ActiveRecord::Relation
-  include ActiveStorage::Blob::ModelRelationShared
-  extend T::Sig
-  extend T::Generic
-  Elem = type_member(fixed: ActiveStorage::Blob)
-end
+module ActiveStorage::Blob::CustomFinderMethods
+  sig { params(limit: Integer).returns(T::Array[ActiveStorage::Blob]) }
+  def first_n(limit); end
 
-class ActiveStorage::Blob::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
-  include ActiveStorage::Blob::ModelRelationShared
-  extend T::Sig
-  extend T::Generic
-  Elem = type_member(fixed: ActiveStorage::Blob)
+  sig { params(limit: Integer).returns(T::Array[ActiveStorage::Blob]) }
+  def last_n(limit); end
+
+  sig { params(args: T::Array[T.any(Integer, String)]).returns(T::Array[ActiveStorage::Blob]) }
+  def find_n(*args); end
+
+  sig { params(id: Integer).returns(T.nilable(ActiveStorage::Blob)) }
+  def find_by_id(id); end
+
+  sig { params(id: Integer).returns(ActiveStorage::Blob) }
+  def find_by_id!(id); end
 end
 
 module ActiveStorage::Blob::ModelRelationShared
@@ -135,10 +143,243 @@ module ActiveStorage::Blob::ModelRelationShared
   def except(*args, &block); end
 end
 
+class ActiveStorage::Blob::ActiveRecord_Relation < ActiveRecord::Relation
+  include ActiveStorage::Blob::ActiveRelation_WhereNot
+  include SorbetRails::CustomFinderMethods
+  include ActiveStorage::Blob::CustomFinderMethods
+  include Enumerable
+  include ActiveStorage::Blob::ModelRelationShared
+  extend T::Sig
+  extend T::Generic
+  Elem = type_member(fixed: ActiveStorage::Blob)
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Blob) }
+  def find(*args); end
+
+  sig { params(args: T.untyped).returns(T.nilable(ActiveStorage::Blob)) }
+  def find_by(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Blob) }
+  def find_by!(*args); end
+
+  sig { returns(T.nilable(ActiveStorage::Blob)) }
+  def first; end
+
+  sig { returns(ActiveStorage::Blob) }
+  def first!; end
+
+  sig { returns(T.nilable(ActiveStorage::Blob)) }
+  def second; end
+
+  sig { returns(ActiveStorage::Blob) }
+  def second!; end
+
+  sig { returns(T.nilable(ActiveStorage::Blob)) }
+  def third; end
+
+  sig { returns(ActiveStorage::Blob) }
+  def third!; end
+
+  sig { returns(T.nilable(ActiveStorage::Blob)) }
+  def third_to_last; end
+
+  sig { returns(ActiveStorage::Blob) }
+  def third_to_last!; end
+
+  sig { returns(T.nilable(ActiveStorage::Blob)) }
+  def second_to_last; end
+
+  sig { returns(ActiveStorage::Blob) }
+  def second_to_last!; end
+
+  sig { returns(T.nilable(ActiveStorage::Blob)) }
+  def last; end
+
+  sig { returns(ActiveStorage::Blob) }
+  def last!; end
+
+  sig { params(conditions: T.untyped).returns(T::Boolean) }
+  def exists?(conditions = nil); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def any?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def many?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def none?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def one?(*args); end
+
+  sig { implementation.params(block: T.proc.params(e: ActiveStorage::Blob).void).void }
+  def each(&block); end
+
+  sig { params(level: T.nilable(Integer)).returns(T::Array[ActiveStorage::Blob]) }
+  def flatten(level); end
+
+  sig { returns(T::Array[ActiveStorage::Blob]) }
+  def to_a; end
+end
+
+class ActiveStorage::Blob::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
+  include ActiveStorage::Blob::ActiveRelation_WhereNot
+  include SorbetRails::CustomFinderMethods
+  include ActiveStorage::Blob::CustomFinderMethods
+  include Enumerable
+  include ActiveStorage::Blob::ModelRelationShared
+  extend T::Sig
+  extend T::Generic
+  Elem = type_member(fixed: ActiveStorage::Blob)
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Blob) }
+  def find(*args); end
+
+  sig { params(args: T.untyped).returns(T.nilable(ActiveStorage::Blob)) }
+  def find_by(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Blob) }
+  def find_by!(*args); end
+
+  sig { returns(T.nilable(ActiveStorage::Blob)) }
+  def first; end
+
+  sig { returns(ActiveStorage::Blob) }
+  def first!; end
+
+  sig { returns(T.nilable(ActiveStorage::Blob)) }
+  def second; end
+
+  sig { returns(ActiveStorage::Blob) }
+  def second!; end
+
+  sig { returns(T.nilable(ActiveStorage::Blob)) }
+  def third; end
+
+  sig { returns(ActiveStorage::Blob) }
+  def third!; end
+
+  sig { returns(T.nilable(ActiveStorage::Blob)) }
+  def third_to_last; end
+
+  sig { returns(ActiveStorage::Blob) }
+  def third_to_last!; end
+
+  sig { returns(T.nilable(ActiveStorage::Blob)) }
+  def second_to_last; end
+
+  sig { returns(ActiveStorage::Blob) }
+  def second_to_last!; end
+
+  sig { returns(T.nilable(ActiveStorage::Blob)) }
+  def last; end
+
+  sig { returns(ActiveStorage::Blob) }
+  def last!; end
+
+  sig { params(conditions: T.untyped).returns(T::Boolean) }
+  def exists?(conditions = nil); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def any?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def many?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def none?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def one?(*args); end
+
+  sig { implementation.params(block: T.proc.params(e: ActiveStorage::Blob).void).void }
+  def each(&block); end
+
+  sig { params(level: T.nilable(Integer)).returns(T::Array[ActiveStorage::Blob]) }
+  def flatten(level); end
+
+  sig { returns(T::Array[ActiveStorage::Blob]) }
+  def to_a; end
+
+  sig { params(records: T.any(ActiveStorage::Blob, T::Array[ActiveStorage::Blob])).returns(T.self_type) }
+  def <<(*records); end
+
+  sig { params(records: T.any(ActiveStorage::Blob, T::Array[ActiveStorage::Blob])).returns(T.self_type) }
+  def append(*records); end
+
+  sig { params(records: T.any(ActiveStorage::Blob, T::Array[ActiveStorage::Blob])).returns(T.self_type) }
+  def push(*records); end
+
+  sig { params(records: T.any(ActiveStorage::Blob, T::Array[ActiveStorage::Blob])).returns(T.self_type) }
+  def concat(*records); end
+end
+
 class ActiveStorage::Blob < ActiveRecord::Base
   include ActiveStorage::Blob::GeneratedAssociationMethods
+  extend SorbetRails::CustomFinderMethods
+  extend ActiveStorage::Blob::CustomFinderMethods
   extend T::Sig
   extend T::Generic
   extend ActiveStorage::Blob::ModelRelationShared
-  Elem = type_template(fixed: ActiveStorage::Blob)
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Blob) }
+  def self.find(*args); end
+
+  sig { params(args: T.untyped).returns(T.nilable(ActiveStorage::Blob)) }
+  def self.find_by(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Blob) }
+  def self.find_by!(*args); end
+
+  sig { returns(T.nilable(ActiveStorage::Blob)) }
+  def self.first; end
+
+  sig { returns(ActiveStorage::Blob) }
+  def self.first!; end
+
+  sig { returns(T.nilable(ActiveStorage::Blob)) }
+  def self.second; end
+
+  sig { returns(ActiveStorage::Blob) }
+  def self.second!; end
+
+  sig { returns(T.nilable(ActiveStorage::Blob)) }
+  def self.third; end
+
+  sig { returns(ActiveStorage::Blob) }
+  def self.third!; end
+
+  sig { returns(T.nilable(ActiveStorage::Blob)) }
+  def self.third_to_last; end
+
+  sig { returns(ActiveStorage::Blob) }
+  def self.third_to_last!; end
+
+  sig { returns(T.nilable(ActiveStorage::Blob)) }
+  def self.second_to_last; end
+
+  sig { returns(ActiveStorage::Blob) }
+  def self.second_to_last!; end
+
+  sig { returns(T.nilable(ActiveStorage::Blob)) }
+  def self.last; end
+
+  sig { returns(ActiveStorage::Blob) }
+  def self.last!; end
+
+  sig { params(conditions: T.untyped).returns(T::Boolean) }
+  def self.exists?(conditions = nil); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def self.any?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def self.many?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def self.none?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def self.one?(*args); end
 end

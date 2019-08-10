@@ -14,7 +14,6 @@ module ActiveRecord::AttributeMethods::BeforeTypeCast; end
 module ActiveRecord::AttributeMethods::PrimaryKey; end
 module ActiveRecord::AttributeMethods::Query; end
 module ActiveRecord::AttributeMethods::Read; end
-module ActiveRecord::AttributeMethods::TimeZoneConversion; end
 module ActiveRecord::AttributeMethods::Write; end
 module ActiveRecord::Attributes; end
 module ActiveRecord::AutosaveAssociation; end
@@ -39,6 +38,7 @@ module ActiveRecord::QueryCache::ClassMethods; end
 module ActiveRecord::Querying; end
 module ActiveRecord::ReadonlyAttributes; end
 module ActiveRecord::Reflection; end
+module ActiveRecord::Relation; end
 module ActiveRecord::Sanitization; end
 module ActiveRecord::SecureToken; end
 module ActiveRecord::Serialization; end
@@ -66,31 +66,8 @@ module SorbetRails::Utils::Zeitwerk::Loader; end
 module T::InterfaceWrapper::Helpers; end
 module T::InterfaceWrapper::Helpers; end
 module T::InterfaceWrapper::Helpers; end
+module T::InterfaceWrapper::Helpers; end
 module T::Private::Abstract::Hooks; end
 module T::Private::Abstract::Hooks; end
 module T::Private::Abstract::Hooks; end
-module T::Private::Methods::MethodHooks; end
-module T::Private::Methods::MethodHooks; end
-module T::Private::Methods::MethodHooks; end
-module T::Private::Methods::MethodHooks; end
-module T::Private::Methods::MethodHooks; end
-module T::Private::Methods::MethodHooks; end
-module T::Private::Methods::MethodHooks; end
-module T::Private::Methods::MethodHooks; end
-module T::Private::Methods::MethodHooks; end
-module T::Private::Methods::MethodHooks; end
-module T::Private::Methods::MethodHooks; end
-module T::Private::Methods::SingletonMethodHooks; end
-module T::Private::Methods::SingletonMethodHooks; end
-module T::Private::Methods::SingletonMethodHooks; end
-module T::Private::Methods::SingletonMethodHooks; end
-module T::Private::Methods::SingletonMethodHooks; end
-module T::Private::Methods::SingletonMethodHooks; end
-module T::Private::Methods::SingletonMethodHooks; end
-module T::Private::Methods::SingletonMethodHooks; end
-module T::Private::Methods::SingletonMethodHooks; end
-module T::Private::Methods::SingletonMethodHooks; end
-module T::Private::Methods::SingletonMethodHooks; end
-class ActiveRecord::AttributeMethods::TimeZoneConversion::TimeZoneConverter;
-  def klass; end
-end
+module T::Private::Abstract::Hooks; end
