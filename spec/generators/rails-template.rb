@@ -220,9 +220,11 @@ after_bundle do
   create_migrations
   add_sorbet_test_files
   rails_command "db:migrate"
-  Bundler.with_clean_env do
-    run "SRB_YES=true bundle exec srb init"
-    run "bundle exec rake rails_rbi:all"
+  if ENV["RUN_WITH_SORBET"] != 'false'
+    Bundler.with_clean_env do
+      run "SRB_YES=true bundle exec srb init"
+      run "bundle exec rake rails_rbi:all"
+    end
   end
   say "Done!"
 end
