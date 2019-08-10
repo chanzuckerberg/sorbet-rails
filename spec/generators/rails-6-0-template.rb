@@ -117,6 +117,68 @@ def create_models
   RUBY
 end
 
+def create_migrations
+  file "db/migrate/20190620000001_create_wizards.rb", <<~'RUBY'
+    class CreateWizards < ActiveRecord::Migration["#{ENV['RAILS_VERSION']}" || "5.2"]
+      def change
+        create_table :wizards do |t|
+          t.string :name
+          t.integer :house
+          t.string :parent_email
+          t.text :notes
+    
+          t.timestamps
+        end
+      end
+    end
+  RUBY
+
+  file "db/migrate/20190620000002_create_wands.rb", <<~'RUBY'
+    class CreateWands < ActiveRecord::Migration["#{ENV['RAILS_VERSION']}" || "5.2"]
+      def change
+        create_table :wands do |t|
+          t.references :wizard, unique: true, null: false
+          t.string :wood_type
+          t.integer :core_type
+    
+          t.timestamps
+        end
+      end
+    end
+  RUBY
+
+  file "db/migrate/20190620000003_create_spell_books.rb", <<~'RUBY'
+    class CreateSpellBooks < ActiveRecord::Migration["#{ENV['RAILS_VERSION']}" || "5.2"]
+      def change
+        create_table :spell_books do |t|
+          t.string :name
+          t.references :wizard
+        end
+      end
+    end
+  RUBY
+
+  file "db/migrate/20190620000004_add_more_column_types_to_wands.rb", <<~'RUBY'
+    class AddMoreColumnTypesToWands < ActiveRecord::Migration["#{ENV['RAILS_VERSION']}" || "5.2"]
+      def change
+        add_column :wands, :flexibility,    :float,   null: false, default: 0.5
+        add_column :wands, :hardness,       :decimal, null: false, precision: 10, scale: 10, default: 5
+        add_column :wands, :reflectance,    :decimal, null: false, precision: 10, scale: 0, default: 0.5
+        add_column :wands, :broken,         :boolean, null: false, default: false
+        add_column :wands, :chosen_at_date, :date
+        add_column :wands, :chosen_at_time, :time
+        if (
+          ENV['RAILS_VERSION'] != '5.1'
+          ENV['RAILS_VERSION'] != '5.0'
+        ) # JSON column type is only supported on 5.2 or higher
+          add_column :wands, :spell_history,  :json
+          add_column :wands, :maker_info,     :json,    null: false, default: '{}'
+        end
+      end
+    end
+  RUBY
+end
+
 # Main setup
 add_gems
 
@@ -127,6 +189,7 @@ after_bundle do
   create_lib
   create_helpers
   create_models
+  create_migrations
   run "SRB_YES=true bundle exec srb init"
   run "bundle exec rake rails_rbi:all"
   say "Done."
