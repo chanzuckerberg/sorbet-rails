@@ -5,6 +5,7 @@ require('sorbet-rails/model_plugins/active_record_querying')
 require('sorbet-rails/model_plugins/active_record_named_scope')
 require('sorbet-rails/model_plugins/active_record_attribute')
 require('sorbet-rails/model_plugins/active_record_assoc')
+require('sorbet-rails/model_plugins/custom_finder_methods')
 
 module SorbetRails::ModelPlugins
   extend T::Sig
@@ -16,6 +17,7 @@ module SorbetRails::ModelPlugins
       ActiveRecordQuerying,
       ActiveRecordAttribute,
       ActiveRecordAssoc,
+      CustomFinderMethods,
     ],
     T::Array[T.class_of(Base)]
   )

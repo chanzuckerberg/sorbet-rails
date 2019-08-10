@@ -105,27 +105,6 @@ class ActiveRecord::Associations::CollectionProxy < ActiveRecord::Relation
   # def last(limit = nil); end
 end
 
-module SorbetRails::CustomFinderMethods
-  extend T::Sig
-  extend T::Generic
-  Elem = type_member(fixed: ActiveRecord::Base)
-
-  # These are custom finder methods to provide strong type for secondary use case of first, last & find
-  # See sorbet_rails/custom_finder_methods
-  sig { params(limit: Integer).returns(T::Array[Elem]) }
-  def first_n(limit); end
-  sig { params(limit: Integer).returns(T::Array[Elem]) }
-  def last_n(limit); end
-  sig { params(args: T::Array[T.any(Integer, String)]).returns(T::Array[Elem]) }
-  def find_n(*args); end
-
-  # allow common cases of find_by
-  sig { params(id: Integer).returns(T.nilable(Elem)) }
-  def find_by_id(id); end
-  sig { params(id: Integer).returns(Elem) }
-  def find_by_id!(id); end
-end
-
 module ActiveRecord::QueryMethods
   # TODO: where.not is a special case that we replace it with a `where_not` method
   # `where` when not given parameters will return a `ActiveRecord::QueryMethods::WhereChain`
@@ -199,9 +178,4 @@ class ActiveRecord::Base
   def self.find_by(arg, *args); end
   sig { params(arg: T.untyped, args: T.untyped).returns(Elem) }
   def self.find_by!(arg, *args); end
-end
-
-class ApplicationRecord < ActiveRecord::Base
-  extend T::Generic
-  Elem = type_template(fixed: ApplicationRecord)
 end
