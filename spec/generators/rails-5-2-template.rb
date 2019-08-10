@@ -1,0 +1,199 @@
+# Generate a Rails 6.0 app.
+# rails new --template spec/generators/rails-5-2-template.rb spec/support/v5.2 --skip-javascript --skip-action-cable --skip-test --skip-sprockets --skip-spring --skip-bootsnap --skip-listen
+
+def add_gems
+  gem 'sorbet-rails', path: '../../../.'
+
+  sorbet_version = ENV["SORBET_VERSION"]
+  if sorbet_version
+    # mostly used to test against a stable version of Sorbet in Travis.
+    gem 'sorbet', sorbet_version
+    gem 'sorbet-runtime', sorbet_version
+  else
+    # prefer to test against latest version because sorbet is updated frequently
+    gem 'sorbet'
+    gem 'sorbet-runtime'
+  end
+end
+
+def add_routes
+  route "get 'test/index' => 'test#index'"
+end
+
+def create_initializers
+  initializer "sorbet_rails.rb", <<~RUBY
+    # typed: strict
+    require(Rails.root.join('lib/mythical_rbi_plugin'))
+    SorbetRails::ModelRbiFormatter.register_plugin(MythicalRbiPlugin)
+  RUBY
+end
+
+def create_lib
+  lib "mythical_rbi_plugin.rb", <<~'RUBY'
+    # typed: true
+    class MythicalRbiPlugin < SorbetRails::ModelPlugins::Base
+      def generate(root)
+        return unless @model_class.include?(Mythical)
+
+        model_class_rbi = root.create_class(self.model_class_name)
+
+        # ActiveSupport::Concern class method will be inserted to the class
+        # directly. We need to also put the sig in the model class rbi directly
+        model_class_rbi.create_method(
+          'mythicals',
+          class_method: true,
+          return_type: "T::Array[#{@model_class.name}]",
+        )
+      end
+    end
+  RUBY
+end
+
+def create_helpers
+  file "app/helpers/foo_helper.rb", <<~RUBY
+    module FooHelper
+    end
+  RUBY
+
+  file "app/helpers/bar_helper.rb", <<~RUBY
+    module BarHelper
+    end
+  RUBY
+
+  file "app/helpers/baz_helper.rb", <<~RUBY
+    module BazHelper
+    end
+  RUBY
+end
+
+def create_models
+  file "app/models/spell_book.rb", <<~RUBY
+    class SpellBook < ApplicationRecord
+      validates :name, length: { minimum: 5 }, presence: true
+      belongs_to :wizard
+    end
+  RUBY
+
+  file "app/models/potion.rb", <<~RUBY
+    # an abstract class that has no table
+    class Potion < ApplicationRecord
+      self.abstract_class = true
+    end
+  RUBY
+
+  file "app/models/wand.rb", <<~RUBY
+    class Wand < ApplicationRecord
+      include Mythical
+    
+      enum core_type: {
+        phoenix_feather: 0,
+        dragon_heartstring: 1,
+        unicorn_tail_hair: 2,
+        basilisk_horn: 3,
+      }
+    
+      belongs_to :wizard
+    
+      def wood_type
+        'Type ' + super
+      end
+    end
+  RUBY
+
+  file "app/models/wizard.rb", <<~RUBY
+    class Wizard < ApplicationRecord
+      validates :name, length: { minimum: 5 }, presence: true
+
+      enum house: {
+        Gryffindor: 0,
+        Hufflepuff: 1,
+        Ravenclaw: 2,
+        Slytherin: 3,
+      }
+
+      has_one :wand
+      has_many :spell_books
+    end
+  RUBY
+end
+
+def create_migrations
+  file "db/migrate/20190620000001_create_wizards.rb", <<~'RUBY'
+    class CreateWizards < ActiveRecord::Migration["#{ENV['RAILS_VERSION'] || 5.2}"]
+      def change
+        create_table :wizards do |t|
+          t.string :name
+          t.integer :house
+          t.string :parent_email
+          t.text :notes
+    
+          t.timestamps
+        end
+      end
+    end
+  RUBY
+
+  file "db/migrate/20190620000002_create_wands.rb", <<~'RUBY'
+    class CreateWands < ActiveRecord::Migration["#{ENV['RAILS_VERSION'] || 5.2}"]
+      def change
+        create_table :wands do |t|
+          t.references :wizard, unique: true, null: false
+          t.string :wood_type
+          t.integer :core_type
+    
+          t.timestamps
+        end
+      end
+    end
+  RUBY
+
+  file "db/migrate/20190620000003_create_spell_books.rb", <<~'RUBY'
+    class CreateSpellBooks < ActiveRecord::Migration["#{ENV['RAILS_VERSION'] || 5.2}"]
+      def change
+        create_table :spell_books do |t|
+          t.string :name
+          t.references :wizard
+        end
+      end
+    end
+  RUBY
+
+  file "db/migrate/20190620000004_add_more_column_types_to_wands.rb", <<~'RUBY'
+    class AddMoreColumnTypesToWands < ActiveRecord::Migration["#{ENV['RAILS_VERSION'] || 5.2}"]
+      def change
+        add_column :wands, :flexibility,    :float,   null: false, default: 0.5
+        add_column :wands, :hardness,       :decimal, null: false, precision: 10, scale: 10, default: 5
+        add_column :wands, :reflectance,    :decimal, null: false, precision: 10, scale: 0, default: 0.5
+        add_column :wands, :broken,         :boolean, null: false, default: false
+        add_column :wands, :chosen_at_date, :date
+        add_column :wands, :chosen_at_time, :time
+        if (
+          ENV['RAILS_VERSION'] != '5.1'
+          ENV['RAILS_VERSION'] != '5.0'
+        ) # JSON column type is only supported on 5.2 or higher
+          add_column :wands, :spell_history,  :json
+          add_column :wands, :maker_info,     :json,    null: false, default: '{}'
+        end
+      end
+    end
+  RUBY
+end
+
+# Main setup
+add_gems
+
+after_bundle do
+  say "Creating application..."
+  add_routes
+  create_initializers
+  create_lib
+  create_helpers
+  create_models
+  create_migrations
+  rails_command "db:migrate"
+  Bundler.with_clean_env do
+    run "SRB_YES=true bundle exec srb init"
+    run "bundle exec rake rails_rbi:all"
+  end
+  say "Done."
+end
