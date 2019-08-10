@@ -1,4 +1,5 @@
 # Generate a Rails 6.0 app.
+# rails new --template spec/generators/rails-6-0-template.rb spec/support/v6.0 --skip-javascript --skip-action-cable --skip-test --skip-sprockets --skip-spring --skip-bootsnap --skip-listen
 
 def add_gems
   gem 'sorbet-rails', path: '../../../.'
@@ -126,5 +127,7 @@ after_bundle do
   create_lib
   create_helpers
   create_models
+  run "SRB_YES=true bundle exec srb init"
+  run "bundle exec rake rails_rbi:all"
   say "Done."
 end
