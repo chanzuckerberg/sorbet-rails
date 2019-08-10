@@ -1,10 +1,4 @@
-
-add_routes
-create_initializers
-create_lib
-create_models
-create_helpers
-
+# Generate a Rails 6.0 app.
 def add_routes
   route "get 'test/index' => 'test#index'"
 end
@@ -18,7 +12,7 @@ def create_initializers
 end
 
 def create_lib
-  lib "mythical_rbi_plugin.rb", <<~RUBY
+  lib "mythical_rbi_plugin.rb", <<~'RUBY'
     # typed: true
     class MythicalRbiPlugin < SorbetRails::ModelPlugins::Base
       def generate(root)
@@ -104,4 +98,15 @@ def create_models
       has_many :spell_books
     end
   RUBY
+end
+
+# Main setup
+after_bundle do
+  say "Creating application..."
+  add_routes
+  create_initializers
+  create_lib
+  create_helpers
+  create_models
+  say "Done."
 end
