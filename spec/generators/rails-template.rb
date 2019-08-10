@@ -1,5 +1,5 @@
-# Generate a Rails 6.0 app.
-# rails new --template spec/generators/rails-6-0-template.rb spec/support/v6.0 --skip-javascript --skip-action-cable --skip-test --skip-sprockets --skip-spring --skip-bootsnap --skip-listen
+# Generate a Rails app.
+# Use the rake tasks in this repository to generate the Rails apps.
 
 def add_gems
   gem 'sorbet-rails', path: '../../../.'
@@ -115,6 +115,19 @@ def create_models
       has_many :spell_books
     end
   RUBY
+
+  file "app/models/concerns/mythical.rb", <<~RUBY
+    require 'active_support/concern'
+    module Mythical
+      extend ActiveSupport::Concern
+
+      class_methods do
+        def mythicals
+          all.to_a # yeah!
+        end
+      end
+    end
+  RUBY
 end
 
 def create_migrations
@@ -191,7 +204,9 @@ after_bundle do
   create_models
   create_migrations
   rails_command "db:migrate"
-  run "SRB_YES=true bundle exec srb init"
-  run "bundle exec rake rails_rbi:all"
+  Bundler.with_clean_env do
+    run "SRB_YES=true bundle exec srb init"
+    run "bundle exec rake rails_rbi:all"
+  end
   say "Done."
 end
