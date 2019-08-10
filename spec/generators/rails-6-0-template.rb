@@ -1,4 +1,20 @@
 # Generate a Rails 6.0 app.
+
+def add_gems
+  gem 'sorbet-rails', path: '../../../.'
+
+  sorbet_version = ENV["SORBET_VERSION"]
+  if sorbet_version
+    # mostly used to test against a stable version of Sorbet in Travis.
+    gem 'sorbet', sorbet_version
+    gem 'sorbet-runtime', sorbet_version
+  else
+    # prefer to test against latest version because sorbet is updated frequently
+    gem 'sorbet'
+    gem 'sorbet-runtime'
+  end
+end
+
 def add_routes
   route "get 'test/index' => 'test#index'"
 end
@@ -101,6 +117,8 @@ def create_models
 end
 
 # Main setup
+add_gems
+
 after_bundle do
   say "Creating application..."
   add_routes
