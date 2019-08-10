@@ -2,10 +2,13 @@
 require('sorbet-rails/model_plugins/base')
 require('sorbet-rails/model_plugins/active_record_enum')
 require('sorbet-rails/model_plugins/active_record_querying')
+require('sorbet-rails/model_plugins/active_relation_where_not')
 require('sorbet-rails/model_plugins/active_record_named_scope')
 require('sorbet-rails/model_plugins/active_record_attribute')
 require('sorbet-rails/model_plugins/active_record_assoc')
+require('sorbet-rails/model_plugins/active_record_finder_methods')
 require('sorbet-rails/model_plugins/custom_finder_methods')
+require('sorbet-rails/model_plugins/enumerable_collections')
 
 module SorbetRails::ModelPlugins
   extend T::Sig
@@ -15,9 +18,12 @@ module SorbetRails::ModelPlugins
       ActiveRecordEnum,
       ActiveRecordNamedScope,
       ActiveRecordQuerying,
+      ActiveRelationWhereNot,
       ActiveRecordAttribute,
       ActiveRecordAssoc,
+      ActiveRecordFinderMethods,
       CustomFinderMethods,
+      EnumerableCollections,
     ],
     T::Array[T.class_of(Base)]
   )

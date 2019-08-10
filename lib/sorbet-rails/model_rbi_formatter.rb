@@ -74,6 +74,11 @@ class SorbetRails::ModelRbiFormatter
     )
     model_relation_rbi.create_include(self.model_relation_shared_module_name)
     model_relation_rbi.create_extend("T::Sig")
+    model_relation_rbi.create_extend("T::Generic")
+    model_relation_rbi.create_constant(
+      "Elem",
+      value: "type_member(fixed: #{model_class_name})",
+    )
 
     collection_proxy_rbi = root.create_class(
       self.model_assoc_proxy_class_name,
@@ -81,12 +86,18 @@ class SorbetRails::ModelRbiFormatter
     )
     collection_proxy_rbi.create_include(self.model_relation_shared_module_name)
     collection_proxy_rbi.create_extend("T::Sig")
+    collection_proxy_rbi.create_extend("T::Generic")
+    collection_proxy_rbi.create_constant(
+      "Elem",
+      value: "type_member(fixed: #{self.model_class_name})",
+    )
 
     model_rbi = root.create_class(
       self.model_class_name,
       superclass: T.must(@model_class.superclass).name,
     )
     model_rbi.create_extend("T::Sig")
+    model_rbi.create_extend("T::Generic")
     model_rbi.create_extend(self.model_relation_shared_module_name)
 
     # <Model>::MODEL_RELATION_SHARED_MODULE_SUFFIX is a fake module added so that
