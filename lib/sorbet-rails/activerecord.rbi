@@ -21,3 +21,7 @@ class ActiveRecord::Base < Object
   sig { returns(T::Boolean) }
   def self.abstract_class?; end
 end
+
+class ActiveRecord::AttributeMethods::TimeZoneConversion::TimeZoneConverter;
+  def klass; end
+end

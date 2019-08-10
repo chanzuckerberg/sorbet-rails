@@ -17,7 +17,7 @@ rvm:
 matrix:
   include:
   - rvm: 2.5
-    env: RAILS_VERSION=5.2 SORBET_VERSION=0.4.4429
+    env: RAILS_VERSION=5.2 SORBET_VERSION=0.4.4602
   - rvm: 2.5
     env: TEST_SRB_INIT=true
   exclude:

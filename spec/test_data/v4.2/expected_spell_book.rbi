@@ -2,6 +2,11 @@
 # Please rerun rake rails_rbi:models[SpellBook] to regenerate.
 
 # typed: strong
+module SpellBook::ActiveRelation_WhereNot
+  sig { params(opts: T.untyped, rest: T.untyped).returns(T.self_type) }
+  def not(opts, *rest); end
+end
+
 module SpellBook::GeneratedAttributeMethods
   extend T::Sig
 
@@ -43,18 +48,21 @@ module SpellBook::GeneratedAssociationMethods
   def wizard=(value); end
 end
 
-class SpellBook::ActiveRecord_Relation < ActiveRecord::Relation
-  include SpellBook::ModelRelationShared
-  extend T::Sig
-  extend T::Generic
-  Elem = type_member(fixed: SpellBook)
-end
+module SpellBook::CustomFinderMethods
+  sig { params(limit: Integer).returns(T::Array[SpellBook]) }
+  def first_n(limit); end
 
-class SpellBook::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
-  include SpellBook::ModelRelationShared
-  extend T::Sig
-  extend T::Generic
-  Elem = type_member(fixed: SpellBook)
+  sig { params(limit: Integer).returns(T::Array[SpellBook]) }
+  def last_n(limit); end
+
+  sig { params(args: T::Array[T.any(Integer, String)]).returns(T::Array[SpellBook]) }
+  def find_n(*args); end
+
+  sig { params(id: Integer).returns(T.nilable(SpellBook)) }
+  def find_by_id(id); end
+
+  sig { params(id: Integer).returns(SpellBook) }
+  def find_by_id!(id); end
 end
 
 module SpellBook::ModelRelationShared
@@ -136,11 +144,244 @@ module SpellBook::ModelRelationShared
   def except(*args, &block); end
 end
 
+class SpellBook::ActiveRecord_Relation < ActiveRecord::Relation
+  include SpellBook::ActiveRelation_WhereNot
+  include SorbetRails::CustomFinderMethods
+  include SpellBook::CustomFinderMethods
+  include Enumerable
+  include SpellBook::ModelRelationShared
+  extend T::Sig
+  extend T::Generic
+  Elem = type_member(fixed: SpellBook)
+
+  sig { params(args: T.untyped).returns(SpellBook) }
+  def find(*args); end
+
+  sig { params(args: T.untyped).returns(T.nilable(SpellBook)) }
+  def find_by(*args); end
+
+  sig { params(args: T.untyped).returns(SpellBook) }
+  def find_by!(*args); end
+
+  sig { returns(T.nilable(SpellBook)) }
+  def first; end
+
+  sig { returns(SpellBook) }
+  def first!; end
+
+  sig { returns(T.nilable(SpellBook)) }
+  def second; end
+
+  sig { returns(SpellBook) }
+  def second!; end
+
+  sig { returns(T.nilable(SpellBook)) }
+  def third; end
+
+  sig { returns(SpellBook) }
+  def third!; end
+
+  sig { returns(T.nilable(SpellBook)) }
+  def third_to_last; end
+
+  sig { returns(SpellBook) }
+  def third_to_last!; end
+
+  sig { returns(T.nilable(SpellBook)) }
+  def second_to_last; end
+
+  sig { returns(SpellBook) }
+  def second_to_last!; end
+
+  sig { returns(T.nilable(SpellBook)) }
+  def last; end
+
+  sig { returns(SpellBook) }
+  def last!; end
+
+  sig { params(conditions: T.untyped).returns(T::Boolean) }
+  def exists?(conditions = nil); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def any?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def many?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def none?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def one?(*args); end
+
+  sig { implementation.params(block: T.proc.params(e: SpellBook).void).void }
+  def each(&block); end
+
+  sig { params(level: T.nilable(Integer)).returns(T::Array[SpellBook]) }
+  def flatten(level); end
+
+  sig { returns(T::Array[SpellBook]) }
+  def to_a; end
+end
+
+class SpellBook::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
+  include SpellBook::ActiveRelation_WhereNot
+  include SorbetRails::CustomFinderMethods
+  include SpellBook::CustomFinderMethods
+  include Enumerable
+  include SpellBook::ModelRelationShared
+  extend T::Sig
+  extend T::Generic
+  Elem = type_member(fixed: SpellBook)
+
+  sig { params(args: T.untyped).returns(SpellBook) }
+  def find(*args); end
+
+  sig { params(args: T.untyped).returns(T.nilable(SpellBook)) }
+  def find_by(*args); end
+
+  sig { params(args: T.untyped).returns(SpellBook) }
+  def find_by!(*args); end
+
+  sig { returns(T.nilable(SpellBook)) }
+  def first; end
+
+  sig { returns(SpellBook) }
+  def first!; end
+
+  sig { returns(T.nilable(SpellBook)) }
+  def second; end
+
+  sig { returns(SpellBook) }
+  def second!; end
+
+  sig { returns(T.nilable(SpellBook)) }
+  def third; end
+
+  sig { returns(SpellBook) }
+  def third!; end
+
+  sig { returns(T.nilable(SpellBook)) }
+  def third_to_last; end
+
+  sig { returns(SpellBook) }
+  def third_to_last!; end
+
+  sig { returns(T.nilable(SpellBook)) }
+  def second_to_last; end
+
+  sig { returns(SpellBook) }
+  def second_to_last!; end
+
+  sig { returns(T.nilable(SpellBook)) }
+  def last; end
+
+  sig { returns(SpellBook) }
+  def last!; end
+
+  sig { params(conditions: T.untyped).returns(T::Boolean) }
+  def exists?(conditions = nil); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def any?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def many?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def none?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def one?(*args); end
+
+  sig { implementation.params(block: T.proc.params(e: SpellBook).void).void }
+  def each(&block); end
+
+  sig { params(level: T.nilable(Integer)).returns(T::Array[SpellBook]) }
+  def flatten(level); end
+
+  sig { returns(T::Array[SpellBook]) }
+  def to_a; end
+
+  sig { params(records: T.any(SpellBook, T::Array[SpellBook])).returns(T.self_type) }
+  def <<(*records); end
+
+  sig { params(records: T.any(SpellBook, T::Array[SpellBook])).returns(T.self_type) }
+  def append(*records); end
+
+  sig { params(records: T.any(SpellBook, T::Array[SpellBook])).returns(T.self_type) }
+  def push(*records); end
+
+  sig { params(records: T.any(SpellBook, T::Array[SpellBook])).returns(T.self_type) }
+  def concat(*records); end
+end
+
 class SpellBook < ApplicationRecord
   include SpellBook::GeneratedAttributeMethods
   include SpellBook::GeneratedAssociationMethods
+  extend SorbetRails::CustomFinderMethods
+  extend SpellBook::CustomFinderMethods
   extend T::Sig
   extend T::Generic
   extend SpellBook::ModelRelationShared
-  Elem = type_template(fixed: SpellBook)
+
+  sig { params(args: T.untyped).returns(SpellBook) }
+  def self.find(*args); end
+
+  sig { params(args: T.untyped).returns(T.nilable(SpellBook)) }
+  def self.find_by(*args); end
+
+  sig { params(args: T.untyped).returns(SpellBook) }
+  def self.find_by!(*args); end
+
+  sig { returns(T.nilable(SpellBook)) }
+  def self.first; end
+
+  sig { returns(SpellBook) }
+  def self.first!; end
+
+  sig { returns(T.nilable(SpellBook)) }
+  def self.second; end
+
+  sig { returns(SpellBook) }
+  def self.second!; end
+
+  sig { returns(T.nilable(SpellBook)) }
+  def self.third; end
+
+  sig { returns(SpellBook) }
+  def self.third!; end
+
+  sig { returns(T.nilable(SpellBook)) }
+  def self.third_to_last; end
+
+  sig { returns(SpellBook) }
+  def self.third_to_last!; end
+
+  sig { returns(T.nilable(SpellBook)) }
+  def self.second_to_last; end
+
+  sig { returns(SpellBook) }
+  def self.second_to_last!; end
+
+  sig { returns(T.nilable(SpellBook)) }
+  def self.last; end
+
+  sig { returns(SpellBook) }
+  def self.last!; end
+
+  sig { params(conditions: T.untyped).returns(T::Boolean) }
+  def self.exists?(conditions = nil); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def self.any?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def self.many?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def self.none?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def self.one?(*args); end
 end
