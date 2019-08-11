@@ -113,7 +113,7 @@ end
 T.assert_type!(wizard.id, Integer)
 T.assert_type!(wizard.id?, T::Boolean)
 T.assert_type!(wizard.notes, T.nilable(String))
-T.assert_type!(wizard.house, String)
+T.assert_type!(wizard.house, T.nilable(String))
 
 # Model enum
 T.assert_type!(wizard.Gryffindor?, T::Boolean)
