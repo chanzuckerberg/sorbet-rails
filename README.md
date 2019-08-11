@@ -178,7 +178,7 @@ Model.unscoped.scoping do … end
 A custom plugin should be a subclass of `SorbetRails::ModelPlugins::Base`. Each plugin would implement a `generate(root)` method that generate additional rbi for the model.
 
 At a high level, here is the structure of a plugin:
-```
+```ruby
 # -- lib/my_custom_plugin.rb
 class MyCustomPlugin < SorbetRails::ModelPlugins::Base
   sig { implementation.params(root: Parlour::RbiGenerator::Namespace).void }
@@ -193,7 +193,7 @@ During the generation phase, the system will create a new instance of the plugin
 We use [Parlour gem](https://github.com/AaronC81/parlour) to generate the RBI for a model. Please check out [Parlour wiki](https://github.com/AaronC81/parlour/wiki/Using-and-creating-RBI-objects) for guide to add RBI, eg create a new module, class, or method in the generated file.
 
 At a high level, you'd usually want to create a model-scoped module for your methods, and include or extend it in the base model class. The generation logic usually looks like this:
-```
+```ruby
   def generate(root)
     # Make sure this is only run for relevant class
     return unless @model_class.include?(CustomModule)
