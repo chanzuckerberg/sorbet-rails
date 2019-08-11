@@ -65,7 +65,7 @@ module Wand::GeneratedAttributeMethods
   sig { returns(T::Boolean) }
   def chosen_at_time?; end
 
-  sig { returns(String) }
+  sig { returns(T.nilable(String)) }
   def core_type; end
 
   sig { params(value: T.nilable(T.any(Integer, String, Symbol))).void }
