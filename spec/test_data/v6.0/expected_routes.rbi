@@ -57,7 +57,7 @@ class ActionController::Base
   def edit_rails_conductor_inbound_email_path(*args, **kwargs); end
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
   def edit_rails_conductor_inbound_email_url(*args, **kwargs); end
-  
+
   # Sigs for route /rails/conductor/action_mailbox/inbound_emails/:id(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
   def rails_conductor_inbound_email_path(*args, **kwargs); end
