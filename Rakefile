@@ -8,14 +8,14 @@ task :default => :spec
 namespace :update_spec do
   require 'fileutils'
 
-  desc "Generate Rails apps for all versions."
+  # This excludes 4.2 because it won't work with Bundler 2.0
+  desc "Generate Rails apps for all versions (except 4.2)."
   task :all do |t, args|
     Rake::Task['update_spec:v6_0'].invoke
     Rake::Task['update_spec:v5_2'].invoke
     Rake::Task['update_spec:v5_2_no_sorbet'].invoke
     Rake::Task['update_spec:v5_1'].invoke
     Rake::Task['update_spec:v5_0'].invoke
-    Rake::Task['update_spec:v4_2'].invoke
   end
 
   desc "Delete the Rails 6 spec directory and regenerate it."

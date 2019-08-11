@@ -67,8 +67,16 @@ def create_helpers
 end
 
 def create_models
+  if ENV['RAILS_VERSION'] != '4.2'
+    inject_into_file "app/models/application_record.rb", after: "self.abstract_class = true\n" do
+      # Need to include indentation manually
+      "  scope :recent, -> { where('created_at > ?', 1.month.ago) }\n"
+    end
+  end
+
   model_superclass = 'ApplicationRecord'
   model_superclass = 'ActiveRecord::Base' if ENV['RAILS_VERSION'] == '4.2'
+
   file "app/models/spell_book.rb", <<~RUBY
     class SpellBook < #{model_superclass}
       validates :name, length: { minimum: 5 }, presence: true
