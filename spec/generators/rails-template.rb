@@ -67,8 +67,10 @@ def create_helpers
 end
 
 def create_models
+  model_superclass = 'ApplicationRecord'
+  model_superclass = 'ActiveRecord::Base' if ENV['RAILS_VERSION'] == '4.2'
   file "app/models/spell_book.rb", <<~RUBY
-    class SpellBook < ApplicationRecord
+    class SpellBook < #{model_superclass}
       validates :name, length: { minimum: 5 }, presence: true
       belongs_to :wizard
     end
@@ -76,13 +78,13 @@ def create_models
 
   file "app/models/potion.rb", <<~RUBY
     # an abstract class that has no table
-    class Potion < ApplicationRecord
+    class Potion < #{model_superclass}
       self.abstract_class = true
     end
   RUBY
 
   file "app/models/wand.rb", <<~RUBY
-    class Wand < ApplicationRecord
+    class Wand < #{model_superclass}
       include Mythical
     
       enum core_type: {
@@ -101,7 +103,7 @@ def create_models
   RUBY
 
   file "app/models/wizard.rb", <<~RUBY
-    class Wizard < ApplicationRecord
+    class Wizard < #{model_superclass}
       validates :name, length: { minimum: 5 }, presence: true
 
       enum house: {
@@ -131,8 +133,14 @@ def create_models
 end
 
 def create_migrations
-  file "db/migrate/20190620000001_create_wizards.rb", <<~'RUBY'
-    class CreateWizards < ActiveRecord::Migration["#{ENV['RAILS_VERSION'] || 5.2}"]
+  if ENV["RAILS_VERSION"] == "4.2"
+    migration_superclass = 'ActiveRecord::Migration'
+  else
+    migration_superclass = 'ActiveRecord::Migration["#{ENV[\'RAILS_VERSION\'] || 5.2}"]'
+  end
+
+  file "db/migrate/20190620000001_create_wizards.rb", <<~RUBY
+    class CreateWizards < #{migration_superclass}
       def change
         create_table :wizards do |t|
           t.string :name
@@ -146,8 +154,8 @@ def create_migrations
     end
   RUBY
 
-  file "db/migrate/20190620000002_create_wands.rb", <<~'RUBY'
-    class CreateWands < ActiveRecord::Migration["#{ENV['RAILS_VERSION'] || 5.2}"]
+  file "db/migrate/20190620000002_create_wands.rb", <<~RUBY
+    class CreateWands < #{migration_superclass}
       def change
         create_table :wands do |t|
           t.references :wizard, unique: true, null: false
@@ -160,8 +168,8 @@ def create_migrations
     end
   RUBY
 
-  file "db/migrate/20190620000003_create_spell_books.rb", <<~'RUBY'
-    class CreateSpellBooks < ActiveRecord::Migration["#{ENV['RAILS_VERSION'] || 5.2}"]
+  file "db/migrate/20190620000003_create_spell_books.rb", <<~RUBY
+    class CreateSpellBooks < #{migration_superclass}
       def change
         create_table :spell_books do |t|
           t.string :name
@@ -171,8 +179,8 @@ def create_migrations
     end
   RUBY
 
-  file "db/migrate/20190620000004_add_more_column_types_to_wands.rb", <<~'RUBY'
-    class AddMoreColumnTypesToWands < ActiveRecord::Migration["#{ENV['RAILS_VERSION'] || 5.2}"]
+  file "db/migrate/20190620000004_add_more_column_types_to_wands.rb", <<~RUBY
+    class AddMoreColumnTypesToWands < #{migration_superclass}
       def change
         add_column :wands, :flexibility,    :float,   null: false, default: 0.5
         add_column :wands, :hardness,       :decimal, null: false, precision: 10, scale: 10, default: 5
