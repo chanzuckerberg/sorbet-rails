@@ -19,8 +19,20 @@ ActiveRecord::Schema.define(version: 20190620000004) do
     t.index ["wizard_id"], name: "index_spell_books_on_wizard_id"
   end
 
-# Could not dump table "wands" because of following StandardError
-#   Unknown type 'json' for column 'spell_history'
+  create_table "wands", force: :cascade do |t|
+    t.integer "wizard_id", null: false
+    t.string "wood_type"
+    t.integer "core_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.float "flexibility", default: 0.5, null: false
+    t.decimal "hardness", precision: 10, scale: 10, default: "5.0", null: false
+    t.decimal "reflectance", precision: 10, default: "0", null: false
+    t.boolean "broken", default: false, null: false
+    t.date "chosen_at_date"
+    t.time "chosen_at_time"
+    t.index ["wizard_id"], name: "index_wands_on_wizard_id"
+  end
 
   create_table "wizards", force: :cascade do |t|
     t.string "name"

@@ -1,5 +1,5 @@
-# typed: ignore
-class CreateWizards < ActiveRecord::Migration["#{ENV['RAILS_VERSION'] || 5.2}"]
+# typed: true
+class CreateWizards < ActiveRecord::Migration[6.0]
   def change
     create_table :wizards do |t|
       t.string :name

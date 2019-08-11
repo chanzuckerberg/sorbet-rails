@@ -1,5 +1,5 @@
-# typed: ignore
-class CreateSpellBooks < ActiveRecord::Migration["#{ENV['RAILS_VERSION'] || 5.2}"]
+# typed: true
+class CreateSpellBooks < ActiveRecord::Migration[5.1]
   def change
     create_table :spell_books do |t|
       t.string :name
