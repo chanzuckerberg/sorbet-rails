@@ -49,3 +49,5 @@ else
   gem 'sorbet'
   gem 'sorbet-runtime'
 end
+gem 'dalli' # Found 'require "dalli"' in Rails codebase even if not in app.
+gem 'redis' # Found 'require "redis"' in Rails codebase even if not in app.
