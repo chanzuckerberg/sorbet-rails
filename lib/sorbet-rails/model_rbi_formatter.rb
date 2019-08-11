@@ -27,8 +27,8 @@ class SorbetRails::ModelRbiFormatter
     begin
       # Load all dynamic instance methods of this model by instantiating a fake model
       @model_class.new unless @model_class.abstract_class?
-    rescue StandardError
-      puts "Note: Unable to create new instance of #{model_class.name}"
+    rescue StandardError => err
+      puts "#{err.class}: Note: Unable to create new instance of #{model_class.name}"
     end
   end
 
@@ -99,10 +99,6 @@ class SorbetRails::ModelRbiFormatter
     model_rbi.create_extend("T::Sig")
     model_rbi.create_extend("T::Generic")
     model_rbi.create_extend(self.model_relation_shared_module_name)
-    model_rbi.create_constant(
-      "Elem",
-      value: "type_template(fixed: #{self.model_class_name})",
-    )
 
     # <Model>::MODEL_RELATION_SHARED_MODULE_SUFFIX is a fake module added so that
     # when a method is defined in this module, it'll be added to both the Model class

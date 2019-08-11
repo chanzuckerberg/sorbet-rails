@@ -2,25 +2,26 @@
 # Please rerun rake rails_rbi:models[Potion] to regenerate.
 
 # typed: strong
-class Potion::ActiveRecord_Relation < ActiveRecord::Relation
-  include Potion::ModelRelationShared
-  extend T::Sig
-  extend T::Generic
-  Elem = type_member(fixed: Potion)
+module Potion::ActiveRelation_WhereNot
+  sig { params(opts: T.untyped, rest: T.untyped).returns(T.self_type) }
+  def not(opts, *rest); end
 end
 
-class Potion::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
-  include Potion::ModelRelationShared
-  extend T::Sig
-  extend T::Generic
-  Elem = type_member(fixed: Potion)
-end
+module Potion::CustomFinderMethods
+  sig { params(limit: Integer).returns(T::Array[Potion]) }
+  def first_n(limit); end
 
-class Potion < ApplicationRecord
-  extend T::Sig
-  extend T::Generic
-  extend Potion::ModelRelationShared
-  Elem = type_template(fixed: Potion)
+  sig { params(limit: Integer).returns(T::Array[Potion]) }
+  def last_n(limit); end
+
+  sig { params(args: T::Array[T.any(Integer, String)]).returns(T::Array[Potion]) }
+  def find_n(*args); end
+
+  sig { params(id: Integer).returns(T.nilable(Potion)) }
+  def find_by_id(id); end
+
+  sig { params(id: Integer).returns(Potion) }
+  def find_by_id!(id); end
 end
 
 module Potion::ModelRelationShared
@@ -127,4 +128,244 @@ module Potion::ModelRelationShared
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Potion::ActiveRecord_Relation) }
   def only(*args, &block); end
+end
+
+class Potion::ActiveRecord_Relation < ActiveRecord::Relation
+  include Potion::ActiveRelation_WhereNot
+  include SorbetRails::CustomFinderMethods
+  include Potion::CustomFinderMethods
+  include Enumerable
+  include Potion::ModelRelationShared
+  extend T::Sig
+  extend T::Generic
+  Elem = type_member(fixed: Potion)
+
+  sig { params(args: T.untyped).returns(Potion) }
+  def find(*args); end
+
+  sig { params(args: T.untyped).returns(T.nilable(Potion)) }
+  def find_by(*args); end
+
+  sig { params(args: T.untyped).returns(Potion) }
+  def find_by!(*args); end
+
+  sig { returns(T.nilable(Potion)) }
+  def first; end
+
+  sig { returns(Potion) }
+  def first!; end
+
+  sig { returns(T.nilable(Potion)) }
+  def second; end
+
+  sig { returns(Potion) }
+  def second!; end
+
+  sig { returns(T.nilable(Potion)) }
+  def third; end
+
+  sig { returns(Potion) }
+  def third!; end
+
+  sig { returns(T.nilable(Potion)) }
+  def third_to_last; end
+
+  sig { returns(Potion) }
+  def third_to_last!; end
+
+  sig { returns(T.nilable(Potion)) }
+  def second_to_last; end
+
+  sig { returns(Potion) }
+  def second_to_last!; end
+
+  sig { returns(T.nilable(Potion)) }
+  def last; end
+
+  sig { returns(Potion) }
+  def last!; end
+
+  sig { params(conditions: T.untyped).returns(T::Boolean) }
+  def exists?(conditions = nil); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def any?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def many?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def none?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def one?(*args); end
+
+  sig { implementation.params(block: T.proc.params(e: Potion).void).void }
+  def each(&block); end
+
+  sig { params(level: T.nilable(Integer)).returns(T::Array[Potion]) }
+  def flatten(level); end
+
+  sig { returns(T::Array[Potion]) }
+  def to_a; end
+end
+
+class Potion::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
+  include Potion::ActiveRelation_WhereNot
+  include SorbetRails::CustomFinderMethods
+  include Potion::CustomFinderMethods
+  include Enumerable
+  include Potion::ModelRelationShared
+  extend T::Sig
+  extend T::Generic
+  Elem = type_member(fixed: Potion)
+
+  sig { params(args: T.untyped).returns(Potion) }
+  def find(*args); end
+
+  sig { params(args: T.untyped).returns(T.nilable(Potion)) }
+  def find_by(*args); end
+
+  sig { params(args: T.untyped).returns(Potion) }
+  def find_by!(*args); end
+
+  sig { returns(T.nilable(Potion)) }
+  def first; end
+
+  sig { returns(Potion) }
+  def first!; end
+
+  sig { returns(T.nilable(Potion)) }
+  def second; end
+
+  sig { returns(Potion) }
+  def second!; end
+
+  sig { returns(T.nilable(Potion)) }
+  def third; end
+
+  sig { returns(Potion) }
+  def third!; end
+
+  sig { returns(T.nilable(Potion)) }
+  def third_to_last; end
+
+  sig { returns(Potion) }
+  def third_to_last!; end
+
+  sig { returns(T.nilable(Potion)) }
+  def second_to_last; end
+
+  sig { returns(Potion) }
+  def second_to_last!; end
+
+  sig { returns(T.nilable(Potion)) }
+  def last; end
+
+  sig { returns(Potion) }
+  def last!; end
+
+  sig { params(conditions: T.untyped).returns(T::Boolean) }
+  def exists?(conditions = nil); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def any?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def many?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def none?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def one?(*args); end
+
+  sig { implementation.params(block: T.proc.params(e: Potion).void).void }
+  def each(&block); end
+
+  sig { params(level: T.nilable(Integer)).returns(T::Array[Potion]) }
+  def flatten(level); end
+
+  sig { returns(T::Array[Potion]) }
+  def to_a; end
+
+  sig { params(records: T.any(Potion, T::Array[Potion])).returns(T.self_type) }
+  def <<(*records); end
+
+  sig { params(records: T.any(Potion, T::Array[Potion])).returns(T.self_type) }
+  def append(*records); end
+
+  sig { params(records: T.any(Potion, T::Array[Potion])).returns(T.self_type) }
+  def push(*records); end
+
+  sig { params(records: T.any(Potion, T::Array[Potion])).returns(T.self_type) }
+  def concat(*records); end
+end
+
+class Potion < ApplicationRecord
+  extend SorbetRails::CustomFinderMethods
+  extend Potion::CustomFinderMethods
+  extend T::Sig
+  extend T::Generic
+  extend Potion::ModelRelationShared
+
+  sig { params(args: T.untyped).returns(Potion) }
+  def self.find(*args); end
+
+  sig { params(args: T.untyped).returns(T.nilable(Potion)) }
+  def self.find_by(*args); end
+
+  sig { params(args: T.untyped).returns(Potion) }
+  def self.find_by!(*args); end
+
+  sig { returns(T.nilable(Potion)) }
+  def self.first; end
+
+  sig { returns(Potion) }
+  def self.first!; end
+
+  sig { returns(T.nilable(Potion)) }
+  def self.second; end
+
+  sig { returns(Potion) }
+  def self.second!; end
+
+  sig { returns(T.nilable(Potion)) }
+  def self.third; end
+
+  sig { returns(Potion) }
+  def self.third!; end
+
+  sig { returns(T.nilable(Potion)) }
+  def self.third_to_last; end
+
+  sig { returns(Potion) }
+  def self.third_to_last!; end
+
+  sig { returns(T.nilable(Potion)) }
+  def self.second_to_last; end
+
+  sig { returns(Potion) }
+  def self.second_to_last!; end
+
+  sig { returns(T.nilable(Potion)) }
+  def self.last; end
+
+  sig { returns(Potion) }
+  def self.last!; end
+
+  sig { params(conditions: T.untyped).returns(T::Boolean) }
+  def self.exists?(conditions = nil); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def self.any?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def self.many?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def self.none?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def self.one?(*args); end
 end

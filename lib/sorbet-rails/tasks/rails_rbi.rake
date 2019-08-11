@@ -3,10 +3,6 @@ require("sorbet-rails/routes_rbi_formatter")
 require("sorbet-rails/helper_rbi_formatter")
 require("sorbet-rails/utils")
 
-# this is ugly but it's a way to get the current directory of this script
-# maybe someone coming along will know a better way
-@@sorbet_rails_rake_dir = File.dirname(__FILE__)
-
 namespace :rails_rbi do
   desc "Generate rbis for rails models, routes, and helpers."
   task :all, :environment do |t, args|
@@ -29,8 +25,6 @@ namespace :rails_rbi do
   desc "Generate rbis for rails models. Pass models name to regenerate rbi for only the given models."
   task models: :environment do |t, args|
     SorbetRails::Utils.rails_eager_load_all!
-
-    copy_bundled_rbi
 
     all_models = Set.new(ActiveRecord::Base.descendants + whitelisted_models - blacklisted_models)
 
@@ -64,13 +58,6 @@ namespace :rails_rbi do
     file_path = Rails.root.join("sorbet", "rails-rbi", "helpers.rbi")
     FileUtils.mkdir_p(File.dirname(file_path))
     File.write(file_path, formatter.generate_rbi)
-  end
-
-  def copy_bundled_rbi
-    bundled_rbi_path = File.join(@@sorbet_rails_rake_dir, "..", "rbi", ".")
-    copy_to_path = Rails.root.join("sorbet", "rails-rbi")
-    FileUtils.mkdir_p(File.dirname(copy_to_path))
-    FileUtils.cp_r(bundled_rbi_path, copy_to_path)
   end
 
   def generate_rbis_for_models(model_classes, available_classes)

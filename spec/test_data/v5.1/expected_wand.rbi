@@ -30,6 +30,11 @@ module Wand::EnumInstanceMethods
   def basilisk_horn!; end
 end
 
+module Wand::ActiveRelation_WhereNot
+  sig { params(opts: T.untyped, rest: T.untyped).returns(T.self_type) }
+  def not(opts, *rest); end
+end
+
 module Wand::GeneratedAttributeMethods
   extend T::Sig
 
@@ -152,28 +157,32 @@ module Wand::GeneratedAssociationMethods
   def wizard=(value); end
 end
 
-class Wand::ActiveRecord_Relation < ActiveRecord::Relation
-  include Wand::ModelRelationShared
-  extend T::Sig
-  extend T::Generic
-  Elem = type_member(fixed: Wand)
-end
+module Wand::CustomFinderMethods
+  sig { params(limit: Integer).returns(T::Array[Wand]) }
+  def first_n(limit); end
 
-class Wand::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
-  include Wand::ModelRelationShared
-  extend T::Sig
-  extend T::Generic
-  Elem = type_member(fixed: Wand)
+  sig { params(limit: Integer).returns(T::Array[Wand]) }
+  def last_n(limit); end
+
+  sig { params(args: T::Array[T.any(Integer, String)]).returns(T::Array[Wand]) }
+  def find_n(*args); end
+
+  sig { params(id: Integer).returns(T.nilable(Wand)) }
+  def find_by_id(id); end
+
+  sig { params(id: Integer).returns(Wand) }
+  def find_by_id!(id); end
 end
 
 class Wand < ApplicationRecord
   include Wand::EnumInstanceMethods
   include Wand::GeneratedAttributeMethods
   include Wand::GeneratedAssociationMethods
+  extend SorbetRails::CustomFinderMethods
+  extend Wand::CustomFinderMethods
   extend T::Sig
   extend T::Generic
   extend Wand::ModelRelationShared
-  Elem = type_template(fixed: Wand)
 
   sig { returns(T::Hash[T.any(String, Symbol), Integer]) }
   def self.core_types; end
@@ -189,6 +198,66 @@ class Wand < ApplicationRecord
 
   sig { returns(Wand::ActiveRecord_Relation) }
   def self.basilisk_horn; end
+
+  sig { params(args: T.untyped).returns(Wand) }
+  def self.find(*args); end
+
+  sig { params(args: T.untyped).returns(T.nilable(Wand)) }
+  def self.find_by(*args); end
+
+  sig { params(args: T.untyped).returns(Wand) }
+  def self.find_by!(*args); end
+
+  sig { returns(T.nilable(Wand)) }
+  def self.first; end
+
+  sig { returns(Wand) }
+  def self.first!; end
+
+  sig { returns(T.nilable(Wand)) }
+  def self.second; end
+
+  sig { returns(Wand) }
+  def self.second!; end
+
+  sig { returns(T.nilable(Wand)) }
+  def self.third; end
+
+  sig { returns(Wand) }
+  def self.third!; end
+
+  sig { returns(T.nilable(Wand)) }
+  def self.third_to_last; end
+
+  sig { returns(Wand) }
+  def self.third_to_last!; end
+
+  sig { returns(T.nilable(Wand)) }
+  def self.second_to_last; end
+
+  sig { returns(Wand) }
+  def self.second_to_last!; end
+
+  sig { returns(T.nilable(Wand)) }
+  def self.last; end
+
+  sig { returns(Wand) }
+  def self.last!; end
+
+  sig { params(conditions: T.untyped).returns(T::Boolean) }
+  def self.exists?(conditions = nil); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def self.any?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def self.many?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def self.none?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def self.one?(*args); end
 
   sig { returns(T::Array[Wand]) }
   def self.mythicals; end
@@ -298,4 +367,176 @@ module Wand::ModelRelationShared
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::ActiveRecord_Relation) }
   def except(*args, &block); end
+end
+
+class Wand::ActiveRecord_Relation < ActiveRecord::Relation
+  include Wand::ActiveRelation_WhereNot
+  include SorbetRails::CustomFinderMethods
+  include Wand::CustomFinderMethods
+  include Enumerable
+  include Wand::ModelRelationShared
+  extend T::Sig
+  extend T::Generic
+  Elem = type_member(fixed: Wand)
+
+  sig { params(args: T.untyped).returns(Wand) }
+  def find(*args); end
+
+  sig { params(args: T.untyped).returns(T.nilable(Wand)) }
+  def find_by(*args); end
+
+  sig { params(args: T.untyped).returns(Wand) }
+  def find_by!(*args); end
+
+  sig { returns(T.nilable(Wand)) }
+  def first; end
+
+  sig { returns(Wand) }
+  def first!; end
+
+  sig { returns(T.nilable(Wand)) }
+  def second; end
+
+  sig { returns(Wand) }
+  def second!; end
+
+  sig { returns(T.nilable(Wand)) }
+  def third; end
+
+  sig { returns(Wand) }
+  def third!; end
+
+  sig { returns(T.nilable(Wand)) }
+  def third_to_last; end
+
+  sig { returns(Wand) }
+  def third_to_last!; end
+
+  sig { returns(T.nilable(Wand)) }
+  def second_to_last; end
+
+  sig { returns(Wand) }
+  def second_to_last!; end
+
+  sig { returns(T.nilable(Wand)) }
+  def last; end
+
+  sig { returns(Wand) }
+  def last!; end
+
+  sig { params(conditions: T.untyped).returns(T::Boolean) }
+  def exists?(conditions = nil); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def any?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def many?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def none?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def one?(*args); end
+
+  sig { implementation.params(block: T.proc.params(e: Wand).void).void }
+  def each(&block); end
+
+  sig { params(level: T.nilable(Integer)).returns(T::Array[Wand]) }
+  def flatten(level); end
+
+  sig { returns(T::Array[Wand]) }
+  def to_a; end
+end
+
+class Wand::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
+  include Wand::ActiveRelation_WhereNot
+  include SorbetRails::CustomFinderMethods
+  include Wand::CustomFinderMethods
+  include Enumerable
+  include Wand::ModelRelationShared
+  extend T::Sig
+  extend T::Generic
+  Elem = type_member(fixed: Wand)
+
+  sig { params(args: T.untyped).returns(Wand) }
+  def find(*args); end
+
+  sig { params(args: T.untyped).returns(T.nilable(Wand)) }
+  def find_by(*args); end
+
+  sig { params(args: T.untyped).returns(Wand) }
+  def find_by!(*args); end
+
+  sig { returns(T.nilable(Wand)) }
+  def first; end
+
+  sig { returns(Wand) }
+  def first!; end
+
+  sig { returns(T.nilable(Wand)) }
+  def second; end
+
+  sig { returns(Wand) }
+  def second!; end
+
+  sig { returns(T.nilable(Wand)) }
+  def third; end
+
+  sig { returns(Wand) }
+  def third!; end
+
+  sig { returns(T.nilable(Wand)) }
+  def third_to_last; end
+
+  sig { returns(Wand) }
+  def third_to_last!; end
+
+  sig { returns(T.nilable(Wand)) }
+  def second_to_last; end
+
+  sig { returns(Wand) }
+  def second_to_last!; end
+
+  sig { returns(T.nilable(Wand)) }
+  def last; end
+
+  sig { returns(Wand) }
+  def last!; end
+
+  sig { params(conditions: T.untyped).returns(T::Boolean) }
+  def exists?(conditions = nil); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def any?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def many?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def none?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def one?(*args); end
+
+  sig { implementation.params(block: T.proc.params(e: Wand).void).void }
+  def each(&block); end
+
+  sig { params(level: T.nilable(Integer)).returns(T::Array[Wand]) }
+  def flatten(level); end
+
+  sig { returns(T::Array[Wand]) }
+  def to_a; end
+
+  sig { params(records: T.any(Wand, T::Array[Wand])).returns(T.self_type) }
+  def <<(*records); end
+
+  sig { params(records: T.any(Wand, T::Array[Wand])).returns(T.self_type) }
+  def append(*records); end
+
+  sig { params(records: T.any(Wand, T::Array[Wand])).returns(T.self_type) }
+  def push(*records); end
+
+  sig { params(records: T.any(Wand, T::Array[Wand])).returns(T.self_type) }
+  def concat(*records); end
 end

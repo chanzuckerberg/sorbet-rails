@@ -2,6 +2,11 @@
 # Please rerun rake rails_rbi:models[ActiveStorage::Attachment] to regenerate.
 
 # typed: strong
+module ActiveStorage::Attachment::ActiveRelation_WhereNot
+  sig { params(opts: T.untyped, rest: T.untyped).returns(T.self_type) }
+  def not(opts, *rest); end
+end
+
 module ActiveStorage::Attachment::GeneratedAssociationMethods
   extend T::Sig
 
@@ -18,18 +23,21 @@ module ActiveStorage::Attachment::GeneratedAssociationMethods
   def record=(value); end
 end
 
-class ActiveStorage::Attachment::ActiveRecord_Relation < ActiveRecord::Relation
-  include ActiveStorage::Attachment::ModelRelationShared
-  extend T::Sig
-  extend T::Generic
-  Elem = type_member(fixed: ActiveStorage::Attachment)
-end
+module ActiveStorage::Attachment::CustomFinderMethods
+  sig { params(limit: Integer).returns(T::Array[ActiveStorage::Attachment]) }
+  def first_n(limit); end
 
-class ActiveStorage::Attachment::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
-  include ActiveStorage::Attachment::ModelRelationShared
-  extend T::Sig
-  extend T::Generic
-  Elem = type_member(fixed: ActiveStorage::Attachment)
+  sig { params(limit: Integer).returns(T::Array[ActiveStorage::Attachment]) }
+  def last_n(limit); end
+
+  sig { params(args: T::Array[T.any(Integer, String)]).returns(T::Array[ActiveStorage::Attachment]) }
+  def find_n(*args); end
+
+  sig { params(id: Integer).returns(T.nilable(ActiveStorage::Attachment)) }
+  def find_by_id(id); end
+
+  sig { params(id: Integer).returns(ActiveStorage::Attachment) }
+  def find_by_id!(id); end
 end
 
 module ActiveStorage::Attachment::ModelRelationShared
@@ -135,10 +143,243 @@ module ActiveStorage::Attachment::ModelRelationShared
   def only(*args, &block); end
 end
 
+class ActiveStorage::Attachment::ActiveRecord_Relation < ActiveRecord::Relation
+  include ActiveStorage::Attachment::ActiveRelation_WhereNot
+  include SorbetRails::CustomFinderMethods
+  include ActiveStorage::Attachment::CustomFinderMethods
+  include Enumerable
+  include ActiveStorage::Attachment::ModelRelationShared
+  extend T::Sig
+  extend T::Generic
+  Elem = type_member(fixed: ActiveStorage::Attachment)
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Attachment) }
+  def find(*args); end
+
+  sig { params(args: T.untyped).returns(T.nilable(ActiveStorage::Attachment)) }
+  def find_by(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Attachment) }
+  def find_by!(*args); end
+
+  sig { returns(T.nilable(ActiveStorage::Attachment)) }
+  def first; end
+
+  sig { returns(ActiveStorage::Attachment) }
+  def first!; end
+
+  sig { returns(T.nilable(ActiveStorage::Attachment)) }
+  def second; end
+
+  sig { returns(ActiveStorage::Attachment) }
+  def second!; end
+
+  sig { returns(T.nilable(ActiveStorage::Attachment)) }
+  def third; end
+
+  sig { returns(ActiveStorage::Attachment) }
+  def third!; end
+
+  sig { returns(T.nilable(ActiveStorage::Attachment)) }
+  def third_to_last; end
+
+  sig { returns(ActiveStorage::Attachment) }
+  def third_to_last!; end
+
+  sig { returns(T.nilable(ActiveStorage::Attachment)) }
+  def second_to_last; end
+
+  sig { returns(ActiveStorage::Attachment) }
+  def second_to_last!; end
+
+  sig { returns(T.nilable(ActiveStorage::Attachment)) }
+  def last; end
+
+  sig { returns(ActiveStorage::Attachment) }
+  def last!; end
+
+  sig { params(conditions: T.untyped).returns(T::Boolean) }
+  def exists?(conditions = nil); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def any?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def many?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def none?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def one?(*args); end
+
+  sig { implementation.params(block: T.proc.params(e: ActiveStorage::Attachment).void).void }
+  def each(&block); end
+
+  sig { params(level: T.nilable(Integer)).returns(T::Array[ActiveStorage::Attachment]) }
+  def flatten(level); end
+
+  sig { returns(T::Array[ActiveStorage::Attachment]) }
+  def to_a; end
+end
+
+class ActiveStorage::Attachment::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
+  include ActiveStorage::Attachment::ActiveRelation_WhereNot
+  include SorbetRails::CustomFinderMethods
+  include ActiveStorage::Attachment::CustomFinderMethods
+  include Enumerable
+  include ActiveStorage::Attachment::ModelRelationShared
+  extend T::Sig
+  extend T::Generic
+  Elem = type_member(fixed: ActiveStorage::Attachment)
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Attachment) }
+  def find(*args); end
+
+  sig { params(args: T.untyped).returns(T.nilable(ActiveStorage::Attachment)) }
+  def find_by(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Attachment) }
+  def find_by!(*args); end
+
+  sig { returns(T.nilable(ActiveStorage::Attachment)) }
+  def first; end
+
+  sig { returns(ActiveStorage::Attachment) }
+  def first!; end
+
+  sig { returns(T.nilable(ActiveStorage::Attachment)) }
+  def second; end
+
+  sig { returns(ActiveStorage::Attachment) }
+  def second!; end
+
+  sig { returns(T.nilable(ActiveStorage::Attachment)) }
+  def third; end
+
+  sig { returns(ActiveStorage::Attachment) }
+  def third!; end
+
+  sig { returns(T.nilable(ActiveStorage::Attachment)) }
+  def third_to_last; end
+
+  sig { returns(ActiveStorage::Attachment) }
+  def third_to_last!; end
+
+  sig { returns(T.nilable(ActiveStorage::Attachment)) }
+  def second_to_last; end
+
+  sig { returns(ActiveStorage::Attachment) }
+  def second_to_last!; end
+
+  sig { returns(T.nilable(ActiveStorage::Attachment)) }
+  def last; end
+
+  sig { returns(ActiveStorage::Attachment) }
+  def last!; end
+
+  sig { params(conditions: T.untyped).returns(T::Boolean) }
+  def exists?(conditions = nil); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def any?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def many?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def none?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def one?(*args); end
+
+  sig { implementation.params(block: T.proc.params(e: ActiveStorage::Attachment).void).void }
+  def each(&block); end
+
+  sig { params(level: T.nilable(Integer)).returns(T::Array[ActiveStorage::Attachment]) }
+  def flatten(level); end
+
+  sig { returns(T::Array[ActiveStorage::Attachment]) }
+  def to_a; end
+
+  sig { params(records: T.any(ActiveStorage::Attachment, T::Array[ActiveStorage::Attachment])).returns(T.self_type) }
+  def <<(*records); end
+
+  sig { params(records: T.any(ActiveStorage::Attachment, T::Array[ActiveStorage::Attachment])).returns(T.self_type) }
+  def append(*records); end
+
+  sig { params(records: T.any(ActiveStorage::Attachment, T::Array[ActiveStorage::Attachment])).returns(T.self_type) }
+  def push(*records); end
+
+  sig { params(records: T.any(ActiveStorage::Attachment, T::Array[ActiveStorage::Attachment])).returns(T.self_type) }
+  def concat(*records); end
+end
+
 class ActiveStorage::Attachment < ActiveRecord::Base
   include ActiveStorage::Attachment::GeneratedAssociationMethods
+  extend SorbetRails::CustomFinderMethods
+  extend ActiveStorage::Attachment::CustomFinderMethods
   extend T::Sig
   extend T::Generic
   extend ActiveStorage::Attachment::ModelRelationShared
-  Elem = type_template(fixed: ActiveStorage::Attachment)
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Attachment) }
+  def self.find(*args); end
+
+  sig { params(args: T.untyped).returns(T.nilable(ActiveStorage::Attachment)) }
+  def self.find_by(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Attachment) }
+  def self.find_by!(*args); end
+
+  sig { returns(T.nilable(ActiveStorage::Attachment)) }
+  def self.first; end
+
+  sig { returns(ActiveStorage::Attachment) }
+  def self.first!; end
+
+  sig { returns(T.nilable(ActiveStorage::Attachment)) }
+  def self.second; end
+
+  sig { returns(ActiveStorage::Attachment) }
+  def self.second!; end
+
+  sig { returns(T.nilable(ActiveStorage::Attachment)) }
+  def self.third; end
+
+  sig { returns(ActiveStorage::Attachment) }
+  def self.third!; end
+
+  sig { returns(T.nilable(ActiveStorage::Attachment)) }
+  def self.third_to_last; end
+
+  sig { returns(ActiveStorage::Attachment) }
+  def self.third_to_last!; end
+
+  sig { returns(T.nilable(ActiveStorage::Attachment)) }
+  def self.second_to_last; end
+
+  sig { returns(ActiveStorage::Attachment) }
+  def self.second_to_last!; end
+
+  sig { returns(T.nilable(ActiveStorage::Attachment)) }
+  def self.last; end
+
+  sig { returns(ActiveStorage::Attachment) }
+  def self.last!; end
+
+  sig { params(conditions: T.untyped).returns(T::Boolean) }
+  def self.exists?(conditions = nil); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def self.any?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def self.many?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def self.none?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def self.one?(*args); end
 end
