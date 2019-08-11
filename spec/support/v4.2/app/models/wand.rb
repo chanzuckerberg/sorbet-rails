@@ -1,5 +1,5 @@
 # typed: true
-class Wand < ActiveRecord::Base
+class Wand < ApplicationRecord
   include Mythical
 
   enum core_type: {

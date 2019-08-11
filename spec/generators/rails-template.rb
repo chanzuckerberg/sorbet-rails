@@ -72,13 +72,17 @@ def create_models
       # Need to include indentation manually
       "  scope :recent, -> { where('created_at > ?', 1.month.ago) }\n"
     end
+  else
+    file "app/models/application_record.rb", <<~RUBY
+      class ApplicationRecord < ActiveRecord::Base
+        self.abstract_class = true
+        scope :recent, -> { where('created_at > ?', 1.month.ago) }
+      end
+    RUBY
   end
 
-  model_superclass = 'ApplicationRecord'
-  model_superclass = 'ActiveRecord::Base' if ENV['RAILS_VERSION'] == '4.2'
-
   file "app/models/spell_book.rb", <<~RUBY
-    class SpellBook < #{model_superclass}
+    class SpellBook < ApplicationRecord
       validates :name, length: { minimum: 5 }, presence: true
       belongs_to :wizard
     end
@@ -86,13 +90,13 @@ def create_models
 
   file "app/models/potion.rb", <<~RUBY
     # an abstract class that has no table
-    class Potion < #{model_superclass}
+    class Potion < ApplicationRecord
       self.abstract_class = true
     end
   RUBY
 
   file "app/models/wand.rb", <<~RUBY
-    class Wand < #{model_superclass}
+    class Wand < ApplicationRecord
       include Mythical
     
       enum core_type: {
@@ -111,7 +115,7 @@ def create_models
   RUBY
 
   file "app/models/wizard.rb", <<~RUBY
-    class Wizard < #{model_superclass}
+    class Wizard < ApplicationRecord
       validates :name, length: { minimum: 5 }, presence: true
 
       enum house: {

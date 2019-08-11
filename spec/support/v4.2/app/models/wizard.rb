@@ -1,5 +1,5 @@
 # typed: strict
-class Wizard < ActiveRecord::Base
+class Wizard < ApplicationRecord
   validates :name, length: { minimum: 5 }, presence: true
 
   enum house: {
