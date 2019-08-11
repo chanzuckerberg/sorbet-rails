@@ -12,26 +12,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190622000000) do
+ActiveRecord::Schema.define(version: 20190620000004) do
 
   create_table "spell_books", force: :cascade do |t|
     t.string  "name"
     t.integer "wizard_id"
   end
 
-  create_table "wands", force: :cascade do |t|
-    t.integer  "wizard_id",                                                null: false
-    t.string   "wood_type"
-    t.integer  "core_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.float    "flexibility",                              default: 0.5,   null: false
-    t.decimal  "hardness",       precision: 10, scale: 10, default: 5.0,   null: false
-    t.decimal  "reflectance",    precision: 10,            default: 0,     null: false
-    t.boolean  "broken",                                   default: false, null: false
-    t.date     "chosen_at_date"
-    t.time     "chosen_at_time"
-  end
+# Could not dump table "wands" because of following NoMethodError
+#   undefined method `[]' for nil:NilClass
 
   create_table "wizards", force: :cascade do |t|
     t.string   "name"

@@ -349,21 +349,12 @@ class Rack::Sendfile
   def map_accel_path(env, path); end
   def variation(env); end
 end
-class Rack::ConditionalGet
+class Rack::MethodOverride
+  def allowed_methods; end
   def call(env); end
-  def etag_matches?(none_match, headers); end
-  def fresh?(env, headers); end
   def initialize(app); end
-  def modified_since?(modified_since, headers); end
-  def to_rfc2822(since); end
-end
-class Rack::ETag
-  def call(env); end
-  def digest_body(body); end
-  def etag_body?(body); end
-  def etag_status?(status); end
-  def initialize(app, no_cache_control = nil, cache_control = nil); end
-  def skip_caching?(headers); end
+  def method_override(env); end
+  def method_override_param(req); end
 end
 module Rack::Session::Abstract
 end
@@ -435,88 +426,56 @@ class Rack::Session::Abstract::ID < Rack::Session::Abstract::Persisted
   def self.inherited(klass); end
   def write_session(req, sid, session, options); end
 end
-class Rack::Lint
-  def _call(env); end
-  def call(env = nil); end
-  def check_content_length(status, headers); end
-  def check_content_type(status, headers); end
-  def check_env(env); end
-  def check_error(error); end
-  def check_headers(header); end
-  def check_hijack(env); end
-  def check_hijack_response(headers, env); end
-  def check_input(input); end
-  def check_status(status); end
-  def close; end
-  def each; end
+class Rack::Session::Cookie < Rack::Session::Abstract::Persisted
+  def coder; end
+  def delete_session(req, session_id, options); end
+  def digest_match?(data, digest); end
+  def extract_session_id(request); end
+  def find_session(req, sid); end
+  def generate_hmac(data, secret); end
+  def initialize(app, options = nil); end
+  def persistent_session_id!(data, sid = nil); end
+  def secure?(options); end
+  def unpacked_cookie_data(request); end
+  def write_session(req, session_id, session, options); end
+end
+class Rack::Session::Cookie::Base64
+  def decode(str); end
+  def encode(str); end
+end
+class Rack::Session::Cookie::Base64::Marshal < Rack::Session::Cookie::Base64
+  def decode(str); end
+  def encode(str); end
+end
+class Rack::Session::Cookie::Base64::JSON < Rack::Session::Cookie::Base64
+  def decode(str); end
+  def encode(obj); end
+end
+class Rack::Session::Cookie::Base64::ZipJSON < Rack::Session::Cookie::Base64
+  def decode(str); end
+  def encode(obj); end
+end
+class Rack::Session::Cookie::Identity
+  def decode(str); end
+  def encode(str); end
+end
+class Rack::ConditionalGet
+  def call(env); end
+  def etag_matches?(none_match, headers); end
+  def fresh?(env, headers); end
   def initialize(app); end
-  def verify_content_length(bytes); end
-  include Rack::Lint::Assertion
+  def modified_since?(modified_since, headers); end
+  def to_rfc2822(since); end
 end
-class Rack::Lint::LintError < RuntimeError
+class Rack::ETag
+  def call(env); end
+  def digest_body(body); end
+  def etag_body?(body); end
+  def etag_status?(status); end
+  def initialize(app, no_cache_control = nil, cache_control = nil); end
+  def skip_caching?(headers); end
 end
-module Rack::Lint::Assertion
-  def assert(message); end
-end
-class Rack::Lint::InputWrapper
-  def close(*args); end
-  def each(*args); end
-  def gets(*args); end
-  def initialize(input); end
-  def read(*args); end
-  def rewind(*args); end
-  include Rack::Lint::Assertion
-end
-class Rack::Lint::ErrorWrapper
-  def close(*args); end
-  def flush; end
-  def initialize(error); end
-  def puts(str); end
-  def write(str); end
-  include Rack::Lint::Assertion
-end
-class Rack::Lint::HijackWrapper
-  def close(*args, &block); end
-  def close_read(*args, &block); end
-  def close_write(*args, &block); end
-  def closed?(*args, &block); end
-  def flush(*args, &block); end
-  def initialize(io); end
-  def read(*args, &block); end
-  def read_nonblock(*args, &block); end
-  def write(*args, &block); end
-  def write_nonblock(*args, &block); end
-  extend Forwardable
-  include Rack::Lint::Assertion
-end
-class Rack::MockRequest
-  def delete(uri, opts = nil); end
-  def get(uri, opts = nil); end
-  def head(uri, opts = nil); end
+class Rack::TempfileReaper
+  def call(env); end
   def initialize(app); end
-  def options(uri, opts = nil); end
-  def patch(uri, opts = nil); end
-  def post(uri, opts = nil); end
-  def put(uri, opts = nil); end
-  def request(method = nil, uri = nil, opts = nil); end
-  def self.env_for(uri = nil, opts = nil); end
-  def self.parse_uri_rfc2396(uri); end
-end
-class Rack::MockRequest::FatalWarning < RuntimeError
-end
-class Rack::MockRequest::FatalWarner
-  def flush; end
-  def puts(warning); end
-  def string; end
-  def write(warning); end
-end
-class Rack::MockResponse < Rack::Response
-  def =~(other); end
-  def body; end
-  def empty?; end
-  def errors; end
-  def errors=(arg0); end
-  def initialize(status, headers, body, errors = nil); end
-  def match(other); end
-  def original_headers; end
 end

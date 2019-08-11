@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/railties/all/railties.rbi
 #
-# railties-6.0.0.rc1
+# railties-6.0.0.rc2
 module Rails
   def self.app_class; end
   def self.app_class=(arg0); end
@@ -92,7 +92,7 @@ end
 class Rails::Engine < Rails::Railtie
   def _all_autoload_once_paths; end
   def _all_autoload_paths; end
-  def _all_load_paths; end
+  def _all_load_paths(add_autoload_paths_to_load_path); end
   def app; end
   def build_middleware; end
   def build_request(env); end
@@ -359,36 +359,6 @@ class Rails::Engine::Configuration < Rails::Railtie::Configuration
   def root; end
   def root=(value); end
 end
-module Rails::TestUnit
-end
-class Rails::TestUnit::Runner
-  def filters; end
-  def self.attach_before_load_options(opts); end
-  def self.compose_filter(runnable, filter); end
-  def self.extract_filters(argv); end
-  def self.filters; end
-  def self.load_tests(argv); end
-  def self.parse_options(argv); end
-  def self.rake_run(argv = nil); end
-  def self.run(argv = nil); end
-end
-class Rails::TestUnit::CompositeFilter
-  def ===(method); end
-  def derive_line_filters(patterns); end
-  def derive_named_filter(filter); end
-  def initialize(runnable, filter, patterns); end
-  def named_filter; end
-end
-class Rails::TestUnit::Filter
-  def ===(method); end
-  def definition_for(method); end
-  def initialize(runnable, file, line); end
-end
-module Rails::LineFiltering
-  def run(reporter, options = nil); end
-end
-class Rails::TestUnitRailtie < Rails::Railtie
-end
 class Rails::SourceAnnotationExtractor
   def display(results, options = nil); end
   def extract_annotations_from(file, pattern); end
@@ -420,7 +390,11 @@ class Rails::SourceAnnotationExtractor::Annotation < Anonymous_Struct_1
   def self.tags; end
   def to_s(options = nil); end
 end
+module SourceAnnotationExtractor
+end
 class Rails::Application::Configuration < Rails::Engine::Configuration
+  def add_autoload_paths_to_load_path; end
+  def add_autoload_paths_to_load_path=(arg0); end
   def allow_concurrency; end
   def allow_concurrency=(arg0); end
   def annotations; end
@@ -445,6 +419,8 @@ class Rails::Application::Configuration < Rails::Engine::Configuration
   def console; end
   def console=(arg0); end
   def content_security_policy(&block); end
+  def content_security_policy_nonce_directives; end
+  def content_security_policy_nonce_directives=(arg0); end
   def content_security_policy_nonce_generator; end
   def content_security_policy_nonce_generator=(arg0); end
   def content_security_policy_report_only; end
@@ -457,6 +433,7 @@ class Rails::Application::Configuration < Rails::Engine::Configuration
   def debug_exception_response_format=(arg0); end
   def default_credentials_content_path; end
   def default_credentials_key_path; end
+  def default_log_file; end
   def disable_sandbox; end
   def disable_sandbox=(arg0); end
   def eager_load; end
@@ -566,195 +543,6 @@ class Rails::Application::DefaultMiddlewareStack
 end
 class Rails::Rack::Logger < ActiveSupport::LogSubscriber
 end
-module Rails::Command
-  def self.command_type; end
-  def self.commands; end
-  def self.environment; end
-  def self.file_lookup_paths; end
-  def self.find_by_namespace(namespace, command_name = nil); end
-  def self.hidden_commands; end
-  def self.invoke(full_namespace, args = nil, **config); end
-  def self.lookup_paths; end
-  def self.print_commands; end
-  def self.root; end
-  extend ActiveSupport::Autoload
-  extend Rails::Command::Behavior::ClassMethods
-  include Rails::Command::Behavior
-end
-module Rails::Command::Behavior
-  extend ActiveSupport::Concern
-end
-module Rails::Command::Behavior::ClassMethods
-  def lookup!; end
-  def lookup(namespaces); end
-  def namespaces_to_paths(namespaces); end
-  def no_color!; end
-  def print_list(base, namespaces); end
-  def subclasses; end
-end
-module Rails::Generators
-  def namespace; end
-  def namespace=(obj); end
-  def self.aliases; end
-  def self.api_only!; end
-  def self.command_type; end
-  def self.configure!(config); end
-  def self.fallbacks; end
-  def self.file_lookup_paths; end
-  def self.find_by_namespace(name, base = nil, context = nil); end
-  def self.help(command = nil); end
-  def self.hidden_namespaces; end
-  def self.hide_namespace(*namespaces); end
-  def self.hide_namespaces(*namespaces); end
-  def self.invoke(namespace, args = nil, config = nil); end
-  def self.invoke_fallbacks_for(name, base); end
-  def self.lookup_paths; end
-  def self.namespace; end
-  def self.namespace=(obj); end
-  def self.no_color!; end
-  def self.options; end
-  def self.print_generators; end
-  def self.print_list(base, namespaces); end
-  def self.public_namespaces; end
-  def self.sorted_groups; end
-  def self.templates_path; end
-  extend Rails::Command::Behavior::ClassMethods
-  include Rails::Command::Behavior
-end
-module Rails::Generators::Testing
-end
-module Rails::Generators::Testing::Behaviour
-  def create_generated_attribute(attribute_type, name = nil, index = nil); end
-  def destination_root_is_set?; end
-  def ensure_current_path; end
-  def generator(args = nil, options = nil, config = nil); end
-  def migration_file_name(relative); end
-  def prepare_destination; end
-  def run_generator(args = nil, config = nil); end
-  extend ActiveSupport::Concern
-  include ActiveSupport::Testing::Stream
-end
-module Rails::Generators::Testing::Behaviour::ClassMethods
-  def arguments(array); end
-  def destination(path); end
-  def tests(klass); end
-end
-module Rails::Generators::Testing::SetupAndTeardown
-  def setup; end
-  def teardown; end
-end
-module Rails::Generators::Testing::Assertions
-  def assert_class_method(method, content, &block); end
-  def assert_directory(relative, *contents); end
-  def assert_field_default_value(attribute_type, value); end
-  def assert_field_type(attribute_type, field_type); end
-  def assert_file(relative, *contents); end
-  def assert_instance_method(method, content); end
-  def assert_method(method, content); end
-  def assert_migration(relative, *contents, &block); end
-  def assert_no_directory(relative); end
-  def assert_no_file(relative); end
-  def assert_no_migration(relative); end
-end
-class Rails::Generators::TestCase < ActiveSupport::TestCase
-  def current_path; end
-  def current_path=(val); end
-  def current_path?; end
-  def default_arguments; end
-  def default_arguments=(val); end
-  def default_arguments?; end
-  def destination_root; end
-  def destination_root=(val); end
-  def destination_root?; end
-  def generator_class; end
-  def generator_class=(val); end
-  def generator_class?; end
-  def self.current_path; end
-  def self.current_path=(val); end
-  def self.current_path?; end
-  def self.default_arguments; end
-  def self.default_arguments=(val); end
-  def self.default_arguments?; end
-  def self.destination_root; end
-  def self.destination_root=(val); end
-  def self.destination_root?; end
-  def self.generator_class; end
-  def self.generator_class=(val); end
-  def self.generator_class?; end
-  extend Rails::Generators::Testing::Behaviour::ClassMethods
-  include FileUtils
-  include Rails::Generators::Testing::Assertions
-  include Rails::Generators::Testing::Behaviour
-  include Rails::Generators::Testing::SetupAndTeardown
-end
 class Rails::BacktraceCleaner < ActiveSupport::BacktraceCleaner
   def initialize; end
-end
-class ActiveRecord::ExplainRegistry
-  def self.collect?(*args, &block); end
-end
-class ActiveRecord::Scoping::ScopeRegistry
-  def self.value_for(*args, &block); end
-end
-class ActiveRecord::SchemaMigration < ActiveRecord::Base
-  def self.default_scope_override; end
-end
-class ActiveSupport::TestCase < Minitest::Test
-  def config; end
-  def config=(val); end
-  def config?; end
-  def fixture_class_names; end
-  def fixture_class_names=(val); end
-  def fixture_class_names?; end
-  def fixture_path; end
-  def fixture_path?; end
-  def fixture_table_names; end
-  def fixture_table_names=(val); end
-  def fixture_table_names?; end
-  def lock_threads; end
-  def lock_threads=(val); end
-  def lock_threads?; end
-  def pre_loaded_fixtures; end
-  def pre_loaded_fixtures=(val); end
-  def pre_loaded_fixtures?; end
-  def self.config; end
-  def self.config=(val); end
-  def self.config?; end
-  def self.fixture_class_names; end
-  def self.fixture_class_names=(val); end
-  def self.fixture_class_names?; end
-  def self.fixture_path; end
-  def self.fixture_path=(val); end
-  def self.fixture_path?; end
-  def self.fixture_table_names; end
-  def self.fixture_table_names=(val); end
-  def self.fixture_table_names?; end
-  def self.lock_threads; end
-  def self.lock_threads=(val); end
-  def self.lock_threads?; end
-  def self.pre_loaded_fixtures; end
-  def self.pre_loaded_fixtures=(val); end
-  def self.pre_loaded_fixtures?; end
-  def self.use_instantiated_fixtures; end
-  def self.use_instantiated_fixtures=(val); end
-  def self.use_instantiated_fixtures?; end
-  def self.use_transactional_tests; end
-  def self.use_transactional_tests=(val); end
-  def self.use_transactional_tests?; end
-  def use_instantiated_fixtures; end
-  def use_instantiated_fixtures=(val); end
-  def use_instantiated_fixtures?; end
-  def use_transactional_tests; end
-  def use_transactional_tests=(val); end
-  def use_transactional_tests?; end
-  extend ActiveRecord::TestFixtures::ClassMethods
-  include ActiveRecord::TestDatabases
-  include ActiveRecord::TestFixtures
-end
-class ActionDispatch::IntegrationTest < ActiveSupport::TestCase
-  def before_setup; end
-  def self.fixture_path; end
-end
-class ActionController::TestCase < ActiveSupport::TestCase
-  def before_setup; end
 end

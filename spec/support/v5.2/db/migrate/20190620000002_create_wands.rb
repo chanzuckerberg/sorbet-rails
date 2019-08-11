@@ -1,0 +1,12 @@
+# typed: ignore
+class CreateWands < ActiveRecord::Migration["#{ENV['RAILS_VERSION'] || 5.2}"]
+  def change
+    create_table :wands do |t|
+      t.references :wizard, unique: true, null: false
+      t.string :wood_type
+      t.integer :core_type
+
+      t.timestamps
+    end
+  end
+end

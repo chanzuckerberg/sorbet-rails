@@ -57,8 +57,8 @@ class Hash
   def reverse_merge!(other_hash); end
   def reverse_merge(other_hash); end
   def reverse_update(other_hash); end
+  def self.from_trusted_xml(xml); end
   def self.from_xml(xml, disallowed_types = nil); end
-  def self.try_convert(arg0); end
   def slice!(*keys); end
   def stringify_keys!; end
   def stringify_keys; end
@@ -1128,7 +1128,7 @@ class ActiveSupport::HashWithIndifferentAccess < Hash
   def merge!(other_hash); end
   def merge(hash, &block); end
   def nested_under_indifferent_access; end
-  def regular_update(arg0); end
+  def regular_update(*arg0); end
   def regular_writer(arg0, arg1); end
   def reject(*args, &block); end
   def replace(other_hash); end
@@ -1492,58 +1492,6 @@ class ActiveSupport::Cache::Entry
   def uncompress(value); end
   def value; end
 end
-class ActiveSupport::BacktraceCleaner
-  def add_filter(&block); end
-  def add_silencer(&block); end
-  def clean(backtrace, kind = nil); end
-  def filter(backtrace, kind = nil); end
-  def filter_backtrace(backtrace); end
-  def initialize; end
-  def noise(backtrace); end
-  def remove_filters!; end
-  def remove_silencers!; end
-  def silence(backtrace); end
-end
-class ActiveSupport::Subscriber
-  def self.add_event_subscriber(event); end
-  def self.attach_to(namespace, subscriber = nil, notifier = nil); end
-  def self.method_added(event); end
-  def self.namespace; end
-  def self.notifier; end
-  def self.subscriber; end
-  def self.subscribers; end
-end
-class ActiveSupport::SubscriberQueueRegistry
-  def get_queue(queue_key); end
-  def initialize; end
-  extend ActiveSupport::PerThreadRegistry
-end
-class ActiveSupport::LogSubscriber < ActiveSupport::Subscriber
-  def self.colorize_logging; end
-  def self.colorize_logging=(obj); end
-  def self.flush_all!; end
-  def self.log_subscribers; end
-  def self.logger; end
-  def self.logger=(arg0); end
-end
-module ActiveSupport::Benchmarkable
-  def benchmark(message = nil, options = nil); end
-end
-module ActiveSupport::NumberHelper
-  def number_to_currency(number, options = nil); end
-  def number_to_delimited(number, options = nil); end
-  def number_to_human(number, options = nil); end
-  def number_to_human_size(number, options = nil); end
-  def number_to_percentage(number, options = nil); end
-  def number_to_phone(number, options = nil); end
-  def number_to_rounded(number, options = nil); end
-  extend ActiveSupport::Autoload
-  extend ActiveSupport::NumberHelper
-end
-module Module::Concerning
-  def concern(topic, &module_definition); end
-  def concerning(topic, &block); end
-end
 module QualifiedConstUtils
   def self.names(path); end
   def self.raise_if_absolute(path); end
@@ -1671,13 +1619,28 @@ end
 class Exception
   include ActiveSupport::Dependencies::Blamable
 end
+module Module::Concerning
+  def concern(topic, &module_definition); end
+  def concerning(topic, &block); end
+end
+module ActiveSupport::NumberHelper
+  def number_to_currency(number, options = nil); end
+  def number_to_delimited(number, options = nil); end
+  def number_to_human(number, options = nil); end
+  def number_to_human_size(number, options = nil); end
+  def number_to_percentage(number, options = nil); end
+  def number_to_phone(number, options = nil); end
+  def number_to_rounded(number, options = nil); end
+  extend ActiveSupport::Autoload
+  extend ActiveSupport::NumberHelper
+end
+class File < IO
+  def self.atomic_write(file_name, temp_dir = nil); end
+  def self.probe_stat_in(dir); end
+end
 module Marshal
   def self.load_with_autoloading(source, proc = nil); end
   def self.load_without_autoloading(*arg0); end
-end
-class File < IO
-  def self.empty?(arg0); end
-  def self.join(*arg0); end
 end
 module ActiveSupport::TaggedLogging
   def clear_tags!(*args, &block); end
@@ -1754,6 +1717,28 @@ class ActiveSupport::Cache::Strategy::LocalCache::Middleware
   def name; end
   def new(app); end
 end
+class ActiveSupport::Subscriber
+  def self.add_event_subscriber(event); end
+  def self.attach_to(namespace, subscriber = nil, notifier = nil); end
+  def self.method_added(event); end
+  def self.namespace; end
+  def self.notifier; end
+  def self.subscriber; end
+  def self.subscribers; end
+end
+class ActiveSupport::SubscriberQueueRegistry
+  def get_queue(queue_key); end
+  def initialize; end
+  extend ActiveSupport::PerThreadRegistry
+end
+class ActiveSupport::LogSubscriber < ActiveSupport::Subscriber
+  def self.colorize_logging; end
+  def self.colorize_logging=(obj); end
+  def self.flush_all!; end
+  def self.log_subscribers; end
+  def self.logger; end
+  def self.logger=(arg0); end
+end
 module ActiveSupport::Configurable
   def config; end
   extend ActiveSupport::Concern
@@ -1766,6 +1751,9 @@ module ActiveSupport::Configurable::ClassMethods
   def config; end
   def config_accessor(*names); end
   def configure; end
+end
+module ActiveSupport::Benchmarkable
+  def benchmark(message = nil, options = nil); end
 end
 module ActiveSupport::Testing
 end
@@ -1881,6 +1869,18 @@ class ActiveSupport::TestCase < Minitest::Test
   include ActiveSupport::Testing::SetupAndTeardown
   include ActiveSupport::Testing::TaggedLogging
   include ActiveSupport::Testing::TimeHelpers
+end
+class ActiveSupport::BacktraceCleaner
+  def add_filter(&block); end
+  def add_silencer(&block); end
+  def clean(backtrace, kind = nil); end
+  def filter(backtrace, kind = nil); end
+  def filter_backtrace(backtrace); end
+  def initialize; end
+  def noise(backtrace); end
+  def remove_filters!; end
+  def remove_silencers!; end
+  def silence(backtrace); end
 end
 module Digest
 end

@@ -18,60 +18,53 @@ module ActionView::VERSION
 end
 class ActionView::Railtie < Rails::Engine
 end
-module ActionView::CollectionCaching
-  def cache_collection_render(instrumentation_payload); end
-  def callable_cache_key?; end
-  def collection_by_cache_keys; end
-  def expanded_cache_key(key); end
-  def fetch_or_cache_partial(cached_partials, order_by:); end
+module ActionView::ViewPaths
+  def _prefixes; end
+  def any_templates?(*args, &block); end
+  def append_view_path(path); end
+  def details_for_lookup; end
+  def formats(*args, &block); end
+  def formats=(arg); end
+  def locale(*args, &block); end
+  def locale=(arg); end
+  def lookup_context; end
+  def prepend_view_path(path); end
+  def template_exists?(*args, &block); end
+  def view_paths(*args, &block); end
   extend ActiveSupport::Concern
 end
-class ActionView::AbstractRenderer
-  def any_templates?(*args, &block); end
-  def extract_details(options); end
-  def find_file(*args, &block); end
-  def find_template(*args, &block); end
-  def formats(*args, &block); end
-  def initialize(lookup_context); end
-  def instrument(name, **options); end
-  def prepend_formats(formats); end
-  def render; end
-  def template_exists?(*args, &block); end
-  def with_fallbacks(*args, &block); end
-  def with_layout_format(*args, &block); end
+module ActionView::ViewPaths::ClassMethods
+  def _prefixes; end
+  def append_view_path(path); end
+  def local_prefixes; end
+  def prepend_view_path(path); end
+  def view_paths; end
+  def view_paths=(paths); end
 end
-class ActionView::PartialIteration
-  def first?; end
-  def index; end
-  def initialize(size); end
-  def iterate!; end
-  def last?; end
-  def size; end
+class ActionView::I18nProxy < I18n::Config
+  def initialize(original_config, lookup_context); end
+  def locale; end
+  def locale=(value); end
+  def lookup_context; end
+  def original_config; end
 end
-class ActionView::PartialRenderer < ActionView::AbstractRenderer
-  def collection_cache; end
-  def collection_cache=(obj); end
-  def collection_from_object; end
-  def collection_from_options; end
-  def collection_with_template; end
-  def collection_without_template; end
-  def find_partial; end
-  def find_template(path, locals); end
-  def initialize(*arg0); end
-  def merge_prefix_into_object_path(prefix, object_path); end
-  def partial_path(object = nil); end
-  def prefixed_partial_names; end
-  def raise_invalid_identifier(path); end
-  def raise_invalid_option_as(as); end
-  def render(context, options, block); end
-  def render_collection; end
-  def render_partial; end
-  def retrieve_template_keys; end
-  def retrieve_variable(path, as); end
-  def self.collection_cache; end
-  def self.collection_cache=(obj); end
-  def setup(context, options, block); end
-  include ActionView::CollectionCaching
+module ActionView::Rendering
+  def _normalize_args(action = nil, options = nil); end
+  def _normalize_options(options); end
+  def _process_format(format); end
+  def _render_template(options); end
+  def process(*arg0); end
+  def render_to_body(options = nil); end
+  def rendered_format; end
+  def view_context; end
+  def view_context_class; end
+  def view_context_class=(arg0); end
+  def view_renderer; end
+  extend ActiveSupport::Concern
+  include ActionView::ViewPaths
+end
+module ActionView::Rendering::ClassMethods
+  def view_context_class; end
 end
 class ActionView::LogSubscriber < ActiveSupport::LogSubscriber
 end
@@ -930,38 +923,6 @@ class ActionView::DependencyTracker::ERBTracker
   def source; end
   def template; end
 end
-class ActionView::Digestor
-  def self.digest(name:, finder:, dependencies: nil); end
-  def self.find_template(finder, name, prefixes, partial, keys); end
-  def self.logger; end
-  def self.tree(name, finder, partial = nil, seen = nil); end
-end
-module ActionView::Digestor::PerExecutionDigestCacheExpiry
-  def self.before(target); end
-end
-class ActionView::Digestor::Node
-  def children; end
-  def dependency_digest(finder, stack); end
-  def digest(finder, stack = nil); end
-  def initialize(name, logical_name, template, children = nil); end
-  def logical_name; end
-  def name; end
-  def self.create(name, logical_name, template, partial); end
-  def template; end
-  def to_dep_map; end
-end
-class ActionView::Digestor::Partial < ActionView::Digestor::Node
-end
-class ActionView::Digestor::Missing < ActionView::Digestor::Node
-  def digest(finder, _ = nil); end
-end
-class ActionView::Digestor::Injected < ActionView::Digestor::Node
-  def digest(finder, _ = nil); end
-end
-class ActionView::Digestor::NullLogger
-  def self.debug(_); end
-  def self.error(_); end
-end
 class ActionView::Base
   def _routes; end
   def _routes=(val); end
@@ -1027,7 +988,6 @@ class ActionView::Base
   extend ActionView::Helpers::SanitizeHelper::ClassMethods
   extend ActionView::Helpers::SanitizeHelper::ClassMethods
   extend ActionView::Helpers::UrlHelper::ClassMethods
-  include ActionCable::Helpers::ActionCableHelper
   include ActionView::Helpers
   include ActionView::Helpers::AssetTagHelper
   include ActionView::Helpers::FormHelper
@@ -1047,53 +1007,92 @@ class ActionView::Base
   include ActionView::Helpers::UrlHelper
   include ActionView::Helpers::UrlHelper
 end
-module ActionView::ViewPaths
-  def _prefixes; end
+class ActionView::Digestor
+  def self.digest(name:, finder:, dependencies: nil); end
+  def self.find_template(finder, name, prefixes, partial, keys); end
+  def self.logger; end
+  def self.tree(name, finder, partial = nil, seen = nil); end
+end
+module ActionView::Digestor::PerExecutionDigestCacheExpiry
+  def self.before(target); end
+end
+class ActionView::Digestor::Node
+  def children; end
+  def dependency_digest(finder, stack); end
+  def digest(finder, stack = nil); end
+  def initialize(name, logical_name, template, children = nil); end
+  def logical_name; end
+  def name; end
+  def self.create(name, logical_name, template, partial); end
+  def template; end
+  def to_dep_map; end
+end
+class ActionView::Digestor::Partial < ActionView::Digestor::Node
+end
+class ActionView::Digestor::Missing < ActionView::Digestor::Node
+  def digest(finder, _ = nil); end
+end
+class ActionView::Digestor::Injected < ActionView::Digestor::Node
+  def digest(finder, _ = nil); end
+end
+class ActionView::Digestor::NullLogger
+  def self.debug(_); end
+  def self.error(_); end
+end
+module ActionView::CollectionCaching
+  def cache_collection_render(instrumentation_payload); end
+  def callable_cache_key?; end
+  def collection_by_cache_keys; end
+  def expanded_cache_key(key); end
+  def fetch_or_cache_partial(cached_partials, order_by:); end
+  extend ActiveSupport::Concern
+end
+class ActionView::AbstractRenderer
   def any_templates?(*args, &block); end
-  def append_view_path(path); end
-  def details_for_lookup; end
+  def extract_details(options); end
+  def find_file(*args, &block); end
+  def find_template(*args, &block); end
   def formats(*args, &block); end
-  def formats=(arg); end
-  def locale(*args, &block); end
-  def locale=(arg); end
-  def lookup_context; end
-  def prepend_view_path(path); end
+  def initialize(lookup_context); end
+  def instrument(name, **options); end
+  def prepend_formats(formats); end
+  def render; end
   def template_exists?(*args, &block); end
-  def view_paths(*args, &block); end
-  extend ActiveSupport::Concern
+  def with_fallbacks(*args, &block); end
+  def with_layout_format(*args, &block); end
 end
-module ActionView::ViewPaths::ClassMethods
-  def _prefixes; end
-  def append_view_path(path); end
-  def local_prefixes; end
-  def prepend_view_path(path); end
-  def view_paths; end
-  def view_paths=(paths); end
+class ActionView::PartialIteration
+  def first?; end
+  def index; end
+  def initialize(size); end
+  def iterate!; end
+  def last?; end
+  def size; end
 end
-class ActionView::I18nProxy < I18n::Config
-  def initialize(original_config, lookup_context); end
-  def locale; end
-  def locale=(value); end
-  def lookup_context; end
-  def original_config; end
-end
-module ActionView::Rendering
-  def _normalize_args(action = nil, options = nil); end
-  def _normalize_options(options); end
-  def _process_format(format); end
-  def _render_template(options); end
-  def process(*arg0); end
-  def render_to_body(options = nil); end
-  def rendered_format; end
-  def view_context; end
-  def view_context_class; end
-  def view_context_class=(arg0); end
-  def view_renderer; end
-  extend ActiveSupport::Concern
-  include ActionView::ViewPaths
-end
-module ActionView::Rendering::ClassMethods
-  def view_context_class; end
+class ActionView::PartialRenderer < ActionView::AbstractRenderer
+  def collection_cache; end
+  def collection_cache=(obj); end
+  def collection_from_object; end
+  def collection_from_options; end
+  def collection_with_template; end
+  def collection_without_template; end
+  def find_partial; end
+  def find_template(path, locals); end
+  def initialize(*arg0); end
+  def merge_prefix_into_object_path(prefix, object_path); end
+  def partial_path(object = nil); end
+  def prefixed_partial_names; end
+  def raise_invalid_identifier(path); end
+  def raise_invalid_option_as(as); end
+  def render(context, options, block); end
+  def render_collection; end
+  def render_partial; end
+  def retrieve_template_keys; end
+  def retrieve_variable(path, as); end
+  def self.collection_cache; end
+  def self.collection_cache=(obj); end
+  def setup(context, options, block); end
+  include ActionView::CollectionCaching
 end
 module ActionView::Layouts
   def _conditional_layout?; end

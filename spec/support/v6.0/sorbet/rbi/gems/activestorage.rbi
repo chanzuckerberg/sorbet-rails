@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/activestorage/all/activestorage.rbi
 #
-# activestorage-6.0.0.rc1
+# activestorage-6.0.0.rc2
 module ActiveStorage
   def analyzers; end
   def analyzers=(obj); end
@@ -25,6 +25,8 @@ module ActiveStorage
   def previewers=(obj); end
   def queues; end
   def queues=(obj); end
+  def replace_on_assign_to_many; end
+  def replace_on_assign_to_many=(obj); end
   def routes_prefix; end
   def routes_prefix=(obj); end
   def self.analyzers; end
@@ -47,6 +49,8 @@ module ActiveStorage
   def self.railtie_helpers_paths; end
   def self.railtie_namespace; end
   def self.railtie_routes_url_helpers(include_path_helpers = nil); end
+  def self.replace_on_assign_to_many; end
+  def self.replace_on_assign_to_many=(obj); end
   def self.routes_prefix; end
   def self.routes_prefix=(obj); end
   def self.service_urls_expire_in; end
