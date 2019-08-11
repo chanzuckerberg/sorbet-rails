@@ -37,7 +37,7 @@ gem 'sorbet-rails'
 
 4. Update hidden-definition files and automatically upgrade each file's typecheck level:
 ```sh
-> srb rbi hidden-definitions
+❯ srb rbi hidden-definitions
 ❯ srb rbi suggest-typed
 ```
 Because we've generated RBI files for routes, models, and helpers, a lot more files should be typecheckable now. Many methods in `hidden.rbi` may be removed because they are now typed.
@@ -71,6 +71,8 @@ The generation task currently creates the following signatures:
 - Named scopes
 - Model relation class
 
+It is possible to add custom RBI generation logic for your custom module or gems via the plugin system. Check out the section on plugins below if you are interested.
+
 ### Helpers
 
 This Rake task generates a `helpers.rbi` file that includes a basic module definition which includes the `Kernel` module, to allow for some basic Ruby methods to be used in helpers without Sorbet complaining.
@@ -78,35 +80,6 @@ This Rake task generates a `helpers.rbi` file that includes a basic module defin
 ```sh
 ❯ rake rails_rbi:helpers
 ```
-
-## Extending Model Generation Task with Custom Plugins
-
-It is common in Rails app to define concerns that add extra functionalities to a model. Many gems also add methods to the models. `sorbet-rails` support a customizable plugin system that can be used to add additional RBI generation logic. You can define custom plugins that generate signature for methods provided by gems or by private modules.
-
-### Defining a Custom `ModelPlugin` 
-
-A custom plugin should be a subclass of `SorbetRails::ModelPlugins::Base`. Each plugin would implement a `generate(root)` method that should add additional generation logic for the class.
-```
-# -- lib/my_custom_plugin.rb
-class MyCustomPlugin < SorbetRails::ModelPlugins::Base
-  def generate(root)
-    # TODO: implement the generation logic
-  end
-end
-```
-
-TODO: add documentation about Parlour.
-TODO: add documentation about methods in model_utils
-TODO: add guidance how write generation logic
-TODO: add comment about ActiveRecord::Concerns
-
-### Registering new plugins
-You can register your plugins in an initializer:
-```
-# -- config/initializers/sorbet_rails.rb
-SorbetRails::ModelRbiFormatter.register_plugin(MyCustomPlugin)
-```
-Checkout the default plugins and other customizations [here](https://github.com/chanzuckerberg/sorbet-rails/blob/master/lib/sorbet-rails/model_plugins/plugins.rb). `sorbet-rails` includes a plugins that generate methods for ActiveRecord associations, enums, etc. by default. 
 
 ## Tips & Tricks
 
@@ -195,6 +168,67 @@ with:
 ```ruby
 Model.unscoped.scoping do … end
 ```
+
+## Extending Model Generation Task with Custom Plugins
+
+`sorbet-rails` support a customizable plugin system that you can use to generate additional RBI for each model. This will be useful to generate RBI for methods dynamically added by gems or private concerns.
+
+### Defining a Custom `ModelPlugin` 
+
+A custom plugin should be a subclass of `SorbetRails::ModelPlugins::Base`. Each plugin would implement a `generate(root)` method that generate additional rbi for the model.
+
+At a high level, here is the structure of a plugin:
+```
+# -- lib/my_custom_plugin.rb
+class MyCustomPlugin < SorbetRails::ModelPlugins::Base
+  sig { implementation.params(root: Parlour::RbiGenerator::Namespace).void }
+  def generate(root)
+    # TODO: implement the generation logic
+    # You can use @model_class and @available_classes here
+  end
+end
+```
+During the generation phase, the system will create a new instance of the plugin, with the `model_class` to be generated and a set of all `available_classes` (available models) detected in the Rails App.
+
+We use [Parlour gem](https://github.com/AaronC81/parlour) to generate the RBI for a model. Please check out [Parlour wiki](https://github.com/AaronC81/parlour/wiki/Using-and-creating-RBI-objects) for guide to add RBI, eg create a new module, class, or method in the generated file.
+
+At a high level, you'd usually want to create a model-scoped module for your methods, and include or extend it in the base model class. The generation logic usually looks like this:
+```
+  def generate(root)
+    # Make sure this is only run for relevant class
+    return unless @model_class.include?(CustomModule)
+
+    custom_module_name = self.model_module_name("CustomModule")
+    custom_module_rbi = root.create_module(custom_module_name)
+
+    # here we re-create the model class!
+    model_class_rbi = root.create_class(self.model_class_name)
+    model_class_rbi.create_extend(custom_module_name)
+    
+    # then create custom methods, constants, etc. for this module.
+    custom_module_rbi.create_method(...)
+    
+    # this is allowed but not recommended, because it limit the ability to override the method.
+    model_class_rbi.create_method(...)
+  end
+```
+Notice that we re-create `model_class_rbi` here. Parlour's [ConflictResolver](https://github.com/AaronC81/parlour/wiki/Internals#overall-flow) will merge the classes or modules with the same name together to generate 1 beautiful RBI file. It'll also flag and skip if any method is created multiple times with conflict signatures. Check-out useful predefined module names & helper methods in [model_utils](https://github.com/chanzuckerberg/sorbet-rails/blob/master/lib/sorbet-rails/model_utils.rb).
+
+It is also allowed to put methods into a model class directly. However, it is not recommended because it'll be harder to override the method. `sorbet` will enforce that the overriding method match the signature generated. It also makes the generated RBI file less modularized.  
+
+However, sometimes this is required to make `sorbet` recognize the signature. This is the case for class methods added by `ActiveRecord::Concerns`. Because `ActiveSupport::Concern` class methods will be inserted to the class directly, you need to also put the sig in the model class rbi directly.
+
+It is also recommended to check if the generated methods are detected by `sorbet` as a gem method (in `sorbet/rbi/gem/gem_name.rbi`) or hidden methods (in `sorbet/rbi/hidden-definitions/hidden.rbi`). If so, you may need to re-run `srb rbi hidden-definition` or put method in the model class directly.
+
+Check out the [plugins](https://github.com/chanzuckerberg/sorbet-rails/tree/master/lib/sorbet-rails/model_plugins) written for `sorbet-rails`'s own model RBI generation logic for examples.
+
+### Registering new plugins
+You can register your plugins in an initializer:
+```
+# -- config/initializers/sorbet_rails.rb
+SorbetRails::ModelRbiFormatter.register_plugin(MyCustomPlugin)
+```
+Checkout the default plugins and other customizations [here](https://github.com/chanzuckerberg/sorbet-rails/blob/master/lib/sorbet-rails/model_plugins/plugins.rb). `sorbet-rails` includes a plugins that generate methods for ActiveRecord associations, enums, etc. by default. 
 
 ## Contributing
 
