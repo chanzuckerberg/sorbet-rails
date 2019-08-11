@@ -87,6 +87,9 @@ build-iPhoneSimulator/
 /spec/support/v5.2-no-sorbet/sorbet/*
 /spec/support/v5.2-no-sorbet/sorbet/**/*
 
+# Ignore files in the public/ directories.
+/spec/support/**/public/*
+
 # editor swap files
 *.swp
 *.swo
