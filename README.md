@@ -71,7 +71,7 @@ The generation task currently creates the following signatures:
 - Named scopes
 - Model relation class
 
-It is possible to add custom RBI generation logic for your custom module or gems via the plugin system. Check out the section on plugins below if you are interested.
+It is possible to add custom RBI generation logic for your custom module or gems via the plugin system. Check out the [plugins section](#extending-model-generation-task-with-custom-plugins) below if you are interested.
 
 ### Helpers
 
@@ -171,7 +171,7 @@ Model.unscoped.scoping do … end
 
 ## Extending Model Generation Task with Custom Plugins
 
-`sorbet-rails` support a customizable plugin system that you can use to generate additional RBI for each model. This will be useful to generate RBI for methods dynamically added by gems or private concerns.
+`sorbet-rails` support a customizable plugin system that you can use to generate additional RBI for each model. This will be useful to generate RBI for methods dynamically added by gems or private concerns. If you write plugins for public gems, please feel free to contribute it to this repo.
 
 ### Defining a Custom `ModelPlugin` 
 
@@ -228,7 +228,7 @@ You can register your plugins in an initializer:
 # -- config/initializers/sorbet_rails.rb
 SorbetRails::ModelRbiFormatter.register_plugin(MyCustomPlugin)
 ```
-Checkout the default plugins and other customizations [here](https://github.com/chanzuckerberg/sorbet-rails/blob/master/lib/sorbet-rails/model_plugins/plugins.rb). `sorbet-rails` includes a plugins that generate methods for ActiveRecord associations, enums, etc. by default. 
+The default plugins and other customizations are defined [here](https://github.com/chanzuckerberg/sorbet-rails/blob/master/lib/sorbet-rails/model_plugins/plugins.rb).
 
 ## Contributing
 
