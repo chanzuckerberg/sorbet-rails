@@ -253,12 +253,11 @@ after_bundle do
   create_migrations
   add_sorbet_test_files
   
-  # Rails 4.2 doesn't have the rails_command method.
-  if ['4.2'].include?(ENV["RAILS_VERSION"])
+  Bundler.with_clean_env do
+    # Rails 4.2 doesn't have the rails_command method, so just use run.
     run "bundle exec rake db:migrate"
-  else
-    rails_command "db:migrate"
   end
+
   if ENV["RUN_WITH_SORBET"] != 'false'
     Bundler.with_clean_env do
       run "SRB_YES=true bundle exec srb init"

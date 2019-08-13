@@ -10,7 +10,7 @@ namespace :update_spec do
 
   # This excludes 4.2 because it won't work with Bundler 2.0
   desc "Generate Rails apps for all versions (except 4.2)."
-  task :all do |t, args|
+  task :v5_plus do |t, args|
     Rake::Task['update_spec:v6_0'].invoke
     Rake::Task['update_spec:v5_2'].invoke
     Rake::Task['update_spec:v5_2_no_sorbet'].invoke
