@@ -19,10 +19,12 @@ class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugi
         # enum attribute is treated differently
         assignable_type = "T.any(Integer, String, Symbol)"
         assignable_type = "T.nilable(#{assignable_type})" if column_def.null
+        return_type = "String"
+        return_type = "T.nilable(#{return_type})" if column_def.null
 
         attribute_module_rbi.create_method(
           column_name.to_s,
-          return_type: "String",
+          return_type: return_type,
         )
         attribute_module_rbi.create_method(
           "#{column_name}=",
