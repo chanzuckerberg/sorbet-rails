@@ -32,9 +32,9 @@ cd $current_dir
 
 if [[ -z $RAILS_VERSION ]]; then
   echo "---- Run DEFAULT ----"
-  bundle update && bundle exec rake
+  bundle update && DISABLE_DATABASE_ENVIRONMENT_CHECK=1 bundle exec rake
 else
   echo "---- Run $RAILS_VERSION ----"
   RAILS_VERSION=$RAILS_VERSION bundle $bundle_version update
-  RAILS_VERSION=$RAILS_VERSION bundle $bundle_version exec rake
+  RAILS_VERSION=$RAILS_VERSION DISABLE_DATABASE_ENVIRONMENT_CHECK=1 bundle $bundle_version exec rake
 fi
