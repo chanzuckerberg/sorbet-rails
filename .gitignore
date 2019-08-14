@@ -73,8 +73,10 @@ build-iPhoneSimulator/
 /spec/support/**/public/assets
 .byebug_history
 
-# Ignore master key for decrypting credentials and more.
+# Ignore master key for decrypting credentials and the secrets.yml that was used in older versions of Rails.
 /spec/support/**/config/master.key
+/spec/support/**/config/secrets.yml
+/spec/support/**/config/credentials.yml.enc
 
 # Ignore sorbet-rails generated files
 /spec/support/**/sorbet/rails-rbi/*
@@ -86,6 +88,9 @@ build-iPhoneSimulator/
 # Ignore sorbet files in v5.2-no-sorbet
 /spec/support/v5.2-no-sorbet/sorbet/*
 /spec/support/v5.2-no-sorbet/sorbet/**/*
+
+# Ignore files in the public/ directories.
+/spec/support/**/public/*
 
 # editor swap files
 *.swp

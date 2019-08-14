@@ -549,12 +549,6 @@ class Rails::BacktraceCleaner < ActiveSupport::BacktraceCleaner
   def add_gem_filters; end
   def initialize; end
 end
-class ActiveRecord::ExplainRegistry
-  def self.collect?(*args, &block); end
-end
-class ActiveRecord::Scoping::ScopeRegistry
-  def self.value_for(*args, &block); end
-end
 module Anonymous_ActiveRecord_AttributeMethods_GeneratedAttributeMethods_3
   def reset_version!(*args); end
   def restore_version!(*args); end

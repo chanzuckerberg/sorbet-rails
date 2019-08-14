@@ -378,219 +378,6 @@ class Mime::NullType
   extend Singleton::SingletonClassMethods
   include Singleton
 end
-class ActionDispatch::Http::Headers
-  def [](key); end
-  def []=(key, value); end
-  def each(&block); end
-  def env; end
-  def env_name(key); end
-  def fetch(key, *args, &block); end
-  def include?(key); end
-  def initialize(env = nil); end
-  def key?(key); end
-  def merge!(headers_or_env); end
-  def merge(headers_or_env); end
-  include Enumerable
-end
-class ActionController::ActionControllerError < StandardError
-end
-class ActionController::BadRequest < ActionController::ActionControllerError
-  def initialize(type = nil, e = nil); end
-  def original_exception; end
-end
-class ActionController::RenderError < ActionController::ActionControllerError
-end
-class ActionController::RoutingError < ActionController::ActionControllerError
-  def failures; end
-  def initialize(message, failures = nil); end
-end
-class ActionController::UrlGenerationError < ActionController::ActionControllerError
-end
-class ActionController::MethodNotAllowed < ActionController::ActionControllerError
-  def initialize(*allowed_methods); end
-end
-class ActionController::NotImplemented < ActionController::MethodNotAllowed
-end
-class ActionController::UnknownController < ActionController::ActionControllerError
-end
-class ActionController::MissingFile < ActionController::ActionControllerError
-end
-class ActionController::SessionOverflowError < ActionController::ActionControllerError
-  def initialize(message = nil); end
-end
-class ActionController::UnknownHttpMethod < ActionController::ActionControllerError
-end
-class ActionController::UnknownFormat < ActionController::ActionControllerError
-end
-module ActionDispatch::Http::MimeNegotiation
-  def accepts; end
-  def content_mime_type; end
-  def content_type; end
-  def format(view_path = nil); end
-  def format=(extension); end
-  def formats; end
-  def formats=(extensions); end
-  def negotiate_mime(order); end
-  def use_accept_header; end
-  def valid_accept_header; end
-  def variant; end
-  def variant=(variant); end
-  extend ActiveSupport::Concern
-end
-module ActionDispatch::Http::Parameters
-  def normalize_encode_params(params); end
-  def parameters; end
-  def params; end
-  def path_parameters; end
-  def path_parameters=(parameters); end
-  def symbolized_path_parameters; end
-end
-class ActionDispatch::Http::ParameterFilter
-  def compiled_filter; end
-  def filter(params); end
-  def initialize(filters = nil); end
-end
-class ActionDispatch::Http::ParameterFilter::CompiledFilter
-  def blocks; end
-  def call(original_params); end
-  def initialize(regexps, blocks); end
-  def regexps; end
-  def self.compile(filters); end
-end
-module ActionDispatch::Http::FilterParameters
-  def env_filter; end
-  def filtered_env; end
-  def filtered_parameters; end
-  def filtered_path; end
-  def filtered_query_string; end
-  def initialize(env); end
-  def parameter_filter; end
-  def parameter_filter_for(filters); end
-end
-module ActionDispatch::Http::URL
-  def domain(tld_length = nil); end
-  def host; end
-  def host_with_port; end
-  def initialize(env); end
-  def optional_port; end
-  def port; end
-  def port_string; end
-  def protocol; end
-  def raw_host_with_port; end
-  def self.add_anchor(path, anchor); end
-  def self.add_params(path, params); end
-  def self.add_trailing_slash(path); end
-  def self.build_host_url(host, port, protocol, options, path); end
-  def self.extract_domain(host, tld_length); end
-  def self.extract_domain_from(host, tld_length); end
-  def self.extract_subdomain(host, tld_length); end
-  def self.extract_subdomains(host, tld_length); end
-  def self.extract_subdomains_from(host, tld_length); end
-  def self.full_url_for(options); end
-  def self.named_host?(host); end
-  def self.normalize_host(_host, options); end
-  def self.normalize_port(port, protocol); end
-  def self.normalize_protocol(protocol); end
-  def self.path_for(options); end
-  def self.tld_length; end
-  def self.tld_length=(obj); end
-  def self.url_for(options); end
-  def server_port; end
-  def standard_port; end
-  def standard_port?; end
-  def subdomain(tld_length = nil); end
-  def subdomains(tld_length = nil); end
-  def tld_length; end
-  def tld_length=(obj); end
-  def url; end
-end
-class ActionDispatch::Request < Rack::Request
-  def GET; end
-  def POST; end
-  def accept; end
-  def accept_charset; end
-  def accept_encoding; end
-  def accept_language; end
-  def auth_type; end
-  def authorization; end
-  def body; end
-  def body_stream; end
-  def cache_control; end
-  def check_method(name); end
-  def check_path_parameters!; end
-  def content_length; end
-  def cookie_jar; end
-  def deep_munge(hash); end
-  def delete?; end
-  def flash; end
-  def form_data?; end
-  def from; end
-  def fullpath; end
-  def gateway_interface; end
-  def get?; end
-  def head?; end
-  def headers; end
-  def ignore_accept_header; end
-  def ignore_accept_header=(obj); end
-  def initialize(env); end
-  def ip; end
-  def key?(key); end
-  def local?; end
-  def media_type; end
-  def method; end
-  def method_symbol; end
-  def negotiate; end
-  def original_fullpath; end
-  def original_url; end
-  def parse_query(qs); end
-  def patch?; end
-  def path_translated; end
-  def post?; end
-  def pragma; end
-  def put?; end
-  def query_parameters; end
-  def raw_post; end
-  def remote_addr; end
-  def remote_host; end
-  def remote_ident; end
-  def remote_ip; end
-  def remote_user; end
-  def request_method; end
-  def request_method=(request_method); end
-  def request_method_symbol; end
-  def request_parameters; end
-  def reset_session; end
-  def self.ignore_accept_header; end
-  def self.ignore_accept_header=(obj); end
-  def server_name; end
-  def server_protocol; end
-  def server_software; end
-  def session=(session); end
-  def session_options=(options); end
-  def uuid; end
-  def xhr?; end
-  def xml_http_request?; end
-  include ActionDispatch::Http::Cache::Request
-  include ActionDispatch::Http::FilterParameters
-  include ActionDispatch::Http::MimeNegotiation
-  include ActionDispatch::Http::Parameters
-  include ActionDispatch::Http::URL
-end
-class ActionDispatch::RemoteIp
-  def call(env); end
-  def check_ip; end
-  def initialize(app, check_ip_spoofing = nil, custom_proxies = nil); end
-  def proxies; end
-end
-class ActionDispatch::RemoteIp::IpSpoofAttackError < StandardError
-end
-class ActionDispatch::RemoteIp::GetIp
-  def calculate_ip; end
-  def filter_proxies(ips); end
-  def initialize(env, middleware); end
-  def ips_from(header); end
-  def to_s; end
-end
 module ActionDispatch::Routing
   extend ActiveSupport::Autoload
 end
@@ -653,6 +440,36 @@ class ActionDispatch::Journey::Routes
   def simulator; end
   def size; end
   include Enumerable
+end
+class ActionController::ActionControllerError < StandardError
+end
+class ActionController::BadRequest < ActionController::ActionControllerError
+  def initialize(type = nil, e = nil); end
+  def original_exception; end
+end
+class ActionController::RenderError < ActionController::ActionControllerError
+end
+class ActionController::RoutingError < ActionController::ActionControllerError
+  def failures; end
+  def initialize(message, failures = nil); end
+end
+class ActionController::UrlGenerationError < ActionController::ActionControllerError
+end
+class ActionController::MethodNotAllowed < ActionController::ActionControllerError
+  def initialize(*allowed_methods); end
+end
+class ActionController::NotImplemented < ActionController::MethodNotAllowed
+end
+class ActionController::UnknownController < ActionController::ActionControllerError
+end
+class ActionController::MissingFile < ActionController::ActionControllerError
+end
+class ActionController::SessionOverflowError < ActionController::ActionControllerError
+  def initialize(message = nil); end
+end
+class ActionController::UnknownHttpMethod < ActionController::ActionControllerError
+end
+class ActionController::UnknownFormat < ActionController::ActionControllerError
 end
 class ActionDispatch::Journey::Formatter
   def build_cache; end
@@ -1004,6 +821,174 @@ class ActionDispatch::Journey::NFA::Simulator
   def simulate(string); end
   def tt; end
 end
+class ActionDispatch::Http::Headers
+  def [](key); end
+  def []=(key, value); end
+  def each(&block); end
+  def env; end
+  def env_name(key); end
+  def fetch(key, *args, &block); end
+  def include?(key); end
+  def initialize(env = nil); end
+  def key?(key); end
+  def merge!(headers_or_env); end
+  def merge(headers_or_env); end
+  include Enumerable
+end
+module ActionDispatch::Http::MimeNegotiation
+  def accepts; end
+  def content_mime_type; end
+  def content_type; end
+  def format(view_path = nil); end
+  def format=(extension); end
+  def formats; end
+  def formats=(extensions); end
+  def negotiate_mime(order); end
+  def use_accept_header; end
+  def valid_accept_header; end
+  def variant; end
+  def variant=(variant); end
+  extend ActiveSupport::Concern
+end
+module ActionDispatch::Http::Parameters
+  def normalize_encode_params(params); end
+  def parameters; end
+  def params; end
+  def path_parameters; end
+  def path_parameters=(parameters); end
+  def symbolized_path_parameters; end
+end
+class ActionDispatch::Http::ParameterFilter
+  def compiled_filter; end
+  def filter(params); end
+  def initialize(filters = nil); end
+end
+class ActionDispatch::Http::ParameterFilter::CompiledFilter
+  def blocks; end
+  def call(original_params); end
+  def initialize(regexps, blocks); end
+  def regexps; end
+  def self.compile(filters); end
+end
+module ActionDispatch::Http::FilterParameters
+  def env_filter; end
+  def filtered_env; end
+  def filtered_parameters; end
+  def filtered_path; end
+  def filtered_query_string; end
+  def initialize(env); end
+  def parameter_filter; end
+  def parameter_filter_for(filters); end
+end
+module ActionDispatch::Http::URL
+  def domain(tld_length = nil); end
+  def host; end
+  def host_with_port; end
+  def initialize(env); end
+  def optional_port; end
+  def port; end
+  def port_string; end
+  def protocol; end
+  def raw_host_with_port; end
+  def self.add_anchor(path, anchor); end
+  def self.add_params(path, params); end
+  def self.add_trailing_slash(path); end
+  def self.build_host_url(host, port, protocol, options, path); end
+  def self.extract_domain(host, tld_length); end
+  def self.extract_domain_from(host, tld_length); end
+  def self.extract_subdomain(host, tld_length); end
+  def self.extract_subdomains(host, tld_length); end
+  def self.extract_subdomains_from(host, tld_length); end
+  def self.full_url_for(options); end
+  def self.named_host?(host); end
+  def self.normalize_host(_host, options); end
+  def self.normalize_port(port, protocol); end
+  def self.normalize_protocol(protocol); end
+  def self.path_for(options); end
+  def self.tld_length; end
+  def self.tld_length=(obj); end
+  def self.url_for(options); end
+  def server_port; end
+  def standard_port; end
+  def standard_port?; end
+  def subdomain(tld_length = nil); end
+  def subdomains(tld_length = nil); end
+  def tld_length; end
+  def tld_length=(obj); end
+  def url; end
+end
+class ActionDispatch::Request < Rack::Request
+  def GET; end
+  def POST; end
+  def accept; end
+  def accept_charset; end
+  def accept_encoding; end
+  def accept_language; end
+  def auth_type; end
+  def authorization; end
+  def body; end
+  def body_stream; end
+  def cache_control; end
+  def check_method(name); end
+  def check_path_parameters!; end
+  def content_length; end
+  def cookie_jar; end
+  def deep_munge(hash); end
+  def delete?; end
+  def flash; end
+  def form_data?; end
+  def from; end
+  def fullpath; end
+  def gateway_interface; end
+  def get?; end
+  def head?; end
+  def headers; end
+  def ignore_accept_header; end
+  def ignore_accept_header=(obj); end
+  def initialize(env); end
+  def ip; end
+  def key?(key); end
+  def local?; end
+  def media_type; end
+  def method; end
+  def method_symbol; end
+  def negotiate; end
+  def original_fullpath; end
+  def original_url; end
+  def parse_query(qs); end
+  def patch?; end
+  def path_translated; end
+  def post?; end
+  def pragma; end
+  def put?; end
+  def query_parameters; end
+  def raw_post; end
+  def remote_addr; end
+  def remote_host; end
+  def remote_ident; end
+  def remote_ip; end
+  def remote_user; end
+  def request_method; end
+  def request_method=(request_method); end
+  def request_method_symbol; end
+  def request_parameters; end
+  def reset_session; end
+  def self.ignore_accept_header; end
+  def self.ignore_accept_header=(obj); end
+  def server_name; end
+  def server_protocol; end
+  def server_software; end
+  def session=(session); end
+  def session_options=(options); end
+  def uuid; end
+  def xhr?; end
+  def xml_http_request?; end
+  include ActionDispatch::Http::Cache::Request
+  include ActionDispatch::Http::FilterParameters
+  include ActionDispatch::Http::MimeNegotiation
+  include ActionDispatch::Http::Parameters
+  include ActionDispatch::Http::URL
+end
 class ActionDispatch::Routing::Endpoint
   def app; end
   def dispatcher?; end
@@ -1333,57 +1318,6 @@ module ActionController::Helpers::ClassMethods
   def helpers; end
   def modules_for_helpers(args); end
 end
-class ActionDispatch::Routing::RouteWrapper < SimpleDelegator
-  def action; end
-  def constraints; end
-  def controller; end
-  def endpoint; end
-  def engine?; end
-  def internal?; end
-  def json_regexp; end
-  def name; end
-  def path; end
-  def rack_app; end
-  def regexp; end
-  def reqs; end
-  def verb; end
-end
-class ActionDispatch::Routing::RoutesInspector
-  def collect_engine_routes(route); end
-  def collect_routes(routes); end
-  def filter_routes(filter); end
-  def format(formatter, filter = nil); end
-  def initialize(routes); end
-end
-class ActionDispatch::Routing::ConsoleFormatter
-  def draw_header(routes); end
-  def draw_section(routes); end
-  def header(routes); end
-  def initialize; end
-  def no_routes; end
-  def result; end
-  def section(routes); end
-  def section_title(title); end
-  def widths(routes); end
-end
-class ActionDispatch::Routing::HtmlTableFormatter
-  def header(routes); end
-  def initialize(view); end
-  def no_routes; end
-  def result; end
-  def section(routes); end
-  def section_title(title); end
-end
-class ActionDispatch::DebugExceptions
-  def call(env); end
-  def initialize(app, routes_app = nil); end
-  def log_error(env, wrapper); end
-  def logger(env); end
-  def render(status, body, format); end
-  def render_exception(request, exception); end
-  def routes_inspector(exception); end
-  def stderr_logger; end
-end
 class ActionDispatch::MiddlewareStack
   def [](i); end
   def assert_index(index, where); end
@@ -1450,6 +1384,72 @@ class ActionDispatch::PublicExceptions
   def render(status, content_type, body); end
   def render_format(status, content_type, body); end
   def render_html(status); end
+end
+class ActionDispatch::Routing::RouteWrapper < SimpleDelegator
+  def action; end
+  def constraints; end
+  def controller; end
+  def endpoint; end
+  def engine?; end
+  def internal?; end
+  def json_regexp; end
+  def name; end
+  def path; end
+  def rack_app; end
+  def regexp; end
+  def reqs; end
+  def verb; end
+end
+class ActionDispatch::Routing::RoutesInspector
+  def collect_engine_routes(route); end
+  def collect_routes(routes); end
+  def filter_routes(filter); end
+  def format(formatter, filter = nil); end
+  def initialize(routes); end
+end
+class ActionDispatch::Routing::ConsoleFormatter
+  def draw_header(routes); end
+  def draw_section(routes); end
+  def header(routes); end
+  def initialize; end
+  def no_routes; end
+  def result; end
+  def section(routes); end
+  def section_title(title); end
+  def widths(routes); end
+end
+class ActionDispatch::Routing::HtmlTableFormatter
+  def header(routes); end
+  def initialize(view); end
+  def no_routes; end
+  def result; end
+  def section(routes); end
+  def section_title(title); end
+end
+class ActionDispatch::DebugExceptions
+  def call(env); end
+  def initialize(app, routes_app = nil); end
+  def log_error(env, wrapper); end
+  def logger(env); end
+  def render(status, body, format); end
+  def render_exception(env, exception); end
+  def routes_inspector(exception); end
+  def stderr_logger; end
+end
+class ActionDispatch::RemoteIp
+  def call(env); end
+  def check_ip; end
+  def initialize(app, check_ip_spoofing = nil, custom_proxies = nil); end
+  def proxies; end
+end
+class ActionDispatch::RemoteIp::IpSpoofAttackError < StandardError
+end
+class ActionDispatch::RemoteIp::GetIp
+  def calculate_ip; end
+  def filter_proxies(ips); end
+  def initialize(env, middleware); end
+  def ips_from(header); end
+  def to_s; end
 end
 class ActionDispatch::Reloader
   def _cleanup_callbacks; end
@@ -1647,7 +1647,6 @@ module AbstractController::Collector
   def tiff(*args, &block); end
   def url_encoded_form(*args, &block); end
   def vcf(*args, &block); end
-  def web_console_v2(*args, &block); end
   def xml(*args, &block); end
   def yaml(*args, &block); end
   def zip(*args, &block); end
@@ -2639,7 +2638,6 @@ class ActionController::Base < ActionController::Metal
   include ActiveSupport::Callbacks
   include ActiveSupport::Rescuable
   include ActiveSupport::Rescuable
-  include WebConsole::Helper
 end
 module ActionView::RoutingUrlFor
   def default_url_options=(obj); end

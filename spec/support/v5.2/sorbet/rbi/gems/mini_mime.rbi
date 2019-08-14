@@ -7,11 +7,17 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/mini_mime/all/mini_mime.rbi
 #
-# mini_mime-1.0.1
+# mini_mime-1.0.2
 module MiniMime
   def self.lookup_by_content_type(mime); end
   def self.lookup_by_extension(extension); end
   def self.lookup_by_filename(filename); end
+end
+module MiniMime::Configuration
+  def self.content_type_db_path; end
+  def self.content_type_db_path=(arg0); end
+  def self.ext_db_path; end
+  def self.ext_db_path=(arg0); end
 end
 class MiniMime::Info
   def [](idx); end
@@ -38,7 +44,7 @@ class MiniMime::Db::Cache
   def initialize(size); end
 end
 class MiniMime::Db::RandomAccessDb
-  def initialize(name, sort_order); end
+  def initialize(path, sort_order); end
   def lookup(val); end
   def lookup_uncached(val); end
   def resolve(row); end

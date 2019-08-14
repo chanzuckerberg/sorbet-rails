@@ -9,7 +9,6 @@
 #
 # activesupport-5.2.3
 class Array
-  def append(*arg0); end
   def as_json(options = nil); end
   def blank?; end
   def deep_dup; end
@@ -21,10 +20,9 @@ class Array
   def in_groups(number, fill_with = nil); end
   def in_groups_of(number, fill_with = nil); end
   def inquiry; end
-  def prepend(*arg0); end
   def second; end
   def second_to_last; end
-  def self.[](*arg0); end
+  def self.try_convert(arg0); end
   def split(value = nil); end
   def third; end
   def third_to_last; end
@@ -65,9 +63,8 @@ class Hash
   def reverse_merge(other_hash); end
   def reverse_update(other_hash); end
   def self.[](*arg0); end
-  def self.try_convert(arg0); end
+  def self.from_xml(xml, disallowed_types = nil); end
   def slice!(*keys); end
-  def slice(*keys); end
   def stringify_keys!; end
   def stringify_keys; end
   def symbolize_keys!; end
@@ -77,8 +74,6 @@ class Hash
   def to_param(namespace = nil); end
   def to_query(namespace = nil); end
   def to_xml(options = nil); end
-  def transform_keys!; end
-  def transform_keys; end
   def with_defaults!(other_hash); end
   def with_defaults(other_hash); end
   def with_indifferent_access; end
@@ -1204,10 +1199,8 @@ class Method
   def duplicable?; end
 end
 class Complex < Numeric
-  def duplicable?; end
 end
 class Rational < Numeric
-  def duplicable?; end
 end
 class Integer < Numeric
   def month; end
@@ -1329,7 +1322,7 @@ class ActiveSupport::HashWithIndifferentAccess < Hash
   def merge!(other_hash); end
   def merge(hash, &block); end
   def nested_under_indifferent_access; end
-  def regular_update(arg0); end
+  def regular_update(*arg0); end
   def regular_writer(arg0, arg1); end
   def reject(*args, &block); end
   def replace(other_hash); end
@@ -1388,6 +1381,7 @@ class ActiveSupport::Callbacks::Filters::Environment < Struct
   def halted; end
   def halted=(_); end
   def self.[](*arg0); end
+  def self.inspect; end
   def self.members; end
   def self.new(*arg0); end
   def target; end
@@ -1685,6 +1679,80 @@ class ActiveSupport::StringInquirer < String
   def method_missing(method_name, *arguments); end
   def respond_to_missing?(method_name, include_private = nil); end
 end
+class ActiveSupport::ProxyObject < BasicObject
+  def raise(*args); end
+end
+class ActiveSupport::ArrayInquirer < Array
+  def any?(*candidates); end
+  def method_missing(name, *args); end
+  def respond_to_missing?(name, include_private = nil); end
+end
+module ActiveSupport::Cache
+  def self.expand_cache_key(key, namespace = nil); end
+  def self.lookup_store(*store_option); end
+  def self.retrieve_cache_key(key); end
+  def self.retrieve_store_class(store); end
+end
+module ActiveSupport::Cache::Strategy
+end
+class ActiveSupport::Cache::Store
+  def cleanup(options = nil); end
+  def clear(options = nil); end
+  def decrement(name, amount = nil, options = nil); end
+  def delete(name, options = nil); end
+  def delete_entry(key, options); end
+  def delete_matched(matcher, options = nil); end
+  def exist?(name, options = nil); end
+  def expanded_key(key); end
+  def expanded_version(key); end
+  def fetch(name, options = nil); end
+  def fetch_multi(*names); end
+  def get_entry_value(entry, name, options); end
+  def handle_expired_entry(entry, key, options); end
+  def increment(name, amount = nil, options = nil); end
+  def initialize(options = nil); end
+  def instrument(operation, key, options = nil); end
+  def key_matcher(pattern, options); end
+  def log; end
+  def logger; end
+  def logger=(obj); end
+  def merged_options(call_options); end
+  def mute; end
+  def namespace_key(key, options = nil); end
+  def normalize_key(key, options = nil); end
+  def normalize_version(key, options = nil); end
+  def options; end
+  def read(name, options = nil); end
+  def read_entry(key, options); end
+  def read_multi(*names); end
+  def read_multi_entries(names, options); end
+  def save_block_result_to_cache(name, options); end
+  def self.ensure_connection_pool_added!; end
+  def self.logger; end
+  def self.logger=(obj); end
+  def self.retrieve_pool_options(options); end
+  def silence!; end
+  def silence; end
+  def silence?; end
+  def write(name, value, options = nil); end
+  def write_entry(key, entry, options); end
+  def write_multi(hash, options = nil); end
+  def write_multi_entries(hash, options); end
+end
+class ActiveSupport::Cache::Entry
+  def compress!(compress_threshold); end
+  def compressed?; end
+  def dup_value!; end
+  def expired?; end
+  def expires_at; end
+  def expires_at=(value); end
+  def initialize(value, compress: nil, compress_threshold: nil, version: nil, expires_in: nil, **arg5); end
+  def mismatched?(version); end
+  def size; end
+  def uncompress(value); end
+  def value; end
+  def version; end
+end
 class ActiveSupport::ExecutionWrapper
   def __callbacks; end
   def __callbacks?; end
@@ -1720,6 +1788,7 @@ class ActiveSupport::ExecutionWrapper::RunHook < Struct
   def hook; end
   def hook=(_); end
   def self.[](*arg0); end
+  def self.inspect; end
   def self.members; end
   def self.new(*arg0); end
 end
@@ -1729,6 +1798,7 @@ class ActiveSupport::ExecutionWrapper::CompleteHook < Struct
   def hook; end
   def hook=(_); end
   def self.[](*arg0); end
+  def self.inspect; end
   def self.members; end
   def self.new(*arg0); end
 end
@@ -1917,6 +1987,10 @@ class ActiveSupport::Dependencies::ClassCache
   def safe_get(key); end
   def store(klass); end
 end
+module Module::Concerning
+  def concern(topic, &module_definition); end
+  def concerning(topic, &block); end
+end
 module ActiveSupport::NumberHelper
   def number_to_currency(number, options = nil); end
   def number_to_delimited(number, options = nil); end
@@ -1930,6 +2004,10 @@ module ActiveSupport::NumberHelper
 end
 module ActiveSupport::NumericWithFormat
   def to_s(format = nil, options = nil); end
+end
+class File < IO
+  def self.atomic_write(file_name, temp_dir = nil); end
+  def self.probe_stat_in(dir); end
 end
 module ActiveSupport::RangeWithFormat
   def to_default_s(format = nil); end
@@ -1949,27 +2027,14 @@ module ActiveSupport::EachTimeWithZone
   def ensure_iteration_allowed; end
   def step(n = nil, &block); end
 end
-module SecureRandom
-  def self.base58(n = nil); end
-end
-module Module::Concerning
-  def concern(topic, &module_definition); end
-  def concerning(topic, &block); end
-end
 module Benchmark
   def self.ms; end
 end
 module ActiveSupport::MarshalWithAutoloading
   def load(source, proc = nil); end
 end
-class ActiveSupport::ArrayInquirer < Array
-  def any?(*candidates); end
-  def method_missing(name, *args); end
-  def respond_to_missing?(name, include_private = nil); end
-end
-class File < IO
-  def self.empty?(arg0); end
-  def self.size(arg0); end
+module SecureRandom
+  def self.base58(n = nil); end
 end
 module ActiveSupport::TaggedLogging
   def clear_tags!(*args, &block); end
@@ -1987,72 +2052,6 @@ module ActiveSupport::TaggedLogging::Formatter
   def push_tags(*tags); end
   def tagged(*tags); end
   def tags_text; end
-end
-module ActiveSupport::Cache
-  def self.expand_cache_key(key, namespace = nil); end
-  def self.lookup_store(*store_option); end
-  def self.retrieve_cache_key(key); end
-  def self.retrieve_store_class(store); end
-end
-module ActiveSupport::Cache::Strategy
-end
-class ActiveSupport::Cache::Store
-  def cleanup(options = nil); end
-  def clear(options = nil); end
-  def decrement(name, amount = nil, options = nil); end
-  def delete(name, options = nil); end
-  def delete_entry(key, options); end
-  def delete_matched(matcher, options = nil); end
-  def exist?(name, options = nil); end
-  def expanded_key(key); end
-  def expanded_version(key); end
-  def fetch(name, options = nil); end
-  def fetch_multi(*names); end
-  def get_entry_value(entry, name, options); end
-  def handle_expired_entry(entry, key, options); end
-  def increment(name, amount = nil, options = nil); end
-  def initialize(options = nil); end
-  def instrument(operation, key, options = nil); end
-  def key_matcher(pattern, options); end
-  def log; end
-  def logger; end
-  def logger=(obj); end
-  def merged_options(call_options); end
-  def mute; end
-  def namespace_key(key, options = nil); end
-  def normalize_key(key, options = nil); end
-  def normalize_version(key, options = nil); end
-  def options; end
-  def read(name, options = nil); end
-  def read_entry(key, options); end
-  def read_multi(*names); end
-  def read_multi_entries(names, options); end
-  def save_block_result_to_cache(name, options); end
-  def self.ensure_connection_pool_added!; end
-  def self.logger; end
-  def self.logger=(obj); end
-  def self.retrieve_pool_options(options); end
-  def silence!; end
-  def silence; end
-  def silence?; end
-  def write(name, value, options = nil); end
-  def write_entry(key, entry, options); end
-  def write_multi(hash, options = nil); end
-  def write_multi_entries(hash, options); end
-end
-class ActiveSupport::Cache::Entry
-  def compress!(compress_threshold); end
-  def compressed?; end
-  def dup_value!; end
-  def expired?; end
-  def expires_at; end
-  def expires_at=(value); end
-  def initialize(value, compress: nil, compress_threshold: nil, version: nil, expires_in: nil, **arg5); end
-  def mismatched?(version); end
-  def size; end
-  def uncompress(value); end
-  def value; end
-  def version; end
 end
 module ActiveSupport::Cache::Strategy::LocalCache
   def bypass_local_cache; end
@@ -2128,6 +2127,9 @@ class ActiveSupport::LogSubscriber < ActiveSupport::Subscriber
   def self.logger; end
   def self.logger=(arg0); end
 end
+module ActiveSupport::Benchmarkable
+  def benchmark(message = nil, options = nil); end
+end
 class ActiveSupport::Cache::MemoryStore < ActiveSupport::Cache::Store
   def cached_size(key, entry); end
   def cleanup(options = nil); end
@@ -2144,9 +2146,6 @@ class ActiveSupport::Cache::MemoryStore < ActiveSupport::Cache::Store
   def read_entry(key, options); end
   def synchronize(&block); end
   def write_entry(key, entry, options); end
-end
-module ActiveSupport::Benchmarkable
-  def benchmark(message = nil, options = nil); end
 end
 class ActiveSupport::Digest
   def self.hash_digest_class; end
@@ -2165,145 +2164,4 @@ module ActiveSupport::Configurable::ClassMethods
   def config; end
   def config_accessor(*names); end
   def configure; end
-end
-module ActiveSupport::Testing
-end
-module ActiveSupport::Testing::TaggedLogging
-  def before_setup; end
-  def tagged_logger; end
-  def tagged_logger=(arg0); end
-end
-module ActiveSupport::Testing::SetupAndTeardown
-  def after_teardown; end
-  def before_setup; end
-  def self.prepended(klass); end
-end
-module ActiveSupport::Testing::SetupAndTeardown::ClassMethods
-  def setup(*args, &block); end
-  def teardown(*args, &block); end
-end
-module ActiveSupport::Testing::Assertions
-  def assert_changes(expression, message = nil, from: nil, to: nil, &block); end
-  def assert_difference(expression, *args, &block); end
-  def assert_no_changes(expression, message = nil, &block); end
-  def assert_no_difference(expression, message = nil, &block); end
-  def assert_not(object, message = nil); end
-  def assert_nothing_raised; end
-end
-module ActiveSupport::Testing::Deprecation
-  def assert_deprecated(match = nil, deprecator = nil, &block); end
-  def assert_not_deprecated(deprecator = nil, &block); end
-  def collect_deprecations(deprecator = nil); end
-end
-module ActiveSupport::Testing::Declarative
-  def test(name, &block); end
-end
-module ActiveSupport::Testing::Isolation
-  def run; end
-  def self.forking_env?; end
-  def self.included(klass); end
-  include ActiveSupport::Testing::Isolation::Forking
-end
-module ActiveSupport::Testing::Isolation::Forking
-  def run_in_isolation(&blk); end
-end
-module ActiveSupport::Testing::Isolation::Subprocess
-  def run_in_isolation(&blk); end
-end
-module ActiveSupport::Testing::ConstantLookup
-  extend ActiveSupport::Concern
-end
-module ActiveSupport::Testing::ConstantLookup::ClassMethods
-  def determine_constant_from_test_name(test_name); end
-end
-class ActiveSupport::Testing::SimpleStubs
-  def initialize; end
-  def stub_object(object, method_name, &block); end
-  def stubbing(object, method_name); end
-  def unstub_all!; end
-  def unstub_object(stub); end
-end
-class ActiveSupport::Testing::SimpleStubs::Stub < Struct
-  def method_name; end
-  def method_name=(_); end
-  def object; end
-  def object=(_); end
-  def original_method; end
-  def original_method=(_); end
-  def self.[](*arg0); end
-  def self.members; end
-  def self.new(*arg0); end
-end
-module ActiveSupport::Testing::TimeHelpers
-  def after_teardown; end
-  def freeze_time(&block); end
-  def simple_stubs; end
-  def travel(duration, &block); end
-  def travel_back; end
-  def travel_to(date_or_time); end
-end
-module ActiveSupport::Testing::FileFixtures
-  def file_fixture(fixture_name); end
-  extend ActiveSupport::Concern
-end
-class ActiveSupport::TestCase < Minitest::Test
-  def __callbacks; end
-  def __callbacks?; end
-  def _run_setup_callbacks(&block); end
-  def _run_teardown_callbacks(&block); end
-  def _setup_callbacks; end
-  def _teardown_callbacks; end
-  def assert_no_match(matcher, obj, msg = nil); end
-  def assert_not_empty(obj, msg = nil); end
-  def assert_not_equal(exp, act, msg = nil); end
-  def assert_not_in_delta(exp, act, delta = nil, msg = nil); end
-  def assert_not_in_epsilon(a, b, epsilon = nil, msg = nil); end
-  def assert_not_includes(collection, obj, msg = nil); end
-  def assert_not_instance_of(cls, obj, msg = nil); end
-  def assert_not_kind_of(cls, obj, msg = nil); end
-  def assert_not_nil(obj, msg = nil); end
-  def assert_not_operator(o1, op, o2 = nil, msg = nil); end
-  def assert_not_predicate(o1, op, msg = nil); end
-  def assert_not_respond_to(obj, meth, msg = nil); end
-  def assert_not_same(exp, act, msg = nil); end
-  def assert_raise(*exp); end
-  def file_fixture_path; end
-  def file_fixture_path?; end
-  def method_name; end
-  def self.__callbacks; end
-  def self.__callbacks=(val); end
-  def self.__callbacks?; end
-  def self._setup_callbacks; end
-  def self._setup_callbacks=(value); end
-  def self._teardown_callbacks; end
-  def self._teardown_callbacks=(value); end
-  def self.file_fixture_path; end
-  def self.file_fixture_path=(val); end
-  def self.file_fixture_path?; end
-  def self.test_order; end
-  def self.test_order=(new_order); end
-  extend ActiveSupport::Callbacks::ClassMethods
-  extend ActiveSupport::DescendantsTracker
-  extend ActiveSupport::Testing::Declarative
-  extend ActiveSupport::Testing::SetupAndTeardown::ClassMethods
-  extend Rails::LineFiltering
-  include ActiveSupport::Callbacks
-  include ActiveSupport::Testing::Assertions
-  include ActiveSupport::Testing::Deprecation
-  include ActiveSupport::Testing::FileFixtures
-  include ActiveSupport::Testing::TaggedLogging
-  include ActiveSupport::Testing::TimeHelpers
-end
-module ActiveSupport::Testing::Stream
-  def capture(stream); end
-  def quietly; end
-  def silence_stream(stream); end
-end
-module Digest
-end
-module Digest::UUID
-  def self.uuid_from_hash(hash_class, uuid_namespace, name); end
-  def self.uuid_v3(uuid_namespace, name); end
-  def self.uuid_v4; end
-  def self.uuid_v5(uuid_namespace, name); end
 end

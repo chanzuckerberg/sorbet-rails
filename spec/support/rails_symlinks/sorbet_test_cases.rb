@@ -1,1 +1,0 @@
-../rails_shared/sorbet_test_cases.rb
