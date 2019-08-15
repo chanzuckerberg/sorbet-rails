@@ -228,25 +228,3 @@ class ActiveJob::Base
   include ActiveSupport::Callbacks
   include ActiveSupport::Rescuable
 end
-module ActiveJob::TestHelper
-  def after_teardown; end
-  def assert_enqueued_jobs(number, only: nil); end
-  def assert_enqueued_with(args = nil); end
-  def assert_no_enqueued_jobs(only: nil, &block); end
-  def assert_no_performed_jobs(only: nil, &block); end
-  def assert_performed_jobs(number, only: nil); end
-  def assert_performed_with(args = nil); end
-  def before_setup; end
-  def clear_enqueued_jobs; end
-  def clear_performed_jobs; end
-  def enqueued_jobs(*args, &block); end
-  def enqueued_jobs=(arg); end
-  def enqueued_jobs_size(only: nil); end
-  def instantiate_job(payload); end
-  def perform_enqueued_jobs(only: nil); end
-  def performed_jobs(*args, &block); end
-  def performed_jobs=(arg); end
-  def queue_adapter; end
-  def queue_adapter_for_test; end
-  def serialize_args_for_assertion(args); end
-end

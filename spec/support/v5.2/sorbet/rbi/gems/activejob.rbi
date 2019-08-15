@@ -203,8 +203,6 @@ class ActiveJob::Base
   def self._queue_adapter=(val); end
   def self._queue_adapter_name; end
   def self._queue_adapter_name=(val); end
-  def self._test_adapter; end
-  def self._test_adapter=(val); end
   def self.logger; end
   def self.logger=(obj); end
   def self.priority; end
@@ -228,7 +226,6 @@ class ActiveJob::Base
   extend ActiveJob::QueueAdapter::ClassMethods
   extend ActiveJob::QueueName::ClassMethods
   extend ActiveJob::QueuePriority::ClassMethods
-  extend ActiveJob::TestHelper::TestQueueAdapter::ClassMethods
   extend ActiveSupport::Callbacks::ClassMethods
   extend ActiveSupport::DescendantsTracker
   extend ActiveSupport::Rescuable::ClassMethods
@@ -241,41 +238,7 @@ class ActiveJob::Base
   include ActiveJob::QueueAdapter
   include ActiveJob::QueueName
   include ActiveJob::QueuePriority
-  include ActiveJob::TestHelper::TestQueueAdapter
   include ActiveJob::Translation
   include ActiveSupport::Callbacks
   include ActiveSupport::Rescuable
-end
-module ActiveJob::TestHelper
-  def after_teardown; end
-  def assert_enqueued_jobs(number, only: nil, except: nil, queue: nil); end
-  def assert_enqueued_with(job: nil, args: nil, at: nil, queue: nil); end
-  def assert_no_enqueued_jobs(only: nil, except: nil, &block); end
-  def assert_no_performed_jobs(only: nil, except: nil, &block); end
-  def assert_performed_jobs(number, only: nil, except: nil); end
-  def assert_performed_with(job: nil, args: nil, at: nil, queue: nil); end
-  def before_setup; end
-  def clear_enqueued_jobs; end
-  def clear_performed_jobs; end
-  def deserialize_args_for_assertion(job); end
-  def enqueued_jobs(*args, &block); end
-  def enqueued_jobs=(arg); end
-  def enqueued_jobs_size(only: nil, except: nil, queue: nil); end
-  def instantiate_job(payload); end
-  def perform_enqueued_jobs(only: nil, except: nil); end
-  def performed_jobs(*args, &block); end
-  def performed_jobs=(arg); end
-  def prepare_args_for_assertion(args); end
-  def queue_adapter; end
-  def queue_adapter_changed_jobs; end
-  def queue_adapter_for_test; end
-  def validate_option(only: nil, except: nil); end
-end
-module ActiveJob::TestHelper::TestQueueAdapter
-  extend ActiveSupport::Concern
-end
-module ActiveJob::TestHelper::TestQueueAdapter::ClassMethods
-  def disable_test_adapter; end
-  def enable_test_adapter(test_adapter); end
-  def queue_adapter; end
 end

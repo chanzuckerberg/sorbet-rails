@@ -1,4 +1,3 @@
-# typed: strict
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -33,11 +32,6 @@ Rails.application.configure do
   # Store uploaded files on the local file system (see config/storage.yml for options)
   config.active_storage.service = :local
 
-  # Mount Action Cable outside main process or domain
-  # config.action_cable.mount_path = nil
-  # config.action_cable.url = 'wss://example.com/cable'
-  # config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/example.*/ ]
-
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
 
@@ -53,7 +47,7 @@ Rails.application.configure do
 
   # Use a real queuing backend for Active Job (and separate queues per environment)
   # config.active_job.queue_adapter     = :resque
-  # config.active_job.queue_name_prefix = "rails_app_#{Rails.env}"
+  # config.active_job.queue_name_prefix = "v5_2-no-sorbet_#{Rails.env}"
 
   config.action_mailer.perform_caching = false
 

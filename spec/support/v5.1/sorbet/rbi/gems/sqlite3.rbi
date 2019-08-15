@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/sqlite3/all/sqlite3.rbi
 #
-# sqlite3-1.3.13
+# sqlite3-1.4.1
 class SQLite3::Database
   def authorizer(&block); end
   def authorizer=(arg0); end
@@ -25,23 +25,30 @@ class SQLite3::Database
   def create_aggregate_handler(handler); end
   def create_function(name, arity, text_rep = nil, &block); end
   def db_filename(arg0); end
-  def define_aggregator(arg0, arg1); end
+  def define_aggregator(name, aggregator); end
+  def define_aggregator2(arg0, arg1); end
   def define_function(arg0); end
+  def define_function_with_flags(arg0, arg1); end
   def enable_load_extension(arg0); end
   def encoding; end
   def errcode; end
   def errmsg; end
+  def exec_batch(arg0, arg1); end
   def execute(sql, bind_vars = nil, *args, &block); end
   def execute2(sql, *bind_vars); end
   def execute_batch(sql, bind_vars = nil, *args); end
+  def execute_batch2(sql, &block); end
+  def extended_result_codes=(arg0); end
   def filename(db_name = nil); end
   def get_first_row(sql, *bind_vars); end
   def get_first_value(sql, *bind_vars); end
-  def initialize(*arg0); end
+  def initialize(file, options = nil, zvfs = nil); end
   def interrupt; end
   def last_insert_row_id; end
   def load_extension(arg0); end
-  def ordered_map_for(columns, row); end
+  def make_type_translator(should_translate); end
+  def open16(arg0); end
+  def open_v2(arg0, arg1, arg2); end
   def prepare(sql); end
   def query(sql, bind_vars = nil, *args); end
   def readonly?; end
@@ -54,6 +61,7 @@ class SQLite3::Database
   def trace(*arg0); end
   def transaction(mode = nil); end
   def transaction_active?; end
+  def translate_from_db(types, row); end
   def translator; end
   def type_translation; end
   def type_translation=(value); end
@@ -95,6 +103,7 @@ end
 module SQLite3
   def self.const_missing(name); end
   def self.libversion; end
+  def self.sqlcipher?; end
   def self.threadsafe; end
   def self.threadsafe?; end
 end
@@ -108,7 +117,6 @@ module SQLite3::Constants::ErrorCode
 end
 class SQLite3::Exception < StandardError
   def code; end
-  def self.code; end
 end
 class SQLite3::SQLException < SQLite3::Exception
 end
