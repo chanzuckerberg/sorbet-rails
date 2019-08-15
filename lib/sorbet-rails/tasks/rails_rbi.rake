@@ -19,7 +19,7 @@ namespace :rails_rbi do
     root_dir = args[:root_dir] || Rails.root
     file_path = Rails.root.join("sorbet", "rails-rbi", "routes.rbi")
     FileUtils.mkdir_p(File.dirname(file_path))
-    File.write(file_path, inspector.format(SorbetRails::RoutesRbiFormatter.new))
+    File.write(file_path, inspector.format(SorbetRails::RoutesRbiFormatter.new).join("\n"))
   end
 
   desc "Generate rbis for rails models. Pass models name to regenerate rbi for only the given models."
