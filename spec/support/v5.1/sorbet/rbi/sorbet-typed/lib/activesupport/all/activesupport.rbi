@@ -193,7 +193,7 @@ class String
   sig { params(patterns: T.untyped).returns(T.untyped) }
   def remove(*patterns); end
 
-  sig { returns(T.nilable(String)) }
+  sig { returns(T.untyped) }
   def safe_constantize; end
 
   sig { params(locale: Symbol).returns(T.nilable(String)) }
