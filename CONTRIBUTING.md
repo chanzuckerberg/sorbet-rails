@@ -62,7 +62,10 @@ The most important files are:
    Generates RBI files for models. You can regenerate these using `bundle exec rake rails_rbi:models`.
 
  * [`lib/sorbet-rails/routes_rbi_formatter.rb`](lib/sorbet-rails/routes_rbi_formatter.rb):
-   Generates an RBI files for routes.  You can regenerate these using `bundle exec rake rails_rbi:routes`.
+   Generates an RBI file for routes. You can regenerate this using `bundle exec rake rails_rbi:routes`.
+
+ * [`lib/sorbet-rails/helper_rbi_formatter.rb`](lib/sorbet-rails/helper_rbi_formatter.rb):
+   Generates an RBI file for helpers. You can regenerate this using `bundle exec rake rails_rbi:helpers`.
 
 ## Tests
 
