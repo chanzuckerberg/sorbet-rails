@@ -10,7 +10,7 @@ RSpec.describe SorbetRails::RoutesRbiFormatter do
     all_routes = Rails.application.routes.routes
     require "action_dispatch/routing/inspector"
     inspector = ActionDispatch::Routing::RoutesInspector.new(all_routes)
-    formatted = inspector.format(SorbetRails::RoutesRbiFormatter.new)
+    formatted = inspector.format(SorbetRails::RoutesRbiFormatter.new).join("\n")
     expect_match_file(formatted, 'expected_routes.rbi')
   end
 
@@ -21,7 +21,7 @@ RSpec.describe SorbetRails::RoutesRbiFormatter do
     end
     require "action_dispatch/routing/inspector"
     inspector = ActionDispatch::Routing::RoutesInspector.new(empty_set.routes)
-    formatted = inspector.format(SorbetRails::RoutesRbiFormatter.new)
+    formatted = inspector.format(SorbetRails::RoutesRbiFormatter.new).join("\n")
     expect_match_file(formatted, 'expected_no_routes.rbi')
   end
 end
