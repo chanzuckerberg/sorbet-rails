@@ -112,19 +112,24 @@ execution to stop, which will then start a debugger. For more, check out the
 
 ### Writing Tests
 
-Tests are in the `_spec.rb` files in the [`spec/`](spec/) directory. Sorbet's `srb tc` test cases are in [`spec/support/rails_shared/sorbet_test_cases.rb`](spec/support/rails_shared/sorbet_test_cases.rb).
+Tests are in the `_spec.rb` files in the [`spec/`](spec/) directory. Sorbet's `srb tc` test
+cases are in [`spec/generators/sorbet_test_cases.rb`](spec/generators/sorbet_test_cases.rb).
 
-Rails apps are stored in [`spec/support/`](spec/support/). Code shared across Rails versions
-(models, views, controllers) are in [`spec/support/rails_shared/`](spec/support/rails_shared/)
-and symlinked to the individual Rails apps.
+Rails apps are stored in [`spec/support/`](spec/support/). Code shared across
+Rails versions (models, views, controllers) is defined in
+[`spec/generators/rails-template.rb`](spec/generators/rails-template.rb) and
+the Rails apps are generated using Rake tasks.
 
-To update the routes, see
-[`rails_shared/config/routes.rb`](spec/support/rails_shared/config/routes.rb)
-and [`rails_shared/app/controller/`](spec/support/rails_shared/app/controller/).
+All models, controllers, helpers, migrations, and any other shared code comes
+from the `rails-template.rb` file. The only exception to this is `spec/generators/sorbet_test_cases.rb`,
+which is copied into each app with `cp`.
 
-To update the models, see [`rails_shared/app/models/`](spec/support/rails_shared/app/models/).
-Add database migrations to [`rails_shared/db/migrate/`](spec/support/rails_shared/db/migrate/)
-and remember to run `bundle exec rake db:migrate` in each application directory.
+The `rails-template.rb` file uses the
+[Rails Application Template](https://guides.rubyonrails.org/rails_application_templates.html)
+functionality included in Rails. You can then regenerate each Rails app from
+the same file using `bundle exec rake update_spec:v4.2`, `bundle exec rake update_spec:v5.0`,
+`bundle exec rake update_spec:v5.1`, etc. (or just `bundle exec rake update_spec:v5_plus`,
+though this excludes regenerating 4.2 because 4.2 blocks usage of Bundler 2.x).
 
 #### Expected Output
 
