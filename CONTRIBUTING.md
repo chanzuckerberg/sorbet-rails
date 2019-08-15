@@ -115,14 +115,11 @@ execution to stop, which will then start a debugger. For more, check out the
 Tests are in the `_spec.rb` files in the [`spec/`](spec/) directory. Sorbet's `srb tc` test
 cases are in [`spec/generators/sorbet_test_cases.rb`](spec/generators/sorbet_test_cases.rb).
 
-Rails apps are stored in [`spec/support/`](spec/support/). Code shared across
-Rails versions (models, views, controllers) is defined in
-[`spec/generators/rails-template.rb`](spec/generators/rails-template.rb) and
-the Rails apps are generated using Rake tasks.
-
-All models, controllers, helpers, migrations, and any other shared code comes
-from the `rails-template.rb` file. The only exception to this is `spec/generators/sorbet_test_cases.rb`,
-which is copied into each app with `cp`.
+Rails apps are stored in [`spec/support/`](spec/support/). All models,
+controllers, helpers, migrations, and any other shared code comes
+from [`spec/generators/rails-template.rb`](spec/generators/rails-template.rb).
+The only exception to this is `spec/generators/sorbet_test_cases.rb`, which is
+copied into each app with `cp`.
 
 The `rails-template.rb` file uses the
 [Rails Application Template](https://guides.rubyonrails.org/rails_application_templates.html)
