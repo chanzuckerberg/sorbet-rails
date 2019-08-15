@@ -135,3 +135,5 @@ by running:
 Only do this once you're confident that your code is correct, because it will update
 the expected test data stored in [`spec/test_data/`](spec/test_data/) based on your current
 code, and all tests will then pass.
+
+If you want to update `sorbet_test_cases.rb`, you can run `bundle exec rake update_spec:sorbet_test_cases` to copy the file from `spec/generators/sorbet_test_cases.rb` into each of the Rails apps in `spec/support/`.
