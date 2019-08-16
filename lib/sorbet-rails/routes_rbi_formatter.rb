@@ -5,7 +5,6 @@ class SorbetRails::RoutesRbiFormatter
   sig { void }
   def initialize
     @parlour = T.let(Parlour::RbiGenerator.new, Parlour::RbiGenerator)
-    @buffer = T.let([], T::Array[T.any(String, T::Array[String])])
   end
 
   sig { params(title: String).void }
@@ -39,9 +38,9 @@ class SorbetRails::RoutesRbiFormatter
     ])
   end
 
-  sig { returns(T::Array[String]) }
+  sig { returns(String) }
   def result
-    @buffer = @parlour.rbi.split("\n")
+    @parlour.rbi
   end
 
   private
