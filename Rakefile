@@ -77,4 +77,11 @@ namespace :update_spec do
       system("RAILS_VERSION='4.2' rails _4.2.11_ new --template spec/generators/rails-template.rb spec/support/v4.2 --skip-javascript --skip-test --skip-sprockets --skip-spring --skip-listen")
     end
   end
+
+  desc "Update sorbet_test_cases.rb in all the Rails apps in spec/support."
+  task :sorbet_test_cases do |t, args|
+    ['v6.0', 'v5.2', 'v5.2-no-sorbet', 'v5.1', 'v5.0', 'v4.2'].each do |version|
+      FileUtils.cp("spec/generators/sorbet_test_cases.rb", "spec/support/#{version}/sorbet_test_cases.rb")
+    end
+  end
 end

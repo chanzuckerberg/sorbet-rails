@@ -62,7 +62,10 @@ The most important files are:
    Generates RBI files for models. You can regenerate these using `bundle exec rake rails_rbi:models`.
 
  * [`lib/sorbet-rails/routes_rbi_formatter.rb`](lib/sorbet-rails/routes_rbi_formatter.rb):
-   Generates an RBI files for routes.  You can regenerate these using `bundle exec rake rails_rbi:routes`.
+   Generates an RBI file for routes. You can regenerate this using `bundle exec rake rails_rbi:routes`.
+
+ * [`lib/sorbet-rails/helper_rbi_formatter.rb`](lib/sorbet-rails/helper_rbi_formatter.rb):
+   Generates an RBI file for helpers. You can regenerate this using `bundle exec rake rails_rbi:helpers`.
 
 ## Tests
 
@@ -109,19 +112,21 @@ execution to stop, which will then start a debugger. For more, check out the
 
 ### Writing Tests
 
-Tests are in the `_spec.rb` files in the [`spec/`](spec/) directory. Sorbet's `srb tc` test cases are in [`spec/support/rails_shared/sorbet_test_cases.rb`](spec/support/rails_shared/sorbet_test_cases.rb).
+Tests are in the `_spec.rb` files in the [`spec/`](spec/) directory. Sorbet's `srb tc` test
+cases are in [`spec/generators/sorbet_test_cases.rb`](spec/generators/sorbet_test_cases.rb).
 
-Rails apps are stored in [`spec/support/`](spec/support/). Code shared across Rails versions
-(models, views, controllers) are in [`spec/support/rails_shared/`](spec/support/rails_shared/)
-and symlinked to the individual Rails apps.
+Rails apps are stored in [`spec/support/`](spec/support/). All models,
+controllers, helpers, migrations, and any other shared code comes
+from [`spec/generators/rails-template.rb`](spec/generators/rails-template.rb).
+The only exception to this is `spec/generators/sorbet_test_cases.rb`, which is
+copied into each app with `cp`.
 
-To update the routes, see
-[`rails_shared/config/routes.rb`](spec/support/rails_shared/config/routes.rb)
-and [`rails_shared/app/controller/`](spec/support/rails_shared/app/controller/).
-
-To update the models, see [`rails_shared/app/models/`](spec/support/rails_shared/app/models/).
-Add database migrations to [`rails_shared/db/migrate/`](spec/support/rails_shared/db/migrate/)
-and remember to run `bundle exec rake db:migrate` in each application directory.
+The `rails-template.rb` file uses the
+[Rails Application Template](https://guides.rubyonrails.org/rails_application_templates.html)
+functionality included in Rails. You can then regenerate each Rails app from
+the same file using `bundle _1.17.3_ exec rake update_spec:v4.2`, `bundle exec rake update_spec:v5.0`,
+`bundle exec rake update_spec:v5.1`, etc. (or just `bundle exec rake update_spec:v5_plus`,
+though this excludes regenerating 4.2 because 4.2 blocks usage of Bundler 2.x).
 
 #### Expected Output
 
@@ -135,3 +140,7 @@ by running:
 Only do this once you're confident that your code is correct, because it will update
 the expected test data stored in [`spec/test_data/`](spec/test_data/) based on your current
 code, and all tests will then pass.
+
+If you want to update `sorbet_test_cases.rb`, you can run `bundle exec rake update_spec:sorbet_test_cases`
+to copy the file from `spec/generators/sorbet_test_cases.rb` into each of the Rails apps
+in `spec/support/`.
