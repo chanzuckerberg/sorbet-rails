@@ -62,6 +62,8 @@ module ActiveRecord::Type::Text; end
 module ActiveRecord::Type::Time; end
 module ActiveRecord::Type::UnsignedInteger; end
 module ActiveSupport::ActionController::Base; end
+module KaminariPlugin::Kaminari; end
+module KaminariPlugin::Kaminari::ActiveRecordModelExtension; end
 module SorbetRails::Utils::Zeitwerk::Loader; end
 module T::InterfaceWrapper::Helpers; end
 module T::InterfaceWrapper::Helpers; end
