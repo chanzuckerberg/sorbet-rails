@@ -291,7 +291,7 @@ class ActionMailer::Base < AbstractController::Base
   extend ActiveSupport::Callbacks::ClassMethods
   extend ActiveSupport::DescendantsTracker
   extend ActiveSupport::Rescuable::ClassMethods
-  extend Anonymous_Module_30
+  extend Anonymous_Module_22
   include AbstractController::AssetPaths
   include AbstractController::Caching
   include AbstractController::Caching::Fragments
@@ -326,54 +326,6 @@ class ActionMailer::Base::LateAttachmentsProxy < SimpleDelegator
   def _raise_error; end
   def inline; end
 end
-module Anonymous_Module_30
+module Anonymous_Module_22
   def inherited(klass); end
-end
-module ActionMailer::TestHelper
-  def assert_emails(number); end
-  def assert_enqueued_emails(number, &block); end
-  def assert_no_emails(&block); end
-  def assert_no_enqueued_emails(&block); end
-  include ActiveJob::TestHelper
-end
-class ActionMailer::NonInferrableMailerError < StandardError
-  def initialize(name); end
-end
-class ActionMailer::TestCase < ActiveSupport::TestCase
-  def _mailer_class; end
-  def _mailer_class=(arg0); end
-  def _mailer_class?; end
-  def self._mailer_class; end
-  def self._mailer_class=(val); end
-  def self._mailer_class?; end
-  def self._setup_callbacks; end
-  def self._teardown_callbacks; end
-  extend ActionMailer::TestCase::Behavior::ClassMethods
-  extend ActiveSupport::Testing::ConstantLookup::ClassMethods
-  include ActionMailer::TestCase::Behavior
-  include ActiveSupport::Testing::ConstantLookup
-end
-module ActionMailer::TestCase::ClearTestDeliveries
-  def clear_test_deliveries; end
-  extend ActiveSupport::Concern
-end
-module ActionMailer::TestCase::Behavior
-  def charset; end
-  def encode(subject); end
-  def initialize_test_deliveries; end
-  def read_fixture(action); end
-  def restore_delivery_method; end
-  def restore_test_deliveries; end
-  def set_delivery_method(method); end
-  def set_expected_mail; end
-  extend ActiveSupport::Concern
-  include ActionMailer::TestHelper
-  include ActiveSupport::Testing::ConstantLookup
-  include Rails::Dom::Testing::Assertions::DomAssertions
-  include Rails::Dom::Testing::Assertions::SelectorAssertions
-end
-module ActionMailer::TestCase::Behavior::ClassMethods
-  def determine_default_mailer(name); end
-  def mailer_class; end
-  def tests(mailer); end
 end

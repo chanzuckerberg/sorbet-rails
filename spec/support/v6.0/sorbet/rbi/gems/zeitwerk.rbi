@@ -7,11 +7,15 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/zeitwerk/all/zeitwerk.rbi
 #
-# zeitwerk-2.1.8
+# zeitwerk-2.1.9
+module Zeitwerk::RealModName
+  def real_mod_name(mod); end
+end
 module Zeitwerk::Loader::Callbacks
   def on_dir_autoloaded(dir); end
   def on_file_autoloaded(file); end
   def on_namespace_loaded(namespace); end
+  include Zeitwerk::RealModName
 end
 module Zeitwerk
 end
@@ -34,10 +38,10 @@ class Zeitwerk::Loader
   def eager_load; end
   def eager_load_exclusions; end
   def enable_reloading; end
-  def expand_ignored_glob_patterns; end
+  def expand_glob_patterns(glob_patterns); end
   def expand_paths(paths); end
-  def ignore(*paths); end
-  def ignored; end
+  def ignore(*glob_patterns); end
+  def ignored_glob_patterns; end
   def ignored_paths; end
   def inflector; end
   def inflector=(arg0); end
@@ -48,6 +52,7 @@ class Zeitwerk::Loader
   def logger; end
   def logger=(arg0); end
   def ls(dir); end
+  def manages?(dir); end
   def mutex2; end
   def mutex; end
   def preload(*paths); end
@@ -55,6 +60,7 @@ class Zeitwerk::Loader
   def promote_namespace_from_implicit_to_explicit(dir:, file:, parent:, cname:); end
   def push_dir(path); end
   def raise_if_conflicting_directory(dir); end
+  def recompute_ignored_paths; end
   def register_explicit_namespace(cpath); end
   def reload; end
   def reloading_enabled?; end
@@ -80,6 +86,7 @@ class Zeitwerk::Loader
   def unloadable_cpath?(cpath); end
   def unloadable_cpaths; end
   include Zeitwerk::Loader::Callbacks
+  include Zeitwerk::RealModName
 end
 module Zeitwerk::Registry
   def self.autoloads; end
@@ -100,6 +107,7 @@ module Zeitwerk::ExplicitNamespace
   def self.disable_tracer_if_unneeded; end
   def self.mutex; end
   def self.register(cpath, loader); end
+  def self.tracepoint_class_callback(event); end
   def self.tracer; end
   def self.unregister(loader); end
 end

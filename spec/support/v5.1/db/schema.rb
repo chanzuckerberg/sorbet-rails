@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190622000000) do
+ActiveRecord::Schema.define(version: 20190620000004) do
 
   create_table "spell_books", force: :cascade do |t|
     t.string "name"

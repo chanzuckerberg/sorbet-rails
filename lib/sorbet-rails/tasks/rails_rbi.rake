@@ -49,15 +49,19 @@ namespace :rails_rbi do
     end
 
     # If ApplicationController doesn't work or doesn't return any helpers,
-    # use ActionController::Base.
-    if ActionController::Base.methods.include?(:modules_for_helpers) && (helpers.length == 0 || helpers.nil?)
+    # try using ActionController::Base.
+    if ActionController::Base.methods.include?(:modules_for_helpers) && (helpers.nil? || helpers.length == 0)
       helpers = ActionController::Base.modules_for_helpers([:all])
     end
 
-    formatter = SorbetRails::HelperRbiFormatter.new(helpers)
-    file_path = Rails.root.join("sorbet", "rails-rbi", "helpers.rbi")
-    FileUtils.mkdir_p(File.dirname(file_path))
-    File.write(file_path, formatter.generate_rbi)
+    if helpers.nil? || helpers.length == 0
+      puts 'No helpers found.'
+    else
+      formatter = SorbetRails::HelperRbiFormatter.new(helpers)
+      file_path = Rails.root.join("sorbet", "rails-rbi", "helpers.rbi")
+      FileUtils.mkdir_p(File.dirname(file_path))
+      File.write(file_path, formatter.generate_rbi)
+    end
   end
 
   def generate_rbis_for_models(model_classes, available_classes)

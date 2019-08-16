@@ -72,6 +72,54 @@ class ActionView::PartialRenderer < ActionView::AbstractRenderer
   def setup(context, options, block); end
   include ActionView::CollectionCaching
 end
+module ActionView::ViewPaths
+  def _prefixes; end
+  def any_templates?(*args, &block); end
+  def append_view_path(path); end
+  def details_for_lookup; end
+  def formats(*args, &block); end
+  def formats=(arg); end
+  def locale(*args, &block); end
+  def locale=(arg); end
+  def lookup_context; end
+  def prepend_view_path(path); end
+  def template_exists?(*args, &block); end
+  def view_paths(*args, &block); end
+  extend ActiveSupport::Concern
+end
+module ActionView::ViewPaths::ClassMethods
+  def _prefixes; end
+  def append_view_path(path); end
+  def local_prefixes; end
+  def prepend_view_path(path); end
+  def view_paths; end
+  def view_paths=(paths); end
+end
+class ActionView::I18nProxy < I18n::Config
+  def initialize(original_config, lookup_context); end
+  def locale; end
+  def locale=(value); end
+  def lookup_context; end
+  def original_config; end
+end
+module ActionView::Rendering
+  def _normalize_args(action = nil, options = nil); end
+  def _normalize_options(options); end
+  def _process_format(format); end
+  def _render_template(options); end
+  def process(*arg0); end
+  def render_to_body(options = nil); end
+  def rendered_format; end
+  def view_context; end
+  def view_context_class; end
+  def view_context_class=(arg0); end
+  def view_renderer; end
+  extend ActiveSupport::Concern
+  include ActionView::ViewPaths
+end
+module ActionView::Rendering::ClassMethods
+  def view_context_class; end
+end
 class ActionView::LogSubscriber < ActiveSupport::LogSubscriber
 end
 module ActionView::Helpers
@@ -991,7 +1039,6 @@ class ActionView::Base
   extend ActionView::Helpers::SanitizeHelper::ClassMethods
   extend ActionView::Helpers::SanitizeHelper::ClassMethods
   extend ActionView::Helpers::UrlHelper::ClassMethods
-  include ActionCable::Helpers::ActionCableHelper
   include ActionView::Helpers
   include ActionView::Helpers::AssetTagHelper
   include ActionView::Helpers::FormHelper
@@ -1010,62 +1057,6 @@ class ActionView::Base
   include ActionView::Helpers::UrlHelper
   include ActionView::Helpers::UrlHelper
   include ActionView::Helpers::UrlHelper
-end
-module ActionView::ViewPaths
-  def _prefixes; end
-  def any_templates?(*args, &block); end
-  def append_view_path(path); end
-  def details_for_lookup; end
-  def formats(*args, &block); end
-  def formats=(arg); end
-  def locale(*args, &block); end
-  def locale=(arg); end
-  def lookup_context; end
-  def prepend_view_path(path); end
-  def template_exists?(*args, &block); end
-  def view_paths(*args, &block); end
-  extend ActiveSupport::Concern
-end
-module ActionView::ViewPaths::ClassMethods
-  def _prefixes; end
-  def append_view_path(path); end
-  def local_prefixes; end
-  def prepend_view_path(path); end
-  def view_paths; end
-  def view_paths=(paths); end
-end
-module ActionView::RoutingUrlFor
-  def _generate_paths_by_default; end
-  def _routes_context; end
-  def only_path?(host); end
-  def optimize_routes_generation?; end
-  def url_for(options = nil); end
-  def url_options; end
-end
-class ActionView::I18nProxy < I18n::Config
-  def initialize(original_config, lookup_context); end
-  def locale; end
-  def locale=(value); end
-  def lookup_context; end
-  def original_config; end
-end
-module ActionView::Rendering
-  def _normalize_args(action = nil, options = nil); end
-  def _normalize_options(options); end
-  def _process_format(format); end
-  def _render_template(options); end
-  def process(*arg0); end
-  def render_to_body(options = nil); end
-  def rendered_format; end
-  def view_context; end
-  def view_context_class; end
-  def view_context_class=(arg0); end
-  def view_renderer; end
-  extend ActiveSupport::Concern
-  include ActionView::ViewPaths
-end
-module ActionView::Rendering::ClassMethods
-  def view_context_class; end
 end
 module ActionView::Layouts
   def _conditional_layout?; end
@@ -1090,4 +1081,12 @@ module ActionView::Layouts::ClassMethods
 end
 module ActionView::Layouts::ClassMethods::LayoutConditions
   def _conditional_layout?; end
+end
+module ActionView::RoutingUrlFor
+  def _generate_paths_by_default; end
+  def _routes_context; end
+  def only_path?(host); end
+  def optimize_routes_generation?; end
+  def url_for(options = nil); end
+  def url_options; end
 end

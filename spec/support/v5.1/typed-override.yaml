@@ -1,1 +1,2 @@
-../rails_shared/typed-override.yaml
+true:
+- ./sorbet_test_cases.rb

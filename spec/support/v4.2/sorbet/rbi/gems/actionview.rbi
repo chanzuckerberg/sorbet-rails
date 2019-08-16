@@ -781,6 +781,24 @@ class ActionView::Template::Types::Type
   def types; end
   def types=(obj); end
 end
+class ActionView::DependencyTracker
+  def self.find_dependencies(name, template); end
+  def self.register_tracker(extension, tracker); end
+  def self.remove_tracker(handler); end
+end
+class ActionView::DependencyTracker::ERBTracker
+  def add_dynamic_dependency(dependencies, dependency); end
+  def add_static_dependency(dependencies, dependency); end
+  def dependencies; end
+  def directory; end
+  def explicit_dependencies; end
+  def initialize(name, template); end
+  def name; end
+  def render_dependencies; end
+  def self.call(name, template); end
+  def source; end
+  def template; end
+end
 class ActionView::Base
   def _routes; end
   def _routes=(arg0); end
@@ -854,24 +872,6 @@ class ActionView::Base
   include ActionView::Helpers::UrlHelper
   include ActionView::Helpers::UrlHelper
   include ActionView::Helpers::UrlHelper
-end
-class ActionView::DependencyTracker
-  def self.find_dependencies(name, template); end
-  def self.register_tracker(extension, tracker); end
-  def self.remove_tracker(handler); end
-end
-class ActionView::DependencyTracker::ERBTracker
-  def add_dynamic_dependency(dependencies, dependency); end
-  def add_static_dependency(dependencies, dependency); end
-  def dependencies; end
-  def directory; end
-  def explicit_dependencies; end
-  def initialize(name, template); end
-  def name; end
-  def render_dependencies; end
-  def self.call(name, template); end
-  def source; end
-  def template; end
 end
 module ActionView::ViewPaths
   def _prefixes; end

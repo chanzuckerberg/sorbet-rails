@@ -136,7 +136,7 @@ end
 module Arel::Attributes
   def self.for(column); end
 end
-class Anonymous_Struct_13 < Struct
+class Anonymous_Struct_12 < Struct
   def name; end
   def name=(_); end
   def relation; end
@@ -146,7 +146,7 @@ class Anonymous_Struct_13 < Struct
   def self.members; end
   def self.new(*arg0); end
 end
-class Arel::Attributes::Attribute < Anonymous_Struct_13
+class Arel::Attributes::Attribute < Anonymous_Struct_12
   def able_to_type_cast?; end
   def lower; end
   def type_cast_for_database(value); end
@@ -615,7 +615,7 @@ class Arel::Visitors::Dot::Node
   def name; end
   def name=(arg0); end
 end
-class Anonymous_Struct_14 < Struct
+class Anonymous_Struct_13 < Struct
   def from; end
   def from=(_); end
   def name; end
@@ -627,7 +627,7 @@ class Anonymous_Struct_14 < Struct
   def to; end
   def to=(_); end
 end
-class Arel::Visitors::Dot::Edge < Anonymous_Struct_14
+class Arel::Visitors::Dot::Edge < Anonymous_Struct_13
 end
 class Arel::Visitors::IBM_DB < Arel::Visitors::ToSql
   def visit_Arel_Nodes_Limit(o, collector); end
@@ -712,7 +712,7 @@ class Arel::SelectManager < Arel::TreeManager
   def with(*subqueries); end
   include Arel::Crud
 end
-class Anonymous_Struct_15 < Struct
+class Anonymous_Struct_14 < Struct
   def data; end
   def data=(_); end
   def self.[](*arg0); end
@@ -720,7 +720,7 @@ class Anonymous_Struct_15 < Struct
   def self.members; end
   def self.new(*arg0); end
 end
-class Arel::SelectManager::Row < Anonymous_Struct_15
+class Arel::SelectManager::Row < Anonymous_Struct_14
   def id; end
   def method_missing(name, *args); end
 end
