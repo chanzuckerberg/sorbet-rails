@@ -5,6 +5,10 @@ class ActionController::Base
   include GeneratedUrlHelpers
 end
 
+module ActionView::Helpers
+  include GeneratedUrlHelpers
+end
+
 module GeneratedUrlHelpers
   # Sigs for route /test/index(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
