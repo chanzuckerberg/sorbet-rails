@@ -4,7 +4,8 @@ class SorbetRails::ModelPlugins::ActiveRecordNamedScope < SorbetRails::ModelPlug
 
   sig { implementation.params(root: Parlour::RbiGenerator::Namespace).void }
   def generate(root)
-    ar_named_scope_rbi = root.create_module(self.model_relation_shared_module_name)
+    model_class_rbi = root.create_class(self.model_class_name)
+
     @model_class.methods.sort.each do |method_name|
       method_obj = @model_class.method(method_name)
       next unless method_obj.present? && method_obj.source_location.present?
@@ -16,12 +17,12 @@ class SorbetRails::ModelPlugins::ActiveRecordNamedScope < SorbetRails::ModelPlug
       source_file = method_obj.source_location[0]
       next unless source_file.include?("lib/active_record/scoping/named.rb")
 
-      ar_named_scope_rbi.create_method(
+      add_relation_query_method(
+        root,
         method_name.to_s,
         parameters: [
           Parameter.new("*args", type: "T.untyped"),
         ],
-        return_type: self.model_relation_class_name,
       )
     end
   end

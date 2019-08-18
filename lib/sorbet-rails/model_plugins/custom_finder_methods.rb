@@ -7,11 +7,7 @@ class SorbetRails::ModelPlugins::CustomFinderMethods < SorbetRails::ModelPlugins
     model_class_rbi = root.create_class(self.model_class_name)
     model_relation_class_rbi = root.create_class(self.model_relation_class_name)
     model_assoc_proxy_class_rbi = root.create_class(self.model_assoc_proxy_class_name)
-
-    # include the actual module
-    model_class_rbi.create_extend("SorbetRails::CustomFinderMethods")
-    model_relation_class_rbi.create_include("SorbetRails::CustomFinderMethods")
-    model_assoc_proxy_class_rbi.create_include("SorbetRails::CustomFinderMethods")
+    model_assoc_relation_rbi = root.create_class(self.model_assoc_relation_class_name)
 
     custom_module_name = self.model_module_name("CustomFinderMethods")
     custom_module_rbi = root.create_module(custom_module_name)
@@ -20,6 +16,7 @@ class SorbetRails::ModelPlugins::CustomFinderMethods < SorbetRails::ModelPlugins
     model_class_rbi.create_extend(custom_module_name)
     model_relation_class_rbi.create_include(custom_module_name)
     model_assoc_proxy_class_rbi.create_include(custom_module_name)
+    model_assoc_relation_rbi.create_include(custom_module_name)
 
     custom_module_rbi.create_method(
       "first_n",
