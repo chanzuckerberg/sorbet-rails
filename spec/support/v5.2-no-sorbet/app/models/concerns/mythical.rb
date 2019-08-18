@@ -1,3 +1,4 @@
+# typed: false
 require 'active_support/concern'
 module Mythical
   extend ActiveSupport::Concern

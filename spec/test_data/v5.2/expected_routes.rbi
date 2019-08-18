@@ -13,6 +13,76 @@ module GeneratedUrlHelpers
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
   def test_index_url(*args, **kwargs); end
 
+  # Sigs for route /rails/action_mailbox/mandrill/inbound_emails(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def rails_mandrill_inbound_emails_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def rails_mandrill_inbound_emails_url(*args, **kwargs); end
+
+  # Sigs for route /rails/action_mailbox/postmark/inbound_emails(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def rails_postmark_inbound_emails_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def rails_postmark_inbound_emails_url(*args, **kwargs); end
+
+  # Sigs for route /rails/action_mailbox/relay/inbound_emails(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def rails_relay_inbound_emails_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def rails_relay_inbound_emails_url(*args, **kwargs); end
+
+  # Sigs for route /rails/action_mailbox/sendgrid/inbound_emails(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def rails_sendgrid_inbound_emails_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def rails_sendgrid_inbound_emails_url(*args, **kwargs); end
+
+  # Sigs for route /rails/action_mailbox/mailgun/inbound_emails/mime(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def rails_mailgun_inbound_emails_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def rails_mailgun_inbound_emails_url(*args, **kwargs); end
+
+  # Sigs for route /rails/conductor/action_mailbox/inbound_emails(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def rails_conductor_inbound_emails_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def rails_conductor_inbound_emails_url(*args, **kwargs); end
+
+  # Sigs for route /rails/conductor/action_mailbox/inbound_emails/new(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def new_rails_conductor_inbound_email_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def new_rails_conductor_inbound_email_url(*args, **kwargs); end
+
+  # Sigs for route /rails/conductor/action_mailbox/inbound_emails/:id/edit(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def edit_rails_conductor_inbound_email_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def edit_rails_conductor_inbound_email_url(*args, **kwargs); end
+
+  # Sigs for route /rails/conductor/action_mailbox/inbound_emails/:id(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def rails_conductor_inbound_email_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def rails_conductor_inbound_email_url(*args, **kwargs); end
+
+  # Sigs for route /rails/conductor/action_mailbox/:inbound_email_id/reroute(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def rails_conductor_inbound_email_reroute_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def rails_conductor_inbound_email_reroute_url(*args, **kwargs); end
+
   # Sigs for route /rails/active_storage/blobs/:signed_id/*filename(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
   def rails_service_blob_path(*args, **kwargs); end

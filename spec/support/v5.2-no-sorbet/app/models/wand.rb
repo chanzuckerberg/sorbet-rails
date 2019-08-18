@@ -1,3 +1,4 @@
+# typed: true
 class Wand < ApplicationRecord
   include Mythical
 
