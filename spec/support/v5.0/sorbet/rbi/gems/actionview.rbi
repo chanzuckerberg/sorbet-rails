@@ -120,6 +120,222 @@ end
 module ActionView::Rendering::ClassMethods
   def view_context_class; end
 end
+module ActionView::Layouts
+  def _conditional_layout?; end
+  def _default_layout(formats, require_layout = nil); end
+  def _include_layout?(options); end
+  def _layout(*arg0); end
+  def _layout_conditions(*args, &block); end
+  def _layout_for_option(name); end
+  def _normalize_layout(value); end
+  def _normalize_options(options); end
+  def action_has_layout=(arg0); end
+  def action_has_layout?; end
+  def initialize(*arg0); end
+  extend ActiveSupport::Concern
+  include ActionView::Rendering
+end
+module ActionView::Layouts::ClassMethods
+  def _implied_layout_name; end
+  def _write_layout_method; end
+  def inherited(klass); end
+  def layout(layout, conditions = nil); end
+end
+module ActionView::Layouts::ClassMethods::LayoutConditions
+  def _conditional_layout?; end
+end
+class ActionView::PathSet
+  def +(array); end
+  def <<(*args); end
+  def [](*args, &block); end
+  def _find_all(path, prefixes, args, outside_app); end
+  def compact; end
+  def concat(*args); end
+  def each(*args, &block); end
+  def exists?(path, prefixes, *args); end
+  def find(*args); end
+  def find_all(path, prefixes = nil, *args); end
+  def find_all_with_query(query); end
+  def find_file(path, prefixes = nil, *args); end
+  def include?(*args, &block); end
+  def initialize(paths = nil); end
+  def initialize_copy(other); end
+  def insert(*args); end
+  def paths; end
+  def pop(*args, &block); end
+  def push(*args); end
+  def size(*args, &block); end
+  def to_ary; end
+  def typecast(paths); end
+  def unshift(*args); end
+  include Enumerable
+end
+class ActionView::Template
+  def compile!(view); end
+  def compile(mod); end
+  def encode!; end
+  def formats; end
+  def formats=(arg0); end
+  def handle_render_error(view, e); end
+  def handler; end
+  def identifier; end
+  def identifier_method_name; end
+  def initialize(source, identifier, handler, details); end
+  def inspect; end
+  def instrument(action, &block); end
+  def locals; end
+  def locals=(arg0); end
+  def locals_code; end
+  def method_name; end
+  def original_encoding; end
+  def refresh(view); end
+  def render(view, locals, buffer = nil, &block); end
+  def source; end
+  def supports_streaming?; end
+  def type; end
+  def updated_at; end
+  def variants; end
+  def variants=(arg0); end
+  def virtual_path; end
+  def virtual_path=(arg0); end
+  extend ActionView::Template::Handlers
+  extend ActiveSupport::Autoload
+end
+module ActionView::Template::Handlers
+  def handler_for_extension(extension); end
+  def register_default_template_handler(extension, klass); end
+  def register_template_handler(*extensions, handler); end
+  def registered_template_handler(extension); end
+  def self.extended(base); end
+  def self.extensions; end
+  def template_handler_extensions; end
+  def unregister_template_handler(*extensions); end
+end
+class ActionView::Template::Handlers::Raw
+  def call(template); end
+end
+class ActionView::Template::Handlers::Erubis < Erubis::Eruby
+  def add_expr(src, code, indicator); end
+  def add_expr_escaped(src, code); end
+  def add_expr_literal(src, code); end
+  def add_postamble(src); end
+  def add_preamble(src); end
+  def add_stmt(src, code); end
+  def add_text(src, text); end
+  def flush_newline_if_pending(src); end
+end
+class ActionView::Template::Handlers::ERB
+  def call(template); end
+  def erb_implementation; end
+  def erb_implementation=(arg0); end
+  def erb_implementation?; end
+  def erb_trim_mode; end
+  def erb_trim_mode=(arg0); end
+  def erb_trim_mode?; end
+  def escape_whitelist; end
+  def escape_whitelist=(arg0); end
+  def escape_whitelist?; end
+  def handles_encoding?; end
+  def self.call(template); end
+  def self.erb_implementation; end
+  def self.erb_implementation=(val); end
+  def self.erb_implementation?; end
+  def self.erb_trim_mode; end
+  def self.erb_trim_mode=(val); end
+  def self.erb_trim_mode?; end
+  def self.escape_whitelist; end
+  def self.escape_whitelist=(val); end
+  def self.escape_whitelist?; end
+  def supports_streaming?; end
+  def valid_encoding(string, encoding); end
+end
+class ActionView::Template::Handlers::Html < ActionView::Template::Handlers::Raw
+  def call(template); end
+end
+class ActionView::Template::Handlers::Builder
+  def call(template); end
+  def default_format; end
+  def default_format=(arg0); end
+  def default_format?; end
+  def require_engine; end
+  def self.default_format; end
+  def self.default_format=(val); end
+  def self.default_format?; end
+end
+class ActionView::Resolver
+  def build_path(name, prefix, partial); end
+  def cached(key, path_info, details, locals); end
+  def caching; end
+  def caching=(obj); end
+  def caching?(*args, &block); end
+  def clear_cache; end
+  def decorate(templates, path_info, details, locals); end
+  def find_all(name, prefix = nil, partial = nil, details = nil, key = nil, locals = nil); end
+  def find_all_anywhere(name, prefix, partial = nil, details = nil, key = nil, locals = nil); end
+  def find_all_with_query(query); end
+  def find_templates(name, prefix, partial, details, outside_app_allowed = nil); end
+  def initialize; end
+  def self.caching; end
+  def self.caching=(obj); end
+  def self.caching?; end
+end
+class ActionView::Resolver::Path
+  def initialize(name, prefix, partial, virtual); end
+  def name; end
+  def partial; end
+  def partial?; end
+  def prefix; end
+  def self.build(name, prefix, partial); end
+  def to_s; end
+  def to_str; end
+  def virtual; end
+end
+class ActionView::Resolver::Cache
+  def cache(key, name, prefix, partial, locals); end
+  def cache_query(query); end
+  def canonical_no_templates(templates); end
+  def clear; end
+  def initialize; end
+  def inspect; end
+  def templates_have_changed?(cached_templates, fresh_templates); end
+end
+class ActionView::Resolver::Cache::SmallCache < Concurrent::Map
+  def initialize(options = nil); end
+end
+class ActionView::PathResolver < ActionView::Resolver
+  def build_query(path, details); end
+  def escape_entry(entry); end
+  def extract_handler_and_format_and_variant(path, default_formats); end
+  def find_template_paths(query); end
+  def find_templates(name, prefix, partial, details, outside_app_allowed = nil); end
+  def initialize(pattern = nil); end
+  def inside_path?(path, filename); end
+  def mtime(p); end
+  def query(path, details, formats, outside_app_allowed); end
+  def reject_files_external_to_app(files); end
+end
+class ActionView::FileSystemResolver < ActionView::PathResolver
+  def ==(resolver); end
+  def eql?(resolver); end
+  def initialize(path, pattern = nil); end
+  def to_path; end
+  def to_s; end
+end
+class ActionView::OptimizedFileSystemResolver < ActionView::FileSystemResolver
+  def build_query(path, details); end
+end
+class ActionView::FallbackFileSystemResolver < ActionView::FileSystemResolver
+  def decorate(*arg0); end
+  def self.instances; end
+end
+module ActionView::RoutingUrlFor
+  def _generate_paths_by_default; end
+  def _routes_context; end
+  def only_path?(host); end
+  def optimize_routes_generation?; end
+  def url_for(options = nil); end
+  def url_options; end
+end
 class ActionView::LogSubscriber < ActiveSupport::LogSubscriber
 end
 module ActionView::Helpers
@@ -647,164 +863,6 @@ module ActionView::Context
   def view_flow=(arg0); end
   include ActionView::CompiledTemplates
 end
-class ActionView::Template
-  def compile!(view); end
-  def compile(mod); end
-  def encode!; end
-  def formats; end
-  def formats=(arg0); end
-  def handle_render_error(view, e); end
-  def handler; end
-  def identifier; end
-  def identifier_method_name; end
-  def initialize(source, identifier, handler, details); end
-  def inspect; end
-  def instrument(action, &block); end
-  def locals; end
-  def locals=(arg0); end
-  def locals_code; end
-  def method_name; end
-  def original_encoding; end
-  def refresh(view); end
-  def render(view, locals, buffer = nil, &block); end
-  def source; end
-  def supports_streaming?; end
-  def type; end
-  def updated_at; end
-  def variants; end
-  def variants=(arg0); end
-  def virtual_path; end
-  def virtual_path=(arg0); end
-  extend ActionView::Template::Handlers
-  extend ActiveSupport::Autoload
-end
-module ActionView::Template::Handlers
-  def handler_for_extension(extension); end
-  def register_default_template_handler(extension, klass); end
-  def register_template_handler(*extensions, handler); end
-  def registered_template_handler(extension); end
-  def self.extended(base); end
-  def self.extensions; end
-  def template_handler_extensions; end
-  def unregister_template_handler(*extensions); end
-end
-class ActionView::Template::Handlers::Raw
-  def call(template); end
-end
-class ActionView::Template::Handlers::Erubis < Erubis::Eruby
-  def add_expr(src, code, indicator); end
-  def add_expr_escaped(src, code); end
-  def add_expr_literal(src, code); end
-  def add_postamble(src); end
-  def add_preamble(src); end
-  def add_stmt(src, code); end
-  def add_text(src, text); end
-  def flush_newline_if_pending(src); end
-end
-class ActionView::Template::Handlers::ERB
-  def call(template); end
-  def erb_implementation; end
-  def erb_implementation=(arg0); end
-  def erb_implementation?; end
-  def erb_trim_mode; end
-  def erb_trim_mode=(arg0); end
-  def erb_trim_mode?; end
-  def escape_whitelist; end
-  def escape_whitelist=(arg0); end
-  def escape_whitelist?; end
-  def handles_encoding?; end
-  def self.call(template); end
-  def self.erb_implementation; end
-  def self.erb_implementation=(val); end
-  def self.erb_implementation?; end
-  def self.erb_trim_mode; end
-  def self.erb_trim_mode=(val); end
-  def self.erb_trim_mode?; end
-  def self.escape_whitelist; end
-  def self.escape_whitelist=(val); end
-  def self.escape_whitelist?; end
-  def supports_streaming?; end
-  def valid_encoding(string, encoding); end
-end
-class ActionView::Template::Handlers::Html < ActionView::Template::Handlers::Raw
-  def call(template); end
-end
-class ActionView::Template::Handlers::Builder
-  def call(template); end
-  def default_format; end
-  def default_format=(arg0); end
-  def default_format?; end
-  def require_engine; end
-  def self.default_format; end
-  def self.default_format=(val); end
-  def self.default_format?; end
-end
-class ActionView::Resolver
-  def build_path(name, prefix, partial); end
-  def cached(key, path_info, details, locals); end
-  def caching; end
-  def caching=(obj); end
-  def caching?(*args, &block); end
-  def clear_cache; end
-  def decorate(templates, path_info, details, locals); end
-  def find_all(name, prefix = nil, partial = nil, details = nil, key = nil, locals = nil); end
-  def find_all_anywhere(name, prefix, partial = nil, details = nil, key = nil, locals = nil); end
-  def find_all_with_query(query); end
-  def find_templates(name, prefix, partial, details, outside_app_allowed = nil); end
-  def initialize; end
-  def self.caching; end
-  def self.caching=(obj); end
-  def self.caching?; end
-end
-class ActionView::Resolver::Path
-  def initialize(name, prefix, partial, virtual); end
-  def name; end
-  def partial; end
-  def partial?; end
-  def prefix; end
-  def self.build(name, prefix, partial); end
-  def to_s; end
-  def to_str; end
-  def virtual; end
-end
-class ActionView::Resolver::Cache
-  def cache(key, name, prefix, partial, locals); end
-  def cache_query(query); end
-  def canonical_no_templates(templates); end
-  def clear; end
-  def initialize; end
-  def inspect; end
-  def templates_have_changed?(cached_templates, fresh_templates); end
-end
-class ActionView::Resolver::Cache::SmallCache < Concurrent::Map
-  def initialize(options = nil); end
-end
-class ActionView::PathResolver < ActionView::Resolver
-  def build_query(path, details); end
-  def escape_entry(entry); end
-  def extract_handler_and_format_and_variant(path, default_formats); end
-  def find_template_paths(query); end
-  def find_templates(name, prefix, partial, details, outside_app_allowed = nil); end
-  def initialize(pattern = nil); end
-  def inside_path?(path, filename); end
-  def mtime(p); end
-  def query(path, details, formats, outside_app_allowed); end
-  def reject_files_external_to_app(files); end
-end
-class ActionView::FileSystemResolver < ActionView::PathResolver
-  def ==(resolver); end
-  def eql?(resolver); end
-  def initialize(path, pattern = nil); end
-  def to_path; end
-  def to_s; end
-end
-class ActionView::OptimizedFileSystemResolver < ActionView::FileSystemResolver
-  def build_query(path, details); end
-end
-class ActionView::FallbackFileSystemResolver < ActionView::FileSystemResolver
-  def decorate(*arg0); end
-  def self.instances; end
-end
 class ActionView::LookupContext
   def digest_cache; end
   def fallbacks; end
@@ -895,32 +953,6 @@ class ActionView::Template::Types::Type
   def to_s; end
   def to_str; end
   def to_sym; end
-end
-class ActionView::PathSet
-  def +(array); end
-  def <<(*args); end
-  def [](*args, &block); end
-  def _find_all(path, prefixes, args, outside_app); end
-  def compact; end
-  def concat(*args); end
-  def each(*args, &block); end
-  def exists?(path, prefixes, *args); end
-  def find(*args); end
-  def find_all(path, prefixes = nil, *args); end
-  def find_all_with_query(query); end
-  def find_file(path, prefixes = nil, *args); end
-  def include?(*args, &block); end
-  def initialize(paths = nil); end
-  def initialize_copy(other); end
-  def insert(*args); end
-  def paths; end
-  def pop(*args, &block); end
-  def push(*args); end
-  def size(*args, &block); end
-  def to_ary; end
-  def typecast(paths); end
-  def unshift(*args); end
-  include Enumerable
 end
 class ActionView::DependencyTracker
   def self.find_dependencies(name, template, view_paths = nil); end
@@ -1057,36 +1089,4 @@ class ActionView::Base
   include ActionView::Helpers::UrlHelper
   include ActionView::Helpers::UrlHelper
   include ActionView::Helpers::UrlHelper
-end
-module ActionView::Layouts
-  def _conditional_layout?; end
-  def _default_layout(formats, require_layout = nil); end
-  def _include_layout?(options); end
-  def _layout(*arg0); end
-  def _layout_conditions(*args, &block); end
-  def _layout_for_option(name); end
-  def _normalize_layout(value); end
-  def _normalize_options(options); end
-  def action_has_layout=(arg0); end
-  def action_has_layout?; end
-  def initialize(*arg0); end
-  extend ActiveSupport::Concern
-  include ActionView::Rendering
-end
-module ActionView::Layouts::ClassMethods
-  def _implied_layout_name; end
-  def _write_layout_method; end
-  def inherited(klass); end
-  def layout(layout, conditions = nil); end
-end
-module ActionView::Layouts::ClassMethods::LayoutConditions
-  def _conditional_layout?; end
-end
-module ActionView::RoutingUrlFor
-  def _generate_paths_by_default; end
-  def _routes_context; end
-  def only_path?(host); end
-  def optimize_routes_generation?; end
-  def url_for(options = nil); end
-  def url_options; end
 end

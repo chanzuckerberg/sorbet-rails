@@ -33,4 +33,5 @@ class Skiptrace::BindingLocations < BasicObject
   def respond_to_missing?(name, include_all = nil); end
 end
 class Binding
+  def source_location; end
 end

@@ -1083,89 +1083,6 @@ end
 module ActiveRecord::Railties::ControllerRuntime::ClassMethods
   def log_process_action(payload); end
 end
-class ActiveRecord::QueryCache
-  def call(env); end
-  def initialize(app); end
-  def restore_query_cache_settings(connection_id, enabled); end
-end
-module ActiveRecord::QueryCache::ClassMethods
-  def cache(&block); end
-  def uncached(&block); end
-end
-class ActiveRecord::ConnectionTimeoutError < ActiveRecord::ConnectionNotEstablished
-end
-class ActiveRecord::ConnectionAdapters::ConnectionPool
-  def acquire_connection; end
-  def active_connection?; end
-  def automatic_reconnect; end
-  def automatic_reconnect=(arg0); end
-  def checkin(conn); end
-  def checkout; end
-  def checkout_and_verify(c); end
-  def checkout_new_connection; end
-  def checkout_timeout; end
-  def checkout_timeout=(arg0); end
-  def clear_reloadable_connections!; end
-  def connected?; end
-  def connection; end
-  def connections; end
-  def current_connection_id; end
-  def disconnect!; end
-  def initialize(spec); end
-  def new_connection; end
-  def reap; end
-  def reaper; end
-  def release(conn, owner); end
-  def release_connection(with_id = nil); end
-  def remove(conn); end
-  def size; end
-  def spec; end
-  def with_connection; end
-  include MonitorMixin
-end
-class ActiveRecord::ConnectionAdapters::ConnectionPool::Queue
-  def add(element); end
-  def any?; end
-  def any_waiting?; end
-  def can_remove_no_wait?; end
-  def clear; end
-  def delete(element); end
-  def initialize(lock = nil); end
-  def no_wait_poll; end
-  def num_waiting; end
-  def poll(timeout = nil); end
-  def remove; end
-  def synchronize(&block); end
-  def wait_poll(timeout); end
-end
-class ActiveRecord::ConnectionAdapters::ConnectionPool::Reaper
-  def frequency; end
-  def initialize(pool, frequency); end
-  def pool; end
-  def run; end
-end
-class ActiveRecord::ConnectionAdapters::ConnectionHandler
-  def active_connections?; end
-  def class_to_pool; end
-  def clear_active_connections!; end
-  def clear_all_connections!; end
-  def clear_reloadable_connections!; end
-  def connected?(klass); end
-  def connection_pool_list; end
-  def connection_pools; end
-  def establish_connection(owner, spec); end
-  def initialize; end
-  def owner_to_pool; end
-  def pool_for(owner); end
-  def pool_from_any_process_for(owner); end
-  def remove_connection(owner); end
-  def retrieve_connection(klass); end
-  def retrieve_connection_pool(klass); end
-end
-class ActiveRecord::ConnectionAdapters::ConnectionManagement
-  def call(env); end
-  def initialize(app); end
-end
 module ActiveRecord::AttributeDecorators
   extend ActiveSupport::Concern
 end
@@ -1271,6 +1188,15 @@ class ActiveRecord::ConnectionHandling::MergeAndResolveDefaultUrlConfig
   def config; end
   def initialize(raw_configurations); end
   def resolve; end
+end
+class ActiveRecord::QueryCache
+  def call(env); end
+  def initialize(app); end
+  def restore_query_cache_settings(connection_id, enabled); end
+end
+module ActiveRecord::QueryCache::ClassMethods
+  def cache(&block); end
+  def uncached(&block); end
 end
 module ActiveRecord::Querying
   def any?(*args, &block); end
@@ -1465,6 +1391,80 @@ class ActiveRecord::ConnectionAdapters::ConnectionSpecification::Resolver
   def resolve_symbol_connection(spec); end
   def resolve_url_connection(url); end
   def spec(config); end
+end
+class ActiveRecord::ConnectionTimeoutError < ActiveRecord::ConnectionNotEstablished
+end
+class ActiveRecord::ConnectionAdapters::ConnectionPool
+  def acquire_connection; end
+  def active_connection?; end
+  def automatic_reconnect; end
+  def automatic_reconnect=(arg0); end
+  def checkin(conn); end
+  def checkout; end
+  def checkout_and_verify(c); end
+  def checkout_new_connection; end
+  def checkout_timeout; end
+  def checkout_timeout=(arg0); end
+  def clear_reloadable_connections!; end
+  def connected?; end
+  def connection; end
+  def connections; end
+  def current_connection_id; end
+  def disconnect!; end
+  def initialize(spec); end
+  def new_connection; end
+  def reap; end
+  def reaper; end
+  def release(conn, owner); end
+  def release_connection(with_id = nil); end
+  def remove(conn); end
+  def size; end
+  def spec; end
+  def with_connection; end
+  include MonitorMixin
+end
+class ActiveRecord::ConnectionAdapters::ConnectionPool::Queue
+  def add(element); end
+  def any?; end
+  def any_waiting?; end
+  def can_remove_no_wait?; end
+  def clear; end
+  def delete(element); end
+  def initialize(lock = nil); end
+  def no_wait_poll; end
+  def num_waiting; end
+  def poll(timeout = nil); end
+  def remove; end
+  def synchronize(&block); end
+  def wait_poll(timeout); end
+end
+class ActiveRecord::ConnectionAdapters::ConnectionPool::Reaper
+  def frequency; end
+  def initialize(pool, frequency); end
+  def pool; end
+  def run; end
+end
+class ActiveRecord::ConnectionAdapters::ConnectionHandler
+  def active_connections?; end
+  def class_to_pool; end
+  def clear_active_connections!; end
+  def clear_all_connections!; end
+  def clear_reloadable_connections!; end
+  def connected?(klass); end
+  def connection_pool_list; end
+  def connection_pools; end
+  def establish_connection(owner, spec); end
+  def initialize; end
+  def owner_to_pool; end
+  def pool_for(owner); end
+  def pool_from_any_process_for(owner); end
+  def remove_connection(owner); end
+  def retrieve_connection(klass); end
+  def retrieve_connection_pool(klass); end
+end
+class ActiveRecord::ConnectionAdapters::ConnectionManagement
+  def call(env); end
+  def initialize(app); end
 end
 module ActiveRecord::Persistence
   def _create_record(attribute_names = nil); end

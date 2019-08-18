@@ -67,16 +67,10 @@ def create_helpers
 end
 
 def create_models
-  if ENV['RAILS_VERSION'] != '4.2'
-    inject_into_file "app/models/application_record.rb", after: "self.abstract_class = true\n" do
-      # Need to include indentation manually
-      "  scope :recent, -> { where('created_at > ?', 1.month.ago) }\n"
-    end
-  else
+  if ENV['RAILS_VERSION'] == '4.2'
     file "app/models/application_record.rb", <<~RUBY
       class ApplicationRecord < ActiveRecord::Base
         self.abstract_class = true
-        scope :recent, -> { where('created_at > ?', 1.month.ago) }
       end
     RUBY
   end
@@ -85,6 +79,12 @@ def create_models
     class SpellBook < ApplicationRecord
       validates :name, length: { minimum: 5 }, presence: true
       belongs_to :wizard
+
+      enum book_type: {
+        unclassified: 0,
+        biology: 1,
+        dark_art: 999,
+      }
     end
   RUBY
 
@@ -98,16 +98,16 @@ def create_models
   file "app/models/wand.rb", <<~RUBY
     class Wand < ApplicationRecord
       include Mythical
-    
+
       enum core_type: {
         phoenix_feather: 0,
         dragon_heartstring: 1,
         unicorn_tail_hair: 2,
         basilisk_horn: 3,
       }
-    
+
       belongs_to :wizard
-    
+
       def wood_type
         'Type ' + super
       end
@@ -127,6 +127,8 @@ def create_models
 
       has_one :wand
       has_many :spell_books
+
+      scope :recent, -> { where('created_at > ?', 1.month.ago) }
     end
   RUBY
 
@@ -159,7 +161,7 @@ def create_migrations
           t.integer :house
           t.string :parent_email
           t.text :notes
-    
+
           t.timestamps
         end
       end
@@ -173,7 +175,7 @@ def create_migrations
           t.references :wizard, unique: true, null: false
           t.string :wood_type
           t.integer :core_type
-    
+
           t.timestamps
         end
       end
@@ -186,6 +188,7 @@ def create_migrations
         create_table :spell_books do |t|
           t.string :name
           t.references :wizard
+          t.integer :book_type, null: false, default: 0
         end
       end
     end
@@ -228,7 +231,7 @@ end
 source_paths
 
 if ['4.2', '5.0'].include?(ENV["RAILS_VERSION"])
-  File.open('Gemfile', 'r+') do |f|   
+  File.open('Gemfile', 'r+') do |f|
     out = ""
     f.each do |line|
       # We remove sdoc and web-console because they misbehave.
@@ -252,16 +255,19 @@ after_bundle do
   create_models
   create_migrations
   add_sorbet_test_files
-  
+
+  bundle_version = ENV["RAILS_VERSION"] == "4.2" ? "_1.17.3_" : ""
+
   Bundler.with_clean_env do
     # Rails 4.2 doesn't have the rails_command method, so just use run.
-    run "bundle exec rake db:migrate"
+    run "bundle #{bundle_version} exec rake db:migrate"
   end
 
   if ENV["RUN_WITH_SORBET"] != 'false'
     Bundler.with_clean_env do
-      run "SRB_YES=true bundle exec srb init"
-      run "bundle exec rake rails_rbi:all"
+      run "SRB_YES=true bundle #{bundle_version} exec srb init"
+      run "bundle #{bundle_version} exec rake rails_rbi:all"
+      run "bundle #{bundle_version} exec srb rbi todo"
     end
   end
   say "Done!"

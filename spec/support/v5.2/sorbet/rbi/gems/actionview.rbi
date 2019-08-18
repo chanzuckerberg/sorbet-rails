@@ -1007,6 +1007,30 @@ class ActionView::Base
   include ActionView::Helpers::UrlHelper
   include ActionView::Helpers::UrlHelper
 end
+module ActionView::Layouts
+  def _conditional_layout?; end
+  def _default_layout(formats, require_layout = nil); end
+  def _include_layout?(options); end
+  def _layout(*arg0); end
+  def _layout_conditions(*args, &block); end
+  def _layout_for_option(name); end
+  def _normalize_layout(value); end
+  def _normalize_options(options); end
+  def action_has_layout=(arg0); end
+  def action_has_layout?; end
+  def initialize(*arg0); end
+  extend ActiveSupport::Concern
+  include ActionView::Rendering
+end
+module ActionView::Layouts::ClassMethods
+  def _implied_layout_name; end
+  def _write_layout_method; end
+  def inherited(klass); end
+  def layout(layout, conditions = nil); end
+end
+module ActionView::Layouts::ClassMethods::LayoutConditions
+  def _conditional_layout?; end
+end
 class ActionView::Digestor
   def self.digest(name:, finder:, dependencies: nil); end
   def self.find_template(finder, name, prefixes, partial, keys); end
@@ -1038,6 +1062,14 @@ end
 class ActionView::Digestor::NullLogger
   def self.debug(_); end
   def self.error(_); end
+end
+module ActionView::RoutingUrlFor
+  def _generate_paths_by_default; end
+  def _routes_context; end
+  def only_path?(host); end
+  def optimize_routes_generation?; end
+  def url_for(options = nil); end
+  def url_options; end
 end
 module ActionView::CollectionCaching
   def cache_collection_render(instrumentation_payload); end
@@ -1093,36 +1125,4 @@ class ActionView::PartialRenderer < ActionView::AbstractRenderer
   def self.collection_cache=(obj); end
   def setup(context, options, block); end
   include ActionView::CollectionCaching
-end
-module ActionView::Layouts
-  def _conditional_layout?; end
-  def _default_layout(formats, require_layout = nil); end
-  def _include_layout?(options); end
-  def _layout(*arg0); end
-  def _layout_conditions(*args, &block); end
-  def _layout_for_option(name); end
-  def _normalize_layout(value); end
-  def _normalize_options(options); end
-  def action_has_layout=(arg0); end
-  def action_has_layout?; end
-  def initialize(*arg0); end
-  extend ActiveSupport::Concern
-  include ActionView::Rendering
-end
-module ActionView::Layouts::ClassMethods
-  def _implied_layout_name; end
-  def _write_layout_method; end
-  def inherited(klass); end
-  def layout(layout, conditions = nil); end
-end
-module ActionView::Layouts::ClassMethods::LayoutConditions
-  def _conditional_layout?; end
-end
-module ActionView::RoutingUrlFor
-  def _generate_paths_by_default; end
-  def _routes_context; end
-  def only_path?(host); end
-  def optimize_routes_generation?; end
-  def url_for(options = nil); end
-  def url_options; end
 end

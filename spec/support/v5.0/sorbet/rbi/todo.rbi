@@ -6,7 +6,7 @@ module ::Anonymous_Delegator_15; end
 module ::Anonymous_Delegator_16; end
 module ::Anonymous_Delegator_19; end
 module ::Anonymous_Delegator_20; end
-module ::Anonymous_Delegator_26; end
+module ::Anonymous_Delegator_23; end
 module ::Anonymous_Delegator_4; end
 module T::InterfaceWrapper::Helpers; end
 module T::InterfaceWrapper::Helpers; end

@@ -157,13 +157,16 @@ DEPENDENCIES
   byebug
   jbuilder (~> 2.7)
   puma (~> 3.11)
-  rails (~> 6.0.0.rc2)
+  rails (~> 6.0.0)
   sorbet
   sorbet-rails!
   sorbet-runtime
   sqlite3 (~> 1.4)
   tzinfo-data
   web-console (>= 3.3.0)
+
+RUBY VERSION
+   ruby 2.5.5p157
 
 BUNDLED WITH
    2.0.2

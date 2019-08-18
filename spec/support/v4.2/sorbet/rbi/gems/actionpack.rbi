@@ -1318,6 +1318,33 @@ module ActionController::Helpers::ClassMethods
   def helpers; end
   def modules_for_helpers(args); end
 end
+class ActionDispatch::Reloader
+  def _cleanup_callbacks; end
+  def _cleanup_callbacks?; end
+  def _prepare_callbacks; end
+  def _prepare_callbacks?; end
+  def _run_cleanup_callbacks(&block); end
+  def _run_prepare_callbacks(&block); end
+  def call(env); end
+  def cleanup!; end
+  def initialize(app, condition = nil); end
+  def prepare!; end
+  def self._cleanup_callbacks; end
+  def self._cleanup_callbacks=(val); end
+  def self._cleanup_callbacks?; end
+  def self._prepare_callbacks; end
+  def self._prepare_callbacks=(val); end
+  def self._prepare_callbacks?; end
+  def self.cleanup!; end
+  def self.prepare!; end
+  def self.to_cleanup(*args, &block); end
+  def self.to_prepare(*args, &block); end
+  def validated?; end
+  extend ActiveSupport::Callbacks::ClassMethods
+  extend ActiveSupport::DescendantsTracker
+  include ActiveSupport::Callbacks
+  include ActiveSupport::Deprecation::Reporting
+end
 class ActionDispatch::MiddlewareStack
   def [](i); end
   def assert_index(index, where); end
@@ -1450,33 +1477,6 @@ class ActionDispatch::RemoteIp::GetIp
   def initialize(env, middleware); end
   def ips_from(header); end
   def to_s; end
-end
-class ActionDispatch::Reloader
-  def _cleanup_callbacks; end
-  def _cleanup_callbacks?; end
-  def _prepare_callbacks; end
-  def _prepare_callbacks?; end
-  def _run_cleanup_callbacks(&block); end
-  def _run_prepare_callbacks(&block); end
-  def call(env); end
-  def cleanup!; end
-  def initialize(app, condition = nil); end
-  def prepare!; end
-  def self._cleanup_callbacks; end
-  def self._cleanup_callbacks=(val); end
-  def self._cleanup_callbacks?; end
-  def self._prepare_callbacks; end
-  def self._prepare_callbacks=(val); end
-  def self._prepare_callbacks?; end
-  def self.cleanup!; end
-  def self.prepare!; end
-  def self.to_cleanup(*args, &block); end
-  def self.to_prepare(*args, &block); end
-  def validated?; end
-  extend ActiveSupport::Callbacks::ClassMethods
-  extend ActiveSupport::DescendantsTracker
-  include ActiveSupport::Callbacks
-  include ActiveSupport::Deprecation::Reporting
 end
 class ActionDispatch::Callbacks
   def _call_callbacks; end

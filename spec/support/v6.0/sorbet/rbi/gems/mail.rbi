@@ -88,7 +88,7 @@ class Mail::IndifferentHash < Hash
   def member?(key); end
   def merge!(other_hash); end
   def merge(hash); end
-  def regular_update(*arg0); end
+  def regular_update(arg0); end
   def regular_writer(arg0, arg1); end
   def reverse_merge!(other_hash); end
   def reverse_merge(other_hash); end

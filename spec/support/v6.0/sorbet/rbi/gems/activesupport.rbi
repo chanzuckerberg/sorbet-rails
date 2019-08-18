@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/activesupport/all/activesupport.rbi
 #
-# activesupport-6.0.0.rc2
+# activesupport-6.0.0
 class Hash
   def _deep_transform_keys_in_object!(object, &block); end
   def _deep_transform_keys_in_object(object, &block); end
@@ -35,7 +35,7 @@ class Hash
   def reverse_merge!(other_hash); end
   def reverse_merge(other_hash); end
   def reverse_update(other_hash); end
-  def self.[](*arg0); end
+  def self.from_trusted_xml(xml); end
   def self.from_xml(xml, disallowed_types = nil); end
   def slice!(*keys); end
   def stringify_keys!; end
@@ -331,7 +331,7 @@ class Array
   def inquiry; end
   def second; end
   def second_to_last; end
-  def self.try_convert(arg0); end
+  def self.wrap(object); end
   def split(value = nil); end
   def third; end
   def third_to_last; end
@@ -832,7 +832,7 @@ class ActiveSupport::HashWithIndifferentAccess < Hash
   def merge!(other_hash); end
   def merge(hash, &block); end
   def nested_under_indifferent_access; end
-  def regular_update(*arg0); end
+  def regular_update(arg0); end
   def regular_writer(arg0, arg1); end
   def reject(*args, &block); end
   def replace(other_hash); end
@@ -931,6 +931,7 @@ module ActiveSupport::Dependencies
   def new_constants_in(*descs); end
   def qualified_const_defined?(path); end
   def qualified_name_for(mod, name); end
+  def real_mod_name(mod); end
   def reference(klass); end
   def remove_constant(const); end
   def remove_unloadable_constants!; end
@@ -1053,6 +1054,9 @@ module ActiveSupport::Dependencies::ZeitwerkIntegration::Decorations
   def safe_constantize(cpath); end
   def unhook!; end
   def verbose=(verbose); end
+end
+module ActiveSupport::Dependencies::ZeitwerkIntegration::RequireDependency
+  def require_dependency(filename); end
 end
 module ActiveSupport::Dependencies::ZeitwerkIntegration::Inflector
   def self.camelize(basename, _abspath); end
@@ -2052,9 +2056,13 @@ class ActiveSupport::FileUpdateChecker
   def updated_at(paths); end
   def watched; end
 end
-module Module::Concerning
-  def concern(topic, &module_definition); end
-  def concerning(topic, &block); end
+module Digest
+end
+module Digest::UUID
+  def self.uuid_from_hash(hash_class, uuid_namespace, name); end
+  def self.uuid_v3(uuid_namespace, name); end
+  def self.uuid_v4; end
+  def self.uuid_v5(uuid_namespace, name); end
 end
 module ActiveSupport::NumberHelper
   def number_to_currency(number, options = nil); end
@@ -2069,10 +2077,6 @@ module ActiveSupport::NumberHelper
 end
 module ActiveSupport::NumericWithFormat
   def to_s(format = nil, options = nil); end
-end
-class File < IO
-  def self.empty?(arg0); end
-  def self.split(arg0); end
 end
 module ActiveSupport::RangeWithFormat
   def to_default_s(format = nil); end
@@ -2092,23 +2096,23 @@ module ActiveSupport::EachTimeWithZone
   def ensure_iteration_allowed; end
   def step(n = nil, &block); end
 end
+module SecureRandom
+  def self.base36(n = nil); end
+  def self.base58(n = nil); end
+end
+module Module::Concerning
+  def concern(topic, &module_definition); end
+  def concerning(topic, &block); end
+end
 module Benchmark
   def self.ms; end
-end
-module Digest
-end
-module Digest::UUID
-  def self.uuid_from_hash(hash_class, uuid_namespace, name); end
-  def self.uuid_v3(uuid_namespace, name); end
-  def self.uuid_v4; end
-  def self.uuid_v5(uuid_namespace, name); end
 end
 module ActiveSupport::MarshalWithAutoloading
   def load(source, proc = nil); end
 end
-module SecureRandom
-  def self.base36(n = nil); end
-  def self.base58(n = nil); end
+class File < IO
+  def self.empty?(arg0); end
+  def self.join(*arg0); end
 end
 module ActiveSupport::TaggedLogging
   def clear_tags!(*args, &block); end

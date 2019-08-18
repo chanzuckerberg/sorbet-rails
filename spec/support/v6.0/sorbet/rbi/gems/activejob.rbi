@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/activejob/all/activejob.rbi
 #
-# activejob-6.0.0.rc2
+# activejob-6.0.0
 module ActiveJob
   def self.gem_version; end
   def self.version; end

@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/railties/all/railties.rbi
 #
-# railties-6.0.0.rc2
+# railties-6.0.0
 module Rails
   def self.app_class; end
   def self.app_class=(arg0); end
@@ -232,6 +232,7 @@ module Rails::VERSION
 end
 module Rails::Autoloaders
   def self.each; end
+  def self.log!; end
   def self.logger=(logger); end
   def self.main; end
   def self.once; end
@@ -353,6 +354,8 @@ class Rails::Engine::Configuration < Rails::Railtie::Configuration
   def eager_load_paths=(arg0); end
   def generators; end
   def initialize(root = nil); end
+  def javascript_path; end
+  def javascript_path=(arg0); end
   def middleware; end
   def middleware=(arg0); end
   def paths; end
@@ -532,6 +535,9 @@ class Rails::Application::RoutesReloader
   def updated?(*args, &block); end
   def updater; end
 end
+class Rails::BacktraceCleaner < ActiveSupport::BacktraceCleaner
+  def initialize; end
+end
 class Rails::Application::DefaultMiddlewareStack
   def app; end
   def build_stack; end
@@ -542,7 +548,4 @@ class Rails::Application::DefaultMiddlewareStack
   def show_exceptions_app; end
 end
 class Rails::Rack::Logger < ActiveSupport::LogSubscriber
-end
-class Rails::BacktraceCleaner < ActiveSupport::BacktraceCleaner
-  def initialize; end
 end

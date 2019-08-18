@@ -57,8 +57,8 @@ class Hash
   def reverse_merge!(other_hash); end
   def reverse_merge(other_hash); end
   def reverse_update(other_hash); end
-  def self.from_trusted_xml(xml); end
   def self.from_xml(xml, disallowed_types = nil); end
+  def self.try_convert(arg0); end
   def slice!(*keys); end
   def stringify_keys!; end
   def stringify_keys; end
@@ -1128,7 +1128,7 @@ class ActiveSupport::HashWithIndifferentAccess < Hash
   def merge!(other_hash); end
   def merge(hash, &block); end
   def nested_under_indifferent_access; end
-  def regular_update(*arg0); end
+  def regular_update(arg0); end
   def regular_writer(arg0, arg1); end
   def reject(*args, &block); end
   def replace(other_hash); end
@@ -1619,10 +1619,6 @@ end
 class Exception
   include ActiveSupport::Dependencies::Blamable
 end
-module Module::Concerning
-  def concern(topic, &module_definition); end
-  def concerning(topic, &block); end
-end
 module ActiveSupport::NumberHelper
   def number_to_currency(number, options = nil); end
   def number_to_delimited(number, options = nil); end
@@ -1634,13 +1630,17 @@ module ActiveSupport::NumberHelper
   extend ActiveSupport::Autoload
   extend ActiveSupport::NumberHelper
 end
-class File < IO
-  def self.atomic_write(file_name, temp_dir = nil); end
-  def self.probe_stat_in(dir); end
+module Module::Concerning
+  def concern(topic, &module_definition); end
+  def concerning(topic, &block); end
 end
 module Marshal
   def self.load_with_autoloading(source, proc = nil); end
   def self.load_without_autoloading(*arg0); end
+end
+class File < IO
+  def self.atomic_write(file_name, temp_dir = nil); end
+  def self.empty?(arg0); end
 end
 module ActiveSupport::TaggedLogging
   def clear_tags!(*args, &block); end
@@ -1739,6 +1739,9 @@ class ActiveSupport::LogSubscriber < ActiveSupport::Subscriber
   def self.logger; end
   def self.logger=(arg0); end
 end
+module ActiveSupport::Benchmarkable
+  def benchmark(message = nil, options = nil); end
+end
 module ActiveSupport::Configurable
   def config; end
   extend ActiveSupport::Concern
@@ -1751,9 +1754,6 @@ module ActiveSupport::Configurable::ClassMethods
   def config; end
   def config_accessor(*names); end
   def configure; end
-end
-module ActiveSupport::Benchmarkable
-  def benchmark(message = nil, options = nil); end
 end
 module ActiveSupport::Testing
 end

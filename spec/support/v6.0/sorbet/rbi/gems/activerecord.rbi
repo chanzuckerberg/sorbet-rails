@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/activerecord/all/activerecord.rbi
 #
-# activerecord-6.0.0.rc2
+# activerecord-6.0.0
 module Arel
   def self.arel_node?(value); end
   def self.fetch_attribute(value); end
@@ -2420,56 +2420,6 @@ module ActiveRecord::QueryCache::ClassMethods
   def cache(&block); end
   def uncached(&block); end
 end
-module ActiveRecord::Migration::Compatibility
-  def self.find(version); end
-end
-class ActiveRecord::Migration::Compatibility::V5_2 < ActiveRecord::Migration::Current
-  def add_timestamps(table_name, **options); end
-  def change_table(table_name, **options); end
-  def command_recorder; end
-  def compatible_table_definition(t); end
-  def create_join_table(table_1, table_2, **options); end
-  def create_table(table_name, **options); end
-end
-module ActiveRecord::Migration::Compatibility::V5_2::TableDefinition
-  def timestamps(**options); end
-end
-module ActiveRecord::Migration::Compatibility::V5_2::CommandRecorder
-  def invert_change_column_comment(args); end
-  def invert_change_table_comment(args); end
-  def invert_transaction(args, &block); end
-end
-class ActiveRecord::Migration::Compatibility::V5_1 < ActiveRecord::Migration::Compatibility::V5_2
-  def change_column(table_name, column_name, type, options = nil); end
-  def create_table(table_name, options = nil); end
-end
-class ActiveRecord::Migration::Compatibility::V5_0 < ActiveRecord::Migration::Compatibility::V5_1
-  def add_belongs_to(table_name, ref_name, **options); end
-  def add_column(table_name, column_name, type, options = nil); end
-  def add_reference(table_name, ref_name, **options); end
-  def compatible_table_definition(t); end
-  def create_join_table(table_1, table_2, column_options: nil, **options); end
-  def create_table(table_name, options = nil); end
-end
-module ActiveRecord::Migration::Compatibility::V5_0::TableDefinition
-  def belongs_to(*args, **options); end
-  def primary_key(name, type = nil, **options); end
-  def references(*args, **options); end
-end
-class ActiveRecord::Migration::Compatibility::V4_2 < ActiveRecord::Migration::Compatibility::V5_0
-  def add_belongs_to(table_name, ref_name, **options); end
-  def add_reference(table_name, ref_name, **options); end
-  def add_timestamps(table_name, **options); end
-  def compatible_table_definition(t); end
-  def index_exists?(table_name, column_name, options = nil); end
-  def index_name_for_remove(table_name, options = nil); end
-  def remove_index(table_name, options = nil); end
-end
-module ActiveRecord::Migration::Compatibility::V4_2::TableDefinition
-  def belongs_to(*arg0, **options); end
-  def references(*arg0, **options); end
-  def timestamps(**options); end
-end
 module ActiveRecord::AttributeDecorators
   extend ActiveSupport::Concern
 end
@@ -2595,20 +2545,25 @@ class ActiveRecord::DatabaseConfigurations
   def blank?; end
   def build_configs(configs); end
   def build_db_config_from_hash(env_name, spec_name, config); end
+  def build_db_config_from_raw_config(env_name, spec_name, config); end
   def build_db_config_from_string(env_name, spec_name, config); end
-  def build_url_config(url, configs); end
   def configs_for(env_name: nil, spec_name: nil, include_replicas: nil); end
   def configurations; end
   def default_hash(env = nil); end
+  def each; end
   def empty?; end
   def env_with_configs(env = nil); end
+  def environment_url_config(env, spec_name, config); end
+  def environment_value_for(spec_name); end
   def find_db_config(env); end
+  def first; end
   def initialize(configurations = nil); end
+  def merge_db_environment_variables(current_env, configs); end
   def method_missing(method, *args, &blk); end
   def throw_getter_deprecation(method); end
   def throw_setter_deprecation(method); end
   def to_h; end
-  def walk_configs(env_name, spec_name, config); end
+  def walk_configs(env_name, config); end
 end
 class ActiveRecord::DatabaseConfigurations::DatabaseConfig
   def env_name; end
@@ -2635,6 +2590,8 @@ class ActiveRecord::DatabaseConfigurations::UrlConfig < ActiveRecord::DatabaseCo
   def replica?; end
   def url; end
   def url_config?; end
+end
+class ActiveRecord::DatabaseConfigurations::InvalidConfigurationError < StandardError
 end
 module ActiveRecord::ConnectionHandling
   def clear_active_connections!(*args, &block); end
@@ -2905,6 +2862,7 @@ module ActiveRecord::Enum
   def _enum_methods_module; end
   def assert_valid_enum_definition_values(values); end
   def detect_enum_conflict!(enum_name, method_name, klass_method = nil); end
+  def detect_negative_condition!(method_name); end
   def enum(definitions); end
   def inherited(base); end
   def raise_conflict_error(enum_name, method_name, type: nil, source: nil); end
@@ -3094,13 +3052,14 @@ class ActiveRecord::ConnectionAdapters::ConnectionHandler
   def owner_to_pool; end
   def pool_from_any_process_for(spec_name); end
   def prevent_writes; end
+  def prevent_writes=(prevent_writes); end
   def remove_connection(spec_name); end
   def retrieve_connection(spec_name); end
   def retrieve_connection_pool(spec_name); end
   def self.create_owner_to_pool; end
   def self.discard_unowned_pools(pid_map); end
   def self.unowned_pool_finalizer(pid_map); end
-  def while_preventing_writes; end
+  def while_preventing_writes(enabled = nil); end
 end
 class ActiveRecord::InsertAll
   def connection; end
@@ -4633,8 +4592,6 @@ class ActiveRecord::Base
   def aggregate_reflections; end
   def aggregate_reflections?; end
   def allow_unsafe_raw_sql; end
-  def attachment_reflections; end
-  def attachment_reflections?; end
   def attribute_aliases; end
   def attribute_aliases?; end
   def attribute_method_matchers; end
@@ -4732,9 +4689,6 @@ class ActiveRecord::Base
   def self.around_destroy(*args, **options, &block); end
   def self.around_save(*args, **options, &block); end
   def self.around_update(*args, **options, &block); end
-  def self.attachment_reflections; end
-  def self.attachment_reflections=(val); end
-  def self.attachment_reflections?; end
   def self.attribute_aliases; end
   def self.attribute_aliases=(val); end
   def self.attribute_aliases?; end
@@ -4869,7 +4823,6 @@ class ActiveRecord::Base
   def validation_context=(arg0); end
   def verbose_query_logs; end
   def warn_on_records_fetched_greater_than; end
-  extend ActionText::Attribute::ClassMethods
   extend ActiveModel::AttributeMethods::ClassMethods
   extend ActiveModel::Callbacks
   extend ActiveModel::Conversion::ClassMethods
@@ -4922,14 +4875,11 @@ class ActiveRecord::Base
   extend ActiveRecord::Transactions::ClassMethods
   extend ActiveRecord::Translation
   extend ActiveRecord::Validations::ClassMethods
-  extend ActiveStorage::Attached::Model::ClassMethods
-  extend ActiveStorage::Reflection::ActiveRecordExtensions::ClassMethods
   extend ActiveSupport::Benchmarkable
   extend ActiveSupport::Callbacks::ClassMethods
   extend ActiveSupport::DescendantsTracker
   extend ActiveSupport::DescendantsTracker
   extend SorbetRails::CustomFinderMethods
-  include ActionText::Attribute
   include ActiveModel::AttributeMethods
   include ActiveModel::AttributeMethods
   include ActiveModel::Conversion
@@ -4981,8 +4931,6 @@ class ActiveRecord::Base
   include ActiveRecord::TouchLater
   include ActiveRecord::Transactions
   include ActiveRecord::Validations
-  include ActiveStorage::Attached::Model
-  include ActiveStorage::Reflection::ActiveRecordExtensions
   include ActiveSupport::Callbacks
   include ActiveSupport::Callbacks
   include GlobalID::Identification
@@ -4990,6 +4938,56 @@ end
 module ActiveRecord::Base::GeneratedAttributeMethods
 end
 module ActiveRecord::Base::GeneratedAssociationMethods
+end
+module ActiveRecord::Migration::Compatibility
+  def self.find(version); end
+end
+class ActiveRecord::Migration::Compatibility::V5_2 < ActiveRecord::Migration::Current
+  def add_timestamps(table_name, **options); end
+  def change_table(table_name, **options); end
+  def command_recorder; end
+  def compatible_table_definition(t); end
+  def create_join_table(table_1, table_2, **options); end
+  def create_table(table_name, **options); end
+end
+module ActiveRecord::Migration::Compatibility::V5_2::TableDefinition
+  def timestamps(**options); end
+end
+module ActiveRecord::Migration::Compatibility::V5_2::CommandRecorder
+  def invert_change_column_comment(args); end
+  def invert_change_table_comment(args); end
+  def invert_transaction(args, &block); end
+end
+class ActiveRecord::Migration::Compatibility::V5_1 < ActiveRecord::Migration::Compatibility::V5_2
+  def change_column(table_name, column_name, type, options = nil); end
+  def create_table(table_name, options = nil); end
+end
+class ActiveRecord::Migration::Compatibility::V5_0 < ActiveRecord::Migration::Compatibility::V5_1
+  def add_belongs_to(table_name, ref_name, **options); end
+  def add_column(table_name, column_name, type, options = nil); end
+  def add_reference(table_name, ref_name, **options); end
+  def compatible_table_definition(t); end
+  def create_join_table(table_1, table_2, column_options: nil, **options); end
+  def create_table(table_name, options = nil); end
+end
+module ActiveRecord::Migration::Compatibility::V5_0::TableDefinition
+  def belongs_to(*args, **options); end
+  def primary_key(name, type = nil, **options); end
+  def references(*args, **options); end
+end
+class ActiveRecord::Migration::Compatibility::V4_2 < ActiveRecord::Migration::Compatibility::V5_0
+  def add_belongs_to(table_name, ref_name, **options); end
+  def add_reference(table_name, ref_name, **options); end
+  def add_timestamps(table_name, **options); end
+  def compatible_table_definition(t); end
+  def index_exists?(table_name, column_name, options = nil); end
+  def index_name_for_remove(table_name, options = nil); end
+  def remove_index(table_name, options = nil); end
+end
+module ActiveRecord::Migration::Compatibility::V4_2::TableDefinition
+  def belongs_to(*arg0, **options); end
+  def references(*arg0, **options); end
+  def timestamps(**options); end
 end
 class ActiveRecord::Associations::CollectionProxy < ActiveRecord::Relation
   def <<(*records); end

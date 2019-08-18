@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/actionview/all/actionview.rbi
 #
-# actionview-6.0.0.rc2
+# actionview-6.0.0
 module ActionView
   def self.eager_load!; end
   def self.gem_version; end
@@ -422,11 +422,11 @@ module ActionView::Helpers::SanitizeHelper::ClassMethods
   def full_sanitizer=(arg0); end
   def link_sanitizer; end
   def link_sanitizer=(arg0); end
+  def safe_list_sanitizer; end
+  def safe_list_sanitizer=(arg0); end
   def sanitized_allowed_attributes; end
   def sanitized_allowed_tags; end
   def sanitizer_vendor; end
-  def white_list_sanitizer; end
-  def white_list_sanitizer=(arg0); end
 end
 module ActionView::Helpers::TextHelper
   def concat(string); end

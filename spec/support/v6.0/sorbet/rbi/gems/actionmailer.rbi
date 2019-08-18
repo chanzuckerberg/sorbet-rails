@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/actionmailer/all/actionmailer.rbi
 #
-# actionmailer-6.0.0.rc2
+# actionmailer-6.0.0
 module ActionMailer
   def self.eager_load!; end
   def self.gem_version; end

@@ -22,7 +22,7 @@ class Array
   def inquiry; end
   def second; end
   def second_to_last; end
-  def self.try_convert(arg0); end
+  def self.wrap(object); end
   def split(value = nil); end
   def third; end
   def third_to_last; end
@@ -62,7 +62,7 @@ class Hash
   def reverse_merge!(other_hash); end
   def reverse_merge(other_hash); end
   def reverse_update(other_hash); end
-  def self.[](*arg0); end
+  def self.from_trusted_xml(xml); end
   def self.from_xml(xml, disallowed_types = nil); end
   def slice!(*keys); end
   def stringify_keys!; end
@@ -1322,7 +1322,7 @@ class ActiveSupport::HashWithIndifferentAccess < Hash
   def merge!(other_hash); end
   def merge(hash, &block); end
   def nested_under_indifferent_access; end
-  def regular_update(*arg0); end
+  def regular_update(arg0); end
   def regular_writer(arg0, arg1); end
   def reject(*args, &block); end
   def replace(other_hash); end
@@ -1987,10 +1987,6 @@ class ActiveSupport::Dependencies::ClassCache
   def safe_get(key); end
   def store(klass); end
 end
-module Module::Concerning
-  def concern(topic, &module_definition); end
-  def concerning(topic, &block); end
-end
 module ActiveSupport::NumberHelper
   def number_to_currency(number, options = nil); end
   def number_to_delimited(number, options = nil); end
@@ -2004,10 +2000,6 @@ module ActiveSupport::NumberHelper
 end
 module ActiveSupport::NumericWithFormat
   def to_s(format = nil, options = nil); end
-end
-class File < IO
-  def self.atomic_write(file_name, temp_dir = nil); end
-  def self.probe_stat_in(dir); end
 end
 module ActiveSupport::RangeWithFormat
   def to_default_s(format = nil); end
@@ -2027,14 +2019,22 @@ module ActiveSupport::EachTimeWithZone
   def ensure_iteration_allowed; end
   def step(n = nil, &block); end
 end
+module SecureRandom
+  def self.base58(n = nil); end
+end
+module Module::Concerning
+  def concern(topic, &module_definition); end
+  def concerning(topic, &block); end
+end
 module Benchmark
   def self.ms; end
 end
 module ActiveSupport::MarshalWithAutoloading
   def load(source, proc = nil); end
 end
-module SecureRandom
-  def self.base58(n = nil); end
+class File < IO
+  def self.atomic_write(file_name, temp_dir = nil); end
+  def self.empty?(arg0); end
 end
 module ActiveSupport::TaggedLogging
   def clear_tags!(*args, &block); end
@@ -2130,6 +2130,19 @@ end
 module ActiveSupport::Benchmarkable
   def benchmark(message = nil, options = nil); end
 end
+module ActiveSupport::Configurable
+  def config; end
+  extend ActiveSupport::Concern
+end
+class ActiveSupport::Configurable::Configuration < ActiveSupport::InheritableOptions
+  def compile_methods!; end
+  def self.compile_methods!(keys); end
+end
+module ActiveSupport::Configurable::ClassMethods
+  def config; end
+  def config_accessor(*names); end
+  def configure; end
+end
 class ActiveSupport::Cache::MemoryStore < ActiveSupport::Cache::Store
   def cached_size(key, entry); end
   def cleanup(options = nil); end
@@ -2151,17 +2164,4 @@ class ActiveSupport::Digest
   def self.hash_digest_class; end
   def self.hash_digest_class=(klass); end
   def self.hexdigest(arg); end
-end
-module ActiveSupport::Configurable
-  def config; end
-  extend ActiveSupport::Concern
-end
-class ActiveSupport::Configurable::Configuration < ActiveSupport::InheritableOptions
-  def compile_methods!; end
-  def self.compile_methods!(keys); end
-end
-module ActiveSupport::Configurable::ClassMethods
-  def config; end
-  def config_accessor(*names); end
-  def configure; end
 end

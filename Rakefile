@@ -22,9 +22,9 @@ namespace :update_spec do
   task :v6_0 do |t, args|
     Bundler.with_clean_env do
       FileUtils.rm_rf 'spec/support/v6.0' if File.directory?('spec/support/v6.0')
-      system("gem install rails -v 6.0.0.rc2")
-      system("rails _6.0.0.rc2_ -v")
-      system("RAILS_VERSION='6.0' rails _6.0.0.rc2_ new --template spec/generators/rails-template.rb spec/support/v6.0 --skip-javascript --skip-action-cable --skip-test --skip-sprockets --skip-spring --skip-bootsnap --skip-listen")
+      system("gem install rails -v 6.0.0")
+      system("rails _6.0.0_ -v")
+      system("RAILS_VERSION='6.0' rails _6.0.0_ new --template spec/generators/rails-template.rb spec/support/v6.0 --skip-javascript --skip-action-cable --skip-test --skip-sprockets --skip-spring --skip-bootsnap --skip-listen")
     end
   end
 

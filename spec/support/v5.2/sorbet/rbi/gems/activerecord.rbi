@@ -3321,7 +3321,6 @@ class ActiveRecord::Base
   extend ActiveRecord::Transactions::ClassMethods
   extend ActiveRecord::Translation
   extend ActiveRecord::Validations::ClassMethods
-  extend ActiveStorage::Attached::Macros
   extend ActiveSupport::Benchmarkable
   extend ActiveSupport::Callbacks::ClassMethods
   extend ActiveSupport::DescendantsTracker

@@ -313,49 +313,6 @@ class Rack::Runtime
   def call(env); end
   def initialize(app, name = nil); end
 end
-module Rack::Mime
-  def match?(value, matcher); end
-  def mime_type(ext, fallback = nil); end
-  def self.match?(value, matcher); end
-  def self.mime_type(ext, fallback = nil); end
-end
-class Rack::Head
-  def call(env); end
-  def initialize(app); end
-end
-class Rack::File
-  def call(env); end
-  def fail(status, body, headers = nil); end
-  def filesize(path); end
-  def get(env); end
-  def initialize(root, headers = nil, default_mime = nil); end
-  def make_body(request, path, range); end
-  def mime_type(path, default_mime); end
-  def response_body; end
-  def root; end
-  def serving(request, path); end
-end
-class Rack::File::Iterator
-  def close; end
-  def each; end
-  def initialize(path, range); end
-  def path; end
-  def range; end
-  def to_path; end
-end
-class Rack::Sendfile
-  def call(env); end
-  def initialize(app, variation = nil, mappings = nil); end
-  def map_accel_path(env, path); end
-  def variation(env); end
-end
-class Rack::MethodOverride
-  def allowed_methods; end
-  def call(env); end
-  def initialize(app); end
-  def method_override(env); end
-  def method_override_param(req); end
-end
 module Rack::Session::Abstract
 end
 class Rack::Session::Abstract::SessionHash
@@ -426,6 +383,61 @@ class Rack::Session::Abstract::ID < Rack::Session::Abstract::Persisted
   def self.inherited(klass); end
   def write_session(req, sid, session, options); end
 end
+class Rack::Chunked
+  def call(env); end
+  def chunkable_version?(ver); end
+  def initialize(app); end
+  include Rack::Utils
+end
+class Rack::Chunked::Body
+  def close; end
+  def each; end
+  def initialize(body); end
+  include Rack::Utils
+end
+module Rack::Mime
+  def match?(value, matcher); end
+  def mime_type(ext, fallback = nil); end
+  def self.match?(value, matcher); end
+  def self.mime_type(ext, fallback = nil); end
+end
+class Rack::Head
+  def call(env); end
+  def initialize(app); end
+end
+class Rack::File
+  def call(env); end
+  def fail(status, body, headers = nil); end
+  def filesize(path); end
+  def get(env); end
+  def initialize(root, headers = nil, default_mime = nil); end
+  def make_body(request, path, range); end
+  def mime_type(path, default_mime); end
+  def response_body; end
+  def root; end
+  def serving(request, path); end
+end
+class Rack::File::Iterator
+  def close; end
+  def each; end
+  def initialize(path, range); end
+  def path; end
+  def range; end
+  def to_path; end
+end
+class Rack::Sendfile
+  def call(env); end
+  def initialize(app, variation = nil, mappings = nil); end
+  def map_accel_path(env, path); end
+  def variation(env); end
+end
+class Rack::MethodOverride
+  def allowed_methods; end
+  def call(env); end
+  def initialize(app); end
+  def method_override(env); end
+  def method_override_param(req); end
+end
 class Rack::Session::Cookie < Rack::Session::Abstract::Persisted
   def coder; end
   def delete_session(req, session_id, options); end
@@ -474,16 +486,4 @@ class Rack::ETag
   def etag_status?(status); end
   def initialize(app, no_cache_control = nil, cache_control = nil); end
   def skip_caching?(headers); end
-end
-class Rack::Chunked
-  def call(env); end
-  def chunkable_version?(ver); end
-  def initialize(app); end
-  include Rack::Utils
-end
-class Rack::Chunked::Body
-  def close; end
-  def each; end
-  def initialize(body); end
-  include Rack::Utils
 end

@@ -1532,495 +1532,6 @@ module ActionController::ApiRendering
   def render_to_body(options = nil); end
   extend ActiveSupport::Concern
 end
-class ActionDispatch::MiddlewareStack
-  def [](i); end
-  def assert_index(index, where); end
-  def build(app = nil); end
-  def build_middleware(klass, args, block); end
-  def delete(target); end
-  def each; end
-  def get_class(klass); end
-  def initialize(*args); end
-  def initialize_copy(other); end
-  def insert(index, klass, *args, &block); end
-  def insert_after(index, *args, &block); end
-  def insert_before(index, klass, *args, &block); end
-  def last; end
-  def middlewares; end
-  def middlewares=(arg0); end
-  def size; end
-  def swap(target, *args, &block); end
-  def unshift(klass, *args, &block); end
-  def use(klass, *args, &block); end
-  include Enumerable
-end
-class ActionDispatch::MiddlewareStack::Middleware
-  def ==(middleware); end
-  def args; end
-  def block; end
-  def build(app); end
-  def initialize(klass, args, block); end
-  def inspect; end
-  def klass; end
-  def name; end
-end
-class ActionDispatch::FileHandler
-  def call(env); end
-  def content_type(path); end
-  def ext; end
-  def gzip_encoding_accepted?(request); end
-  def gzip_file_path(path); end
-  def initialize(root, index: nil, headers: nil); end
-  def match?(path); end
-  def serve(request); end
-  def valid_path?(path); end
-end
-class ActionDispatch::Static
-  def call(env); end
-  def initialize(app, path, deprecated_cache_control = nil, index: nil, headers: nil); end
-end
-class ActionDispatch::RequestId
-  def call(env); end
-  def initialize(app); end
-  def internal_request_id; end
-  def make_request_id(request_id); end
-end
-class ActionDispatch::ShowExceptions
-  def call(env); end
-  def initialize(app, exceptions_app); end
-  def pass_response(status); end
-  def render_exception(request, exception); end
-end
-class ActionDispatch::PublicExceptions
-  def call(env); end
-  def initialize(public_path); end
-  def public_path; end
-  def public_path=(arg0); end
-  def render(status, content_type, body); end
-  def render_format(status, content_type, body); end
-  def render_html(status); end
-end
-class ActionDispatch::Routing::RouteWrapper < SimpleDelegator
-  def action; end
-  def constraints; end
-  def controller; end
-  def endpoint; end
-  def engine?; end
-  def internal?; end
-  def name; end
-  def path; end
-  def rack_app; end
-  def reqs; end
-end
-class ActionDispatch::Routing::RoutesInspector
-  def collect_engine_routes(route); end
-  def collect_routes(routes); end
-  def filter_routes(filter); end
-  def format(formatter, filter = nil); end
-  def initialize(routes); end
-  def normalize_filter(filter); end
-end
-class ActionDispatch::Routing::ConsoleFormatter
-  def draw_header(routes); end
-  def draw_section(routes); end
-  def header(routes); end
-  def initialize; end
-  def no_routes(routes); end
-  def result; end
-  def section(routes); end
-  def section_title(title); end
-  def widths(routes); end
-end
-class ActionDispatch::Routing::HtmlTableFormatter
-  def header(routes); end
-  def initialize(view); end
-  def no_routes(*arg0); end
-  def result; end
-  def section(routes); end
-  def section_title(title); end
-end
-class ActionDispatch::DebugExceptions
-  def call(env); end
-  def create_template(request, wrapper); end
-  def initialize(app, routes_app = nil, response_format = nil); end
-  def log_array(logger, array); end
-  def log_error(request, wrapper); end
-  def logger(request); end
-  def render(status, body, format); end
-  def render_exception(request, exception); end
-  def render_for_api_application(request, wrapper); end
-  def render_for_default_application(request, wrapper); end
-  def routes_inspector(exception); end
-  def stderr_logger; end
-end
-class ActionDispatch::DebugExceptions::DebugView < ActionView::Base
-  def debug_hash(object); end
-  def debug_headers(headers); end
-  def debug_params(params); end
-end
-class ActionDispatch::RemoteIp
-  def call(env); end
-  def check_ip; end
-  def initialize(app, ip_spoofing_check = nil, custom_proxies = nil); end
-  def proxies; end
-end
-class ActionDispatch::RemoteIp::IpSpoofAttackError < StandardError
-end
-class ActionDispatch::RemoteIp::GetIp
-  def calculate_ip; end
-  def filter_proxies(ips); end
-  def initialize(req, check_ip, proxies); end
-  def ips_from(header); end
-  def to_s; end
-end
-class ActionDispatch::Request::Session
-  def [](key); end
-  def []=(key, value); end
-  def clear; end
-  def delete(key); end
-  def destroy; end
-  def each(&block); end
-  def empty?; end
-  def exists?; end
-  def fetch(key, default = nil, &block); end
-  def has_key?(key); end
-  def id; end
-  def include?(key); end
-  def initialize(by, req); end
-  def inspect; end
-  def key?(key); end
-  def keys; end
-  def load!; end
-  def load_for_read!; end
-  def load_for_write!; end
-  def loaded?; end
-  def merge!(other); end
-  def options; end
-  def self.create(store, req, default_options); end
-  def self.find(req); end
-  def self.set(req, session); end
-  def stringify_keys(other); end
-  def to_hash; end
-  def update(hash); end
-  def values; end
-end
-class ActionDispatch::Request::Session::Options
-  def [](key); end
-  def []=(k, v); end
-  def id(req); end
-  def initialize(by, default_options); end
-  def self.find(req); end
-  def self.set(req, options); end
-  def to_hash; end
-  def values_at(*args); end
-end
-class ActionDispatch::Session::SessionRestoreError < StandardError
-  def initialize(const_error = nil); end
-  def original_exception; end
-end
-module ActionDispatch::Session::Compatibility
-  def generate_sid; end
-  def initialize(app, options = nil); end
-  def initialize_sid; end
-  def make_request(env); end
-end
-module ActionDispatch::Session::StaleSessionCheck
-  def extract_session_id(env); end
-  def load_session(env); end
-  def stale_session_check!; end
-end
-module ActionDispatch::Session::SessionObject
-  def loaded_session?(session); end
-  def prepare_session(req); end
-end
-class ActionDispatch::Session::AbstractStore < Rack::Session::Abstract::Persisted
-  def set_cookie(request, session_id, cookie); end
-  include ActionDispatch::Session::Compatibility
-  include ActionDispatch::Session::SessionObject
-  include ActionDispatch::Session::StaleSessionCheck
-end
-class ActionDispatch::Session::CookieStore < ActionDispatch::Session::AbstractStore
-  def cookie_jar(request); end
-  def delete_session(req, session_id, options); end
-  def extract_session_id(req); end
-  def get_cookie(req); end
-  def initialize(app, options = nil); end
-  def load_session(req); end
-  def persistent_session_id!(data, sid = nil); end
-  def set_cookie(request, session_id, cookie); end
-  def unpacked_cookie_data(req); end
-  def write_session(req, sid, session_data, options); end
-end
-class ActionDispatch::Flash
-  def self.new(app); end
-end
-module ActionDispatch::Flash::RequestMethods
-  def commit_flash; end
-  def flash; end
-  def flash=(flash); end
-  def flash_hash; end
-  def reset_session; end
-end
-class ActionDispatch::Flash::FlashNow
-  def [](k); end
-  def []=(k, v); end
-  def alert=(message); end
-  def flash; end
-  def flash=(arg0); end
-  def initialize(flash); end
-  def notice=(message); end
-end
-class ActionDispatch::Flash::FlashHash
-  def [](k); end
-  def []=(k, v); end
-  def alert; end
-  def alert=(message); end
-  def clear; end
-  def delete(key); end
-  def discard(k = nil); end
-  def each(&block); end
-  def empty?; end
-  def initialize(flashes = nil, discard = nil); end
-  def initialize_copy(other); end
-  def keep(k = nil); end
-  def key?(name); end
-  def keys; end
-  def merge!(h); end
-  def notice; end
-  def notice=(message); end
-  def now; end
-  def now_is_loaded?; end
-  def replace(h); end
-  def self.from_session_value(value); end
-  def stringify_array(array); end
-  def sweep; end
-  def to_hash; end
-  def to_session_value; end
-  def update(h); end
-  include Enumerable
-end
-class ActionDispatch::Routing::Redirect < ActionDispatch::Routing::Endpoint
-  def block; end
-  def call(env); end
-  def escape(params); end
-  def escape_fragment(params); end
-  def escape_path(params); end
-  def initialize(status, block); end
-  def inspect; end
-  def path(params, request); end
-  def redirect?; end
-  def relative_path?(path); end
-  def serve(req); end
-  def status; end
-end
-class ActionDispatch::Routing::PathRedirect < ActionDispatch::Routing::Redirect
-  def inspect; end
-  def interpolation_required?(string, params); end
-  def path(params, request); end
-end
-class ActionDispatch::Routing::OptionRedirect < ActionDispatch::Routing::Redirect
-  def inspect; end
-  def options; end
-  def path(params, request); end
-end
-module ActionDispatch::Routing::Redirection
-  def redirect(*args, &block); end
-end
-class ActionDispatch::Routing::Mapper
-  def initialize(set); end
-  def self.normalize_name(name); end
-  def self.normalize_path(path); end
-  include ActionDispatch::Routing::Mapper::Base
-  include ActionDispatch::Routing::Mapper::Concerns
-  include ActionDispatch::Routing::Mapper::HttpHelpers
-  include ActionDispatch::Routing::Mapper::Resources
-  include ActionDispatch::Routing::Mapper::Scoping
-  include ActionDispatch::Routing::Redirection
-end
-class ActionDispatch::Routing::Mapper::Constraints < ActionDispatch::Routing::Endpoint
-  def app; end
-  def constraint_args(constraint, request); end
-  def constraints; end
-  def dispatcher?; end
-  def initialize(app, constraints, strategy); end
-  def matches?(req); end
-  def serve(req); end
-end
-class ActionDispatch::Routing::Mapper::Mapping
-  def add_controller_module(controller, modyoule); end
-  def add_wildcard_options(options, formatted, path_ast); end
-  def app(blocks); end
-  def application; end
-  def ast; end
-  def blocks(callable_constraint); end
-  def build_conditions(current_conditions, request_class); end
-  def build_path(ast, requirements, anchor); end
-  def check_controller_and_action(path_params, controller, action); end
-  def check_part(name, part, path_params, hash); end
-  def conditions; end
-  def constraints(options, path_params); end
-  def default_action; end
-  def default_controller; end
-  def defaults; end
-  def dispatcher(raise_on_name_error); end
-  def initialize(set, ast, defaults, controller, default_action, modyoule, to, formatted, scope_constraints, blocks, via, options_constraints, anchor, options); end
-  def make_route(name, precedence); end
-  def normalize_defaults(options); end
-  def normalize_format(formatted); end
-  def normalize_options!(options, path_params, modyoule); end
-  def path; end
-  def request_method; end
-  def required_defaults; end
-  def requirements; end
-  def self.build(scope, set, ast, controller, default_action, to, via, formatted, options_constraints, anchor, options); end
-  def self.check_via(via); end
-  def self.normalize_path(path, format); end
-  def self.optional_format?(path, format); end
-  def split_constraints(path_params, constraints); end
-  def split_to(to); end
-  def to; end
-  def translate_controller(controller); end
-  def verify_regexp_requirements(requirements); end
-end
-module ActionDispatch::Routing::Mapper::Base
-  def app_name(app, rails_app); end
-  def default_url_options(options); end
-  def default_url_options=(options); end
-  def define_generate_prefix(app, name); end
-  def has_named_route?(name); end
-  def match(path, options = nil); end
-  def mount(app, options = nil); end
-  def rails_app?(app); end
-  def with_default_scope(scope, &block); end
-end
-module ActionDispatch::Routing::Mapper::HttpHelpers
-  def delete(*args, &block); end
-  def get(*args, &block); end
-  def map_method(method, args, &block); end
-  def patch(*args, &block); end
-  def post(*args, &block); end
-  def put(*args, &block); end
-end
-module ActionDispatch::Routing::Mapper::Scoping
-  def constraints(constraints = nil); end
-  def controller(controller, options = nil); end
-  def defaults(defaults = nil); end
-  def merge_action_scope(parent, child); end
-  def merge_as_scope(parent, child); end
-  def merge_blocks_scope(parent, child); end
-  def merge_constraints_scope(parent, child); end
-  def merge_controller_scope(parent, child); end
-  def merge_defaults_scope(parent, child); end
-  def merge_format_scope(parent, child); end
-  def merge_module_scope(parent, child); end
-  def merge_options_scope(parent, child); end
-  def merge_path_names_scope(parent, child); end
-  def merge_path_scope(parent, child); end
-  def merge_shallow_path_scope(parent, child); end
-  def merge_shallow_prefix_scope(parent, child); end
-  def merge_shallow_scope(parent, child); end
-  def merge_to_scope(parent, child); end
-  def merge_via_scope(parent, child); end
-  def namespace(path, options = nil); end
-  def scope(*args); end
-end
-module ActionDispatch::Routing::Mapper::Resources
-  def action_options?(options); end
-  def action_path(name); end
-  def add_route(action, controller, options, _path, to, via, formatted, anchor, options_constraints); end
-  def api_only?; end
-  def apply_action_options(options); end
-  def apply_common_behavior_for(method, resources, options, &block); end
-  def canonical_action?(action); end
-  def collection; end
-  def decomposed_match(path, controller, options, _path, to, via, formatted, anchor, options_constraints); end
-  def get_to_from_path(path, to, action); end
-  def map_match(paths, options); end
-  def match(path, *rest, &block); end
-  def match_root_route(options); end
-  def member; end
-  def name_for_action(as, action); end
-  def namespace(path, options = nil); end
-  def nested; end
-  def nested_options; end
-  def nested_scope?; end
-  def new; end
-  def param_constraint; end
-  def param_constraint?; end
-  def parent_resource; end
-  def path_for_action(action, path); end
-  def path_scope(path); end
-  def prefix_name_for_action(as, action); end
-  def resource(*resources, &block); end
-  def resource_method_scope?; end
-  def resource_scope(resource); end
-  def resource_scope?; end
-  def resources(*resources, &block); end
-  def resources_path_names(options); end
-  def root(path, options = nil); end
-  def scope_action_options; end
-  def set_member_mappings_for_resource; end
-  def shallow; end
-  def shallow?; end
-  def shallow_nesting_depth; end
-  def shallow_scope; end
-  def using_match_shorthand?(path); end
-  def with_scope_level(kind); end
-end
-class ActionDispatch::Routing::Mapper::Resources::Resource
-  def actions; end
-  def collection_name; end
-  def collection_scope; end
-  def controller; end
-  def default_actions; end
-  def initialize(entities, api_only, shallow, options = nil); end
-  def member_name; end
-  def member_scope; end
-  def name; end
-  def nested_param; end
-  def nested_scope; end
-  def new_scope(new_path); end
-  def param; end
-  def path; end
-  def plural; end
-  def resource_scope; end
-  def shallow?; end
-  def shallow_scope; end
-  def singleton?; end
-  def singular; end
-end
-class ActionDispatch::Routing::Mapper::Resources::SingletonResource < ActionDispatch::Routing::Mapper::Resources::Resource
-  def collection_name; end
-  def default_actions; end
-  def initialize(entities, api_only, shallow, options); end
-  def member_name; end
-  def member_scope; end
-  def nested_scope; end
-  def plural; end
-  def singleton?; end
-  def singular; end
-end
-module ActionDispatch::Routing::Mapper::Concerns
-  def concern(name, callable = nil, &block); end
-  def concerns(*args); end
-end
-class ActionDispatch::Routing::Mapper::Scope
-  def [](key); end
-  def action_name(name_prefix, prefix, collection_name, member_name); end
-  def each; end
-  def frame; end
-  def initialize(hash, parent = nil, scope_level = nil); end
-  def nested?; end
-  def new(hash); end
-  def new_level(level); end
-  def options; end
-  def parent; end
-  def resource_method_scope?; end
-  def resource_scope?; end
-  def resources?; end
-  def scope_level; end
-  include Enumerable
-end
 class ActionController::LogSubscriber < ActiveSupport::LogSubscriber
 end
 module ActionController::ParamsWrapper
@@ -2068,6 +1579,38 @@ module ActionController::ParamsWrapper::ClassMethods
   def _set_wrapper_options(options); end
   def inherited(klass); end
   def wrap_parameters(name_or_model_or_options, options = nil); end
+end
+class ActionDispatch::MiddlewareStack
+  def [](i); end
+  def assert_index(index, where); end
+  def build(app = nil); end
+  def build_middleware(klass, args, block); end
+  def delete(target); end
+  def each; end
+  def get_class(klass); end
+  def initialize(*args); end
+  def initialize_copy(other); end
+  def insert(index, klass, *args, &block); end
+  def insert_after(index, *args, &block); end
+  def insert_before(index, klass, *args, &block); end
+  def last; end
+  def middlewares; end
+  def middlewares=(arg0); end
+  def size; end
+  def swap(target, *args, &block); end
+  def unshift(klass, *args, &block); end
+  def use(klass, *args, &block); end
+  include Enumerable
+end
+class ActionDispatch::MiddlewareStack::Middleware
+  def ==(middleware); end
+  def args; end
+  def block; end
+  def build(app); end
+  def initialize(klass, args, block); end
+  def inspect; end
+  def klass; end
+  def name; end
 end
 class AbstractController::Error < StandardError
 end
@@ -2984,4 +2527,461 @@ class ActionController::Base < ActionController::Metal
 end
 module Anonymous_Module_8
   def inherited(klass); end
+end
+class ActionDispatch::FileHandler
+  def call(env); end
+  def content_type(path); end
+  def ext; end
+  def gzip_encoding_accepted?(request); end
+  def gzip_file_path(path); end
+  def initialize(root, index: nil, headers: nil); end
+  def match?(path); end
+  def serve(request); end
+  def valid_path?(path); end
+end
+class ActionDispatch::Static
+  def call(env); end
+  def initialize(app, path, deprecated_cache_control = nil, index: nil, headers: nil); end
+end
+class ActionDispatch::RequestId
+  def call(env); end
+  def initialize(app); end
+  def internal_request_id; end
+  def make_request_id(request_id); end
+end
+class ActionDispatch::ShowExceptions
+  def call(env); end
+  def initialize(app, exceptions_app); end
+  def pass_response(status); end
+  def render_exception(request, exception); end
+end
+class ActionDispatch::PublicExceptions
+  def call(env); end
+  def initialize(public_path); end
+  def public_path; end
+  def public_path=(arg0); end
+  def render(status, content_type, body); end
+  def render_format(status, content_type, body); end
+  def render_html(status); end
+end
+class ActionDispatch::Routing::RouteWrapper < SimpleDelegator
+  def action; end
+  def constraints; end
+  def controller; end
+  def endpoint; end
+  def engine?; end
+  def internal?; end
+  def name; end
+  def path; end
+  def rack_app; end
+  def reqs; end
+end
+class ActionDispatch::Routing::RoutesInspector
+  def collect_engine_routes(route); end
+  def collect_routes(routes); end
+  def filter_routes(filter); end
+  def format(formatter, filter = nil); end
+  def initialize(routes); end
+  def normalize_filter(filter); end
+end
+class ActionDispatch::Routing::ConsoleFormatter
+  def draw_header(routes); end
+  def draw_section(routes); end
+  def header(routes); end
+  def initialize; end
+  def no_routes(routes); end
+  def result; end
+  def section(routes); end
+  def section_title(title); end
+  def widths(routes); end
+end
+class ActionDispatch::Routing::HtmlTableFormatter
+  def header(routes); end
+  def initialize(view); end
+  def no_routes(*arg0); end
+  def result; end
+  def section(routes); end
+  def section_title(title); end
+end
+class ActionDispatch::DebugExceptions
+  def call(env); end
+  def create_template(request, wrapper); end
+  def initialize(app, routes_app = nil, response_format = nil); end
+  def log_array(logger, array); end
+  def log_error(request, wrapper); end
+  def logger(request); end
+  def render(status, body, format); end
+  def render_exception(request, exception); end
+  def render_for_api_application(request, wrapper); end
+  def render_for_default_application(request, wrapper); end
+  def routes_inspector(exception); end
+  def stderr_logger; end
+end
+class ActionDispatch::DebugExceptions::DebugView < ActionView::Base
+  def debug_hash(object); end
+  def debug_headers(headers); end
+  def debug_params(params); end
+end
+class ActionDispatch::RemoteIp
+  def call(env); end
+  def check_ip; end
+  def initialize(app, ip_spoofing_check = nil, custom_proxies = nil); end
+  def proxies; end
+end
+class ActionDispatch::RemoteIp::IpSpoofAttackError < StandardError
+end
+class ActionDispatch::RemoteIp::GetIp
+  def calculate_ip; end
+  def filter_proxies(ips); end
+  def initialize(req, check_ip, proxies); end
+  def ips_from(header); end
+  def to_s; end
+end
+class ActionDispatch::Request::Session
+  def [](key); end
+  def []=(key, value); end
+  def clear; end
+  def delete(key); end
+  def destroy; end
+  def each(&block); end
+  def empty?; end
+  def exists?; end
+  def fetch(key, default = nil, &block); end
+  def has_key?(key); end
+  def id; end
+  def include?(key); end
+  def initialize(by, req); end
+  def inspect; end
+  def key?(key); end
+  def keys; end
+  def load!; end
+  def load_for_read!; end
+  def load_for_write!; end
+  def loaded?; end
+  def merge!(other); end
+  def options; end
+  def self.create(store, req, default_options); end
+  def self.find(req); end
+  def self.set(req, session); end
+  def stringify_keys(other); end
+  def to_hash; end
+  def update(hash); end
+  def values; end
+end
+class ActionDispatch::Request::Session::Options
+  def [](key); end
+  def []=(k, v); end
+  def id(req); end
+  def initialize(by, default_options); end
+  def self.find(req); end
+  def self.set(req, options); end
+  def to_hash; end
+  def values_at(*args); end
+end
+class ActionDispatch::Session::SessionRestoreError < StandardError
+  def initialize(const_error = nil); end
+  def original_exception; end
+end
+module ActionDispatch::Session::Compatibility
+  def generate_sid; end
+  def initialize(app, options = nil); end
+  def initialize_sid; end
+  def make_request(env); end
+end
+module ActionDispatch::Session::StaleSessionCheck
+  def extract_session_id(env); end
+  def load_session(env); end
+  def stale_session_check!; end
+end
+module ActionDispatch::Session::SessionObject
+  def loaded_session?(session); end
+  def prepare_session(req); end
+end
+class ActionDispatch::Session::AbstractStore < Rack::Session::Abstract::Persisted
+  def set_cookie(request, session_id, cookie); end
+  include ActionDispatch::Session::Compatibility
+  include ActionDispatch::Session::SessionObject
+  include ActionDispatch::Session::StaleSessionCheck
+end
+class ActionDispatch::Session::CookieStore < ActionDispatch::Session::AbstractStore
+  def cookie_jar(request); end
+  def delete_session(req, session_id, options); end
+  def extract_session_id(req); end
+  def get_cookie(req); end
+  def initialize(app, options = nil); end
+  def load_session(req); end
+  def persistent_session_id!(data, sid = nil); end
+  def set_cookie(request, session_id, cookie); end
+  def unpacked_cookie_data(req); end
+  def write_session(req, sid, session_data, options); end
+end
+class ActionDispatch::Flash
+  def self.new(app); end
+end
+module ActionDispatch::Flash::RequestMethods
+  def commit_flash; end
+  def flash; end
+  def flash=(flash); end
+  def flash_hash; end
+  def reset_session; end
+end
+class ActionDispatch::Flash::FlashNow
+  def [](k); end
+  def []=(k, v); end
+  def alert=(message); end
+  def flash; end
+  def flash=(arg0); end
+  def initialize(flash); end
+  def notice=(message); end
+end
+class ActionDispatch::Flash::FlashHash
+  def [](k); end
+  def []=(k, v); end
+  def alert; end
+  def alert=(message); end
+  def clear; end
+  def delete(key); end
+  def discard(k = nil); end
+  def each(&block); end
+  def empty?; end
+  def initialize(flashes = nil, discard = nil); end
+  def initialize_copy(other); end
+  def keep(k = nil); end
+  def key?(name); end
+  def keys; end
+  def merge!(h); end
+  def notice; end
+  def notice=(message); end
+  def now; end
+  def now_is_loaded?; end
+  def replace(h); end
+  def self.from_session_value(value); end
+  def stringify_array(array); end
+  def sweep; end
+  def to_hash; end
+  def to_session_value; end
+  def update(h); end
+  include Enumerable
+end
+class ActionDispatch::Routing::Redirect < ActionDispatch::Routing::Endpoint
+  def block; end
+  def call(env); end
+  def escape(params); end
+  def escape_fragment(params); end
+  def escape_path(params); end
+  def initialize(status, block); end
+  def inspect; end
+  def path(params, request); end
+  def redirect?; end
+  def relative_path?(path); end
+  def serve(req); end
+  def status; end
+end
+class ActionDispatch::Routing::PathRedirect < ActionDispatch::Routing::Redirect
+  def inspect; end
+  def interpolation_required?(string, params); end
+  def path(params, request); end
+end
+class ActionDispatch::Routing::OptionRedirect < ActionDispatch::Routing::Redirect
+  def inspect; end
+  def options; end
+  def path(params, request); end
+end
+module ActionDispatch::Routing::Redirection
+  def redirect(*args, &block); end
+end
+class ActionDispatch::Routing::Mapper
+  def initialize(set); end
+  def self.normalize_name(name); end
+  def self.normalize_path(path); end
+  include ActionDispatch::Routing::Mapper::Base
+  include ActionDispatch::Routing::Mapper::Concerns
+  include ActionDispatch::Routing::Mapper::HttpHelpers
+  include ActionDispatch::Routing::Mapper::Resources
+  include ActionDispatch::Routing::Mapper::Scoping
+  include ActionDispatch::Routing::Redirection
+end
+class ActionDispatch::Routing::Mapper::Constraints < ActionDispatch::Routing::Endpoint
+  def app; end
+  def constraint_args(constraint, request); end
+  def constraints; end
+  def dispatcher?; end
+  def initialize(app, constraints, strategy); end
+  def matches?(req); end
+  def serve(req); end
+end
+class ActionDispatch::Routing::Mapper::Mapping
+  def add_controller_module(controller, modyoule); end
+  def add_wildcard_options(options, formatted, path_ast); end
+  def app(blocks); end
+  def application; end
+  def ast; end
+  def blocks(callable_constraint); end
+  def build_conditions(current_conditions, request_class); end
+  def build_path(ast, requirements, anchor); end
+  def check_controller_and_action(path_params, controller, action); end
+  def check_part(name, part, path_params, hash); end
+  def conditions; end
+  def constraints(options, path_params); end
+  def default_action; end
+  def default_controller; end
+  def defaults; end
+  def dispatcher(raise_on_name_error); end
+  def initialize(set, ast, defaults, controller, default_action, modyoule, to, formatted, scope_constraints, blocks, via, options_constraints, anchor, options); end
+  def make_route(name, precedence); end
+  def normalize_defaults(options); end
+  def normalize_format(formatted); end
+  def normalize_options!(options, path_params, modyoule); end
+  def path; end
+  def request_method; end
+  def required_defaults; end
+  def requirements; end
+  def self.build(scope, set, ast, controller, default_action, to, via, formatted, options_constraints, anchor, options); end
+  def self.check_via(via); end
+  def self.normalize_path(path, format); end
+  def self.optional_format?(path, format); end
+  def split_constraints(path_params, constraints); end
+  def split_to(to); end
+  def to; end
+  def translate_controller(controller); end
+  def verify_regexp_requirements(requirements); end
+end
+module ActionDispatch::Routing::Mapper::Base
+  def app_name(app, rails_app); end
+  def default_url_options(options); end
+  def default_url_options=(options); end
+  def define_generate_prefix(app, name); end
+  def has_named_route?(name); end
+  def match(path, options = nil); end
+  def mount(app, options = nil); end
+  def rails_app?(app); end
+  def with_default_scope(scope, &block); end
+end
+module ActionDispatch::Routing::Mapper::HttpHelpers
+  def delete(*args, &block); end
+  def get(*args, &block); end
+  def map_method(method, args, &block); end
+  def patch(*args, &block); end
+  def post(*args, &block); end
+  def put(*args, &block); end
+end
+module ActionDispatch::Routing::Mapper::Scoping
+  def constraints(constraints = nil); end
+  def controller(controller, options = nil); end
+  def defaults(defaults = nil); end
+  def merge_action_scope(parent, child); end
+  def merge_as_scope(parent, child); end
+  def merge_blocks_scope(parent, child); end
+  def merge_constraints_scope(parent, child); end
+  def merge_controller_scope(parent, child); end
+  def merge_defaults_scope(parent, child); end
+  def merge_format_scope(parent, child); end
+  def merge_module_scope(parent, child); end
+  def merge_options_scope(parent, child); end
+  def merge_path_names_scope(parent, child); end
+  def merge_path_scope(parent, child); end
+  def merge_shallow_path_scope(parent, child); end
+  def merge_shallow_prefix_scope(parent, child); end
+  def merge_shallow_scope(parent, child); end
+  def merge_to_scope(parent, child); end
+  def merge_via_scope(parent, child); end
+  def namespace(path, options = nil); end
+  def scope(*args); end
+end
+module ActionDispatch::Routing::Mapper::Resources
+  def action_options?(options); end
+  def action_path(name); end
+  def add_route(action, controller, options, _path, to, via, formatted, anchor, options_constraints); end
+  def api_only?; end
+  def apply_action_options(options); end
+  def apply_common_behavior_for(method, resources, options, &block); end
+  def canonical_action?(action); end
+  def collection; end
+  def decomposed_match(path, controller, options, _path, to, via, formatted, anchor, options_constraints); end
+  def get_to_from_path(path, to, action); end
+  def map_match(paths, options); end
+  def match(path, *rest, &block); end
+  def match_root_route(options); end
+  def member; end
+  def name_for_action(as, action); end
+  def namespace(path, options = nil); end
+  def nested; end
+  def nested_options; end
+  def nested_scope?; end
+  def new; end
+  def param_constraint; end
+  def param_constraint?; end
+  def parent_resource; end
+  def path_for_action(action, path); end
+  def path_scope(path); end
+  def prefix_name_for_action(as, action); end
+  def resource(*resources, &block); end
+  def resource_method_scope?; end
+  def resource_scope(resource); end
+  def resource_scope?; end
+  def resources(*resources, &block); end
+  def resources_path_names(options); end
+  def root(path, options = nil); end
+  def scope_action_options; end
+  def set_member_mappings_for_resource; end
+  def shallow; end
+  def shallow?; end
+  def shallow_nesting_depth; end
+  def shallow_scope; end
+  def using_match_shorthand?(path); end
+  def with_scope_level(kind); end
+end
+class ActionDispatch::Routing::Mapper::Resources::Resource
+  def actions; end
+  def collection_name; end
+  def collection_scope; end
+  def controller; end
+  def default_actions; end
+  def initialize(entities, api_only, shallow, options = nil); end
+  def member_name; end
+  def member_scope; end
+  def name; end
+  def nested_param; end
+  def nested_scope; end
+  def new_scope(new_path); end
+  def param; end
+  def path; end
+  def plural; end
+  def resource_scope; end
+  def shallow?; end
+  def shallow_scope; end
+  def singleton?; end
+  def singular; end
+end
+class ActionDispatch::Routing::Mapper::Resources::SingletonResource < ActionDispatch::Routing::Mapper::Resources::Resource
+  def collection_name; end
+  def default_actions; end
+  def initialize(entities, api_only, shallow, options); end
+  def member_name; end
+  def member_scope; end
+  def nested_scope; end
+  def plural; end
+  def singleton?; end
+  def singular; end
+end
+module ActionDispatch::Routing::Mapper::Concerns
+  def concern(name, callable = nil, &block); end
+  def concerns(*args); end
+end
+class ActionDispatch::Routing::Mapper::Scope
+  def [](key); end
+  def action_name(name_prefix, prefix, collection_name, member_name); end
+  def each; end
+  def frame; end
+  def initialize(hash, parent = nil, scope_level = nil); end
+  def nested?; end
+  def new(hash); end
+  def new_level(level); end
+  def options; end
+  def parent; end
+  def resource_method_scope?; end
+  def resource_scope?; end
+  def resources?; end
+  def scope_level; end
+  include Enumerable
 end
