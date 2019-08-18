@@ -84,6 +84,8 @@ build-iPhoneSimulator/
 # Ignore hidden-definition.rbi because we will rerun it
 /spec/support/**/sorbet/rbi/hidden-definitions/*
 /spec/support/**/sorbet/rbi/hidden-definitions/**/*
+# Ignore sorbet-typed files because we will regenerate them
+/spec/support/**/sorbet/rbi/sorbet-typed/**/*
 
 # Ignore sorbet files in v5.2-no-sorbet
 /spec/support/v5.2-no-sorbet/sorbet/*
