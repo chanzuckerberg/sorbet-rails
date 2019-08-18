@@ -237,18 +237,6 @@ module Wizard::ModelRelationShared
   def Slytherin(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
-  def not_Gryffindor(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
-  def not_Hufflepuff(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
-  def not_Ravenclaw(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
-  def not_Slytherin(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
   def recent(*args); end
 
   sig { returns(Wizard::ActiveRecord_Relation) }
@@ -259,9 +247,6 @@ module Wizard::ModelRelationShared
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
   def select(*args, &block); end
-
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
-  def reselect(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
   def order(*args, &block); end
@@ -295,9 +280,6 @@ module Wizard::ModelRelationShared
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
   def preload(*args, &block); end
-
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
-  def extract_associated(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
   def eager_load(*args, &block); end
@@ -339,16 +321,10 @@ module Wizard::ModelRelationShared
   def unscope(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
-  def optimizer_hints(*args, &block); end
-
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
   def merge(*args, &block); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
   def except(*args, &block); end
-
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
-  def only(*args, &block); end
 end
 
 class Wizard::ActiveRecord_Relation < ActiveRecord::Relation
