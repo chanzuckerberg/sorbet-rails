@@ -41,7 +41,13 @@ RSpec.describe 'sorbet' do
       'bundle', 'exec', 'srb', 'rbi', 'hidden-definitions',
       chdir: Rails.root.to_path,
     )
-    # TODO srb rbi hidden-definitions is not working with sorbet & Rails 6.0.0.rc2
+    puts stderr, status
+
+    # Regenerate sorbet-typed files since they're ignored.
+    stdout, stderr, status = Open3.capture3(
+      'bundle', 'exec', 'srb', 'rbi', 'sorbet-typed',
+      chdir: Rails.root.to_path,
+    )
     puts stderr, status
   end
 
