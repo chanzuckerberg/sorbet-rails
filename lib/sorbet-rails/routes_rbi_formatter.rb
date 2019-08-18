@@ -25,7 +25,7 @@ class SorbetRails::RoutesRbiFormatter
     ])
 
     @parlour.root.create_class('ActionController::Base') do |klass|
-      klass.create_include('GeneratedUrlHelper')
+      klass.create_include('GeneratedUrlHelpers')
     end
   end
 
@@ -47,7 +47,7 @@ class SorbetRails::RoutesRbiFormatter
 
   sig { params(routes: T::Array[T::Hash[Symbol, String]]).void }
   def draw_section(routes)
-    @parlour.root.create_module('GeneratedUrlHelper') do |klass|
+    @parlour.root.create_module('GeneratedUrlHelpers') do |klass|
       routes.each do |r|
         next unless r[:name].present?
 
