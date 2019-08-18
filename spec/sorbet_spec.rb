@@ -12,6 +12,7 @@ RSpec.describe 'sorbet' do
     SpellBook.create!(
       name: 'Fantastic Beasts',
       wizard: harry,
+      book_type: :biology,
     )
   end
   let!(:wand) do
@@ -64,11 +65,8 @@ RSpec.describe 'sorbet' do
       chdir: Rails.root.to_path,
     )
     expect(stdout).to eql('')
-    expect(status.exitstatus).to eql(1) # T.reveal_type is considered an error
+    expect(status.exitstatus).to eql(0)
     expected_file_path = 'expected_srb_tc_output.txt'
-    # if ENV['SORBET_VERSION']
-    #   expected_file_path = File.join(ENV['SORBET_VERSION'], expected_file_path)
-    # end
     expect_match_file(stderr, expected_file_path)
   end
 
