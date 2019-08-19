@@ -69,7 +69,8 @@ The generation task currently creates the following signatures:
 - Associations getters & setters
 - Enum values, checkers & scopes
 - Named scopes
-- Model relation class
+- Model `Relation` class
+  - Scopes on `Relation`, but not [class methods](https://github.com/chanzuckerberg/sorbet-rails/issues/104#issuecomment-521763909)
 
 It is possible to add custom RBI generation logic for your custom module or gems via the plugin system. Check out the [plugins section](#extending-model-generation-task-with-custom-plugins) below if you are interested.
 
