@@ -7,20 +7,22 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/parlour/all/parlour.rbi
 #
-# parlour-0.5.1
+# parlour-0.6.1
 module Parlour
+end
+module Kernel
 end
 class Parlour::Plugin
   def generate(*args, &blk); end
   def initialize(*args, &blk); end
   def self.inherited(*args, &blk); end
-  def self.method_added(name); end
   def self.registered_plugins(*args, &blk); end
   def self.run_plugins(*args, &blk); end
-  def self.singleton_method_added(name); end
   extend T::Helpers
   extend T::InterfaceWrapper::Helpers
   extend T::Private::Abstract::Hooks
+  extend T::Private::Methods::MethodHooks
+  extend T::Private::Methods::SingletonMethodHooks
   extend T::Sig
 end
 class Parlour::RbiGenerator
@@ -30,8 +32,8 @@ class Parlour::RbiGenerator
   def options(*args, &blk); end
   def rbi(*args, &blk); end
   def root(*args, &blk); end
-  def self.method_added(name); end
-  def self.singleton_method_added(name); end
+  extend T::Private::Methods::MethodHooks
+  extend T::Private::Methods::SingletonMethodHooks
   extend T::Sig
 end
 class Parlour::RbiGenerator::Parameter
@@ -41,11 +43,11 @@ class Parlour::RbiGenerator::Parameter
   def kind(*args, &blk); end
   def name(*args, &blk); end
   def name_without_kind(*args, &blk); end
-  def self.method_added(name); end
-  def self.singleton_method_added(name); end
   def to_def_param(*args, &blk); end
   def to_sig_param(*args, &blk); end
   def type(*args, &blk); end
+  extend T::Private::Methods::MethodHooks
+  extend T::Private::Methods::SingletonMethodHooks
   extend T::Sig
 end
 class Parlour::RbiGenerator::RbiObject
@@ -61,11 +63,11 @@ class Parlour::RbiGenerator::RbiObject
   def merge_into_self(*args, &blk); end
   def mergeable?(*args, &blk); end
   def name(*args, &blk); end
-  def self.method_added(name); end
-  def self.singleton_method_added(name); end
   extend T::Helpers
   extend T::InterfaceWrapper::Helpers
   extend T::Private::Abstract::Hooks
+  extend T::Private::Methods::MethodHooks
+  extend T::Private::Methods::SingletonMethodHooks
   extend T::Sig
 end
 class Parlour::RbiGenerator::Method < Parlour::RbiGenerator::RbiObject
@@ -84,16 +86,16 @@ class Parlour::RbiGenerator::Method < Parlour::RbiGenerator::RbiObject
   def parameters(*args, &blk); end
   def qualifiers(*args, &blk); end
   def return_type(*args, &blk); end
-  def self.method_added(name); end
-  def self.singleton_method_added(name); end
+  extend T::Private::Methods::MethodHooks
+  extend T::Private::Methods::SingletonMethodHooks
   extend T::Sig
 end
 class Parlour::RbiGenerator::Attribute < Parlour::RbiGenerator::Method
   def generate_definition(*args, &blk); end
   def initialize(*args, &blk); end
   def kind(*args, &blk); end
-  def self.method_added(name); end
-  def self.singleton_method_added(name); end
+  extend T::Private::Methods::MethodHooks
+  extend T::Private::Methods::SingletonMethodHooks
 end
 class Parlour::RbiGenerator::Arbitrary < Parlour::RbiGenerator::RbiObject
   def ==(*args, &blk); end
@@ -104,16 +106,16 @@ class Parlour::RbiGenerator::Arbitrary < Parlour::RbiGenerator::RbiObject
   def initialize(*args, &blk); end
   def merge_into_self(*args, &blk); end
   def mergeable?(*args, &blk); end
-  def self.method_added(name); end
-  def self.singleton_method_added(name); end
+  extend T::Private::Methods::MethodHooks
+  extend T::Private::Methods::SingletonMethodHooks
 end
 class Parlour::RbiGenerator::Options
   def break_params(*args, &blk); end
   def indented(*args, &blk); end
   def initialize(*args, &blk); end
-  def self.method_added(name); end
-  def self.singleton_method_added(name); end
   def tab_size(*args, &blk); end
+  extend T::Private::Methods::MethodHooks
+  extend T::Private::Methods::SingletonMethodHooks
   extend T::Sig
 end
 class Parlour::RbiGenerator::Include < Parlour::RbiGenerator::RbiObject
@@ -123,8 +125,8 @@ class Parlour::RbiGenerator::Include < Parlour::RbiGenerator::RbiObject
   def initialize(*args, &blk); end
   def merge_into_self(*args, &blk); end
   def mergeable?(*args, &blk); end
-  def self.method_added(name); end
-  def self.singleton_method_added(name); end
+  extend T::Private::Methods::MethodHooks
+  extend T::Private::Methods::SingletonMethodHooks
 end
 class Parlour::RbiGenerator::Extend < Parlour::RbiGenerator::RbiObject
   def ==(*args, &blk); end
@@ -133,8 +135,8 @@ class Parlour::RbiGenerator::Extend < Parlour::RbiGenerator::RbiObject
   def initialize(*args, &blk); end
   def merge_into_self(*args, &blk); end
   def mergeable?(*args, &blk); end
-  def self.method_added(name); end
-  def self.singleton_method_added(name); end
+  extend T::Private::Methods::MethodHooks
+  extend T::Private::Methods::SingletonMethodHooks
 end
 class Parlour::RbiGenerator::Constant < Parlour::RbiGenerator::RbiObject
   def ==(*args, &blk); end
@@ -143,24 +145,26 @@ class Parlour::RbiGenerator::Constant < Parlour::RbiGenerator::RbiObject
   def initialize(*args, &blk); end
   def merge_into_self(*args, &blk); end
   def mergeable?(*args, &blk); end
-  def self.method_added(name); end
-  def self.singleton_method_added(name); end
   def value(*args, &blk); end
+  extend T::Private::Methods::MethodHooks
+  extend T::Private::Methods::SingletonMethodHooks
 end
 class Parlour::RbiGenerator::Namespace < Parlour::RbiGenerator::RbiObject
   def add_comment_to_next_child(*args, &blk); end
   def children(*args, &blk); end
   def constants(*args, &blk); end
-  def create_arbitrary(code: nil, &block); end
-  def create_attr(name: nil, kind: nil, type: nil, &block); end
-  def create_attr_accessor(name: nil, type: nil, &block); end
-  def create_attr_reader(name: nil, type: nil, &block); end
-  def create_attr_writer(name: nil, type: nil, &block); end
-  def create_attribute(name: nil, kind: nil, type: nil, &block); end
+  def create_arbitrary(code:, &block); end
+  def create_attr(name, kind:, type:, &block); end
+  def create_attr_accessor(name, type:, &block); end
+  def create_attr_reader(name, type:, &block); end
+  def create_attr_writer(name, type:, &block); end
+  def create_attribute(name, kind:, type:, &block); end
   def create_class(*args, &blk); end
   def create_constant(*args, &blk); end
   def create_extend(*args, &blk); end
+  def create_extends(*args, &blk); end
   def create_include(*args, &blk); end
+  def create_includes(*args, &blk); end
   def create_method(*args, &blk); end
   def create_module(*args, &blk); end
   def describe(*args, &blk); end
@@ -173,8 +177,8 @@ class Parlour::RbiGenerator::Namespace < Parlour::RbiGenerator::RbiObject
   def mergeable?(*args, &blk); end
   def move_next_comments(*args, &blk); end
   def path(*args, &blk); end
-  def self.method_added(name); end
-  def self.singleton_method_added(name); end
+  extend T::Private::Methods::MethodHooks
+  extend T::Private::Methods::SingletonMethodHooks
   extend T::Sig
 end
 class Parlour::RbiGenerator::ModuleNamespace < Parlour::RbiGenerator::Namespace
@@ -184,8 +188,8 @@ class Parlour::RbiGenerator::ModuleNamespace < Parlour::RbiGenerator::Namespace
   def interface(*args, &blk); end
   def merge_into_self(*args, &blk); end
   def mergeable?(*args, &blk); end
-  def self.method_added(name); end
-  def self.singleton_method_added(name); end
+  extend T::Private::Methods::MethodHooks
+  extend T::Private::Methods::SingletonMethodHooks
   extend T::Sig
 end
 class Parlour::RbiGenerator::ClassNamespace < Parlour::RbiGenerator::Namespace
@@ -195,16 +199,16 @@ class Parlour::RbiGenerator::ClassNamespace < Parlour::RbiGenerator::Namespace
   def initialize(*args, &blk); end
   def merge_into_self(*args, &blk); end
   def mergeable?(*args, &blk); end
-  def self.method_added(name); end
-  def self.singleton_method_added(name); end
   def superclass(*args, &blk); end
+  extend T::Private::Methods::MethodHooks
+  extend T::Private::Methods::SingletonMethodHooks
   extend T::Sig
 end
 class Parlour::ConflictResolver
   def all_eql?(*args, &blk); end
   def resolve_conflicts(*args, &blk); end
-  def self.method_added(name); end
-  def self.singleton_method_added(name); end
   def single_type_of_array(*args, &blk); end
+  extend T::Private::Methods::MethodHooks
+  extend T::Private::Methods::SingletonMethodHooks
   extend T::Sig
 end
