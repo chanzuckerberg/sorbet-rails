@@ -22,7 +22,7 @@ rails_folder =
   when "6.0"
     "v6.0"
   else
-    ENV["TEST_SRB_INIT"] ? "v5.2-no-sorbet" : "v5.2"
+    "v5.2"
   end
 
 TEST_DATA_FOLDER = "spec/test_data/#{rails_folder}"

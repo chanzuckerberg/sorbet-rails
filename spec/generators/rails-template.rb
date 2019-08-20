@@ -267,6 +267,7 @@ after_bundle do
     Bundler.with_clean_env do
       run "SRB_YES=true bundle #{bundle_version} exec srb init"
       run "bundle #{bundle_version} exec rake rails_rbi:all"
+      run "bundle #{bundle_version} exec srbi rbi hidden-definitions"
       run "bundle #{bundle_version} exec srb rbi todo"
     end
   end

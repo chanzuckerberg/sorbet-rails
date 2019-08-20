@@ -13,7 +13,6 @@ namespace :update_spec do
   task :v5_plus do |t, args|
     Rake::Task['update_spec:v6_0'].invoke
     Rake::Task['update_spec:v5_2'].invoke
-    Rake::Task['update_spec:v5_2_no_sorbet'].invoke
     Rake::Task['update_spec:v5_1'].invoke
     Rake::Task['update_spec:v5_0'].invoke
   end
@@ -35,16 +34,6 @@ namespace :update_spec do
       system("gem install rails -v 5.2.3")
       system("rails _5.2.3_ -v")
       system("RAILS_VERSION='5.2' rails _5.2.3_ new --template spec/generators/rails-template.rb spec/support/v5.2 --skip-javascript --skip-action-cable --skip-test --skip-sprockets --skip-spring --skip-bootsnap --skip-listen")
-    end
-  end
-
-  desc "Delete the Rails 5.2-no-sorbet spec directory and regenerate it."
-  task :v5_2_no_sorbet do |t, args|
-    Bundler.with_clean_env do
-      FileUtils.rm_rf 'spec/support/v5.2-no-sorbet' if File.directory?('spec/support/v5.2-no-sorbet')
-      system("gem install rails -v 5.2.3")
-      system("rails _5.2.3_ -v")
-      system("RUN_WITH_SORBET='false' RAILS_VERSION='5.2' rails _5.2.3_ new --template spec/generators/rails-template.rb spec/support/v5.2-no-sorbet --skip-javascript --skip-action-cable --skip-test --skip-sprockets --skip-spring --skip-bootsnap --skip-listen")
     end
   end
 
@@ -80,7 +69,7 @@ namespace :update_spec do
 
   desc "Update sorbet_test_cases.rb in all the Rails apps in spec/support."
   task :sorbet_test_cases do |t, args|
-    ['v6.0', 'v5.2', 'v5.2-no-sorbet', 'v5.1', 'v5.0', 'v4.2'].each do |version|
+    ['v6.0', 'v5.2', 'v5.1', 'v5.0', 'v4.2'].each do |version|
       FileUtils.cp("spec/generators/sorbet_test_cases.rb", "spec/support/#{version}/sorbet_test_cases.rb")
     end
   end
