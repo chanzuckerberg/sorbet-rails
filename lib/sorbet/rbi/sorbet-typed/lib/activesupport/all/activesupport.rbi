@@ -117,9 +117,11 @@ class String
   def blank?; end
 
   sig { params(first_letter: Symbol).returns(String) }
-  def camelize(first_letter = nil); end
+  def camelize(first_letter = :upper); end
 
-  alias_method :camelcase, :camelize
+  # camelcase is an alias of camelize
+  sig { params(first_letter: Symbol).returns(String) }
+  def camelcase(first_letter = :upper); end
 
   sig { returns(String) }
   def classify; end
@@ -136,13 +138,15 @@ class String
   sig { returns(String) }
   def demodulize; end
 
-  alias_method :ends_with?, :end_with?
+  # ends_with? is an alias of the core method 'end_with?'
+  sig { params(arg0: String).returns(T::Boolean) }
+  def ends_with?(*arg0); end
 
   sig { params(string: String).returns(T::Boolean) }
   def exclude?(string); end
 
-  sig { params(limit: T.nilable(Integer)).returns(String) }
-  def first(limit = nil); end
+  sig { params(limit: Integer).returns(String) }
+  def first(limit = 1); end
 
   sig { params(separate_class_name_and_id_with_underscore: T::Boolean).returns(String) }
   def foreign_key(separate_class_name_and_id_with_underscore = true); end
@@ -189,7 +193,7 @@ class String
   sig { params(patterns: T.untyped).returns(T.untyped) }
   def remove(*patterns); end
 
-  sig { returns(T.nilable(String)) }
+  sig { returns(T.untyped) }
   def safe_constantize; end
 
   sig { params(locale: Symbol).returns(T.nilable(String)) }
@@ -201,7 +205,9 @@ class String
   sig { returns(String) }
   def squish; end
 
-  alias_method :starts_with?, :start_with?
+  # starts_with? is an alias of the core method 'start_with?''
+  sig { params(arg0: String).returns(T::Boolean) }
+  def starts_with?(*arg0); end
 
   sig { returns(String) }
   def strip_heredoc; end
@@ -209,10 +215,12 @@ class String
   sig { returns(String) }
   def tableize; end
 
-  alias_method :titlecase, :titleize
-
   sig { params(keep_id_suffix: T::Boolean).returns(String) }
   def titleize(keep_id_suffix: false); end
+
+  # titlecase is an alias of titleize
+  sig { params(keep_id_suffix: T::Boolean).returns(String) }
+  def titlecase(keep_id_suffix: false); end
 
   sig { params(position: Integer).returns(String) }
   def to(position); end
@@ -276,8 +284,13 @@ class Array
   sig { returns(Elem) }
   def second_to_last; end
 
-  sig { params(value: T.untyped).returns(T::Array[T.untyped]) }
-  def split(value = nil); end
+  sig do
+    params(
+      value: T.untyped,
+      blk: T.proc.params(arg0: Elem).void
+    ).returns(T::Array[Elem])
+  end
+  def split(value = nil, &blk); end
 
   sig { returns(Elem) }
   def third; end
@@ -288,7 +301,9 @@ class Array
   sig { params(position: Integer).returns(T::Array[T.untyped]) }
   def to(position); end
 
-  alias_method :to_default_s, :to_s
+  # to_default_s is an alias of the core method 'to_s'
+  sig {returns(String)}
+  def to_defaul_s; end
 
   sig { params(format: Symbol).returns(String) }
   def to_formatted_s(format = :default); end
@@ -304,8 +319,8 @@ class Array
       words_connector: String,
       two_words_connector: String,
       last_word_connector: String,
-      locale: T.untyped
-    ).returns(T.untyped)
+      locale: T.nilable(Symbol)
+    ).returns(String)
   end
   def to_sentence(words_connector: ", ", two_words_connector: " and ", last_word_connector: ", and ", locale: nil); end
 
@@ -337,10 +352,10 @@ module ActiveSupport::NumberHelper
       locale: Symbol,
       delimiter: String,
       separator: String,
-      delimiter_patter: T.nilable(Regexp)
+      delimiter_pattern: T.nilable(Regexp)
     ).returns(String)
   end
-  def number_to_delimited(number, locale: :en, delimiter: ",", separator: ".", delimiter_patter: nil); end
+  def number_to_delimited(number, locale: :en, delimiter: ",", separator: ".", delimiter_pattern: nil); end
 
   sig do
     params(
@@ -351,7 +366,7 @@ module ActiveSupport::NumberHelper
       separator: String,
       delimiter: String,
       strip_insignificant_zeros: T::Boolean,
-      units: T.any(T::Hash[T.untyped, T.untyped], String),
+      units: T.any(T::Hash[T.untyped, T.untyped], String, Symbol),
       format: String
     ).returns(String)
   end
@@ -379,7 +394,7 @@ module ActiveSupport::NumberHelper
       separator: String,
       delimiter: String,
       strip_insignificant_zeros: T::Boolean,
-      format: Symbol
+      format: String
     ).returns(String)
   end
   def number_to_percentage(number, locale: :en, precision: 3, significant: false, separator: ".", delimiter: "", strip_insignificant_zeros: false, format: "%n%"); end
@@ -408,4 +423,36 @@ module ActiveSupport::NumberHelper
     ).returns(String)
   end
   def number_to_rounded(number, locale: :en, precision: 3, significant: false, separator: ".", delimiter: "", strip_insignificant_zeros: false); end
+end
+
+class Hash
+  sig { returns(T.self_type) }
+  def deep_stringify_keys; end
+
+  sig { returns(T.self_type) }
+  def deep_stringify_keys!; end
+
+  sig { returns(T.self_type) }
+  def deep_symbolize_keys; end
+
+  sig { returns(T.self_type) }
+  def deep_symbolize_keys!; end
+
+  sig { returns(T.self_type) }
+  def deep_transform_keys; end
+
+  sig { returns(T.self_type) }
+  def deep_transform_keys!; end
+
+  sig { returns(T.self_type) }
+  def stringify_keys; end
+
+  sig { returns(T.self_type) }
+  def stringify_keys!; end
+
+  sig { returns(T.self_type) }
+  def symbolize_keys; end
+
+  sig { returns(T.self_type) }
+  def symbolize_keys!; end
 end

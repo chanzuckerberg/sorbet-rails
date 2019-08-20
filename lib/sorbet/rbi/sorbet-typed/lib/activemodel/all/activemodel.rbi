@@ -314,7 +314,45 @@ module ActiveModel::Validations::HelperMethods
     strict: false
   ); end
   
-  alias_method :validates_size_of, :validates_length_of
+  # validates_size_of is an alias of validates_length_of
+  sig do
+    params(
+      attr_names: T.any(String, Symbol),
+      message: T.nilable(String),
+      minimum: T.nilable(Integer),
+      maximum: T.nilable(Integer),
+      is: T.nilable(Integer),
+      within: T.nilable(T::Range[Integer]),
+      in: T.nilable(T::Range[Integer]),
+      too_long: String,
+      too_short: String,
+      wrong_length: String,
+      if: T.any(Symbol, String, T.proc.params(arg0: T.untyped).returns(T::Boolean)),
+      unless: T.any(Symbol, String, T.proc.params(arg0: T.untyped).returns(T::Boolean)),
+      on: T.any(Symbol, String),
+      allow_nil: T::Boolean,
+      allow_blank: T::Boolean,
+      strict: T::Boolean
+    ).void
+  end
+  def validates_size_of(
+    *attr_names,
+    message: nil,
+    minimum: nil,
+    maximum: nil,
+    is: nil,
+    within: nil,
+    in: nil,
+    too_long: 'is too long (maximum is %{count} characters)',
+    too_short: 'is too short (minimum is %{count} characters)',
+    wrong_length: 'is the wrong length (should be %{count} characters)',
+    if: nil,
+    unless: :_,
+    on: :_,
+    allow_nil: false,
+    allow_blank: false,
+    strict: false
+  ); end
 
   # Create a type alias so we don't have to repeat this long type signature 6 times.
   NumberComparatorType = T.type_alias(T.nilable(T.any(Integer, Float, T.proc.params(arg0: T.untyped).returns(T::Boolean), Symbol)))

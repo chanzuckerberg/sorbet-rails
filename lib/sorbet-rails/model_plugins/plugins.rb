@@ -1,4 +1,4 @@
-# typed: true
+# typed: strict
 require('sorbet-rails/model_plugins/base')
 require('sorbet-rails/model_plugins/active_record_enum')
 require('sorbet-rails/model_plugins/active_record_querying')
