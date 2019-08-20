@@ -40,7 +40,15 @@ RSpec.describe 'sorbet' do
       'bundle', 'exec', 'srb', 'rbi', 'hidden-definitions',
       chdir: Rails.root.to_path,
     )
-    puts stderr, status
+    puts '--- srb rbi hidden-definitions ---'
+    puts stdout, stderr, status
+
+    stdout, stderr, status = Open3.capture3(
+      'bundle', 'exec', 'srb', 'rbi', 'todo',
+      chdir: Rails.root.to_path,
+    )
+    puts '--- srb rbi todo ---'
+    puts stdout, stderr, status
   end
 
   it 'returns expected sorbet tc result' do
@@ -48,10 +56,9 @@ RSpec.describe 'sorbet' do
       'bundle', 'exec', 'srb', 'tc', '--typed-override=typed-override.yaml',
       chdir: Rails.root.to_path,
     )
-    expect(stdout).to eql('')
-    expect(status.exitstatus).to eql(0)
     expected_file_path = 'expected_srb_tc_output.txt'
     expect_match_file(stderr, expected_file_path)
+    expect(stdout).to eql('')
   end
 
   it 'passes sorbet dynamic checks' do
