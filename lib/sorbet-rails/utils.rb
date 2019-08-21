@@ -12,4 +12,9 @@ module SorbetRails::Utils
     # But this is not applied to Rails.application.eager_load! method
     Zeitwerk::Loader.eager_load_all if defined?(Zeitwerk)
   end
+
+  sig { params(method_name: String).returns(T::Boolean) }
+  def valid_method_name?(method_name)
+    method_name.match?(/^[A-z][A-z0-9_]*[!?=]?$/)
+  end
 end

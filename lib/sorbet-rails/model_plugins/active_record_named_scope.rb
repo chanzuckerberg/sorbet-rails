@@ -1,11 +1,13 @@
 # typed: strict
 require ('sorbet-rails/model_plugins/base')
+require("sorbet-rails/utils")
 class SorbetRails::ModelPlugins::ActiveRecordNamedScope < SorbetRails::ModelPlugins::Base
 
   sig { implementation.params(root: Parlour::RbiGenerator::Namespace).void }
   def generate(root)
     ar_named_scope_rbi = root.create_module(self.model_relation_shared_module_name)
     @model_class.methods.sort.each do |method_name|
+      next unless SorbetRails::Utils.valid_method_name?(method_name.to_s)
       method_obj = @model_class.method(method_name)
       next unless method_obj.present? && method_obj.source_location.present?
       # we detect sscopes defined in a model by 2 criteria:
