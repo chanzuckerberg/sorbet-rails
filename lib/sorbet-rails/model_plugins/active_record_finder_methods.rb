@@ -12,6 +12,9 @@ class SorbetRails::ModelPlugins::ActiveRecordFinderMethods < SorbetRails::ModelP
 
     model_assoc_proxy_class_rbi = root.create_class(self.model_assoc_proxy_class_name)
     create_finder_methods_for(model_assoc_proxy_class_rbi, class_method: false)
+
+    model_assoc_relation_rbi = root.create_class(self.model_assoc_relation_class_name)
+    create_finder_methods_for(model_assoc_relation_rbi, class_method: false)
   end
 
   sig { params(class_rbi: Parlour::RbiGenerator::ClassNamespace, class_method: T::Boolean).void }
