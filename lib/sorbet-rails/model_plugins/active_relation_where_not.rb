@@ -10,8 +10,8 @@ class SorbetRails::ModelPlugins::ActiveRelationWhereNot < SorbetRails::ModelPlug
     model_relation_class_rbi = root.create_class(self.model_relation_class_name)
     model_relation_class_rbi.create_include(where_not_module_name)
 
-    model_assoc_proxy_class_rbi = root.create_class(self.model_assoc_proxy_class_name)
-    model_assoc_proxy_class_rbi.create_include(where_not_module_name)
+    model_assoc_relation_rbi = root.create_class(self.model_assoc_relation_class_name)
+    model_assoc_relation_rbi.create_include(where_not_module_name)
 
     # TODO: where.not is a special case that we replace it with a `where_not` method
     # `where` when not given parameters will return a `ActiveRecord::QueryMethods::WhereChain`

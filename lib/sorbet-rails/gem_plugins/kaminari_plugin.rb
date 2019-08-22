@@ -9,13 +9,12 @@ class KaminariPlugin < SorbetRails::ModelPlugins::Base
     # Get the configured Kaminari page method name, or fall back to 'page' if necessary.
     page_method = T.unsafe(Kaminari).config.page_method_name || 'page'
 
-    ar_querying_rbi = root.create_module(model_relation_shared_module_name)
-    ar_querying_rbi.create_method(
+    add_relation_query_method(
+      root,
       page_method.to_s,
       parameters: [
         Parameter.new('num', type: 'T.nilable(Integer)', default: 'nil')
       ],
-      return_type: model_relation_class_name
     )
   end
 end

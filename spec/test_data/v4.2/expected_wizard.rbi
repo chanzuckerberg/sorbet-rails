@@ -139,26 +139,99 @@ class Wizard < ApplicationRecord
   include Wizard::EnumInstanceMethods
   include Wizard::GeneratedAttributeMethods
   include Wizard::GeneratedAssociationMethods
-  extend SorbetRails::CustomFinderMethods
   extend Wizard::CustomFinderMethods
   extend T::Sig
   extend T::Generic
-  extend Wizard::ModelRelationShared
 
   sig { returns(T::Hash[T.any(String, Symbol), Integer]) }
   def self.houses; end
 
-  sig { returns(Wizard::ActiveRecord_Relation) }
-  def self.Gryffindor; end
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def self.Gryffindor(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def self.Hufflepuff(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def self.Ravenclaw(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def self.Slytherin(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def self.recent(*args); end
 
   sig { returns(Wizard::ActiveRecord_Relation) }
-  def self.Hufflepuff; end
+  def self.all; end
 
-  sig { returns(Wizard::ActiveRecord_Relation) }
-  def self.Ravenclaw; end
+  sig { params(block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
+  def self.unscoped(&block); end
 
-  sig { returns(Wizard::ActiveRecord_Relation) }
-  def self.Slytherin; end
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
+  def self.select(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
+  def self.order(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
+  def self.reorder(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
+  def self.group(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
+  def self.limit(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
+  def self.offset(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
+  def self.joins(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
+  def self.where(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
+  def self.rewhere(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
+  def self.preload(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
+  def self.eager_load(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
+  def self.includes(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
+  def self.from(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
+  def self.lock(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
+  def self.readonly(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
+  def self.having(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
+  def self.create_with(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
+  def self.distinct(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
+  def self.references(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
+  def self.none(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
+  def self.unscope(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
+  def self.except(*args, &block); end
 
   sig { params(args: T.untyped).returns(Wizard) }
   def self.find(*args); end
@@ -221,8 +294,13 @@ class Wizard < ApplicationRecord
   def self.one?(*args); end
 end
 
-module Wizard::ModelRelationShared
+class Wizard::ActiveRecord_Relation < ActiveRecord::Relation
+  include Wizard::ActiveRelation_WhereNot
+  include Wizard::CustomFinderMethods
+  include Enumerable
   extend T::Sig
+  extend T::Generic
+  Elem = type_member(fixed: Wizard)
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
   def Gryffindor(*args); end
@@ -310,17 +388,6 @@ module Wizard::ModelRelationShared
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
   def except(*args, &block); end
-end
-
-class Wizard::ActiveRecord_Relation < ActiveRecord::Relation
-  include Wizard::ActiveRelation_WhereNot
-  include SorbetRails::CustomFinderMethods
-  include Wizard::CustomFinderMethods
-  include Enumerable
-  include Wizard::ModelRelationShared
-  extend T::Sig
-  extend T::Generic
-  Elem = type_member(fixed: Wizard)
 
   sig { params(args: T.untyped).returns(Wizard) }
   def find(*args); end
@@ -390,17 +457,282 @@ class Wizard::ActiveRecord_Relation < ActiveRecord::Relation
 
   sig { returns(T::Array[Wizard]) }
   def to_a; end
+
+  sig do
+    type_parameters(:U).params(
+        blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),
+    )
+    .returns(T::Array[T.type_parameter(:U)])
+  end
+  def map(&blk); end
+end
+
+class Wizard::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
+  include Wizard::ActiveRelation_WhereNot
+  include Wizard::CustomFinderMethods
+  include Enumerable
+  extend T::Sig
+  extend T::Generic
+  Elem = type_member(fixed: Wizard)
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def Gryffindor(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def Hufflepuff(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def Ravenclaw(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def Slytherin(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def recent(*args); end
+
+  sig { returns(Wizard::ActiveRecord_AssociationRelation) }
+  def all; end
+
+  sig { params(block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def unscoped(&block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def select(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def order(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def reorder(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def group(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def limit(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def offset(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def joins(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def where(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def rewhere(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def preload(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def eager_load(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def includes(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def from(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def lock(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def readonly(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def having(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def create_with(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def distinct(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def references(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def none(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def unscope(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def except(*args, &block); end
+
+  sig { params(args: T.untyped).returns(Wizard) }
+  def find(*args); end
+
+  sig { params(args: T.untyped).returns(T.nilable(Wizard)) }
+  def find_by(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard) }
+  def find_by!(*args); end
+
+  sig { returns(T.nilable(Wizard)) }
+  def first; end
+
+  sig { returns(Wizard) }
+  def first!; end
+
+  sig { returns(T.nilable(Wizard)) }
+  def second; end
+
+  sig { returns(Wizard) }
+  def second!; end
+
+  sig { returns(T.nilable(Wizard)) }
+  def third; end
+
+  sig { returns(Wizard) }
+  def third!; end
+
+  sig { returns(T.nilable(Wizard)) }
+  def third_to_last; end
+
+  sig { returns(Wizard) }
+  def third_to_last!; end
+
+  sig { returns(T.nilable(Wizard)) }
+  def second_to_last; end
+
+  sig { returns(Wizard) }
+  def second_to_last!; end
+
+  sig { returns(T.nilable(Wizard)) }
+  def last; end
+
+  sig { returns(Wizard) }
+  def last!; end
+
+  sig { params(conditions: T.untyped).returns(T::Boolean) }
+  def exists?(conditions = nil); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def any?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def many?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def none?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def one?(*args); end
+
+  sig { implementation.params(block: T.proc.params(e: Wizard).void).void }
+  def each(&block); end
+
+  sig { params(level: T.nilable(Integer)).returns(T::Array[Wizard]) }
+  def flatten(level); end
+
+  sig { returns(T::Array[Wizard]) }
+  def to_a; end
+
+  sig do
+    type_parameters(:U).params(
+        blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),
+    )
+    .returns(T::Array[T.type_parameter(:U)])
+  end
+  def map(&blk); end
 end
 
 class Wizard::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
-  include Wizard::ActiveRelation_WhereNot
-  include SorbetRails::CustomFinderMethods
   include Wizard::CustomFinderMethods
   include Enumerable
-  include Wizard::ModelRelationShared
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: Wizard)
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def Gryffindor(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def Hufflepuff(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def Ravenclaw(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def Slytherin(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def recent(*args); end
+
+  sig { returns(Wizard::ActiveRecord_AssociationRelation) }
+  def all; end
+
+  sig { params(block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def unscoped(&block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def select(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def order(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def reorder(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def group(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def limit(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def offset(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def joins(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def where(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def rewhere(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def preload(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def eager_load(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def includes(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def from(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def lock(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def readonly(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def having(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def create_with(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def distinct(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def references(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def none(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def unscope(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def except(*args, &block); end
 
   sig { params(args: T.untyped).returns(Wizard) }
   def find(*args); end
@@ -470,6 +802,14 @@ class Wizard::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associat
 
   sig { returns(T::Array[Wizard]) }
   def to_a; end
+
+  sig do
+    type_parameters(:U).params(
+        blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),
+    )
+    .returns(T::Array[T.type_parameter(:U)])
+  end
+  def map(&blk); end
 
   sig { params(records: T.any(Wizard, T::Array[Wizard])).returns(T.self_type) }
   def <<(*records); end
