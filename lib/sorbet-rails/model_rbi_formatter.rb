@@ -2,6 +2,7 @@
 require('parlour')
 require('sorbet-rails/model_utils')
 require('sorbet-rails/model_plugins/plugins')
+require('sorbet-rails/gem_plugins/gem_plugins')
 
 class SorbetRails::ModelRbiFormatter
   extend T::Sig
@@ -35,6 +36,9 @@ class SorbetRails::ModelRbiFormatter
   sig {returns(String)}
   def generate_rbi
     puts "-- Generate sigs for #{@model_class.name} --"
+
+    # Register any gem plugins the user has added to their configuration.
+    SorbetRails::GemPlugins.register_gem_plugins
 
     # Collect the instances of each plugin into an array
     plugin_instances = self.class.get_plugins.map do |plugin_klass|
