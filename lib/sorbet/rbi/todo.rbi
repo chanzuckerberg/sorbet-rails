@@ -2,6 +2,7 @@
 #   srb rbi todo
 
 # typed: strong
+module ::FriendlyId; end
 module ::Kaminari; end
 module ::Kaminari::ActiveRecordModelExtension; end
 module ::PgSearch::Model; end
