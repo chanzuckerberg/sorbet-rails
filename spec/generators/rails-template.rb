@@ -125,6 +125,11 @@ def create_models
         Slytherin: 3,
       }
 
+      enum broom: {
+        nimbus: 'nimbus',
+        firebolt: 'firebolt',
+      }
+
       has_one :wand
       has_many :spell_books
 
@@ -208,6 +213,14 @@ def create_migrations
           add_column :wands, :spell_history,  :json
           add_column :wands, :maker_info,     :json,    null: false, default: '{}'
         end
+      end
+    end
+  RUBY
+
+  file "db/migrate/20190620000005_add_broom_to_wizard.rb", <<~RUBY
+    class AddBroomToWizard < #{migration_superclass}
+      def change
+        add_column :wizards, :broom, :string
       end
     end
   RUBY

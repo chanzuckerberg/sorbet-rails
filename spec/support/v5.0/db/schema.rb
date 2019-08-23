@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190620000004) do
+ActiveRecord::Schema.define(version: 20190620000005) do
 
   create_table "spell_books", force: :cascade do |t|
     t.string  "name"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20190620000004) do
     t.text     "notes"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.string   "broom"
   end
 
 end

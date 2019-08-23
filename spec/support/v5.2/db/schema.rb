@@ -1,4 +1,3 @@
-# typed: strict
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_20_000004) do
+ActiveRecord::Schema.define(version: 2019_06_20_000005) do
 
   create_table "spell_books", force: :cascade do |t|
     t.string "name"
@@ -44,6 +43,7 @@ ActiveRecord::Schema.define(version: 2019_06_20_000004) do
     t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "broom"
   end
 
 end
