@@ -1,5 +1,6 @@
 # typed: true
 require "rails"
+require "sorbet-runtime"
 require "sorbet-rails/custom_finder_methods"
 require "sorbet-rails/config"
 
