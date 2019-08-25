@@ -52,7 +52,7 @@ module SorbetRails
 
     sig { returns(T::Array[Symbol]) }
     def enabled_plugins
-      @enabled_gem_plugins + @enabled_model_plugins
+      @enabled_model_plugins + @enabled_gem_plugins
     end
   end
 end
