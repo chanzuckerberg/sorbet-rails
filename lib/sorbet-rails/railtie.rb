@@ -1,6 +1,8 @@
 # typed: true
 require "rails"
+require "sorbet-runtime"
 require "sorbet-rails/custom_finder_methods"
+require "sorbet-rails/config"
 
 class SorbetRails::Railtie < Rails::Railtie
   railtie_name "sorbet-rails"
@@ -30,5 +32,7 @@ class SorbetRails::Railtie < Rails::Railtie
         end
       end
     end
+
+    SorbetRails.register_configured_plugins
   end
 end
