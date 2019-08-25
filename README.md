@@ -229,11 +229,10 @@ You can register your plugins in an initializer:
 # -- config/initializers/sorbet_rails.rb
 SorbetRails::ModelRbiFormatter.register_plugin(MyCustomPlugin)
 ```
-The default plugins and other customizations are defined [here](https://github.com/chanzuckerberg/sorbet-rails/blob/master/lib/sorbet-rails/model_plugins/plugins.rb).
 
 ### Enabling built-in plugins
 
-sorbet-rails comes with a handful of gem plugins that can be enabled in the sorbet-rails initializer. You can pass enabled gem plugins to `config.enabled_gem_plugins`, like so:
+sorbet-rails comes with a handful of gem plugins that can be enabled in an initializer. You can pass enabled gem plugins to `config.enabled_gem_plugins`, like so:
 
 ```ruby
 # -- config/initializers/sorbet_rails.rb
@@ -249,6 +248,9 @@ These are the currently-supported gems and their symbolized names:
 | Gem        | Symbol      |
 |------------|-------------|
 | [Kaminari] | `:kaminari` |
+
+You can also configure the core model plugins if needed. The default plugins are defined in the [config](https://github.com/chanzuckerberg/sorbet-rails/blob/master/lib/sorbet-rails/lib/sorbet-rails/config.rb). For the full list of plugin symbols, check out [here](https://github.com/chanzuckerberg/sorbet-rails/blob/master/lib/sorbet-rails/model_plugins/plugins.rb).
+
 
 [Kaminari]: https://github.com/kaminari/kaminari
 
