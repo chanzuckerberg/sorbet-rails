@@ -7,8 +7,7 @@ class PgSearchPlugin < SorbetRails::ModelPlugins::Base
     return unless @model_class.include?(::PgSearch::Model)
 
     model_rbi = root.create_class(
-      model_class_name,
-      superclass: T.must(@model_class.superclass).name
+      model_class_name
     )
 
     model_rbi.create_extend('PgSearch::Model::ClassMethods')
