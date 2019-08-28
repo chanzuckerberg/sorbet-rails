@@ -114,28 +114,72 @@ def create_models
     end
   RUBY
 
-  file "app/models/wizard.rb", <<~RUBY
-    class Wizard < ApplicationRecord
-      validates :name, length: { minimum: 5 }, presence: true
+  if ENV["RAILS_VERSION"] == "4.2"
+    file "app/models/wizard.rb", <<~RUBY
+      class Wizard < ApplicationRecord
+        validates :name, length: { minimum: 5 }, presence: true
 
-      enum house: {
-        Gryffindor: 0,
-        Hufflepuff: 1,
-        Ravenclaw: 2,
-        Slytherin: 3,
-      }
+        enum house: {
+          Gryffindor: 0,
+          Hufflepuff: 1,
+          Ravenclaw: 2,
+          Slytherin: 3,
+        }
 
-      enum broom: {
-        nimbus: 'nimbus',
-        firebolt: 'firebolt',
-      }
+        enum broom: {
+          nimbus: 'nimbus',
+          firebolt: 'firebolt',
+        }
 
-      has_one :wand
-      has_many :spell_books
+        has_one :wand
+        has_many :spell_books
 
-      scope :recent, -> { where('created_at > ?', 1.month.ago) }
-    end
-  RUBY
+        scope :recent, -> { where('created_at > ?', 1.month.ago) }
+      end
+    RUBY
+  else
+    file "app/models/wizard.rb", <<~RUBY
+      class Wizard < ApplicationRecord
+        validates :name, length: { minimum: 5 }, presence: true
+
+        enum house: {
+          Gryffindor: 0,
+          Hufflepuff: 1,
+          Ravenclaw: 2,
+          Slytherin: 3,
+        }
+
+        enum broom: {
+          nimbus: 'nimbus',
+          firebolt: 'firebolt',
+        }, _prefix: true
+
+        enum quidditch_position: {
+          keeper: 0,
+          seeker: 1,
+          beater: 2,
+          chaser: 3,
+        }, _prefix: :quidditch
+
+        enum hair_color: {
+          brown: 0,
+          black: 1,
+          blonde: 2,
+        }, _suffix: :hair
+
+        enum eye_color: {
+          brown: 0,
+          green: 1,
+          blue: 2,
+        }, _prefix: :color, _suffix: :eyes
+
+        has_one :wand
+        has_many :spell_books
+
+        scope :recent, -> { where('created_at > ?', 1.month.ago) }
+      end
+    RUBY
+  end
 
   file "app/models/concerns/mythical.rb", <<~RUBY
     require 'active_support/concern'
@@ -224,6 +268,19 @@ def create_migrations
       end
     end
   RUBY
+
+  if ENV["RAILS_VERSION"] != "4.2"
+    file "db/migrate/20190620000006_add_more_enums_to_wizard.rb", <<~RUBY
+      class AddMoreEnumsToWizard < #{migration_superclass}
+        def change
+          add_column :wizards, :quidditch_position, :integer
+          add_column :wizards, :hair_color, :integer
+          add_column :wizards, :eye_color, :integer
+          add_column :wizards, :hair_length, :integer
+        end
+      end
+    RUBY
+  end
 end
 
 def create_mailers

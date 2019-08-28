@@ -6,16 +6,52 @@ module Wizard::EnumInstanceMethods
   extend T::Sig
 
   sig { returns(T::Boolean) }
-  def nimbus?; end
+  def broom_nimbus?; end
 
   sig { void }
-  def nimbus!; end
+  def broom_nimbus!; end
 
   sig { returns(T::Boolean) }
-  def firebolt?; end
+  def broom_firebolt?; end
 
   sig { void }
-  def firebolt!; end
+  def broom_firebolt!; end
+
+  sig { returns(T::Boolean) }
+  def color_brown_eyes?; end
+
+  sig { void }
+  def color_brown_eyes!; end
+
+  sig { returns(T::Boolean) }
+  def color_green_eyes?; end
+
+  sig { void }
+  def color_green_eyes!; end
+
+  sig { returns(T::Boolean) }
+  def color_blue_eyes?; end
+
+  sig { void }
+  def color_blue_eyes!; end
+
+  sig { returns(T::Boolean) }
+  def brown_hair?; end
+
+  sig { void }
+  def brown_hair!; end
+
+  sig { returns(T::Boolean) }
+  def black_hair?; end
+
+  sig { void }
+  def black_hair!; end
+
+  sig { returns(T::Boolean) }
+  def blonde_hair?; end
+
+  sig { void }
+  def blonde_hair!; end
 
   sig { returns(T::Boolean) }
   def Gryffindor?; end
@@ -40,6 +76,30 @@ module Wizard::EnumInstanceMethods
 
   sig { void }
   def Slytherin!; end
+
+  sig { returns(T::Boolean) }
+  def quidditch_keeper?; end
+
+  sig { void }
+  def quidditch_keeper!; end
+
+  sig { returns(T::Boolean) }
+  def quidditch_seeker?; end
+
+  sig { void }
+  def quidditch_seeker!; end
+
+  sig { returns(T::Boolean) }
+  def quidditch_beater?; end
+
+  sig { void }
+  def quidditch_beater!; end
+
+  sig { returns(T::Boolean) }
+  def quidditch_chaser?; end
+
+  sig { void }
+  def quidditch_chaser!; end
 end
 
 module Wizard::ActiveRelation_WhereNot
@@ -67,6 +127,33 @@ module Wizard::GeneratedAttributeMethods
 
   sig { returns(T::Boolean) }
   def created_at?; end
+
+  sig { returns(T.nilable(String)) }
+  def eye_color; end
+
+  sig { params(value: T.nilable(T.any(Integer, String, Symbol))).void }
+  def eye_color=(value); end
+
+  sig { returns(T::Boolean) }
+  def eye_color?; end
+
+  sig { returns(T.nilable(String)) }
+  def hair_color; end
+
+  sig { params(value: T.nilable(T.any(Integer, String, Symbol))).void }
+  def hair_color=(value); end
+
+  sig { returns(T::Boolean) }
+  def hair_color?; end
+
+  sig { returns(T.nilable(Integer)) }
+  def hair_length; end
+
+  sig { params(value: T.nilable(Integer)).void }
+  def hair_length=(value); end
+
+  sig { returns(T::Boolean) }
+  def hair_length?; end
 
   sig { returns(T.nilable(String)) }
   def house; end
@@ -112,6 +199,15 @@ module Wizard::GeneratedAttributeMethods
 
   sig { returns(T::Boolean) }
   def parent_email?; end
+
+  sig { returns(T.nilable(String)) }
+  def quidditch_position; end
+
+  sig { params(value: T.nilable(T.any(Integer, String, Symbol))).void }
+  def quidditch_position=(value); end
+
+  sig { returns(T::Boolean) }
+  def quidditch_position?; end
 
   sig { returns(DateTime) }
   def updated_at; end
@@ -168,7 +264,16 @@ class Wizard < ApplicationRecord
   def self.brooms; end
 
   sig { returns(T::Hash[T.any(String, Symbol), Integer]) }
+  def self.eye_colors; end
+
+  sig { returns(T::Hash[T.any(String, Symbol), Integer]) }
+  def self.hair_colors; end
+
+  sig { returns(T::Hash[T.any(String, Symbol), Integer]) }
   def self.houses; end
+
+  sig { returns(T::Hash[T.any(String, Symbol), Integer]) }
+  def self.quidditch_positions; end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
   def self.Gryffindor(*args); end
@@ -183,10 +288,28 @@ class Wizard < ApplicationRecord
   def self.Slytherin(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
-  def self.firebolt(*args); end
+  def self.black_hair(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
-  def self.nimbus(*args); end
+  def self.blonde_hair(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def self.broom_firebolt(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def self.broom_nimbus(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def self.brown_hair(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def self.color_blue_eyes(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def self.color_brown_eyes(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def self.color_green_eyes(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
   def self.not_Gryffindor(*args); end
@@ -201,10 +324,52 @@ class Wizard < ApplicationRecord
   def self.not_Slytherin(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
-  def self.not_firebolt(*args); end
+  def self.not_black_hair(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
-  def self.not_nimbus(*args); end
+  def self.not_blonde_hair(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def self.not_broom_firebolt(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def self.not_broom_nimbus(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def self.not_brown_hair(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def self.not_color_blue_eyes(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def self.not_color_brown_eyes(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def self.not_color_green_eyes(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def self.not_quidditch_beater(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def self.not_quidditch_chaser(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def self.not_quidditch_keeper(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def self.not_quidditch_seeker(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def self.quidditch_beater(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def self.quidditch_chaser(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def self.quidditch_keeper(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def self.quidditch_seeker(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
   def self.recent(*args); end
@@ -390,10 +555,28 @@ class Wizard::ActiveRecord_Relation < ActiveRecord::Relation
   def Slytherin(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
-  def firebolt(*args); end
+  def black_hair(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
-  def nimbus(*args); end
+  def blonde_hair(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def broom_firebolt(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def broom_nimbus(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def brown_hair(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def color_blue_eyes(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def color_brown_eyes(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def color_green_eyes(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
   def not_Gryffindor(*args); end
@@ -408,10 +591,52 @@ class Wizard::ActiveRecord_Relation < ActiveRecord::Relation
   def not_Slytherin(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
-  def not_firebolt(*args); end
+  def not_black_hair(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
-  def not_nimbus(*args); end
+  def not_blonde_hair(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def not_broom_firebolt(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def not_broom_nimbus(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def not_brown_hair(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def not_color_blue_eyes(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def not_color_brown_eyes(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def not_color_green_eyes(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def not_quidditch_beater(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def not_quidditch_chaser(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def not_quidditch_keeper(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def not_quidditch_seeker(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def quidditch_beater(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def quidditch_chaser(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def quidditch_keeper(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def quidditch_seeker(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
   def recent(*args); end
@@ -614,10 +839,28 @@ class Wizard::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelati
   def Slytherin(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def firebolt(*args); end
+  def black_hair(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def nimbus(*args); end
+  def blonde_hair(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def broom_firebolt(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def broom_nimbus(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def brown_hair(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def color_blue_eyes(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def color_brown_eyes(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def color_green_eyes(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
   def not_Gryffindor(*args); end
@@ -632,10 +875,52 @@ class Wizard::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelati
   def not_Slytherin(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def not_firebolt(*args); end
+  def not_black_hair(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def not_nimbus(*args); end
+  def not_blonde_hair(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def not_broom_firebolt(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def not_broom_nimbus(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def not_brown_hair(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def not_color_blue_eyes(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def not_color_brown_eyes(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def not_color_green_eyes(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def not_quidditch_beater(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def not_quidditch_chaser(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def not_quidditch_keeper(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def not_quidditch_seeker(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def quidditch_beater(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def quidditch_chaser(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def quidditch_keeper(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def quidditch_seeker(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
   def recent(*args); end
@@ -837,10 +1122,28 @@ class Wizard::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associat
   def Slytherin(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def firebolt(*args); end
+  def black_hair(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def nimbus(*args); end
+  def blonde_hair(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def broom_firebolt(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def broom_nimbus(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def brown_hair(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def color_blue_eyes(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def color_brown_eyes(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def color_green_eyes(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
   def not_Gryffindor(*args); end
@@ -855,10 +1158,52 @@ class Wizard::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associat
   def not_Slytherin(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def not_firebolt(*args); end
+  def not_black_hair(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def not_nimbus(*args); end
+  def not_blonde_hair(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def not_broom_firebolt(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def not_broom_nimbus(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def not_brown_hair(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def not_color_blue_eyes(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def not_color_brown_eyes(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def not_color_green_eyes(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def not_quidditch_beater(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def not_quidditch_chaser(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def not_quidditch_keeper(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def not_quidditch_seeker(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def quidditch_beater(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def quidditch_chaser(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def quidditch_keeper(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def quidditch_seeker(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
   def recent(*args); end
