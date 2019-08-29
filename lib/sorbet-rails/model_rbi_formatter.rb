@@ -72,10 +72,20 @@ class SorbetRails::ModelRbiFormatter
       self.model_relation_class_name,
       superclass: "ActiveRecord::Relation",
     )
-    model_relation_rbi.create_include(self.model_relation_shared_module_name)
     model_relation_rbi.create_extend("T::Sig")
     model_relation_rbi.create_extend("T::Generic")
     model_relation_rbi.create_constant(
+      "Elem",
+      value: "type_member(fixed: #{model_class_name})",
+    )
+
+    model_assoc_relation_rbi = root.create_class(
+      self.model_assoc_relation_class_name,
+      superclass: "ActiveRecord::AssociationRelation",
+    )
+    model_assoc_relation_rbi.create_extend("T::Sig")
+    model_assoc_relation_rbi.create_extend("T::Generic")
+    model_assoc_relation_rbi.create_constant(
       "Elem",
       value: "type_member(fixed: #{model_class_name})",
     )
@@ -84,7 +94,6 @@ class SorbetRails::ModelRbiFormatter
       self.model_assoc_proxy_class_name,
       superclass: "ActiveRecord::Associations::CollectionProxy",
     )
-    collection_proxy_rbi.create_include(self.model_relation_shared_module_name)
     collection_proxy_rbi.create_extend("T::Sig")
     collection_proxy_rbi.create_extend("T::Generic")
     collection_proxy_rbi.create_constant(
@@ -98,17 +107,6 @@ class SorbetRails::ModelRbiFormatter
     )
     model_rbi.create_extend("T::Sig")
     model_rbi.create_extend("T::Generic")
-    model_rbi.create_extend(self.model_relation_shared_module_name)
-
-    # <Model>::MODEL_RELATION_SHARED_MODULE_SUFFIX is a fake module added so that
-    # when a method is defined in this module, it'll be added to both the Model class
-    # as a class method and to its relation as an instance method.
-    #
-    # We need to define the module after the other classes
-    # to work around Sorbet loading order bug
-    # https://sorbet-ruby.slack.com/archives/CHN2L03NH/p1556065791047300
-    model_relation_shared_rbi = root.create_module(self.model_relation_shared_module_name)
-    model_relation_shared_rbi.create_extend("T::Sig")
   end
 
   sig {

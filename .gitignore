@@ -78,18 +78,9 @@ build-iPhoneSimulator/
 /spec/support/**/config/secrets.yml
 /spec/support/**/config/credentials.yml.enc
 
-# Ignore sorbet-rails generated files
-/spec/support/**/sorbet/rails-rbi/*
-/spec/support/**/sorbet/rails-rbi/**/*
-# Ignore hidden-definition.rbi because we will rerun it
-/spec/support/**/sorbet/rbi/hidden-definitions/*
-/spec/support/**/sorbet/rbi/hidden-definitions/**/*
-# Ignore sorbet-typed files because we will regenerate them
-/spec/support/**/sorbet/rbi/sorbet-typed/**/*
-
-# Ignore sorbet files in v5.2-no-sorbet
-/spec/support/v5.2-no-sorbet/sorbet/*
-/spec/support/v5.2-no-sorbet/sorbet/**/*
+# Ignore sorbet generated files
+/spec/support/**/sorbet/*
+/spec/support/**/sorbet/**/*
 
 # Ignore files in the public/ directories.
 /spec/support/**/public/*
