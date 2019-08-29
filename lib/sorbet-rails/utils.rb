@@ -14,7 +14,7 @@ module SorbetRails::Utils
   end
 
   sig { params(method_name: String).returns(T::Boolean) }
-  def valid_method_name?(method_name)
+  def self.valid_method_name?(method_name)
     method_name.match?(/^[A-z][A-z0-9_]*[!?=]?$/)
   end
 end

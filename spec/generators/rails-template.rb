@@ -130,6 +130,18 @@ def create_models
     end
   RUBY
 
+  file "app/models/professor.rb", <<~RUBY
+    class Professor < ApplicationRecord
+      enum name: {
+        "Severus Snape": 0,
+        "Minerva McGonagall": 1,
+        "Pomona Sprout": 2,
+        "Filius Flitwick": 3,
+        "Hagrid": 4,
+      }
+    end
+  RUBY
+
   file "app/models/concerns/mythical.rb", <<~RUBY
     require 'active_support/concern'
     module Mythical
@@ -208,6 +220,17 @@ def create_migrations
       end
     end
   RUBY
+
+  file "db/migrate/20190620000005_create_professor.rb", <<~RUBY
+    class CreateProfessor < #{migration_superclass}
+      def change
+        create_table :professor do |t|
+          t.integer :name
+        end
+      end
+    end
+  RUBY
+
 end
 
 def add_sorbet_test_files
