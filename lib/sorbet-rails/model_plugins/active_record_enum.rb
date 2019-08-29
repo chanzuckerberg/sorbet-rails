@@ -18,13 +18,13 @@ class SorbetRails::ModelPlugins::ActiveRecordEnum < SorbetRails::ModelPlugins::B
 
     # TODO: add any method for signature verification?
     model_class.defined_enums.sort.each do |enum_name, enum_hash|
-      next unless SorbetRails::Utils.valid_method_name?(method_name.to_s)
       model_class_rbi.create_method(
         enum_name.pluralize,
         return_type: "T::Hash[T.any(String, Symbol), Integer]",
         class_method: true,
       )
       enum_hash.keys.each do |enum_val|
+        next unless SorbetRails::Utils.valid_method_name?(enum_val.to_s)
         enum_module_rbi.create_method(
           "#{enum_val}?",
           return_type: "T::Boolean",
