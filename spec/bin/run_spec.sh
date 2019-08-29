@@ -6,11 +6,7 @@ wd="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 current_dir=$(pwd)
 
 if [[ -z $RAILS_VERSION ]]; then
-  if [[ -z $TEST_SRB_INIT ]]; then
-    rails_dir="$wd/../support/v5.2"
-  else
-    rails_dir="$wd/../support/v5.2-no-sorbet"
-  fi
+  rails_dir="$wd/../support/v5.2"
 else
   rails_dir="$wd/../support/v$RAILS_VERSION"
 fi

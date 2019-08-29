@@ -30,7 +30,7 @@ when "5.2"
   gem "bundler", ">= 2.0"
   gem "sqlite3", "~> 1.4.1"
 when "6.0"
-  gem "rails", "~> 6.0.0.rc1"
+  gem "rails", "~> 6.0.0"
   gem "bundler", ">= 2.0"
   gem "sqlite3", "~> 1.4.1"
 else

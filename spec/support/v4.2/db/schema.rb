@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 20190620000004) do
   create_table "spell_books", force: :cascade do |t|
     t.string  "name"
     t.integer "wizard_id"
+    t.integer "book_type", default: 0, null: false
   end
 
   create_table "wands", force: :cascade do |t|

@@ -9,6 +9,9 @@ class SorbetRails::ModelPlugins::EnumerableCollections < SorbetRails::ModelPlugi
     model_relation_class_rbi = root.create_class(self.model_relation_class_name)
     create_enumerable_methods_for(model_relation_class_rbi)
 
+    model_assoc_relation_rbi = root.create_class(self.model_assoc_relation_class_name)
+    create_enumerable_methods_for(model_assoc_relation_rbi)
+
     model_assoc_proxy_class_rbi = root.create_class(self.model_assoc_proxy_class_name)
     create_enumerable_methods_for(model_assoc_proxy_class_rbi)
 
@@ -44,6 +47,18 @@ class SorbetRails::ModelPlugins::EnumerableCollections < SorbetRails::ModelPlugi
     class_rbi.create_method(
       "to_a",
       return_type: "T::Array[#{self.model_class_name}]",
+    )
+    # TODO use type_parameters(:U) when parlour supports it
+    class_rbi.create_arbitrary(
+      code: <<~RUBY
+        sig do
+          type_parameters(:U).params(
+              blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),
+          )
+          .returns(T::Array[T.type_parameter(:U)])
+        end
+        def map(&blk); end
+      RUBY
     )
   end
 end

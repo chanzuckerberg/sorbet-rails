@@ -2,6 +2,10 @@
 #   srb rbi todo
 
 # typed: strong
+module ::FriendlyId; end
+module ::Kaminari; end
+module ::Kaminari::ActiveRecordModelExtension; end
+module ::PgSearch::Model; end
 module ActionMailer::Base::Mail::Message; end
 module ActiveModel::AttributeMethods; end
 module ActiveModel::Conversion; end
@@ -61,8 +65,6 @@ module ActiveRecord::Type::String; end
 module ActiveRecord::Type::Text; end
 module ActiveRecord::Type::Time; end
 module ActiveRecord::Type::UnsignedInteger; end
-module KaminariPlugin::Kaminari; end
-module KaminariPlugin::Kaminari::ActiveRecordModelExtension; end
 module SorbetRails::Utils::Zeitwerk::Loader; end
 module T::InterfaceWrapper::Helpers; end
 module T::InterfaceWrapper::Helpers; end
