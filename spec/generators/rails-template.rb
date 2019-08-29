@@ -125,20 +125,16 @@ def create_models
         Slytherin: 3,
       }
 
-      has_one :wand
-      has_many :spell_books
-    end
-  RUBY
-
-  file "app/models/professor.rb", <<~RUBY
-    class Professor < ApplicationRecord
-      enum name: {
+      enum professor: {
         "Severus Snape": 0,
         "Minerva McGonagall": 1,
         "Pomona Sprout": 2,
         "Filius Flitwick": 3,
         "Hagrid": 4,
       }
+
+      has_one :wand
+      has_many :spell_books
     end
   RUBY
 
@@ -220,17 +216,6 @@ def create_migrations
       end
     end
   RUBY
-
-  file "db/migrate/20190620000005_create_professor.rb", <<~RUBY
-    class CreateProfessor < #{migration_superclass}
-      def change
-        create_table :professor do |t|
-          t.integer :name
-        end
-      end
-    end
-  RUBY
-
 end
 
 def add_sorbet_test_files
