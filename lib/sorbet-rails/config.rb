@@ -48,6 +48,9 @@ module SorbetRails
         :custom_finder_methods,
         :enumerable_collections,
       ]
+
+      # TODO: Replace this with something sensible.
+      @enabled_model_plugins << :active_storage_methods if ['5.2', '6.0'].include?(ENV['RAILS_VERSION'])
     end
 
     sig { returns(T::Array[Symbol]) }
