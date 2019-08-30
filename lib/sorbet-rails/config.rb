@@ -49,8 +49,7 @@ module SorbetRails
         :enumerable_collections,
       ]
 
-      # TODO: Replace this with something sensible.
-      @enabled_model_plugins << :active_storage_methods if ['5.2', '6.0'].include?(ENV['RAILS_VERSION'])
+      @enabled_model_plugins << :active_storage_methods if defined?(T.unsafe(ActiveStorage))
     end
 
     sig { returns(T::Array[Symbol]) }
