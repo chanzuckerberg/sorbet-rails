@@ -60,6 +60,12 @@ module SorbetRails::ModelPlugins
     when :kaminari
       require('sorbet-rails/gem_plugins/kaminari_plugin')
       KaminariPlugin
+    when :pg_search
+      require('sorbet-rails/gem_plugins/pg_search_plugin')
+      PgSearchPlugin
+    when :friendly_id
+      require('sorbet-rails/gem_plugins/friendly_id_plugin')
+      FriendlyIdPlugin
     else
       raise UnrecognizedPluginName.new(
         "Unrecognized plugin with name: #{plugin_name}. Please check available plugins in the
