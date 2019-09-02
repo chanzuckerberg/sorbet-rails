@@ -217,7 +217,6 @@ def create_mailers
   if ENV['RAILS_VERSION'] == '4.2'
     file "app/mailers/application_mailer.rb", <<~RUBY
       class ApplicationMailer < ActionMailer::Base
-        self.abstract_class = true
       end
     RUBY
   end
