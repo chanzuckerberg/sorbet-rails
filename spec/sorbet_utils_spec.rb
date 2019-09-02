@@ -1,0 +1,110 @@
+require 'rails_helper'
+require 'sorbet-runtime'
+require 'sorbet-rails/sorbet_utils'
+
+module SorbetUtilsExampleModule
+end
+
+class SorbetUtilsExampleClass
+  extend T::Sig
+
+  sig { void }
+  def no_param_method; end
+
+  sig { params(p1: String, p2: T.class_of(String)).void }
+  def method_req_args(p1, p2); end
+
+  sig { params(p1: T.any(String, Integer), p2: T.nilable(String)).void }
+  def method_req_kwarg(p1:, p2:); end
+
+  sig { params(p1: SorbetUtilsExampleModule, p2: T.nilable(T.any(String, Integer))).void }
+  def method_mixed(p1, p2:); end
+
+  sig { params(p1: T::Hash[String, T.untyped], p2: Integer).void }
+  def method_with_rest(p1, *p2); end
+
+  sig { params(p1: T::Array[String], p2: T::Set[Integer], p3: Integer).void }
+  def method_with_keyrest(p1, p2:, **p3); end
+
+  sig { params(p1: String, p2: T.proc.params(p3: T.class_of(String)).void).void }
+  def method_with_block(*p1, &p2); end
+
+  sig { params(p1: T.proc.params(p3: T.class_of(String)).returns(T.nilable(String))).void }
+  def method_with_block_return(&p1); end
+end
+
+RSpec.describe SorbetRails::SorbetUtils do
+  Parameter = ::Parlour::RbiGenerator::Parameter
+
+  it 'works with no_param_method' do
+    method_def = SorbetUtilsExampleClass.instance_method(:no_param_method)
+    parameters = SorbetRails::SorbetUtils.parameters_from_method_def(method_def)
+    expect(parameters).to match_array([])
+  end
+
+  it 'works with method_req_args' do
+    method_def = SorbetUtilsExampleClass.instance_method(:method_req_args)
+    parameters = SorbetRails::SorbetUtils.parameters_from_method_def(method_def)
+    expect(parameters).to match_array([
+      Parameter.new('p1', type: 'String'),
+      Parameter.new('p2', type: 'T.class_of(String)'),
+    ])
+  end
+
+  it 'works with method_req_kwarg' do
+    method_def = SorbetUtilsExampleClass.instance_method(:method_req_kwarg)
+    parameters = SorbetRails::SorbetUtils.parameters_from_method_def(method_def)
+    expect(parameters).to match_array([
+      Parameter.new('p1', type: 'T.any(Integer, String)'), # sorbet re-order the types
+      Parameter.new('p2', type: 'T.nilable(String)'),
+    ])
+  end
+
+  it 'works with method_mixed' do
+    method_def = SorbetUtilsExampleClass.instance_method(:method_mixed)
+    parameters = SorbetRails::SorbetUtils.parameters_from_method_def(method_def)
+    expect(parameters).to match_array([
+      Parameter.new('p1', type: 'SorbetUtilsExampleModule'),
+      Parameter.new('p2', type: 'T.nilable(T.any(Integer, String))'),
+    ])
+  end
+
+  it 'works with method_with_rest' do
+    method_def = SorbetUtilsExampleClass.instance_method(:method_with_rest)
+    parameters = SorbetRails::SorbetUtils.parameters_from_method_def(method_def)
+    expect(parameters).to match_array([
+      Parameter.new('p1', type: 'T::Hash[String, T.untyped]'),
+      Parameter.new('*p2', type: 'Integer'),
+    ])
+  end
+
+  it 'works with method_with_keyrest' do
+    method_def = SorbetUtilsExampleClass.instance_method(:method_with_keyrest)
+    parameters = SorbetRails::SorbetUtils.parameters_from_method_def(method_def)
+    expect(parameters).to match_array([
+      Parameter.new('p1', type: 'T::Array[String]'),
+      Parameter.new('p2', type: 'T::Set[Integer]'),
+      Parameter.new('**p3', type: 'Integer'),
+    ])
+  end
+
+  it 'works with method_with_block' do
+    method_def = SorbetUtilsExampleClass.instance_method(:method_with_block)
+    parameters = SorbetRails::SorbetUtils.parameters_from_method_def(method_def)
+    expect(parameters).to match_array([
+      Parameter.new('*p1', type: 'String'),
+      Parameter.new('&p2', type: 'T.proc.params(p3: T.class_of(String)).void'),
+    ])
+  end
+
+  it 'works with method_with_block_return' do
+    method_def = SorbetUtilsExampleClass.instance_method(:method_with_block_return)
+    parameters = SorbetRails::SorbetUtils.parameters_from_method_def(method_def)
+    expect(parameters).to match_array([
+      Parameter.new(
+        '&p1',
+        type: 'T.proc.params(p3: T.class_of(String)).returns(T.nilable(String))',
+      ),
+    ])
+  end
+end
