@@ -30,6 +30,7 @@ gem 'sorbet-rails'
 ❯ rake rails_rbi:routes
 ❯ rake rails_rbi:models
 ❯ rake rails_rbi:helpers
+❯ rake rails_rbi:mailers
 
 # or run them all at once
 ❯ rake rails_rbi:all
@@ -81,6 +82,18 @@ This Rake task generates a `helpers.rbi` file that includes a basic module defin
 ```sh
 ❯ rake rails_rbi:helpers
 ```
+
+### Mailers
+
+This Rake task generates RBI files for all mailer classes in the Rails application (all descendants of `ActionMailer::Base`)
+```sh
+❯ rake rails_rbi:mailers
+```
+
+Since mailing action methods is based on instance methods defined in a mailer class, the signature of a mailing action method will be dependent on the signature the instance method has
+- If there is a (sorbet) sig written for the instance method, it generates a matching sig for the mailing action method
+- If not, all the params in the mailing action method will be T.untyped.
+- For return type though, the mailing action method will return `ActionMailer::MessageDelivery` instead of the return type of the instance method.
 
 ## Tips & Tricks
 
