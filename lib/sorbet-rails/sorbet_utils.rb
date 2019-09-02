@@ -9,10 +9,9 @@ module SorbetRails::SorbetUtils
   sig { params(method_def: UnboundMethod).returns(T::Array[Parlour::RbiGenerator::Parameter]) }
   def self.parameters_from_method_def(method_def)
     signature = T::Private::Methods.signature_for_method(method_def)
-    untyped_arr = ['T.untyped'] * method_def.parameters.size
 
     parameters_with_type = signature.nil? ?
-      method_def.parameters.zip(untyped_arr) : # append untyped to each
+      method_def.parameters.map { |p| p + ['T.untyped'] } : # append untyped to each
       get_ordered_parameters_with_type(signature)
 
     parameters_with_type.map do |param_def|

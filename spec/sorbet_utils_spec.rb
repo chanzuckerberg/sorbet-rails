@@ -31,6 +31,8 @@ class SorbetUtilsExampleClass
 
   sig { params(p1: T.proc.params(p3: T.class_of(String)).returns(T.nilable(String))).void }
   def method_with_block_return(&p1); end
+
+  def method_without_sig(p1, p2, *p3, p4:, **p5, &p6); end
 end
 
 RSpec.describe SorbetRails::SorbetUtils do
@@ -105,6 +107,20 @@ RSpec.describe SorbetRails::SorbetUtils do
         '&p1',
         type: 'T.proc.params(p3: T.class_of(String)).returns(T.nilable(String))',
       ),
+    ])
+  end
+
+  it 'works with method_without_sig' do
+    method_def = SorbetUtilsExampleClass.instance_method(:method_without_sig)
+    parameters = SorbetRails::SorbetUtils.parameters_from_method_def(method_def)
+    # method_without_sig(p1, p2, *p3, p4:, **p5, &p6); end
+    expect(parameters).to match_array([
+      Parameter.new('p1', type: 'T.untyped'),
+      Parameter.new('p2', type: 'T.untyped'),
+      Parameter.new('*p3', type: 'T.untyped'),
+      Parameter.new('p4', type: 'T.untyped'),
+      Parameter.new('**p5', type: 'T.untyped'),
+      Parameter.new('&p6', type: 'T.untyped'),
     ])
   end
 end
