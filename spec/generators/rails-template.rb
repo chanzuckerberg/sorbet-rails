@@ -213,6 +213,41 @@ def create_migrations
   RUBY
 end
 
+def create_mailers
+  if ENV['RAILS_VERSION'] == '4.2'
+    file "app/mailers/application_mailer.rb", <<~RUBY
+      class ApplicationMailer < ActionMailer::Base
+      end
+    RUBY
+  end
+
+  file "app/mailers/hogwarts_acceptance_mailer.rb", <<~RUBY
+    class HogwartsAcceptanceMailer < ApplicationMailer
+      extend T::Sig
+
+      sig { params(student: Wizard).void }
+      def notify(student)
+        # TODO: mail acceptance letter to student
+      end
+
+      def notify_retry(student)
+        # TODO: send more owls!!
+      end
+    end
+  RUBY
+
+  file "app/mailers/daily_prophet_mailer.rb", <<~RUBY
+    class DailyProphetMailer < ApplicationMailer
+      extend T::Sig
+
+      sig { params(wizards: T::Array[Wizard], hotnews_only: T::Boolean).void }
+      def notify_subscribers(wizards:, hotnews_only:)
+        # TODO: mail the latest news to wizards!
+      end
+    end
+  RUBY
+end
+
 def add_sorbet_test_files
   file "typed-override.yaml", <<~YAML
     true:
@@ -254,6 +289,7 @@ after_bundle do
   create_helpers
   create_models
   create_migrations
+  create_mailers
   add_sorbet_test_files
 
   bundle_version = ENV["RAILS_VERSION"] == "4.2" ? "_1.17.3_" : ""

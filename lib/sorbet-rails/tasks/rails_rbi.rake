@@ -1,6 +1,7 @@
 require("sorbet-rails/model_rbi_formatter")
 require("sorbet-rails/routes_rbi_formatter")
 require("sorbet-rails/helper_rbi_formatter")
+require("sorbet-rails/mailer_rbi_formatter")
 require("sorbet-rails/utils")
 
 namespace :rails_rbi do
@@ -9,6 +10,7 @@ namespace :rails_rbi do
     Rake::Task['rails_rbi:routes'].invoke
     Rake::Task['rails_rbi:models'].invoke
     Rake::Task['rails_rbi:helpers'].invoke
+    Rake::Task['rails_rbi:mailers'].invoke
   end
 
   desc "Generate rbis for rails routes"
@@ -59,6 +61,24 @@ namespace :rails_rbi do
     else
       formatter = SorbetRails::HelperRbiFormatter.new(helpers)
       file_path = Rails.root.join("sorbet", "rails-rbi", "helpers.rbi")
+      FileUtils.mkdir_p(File.dirname(file_path))
+      File.write(file_path, formatter.generate_rbi)
+    end
+  end
+
+  desc "Generate rbis for rails mailers"
+  task :mailers, [:root_dir] => :environment do |t, args|
+    SorbetRails::Utils.rails_eager_load_all!
+    all_mailers = ActionMailer::Base.descendants
+
+    all_mailers.each do |mailer_class|
+      file_path = Rails.root.join(
+        "sorbet",
+        "rails-rbi",
+        "mailers",
+        "#{mailer_class.name.underscore}.rbi",
+      )
+      formatter = SorbetRails::MailerRbiFormatter.new(mailer_class)
       FileUtils.mkdir_p(File.dirname(file_path))
       File.write(file_path, formatter.generate_rbi)
     end

@@ -159,3 +159,5 @@ T.assert_type!(SpellBook.book_types, T::Hash[T.any(String, Symbol), Integer])
 
 # Mythical plugin
 T.assert_type!(Wand.mythicals, T::Array[Wand])
+
+T.assert_type!(HogwartsAcceptanceMailer.notify(wizard), ActionMailer::MessageDelivery)
