@@ -17,7 +17,7 @@ class SorbetRails::ModelPlugins::ActiveRecordEnum < SorbetRails::ModelPlugins::B
 
     # TODO: add any method for signature verification?
     model_class.defined_enums.sort.each do |enum_name, enum_hash|
-      value_type = enum_hash.values.map(&:class).map(&:to_s).uniq
+      value_type = enum_hash.values.map { |v| v.is_a?(Integer) ? 'Integer' : v.class.name }.uniq
 
       return_type = if value_type.length == 1
         "T::Hash[T.any(String, Symbol), #{value_type.first}]"
