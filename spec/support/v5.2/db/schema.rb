@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 2019_06_20_000004) do
   create_table "spell_books", force: :cascade do |t|
     t.string "name"
     t.integer "wizard_id"
+    t.integer "book_type", default: 0, null: false
     t.index ["wizard_id"], name: "index_spell_books_on_wizard_id"
   end
 

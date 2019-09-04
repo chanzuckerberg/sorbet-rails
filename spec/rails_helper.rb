@@ -22,7 +22,7 @@ rails_folder =
   when "6.0"
     "v6.0"
   else
-    ENV["TEST_SRB_INIT"] ? "v5.2-no-sorbet" : "v5.2"
+    "v5.2"
   end
 
 TEST_DATA_FOLDER = "spec/test_data/#{rails_folder}"
@@ -67,4 +67,24 @@ def expect_match_file(content, file_path)
   end
   expected_value = File.read(relative_path)
   expect(content).to eql(expected_value)
+end
+
+def expect_files(base_dir:, files:)
+  rbi_files = Dir[File.join(base_dir, "*.rbi")]
+
+  # smoke test
+  expect(rbi_files.size).to eql(files.size)
+
+  # check we generate correct content
+  generated_files = rbi_files.map do |file_path|
+    pathname = Pathname.new(file_path)
+    generated = File.read(file_path)
+    # expect there is the same file in test_data folder
+    path_from_dir = pathname.relative_path_from(base_dir).to_path
+    expect_match_file(generated, "expected_#{path_from_dir}")
+    path_from_dir
+  end
+
+  # double check we generate correct files
+  expect(generated_files.sort).to eql(files)
 end

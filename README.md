@@ -30,6 +30,7 @@ gem 'sorbet-rails'
 ❯ rake rails_rbi:routes
 ❯ rake rails_rbi:models
 ❯ rake rails_rbi:helpers
+❯ rake rails_rbi:mailers
 
 # or run them all at once
 ❯ rake rails_rbi:all
@@ -81,6 +82,18 @@ This Rake task generates a `helpers.rbi` file that includes a basic module defin
 ```sh
 ❯ rake rails_rbi:helpers
 ```
+
+### Mailers
+
+This Rake task generates RBI files for all mailer classes in the Rails application (all descendants of `ActionMailer::Base`)
+```sh
+❯ rake rails_rbi:mailers
+```
+
+Since mailing action methods is based on instance methods defined in a mailer class, the signature of a mailing action method will be dependent on the signature the instance method has
+- If there is a (sorbet) sig written for the instance method, it generates a matching sig for the mailing action method
+- If not, all the params in the mailing action method will be T.untyped.
+- For return type though, the mailing action method will return `ActionMailer::MessageDelivery` instead of the return type of the instance method.
 
 ## Tips & Tricks
 
@@ -225,11 +238,38 @@ Check out the [plugins](https://github.com/chanzuckerberg/sorbet-rails/tree/mast
 
 ### Registering new plugins
 You can register your plugins in an initializer:
-```
+```ruby
 # -- config/initializers/sorbet_rails.rb
 SorbetRails::ModelRbiFormatter.register_plugin(MyCustomPlugin)
 ```
-The default plugins and other customizations are defined [here](https://github.com/chanzuckerberg/sorbet-rails/blob/master/lib/sorbet-rails/model_plugins/plugins.rb).
+
+### Enabling built-in plugins
+
+sorbet-rails comes with a handful of gem plugins that can be enabled in an initializer. You can pass enabled gem plugins to `config.enabled_gem_plugins`, like so:
+
+```ruby
+# -- config/initializers/sorbet_rails.rb
+SorbetRails.configure do |config|
+  config.enabled_gem_plugins = [
+    :kaminari
+  ]
+end
+```
+
+These are the currently-supported gems and their symbolized names:
+
+| Gem          | Symbol         |
+|--------------|----------------|
+| [Kaminari]   | `:kaminari`    |
+| [PgSearch]   | `:pg_search`   |
+| [FriendlyId] | `:friendly_id` |
+
+You can also configure the core model plugins if needed. The default plugins are defined in the [config](https://github.com/chanzuckerberg/sorbet-rails/blob/master/lib/sorbet-rails/lib/sorbet-rails/config.rb). For the full list of plugin symbols, check out [here](https://github.com/chanzuckerberg/sorbet-rails/blob/master/lib/sorbet-rails/model_plugins/plugins.rb).
+
+
+[Kaminari]: https://github.com/kaminari/kaminari
+[PgSearch]: https://github.com/Casecommons/pg_search
+[FriendlyId]: https://github.com/norman/friendly_id
 
 ## Contributing
 

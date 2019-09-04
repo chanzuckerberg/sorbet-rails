@@ -12,21 +12,9 @@ require('sorbet-rails/model_plugins/enumerable_collections')
 
 module SorbetRails::ModelPlugins
   extend T::Sig
+  include Kernel
 
-  @@plugins = T.let(
-    [
-      ActiveRecordEnum,
-      ActiveRecordNamedScope,
-      ActiveRecordQuerying,
-      ActiveRelationWhereNot,
-      ActiveRecordAttribute,
-      ActiveRecordAssoc,
-      ActiveRecordFinderMethods,
-      CustomFinderMethods,
-      EnumerableCollections,
-    ],
-    T::Array[T.class_of(Base)]
-  )
+  @@plugins = T.let([], T::Array[T.class_of(Base)])
 
   sig { params(plugin: T.class_of(Base)).void }
   def register_plugin(plugin)
@@ -42,4 +30,49 @@ module SorbetRails::ModelPlugins
   def get_plugins
     @@plugins
   end
+
+  sig { params(plugin_name: Symbol).void }
+  def register_plugin_by_name(plugin_name)
+    register_plugin(get_plugin_by_name(plugin_name))
+  end
+
+  sig { params(plugin_name: Symbol).returns(T.class_of(Base)) }
+  def get_plugin_by_name(plugin_name)
+    case plugin_name
+    when :active_record_enum
+      ActiveRecordEnum
+    when :active_record_named_scope
+      ActiveRecordNamedScope
+    when :active_record_querying
+      ActiveRecordQuerying
+    when :active_relation_where_not
+      ActiveRelationWhereNot
+    when :active_record_attribute
+      ActiveRecordAttribute
+    when :active_record_assoc
+      ActiveRecordAssoc
+    when :active_record_finder_methods
+      ActiveRecordFinderMethods
+    when :custom_finder_methods
+      CustomFinderMethods
+    when :enumerable_collections
+      EnumerableCollections
+    when :kaminari
+      require('sorbet-rails/gem_plugins/kaminari_plugin')
+      KaminariPlugin
+    when :pg_search
+      require('sorbet-rails/gem_plugins/pg_search_plugin')
+      PgSearchPlugin
+    when :friendly_id
+      require('sorbet-rails/gem_plugins/friendly_id_plugin')
+      FriendlyIdPlugin
+    else
+      raise UnrecognizedPluginName.new(
+        "Unrecognized plugin with name: #{plugin_name}. Please check available plugins in the
+        documentation".squish!
+      )
+    end
+  end
+
+  class UnrecognizedPluginName < StandardError; end
 end

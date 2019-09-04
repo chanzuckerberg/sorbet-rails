@@ -6,17 +6,16 @@ class SorbetRails::ModelPlugins::ActiveRecordQuerying < SorbetRails::ModelPlugin
   def generate(root)
     # All is a named scope that most method from ActiveRecord::Querying delegate to
     # rails/activerecord/lib/active_record/querying.rb:21
-    ar_querying_rbi = root.create_module(self.model_relation_shared_module_name)
-    ar_querying_rbi.create_method(
+    add_relation_query_method(
+      root,
       "all",
-      return_type: self.model_relation_class_name,
     )
-    ar_querying_rbi.create_method(
+    add_relation_query_method(
+      root,
       "unscoped",
       parameters: [
         Parameter.new("&block", type: "T.nilable(T.proc.void)"),
       ],
-      return_type: self.model_relation_class_name,
     )
 
     # It's not possible to typedef all methods in ActiveRecord::Querying module to have the
@@ -29,13 +28,13 @@ class SorbetRails::ModelPlugins::ActiveRecordQuerying < SorbetRails::ModelPlugin
       :having, :create_with, :distinct, :references, :none, :unscope, :optimizer_hints, :merge, :except, :only,
     ]
     model_query_relation_methods.each do |method_name|
-      ar_querying_rbi.create_method(
+      add_relation_query_method(
+        root,
         method_name.to_s,
         parameters: [
           Parameter.new("*args", type: "T.untyped"),
           Parameter.new("&block", type: "T.nilable(T.proc.void)"),
         ],
-        return_type: self.model_relation_class_name,
       ) if exists_class_method?(method_name)
     end
   end
