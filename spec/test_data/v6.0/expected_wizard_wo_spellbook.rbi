@@ -28,6 +28,12 @@ module Wizard::EnumInstanceMethods
 
   sig { void }
   def Slytherin!; end
+
+  sig { returns(T::Boolean) }
+  def Hagrid?; end
+
+  sig { void }
+  def Hagrid!; end
 end
 
 module Wizard::ActiveRelation_WhereNot
@@ -146,8 +152,14 @@ class Wizard < ApplicationRecord
   sig { returns(T::Hash[T.any(String, Symbol), Integer]) }
   def self.houses; end
 
+  sig { returns(T::Hash[T.any(String, Symbol), Integer]) }
+  def self.professors; end
+
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
   def self.Gryffindor(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def self.Hagrid(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
   def self.Hufflepuff(*args); end
@@ -160,6 +172,9 @@ class Wizard < ApplicationRecord
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
   def self.not_Gryffindor(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def self.not_Hagrid(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
   def self.not_Hufflepuff(*args); end
@@ -345,6 +360,9 @@ class Wizard::ActiveRecord_Relation < ActiveRecord::Relation
   def Gryffindor(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def Hagrid(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
   def Hufflepuff(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
@@ -355,6 +373,9 @@ class Wizard::ActiveRecord_Relation < ActiveRecord::Relation
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
   def not_Gryffindor(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def not_Hagrid(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
   def not_Hufflepuff(*args); end
@@ -557,6 +578,9 @@ class Wizard::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelati
   def Gryffindor(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def Hagrid(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
   def Hufflepuff(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
@@ -567,6 +591,9 @@ class Wizard::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelati
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
   def not_Gryffindor(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def not_Hagrid(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
   def not_Hufflepuff(*args); end
@@ -768,6 +795,9 @@ class Wizard::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associat
   def Gryffindor(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def Hagrid(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
   def Hufflepuff(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
@@ -778,6 +808,9 @@ class Wizard::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associat
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
   def not_Gryffindor(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def not_Hagrid(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
   def not_Hufflepuff(*args); end
