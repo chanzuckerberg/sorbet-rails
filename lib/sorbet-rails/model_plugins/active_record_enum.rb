@@ -1,5 +1,6 @@
 # typed: strict
 require ('sorbet-rails/model_plugins/base')
+require("sorbet-rails/utils")
 class SorbetRails::ModelPlugins::ActiveRecordEnum < SorbetRails::ModelPlugins::Base
 
   sig { implementation.params(root: Parlour::RbiGenerator::Namespace).void }
@@ -21,6 +22,7 @@ class SorbetRails::ModelPlugins::ActiveRecordEnum < SorbetRails::ModelPlugins::B
         class_method: true,
       )
       enum_hash.keys.each do |enum_val|
+        next unless SorbetRails::Utils.valid_method_name?(enum_val.to_s)
         enum_module_rbi.create_method(
           "#{enum_val}?",
           return_type: "T::Boolean",
