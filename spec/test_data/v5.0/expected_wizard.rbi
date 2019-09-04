@@ -78,6 +78,12 @@ module Wizard::EnumInstanceMethods
   def Slytherin!; end
 
   sig { returns(T::Boolean) }
+  def Hagrid?; end
+
+  sig { void }
+  def Hagrid!; end
+
+  sig { returns(T::Boolean) }
   def quidditch_keeper?; end
 
   sig { void }
@@ -273,10 +279,16 @@ class Wizard < ApplicationRecord
   def self.houses; end
 
   sig { returns(T::Hash[T.any(String, Symbol), Integer]) }
+  def self.professors; end
+
+  sig { returns(T::Hash[T.any(String, Symbol), Integer]) }
   def self.quidditch_positions; end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
   def self.Gryffindor(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def self.Hagrid(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
   def self.Hufflepuff(*args); end
@@ -478,6 +490,9 @@ class Wizard::ActiveRecord_Relation < ActiveRecord::Relation
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
   def Gryffindor(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def Hagrid(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
   def Hufflepuff(*args); end
@@ -698,6 +713,9 @@ class Wizard::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelati
   def Gryffindor(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def Hagrid(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
   def Hufflepuff(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
@@ -913,6 +931,9 @@ class Wizard::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associat
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
   def Gryffindor(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def Hagrid(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
   def Hufflepuff(*args); end

@@ -163,7 +163,7 @@ T.assert_type!(Wand.mythicals, T::Array[Wand])
 
 T.assert_type!(HogwartsAcceptanceMailer.notify(wizard), ActionMailer::MessageDelivery)
 
-if wizard.respond_to?(:broom_nimbus?)
+if ENV["RAILS_VERSION"] != "4.2"
   T.assert_type!(wizard.broom_nimbus?, T::Boolean)
   T.assert_type!(wizard.color_brown_eyes?, T::Boolean)
   T.assert_type!(wizard.quidditch_keeper?, T::Boolean)

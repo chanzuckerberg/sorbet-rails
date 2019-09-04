@@ -9,6 +9,14 @@ class Wizard < ApplicationRecord
     Slytherin: 3,
   }
 
+  enum professor: {
+    "Severus Snape": 0,
+    "Minerva McGonagall": 1,
+    "Pomona Sprout": 2,
+    "Filius Flitwick": 3,
+    "Hagrid": 4,
+  }
+
   enum broom: {
     nimbus: 'nimbus',
     firebolt: 'firebolt',
