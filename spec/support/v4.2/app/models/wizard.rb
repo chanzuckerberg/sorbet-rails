@@ -26,4 +26,5 @@ class Wizard < ApplicationRecord
   has_many :spell_books
 
   scope :recent, -> { where('created_at > ?', 1.month.ago) }
+  
 end
