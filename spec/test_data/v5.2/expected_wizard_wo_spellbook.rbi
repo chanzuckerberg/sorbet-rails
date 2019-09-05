@@ -229,6 +229,30 @@ module Wizard::GeneratedAssociationMethods
   extend T::Sig
 
   sig { returns(ActiveRecord::Associations::CollectionProxy) }
+  def hats_attachments; end
+
+  sig { params(value: T.any(T::Array[T.untyped], ActiveRecord::Associations::CollectionProxy)).void }
+  def hats_attachments=(value); end
+
+  sig { returns(ActiveRecord::Associations::CollectionProxy) }
+  def hats_blobs; end
+
+  sig { params(value: T.any(T::Array[T.untyped], ActiveRecord::Associations::CollectionProxy)).void }
+  def hats_blobs=(value); end
+
+  sig { returns(T.nilable(T.untyped)) }
+  def school_photo_attachment; end
+
+  sig { params(value: T.nilable(T.untyped)).void }
+  def school_photo_attachment=(value); end
+
+  sig { returns(T.nilable(T.untyped)) }
+  def school_photo_blob; end
+
+  sig { params(value: T.nilable(T.untyped)).void }
+  def school_photo_blob=(value); end
+
+  sig { returns(ActiveRecord::Associations::CollectionProxy) }
   def spell_books; end
 
   sig { params(value: T.any(T::Array[T.untyped], ActiveRecord::Associations::CollectionProxy)).void }
@@ -337,6 +361,12 @@ class Wizard < ApplicationRecord
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
   def self.recent(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def self.with_attached_hats(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def self.with_attached_school_photo(*args); end
 
   sig { returns(Wizard::ActiveRecord_Relation) }
   def self.all; end
@@ -547,6 +577,12 @@ class Wizard::ActiveRecord_Relation < ActiveRecord::Relation
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
   def recent(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def with_attached_hats(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def with_attached_school_photo(*args); end
 
   sig { returns(Wizard::ActiveRecord_Relation) }
   def all; end
@@ -775,6 +811,12 @@ class Wizard::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelati
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
   def recent(*args); end
 
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def with_attached_hats(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def with_attached_school_photo(*args); end
+
   sig { returns(Wizard::ActiveRecord_AssociationRelation) }
   def all; end
 
@@ -1000,6 +1042,12 @@ class Wizard::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associat
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
   def recent(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def with_attached_hats(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def with_attached_school_photo(*args); end
 
   sig { returns(Wizard::ActiveRecord_AssociationRelation) }
   def all; end
