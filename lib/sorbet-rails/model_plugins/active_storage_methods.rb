@@ -8,7 +8,9 @@ class SorbetRails::ModelPlugins::ActiveStorageMethods < SorbetRails::ModelPlugin
 
   sig { implementation.params(root: Parlour::RbiGenerator::Namespace).void }
   def generate(root)
-    return unless @model_class.attachment_reflections.length > 0
+    # Check that ActiveStorage the attachment_reflections method exists
+    # It was added in 6.0, so it isn't available for 5.2.
+    return unless defined?(@model_class.attachment_reflections) && @model_class.attachment_reflections.length > 0
 
     assoc_module_name = self.model_module_name("GeneratedAssociationMethods")
     assoc_module_rbi = root.create_module(assoc_module_name)
