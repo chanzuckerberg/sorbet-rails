@@ -153,6 +153,7 @@ T.assert_type!(wizard.notes, T.nilable(String))
 T.assert_type!(wizard.Gryffindor?, T::Boolean)
 T.assert_type!(wizard.house, T.nilable(String))
 T.assert_type!(Wizard.houses, T::Hash[T.any(String, Symbol), Integer])
+T.assert_type!(Wizard.brooms, T::Hash[T.any(String, Symbol), String])
 T.assert_type!(spell_book.biology?, T::Boolean)
 T.assert_type!(spell_book.book_type, String)
 T.assert_type!(SpellBook.book_types, T::Hash[T.any(String, Symbol), Integer])
@@ -161,3 +162,11 @@ T.assert_type!(SpellBook.book_types, T::Hash[T.any(String, Symbol), Integer])
 T.assert_type!(Wand.mythicals, T::Array[Wand])
 
 T.assert_type!(HogwartsAcceptanceMailer.notify(wizard), ActionMailer::MessageDelivery)
+
+if ENV["RAILS_VERSION"] != "4.2"
+  T.assert_type!(wizard.broom_nimbus?, T::Boolean)
+  T.assert_type!(wizard.color_brown_eyes?, T::Boolean)
+  T.assert_type!(wizard.quidditch_keeper?, T::Boolean)
+  T.assert_type!(wizard.brown_hair?, T::Boolean)
+end
+
