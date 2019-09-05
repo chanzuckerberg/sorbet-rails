@@ -17,6 +17,30 @@ class Wizard < ApplicationRecord
     "Hagrid": 4,
   }
 
+  enum broom: {
+    nimbus: 'nimbus',
+    firebolt: 'firebolt',
+  }, _prefix: true
+
+  enum quidditch_position: {
+    keeper: 0,
+    seeker: 1,
+    beater: 2,
+    chaser: 3,
+  }, _prefix: :quidditch
+
+  enum hair_color: {
+    brown: 0,
+    black: 1,
+    blonde: 2,
+  }, _suffix: :hair
+
+  enum eye_color: {
+    brown: 0,
+    green: 1,
+    blue: 2,
+  }, _prefix: :color, _suffix: :eyes
+
   has_one :wand
   has_many :spell_books
 

@@ -9,6 +9,7 @@ require('sorbet-rails/model_plugins/active_record_assoc')
 require('sorbet-rails/model_plugins/active_record_finder_methods')
 require('sorbet-rails/model_plugins/custom_finder_methods')
 require('sorbet-rails/model_plugins/enumerable_collections')
+require('sorbet-rails/model_plugins/active_record_overrides')
 
 module SorbetRails::ModelPlugins
   extend T::Sig

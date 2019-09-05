@@ -17,6 +17,11 @@ class Wizard < ApplicationRecord
     "Hagrid": 4,
   }
 
+  enum broom: {
+    nimbus: 'nimbus',
+    firebolt: 'firebolt',
+  }
+
   has_one :wand
   has_many :spell_books
 

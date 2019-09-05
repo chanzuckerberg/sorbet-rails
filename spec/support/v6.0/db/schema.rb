@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_20_000004) do
+ActiveRecord::Schema.define(version: 2019_06_20_000006) do
 
   create_table "spell_books", force: :cascade do |t|
     t.string "name"
@@ -44,6 +44,11 @@ ActiveRecord::Schema.define(version: 2019_06_20_000004) do
     t.text "notes"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "broom"
+    t.integer "quidditch_position"
+    t.integer "hair_color"
+    t.integer "eye_color"
+    t.integer "hair_length"
   end
 
 end

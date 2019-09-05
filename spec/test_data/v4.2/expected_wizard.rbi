@@ -6,6 +6,18 @@ module Wizard::EnumInstanceMethods
   extend T::Sig
 
   sig { returns(T::Boolean) }
+  def nimbus?; end
+
+  sig { void }
+  def nimbus!; end
+
+  sig { returns(T::Boolean) }
+  def firebolt?; end
+
+  sig { void }
+  def firebolt!; end
+
+  sig { returns(T::Boolean) }
   def Gryffindor?; end
 
   sig { void }
@@ -43,6 +55,15 @@ end
 
 module Wizard::GeneratedAttributeMethods
   extend T::Sig
+
+  sig { returns(T.nilable(String)) }
+  def broom; end
+
+  sig { params(value: T.nilable(T.any(Integer, String, Symbol))).void }
+  def broom=(value); end
+
+  sig { returns(T::Boolean) }
+  def broom?; end
 
   sig { returns(T.nilable(Time)) }
   def created_at; end
@@ -149,6 +170,9 @@ class Wizard < ApplicationRecord
   extend T::Sig
   extend T::Generic
 
+  sig { returns(T::Hash[T.any(String, Symbol), String]) }
+  def self.brooms; end
+
   sig { returns(T::Hash[T.any(String, Symbol), Integer]) }
   def self.houses; end
 
@@ -169,6 +193,12 @@ class Wizard < ApplicationRecord
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
   def self.Slytherin(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def self.firebolt(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def self.nimbus(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
   def self.recent(*args); end
@@ -328,6 +358,12 @@ class Wizard::ActiveRecord_Relation < ActiveRecord::Relation
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
   def Slytherin(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def firebolt(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def nimbus(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
   def recent(*args); end
@@ -506,6 +542,12 @@ class Wizard::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelati
   def Slytherin(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def firebolt(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def nimbus(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
   def recent(*args); end
 
   sig { returns(Wizard::ActiveRecord_AssociationRelation) }
@@ -679,6 +721,12 @@ class Wizard::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associat
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
   def Slytherin(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def firebolt(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def nimbus(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
   def recent(*args); end
