@@ -30,6 +30,19 @@ RSpec.describe 'sorbet' do
       chdir: Rails.root.to_path,
     )
 
+    stdout, stderr, status = Open3.capture3(
+      'bundle', 'exec', 'srb', 'tc',
+      chdir: Rails.root.to_path,
+    )
+
+    if status != 0
+      puts "================================="
+      puts "stdout #{stdout}"
+      puts "stderr #{stderr}"
+      puts "srb-init doesn't produce clean build: #{status}. This will affect sorbet tests."
+      puts "================================="
+    end
+
     # run sorbet-rails rake tasks
     Rake::Task['rails_rbi:all'].invoke
 
