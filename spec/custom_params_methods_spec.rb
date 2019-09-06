@@ -19,19 +19,24 @@ describe SorbetRails::CustomParamsMethods do
 
   context 'require_typed' do
     it 'gets basic param correctly' do
-      val = params.require_typed(:age, TI::Integer)
+      val = params.require_typed(:age, TA[Integer].new)
       expect(val).to eql(11)
 
-      val = params.require_typed(:name, String.new)
+      val = params.require_typed(:name, TA[String].new)
       expect(val).to eql('Harry Potter')
     end
 
+    it 'gets param with complex type correctly' do
+      val = params.require_typed(:age, TA[T.any(String, Integer)].new)
+      expect(val).to eql(11)
+    end
+
     it 'gets param object correctly' do
-      val = params.require_typed(:info, ActionController::Parameters.new)
+      val = params.require_typed(:info, TA[ActionController::Parameters].new)
       expect(val.is_a?(ActionController::Parameters))
       expect(val).to eql(params_info)
 
-      friends = val.require_typed(:friends, Array.new)
+      friends = val.require_typed(:friends, TA[T::Array[String]].new)
       expect(friends).to eql([
         'Hermione',
         'Ron',
@@ -40,20 +45,25 @@ describe SorbetRails::CustomParamsMethods do
 
     it 'raises error when param doesnt exist' do
       expect {
-        params.require_typed(:nonexistence, String.new)
+        params.require_typed(:nonexistence, TA[String].new)
       }.to raise_error(ActionController::ParameterMissing)
     end
 
     it 'raises error when param is nil' do
       expect {
-        info = params.require(:info)
-        info.require_typed(:grandson, Array.new)
+        params_info.require_typed(:grandson, TA[T::Array[String]].new)
       }.to raise_error(ActionController::ParameterMissing)
     end
 
     it 'raises error when param has wrong type' do
       expect {
-        params.require_typed(:age, String.new)
+        params.require_typed(:age, TA[String].new)
+      }.to raise_error(ActionController::BadRequest)
+    end
+
+    it 'raises error when param has wrong complex type' do
+      expect {
+        params.require_typed(:age, TA[T::Array[String]].new)
       }.to raise_error(ActionController::BadRequest)
     end
   end

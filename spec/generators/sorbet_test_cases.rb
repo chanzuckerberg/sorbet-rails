@@ -170,3 +170,28 @@ if ENV["RAILS_VERSION"] != "4.2"
   T.assert_type!(wizard.brown_hair?, T::Boolean)
 end
 
+params = ActionController::Parameters.new({
+  age: 11,
+  name: 'Harry Potter',
+  info: {
+    birthday: Date.parse('1980-07-31'),
+    friends: [
+      'Hermione',
+      'Ron',
+    ],
+    grandson: nil,
+  },
+})
+
+# -- require_typed
+T.assert_type!(params.require_typed(:age, TI::Integer), Integer)
+T.assert_type!(params.require_typed(:name, String.new), String)
+info = params.require_typed(:info, ActionController::Parameters.new)
+T.assert_type!(info, ActionController::Parameters)
+T.assert_type!(info.require_typed(:friends), T::Array[String].new, T::Array[String])
+# -- fetch_typed
+T.assert_type!(params.fetch_typed(:age, TI::Integer), T.nilable(Integer))
+T.assert_type!(params.fetch_typed(:name, String.new), T.nilable(String))
+T.assert_type!(params.fetch_typed(:nonexistence, String.new, ''), T.nilable(String))
+T.assert_type!(params.fetch_typed(:nonexistence, String.new, nil), T.nilable(String))
+T.assert_type!(info.fetch_typed(:grandson, Array.new, nil), T.nilable(T::Array[T.untyped]))
