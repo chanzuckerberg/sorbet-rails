@@ -25,6 +25,9 @@ class SorbetRails::HelperRbiFormatter
       @parlour.root.create_module(helper.to_s) do |mod|
         mod.create_include('Kernel')
         mod.create_include('ActionView::Helpers')
+        ::SorbetRails.config.extra_helper_includes.each do |extra_helper|
+          mod.create_include(extra_helper) unless extra_helper == helper.to_s
+        end
       end
     end
 
