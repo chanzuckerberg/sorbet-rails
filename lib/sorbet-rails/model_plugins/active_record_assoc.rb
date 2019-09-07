@@ -1,7 +1,7 @@
 # typed: true
 require ('sorbet-rails/model_plugins/base')
 class SorbetRails::ModelPlugins::ActiveRecordAssoc < SorbetRails::ModelPlugins::Base
-  sig {params(model_class: T.class_of(ActiveRecord::Base), available_classes: T::Set[String]).void}
+  sig { params(model_class: T.class_of(ActiveRecord::Base), available_classes: T::Set[String]).void }
   def initialize(model_class, available_classes)
     super
     @columns_hash = @model_class.table_exists? ? @model_class.columns_hash : {}
@@ -25,6 +25,13 @@ class SorbetRails::ModelPlugins::ActiveRecordAssoc < SorbetRails::ModelPlugins::
     end
   end
 
+  sig do
+    params(
+      assoc_module_rbi: T.untyped,
+      assoc_name: T.untyped,
+      reflection: T.untyped
+    ).void
+  end
   def populate_single_assoc_getter_setter(assoc_module_rbi, assoc_name, reflection)
     # TODO allow people to specify the possible values of polymorphic associations
     assoc_class = assoc_should_be_untyped?(reflection) ? "T.untyped" : "::#{reflection.klass.name}"
@@ -57,6 +64,13 @@ class SorbetRails::ModelPlugins::ActiveRecordAssoc < SorbetRails::ModelPlugins::
     )
   end
 
+  sig do
+    params(
+      assoc_module_rbi: T.untyped,
+      assoc_name: T.untyped,
+      reflection: T.untyped
+    ).void
+  end
   def populate_collection_assoc_getter_setter(assoc_module_rbi, assoc_name, reflection)
     # TODO allow people to specify the possible values of polymorphic associations
     assoc_class = assoc_should_be_untyped?(reflection) ? "T.untyped" : "::#{reflection.klass.name}"

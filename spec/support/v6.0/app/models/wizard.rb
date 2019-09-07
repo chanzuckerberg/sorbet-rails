@@ -1,4 +1,4 @@
-# typed: strict
+# typed: false
 class Wizard < ApplicationRecord
   validates :name, length: { minimum: 5 }, presence: true
 
@@ -45,4 +45,6 @@ class Wizard < ApplicationRecord
   has_many :spell_books
 
   scope :recent, -> { where('created_at > ?', 1.month.ago) }
+  has_one_attached :school_photo
+  has_many_attached :hats
 end

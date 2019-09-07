@@ -48,6 +48,8 @@ module SorbetRails
         :custom_finder_methods,
         :enumerable_collections,
       ]
+
+      @enabled_model_plugins << :active_storage_methods if defined?(T.unsafe(ActiveStorage))
     end
 
     sig { returns(T::Array[Symbol]) }

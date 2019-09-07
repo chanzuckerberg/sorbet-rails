@@ -225,22 +225,6 @@ module Wizard::GeneratedAttributeMethods
   def updated_at?; end
 end
 
-module Wizard::GeneratedAssociationMethods
-  extend T::Sig
-
-  sig { returns(::SpellBook::ActiveRecord_Associations_CollectionProxy) }
-  def spell_books; end
-
-  sig { params(value: T.any(T::Array[::SpellBook], ::SpellBook::ActiveRecord_Associations_CollectionProxy)).void }
-  def spell_books=(value); end
-
-  sig { returns(T.nilable(::Wand)) }
-  def wand; end
-
-  sig { params(value: T.nilable(::Wand)).void }
-  def wand=(value); end
-end
-
 module Wizard::CustomFinderMethods
   sig { params(limit: Integer).returns(T::Array[Wizard]) }
   def first_n(limit); end
@@ -388,6 +372,12 @@ class Wizard < ApplicationRecord
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
   def self.recent(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def self.with_attached_hats(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def self.with_attached_school_photo(*args); end
 
   sig { returns(Wizard::ActiveRecord_Relation) }
   def self.all; end
@@ -661,6 +651,12 @@ class Wizard::ActiveRecord_Relation < ActiveRecord::Relation
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
   def recent(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def with_attached_hats(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
+  def with_attached_school_photo(*args); end
 
   sig { returns(Wizard::ActiveRecord_Relation) }
   def all; end
@@ -952,6 +948,12 @@ class Wizard::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelati
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
   def recent(*args); end
 
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def with_attached_hats(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def with_attached_school_photo(*args); end
+
   sig { returns(Wizard::ActiveRecord_AssociationRelation) }
   def all; end
 
@@ -1241,6 +1243,12 @@ class Wizard::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associat
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
   def recent(*args); end
 
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def with_attached_hats(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def with_attached_school_photo(*args); end
+
   sig { returns(Wizard::ActiveRecord_AssociationRelation) }
   def all; end
 
@@ -1428,4 +1436,56 @@ class Wizard::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associat
 
   sig { params(records: T.any(Wizard, T::Array[Wizard])).returns(T.self_type) }
   def concat(*records); end
+end
+
+module Wizard::GeneratedAssociationMethods
+  extend T::Sig
+
+  sig { returns(::ActiveStorage::Attachment::ActiveRecord_Associations_CollectionProxy) }
+  def hats_attachments; end
+
+  sig { params(value: T.any(T::Array[::ActiveStorage::Attachment], ::ActiveStorage::Attachment::ActiveRecord_Associations_CollectionProxy)).void }
+  def hats_attachments=(value); end
+
+  sig { returns(::ActiveStorage::Blob::ActiveRecord_Associations_CollectionProxy) }
+  def hats_blobs; end
+
+  sig { params(value: T.any(T::Array[::ActiveStorage::Blob], ::ActiveStorage::Blob::ActiveRecord_Associations_CollectionProxy)).void }
+  def hats_blobs=(value); end
+
+  sig { returns(T.nilable(::ActiveStorage::Attachment)) }
+  def school_photo_attachment; end
+
+  sig { params(value: T.nilable(::ActiveStorage::Attachment)).void }
+  def school_photo_attachment=(value); end
+
+  sig { returns(T.nilable(::ActiveStorage::Blob)) }
+  def school_photo_blob; end
+
+  sig { params(value: T.nilable(::ActiveStorage::Blob)).void }
+  def school_photo_blob=(value); end
+
+  sig { returns(::SpellBook::ActiveRecord_Associations_CollectionProxy) }
+  def spell_books; end
+
+  sig { params(value: T.any(T::Array[::SpellBook], ::SpellBook::ActiveRecord_Associations_CollectionProxy)).void }
+  def spell_books=(value); end
+
+  sig { returns(T.nilable(::Wand)) }
+  def wand; end
+
+  sig { params(value: T.nilable(::Wand)).void }
+  def wand=(value); end
+
+  sig { returns(T.nilable(ActiveStorage::Attached::One)) }
+  def school_photo; end
+
+  sig { params(attachable: T.untyped).returns(T.untyped) }
+  def school_photo=(attachable); end
+
+  sig { returns(T.nilable(ActiveStorage::Attached::Many)) }
+  def hats; end
+
+  sig { params(attachables: T.untyped).returns(T.untyped) }
+  def hats=(*attachables); end
 end

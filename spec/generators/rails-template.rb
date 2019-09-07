@@ -114,6 +114,12 @@ def create_models
     end
   RUBY
 
+  # A nasty hack to add has_one_attached and has_many_attached to the models/wizard.rb file.
+  attachments = nil
+  if ['5.2', '6.0'].include?(ENV["RAILS_VERSION"])
+    attachments = "has_one_attached :school_photo\n  has_many_attached :hats"
+  end
+
   if ENV["RAILS_VERSION"] == "4.2"
     file "app/models/wizard.rb", <<~RUBY
       class Wizard < ApplicationRecord
@@ -124,7 +130,7 @@ def create_models
           Hufflepuff: 1,
           Ravenclaw: 2,
           Slytherin: 3,
-	}
+        }
 
         enum professor: {
           "Severus Snape": 0,
@@ -193,6 +199,7 @@ def create_models
         has_many :spell_books
 
         scope :recent, -> { where('created_at > ?', 1.month.ago) }
+        #{attachments}
       end
     RUBY
   end
