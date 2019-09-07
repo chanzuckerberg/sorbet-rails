@@ -127,3 +127,4 @@ module T::Private::Methods::SingletonMethodHooks; end
 module T::Private::Methods::SingletonMethodHooks; end
 module T::Private::Methods::SingletonMethodHooks; end
 module T::Private::Methods::SingletonMethodHooks; end
+module TA::TypeAssertImpl; end
