@@ -1,7 +1,6 @@
 # typed: true
 require "rails"
 require "sorbet-runtime"
-require "sorbet-rails/custom_params_methods"
 require "sorbet-rails/config"
 
 class SorbetRails::Railtie < Rails::Railtie
@@ -37,7 +36,7 @@ class SorbetRails::Railtie < Rails::Railtie
     end
 
     ActiveSupport.on_load(:action_controller) do
-      ActionController::Parameters.include(SorbetRails::CustomParamsMethods)
+      require "sorbet-rails/custom_params_methods"
     end
 
     SorbetRails.register_configured_plugins

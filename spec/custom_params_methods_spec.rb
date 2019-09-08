@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe SorbetRails::CustomParamsMethods do
+describe ActionController::Parameters do
   let!(:params) do
     ActionController::Parameters.new({
       age: 11,

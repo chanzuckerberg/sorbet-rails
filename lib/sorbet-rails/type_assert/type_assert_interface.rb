@@ -12,5 +12,5 @@ module ITypeAssert
   sig { abstract.params(val: T.untyped).returns(Elem) }
   def assert(val); end
 
-  def get_type(val); Elem; end
+  def get_type; Elem; end
 end
