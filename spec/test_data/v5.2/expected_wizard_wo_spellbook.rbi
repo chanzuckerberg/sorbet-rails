@@ -228,28 +228,28 @@ end
 module Wizard::GeneratedAssociationMethods
   extend T::Sig
 
-  sig { returns(::ActiveStorage::Attachment::ActiveRecord_Associations_CollectionProxy) }
+  sig { returns(ActiveRecord::Associations::CollectionProxy) }
   def hats_attachments; end
 
-  sig { params(value: T.any(T::Array[::ActiveStorage::Attachment], ::ActiveStorage::Attachment::ActiveRecord_Associations_CollectionProxy)).void }
+  sig { params(value: T.any(T::Array[T.untyped], ActiveRecord::Associations::CollectionProxy)).void }
   def hats_attachments=(value); end
 
-  sig { returns(::ActiveStorage::Blob::ActiveRecord_Associations_CollectionProxy) }
+  sig { returns(ActiveRecord::Associations::CollectionProxy) }
   def hats_blobs; end
 
-  sig { params(value: T.any(T::Array[::ActiveStorage::Blob], ::ActiveStorage::Blob::ActiveRecord_Associations_CollectionProxy)).void }
+  sig { params(value: T.any(T::Array[T.untyped], ActiveRecord::Associations::CollectionProxy)).void }
   def hats_blobs=(value); end
 
-  sig { returns(T.nilable(::ActiveStorage::Attachment)) }
+  sig { returns(T.nilable(T.untyped)) }
   def school_photo_attachment; end
 
-  sig { params(value: T.nilable(::ActiveStorage::Attachment)).void }
+  sig { params(value: T.nilable(T.untyped)).void }
   def school_photo_attachment=(value); end
 
-  sig { returns(T.nilable(::ActiveStorage::Blob)) }
+  sig { returns(T.nilable(T.untyped)) }
   def school_photo_blob; end
 
-  sig { params(value: T.nilable(::ActiveStorage::Blob)).void }
+  sig { params(value: T.nilable(T.untyped)).void }
   def school_photo_blob=(value); end
 
   sig { returns(ActiveRecord::Associations::CollectionProxy) }
