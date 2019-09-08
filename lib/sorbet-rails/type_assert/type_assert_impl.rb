@@ -20,7 +20,6 @@ module TypeAssertImpl
         define_method(:get_type) { type }
       end
     end
-    klass.define_method(:rule_name) { klass.name }
   end
 
   class Unsupported < StandardError; end
