@@ -20,6 +20,9 @@ class ActiveRecord::Base < Object
 
   sig { returns(T::Boolean) }
   def self.abstract_class?; end
+
+  sig { returns(T::Hash[String, T.untyped]) }
+  def self.attachment_reflections; end
 end
 
 class ActiveRecord::AttributeMethods::TimeZoneConversion::TimeZoneConverter;

@@ -10,6 +10,7 @@ require('sorbet-rails/model_plugins/active_record_finder_methods')
 require('sorbet-rails/model_plugins/custom_finder_methods')
 require('sorbet-rails/model_plugins/enumerable_collections')
 require('sorbet-rails/model_plugins/active_record_overrides')
+require('sorbet-rails/model_plugins/active_storage_methods')
 
 module SorbetRails::ModelPlugins
   extend T::Sig
@@ -58,6 +59,8 @@ module SorbetRails::ModelPlugins
       CustomFinderMethods
     when :enumerable_collections
       EnumerableCollections
+    when :active_storage_methods
+      ActiveStorageMethods
     when :kaminari
       require('sorbet-rails/gem_plugins/kaminari_plugin')
       KaminariPlugin

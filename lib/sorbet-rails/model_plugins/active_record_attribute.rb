@@ -55,7 +55,7 @@ class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugi
     end
   end
 
-  sig {params(column_def: T.untyped).returns(T.any(String, Class))}
+  sig { params(column_def: T.untyped).returns(T.any(String, Class)) }
   def type_for_column_def(column_def)
     cast_type = ActiveRecord::Base.connection.respond_to?(:lookup_cast_type_from_column) ?
       ActiveRecord::Base.connection.lookup_cast_type_from_column(column_def) :
@@ -69,13 +69,12 @@ class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugi
     column_def.null ? "T.nilable(#{strict_type})" : strict_type
   end
 
-  sig {
+  sig do
     params(
       # in v4.2, datetime can be TimeZoneConverter
       klass: T.any(Object, ActiveRecord::AttributeMethods::TimeZoneConversion::TimeZoneConverter)
-    ).
-    returns(T.any(String, Class))
-  }
+    ).returns(T.any(String, Class))
+  end
   def active_record_type_to_sorbet_type(klass)
     case klass
     when ActiveRecord::Type::Boolean
