@@ -88,7 +88,7 @@ If you have additional modules that are included in all your helpers and you wan
 ```ruby
 # -- config/initializers/sorbet_rails.rb
 SorbetRails.configure do |config|
-  config.extra_helper_includes = ['ApplicationHelper', 'DeviseHelper']
+  config.extra_helper_includes = ['ApplicationHelper', 'Devise::Controllers::Helpers']
 end
 
 ### Mailers
