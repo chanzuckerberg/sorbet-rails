@@ -34,6 +34,9 @@ module SorbetRails
     sig { returns(T::Array[Symbol]) }
     attr_accessor :enabled_model_plugins
 
+    sig { returns(T::Array[String]) }
+    attr_accessor :extra_helper_includes
+
     sig { void }
     def initialize
       @enabled_gem_plugins = []
@@ -48,8 +51,8 @@ module SorbetRails
         :custom_finder_methods,
         :enumerable_collections,
       ]
-
       @enabled_model_plugins << :active_storage_methods if defined?(T.unsafe(ActiveStorage))
+      @extra_helper_includes = []
     end
 
     sig { returns(T::Array[Symbol]) }
