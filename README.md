@@ -77,11 +77,19 @@ It is possible to add custom RBI generation logic for your custom module or gems
 
 ### Helpers
 
-This Rake task generates a `helpers.rbi` file that includes a basic module definition which includes the `Kernel` module, to allow for some basic Ruby methods to be used in helpers without Sorbet complaining.
+This Rake task generates a `helpers.rbi` file that includes a basic module definition which includes the `Kernel` module and `ActionView::Helpers`, to allow for some basic Ruby methods to be used in helpers without Sorbet complaining.
 
 ```sh
 ❯ rake rails_rbi:helpers
 ```
+
+If you have additional modules that are included in all your helpers and you want `helpers.rbi` to reflect this, you can configure it:
+
+```ruby
+# -- config/initializers/sorbet_rails.rb
+SorbetRails.configure do |config|
+  config.extra_helper_includes = ['ApplicationHelper', 'Devise::Controllers::Helpers']
+end
 
 ### Mailers
 
