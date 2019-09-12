@@ -1,6 +1,5 @@
 # typed: false
 require 'sorbet-runtime'
-require 'sorbet-rails/type_assert/type_assert'
 
 class ActionController::Parameters
   include Kernel
