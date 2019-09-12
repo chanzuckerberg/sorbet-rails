@@ -36,7 +36,7 @@ class SorbetRails::Railtie < Rails::Railtie
     end
 
     ActiveSupport.on_load(:action_controller) do
-      require "sorbet-rails/custom_params_methods"
+      require "sorbet-rails/rails_mixins/custom_params_methods"
       ActionController::Parameters.include SorbetRails::CustomParamsMethods
     end
 
