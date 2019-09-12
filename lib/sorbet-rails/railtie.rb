@@ -37,6 +37,7 @@ class SorbetRails::Railtie < Rails::Railtie
 
     ActiveSupport.on_load(:action_controller) do
       require "sorbet-rails/custom_params_methods"
+      ActionController::Parameters.include SorbetRails::CustomParamsMethods
     end
 
     SorbetRails.register_configured_plugins

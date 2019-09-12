@@ -26,7 +26,7 @@ class TA
   def assert(val); end
 end
 
-class ActionController::Parameters
+module SorbetRails::CustomParamsMethods
   extend T::Sig
 
   sig {

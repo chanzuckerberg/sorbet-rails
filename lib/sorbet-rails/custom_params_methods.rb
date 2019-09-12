@@ -1,7 +1,7 @@
 # typed: false
 require 'sorbet-runtime'
 
-class ActionController::Parameters
+module SorbetRails::CustomParamsMethods
   include Kernel
   extend T::Sig
   extend T::Helpers
