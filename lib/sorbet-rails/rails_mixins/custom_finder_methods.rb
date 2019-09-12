@@ -2,7 +2,7 @@
 module SorbetRails
   module CustomFinderMethods
     def find_n(*ids)
-      find(ids)
+      find(*ids)
     end
 
     def first_n(n)

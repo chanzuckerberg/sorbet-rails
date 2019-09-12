@@ -32,6 +32,11 @@ RSpec.describe SorbetRails::CustomFinderMethods do
       expect(with_splash.size).to eql(3)
     end
 
+    it 'works with empty array' do
+      with_no_element = Wizard.find_n([])
+      expect(with_no_element).to eql([])
+    end
+
     it 'works with single id array' do
       with_one_element = Wizard.find_n([wizard_ids.first])
       expect(with_one_element.size).to eql(1)
