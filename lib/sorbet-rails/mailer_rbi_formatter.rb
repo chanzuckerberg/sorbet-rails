@@ -33,6 +33,6 @@ class SorbetRails::MailerRbiFormatter
       end
     end
 
-    @parlour.rbi + "\n"
+    @parlour.rbi
   end
 end
