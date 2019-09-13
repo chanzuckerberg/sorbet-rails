@@ -25,12 +25,13 @@ gem 'sorbet-rails'
 ❯ bundle install
 ```
 
-3. Generate RBI files for your routes, models, and helpers:
+3. Generate RBI files for your routes, models, etc
 ```sh
 ❯ rake rails_rbi:routes
 ❯ rake rails_rbi:models
 ❯ rake rails_rbi:helpers
 ❯ rake rails_rbi:mailers
+❯ rake rails_rbi:params
 
 # or run them all at once
 ❯ rake rails_rbi:all
@@ -43,18 +44,8 @@ gem 'sorbet-rails'
 ```
 Because we've generated RBI files for routes, models, and helpers, a lot more files should be typecheckable now. Many methods in `hidden.rbi` may be removed because they are now typed.
 
-## RBI Files
+## Type-checking Rails code
 
-### ActiveRecord
-
-There is an ActiveRecord RBI file that we vendor with this gem. Sorbet picks up these vendored RBI files automatically. (Please make sure you are running the latest version.)
-
-### Routes
-
-This Rake task generates an RBI file defining `_path` and `_url` methods for all named routes in `routes.rb`:
-```sh
-❯ rake rails_rbi:routes
-```
 ### Models
 
 This Rake task generates RBI files for all models in the Rails application (all descendants of `ActiveRecord::Base`):
@@ -74,6 +65,40 @@ The generation task currently creates the following signatures:
   - Scopes on `Relation`, but not [class methods](https://github.com/chanzuckerberg/sorbet-rails/issues/104#issuecomment-521763909)
 
 It is possible to add custom RBI generation logic for your custom module or gems via the plugin system. Check out the [plugins section](#extending-model-generation-task-with-custom-plugins) below if you are interested.
+
+### Controllers
+
+`sorbet-rails` adds methods to extract typed parameters from `params`, namely `require_typed` and `fetch_typed`. They are direct replacement of `require` and `fetch` that return typed parameters. They have the same API as `require` and `fetch`, with an addition of the parameter's type. The type can be any type understood by `sorbet`, and the parameters are type-checked both statically and at runtime.
+
+This is the conversion in essence:
+```
+params.require(:key)              -> params.require_typed(:key, TA[Type].new)
+params.fetch(:key)                -> params.fetch_typed(:key, TA[Type].new)
+params.fetch(:key, default_value) -> params.fetch_typed(:key, TA[Type].new, default_value)
+params[:key]                      -> params.fetch_typed(:key, TA[T.nilable(Type)].new, nil)
+```
+
+For example:
+```
+# require_typed
+key = params.require_typed(:key, TA[String].new)
+T.reveal_type(key) # String
+
+# fetch_typed
+key = params.fetch_typed(:key, TA[T.nilable(String)].new) # raise error if params doesn't have :key
+T.reveal_type(key) # T.nilable(String)
+
+key = params.fetch_typed(:key, TA[T.nilable(String)].new, nil) # returns nil when key doesn't have :key
+T.reveal_type(key) # T.nilable(String)
+```
+The API `TA[...].new` may seems verbose, but it was necessary to support this feature. Ideally, the API can be as simple as `require_typed(:key, Type)`. However, `sorbet` [doesn't support](http://github.com/sorbet/sorbet/issues/62) defining a method that accept a type and return an instance of the type. They are [working on it](https://sorbet-ruby.slack.com/archives/CHN2L03NH/p1566372480496200), however. The library provides a wrapper `TA` (stands for TypeAssert) in order for it to work. Once this behavior is supported by `sorbet`, it will be easy to codemod to remove the `TA[...].new` part from your code.
+
+### Routes
+
+This Rake task generates an RBI file defining `_path` and `_url` methods for all named routes in `routes.rb`:
+```sh
+❯ rake rails_rbi:routes
+```
 
 ### Helpers
 
