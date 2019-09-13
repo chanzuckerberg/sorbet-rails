@@ -4,13 +4,21 @@ require("sorbet-rails/helper_rbi_formatter")
 require("sorbet-rails/mailer_rbi_formatter")
 require("sorbet-rails/utils")
 
+RAILS_RBI_RAKE_DIR  = File.dirname(__FILE__)
+
 namespace :rails_rbi do
   desc "Generate rbis for rails models, routes, and helpers."
   task :all, :environment do |t, args|
+    # reset rails-rbi folder
+    rails_rbi_root_path = Rails.root.join("sorbet", "rails-rbi")
+    FileUtils.rm_rf(rails_rbi_root_path)
+
+    # run all rake tasks
     Rake::Task['rails_rbi:routes'].invoke
     Rake::Task['rails_rbi:models'].invoke
     Rake::Task['rails_rbi:helpers'].invoke
     Rake::Task['rails_rbi:mailers'].invoke
+    Rake::Task['rails_rbi:params'].invoke
   end
 
   desc "Generate rbis for rails routes"
@@ -22,6 +30,11 @@ namespace :rails_rbi do
     file_path = Rails.root.join("sorbet", "rails-rbi", "routes.rbi")
     FileUtils.mkdir_p(File.dirname(file_path))
     File.write(file_path, inspector.format(SorbetRails::RoutesRbiFormatter.new))
+  end
+
+  desc "Copy additional rbis for ActionController::Parameters"
+  task params: :environment do
+    copy_bundled_rbi('parameters.rbi')
   end
 
   desc "Generate rbis for rails models. Pass models name to regenerate rbi for only the given models."
@@ -118,5 +131,14 @@ namespace :rails_rbi do
     whitelisted_models << ActiveRecord::InternalMetadata if Object.const_defined?('ActiveRecord::InternalMetadata')
     whitelisted_models << ActiveRecord::SchemaMigration if Object.const_defined?('ActiveRecord::SchemaMigration')
     whitelisted_models
+  end
+
+  def copy_bundled_rbi(filename)
+    puts "rails rbi rake dir #{RAILS_RBI_RAKE_DIR}"
+    bundled_rbi_file_path = File.join(RAILS_RBI_RAKE_DIR, "..", "..", "bundled_rbi", filename)
+    copy_to_path = Rails.root.join("sorbet", "rails-rbi", filename)
+    FileUtils.mkdir_p(File.dirname(copy_to_path))
+    puts "file path to copy #{bundled_rbi_file_path}"
+    FileUtils.cp(bundled_rbi_file_path, copy_to_path)
   end
 end
