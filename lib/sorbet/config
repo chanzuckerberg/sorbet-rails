@@ -1,2 +1,5 @@
 --dir
 .
+
+--ignore
+bundled_rbi/parameters.rbi

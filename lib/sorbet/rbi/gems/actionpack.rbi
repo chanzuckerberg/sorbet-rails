@@ -32,3 +32,4 @@ module ActionDispatch::Session
 end
 class ActionDispatch::Railtie < Rails::Railtie
 end
+class ActionController::BadRequest; end

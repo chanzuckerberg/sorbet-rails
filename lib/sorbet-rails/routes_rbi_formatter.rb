@@ -44,8 +44,7 @@ class SorbetRails::RoutesRbiFormatter
 
   sig { returns(String) }
   def result
-    # by default parlour doesn't add a \n at the end of file
-    @parlour.rbi + "\n"
+    @parlour.rbi
   end
 
   private
