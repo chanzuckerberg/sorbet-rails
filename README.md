@@ -67,8 +67,11 @@ The generation task currently creates the following signatures:
 It is possible to add custom RBI generation logic for your custom module or gems via the plugin system. Check out the [plugins section](#extending-model-generation-task-with-custom-plugins) below if you are interested.
 
 ### Controllers
+```sh
+❯ rake rails_rbi:params
+```
 
-`sorbet-rails` adds methods to extract typed parameters from `params`, namely `require_typed` and `fetch_typed`. They are direct replacement of `require` and `fetch` that return typed parameters. They have the same API as `require` and `fetch`, with an addition of the parameter's type. The type can be any type understood by `sorbet`, and the parameters are type-checked both statically and at runtime.
+`sorbet-rails` adds methods to extract typed parameters from `params`, namely `require_typed` and `fetch_typed`. They are direct replacement of `require` and `fetch` that return typed object. They have the same API their counterpart, with an addition of the parameter's type, which can be any type understood by `sorbet`
 
 This is the conversion in essence:
 ```
@@ -85,13 +88,15 @@ key = params.require_typed(:key, TA[String].new)
 T.reveal_type(key) # String
 
 # fetch_typed
-key = params.fetch_typed(:key, TA[T.nilable(String)].new) # raise error if params doesn't have :key
+key = params.fetch_typed(:key, TA[T.nilable(String)].new) # raises error if params doesn't have :key
 T.reveal_type(key) # T.nilable(String)
 
 key = params.fetch_typed(:key, TA[T.nilable(String)].new, nil) # returns nil when key doesn't have :key
 T.reveal_type(key) # T.nilable(String)
 ```
-The API `TA[...].new` may seems verbose, but it was necessary to support this feature. Ideally, the API can be as simple as `require_typed(:key, Type)`. However, `sorbet` [doesn't support](http://github.com/sorbet/sorbet/issues/62) defining a method that accept a type and return an instance of the type. They are [working on it](https://sorbet-ruby.slack.com/archives/CHN2L03NH/p1566372480496200), however. The library provides a wrapper `TA` (stands for TypeAssert) in order for it to work. Once this behavior is supported by `sorbet`, it will be easy to codemod to remove the `TA[...].new` part from your code.
+The parameters are type-checked both statically and at runtime.
+
+Note: The API `TA[...].new` may seems verbose, but necessary to support this feature. Ideally, the API can be simply `require_typed(:key, Type)`. However, `sorbet` [doesn't support](http://github.com/sorbet/sorbet/issues/62) defining a method that accept a type and return an instance of the type. The library provides a wrapper `TA` (stands for TypeAssert) in order to achieve the behavior. If it is by `sorbet` in the future, it will be easy to codemod to remove the `TA[...].new` part from your code.
 
 ### Routes
 
