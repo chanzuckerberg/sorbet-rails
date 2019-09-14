@@ -87,6 +87,12 @@ For example:
 key = params.require_typed(:key, TA[String].new)
 T.reveal_type(key) # String
 
+# nested params
+nested_params = params.require_typed(:nested, TA[ActionController::Parameters].new)
+T.reveal_type(nested_params) # ActionController::Parameters
+key = nested_params.require_typed(:key, TA[String.new])
+T.reveal_type(key) # String
+
 # fetch_typed
 key = params.fetch_typed(:key, TA[T.nilable(String)].new) # raises error if params doesn't have :key
 T.reveal_type(key) # T.nilable(String)
