@@ -96,7 +96,7 @@ T.reveal_type(key) # T.nilable(String)
 ```
 The parameters are type-checked both statically and at runtime.
 
-Note: The API `TA[...].new` may seem verbose, but necessary to support this feature. Ideally, the API can be simply `require_typed(:key, Type)`. However, `sorbet` [doesn't support](http://github.com/sorbet/sorbet/issues/62) defining a method that accept a type and return an instance of the type. The library provides a wrapper `TA` (stands for TypeAssert) in order to achieve the behavior. If it is by `sorbet` in the future, it will be easy to codemod to remove the `TA[...].new` part from your code.
+Note: The API `TA[...].new` may seem verbose, but necessary to support this feature. Ideally, the API can be simply `require_typed(:key, Type)`. However, `sorbet` [doesn't support](http://github.com/sorbet/sorbet/issues/62) defining a method that accept a type and return an instance of the type. The library provides a wrapper `TA` (which stands for `TypeAssert`) in order to achieve the behavior. If this feature is supported by `sorbet` in the future, it will be easy to codemod to remove the `TA[...].new` part from your code.
 
 ### Routes
 
