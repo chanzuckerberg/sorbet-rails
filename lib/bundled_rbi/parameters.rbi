@@ -22,7 +22,7 @@ class TA
 
   Elem = type_member
 
-  sig { implementation.params(val: T.untyped).returns(Elem) }
+  sig { override.params(val: T.untyped).returns(Elem) }
   def assert(val); end
 end
 

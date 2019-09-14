@@ -12,7 +12,7 @@ module SorbetRails::ModelPlugins
     # convenient rename
     Parameter = ::Parlour::RbiGenerator::Parameter
 
-    sig { implementation.returns(T.class_of(ActiveRecord::Base)) }
+    sig { override.returns(T.class_of(ActiveRecord::Base)) }
     attr_reader :model_class
 
     sig { returns(T::Set[String]) }

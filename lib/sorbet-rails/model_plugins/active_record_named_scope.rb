@@ -3,7 +3,7 @@ require ('sorbet-rails/model_plugins/base')
 require("sorbet-rails/utils")
 class SorbetRails::ModelPlugins::ActiveRecordNamedScope < SorbetRails::ModelPlugins::Base
 
-  sig { implementation.params(root: Parlour::RbiGenerator::Namespace).void }
+  sig { override.params(root: Parlour::RbiGenerator::Namespace).void }
   def generate(root)
     model_class_rbi = root.create_class(self.model_class_name)
 

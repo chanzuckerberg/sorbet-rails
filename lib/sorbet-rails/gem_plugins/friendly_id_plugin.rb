@@ -1,6 +1,6 @@
 # typed: strict
 class FriendlyIdPlugin < SorbetRails::ModelPlugins::Base
-  sig { implementation.params(root: Parlour::RbiGenerator::Namespace).void }
+  sig { override.params(root: Parlour::RbiGenerator::Namespace).void }
   def generate(root)
     return unless @model_class.singleton_class.included_modules.include?(::FriendlyId)
 

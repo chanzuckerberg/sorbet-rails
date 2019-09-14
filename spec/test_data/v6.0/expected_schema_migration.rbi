@@ -370,7 +370,7 @@ class ActiveRecord::SchemaMigration::ActiveRecord_Relation < ActiveRecord::Relat
   sig { params(args: T.untyped).returns(T::Boolean) }
   def one?(*args); end
 
-  sig { implementation.params(block: T.proc.params(e: ActiveRecord::SchemaMigration).void).void }
+  sig { override.params(block: T.proc.params(e: ActiveRecord::SchemaMigration).void).void }
   def each(&block); end
 
   sig { params(level: T.nilable(Integer)).returns(T::Array[ActiveRecord::SchemaMigration]) }
@@ -555,7 +555,7 @@ class ActiveRecord::SchemaMigration::ActiveRecord_AssociationRelation < ActiveRe
   sig { params(args: T.untyped).returns(T::Boolean) }
   def one?(*args); end
 
-  sig { implementation.params(block: T.proc.params(e: ActiveRecord::SchemaMigration).void).void }
+  sig { override.params(block: T.proc.params(e: ActiveRecord::SchemaMigration).void).void }
   def each(&block); end
 
   sig { params(level: T.nilable(Integer)).returns(T::Array[ActiveRecord::SchemaMigration]) }
@@ -739,7 +739,7 @@ class ActiveRecord::SchemaMigration::ActiveRecord_Associations_CollectionProxy <
   sig { params(args: T.untyped).returns(T::Boolean) }
   def one?(*args); end
 
-  sig { implementation.params(block: T.proc.params(e: ActiveRecord::SchemaMigration).void).void }
+  sig { override.params(block: T.proc.params(e: ActiveRecord::SchemaMigration).void).void }
   def each(&block); end
 
   sig { params(level: T.nilable(Integer)).returns(T::Array[ActiveRecord::SchemaMigration]) }

@@ -3,7 +3,7 @@ require ('sorbet-rails/model_plugins/base')
 require("sorbet-rails/utils")
 class SorbetRails::ModelPlugins::ActiveRecordEnum < SorbetRails::ModelPlugins::Base
 
-  sig { implementation.params(root: Parlour::RbiGenerator::Namespace).void }
+  sig { override.params(root: Parlour::RbiGenerator::Namespace).void }
   def generate(root)
     return unless model_class.defined_enums.size > 0
 

@@ -2,7 +2,7 @@
 require ('sorbet-rails/model_plugins/base')
 class SorbetRails::ModelPlugins::ActiveRelationWhereNot < SorbetRails::ModelPlugins::Base
 
-  sig { implementation.params(root: Parlour::RbiGenerator::Namespace).void }
+  sig { override.params(root: Parlour::RbiGenerator::Namespace).void }
   def generate(root)
     where_not_module_name = self.model_module_name("ActiveRelation_WhereNot")
     where_not_module_rbi = root.create_module(where_not_module_name)
