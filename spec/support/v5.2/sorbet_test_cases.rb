@@ -1,4 +1,4 @@
-# typed: false
+# typed: strong
 require 'sorbet-runtime'
 
 wizard = Wizard.first!
