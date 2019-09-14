@@ -1,6 +1,25 @@
 # Generate a Rails app.
 # Use the rake tasks in this repository to generate the Rails apps.
 
+def  fix_config_file
+  if [ '5.0'].include?(ENV["RAILS_VERSION"])
+     #TODO: Change "TheApp" below to what name of app.
+     file "config/application.rb", <<~RUBY
+       require_relative 'boot'
+
+       require 'rails/all'
+
+       Bundler.require(*Rails.groups)
+
+       module TheApp
+         class Application < Rails::Application
+           config.active_record.time_zone_aware_types = [:datetime]
+         end
+       end
+     RUBY
+  end
+end
+
 def add_gems
   gem 'sorbet-rails', path: '../../../.'
 
@@ -383,6 +402,7 @@ after_bundle do
   create_models
   create_migrations
   create_mailers
+#  fix_config_file
   add_sorbet_test_files
 
   bundle_version = ENV["RAILS_VERSION"] == "4.2" ? "_1.17.3_" : ""
