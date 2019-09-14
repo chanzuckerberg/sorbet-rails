@@ -6,7 +6,7 @@ class SorbetRails::ModelPlugins::ActiveStorageMethods < SorbetRails::ModelPlugin
     super
   end
 
-  sig { implementation.params(root: Parlour::RbiGenerator::Namespace).void }
+  sig { override.params(root: Parlour::RbiGenerator::Namespace).void }
   def generate(root)
     # Check that ActiveStorage the attachment_reflections method exists
     # It was added in 6.0, so it isn't available for 5.2.

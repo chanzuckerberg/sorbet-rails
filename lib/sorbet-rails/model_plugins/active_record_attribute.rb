@@ -2,7 +2,7 @@
 require ('sorbet-rails/model_plugins/base')
 class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugins::Base
 
-  sig { implementation.params(root: Parlour::RbiGenerator::Namespace).void }
+  sig { override.params(root: Parlour::RbiGenerator::Namespace).void }
   def generate(root)
     columns_hash = @model_class.table_exists? ? @model_class.columns_hash : {}
     return unless columns_hash.size > 0

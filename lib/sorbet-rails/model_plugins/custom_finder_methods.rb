@@ -2,7 +2,7 @@
 require ('sorbet-rails/model_plugins/base')
 class SorbetRails::ModelPlugins::CustomFinderMethods < SorbetRails::ModelPlugins::Base
 
-  sig { implementation.params(root: Parlour::RbiGenerator::Namespace).void }
+  sig { override.params(root: Parlour::RbiGenerator::Namespace).void }
   def generate(root)
     model_class_rbi = root.create_class(self.model_class_name)
     model_relation_class_rbi = root.create_class(self.model_relation_class_name)
