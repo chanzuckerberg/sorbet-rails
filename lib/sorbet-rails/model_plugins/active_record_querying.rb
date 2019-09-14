@@ -2,7 +2,7 @@
 require ('sorbet-rails/model_plugins/base')
 class SorbetRails::ModelPlugins::ActiveRecordQuerying < SorbetRails::ModelPlugins::Base
 
-  sig { implementation.params(root: Parlour::RbiGenerator::Namespace).void }
+  sig { override.params(root: Parlour::RbiGenerator::Namespace).void }
   def generate(root)
     # All is a named scope that most method from ActiveRecord::Querying delegate to
     # rails/activerecord/lib/active_record/querying.rb:21
