@@ -130,7 +130,7 @@ the same file using
 ❯ bundle exec rake update_spec:v5_0 # v5_1, etc.
 ❯ bundle exec rake update_spec:v5_plus
 ```
-This excludes regenerating 4.2 because 4.2 blocks usage of Bundler 2.x).
+This excludes regenerating 4.2 because 4.2 blocks usage of Bundler 2.x. 
 
 #### Expected Output
 
