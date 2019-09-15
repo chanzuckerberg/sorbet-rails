@@ -26,7 +26,7 @@ class ActiveRecordOverrides
     return nil if klass == Object
     class_name = klass.name
     class_enum_calls = @enum_calls[klass.name]
-    return class_enum_calls[enum_sym] if class_enum_calls.has_key?(enum_sym)
+    return class_enum_calls[enum_sym] if class_enum_calls && class_enum_calls.has_key?(enum_sym)
     return get_enum_call(klass.superclass, enum_sym)
   end
 end

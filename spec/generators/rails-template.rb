@@ -218,7 +218,7 @@ def create_models
   RUBY
 
   file "app/models/squib.rb", <<~RUBY
-    class Wizard < ApplicationRecord
+    class Squib < Wizard
       def is_magical
         false
       end
