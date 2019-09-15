@@ -31,6 +31,16 @@ class SorbetRails::HelperRbiFormatter
       end
     end
 
+    # Adds the `helpers` method that provides access to all methods within the
+    # application's helpers.
+    # https://api.rubyonrails.org/classes/ActionController/Helpers/ClassMethods.html#method-i-helpers
+    @parlour.root.create_module('ActionController::Helpers') do |mod|
+      mod.create_method(
+        'helpers',
+        return_type: "T.all(#{@helpers.join(', ')})"
+      )
+    end
+
     return @parlour.rbi
   end
 end
