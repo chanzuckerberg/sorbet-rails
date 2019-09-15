@@ -1,13 +1,11 @@
 # typed: ignore
 require 'sorbet-runtime'
 
+return if $PROGRAM_NAME.include?('sorbet')
+
 module TypeAssertImpl
   def self.included(klass)
-    klass.define_singleton_method(:[]) do |*types|
-      if types.length != 1
-        raise Unsupported.new("TypeAssert only supports 1 type, given #{types}")
-      end
-      type = types.first
+    klass.define_singleton_method(:[]) do |type|
       return Class.new do
         include ITypeAssert
 
@@ -21,6 +19,8 @@ module TypeAssertImpl
       end
     end
   end
+end
 
-  class Unsupported < StandardError; end
+class TA
+  include TypeAssertImpl
 end
