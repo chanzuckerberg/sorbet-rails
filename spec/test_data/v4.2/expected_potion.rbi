@@ -160,6 +160,9 @@ class Potion < ApplicationRecord
 
   sig { params(args: T.untyped).returns(T::Boolean) }
   def self.one?(*args); end
+
+  sig { params(attributes: T.untyped, block: T.untyped).returns(Potion) }
+  def self.new(attributes = nil, &block); end
 end
 
 class Potion::ActiveRecord_Relation < ActiveRecord::Relation

@@ -343,6 +343,9 @@ class Wizard < ApplicationRecord
 
   sig { params(args: T.untyped).returns(T::Boolean) }
   def self.one?(*args); end
+
+  sig { params(attributes: T.untyped, block: T.untyped).returns(Wizard) }
+  def self.new(attributes = nil, &block); end
 end
 
 class Wizard::ActiveRecord_Relation < ActiveRecord::Relation

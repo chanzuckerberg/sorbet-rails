@@ -388,6 +388,9 @@ class Wand < ApplicationRecord
 
   sig { returns(T::Array[Wand]) }
   def self.mythicals; end
+
+  sig { params(attributes: T.untyped, block: T.untyped).returns(Wand) }
+  def self.new(attributes = nil, &block); end
 end
 
 class Wand::ActiveRecord_Relation < ActiveRecord::Relation

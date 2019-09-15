@@ -262,6 +262,9 @@ class SpellBook < ApplicationRecord
 
   sig { params(args: T.untyped).returns(T::Boolean) }
   def self.one?(*args); end
+
+  sig { params(attributes: T.untyped, block: T.untyped).returns(SpellBook) }
+  def self.new(attributes = nil, &block); end
 end
 
 class SpellBook::ActiveRecord_Relation < ActiveRecord::Relation

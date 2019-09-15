@@ -210,6 +210,9 @@ class ActiveRecord::InternalMetadata < ActiveRecord::Base
 
   sig { params(args: T.untyped).returns(T::Boolean) }
   def self.one?(*args); end
+
+  sig { params(attributes: T.untyped, block: T.untyped).returns(ActiveRecord::InternalMetadata) }
+  def self.new(attributes = nil, &block); end
 end
 
 class ActiveRecord::InternalMetadata::ActiveRecord_Relation < ActiveRecord::Relation
