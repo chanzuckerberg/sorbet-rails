@@ -216,6 +216,14 @@ def create_models
       end
     end
   RUBY
+
+  file "app/models/squib.rb", <<~RUBY
+    class Squib < Wizard
+      def is_magical
+        false
+      end
+    end
+  RUBY
 end
 
 def create_migrations
@@ -304,6 +312,14 @@ def create_migrations
       end
     RUBY
   end
+
+  file "db/migrate/20190620000007_add_type_to_wizard.rb", <<~RUBY
+    class AddTypeToWizard < #{migration_superclass}
+      def change
+        add_column :wizards, :type, :string, null: false, default: 'Wizard'
+      end
+    end
+  RUBY
 end
 
 def create_mailers

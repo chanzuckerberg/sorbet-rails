@@ -215,6 +215,15 @@ module Wizard::GeneratedAttributeMethods
   sig { returns(T::Boolean) }
   def quidditch_position?; end
 
+  sig { returns(String) }
+  def type; end
+
+  sig { params(value: String).void }
+  def type=(value); end
+
+  sig { returns(T::Boolean) }
+  def type?; end
+
   sig { returns(DateTime) }
   def updated_at; end
 

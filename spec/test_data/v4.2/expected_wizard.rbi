@@ -119,6 +119,15 @@ module Wizard::GeneratedAttributeMethods
   sig { returns(T::Boolean) }
   def parent_email?; end
 
+  sig { returns(String) }
+  def type; end
+
+  sig { params(value: String).void }
+  def type=(value); end
+
+  sig { returns(T::Boolean) }
+  def type?; end
+
   sig { returns(T.nilable(Time)) }
   def updated_at; end
 
