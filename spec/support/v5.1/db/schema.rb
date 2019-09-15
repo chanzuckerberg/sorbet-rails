@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190620000006) do
+ActiveRecord::Schema.define(version: 20190620000007) do
 
   create_table "spell_books", force: :cascade do |t|
     t.string "name"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 20190620000006) do
     t.integer "hair_color"
     t.integer "eye_color"
     t.integer "hair_length"
+    t.string "type", default: "Wizard", null: false
   end
 
 end

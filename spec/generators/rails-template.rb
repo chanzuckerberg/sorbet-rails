@@ -313,7 +313,7 @@ def create_migrations
     RUBY
   end
 
-  file "db/migrate/20190620000005_add_type_to_wizard.rb", <<~RUBY
+  file "db/migrate/20190620000007_add_type_to_wizard.rb", <<~RUBY
     class AddTypeToWizard < #{migration_superclass}
       def change
         add_column :wizards, :type, :string, null: false, default: 'Wizard'

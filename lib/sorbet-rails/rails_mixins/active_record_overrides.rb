@@ -14,7 +14,8 @@ class ActiveRecordOverrides
   def store_enum_call(klass, kwargs)
     class_name = klass.name
     @enum_calls[class_name] ||= {}
-    # modeling the logic in https://github.com/rails/rails/blob/master/activerecord/lib/active_record/enum.rb#L152
+    # modeling the logic in
+    # https://github.com/rails/rails/blob/master/activerecord/lib/active_record/enum.rb#L152
     kwargs.each do |name, values|
       next if [:_prefix, :_suffix, :_scopes].include?(name)
       @enum_calls[class_name][name] = kwargs
