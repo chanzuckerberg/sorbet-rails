@@ -7,7 +7,6 @@ class TA
   extend T::Sig
   extend T::Generic
   include ITypeAssert
-  include TypeAssertImpl
 
   Elem = type_member
 
