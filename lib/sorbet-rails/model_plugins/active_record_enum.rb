@@ -32,7 +32,7 @@ class SorbetRails::ModelPlugins::ActiveRecordEnum < SorbetRails::ModelPlugins::B
         class_method: true,
       )
 
-      enum_call = enum_calls.find { |call| call.has_key?(enum_name.to_sym) }
+      enum_call = ActiveRecordOverrides.instance.get_enum_call(@model_class, enum_name.to_sym)
       if enum_call.nil?
         puts "Error: unable to find enum call for enum #{enum_name}, model #{self.model_class_name}"
         next
