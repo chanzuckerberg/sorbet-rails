@@ -87,6 +87,12 @@ For example:
 key = params.require_typed(:key, TA[String].new)
 T.reveal_type(key) # String
 
+# nested params
+nested_params = params.require_typed(:nested, TA[ActionController::Parameters].new)
+T.reveal_type(nested_params) # ActionController::Parameters
+key = nested_params.require_typed(:key, TA[String.new])
+T.reveal_type(key) # String
+
 # fetch_typed
 key = params.fetch_typed(:key, TA[T.nilable(String)].new) # raises error if params doesn't have :key
 T.reveal_type(key) # T.nilable(String)
@@ -96,7 +102,7 @@ T.reveal_type(key) # T.nilable(String)
 ```
 The parameters are type-checked both statically and at runtime.
 
-Note: The API `TA[...].new` may seems verbose, but necessary to support this feature. Ideally, the API can be simply `require_typed(:key, Type)`. However, `sorbet` [doesn't support](http://github.com/sorbet/sorbet/issues/62) defining a method that accept a type and return an instance of the type. The library provides a wrapper `TA` (stands for TypeAssert) in order to achieve the behavior. If it is by `sorbet` in the future, it will be easy to codemod to remove the `TA[...].new` part from your code.
+Note: The API `TA[...].new` may seem verbose, but necessary to support this feature. Ideally, the API can be simply `require_typed(:key, Type)`. However, `sorbet` [doesn't support](http://github.com/sorbet/sorbet/issues/62) defining a method that accept a type and return an instance of the type. The library provides a wrapper `TA` (which stands for `TypeAssert`) in order to achieve the behavior. If this feature is supported by `sorbet` in the future, it will be easy to codemod to remove the `TA[...].new` part from your code.
 
 ### Routes
 
@@ -226,7 +232,7 @@ Model.unscoped.scoping do … end
 
 `sorbet-rails` support a customizable plugin system that you can use to generate additional RBI for each model. This will be useful to generate RBI for methods dynamically added by gems or private concerns. If you write plugins for public gems, please feel free to contribute it to this repo.
 
-### Defining a Custom `ModelPlugin` 
+### Defining a Custom `ModelPlugin`
 
 A custom plugin should be a subclass of `SorbetRails::ModelPlugins::Base`. Each plugin would implement a `generate(root)` method that generate additional rbi for the model.
 
@@ -234,7 +240,7 @@ At a high level, here is the structure of a plugin:
 ```ruby
 # -- lib/my_custom_plugin.rb
 class MyCustomPlugin < SorbetRails::ModelPlugins::Base
-  sig { implementation.params(root: Parlour::RbiGenerator::Namespace).void }
+  sig { override.params(root: Parlour::RbiGenerator::Namespace).void }
   def generate(root)
     # TODO: implement the generation logic
     # You can use @model_class and @available_classes here
@@ -257,17 +263,17 @@ At a high level, you'd usually want to create a model-scoped module for your met
     # here we re-create the model class!
     model_class_rbi = root.create_class(self.model_class_name)
     model_class_rbi.create_extend(custom_module_name)
-    
+
     # then create custom methods, constants, etc. for this module.
     custom_module_rbi.create_method(...)
-    
+
     # this is allowed but not recommended, because it limit the ability to override the method.
     model_class_rbi.create_method(...)
   end
 ```
 Notice that we re-create `model_class_rbi` here. Parlour's [ConflictResolver](https://github.com/AaronC81/parlour/wiki/Internals#overall-flow) will merge the classes or modules with the same name together to generate 1 beautiful RBI file. It'll also flag and skip if any method is created multiple times with conflict signatures. Check-out useful predefined module names & helper methods in [model_utils](https://github.com/chanzuckerberg/sorbet-rails/blob/master/lib/sorbet-rails/model_utils.rb).
 
-It is also allowed to put methods into a model class directly. However, it is not recommended because it'll be harder to override the method. `sorbet` will enforce that the overriding method match the signature generated. It also makes the generated RBI file less modularized.  
+It is also allowed to put methods into a model class directly. However, it is not recommended because it'll be harder to override the method. `sorbet` will enforce that the overriding method match the signature generated. It also makes the generated RBI file less modularized.
 
 However, sometimes this is required to make `sorbet` recognize the signature. This is the case for class methods added by `ActiveRecord::Concerns`. Because `ActiveSupport::Concern` class methods will be inserted to the class directly, you need to also put the sig in the model class rbi directly.
 

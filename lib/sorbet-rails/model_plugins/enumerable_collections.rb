@@ -2,7 +2,7 @@
 require ('sorbet-rails/model_plugins/base')
 class SorbetRails::ModelPlugins::EnumerableCollections < SorbetRails::ModelPlugins::Base
 
-  sig { implementation.params(root: Parlour::RbiGenerator::Namespace).void }
+  sig { override.params(root: Parlour::RbiGenerator::Namespace).void }
   def generate(root)
     # model relation & association proxy are enumerable
     # we need to implement "each" in these methods so that they work

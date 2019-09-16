@@ -1,8 +1,8 @@
 PATH
   remote: ../../..
   specs:
-    sorbet-rails (0.5.4)
-      parlour (~> 0.6.0)
+    sorbet-rails (0.5.5)
+      parlour (~> 0.8.0)
 
 GEM
   remote: https://rubygems.org/
@@ -76,7 +76,7 @@ GEM
     nio4r (2.5.1)
     nokogiri (1.10.4)
       mini_portile2 (~> 2.4.0)
-    parlour (0.6.1)
+    parlour (0.8.0)
       rainbow (~> 3.0.0)
       sorbet-runtime
     puma (3.12.1)
@@ -109,10 +109,10 @@ GEM
       thor (>= 0.19.0, < 2.0)
     rainbow (3.0.0)
     rake (12.3.3)
-    sorbet (0.4.4709)
-      sorbet-static (= 0.4.4709)
-    sorbet-runtime (0.4.4709)
-    sorbet-static (0.4.4709-universal-darwin-14)
+    sorbet (0.4.4755)
+      sorbet-static (= 0.4.4755)
+    sorbet-runtime (0.4.4755)
+    sorbet-static (0.4.4755-universal-darwin-14)
     sprockets (3.7.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)

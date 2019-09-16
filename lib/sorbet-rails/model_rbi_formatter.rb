@@ -8,7 +8,7 @@ class SorbetRails::ModelRbiFormatter
   extend SorbetRails::ModelPlugins
   include SorbetRails::ModelUtils
 
-  sig { implementation.returns(T.class_of(ActiveRecord::Base)) }
+  sig { override.returns(T.class_of(ActiveRecord::Base)) }
   attr_reader :model_class
 
   sig { returns(T::Set[String]) }

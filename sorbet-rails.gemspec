@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name          = %q{sorbet-rails}
-  s.version       = "0.5.5"
+  s.version       = "0.5.5.1"
   s.date          = %q{2019-04-18}
   s.summary       = %q{Set of tools to make Sorbet work with Rails seamlessly.}
   s.authors       = ["Chan Zuckerberg Initiative"]
@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
     `git ls-files -z`.split("\x0").select { |f| f.match(%r{^(test|spec|features)/}) }
   end
 
-  s.add_dependency 'parlour', '~> 0.7.0'
+  s.add_dependency 'parlour', '~> 0.8.0'
 
   # Development
   s.add_development_dependency 'rspec', '~> 3.8', '>= 3.8'

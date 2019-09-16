@@ -53,15 +53,11 @@ RSpec.describe 'sorbet' do
       'bundle', 'exec', 'srb', 'rbi', 'hidden-definitions',
       chdir: Rails.root.to_path,
     )
-    puts '--- srb rbi hidden-definitions ---'
-    puts stdout, stderr, status
 
     stdout, stderr, status = Open3.capture3(
       'bundle', 'exec', 'srb', 'rbi', 'todo',
       chdir: Rails.root.to_path,
     )
-    puts '--- srb rbi todo ---'
-    puts stdout, stderr, status
   end
 
   it 'returns expected sorbet tc result' do
@@ -86,6 +82,6 @@ RSpec.describe 'sorbet' do
       'bundle', 'exec', 'srb', 'tc', '--lsp',
       chdir: Rails.root.to_path,
     )
-    expect(status.exitstatus).to eql(0)
+    expect(status.exitstatus).to eql(10)
   end
 end

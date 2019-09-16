@@ -356,7 +356,7 @@ class Potion::ActiveRecord_Relation < ActiveRecord::Relation
   sig { params(args: T.untyped).returns(T::Boolean) }
   def one?(*args); end
 
-  sig { implementation.params(block: T.proc.params(e: Potion).void).void }
+  sig { override.params(block: T.proc.params(e: Potion).void).void }
   def each(&block); end
 
   sig { params(level: T.nilable(Integer)).returns(T::Array[Potion]) }
@@ -541,7 +541,7 @@ class Potion::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelati
   sig { params(args: T.untyped).returns(T::Boolean) }
   def one?(*args); end
 
-  sig { implementation.params(block: T.proc.params(e: Potion).void).void }
+  sig { override.params(block: T.proc.params(e: Potion).void).void }
   def each(&block); end
 
   sig { params(level: T.nilable(Integer)).returns(T::Array[Potion]) }
@@ -725,7 +725,7 @@ class Potion::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associat
   sig { params(args: T.untyped).returns(T::Boolean) }
   def one?(*args); end
 
-  sig { implementation.params(block: T.proc.params(e: Potion).void).void }
+  sig { override.params(block: T.proc.params(e: Potion).void).void }
   def each(&block); end
 
   sig { params(level: T.nilable(Integer)).returns(T::Array[Potion]) }

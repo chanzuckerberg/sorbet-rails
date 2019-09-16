@@ -134,11 +134,10 @@ namespace :rails_rbi do
   end
 
   def copy_bundled_rbi(filename)
-    puts "rails rbi rake dir #{RAILS_RBI_RAKE_DIR}"
+    puts "Copy bundled file #{filename}"
     bundled_rbi_file_path = File.join(RAILS_RBI_RAKE_DIR, "..", "..", "bundled_rbi", filename)
     copy_to_path = Rails.root.join("sorbet", "rails-rbi", filename)
     FileUtils.mkdir_p(File.dirname(copy_to_path))
-    puts "file path to copy #{bundled_rbi_file_path}"
     FileUtils.cp(bundled_rbi_file_path, copy_to_path)
   end
 end
