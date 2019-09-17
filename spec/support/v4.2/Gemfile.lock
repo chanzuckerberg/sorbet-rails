@@ -1,7 +1,7 @@
 PATH
   remote: ../../..
   specs:
-    sorbet-rails (0.5.5)
+    sorbet-rails (0.5.5.1)
       parlour (~> 0.8.0)
 
 GEM
@@ -95,10 +95,10 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rainbow (3.0.0)
     rake (12.3.3)
-    sorbet (0.4.4755)
-      sorbet-static (= 0.4.4755)
-    sorbet-runtime (0.4.4755)
-    sorbet-static (0.4.4755-x86_64-linux)
+    sorbet (0.4.4761)
+      sorbet-static (= 0.4.4761)
+    sorbet-runtime (0.4.4761)
+    sorbet-static (0.4.4761-universal-darwin-14)
     sprockets (3.7.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)

@@ -20,6 +20,10 @@ RSpec.describe 'sorbet' do
       wizard: harry,
       core_type: :phoenix_feather,
       wood_type: "holly",
+      chosen_at_date: Date.parse('2019-09-01'),
+      chosen_at_time: Time.parse('2019-09-01T09:00:00Z'),
+      broken: true,
+      broken_at: Time.parse('2019-09-05T15:30:00Z'),
     )
   end
 

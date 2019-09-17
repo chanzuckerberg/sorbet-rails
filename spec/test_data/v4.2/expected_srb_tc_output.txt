@@ -1,57 +1,65 @@
-sorbet_test_cases.rb:167: Method `broom_nimbus?` does not exist on `Wizard` https://srb.help/7003
-     167 |  T.assert_type!(wizard.broom_nimbus?, T::Boolean)
+sorbet_test_cases.rb:24: Argument does not have asserted type `T.nilable(ActiveSupport::TimeWithZone)` https://srb.help/7007
+    24 |  T.assert_type!(wand.chosen_at_time, T.nilable(ActiveSupport::TimeWithZone))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  Got T.nilable(Time) originating from:
+    sorbet_test_cases.rb:24:
+    24 |  T.assert_type!(wand.chosen_at_time, T.nilable(ActiveSupport::TimeWithZone))
+                         ^^^^^^^^^^^^^^^^^^^
+
+sorbet_test_cases.rb:184: Method `broom_nimbus?` does not exist on `Wizard` https://srb.help/7003
+     184 |  T.assert_type!(wizard.broom_nimbus?, T::Boolean)
                            ^^^^^^^^^^^^^^^^^^^^
   Autocorrect: Use `-a` to autocorrect
-    sorbet_test_cases.rb:167: Replace with `nimbus?`
-     167 |  T.assert_type!(wizard.broom_nimbus?, T::Boolean)
+    sorbet_test_cases.rb:184: Replace with `nimbus?`
+     184 |  T.assert_type!(wizard.broom_nimbus?, T::Boolean)
                                   ^^^^^^^^^^^^^
 
 
-sorbet_test_cases.rb:167: The typechecker was unable to infer the type of the asserted value https://srb.help/7007
-     167 |  T.assert_type!(wizard.broom_nimbus?, T::Boolean)
+sorbet_test_cases.rb:184: The typechecker was unable to infer the type of the asserted value https://srb.help/7007
+     184 |  T.assert_type!(wizard.broom_nimbus?, T::Boolean)
             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   Got T.untyped originating from:
-    sorbet_test_cases.rb:167:
-     167 |  T.assert_type!(wizard.broom_nimbus?, T::Boolean)
+    sorbet_test_cases.rb:184:
+     184 |  T.assert_type!(wizard.broom_nimbus?, T::Boolean)
                            ^^^^^^^^^^^^^^^^^^^^
   You may need to add additional `sig` annotations
 
-sorbet_test_cases.rb:168: Method `color_brown_eyes?` does not exist on `Wizard` https://srb.help/7003
-     168 |  T.assert_type!(wizard.color_brown_eyes?, T::Boolean)
+sorbet_test_cases.rb:185: Method `color_brown_eyes?` does not exist on `Wizard` https://srb.help/7003
+     185 |  T.assert_type!(wizard.color_brown_eyes?, T::Boolean)
                            ^^^^^^^^^^^^^^^^^^^^^^^^
 
-sorbet_test_cases.rb:168: The typechecker was unable to infer the type of the asserted value https://srb.help/7007
-     168 |  T.assert_type!(wizard.color_brown_eyes?, T::Boolean)
+sorbet_test_cases.rb:185: The typechecker was unable to infer the type of the asserted value https://srb.help/7007
+     185 |  T.assert_type!(wizard.color_brown_eyes?, T::Boolean)
             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   Got T.untyped originating from:
-    sorbet_test_cases.rb:168:
-     168 |  T.assert_type!(wizard.color_brown_eyes?, T::Boolean)
+    sorbet_test_cases.rb:185:
+     185 |  T.assert_type!(wizard.color_brown_eyes?, T::Boolean)
                            ^^^^^^^^^^^^^^^^^^^^^^^^
   You may need to add additional `sig` annotations
 
-sorbet_test_cases.rb:169: Method `quidditch_keeper?` does not exist on `Wizard` https://srb.help/7003
-     169 |  T.assert_type!(wizard.quidditch_keeper?, T::Boolean)
+sorbet_test_cases.rb:186: Method `quidditch_keeper?` does not exist on `Wizard` https://srb.help/7003
+     186 |  T.assert_type!(wizard.quidditch_keeper?, T::Boolean)
                            ^^^^^^^^^^^^^^^^^^^^^^^^
 
-sorbet_test_cases.rb:169: The typechecker was unable to infer the type of the asserted value https://srb.help/7007
-     169 |  T.assert_type!(wizard.quidditch_keeper?, T::Boolean)
+sorbet_test_cases.rb:186: The typechecker was unable to infer the type of the asserted value https://srb.help/7007
+     186 |  T.assert_type!(wizard.quidditch_keeper?, T::Boolean)
             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   Got T.untyped originating from:
-    sorbet_test_cases.rb:169:
-     169 |  T.assert_type!(wizard.quidditch_keeper?, T::Boolean)
+    sorbet_test_cases.rb:186:
+     186 |  T.assert_type!(wizard.quidditch_keeper?, T::Boolean)
                            ^^^^^^^^^^^^^^^^^^^^^^^^
   You may need to add additional `sig` annotations
 
-sorbet_test_cases.rb:170: Method `brown_hair?` does not exist on `Wizard` https://srb.help/7003
-     170 |  T.assert_type!(wizard.brown_hair?, T::Boolean)
+sorbet_test_cases.rb:187: Method `brown_hair?` does not exist on `Wizard` https://srb.help/7003
+     187 |  T.assert_type!(wizard.brown_hair?, T::Boolean)
                            ^^^^^^^^^^^^^^^^^^
 
-sorbet_test_cases.rb:170: The typechecker was unable to infer the type of the asserted value https://srb.help/7007
-     170 |  T.assert_type!(wizard.brown_hair?, T::Boolean)
+sorbet_test_cases.rb:187: The typechecker was unable to infer the type of the asserted value https://srb.help/7007
+     187 |  T.assert_type!(wizard.brown_hair?, T::Boolean)
             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   Got T.untyped originating from:
-    sorbet_test_cases.rb:170:
-     170 |  T.assert_type!(wizard.brown_hair?, T::Boolean)
+    sorbet_test_cases.rb:187:
+     187 |  T.assert_type!(wizard.brown_hair?, T::Boolean)
                            ^^^^^^^^^^^^^^^^^^
   You may need to add additional `sig` annotations
-Errors: 8
+Errors: 9
