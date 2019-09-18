@@ -36,6 +36,7 @@ class SorbetRails::ModelPlugins::EnumerableCollections < SorbetRails::ModelPlugi
       parameters: [
         Parameter.new("&block", type: "T.proc.params(e: #{self.model_class_name}).void")
       ],
+      return_type: "T::Array[#{self.model_class_name}]",
       implementation: true,
     )
     class_rbi.create_method(
