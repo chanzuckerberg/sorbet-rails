@@ -525,6 +525,12 @@ class Wizard < ApplicationRecord
   def self.one?(*args); end
 
   sig { params(attributes: T.untyped, block: T.untyped).returns(Wizard) }
+  def self.create(attributes = nil, &block); end
+
+  sig { params(attributes: T.untyped, block: T.untyped).returns(Wizard) }
+  def self.create!(attributes = nil, &block); end
+
+  sig { params(attributes: T.untyped, block: T.untyped).returns(Wizard) }
   def self.new(attributes = nil, &block); end
 end
 

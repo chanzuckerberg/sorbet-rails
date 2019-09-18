@@ -285,6 +285,12 @@ class SpellBook < ApplicationRecord
   def self.one?(*args); end
 
   sig { params(attributes: T.untyped, block: T.untyped).returns(SpellBook) }
+  def self.create(attributes = nil, &block); end
+
+  sig { params(attributes: T.untyped, block: T.untyped).returns(SpellBook) }
+  def self.create!(attributes = nil, &block); end
+
+  sig { params(attributes: T.untyped, block: T.untyped).returns(SpellBook) }
   def self.new(attributes = nil, &block); end
 end
 

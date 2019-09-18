@@ -371,11 +371,17 @@ class Wand < ApplicationRecord
   sig { params(args: T.untyped).returns(T::Boolean) }
   def self.one?(*args); end
 
-  sig { returns(T::Array[Wand]) }
-  def self.mythicals; end
+  sig { params(attributes: T.untyped, block: T.untyped).returns(Wand) }
+  def self.create(attributes = nil, &block); end
+
+  sig { params(attributes: T.untyped, block: T.untyped).returns(Wand) }
+  def self.create!(attributes = nil, &block); end
 
   sig { params(attributes: T.untyped, block: T.untyped).returns(Wand) }
   def self.new(attributes = nil, &block); end
+
+  sig { returns(T::Array[Wand]) }
+  def self.mythicals; end
 end
 
 class Wand::ActiveRecord_Relation < ActiveRecord::Relation
