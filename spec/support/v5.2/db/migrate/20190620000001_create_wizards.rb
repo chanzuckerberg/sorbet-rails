@@ -7,7 +7,7 @@ class CreateWizards < ActiveRecord::Migration[5.2]
       t.string :parent_email
       t.text :notes
 
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end

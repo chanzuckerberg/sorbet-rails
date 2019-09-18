@@ -47,6 +47,15 @@ module Wand::GeneratedAttributeMethods
   sig { returns(T::Boolean) }
   def broken?; end
 
+  sig { returns(T.nilable(Time)) }
+  def broken_at; end
+
+  sig { params(value: T.nilable(Time)).void }
+  def broken_at=(value); end
+
+  sig { returns(T::Boolean) }
+  def broken_at?; end
+
   sig { returns(T.nilable(Date)) }
   def chosen_at_date; end
 
@@ -56,10 +65,10 @@ module Wand::GeneratedAttributeMethods
   sig { returns(T::Boolean) }
   def chosen_at_date?; end
 
-  sig { returns(T.nilable(Time)) }
+  sig { returns(T.nilable(ActiveSupport::TimeWithZone)) }
   def chosen_at_time; end
 
-  sig { params(value: T.nilable(Time)).void }
+  sig { params(value: T.nilable(T.any(DateTime, Date, Time, ActiveSupport::TimeWithZone))).void }
   def chosen_at_time=(value); end
 
   sig { returns(T::Boolean) }
@@ -74,10 +83,10 @@ module Wand::GeneratedAttributeMethods
   sig { returns(T::Boolean) }
   def core_type?; end
 
-  sig { returns(DateTime) }
+  sig { returns(ActiveSupport::TimeWithZone) }
   def created_at; end
 
-  sig { params(value: DateTime).void }
+  sig { params(value: T.any(DateTime, Date, Time, ActiveSupport::TimeWithZone)).void }
   def created_at=(value); end
 
   sig { returns(T::Boolean) }
@@ -119,10 +128,10 @@ module Wand::GeneratedAttributeMethods
   sig { returns(T::Boolean) }
   def reflectance?; end
 
-  sig { returns(DateTime) }
+  sig { returns(ActiveSupport::TimeWithZone) }
   def updated_at; end
 
-  sig { params(value: DateTime).void }
+  sig { params(value: T.any(DateTime, Date, Time, ActiveSupport::TimeWithZone)).void }
   def updated_at=(value); end
 
   sig { returns(T::Boolean) }

@@ -27,3 +27,8 @@ module FooHelper
   include ApplicationHelper
   include DeviseHelper
 end
+
+module ActionController::Helpers
+  sig { returns(T.all(ApplicationHelper, BarHelper, BazHelper, FooHelper)) }
+  def helpers; end
+end
