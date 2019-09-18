@@ -13,6 +13,7 @@ class SorbetRails::ModelPlugins::ActiveRecordFactoryMethods < SorbetRails::Model
     end
   end
 
+  sig { params(model_rbi: Parlour::RbiGenerator::ClassNamespace, method_name: String).void }
   def add_factory_method(model_rbi, method_name)
     model_rbi.create_method(
       method_name,
