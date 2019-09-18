@@ -1,11 +1,28 @@
 # typed: false
 require 'sorbet-runtime'
 
+wand = Wand.first!
 wizard = Wizard.first!
 T.assert_type!(wizard, Wizard)
 
 # -- model columns
 T.assert_type!(wizard.name, T.nilable(String))
+
+# -- time/date columns
+T.assert_type!(wizard.created_at, ActiveSupport::TimeWithZone)
+T.assert_type!(wand.broken_at, T.nilable(Time))
+T.assert_type!(wand.chosen_at_date, T.nilable(Date))
+
+# assert that TZ aware attributes are casted to TimeWithZone after assigning
+wizard.created_at = DateTime.now
+T.assert_type!(wizard.created_at, ActiveSupport::TimeWithZone)
+
+if ENV["RAILS_VERSION"] != "4.2"
+  # note: this is expected to fail in Rails 4.2, because in that version only
+  # `datetime` fields are made time zone aware (so this will have the type
+  # `T.nilable(Time)` instead)
+  T.assert_type!(wand.chosen_at_time, T.nilable(ActiveSupport::TimeWithZone))
+end
 
 # -- model associations
 T.assert_type!(wizard.wand, T.nilable(Wand))

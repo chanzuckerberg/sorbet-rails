@@ -20,6 +20,15 @@ def add_routes
   route "get 'test/index' => 'test#index'"
 end
 
+def add_environment
+  if ENV["RAILS_VERSION"] == "5.0"
+    # by default, Rails 5.0 treats only `datetime` as a time zone aware type;
+    # this config option brings it in line with all versions up to at least v6.0
+    # and makes our time-related attribute fixtures simpler to maintain
+    environment 'config.active_record.time_zone_aware_types = [:datetime, :time]'
+  end
+end
+
 def create_initializers
   initializer "sorbet_rails.rb", <<~RUBY
     # typed: strict
@@ -98,6 +107,8 @@ def create_models
   file "app/models/wand.rb", <<~RUBY
     class Wand < ApplicationRecord
       include Mythical
+
+      self.skip_time_zone_conversion_for_attributes = [:broken_at]
 
       enum core_type: {
         phoenix_feather: 0,
@@ -242,7 +253,7 @@ def create_migrations
           t.string :parent_email
           t.text :notes
 
-          t.timestamps
+          t.timestamps null: false
         end
       end
     end
@@ -281,6 +292,7 @@ def create_migrations
         add_column :wands, :hardness,       :decimal, null: false, precision: 10, scale: 10, default: 5
         add_column :wands, :reflectance,    :decimal, null: false, precision: 10, scale: 0, default: 0.5
         add_column :wands, :broken,         :boolean, null: false, default: false
+        add_column :wands, :broken_at,      :datetime, null: true
         add_column :wands, :chosen_at_date, :date
         add_column :wands, :chosen_at_time, :time
         # JSON column type is only supported on 5.2 or higher
@@ -393,6 +405,7 @@ add_gems
 after_bundle do
   say "Creating application..."
   add_routes
+  add_environment
   create_initializers
   create_lib
   create_helpers

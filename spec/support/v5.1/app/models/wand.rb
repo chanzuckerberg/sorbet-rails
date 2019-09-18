@@ -2,6 +2,8 @@
 class Wand < ApplicationRecord
   include Mythical
 
+  self.skip_time_zone_conversion_for_attributes = [:broken_at]
+
   enum core_type: {
     phoenix_feather: 0,
     dragon_heartstring: 1,

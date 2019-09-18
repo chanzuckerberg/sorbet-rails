@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20190620000007) do
     t.decimal "hardness", precision: 10, scale: 10, default: "5.0", null: false
     t.decimal "reflectance", precision: 10, default: "0", null: false
     t.boolean "broken", default: false, null: false
+    t.datetime "broken_at"
     t.date "chosen_at_date"
     t.time "chosen_at_time"
     t.index ["wizard_id"], name: "index_wands_on_wizard_id"
