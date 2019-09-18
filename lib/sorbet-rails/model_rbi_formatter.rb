@@ -109,17 +109,6 @@ class SorbetRails::ModelRbiFormatter
     )
     model_rbi.create_extend("T::Sig")
     model_rbi.create_extend("T::Generic")
-
-    # Create `new` method for creating new instances of a model.
-    model_rbi.create_method(
-      "new",
-      parameters: [
-        Parlour::RbiGenerator::Parameter.new("attributes", type: "T.untyped", default: 'nil'),
-        Parlour::RbiGenerator::Parameter.new("&block", type: "T.untyped")
-      ],
-      return_type: self.model_class_name,
-      class_method: true,
-    )
   end
 
   sig {

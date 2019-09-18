@@ -7,6 +7,7 @@ require('sorbet-rails/model_plugins/active_record_named_scope')
 require('sorbet-rails/model_plugins/active_record_attribute')
 require('sorbet-rails/model_plugins/active_record_assoc')
 require('sorbet-rails/model_plugins/active_record_finder_methods')
+require('sorbet-rails/model_plugins/active_record_factory_methods')
 require('sorbet-rails/model_plugins/custom_finder_methods')
 require('sorbet-rails/model_plugins/enumerable_collections')
 require('sorbet-rails/model_plugins/active_storage_methods')
@@ -54,6 +55,8 @@ module SorbetRails::ModelPlugins
       ActiveRecordAssoc
     when :active_record_finder_methods
       ActiveRecordFinderMethods
+    when :active_record_factory_methods
+      ActiveRecordFactoryMethods
     when :custom_finder_methods
       CustomFinderMethods
     when :enumerable_collections
