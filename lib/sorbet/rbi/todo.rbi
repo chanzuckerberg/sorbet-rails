@@ -6,6 +6,7 @@ module ::FriendlyId; end
 module ::Kaminari; end
 module ::Kaminari::ActiveRecordModelExtension; end
 module ::PgSearch::Model; end
+module ActionController::Helpers; end
 module ActionMailer::Base::Mail::Message; end
 module ActiveModel::AttributeMethods; end
 module ActiveModel::Conversion; end
@@ -30,7 +31,6 @@ module ActiveRecord::CounterCache; end
 module ActiveRecord::DefineCallbacks; end
 module ActiveRecord::Delegation::DelegateCache; end
 module ActiveRecord::DynamicMatchers; end
-module ActiveRecord::Enum; end
 module ActiveRecord::Enum::EnumType; end
 module ActiveRecord::Explain; end
 module ActiveRecord::Integration; end
@@ -127,4 +127,3 @@ module T::Private::Methods::SingletonMethodHooks; end
 module T::Private::Methods::SingletonMethodHooks; end
 module T::Private::Methods::SingletonMethodHooks; end
 module T::Private::Methods::SingletonMethodHooks; end
-module TA::TypeAssertImpl; end

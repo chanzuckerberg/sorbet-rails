@@ -20,3 +20,8 @@ module FooHelper
   include Kernel
   include ActionView::Helpers
 end
+
+module ActionController::Helpers
+  sig { returns(T.all(ApplicationHelper, BarHelper, BazHelper, FooHelper)) }
+  def helpers; end
+end
