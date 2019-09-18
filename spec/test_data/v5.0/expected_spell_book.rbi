@@ -419,7 +419,7 @@ class SpellBook::ActiveRecord_Relation < ActiveRecord::Relation
   sig { params(args: T.untyped).returns(T::Boolean) }
   def one?(*args); end
 
-  sig { override.params(block: T.proc.params(e: SpellBook).void).void }
+  sig { override.params(block: T.proc.params(e: SpellBook).void).returns(T::Array[SpellBook]) }
   def each(&block); end
 
   sig { params(level: T.nilable(Integer)).returns(T::Array[SpellBook]) }
@@ -595,7 +595,7 @@ class SpellBook::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRel
   sig { params(args: T.untyped).returns(T::Boolean) }
   def one?(*args); end
 
-  sig { override.params(block: T.proc.params(e: SpellBook).void).void }
+  sig { override.params(block: T.proc.params(e: SpellBook).void).returns(T::Array[SpellBook]) }
   def each(&block); end
 
   sig { params(level: T.nilable(Integer)).returns(T::Array[SpellBook]) }
@@ -770,7 +770,7 @@ class SpellBook::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Assoc
   sig { params(args: T.untyped).returns(T::Boolean) }
   def one?(*args); end
 
-  sig { override.params(block: T.proc.params(e: SpellBook).void).void }
+  sig { override.params(block: T.proc.params(e: SpellBook).void).returns(T::Array[SpellBook]) }
   def each(&block); end
 
   sig { params(level: T.nilable(Integer)).returns(T::Array[SpellBook]) }

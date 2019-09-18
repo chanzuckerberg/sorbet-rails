@@ -512,7 +512,7 @@ class Squib::ActiveRecord_Relation < ActiveRecord::Relation
   sig { params(args: T.untyped).returns(T::Boolean) }
   def one?(*args); end
 
-  sig { override.params(block: T.proc.params(e: Squib).void).void }
+  sig { override.params(block: T.proc.params(e: Squib).void).returns(T::Array[Squib]) }
   def each(&block); end
 
   sig { params(level: T.nilable(Integer)).returns(T::Array[Squib]) }
@@ -694,7 +694,7 @@ class Squib::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelatio
   sig { params(args: T.untyped).returns(T::Boolean) }
   def one?(*args); end
 
-  sig { override.params(block: T.proc.params(e: Squib).void).void }
+  sig { override.params(block: T.proc.params(e: Squib).void).returns(T::Array[Squib]) }
   def each(&block); end
 
   sig { params(level: T.nilable(Integer)).returns(T::Array[Squib]) }
@@ -875,7 +875,7 @@ class Squib::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associati
   sig { params(args: T.untyped).returns(T::Boolean) }
   def one?(*args); end
 
-  sig { override.params(block: T.proc.params(e: Squib).void).void }
+  sig { override.params(block: T.proc.params(e: Squib).void).returns(T::Array[Squib]) }
   def each(&block); end
 
   sig { params(level: T.nilable(Integer)).returns(T::Array[Squib]) }

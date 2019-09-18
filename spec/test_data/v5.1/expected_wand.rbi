@@ -518,7 +518,7 @@ class Wand::ActiveRecord_Relation < ActiveRecord::Relation
   sig { params(args: T.untyped).returns(T::Boolean) }
   def one?(*args); end
 
-  sig { override.params(block: T.proc.params(e: Wand).void).void }
+  sig { override.params(block: T.proc.params(e: Wand).void).returns(T::Array[Wand]) }
   def each(&block); end
 
   sig { params(level: T.nilable(Integer)).returns(T::Array[Wand]) }
@@ -703,7 +703,7 @@ class Wand::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
   sig { params(args: T.untyped).returns(T::Boolean) }
   def one?(*args); end
 
-  sig { override.params(block: T.proc.params(e: Wand).void).void }
+  sig { override.params(block: T.proc.params(e: Wand).void).returns(T::Array[Wand]) }
   def each(&block); end
 
   sig { params(level: T.nilable(Integer)).returns(T::Array[Wand]) }
@@ -887,7 +887,7 @@ class Wand::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associatio
   sig { params(args: T.untyped).returns(T::Boolean) }
   def one?(*args); end
 
-  sig { override.params(block: T.proc.params(e: Wand).void).void }
+  sig { override.params(block: T.proc.params(e: Wand).void).returns(T::Array[Wand]) }
   def each(&block); end
 
   sig { params(level: T.nilable(Integer)).returns(T::Array[Wand]) }
