@@ -201,6 +201,15 @@ class ActiveRecord::SchemaMigration < ActiveRecord::Base
 
   sig { params(args: T.untyped).returns(T::Boolean) }
   def self.one?(*args); end
+
+  sig { params(attributes: T.untyped, block: T.untyped).returns(ActiveRecord::SchemaMigration) }
+  def self.create(attributes = nil, &block); end
+
+  sig { params(attributes: T.untyped, block: T.untyped).returns(ActiveRecord::SchemaMigration) }
+  def self.create!(attributes = nil, &block); end
+
+  sig { params(attributes: T.untyped, block: T.untyped).returns(ActiveRecord::SchemaMigration) }
+  def self.new(attributes = nil, &block); end
 end
 
 class ActiveRecord::SchemaMigration::ActiveRecord_Relation < ActiveRecord::Relation
