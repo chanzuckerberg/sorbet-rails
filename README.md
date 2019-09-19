@@ -9,6 +9,8 @@ This gem adds a few Rake tasks to generate Ruby Interface (RBI) files for dynami
 
 `sorbet-rails` supports Rails 4.2 or later.
 
+**Notice**: From v0.6, we'll stop supporting Rails 4.2. Fixes targeting Rails 4.2 specifically can be merged to v0.5.x branch.
+
 ## Initial Setup
 
 1. Follow the steps [here](https://sorbet.org/docs/adopting) to set up the latest version of Sorbet, up to being able to run `srb tc`.
