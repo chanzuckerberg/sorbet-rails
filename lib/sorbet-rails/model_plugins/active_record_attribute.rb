@@ -95,6 +95,8 @@ class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugi
       Integer
     when ActiveRecord::Type::Binary, ActiveRecord::Type::String, ActiveRecord::Type::Text
       String
+    when ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Array
+      active_record_type_to_sorbet_type(klass.subtype, time_zone_aware: time_zone_aware)
     else
       # Json type is only supported in Rails 5.2 and above
       case
