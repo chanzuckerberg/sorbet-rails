@@ -17,12 +17,7 @@ T.assert_type!(wand.chosen_at_date, T.nilable(Date))
 wizard.created_at = DateTime.now
 T.assert_type!(wizard.created_at, ActiveSupport::TimeWithZone)
 
-if ENV["RAILS_VERSION"] != "4.2"
-  # note: this is expected to fail in Rails 4.2, because in that version only
-  # `datetime` fields are made time zone aware (so this will have the type
-  # `T.nilable(Time)` instead)
-  T.assert_type!(wand.chosen_at_time, T.nilable(ActiveSupport::TimeWithZone))
-end
+T.assert_type!(wand.chosen_at_time, T.nilable(ActiveSupport::TimeWithZone))
 
 # -- model associations
 T.assert_type!(wizard.wand, T.nilable(Wand))
@@ -87,9 +82,9 @@ spell_books = wizard.spell_books
 T.assert_type!(spell_books.exists?(name: 'Fantastic Beasts'), T::Boolean)
 T.assert_type!(spell_books.find(spell_book.id), SpellBook)
 T.assert_type!(spell_books.first!, SpellBook)
-# T.assert_type!(spell_books.first, T.nilable(SpellBook)) # TODO fix sig for 4.2 and 5.0
+# T.assert_type!(spell_books.first, T.nilable(SpellBook)) # TODO fix sig for 5.0
 T.assert_type!(spell_books.last!, SpellBook)
-# T.assert_type!(spell_books.last, T.nilable(SpellBook)) # TODO fix sig for 4.2 and 5.0
+# T.assert_type!(spell_books.last, T.nilable(SpellBook)) # TODO fix sig for 5.0
 T.assert_type!(spell_books.first_n(5), T::Array[SpellBook])
 T.assert_type!(spell_books.last_n(5), T::Array[SpellBook])
 T.assert_type!(spell_books.find_by(name: 'Fantastic Beasts'), T.nilable(SpellBook))
@@ -109,9 +104,9 @@ spell_books_query = spell_books.where(id: 1)
 T.assert_type!(spell_books_query.exists?(name: 'Fantastic Beasts'), T::Boolean)
 T.assert_type!(spell_books_query.find(spell_book.id), SpellBook)
 T.assert_type!(spell_books_query.first!, SpellBook)
-# T.assert_type!(spell_books_query.first, T.nilable(SpellBook)) # TODO fix sig for 4.2 and 5.0
+# T.assert_type!(spell_books_query.first, T.nilable(SpellBook)) # TODO fix sig for 5.0
 T.assert_type!(spell_books_query.last!, SpellBook)
-# T.assert_type!(spell_books_query.last, T.nilable(SpellBook)) # TODO fix sig for 4.2 and 5.0
+# T.assert_type!(spell_books_query.last, T.nilable(SpellBook)) # TODO fix sig for 5.0
 T.assert_type!(spell_books_query.first_n(5), T::Array[SpellBook])
 T.assert_type!(spell_books_query.last_n(5), T::Array[SpellBook])
 T.assert_type!(spell_books_query.find_by(name: 'Fantastic Beasts'), T.nilable(SpellBook))
@@ -180,12 +175,10 @@ T.assert_type!(Wand.mythicals, T::Array[Wand])
 
 T.assert_type!(HogwartsAcceptanceMailer.notify(wizard), ActionMailer::MessageDelivery)
 
-if ENV["RAILS_VERSION"] != "4.2"
-  T.assert_type!(wizard.broom_nimbus?, T::Boolean)
-  T.assert_type!(wizard.color_brown_eyes?, T::Boolean)
-  T.assert_type!(wizard.quidditch_keeper?, T::Boolean)
-  T.assert_type!(wizard.brown_hair?, T::Boolean)
-end
+T.assert_type!(wizard.broom_nimbus?, T::Boolean)
+T.assert_type!(wizard.color_brown_eyes?, T::Boolean)
+T.assert_type!(wizard.quidditch_keeper?, T::Boolean)
+T.assert_type!(wizard.brown_hair?, T::Boolean)
 
 # -- Custom ActionController::Parameters Methods
 params = ActionController::Parameters.new({

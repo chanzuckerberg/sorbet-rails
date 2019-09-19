@@ -1,7 +1,6 @@
 language: ruby
 env:
   matrix:
-  - RAILS_VERSION=4.2
   - RAILS_VERSION=5.0
   - RAILS_VERSION=5.1
   - RAILS_VERSION=5.2
@@ -28,7 +27,6 @@ matrix:
 before_install:
 - gem install bundler -v 2.0.1 --no-doc
 - gem install bundler -v 1.17.3 --no-doc
-install: "./spec/bin/install.sh"
 script:
 - (cd lib && bundle exec srb tc)
 - "./spec/bin/run_spec.sh"

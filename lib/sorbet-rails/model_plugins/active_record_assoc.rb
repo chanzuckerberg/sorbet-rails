@@ -38,17 +38,8 @@ class SorbetRails::ModelPlugins::ActiveRecordAssoc < SorbetRails::ModelPlugins::
     assoc_type = "T.nilable(#{assoc_class})"
     if reflection.belongs_to?
       column_def = @columns_hash[reflection.foreign_key.to_s]
-      if ENV["RAILS_VERSION"] == "4.2"
-        # Before Rails 5, belongs_to relations were nilable by default
-        # if this is a belongs_to connection, we may be able to detect whether
-        # this field is required & use a stronger type
-        if column_def
-          assoc_type = assoc_class if !column_def.null
-        end
-      else
-        # In Rails 5 and later, belongs_to are required unless specified to be optional
-        assoc_type = assoc_class if !reflection.options[:optional]
-      end
+      # In Rails 5 and later, belongs_to are required unless specified to be optional
+      assoc_type = assoc_class if !reflection.options[:optional]
     end
 
     assoc_module_rbi.create_method(

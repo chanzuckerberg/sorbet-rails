@@ -11,17 +11,15 @@ else
   rails_dir="$wd/../support/v$RAILS_VERSION"
 fi
 
-bundle_version=$([ "$RAILS_VERSION" == 4.2 ] && echo "_1.17.3_" || echo "")
-
 # clean up & install gems
 rm $wd/../../Gemfile.lock 2>/dev/null # clean up Gemfile.lock first
-bundle $bundle_version install
+bundle install
 
 echo $rails_dir
 
 # update gems in rails_dir
 cd $rails_dir
-bundle $bundle_version install
+bundle install
 
 # move back to current dir to run test
 cd $current_dir
@@ -31,6 +29,6 @@ if [[ -z $RAILS_VERSION ]]; then
   bundle update && DISABLE_DATABASE_ENVIRONMENT_CHECK=1 bundle exec rake
 else
   echo "---- Run $RAILS_VERSION ----"
-  RAILS_VERSION=$RAILS_VERSION bundle $bundle_version update
-  RAILS_VERSION=$RAILS_VERSION DISABLE_DATABASE_ENVIRONMENT_CHECK=1 bundle $bundle_version exec rake
+  RAILS_VERSION=$RAILS_VERSION bundle update
+  RAILS_VERSION=$RAILS_VERSION DISABLE_DATABASE_ENVIRONMENT_CHECK=1 bundle exec rake
 fi

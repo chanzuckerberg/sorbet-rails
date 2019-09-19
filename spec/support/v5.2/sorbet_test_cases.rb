@@ -17,12 +17,7 @@ T.assert_type!(wand.chosen_at_date, T.nilable(Date))
 wizard.created_at = DateTime.now
 T.assert_type!(wizard.created_at, ActiveSupport::TimeWithZone)
 
-if ENV["RAILS_VERSION"] != "4.2"
-  # note: this is expected to fail in Rails 4.2, because in that version only
-  # `datetime` fields are made time zone aware (so this will have the type
-  # `T.nilable(Time)` instead)
-  T.assert_type!(wand.chosen_at_time, T.nilable(ActiveSupport::TimeWithZone))
-end
+T.assert_type!(wand.chosen_at_time, T.nilable(ActiveSupport::TimeWithZone))
 
 # -- model associations
 T.assert_type!(wizard.wand, T.nilable(Wand))
@@ -180,12 +175,10 @@ T.assert_type!(Wand.mythicals, T::Array[Wand])
 
 T.assert_type!(HogwartsAcceptanceMailer.notify(wizard), ActionMailer::MessageDelivery)
 
-if ENV["RAILS_VERSION"] != "4.2"
-  T.assert_type!(wizard.broom_nimbus?, T::Boolean)
-  T.assert_type!(wizard.color_brown_eyes?, T::Boolean)
-  T.assert_type!(wizard.quidditch_keeper?, T::Boolean)
-  T.assert_type!(wizard.brown_hair?, T::Boolean)
-end
+T.assert_type!(wizard.broom_nimbus?, T::Boolean)
+T.assert_type!(wizard.color_brown_eyes?, T::Boolean)
+T.assert_type!(wizard.quidditch_keeper?, T::Boolean)
+T.assert_type!(wizard.brown_hair?, T::Boolean)
 
 # -- Custom ActionController::Parameters Methods
 params = ActionController::Parameters.new({
