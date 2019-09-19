@@ -8,9 +8,8 @@ task :default => :spec
 namespace :update_spec do
   require 'fileutils'
 
-  # This excludes 4.2 because it won't work with Bundler 2.0
-  desc "Generate Rails apps for all versions (except 4.2)."
-  task :v5_plus do |t, args|
+  desc "Generate Rails apps for all versions."
+  task :all do |t, args|
     Rake::Task['update_spec:v6_0'].invoke
     Rake::Task['update_spec:v5_2'].invoke
     Rake::Task['update_spec:v5_1'].invoke
@@ -57,19 +56,9 @@ namespace :update_spec do
     end
   end
 
-  desc "Delete the Rails 4.2 spec directory and regenerate it."
-  task :v4_2 do |t, args|
-    Bundler.with_clean_env do
-      FileUtils.rm_rf 'spec/support/v4.2' if File.directory?('spec/support/v4.2')
-      system("gem install rails -v 4.2.11")
-      system("rails _4.2.11_ -v")
-      system("RAILS_VERSION='4.2' rails _4.2.11_ new --template spec/generators/rails-template.rb spec/support/v4.2 --skip-javascript --skip-test --skip-sprockets --skip-spring --skip-listen")
-    end
-  end
-
   desc "Update sorbet_test_cases.rb in all the Rails apps in spec/support."
   task :sorbet_test_cases do |t, args|
-    ['v6.0', 'v5.2', 'v5.1', 'v5.0', 'v4.2'].each do |version|
+    ['v6.0', 'v5.2', 'v5.1', 'v5.0'].each do |version|
       FileUtils.cp("spec/generators/sorbet_test_cases.rb", "spec/support/#{version}/sorbet_test_cases.rb")
     end
   end

@@ -75,8 +75,7 @@ class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugi
 
   sig do
     params(
-      # in v4.2, datetime can be TimeZoneConverter
-      klass: T.any(Object, ActiveRecord::AttributeMethods::TimeZoneConversion::TimeZoneConverter),
+      klass: Object,
       time_zone_aware: T::Boolean,
     ).returns(T.any(String, Class))
   end
@@ -88,10 +87,6 @@ class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugi
       time_zone_aware ? ActiveSupport::TimeWithZone : Time
     when ActiveRecord::Type::Date
       Date
-    when ActiveRecord::AttributeMethods::TimeZoneConversion::TimeZoneConverter
-      # if type has already been decorated with TimeZoneConverter, it's probably
-      # a Rails 4.2 datetime column and can be considered a TimeWithZone
-      ActiveSupport::TimeWithZone
     when ActiveRecord::Type::Decimal
       BigDecimal
     when ActiveRecord::Type::Float

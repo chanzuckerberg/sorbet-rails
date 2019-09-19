@@ -87,7 +87,6 @@ To run the tests against all supported Rails branches, use:
 You can also switch to a version of Rails with `RAILS_VERSION`:
 
 ```sh
-❯ RAILS_VERSION=4.2 ./spec/bin/run_spec.sh
 ❯ RAILS_VERSION=5.0 ./spec/bin/run_spec.sh
 ❯ RAILS_VERSION=5.1 ./spec/bin/run_spec.sh
 ❯ RAILS_VERSION=5.2 ./spec/bin/run_spec.sh
@@ -124,9 +123,8 @@ copied into each app with `cp`.
 The `rails-template.rb` file uses the
 [Rails Application Template](https://guides.rubyonrails.org/rails_application_templates.html)
 functionality included in Rails. You can then regenerate each Rails app from
-the same file using `bundle _1.17.3_ exec rake update_spec:v4_2`, `bundle exec rake update_spec:v5_0`,
-`bundle exec rake update_spec:v5_1`, etc. (or just `bundle exec rake update_spec:v5_plus`,
-though this excludes regenerating 4.2 because 4.2 blocks usage of Bundler 2.x).
+the same file using `bundle exec rake update_spec:v5_0`,
+`bundle exec rake update_spec:v5_1`, etc. (or just `bundle exec rake update_spec:all`.
 
 #### Expected Output
 

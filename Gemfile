@@ -13,10 +13,6 @@ case rails_version
 when "master"
   gem "rails", {github: "rails/rails"}
   gem "bundler", ">= 1.3.0"
-when "4.2"
-  gem "rails", "~> 4.2.11"
-  gem "bundler", "~> 1.17.3"
-  gem "sqlite3", "~> 1.3.6"
 when "5.0"
   gem "rails", "~> 5.0.7"
   gem "bundler", ">= 2.0"
