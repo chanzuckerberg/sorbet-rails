@@ -95,3 +95,5 @@ build-iPhoneSimulator/
 
 lib/sorbet/rbi/hidden-definitions/errors.txt
 .vscode
+
+.rake_tasks~

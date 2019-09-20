@@ -1,4 +1,4 @@
-# typed: false
+# typed: strict
 class Wizard < ApplicationRecord
   validates :name, length: { minimum: 5 }, presence: true
 

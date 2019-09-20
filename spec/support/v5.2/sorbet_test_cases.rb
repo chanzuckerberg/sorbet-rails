@@ -82,9 +82,9 @@ spell_books = wizard.spell_books
 T.assert_type!(spell_books.exists?(name: 'Fantastic Beasts'), T::Boolean)
 T.assert_type!(spell_books.find(spell_book.id), SpellBook)
 T.assert_type!(spell_books.first!, SpellBook)
-# T.assert_type!(spell_books.first, T.nilable(SpellBook)) # TODO fix sig for 4.2 and 5.0
+# T.assert_type!(spell_books.first, T.nilable(SpellBook)) # TODO fix sig for 5.0
 T.assert_type!(spell_books.last!, SpellBook)
-# T.assert_type!(spell_books.last, T.nilable(SpellBook)) # TODO fix sig for 4.2 and 5.0
+# T.assert_type!(spell_books.last, T.nilable(SpellBook)) # TODO fix sig for 5.0
 T.assert_type!(spell_books.first_n(5), T::Array[SpellBook])
 T.assert_type!(spell_books.last_n(5), T::Array[SpellBook])
 T.assert_type!(spell_books.find_by(name: 'Fantastic Beasts'), T.nilable(SpellBook))
@@ -104,9 +104,9 @@ spell_books_query = spell_books.where(id: 1)
 T.assert_type!(spell_books_query.exists?(name: 'Fantastic Beasts'), T::Boolean)
 T.assert_type!(spell_books_query.find(spell_book.id), SpellBook)
 T.assert_type!(spell_books_query.first!, SpellBook)
-# T.assert_type!(spell_books_query.first, T.nilable(SpellBook)) # TODO fix sig for 4.2 and 5.0
+# T.assert_type!(spell_books_query.first, T.nilable(SpellBook)) # TODO fix sig for 5.0
 T.assert_type!(spell_books_query.last!, SpellBook)
-# T.assert_type!(spell_books_query.last, T.nilable(SpellBook)) # TODO fix sig for 4.2 and 5.0
+# T.assert_type!(spell_books_query.last, T.nilable(SpellBook)) # TODO fix sig for 5.0
 T.assert_type!(spell_books_query.first_n(5), T::Array[SpellBook])
 T.assert_type!(spell_books_query.last_n(5), T::Array[SpellBook])
 T.assert_type!(spell_books_query.find_by(name: 'Fantastic Beasts'), T.nilable(SpellBook))
