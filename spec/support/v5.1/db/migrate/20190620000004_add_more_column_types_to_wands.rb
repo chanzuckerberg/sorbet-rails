@@ -9,7 +9,7 @@ class AddMoreColumnTypesToWands < ActiveRecord::Migration[5.1]
     add_column :wands, :chosen_at_date, :date
     add_column :wands, :chosen_at_time, :time
     # JSON column type is only supported on 5.2 or higher
-    unless ['4.2', '5.0', '5.1'].include?(ENV['RAILS_VERSION'])
+    unless ['5.0', '5.1'].include?(ENV['RAILS_VERSION'])
       add_column :wands, :spell_history,  :json
       add_column :wands, :maker_info,     :json,    null: false, default: '{}'
     end

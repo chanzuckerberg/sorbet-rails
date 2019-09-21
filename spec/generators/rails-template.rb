@@ -267,6 +267,17 @@ def create_migrations
     end
   RUBY
 
+  file "db/migrate/20190620000006_add_more_enums_to_wizard.rb", <<~RUBY
+    class AddMoreEnumsToWizard < #{migration_superclass}
+      def change
+        add_column :wizards, :quidditch_position, :integer
+        add_column :wizards, :hair_color, :integer
+        add_column :wizards, :eye_color, :integer
+        add_column :wizards, :hair_length, :integer
+      end
+    end
+  RUBY
+
   file "db/migrate/20190620000007_add_type_to_wizard.rb", <<~RUBY
     class AddTypeToWizard < #{migration_superclass}
       def change
