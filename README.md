@@ -76,7 +76,7 @@ It is possible to add custom RBI generation logic for your custom module or gems
 `sorbet-rails` adds methods to extract typed parameters from `params`, namely `require_typed` and `fetch_typed`. They are direct replacement of `require` and `fetch` that return typed object. They have the same API their counterpart, with an addition of the parameter's type, which can be any type understood by `sorbet`
 
 This is the conversion in essence:
-```
+```ruby
 params.require(:key)              -> params.require_typed(:key, TA[Type].new)
 params.fetch(:key)                -> params.fetch_typed(:key, TA[Type].new)
 params.fetch(:key, default_value) -> params.fetch_typed(:key, TA[Type].new, default_value)
@@ -84,7 +84,7 @@ params[:key]                      -> params.fetch_typed(:key, TA[T.nilable(Type)
 ```
 
 For example:
-```
+```ruby
 # require_typed
 key = params.require_typed(:key, TA[String].new)
 T.reveal_type(key) # String
