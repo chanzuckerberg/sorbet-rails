@@ -33,7 +33,6 @@ class SorbetRails::ModelPlugins::ActiveRecordQuerying < SorbetRails::ModelPlugin
         method_name.to_s,
         parameters: [
           Parameter.new("*args", type: "T.untyped"),
-          Parameter.new("&block", type: "T.nilable(T.proc.void)"),
         ],
       ) if exists_class_method?(method_name)
     end
