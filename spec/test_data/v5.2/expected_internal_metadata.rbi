@@ -22,7 +22,7 @@ module ActiveRecord::InternalMetadata::GeneratedAttributeMethods
   sig { returns(String) }
   def key; end
 
-  sig { params(value: String).void }
+  sig { params(value: T.any(String, Symbol)).void }
   def key=(value); end
 
   sig { returns(T::Boolean) }

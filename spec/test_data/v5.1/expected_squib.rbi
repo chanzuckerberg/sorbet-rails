@@ -218,7 +218,7 @@ module Squib::GeneratedAttributeMethods
   sig { returns(String) }
   def type; end
 
-  sig { params(value: String).void }
+  sig { params(value: T.any(String, Symbol)).void }
   def type=(value); end
 
   sig { returns(T::Boolean) }
