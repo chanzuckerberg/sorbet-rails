@@ -230,6 +230,10 @@ with:
 Model.unscoped.scoping do … end
 ```
 
+### `select` with a block
+
+The [`select` method](https://apidock.com/rails/v4.0.2/ActiveRecord/QueryMethods/select) method in Rails has two modes: it can be given a list of symbols, in which case rails will only return the given columns from the database, or it can be given a block, in which case it acts like [`Enumerable.select`](https://ruby-doc.org/core-2.6.4/Enumerable.html) and returns an array. We have chosen to support the first use case. If you want to pass a block to `select`, you can simply call `to_a` before you do. Note that this would be done within the `select` call anyway, so the performance penalty will be minimal.
+
 ## Extending Model Generation Task with Custom Plugins
 
 `sorbet-rails` support a customizable plugin system that you can use to generate additional RBI for each model. This will be useful to generate RBI for methods dynamically added by gems or private concerns. If you write plugins for public gems, please feel free to contribute it to this repo.
