@@ -27,6 +27,8 @@ gem 'sorbet-rails'
 ❯ bundle install
 ```
 
+Warning: if you're using `sorbet-runtime`, make sure you add `sorbet-rails` to the same environments as `sorbet-runtime`. (In other words, don't run `sorbet-runtime` in production, and `sorbet-rails` only in development.) This is because `sorbet-rails` modifies some Rails internals to make type checking simpler, and these will blow up at runtime if you aren't running this gem. See [`SorbetRails::Railtie`](https://github.com/chanzuckerberg/sorbet-rails/blob/master/lib/sorbet-rails/railtie.rb).
+
 3. Generate RBI files for your routes, models, etc
 ```sh
 ❯ rake rails_rbi:routes
