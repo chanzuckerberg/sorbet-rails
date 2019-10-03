@@ -452,9 +452,6 @@ class Squib < Wizard
   def self.readonly(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.extending(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
   def self.or(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
@@ -486,6 +483,9 @@ class Squib < Wizard
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
   def self.only(*args); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Squib::ActiveRecord_Relation) }
+  def self.extending(*args, &block); end
 
   sig { params(args: T.untyped).returns(Squib) }
   def self.find(*args); end
@@ -740,9 +740,6 @@ class Squib::ActiveRecord_Relation < ActiveRecord::Relation
   def readonly(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def extending(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
   def or(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
@@ -774,6 +771,9 @@ class Squib::ActiveRecord_Relation < ActiveRecord::Relation
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
   def only(*args); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Squib::ActiveRecord_Relation) }
+  def extending(*args, &block); end
 
   sig { params(args: T.untyped).returns(Squib) }
   def find(*args); end
@@ -1036,9 +1036,6 @@ class Squib::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelatio
   def readonly(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def extending(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
   def or(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
@@ -1070,6 +1067,9 @@ class Squib::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelatio
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
   def only(*args); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Squib::ActiveRecord_AssociationRelation) }
+  def extending(*args, &block); end
 
   sig { params(args: T.untyped).returns(Squib) }
   def find(*args); end
@@ -1331,9 +1331,6 @@ class Squib::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associati
   def readonly(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def extending(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
   def or(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
@@ -1365,6 +1362,9 @@ class Squib::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associati
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
   def only(*args); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Squib::ActiveRecord_AssociationRelation) }
+  def extending(*args, &block); end
 
   sig { params(args: T.untyped).returns(Squib) }
   def find(*args); end

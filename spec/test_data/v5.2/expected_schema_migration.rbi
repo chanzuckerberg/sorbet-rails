@@ -101,9 +101,6 @@ class ActiveRecord::SchemaMigration < ActiveRecord::Base
   def self.readonly(*args); end
 
   sig { params(args: T.untyped).returns(ActiveRecord::SchemaMigration::ActiveRecord_Relation) }
-  def self.extending(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveRecord::SchemaMigration::ActiveRecord_Relation) }
   def self.or(*args); end
 
   sig { params(args: T.untyped).returns(ActiveRecord::SchemaMigration::ActiveRecord_Relation) }
@@ -129,6 +126,9 @@ class ActiveRecord::SchemaMigration < ActiveRecord::Base
 
   sig { params(args: T.untyped).returns(ActiveRecord::SchemaMigration::ActiveRecord_Relation) }
   def self.except(*args); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(ActiveRecord::SchemaMigration::ActiveRecord_Relation) }
+  def self.extending(*args, &block); end
 
   sig { params(args: T.untyped).returns(ActiveRecord::SchemaMigration) }
   def self.find(*args); end
@@ -266,9 +266,6 @@ class ActiveRecord::SchemaMigration::ActiveRecord_Relation < ActiveRecord::Relat
   def readonly(*args); end
 
   sig { params(args: T.untyped).returns(ActiveRecord::SchemaMigration::ActiveRecord_Relation) }
-  def extending(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveRecord::SchemaMigration::ActiveRecord_Relation) }
   def or(*args); end
 
   sig { params(args: T.untyped).returns(ActiveRecord::SchemaMigration::ActiveRecord_Relation) }
@@ -294,6 +291,9 @@ class ActiveRecord::SchemaMigration::ActiveRecord_Relation < ActiveRecord::Relat
 
   sig { params(args: T.untyped).returns(ActiveRecord::SchemaMigration::ActiveRecord_Relation) }
   def except(*args); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(ActiveRecord::SchemaMigration::ActiveRecord_Relation) }
+  def extending(*args, &block); end
 
   sig { params(args: T.untyped).returns(ActiveRecord::SchemaMigration) }
   def find(*args); end
@@ -439,9 +439,6 @@ class ActiveRecord::SchemaMigration::ActiveRecord_AssociationRelation < ActiveRe
   def readonly(*args); end
 
   sig { params(args: T.untyped).returns(ActiveRecord::SchemaMigration::ActiveRecord_AssociationRelation) }
-  def extending(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveRecord::SchemaMigration::ActiveRecord_AssociationRelation) }
   def or(*args); end
 
   sig { params(args: T.untyped).returns(ActiveRecord::SchemaMigration::ActiveRecord_AssociationRelation) }
@@ -467,6 +464,9 @@ class ActiveRecord::SchemaMigration::ActiveRecord_AssociationRelation < ActiveRe
 
   sig { params(args: T.untyped).returns(ActiveRecord::SchemaMigration::ActiveRecord_AssociationRelation) }
   def except(*args); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(ActiveRecord::SchemaMigration::ActiveRecord_AssociationRelation) }
+  def extending(*args, &block); end
 
   sig { params(args: T.untyped).returns(ActiveRecord::SchemaMigration) }
   def find(*args); end
@@ -611,9 +611,6 @@ class ActiveRecord::SchemaMigration::ActiveRecord_Associations_CollectionProxy <
   def readonly(*args); end
 
   sig { params(args: T.untyped).returns(ActiveRecord::SchemaMigration::ActiveRecord_AssociationRelation) }
-  def extending(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveRecord::SchemaMigration::ActiveRecord_AssociationRelation) }
   def or(*args); end
 
   sig { params(args: T.untyped).returns(ActiveRecord::SchemaMigration::ActiveRecord_AssociationRelation) }
@@ -639,6 +636,9 @@ class ActiveRecord::SchemaMigration::ActiveRecord_Associations_CollectionProxy <
 
   sig { params(args: T.untyped).returns(ActiveRecord::SchemaMigration::ActiveRecord_AssociationRelation) }
   def except(*args); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(ActiveRecord::SchemaMigration::ActiveRecord_AssociationRelation) }
+  def extending(*args, &block); end
 
   sig { params(args: T.untyped).returns(ActiveRecord::SchemaMigration) }
   def find(*args); end

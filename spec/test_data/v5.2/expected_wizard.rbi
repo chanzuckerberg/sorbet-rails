@@ -435,9 +435,6 @@ class Wizard < ApplicationRecord
   def self.readonly(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
-  def self.extending(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
   def self.or(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
@@ -463,6 +460,9 @@ class Wizard < ApplicationRecord
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
   def self.except(*args); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
+  def self.extending(*args, &block); end
 
   sig { params(args: T.untyped).returns(Wizard) }
   def self.find(*args); end
@@ -660,9 +660,6 @@ class Wizard::ActiveRecord_Relation < ActiveRecord::Relation
   def readonly(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
-  def extending(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
   def or(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
@@ -688,6 +685,9 @@ class Wizard::ActiveRecord_Relation < ActiveRecord::Relation
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
   def except(*args); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
+  def extending(*args, &block); end
 
   sig { params(args: T.untyped).returns(Wizard) }
   def find(*args); end
@@ -893,9 +893,6 @@ class Wizard::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelati
   def readonly(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def extending(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
   def or(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
@@ -921,6 +918,9 @@ class Wizard::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelati
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
   def except(*args); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def extending(*args, &block); end
 
   sig { params(args: T.untyped).returns(Wizard) }
   def find(*args); end
@@ -1125,9 +1125,6 @@ class Wizard::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associat
   def readonly(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def extending(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
   def or(*args); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
@@ -1153,6 +1150,9 @@ class Wizard::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associat
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
   def except(*args); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def extending(*args, &block); end
 
   sig { params(args: T.untyped).returns(Wizard) }
   def find(*args); end

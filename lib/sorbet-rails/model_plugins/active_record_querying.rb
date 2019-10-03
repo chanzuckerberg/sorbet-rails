@@ -24,7 +24,7 @@ class SorbetRails::ModelPlugins::ActiveRecordQuerying < SorbetRails::ModelPlugin
     # rails/activerecord/lib/active_record/querying.rb
     model_query_relation_methods = [
       :select, :reselect, :order, :reorder, :group, :limit, :offset, :joins, :left_joins, :left_outer_joins,
-      :where, :rewhere, :preload, :extract_associated, :eager_load, :includes, :from, :lock, :readonly, :extending, :or,
+      :where, :rewhere, :preload, :extract_associated, :eager_load, :includes, :from, :lock, :readonly, :or,
       :having, :create_with, :distinct, :references, :none, :unscope, :optimizer_hints, :merge, :except, :only,
     ]
     model_query_relation_methods.each do |method_name|
@@ -36,5 +36,14 @@ class SorbetRails::ModelPlugins::ActiveRecordQuerying < SorbetRails::ModelPlugin
         ],
       ) if exists_class_method?(method_name)
     end
+
+    add_relation_query_method(
+      root,
+      "extending",
+      parameters: [
+        Parameter.new("*args", type: "T.untyped"),
+        Parameter.new("&block", type: "T.nilable(T.proc.void)"),
+      ]
+    )
   end
 end

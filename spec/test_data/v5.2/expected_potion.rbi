@@ -87,9 +87,6 @@ class Potion < ApplicationRecord
   def self.readonly(*args); end
 
   sig { params(args: T.untyped).returns(Potion::ActiveRecord_Relation) }
-  def self.extending(*args); end
-
-  sig { params(args: T.untyped).returns(Potion::ActiveRecord_Relation) }
   def self.or(*args); end
 
   sig { params(args: T.untyped).returns(Potion::ActiveRecord_Relation) }
@@ -115,6 +112,9 @@ class Potion < ApplicationRecord
 
   sig { params(args: T.untyped).returns(Potion::ActiveRecord_Relation) }
   def self.except(*args); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Potion::ActiveRecord_Relation) }
+  def self.extending(*args, &block); end
 
   sig { params(args: T.untyped).returns(Potion) }
   def self.find(*args); end
@@ -252,9 +252,6 @@ class Potion::ActiveRecord_Relation < ActiveRecord::Relation
   def readonly(*args); end
 
   sig { params(args: T.untyped).returns(Potion::ActiveRecord_Relation) }
-  def extending(*args); end
-
-  sig { params(args: T.untyped).returns(Potion::ActiveRecord_Relation) }
   def or(*args); end
 
   sig { params(args: T.untyped).returns(Potion::ActiveRecord_Relation) }
@@ -280,6 +277,9 @@ class Potion::ActiveRecord_Relation < ActiveRecord::Relation
 
   sig { params(args: T.untyped).returns(Potion::ActiveRecord_Relation) }
   def except(*args); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Potion::ActiveRecord_Relation) }
+  def extending(*args, &block); end
 
   sig { params(args: T.untyped).returns(Potion) }
   def find(*args); end
@@ -425,9 +425,6 @@ class Potion::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelati
   def readonly(*args); end
 
   sig { params(args: T.untyped).returns(Potion::ActiveRecord_AssociationRelation) }
-  def extending(*args); end
-
-  sig { params(args: T.untyped).returns(Potion::ActiveRecord_AssociationRelation) }
   def or(*args); end
 
   sig { params(args: T.untyped).returns(Potion::ActiveRecord_AssociationRelation) }
@@ -453,6 +450,9 @@ class Potion::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelati
 
   sig { params(args: T.untyped).returns(Potion::ActiveRecord_AssociationRelation) }
   def except(*args); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Potion::ActiveRecord_AssociationRelation) }
+  def extending(*args, &block); end
 
   sig { params(args: T.untyped).returns(Potion) }
   def find(*args); end
@@ -597,9 +597,6 @@ class Potion::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associat
   def readonly(*args); end
 
   sig { params(args: T.untyped).returns(Potion::ActiveRecord_AssociationRelation) }
-  def extending(*args); end
-
-  sig { params(args: T.untyped).returns(Potion::ActiveRecord_AssociationRelation) }
   def or(*args); end
 
   sig { params(args: T.untyped).returns(Potion::ActiveRecord_AssociationRelation) }
@@ -625,6 +622,9 @@ class Potion::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associat
 
   sig { params(args: T.untyped).returns(Potion::ActiveRecord_AssociationRelation) }
   def except(*args); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Potion::ActiveRecord_AssociationRelation) }
+  def extending(*args, &block); end
 
   sig { params(args: T.untyped).returns(Potion) }
   def find(*args); end

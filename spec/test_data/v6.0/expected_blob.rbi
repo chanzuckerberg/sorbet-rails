@@ -100,9 +100,6 @@ class ActiveStorage::Blob < ActiveRecord::Base
   def self.readonly(*args); end
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def self.extending(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
   def self.or(*args); end
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
@@ -134,6 +131,9 @@ class ActiveStorage::Blob < ActiveRecord::Base
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
   def self.only(*args); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
+  def self.extending(*args, &block); end
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob) }
   def self.find(*args); end
@@ -283,9 +283,6 @@ class ActiveStorage::Blob::ActiveRecord_Relation < ActiveRecord::Relation
   def readonly(*args); end
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def extending(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
   def or(*args); end
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
@@ -317,6 +314,9 @@ class ActiveStorage::Blob::ActiveRecord_Relation < ActiveRecord::Relation
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
   def only(*args); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
+  def extending(*args, &block); end
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob) }
   def find(*args); end
@@ -474,9 +474,6 @@ class ActiveStorage::Blob::ActiveRecord_AssociationRelation < ActiveRecord::Asso
   def readonly(*args); end
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def extending(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
   def or(*args); end
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
@@ -508,6 +505,9 @@ class ActiveStorage::Blob::ActiveRecord_AssociationRelation < ActiveRecord::Asso
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
   def only(*args); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
+  def extending(*args, &block); end
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob) }
   def find(*args); end
@@ -664,9 +664,6 @@ class ActiveStorage::Blob::ActiveRecord_Associations_CollectionProxy < ActiveRec
   def readonly(*args); end
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def extending(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
   def or(*args); end
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
@@ -698,6 +695,9 @@ class ActiveStorage::Blob::ActiveRecord_Associations_CollectionProxy < ActiveRec
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
   def only(*args); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
+  def extending(*args, &block); end
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob) }
   def find(*args); end

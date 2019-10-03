@@ -174,9 +174,6 @@ class SpellBook < ApplicationRecord
   def self.readonly(*args); end
 
   sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_Relation) }
-  def self.extending(*args); end
-
-  sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_Relation) }
   def self.or(*args); end
 
   sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_Relation) }
@@ -202,6 +199,9 @@ class SpellBook < ApplicationRecord
 
   sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_Relation) }
   def self.except(*args); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::ActiveRecord_Relation) }
+  def self.extending(*args, &block); end
 
   sig { params(args: T.untyped).returns(SpellBook) }
   def self.find(*args); end
@@ -348,9 +348,6 @@ class SpellBook::ActiveRecord_Relation < ActiveRecord::Relation
   def readonly(*args); end
 
   sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_Relation) }
-  def extending(*args); end
-
-  sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_Relation) }
   def or(*args); end
 
   sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_Relation) }
@@ -376,6 +373,9 @@ class SpellBook::ActiveRecord_Relation < ActiveRecord::Relation
 
   sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_Relation) }
   def except(*args); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::ActiveRecord_Relation) }
+  def extending(*args, &block); end
 
   sig { params(args: T.untyped).returns(SpellBook) }
   def find(*args); end
@@ -530,9 +530,6 @@ class SpellBook::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRel
   def readonly(*args); end
 
   sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_AssociationRelation) }
-  def extending(*args); end
-
-  sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_AssociationRelation) }
   def or(*args); end
 
   sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_AssociationRelation) }
@@ -558,6 +555,9 @@ class SpellBook::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRel
 
   sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_AssociationRelation) }
   def except(*args); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::ActiveRecord_AssociationRelation) }
+  def extending(*args, &block); end
 
   sig { params(args: T.untyped).returns(SpellBook) }
   def find(*args); end
@@ -711,9 +711,6 @@ class SpellBook::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Assoc
   def readonly(*args); end
 
   sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_AssociationRelation) }
-  def extending(*args); end
-
-  sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_AssociationRelation) }
   def or(*args); end
 
   sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_AssociationRelation) }
@@ -739,6 +736,9 @@ class SpellBook::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Assoc
 
   sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_AssociationRelation) }
   def except(*args); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::ActiveRecord_AssociationRelation) }
+  def extending(*args, &block); end
 
   sig { params(args: T.untyped).returns(SpellBook) }
   def find(*args); end

@@ -134,9 +134,6 @@ class ActiveRecord::InternalMetadata < ActiveRecord::Base
   def self.readonly(*args); end
 
   sig { params(args: T.untyped).returns(ActiveRecord::InternalMetadata::ActiveRecord_Relation) }
-  def self.extending(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveRecord::InternalMetadata::ActiveRecord_Relation) }
   def self.or(*args); end
 
   sig { params(args: T.untyped).returns(ActiveRecord::InternalMetadata::ActiveRecord_Relation) }
@@ -168,6 +165,9 @@ class ActiveRecord::InternalMetadata < ActiveRecord::Base
 
   sig { params(args: T.untyped).returns(ActiveRecord::InternalMetadata::ActiveRecord_Relation) }
   def self.only(*args); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(ActiveRecord::InternalMetadata::ActiveRecord_Relation) }
+  def self.extending(*args, &block); end
 
   sig { params(args: T.untyped).returns(ActiveRecord::InternalMetadata) }
   def self.find(*args); end
@@ -311,9 +311,6 @@ class ActiveRecord::InternalMetadata::ActiveRecord_Relation < ActiveRecord::Rela
   def readonly(*args); end
 
   sig { params(args: T.untyped).returns(ActiveRecord::InternalMetadata::ActiveRecord_Relation) }
-  def extending(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveRecord::InternalMetadata::ActiveRecord_Relation) }
   def or(*args); end
 
   sig { params(args: T.untyped).returns(ActiveRecord::InternalMetadata::ActiveRecord_Relation) }
@@ -345,6 +342,9 @@ class ActiveRecord::InternalMetadata::ActiveRecord_Relation < ActiveRecord::Rela
 
   sig { params(args: T.untyped).returns(ActiveRecord::InternalMetadata::ActiveRecord_Relation) }
   def only(*args); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(ActiveRecord::InternalMetadata::ActiveRecord_Relation) }
+  def extending(*args, &block); end
 
   sig { params(args: T.untyped).returns(ActiveRecord::InternalMetadata) }
   def find(*args); end
@@ -496,9 +496,6 @@ class ActiveRecord::InternalMetadata::ActiveRecord_AssociationRelation < ActiveR
   def readonly(*args); end
 
   sig { params(args: T.untyped).returns(ActiveRecord::InternalMetadata::ActiveRecord_AssociationRelation) }
-  def extending(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveRecord::InternalMetadata::ActiveRecord_AssociationRelation) }
   def or(*args); end
 
   sig { params(args: T.untyped).returns(ActiveRecord::InternalMetadata::ActiveRecord_AssociationRelation) }
@@ -530,6 +527,9 @@ class ActiveRecord::InternalMetadata::ActiveRecord_AssociationRelation < ActiveR
 
   sig { params(args: T.untyped).returns(ActiveRecord::InternalMetadata::ActiveRecord_AssociationRelation) }
   def only(*args); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(ActiveRecord::InternalMetadata::ActiveRecord_AssociationRelation) }
+  def extending(*args, &block); end
 
   sig { params(args: T.untyped).returns(ActiveRecord::InternalMetadata) }
   def find(*args); end
@@ -680,9 +680,6 @@ class ActiveRecord::InternalMetadata::ActiveRecord_Associations_CollectionProxy 
   def readonly(*args); end
 
   sig { params(args: T.untyped).returns(ActiveRecord::InternalMetadata::ActiveRecord_AssociationRelation) }
-  def extending(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveRecord::InternalMetadata::ActiveRecord_AssociationRelation) }
   def or(*args); end
 
   sig { params(args: T.untyped).returns(ActiveRecord::InternalMetadata::ActiveRecord_AssociationRelation) }
@@ -714,6 +711,9 @@ class ActiveRecord::InternalMetadata::ActiveRecord_Associations_CollectionProxy 
 
   sig { params(args: T.untyped).returns(ActiveRecord::InternalMetadata::ActiveRecord_AssociationRelation) }
   def only(*args); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(ActiveRecord::InternalMetadata::ActiveRecord_AssociationRelation) }
+  def extending(*args, &block); end
 
   sig { params(args: T.untyped).returns(ActiveRecord::InternalMetadata) }
   def find(*args); end
