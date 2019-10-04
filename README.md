@@ -27,6 +27,8 @@ gem 'sorbet-rails'
 ❯ bundle install
 ```
 
+Warning: *don't* add `sorbet-rails` to a specific environment group (eg. `development` only). `sorbet-rails` adds a bunch of helper methods to your Rails runtime as well as generators for RBI files. You'll want to run the gem in all environments.
+
 3. Generate RBI files for your routes, models, etc
 ```sh
 ❯ rake rails_rbi:routes

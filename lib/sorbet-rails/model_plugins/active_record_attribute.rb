@@ -140,6 +140,8 @@ class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugi
       "T.any(#{assignable_time_types.join(', ')})"
     elsif column_type == "T.nilable(ActiveSupport::TimeWithZone)"
       "T.nilable(T.any(#{assignable_time_types.join(', ')}))"
+    elsif column_type == String
+      'T.any(String, Symbol)'
     else
       column_type.to_s
     end

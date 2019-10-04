@@ -13,7 +13,7 @@ module ActiveRecord::SchemaMigration::GeneratedAttributeMethods
   sig { returns(String) }
   def version; end
 
-  sig { params(value: String).void }
+  sig { params(value: T.any(String, Symbol)).void }
   def version=(value); end
 
   sig { returns(T::Boolean) }
