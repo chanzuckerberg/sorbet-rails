@@ -47,6 +47,11 @@ namespace :rails_rbi do
       args.extras.map { |m| Object.const_get(m) } :
       all_models
 
+    models_to_generate = models_to_generate.
+      map { |m| [m, m.descendants] }.
+      flatten.
+      uniq
+
     generated_rbis = generate_rbis_for_models(models_to_generate, all_models)
     generated_rbis.each do |model_name, contents|
       file_path = Rails.root.join("sorbet", "rails-rbi", "models", "#{model_name.underscore}.rbi")

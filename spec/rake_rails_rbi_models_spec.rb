@@ -44,6 +44,7 @@ RSpec.describe 'rake rails_rbi:models', type: :task do
     expect_files(
       base_dir: generated_dir_path,
       files: [
+        'squib.rbi',
         'wizard.rbi',
       ]
     )
@@ -55,6 +56,7 @@ RSpec.describe 'rake rails_rbi:models', type: :task do
       base_dir: generated_dir_path,
       files: [
         'spell_book.rbi',
+        'squib.rbi',
         'wizard.rbi',
       ]
     )
