@@ -43,9 +43,17 @@ namespace :rails_rbi do
 
     all_models = Set.new(ActiveRecord::Base.descendants + whitelisted_models - blacklisted_models)
 
-    models_to_generate = args.extras.size > 0 ?
-      args.extras.map { |m| Object.const_get(m) } :
-      all_models
+    models_to_generate = all_models
+    if args.extras.size > 0
+      models_to_generate = args.extras.map { |m| Object.const_get(m) }
+      # also generate descendants of a model
+      models_to_generate = models_to_generate.
+        map { |m| [m, m.descendants] }.
+        flatten.
+        uniq
+      # be safe about ignoring blacklisted models
+      models_to_generate = models_to_generate - blacklisted_models
+    end
 
     generated_rbis = generate_rbis_for_models(models_to_generate, all_models)
     generated_rbis.each do |model_name, contents|

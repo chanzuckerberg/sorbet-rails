@@ -56,7 +56,7 @@ This Rake task generates RBI files for all models in the Rails application (all 
 ```sh
 ❯ rake rails_rbi:models
 ```
-You can also regenerate RBI files for specific models:
+You can also regenerate RBI files for specific models. To accommodate for STI, this will generate rbi for all the subclasses of the models included.
 ```sh
 ❯ rake rails_rbi:models[ModelName,AnotherOne,...]
 ```
