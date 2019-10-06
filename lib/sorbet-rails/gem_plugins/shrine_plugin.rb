@@ -1,5 +1,5 @@
 # typed: true
-class SorbetRailsPlugins::ShrinePlugin < SorbetRails::ModelPlugins::Base
+class ShrinePlugin < SorbetRails::ModelPlugins::Base
   sig { override.params(root: Parlour::RbiGenerator::Namespace).void }
   def generate(root)
     model_rbi = root.create_class(model_class_name)

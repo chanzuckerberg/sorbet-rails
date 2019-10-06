@@ -313,9 +313,11 @@ These are the currently-supported gems and their symbolized names:
 
 | Gem          | Symbol         |
 |--------------|----------------|
+| [ElasticSearch]| `:elastic_search` |
+| [FriendlyId] | `:friendly_id` |
 | [Kaminari]   | `:kaminari`    |
 | [PgSearch]   | `:pg_search`   |
-| [FriendlyId] | `:friendly_id` |
+| [Shrine]     | `:shrine`      |
 
 You can also configure the core model plugins if needed. The default plugins are defined in the [config](https://github.com/chanzuckerberg/sorbet-rails/blob/master/lib/sorbet-rails/config.rb). For the full list of plugin symbols, check out [here](https://github.com/chanzuckerberg/sorbet-rails/blob/master/lib/sorbet-rails/model_plugins/plugins.rb).
 
@@ -323,6 +325,8 @@ You can also configure the core model plugins if needed. The default plugins are
 [Kaminari]: https://github.com/kaminari/kaminari
 [PgSearch]: https://github.com/Casecommons/pg_search
 [FriendlyId]: https://github.com/norman/friendly_id
+[ElasticSearch]: https://github.com/elastic/elasticsearch-rails
+[Shrine]: https://github.com/shrinerb/shrine
 
 ## Contributing
 

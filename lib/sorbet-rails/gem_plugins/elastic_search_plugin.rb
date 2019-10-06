@@ -1,5 +1,5 @@
 # typed: true
-class SorbetRailsPlugins::ElasticSearchPlugin < SorbetRails::ModelPlugins::Base
+class ElasticSearchPlugin < SorbetRails::ModelPlugins::Base
   sig { override.params(root: Parlour::RbiGenerator::Namespace).void }
   def generate(root)
     return unless @model_class.include?(::Elasticsearch::Model)

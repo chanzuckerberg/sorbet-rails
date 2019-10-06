@@ -72,6 +72,12 @@ module SorbetRails::ModelPlugins
     when :friendly_id
       require('sorbet-rails/gem_plugins/friendly_id_plugin')
       FriendlyIdPlugin
+    when :shrine
+      require('sorbet-rails/gem_plugins/shrine_plugin')
+      ShrinePlugin
+    when :elastic_search
+      require('sorbet-rails/gem_plugins/elastic_search_plugin')
+      ElasticSearchPlugin
     else
       raise UnrecognizedPluginName.new(
         "Unrecognized plugin with name: #{plugin_name}. Please check available plugins in the
