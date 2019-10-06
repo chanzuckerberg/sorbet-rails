@@ -11,7 +11,10 @@ module SorbetRails::SorbetUtils
     signature = T::Private::Methods.signature_for_method(method_def)
 
     parameters_with_type = signature.nil? ?
-      method_def.parameters.map { |p| p + ['T.untyped'] } : # append untyped to each
+      method_def.parameters.map { |p|
+        p1 = p.size == 1 ? p + ['_'] : p # give param without name default name _
+        p1 + ['T.untyped'] # append untyped as type of each param
+      } :
       get_ordered_parameters_with_type(signature)
 
     parameters_with_type.map do |param_def|
