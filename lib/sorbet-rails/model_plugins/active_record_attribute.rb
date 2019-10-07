@@ -7,12 +7,8 @@ class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugi
     columns_hash = @model_class.table_exists? ? @model_class.columns_hash : {}
     return unless columns_hash.size > 0
 
-    attribute_module_name = self.model_module_name("GeneratedAttributeMethods")
-    attribute_module_rbi = root.create_module(attribute_module_name)
-    attribute_module_rbi.create_extend("T::Sig")
-
     model_class_rbi = root.create_class(self.model_class_name)
-    model_class_rbi.create_include(attribute_module_name)
+    model_class_rbi.create_extend("T::Sig")
 
     columns_hash.sort.each do |column_name, column_def|
       if @model_class.defined_enums.has_key?(column_name)
@@ -22,11 +18,11 @@ class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugi
         return_type = "String"
         return_type = "T.nilable(#{return_type})" if column_def.null
 
-        attribute_module_rbi.create_method(
+        model_class_rbi.create_method(
           column_name.to_s,
           return_type: return_type,
         )
-        attribute_module_rbi.create_method(
+        model_class_rbi.create_method(
           "#{column_name}=",
           parameters: [
             Parameter.new("value", type: assignable_type)
@@ -35,11 +31,11 @@ class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugi
         )
       else
         column_type = type_for_column_def(column_def)
-        attribute_module_rbi.create_method(
+        model_class_rbi.create_method(
           column_name.to_s,
           return_type: column_type.to_s,
         )
-        attribute_module_rbi.create_method(
+        model_class_rbi.create_method(
           "#{column_name}=",
           parameters: [
             Parameter.new("value", type: value_type_for_attr_writer(column_type))
@@ -48,7 +44,7 @@ class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugi
         )
       end
 
-      attribute_module_rbi.create_method(
+      model_class_rbi.create_method(
         "#{column_name}?",
         return_type: "T::Boolean",
       )
