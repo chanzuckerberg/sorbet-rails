@@ -2,6 +2,7 @@
 #   srb rbi todo
 
 # typed: strong
+module ::Elasticsearch::Model; end
 module ::FriendlyId; end
 module ::Kaminari; end
 module ::Kaminari::ActiveRecordModelExtension; end
@@ -65,6 +66,8 @@ module ActiveRecord::Type::String; end
 module ActiveRecord::Type::Text; end
 module ActiveRecord::Type::Time; end
 module ActiveRecord::Type::UnsignedInteger; end
+module Shrine::Attachment; end
+module Shrine::Plugins::RemoteUrl::AttachmentMethods; end
 module SorbetRails::Utils::Zeitwerk::Loader; end
 module T::InterfaceWrapper::Helpers; end
 module T::InterfaceWrapper::Helpers; end
