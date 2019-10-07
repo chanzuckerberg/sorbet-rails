@@ -23,4 +23,6 @@ module SorbetRails::CustomParamsMethods
   def fetch_typed(key, ta, *args); end
 end
 
-ActionController::Parameters.include SorbetRails::CustomParamsMethods
+class ActionController::Parameters
+  include SorbetRails::CustomParamsMethods
+end

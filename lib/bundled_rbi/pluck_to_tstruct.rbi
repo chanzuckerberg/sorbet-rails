@@ -12,5 +12,11 @@ module SorbetRails::PluckToTStruct
   def pluck_to_tstruct(ta_struct, &blk); end
 end
 
-ActiveRecord::Base.extend SorbetRails::PluckToTStruct
-ActiveRecord::Relation.include SorbetRails::PluckToTStruct
+class ActiveRecord::Base
+  extend SorbetRails::PluckToTStruct
+end
+
+class ActiveRecord::Relation
+  Elem = type_member
+  include SorbetRails::PluckToTStruct
+end
