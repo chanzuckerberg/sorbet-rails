@@ -1,4 +1,4 @@
-# typed: true
+# typed: false
 class ShrinePlugin < SorbetRails::ModelPlugins::Base
   sig { override.params(root: Parlour::RbiGenerator::Namespace).void }
   def generate(root)
