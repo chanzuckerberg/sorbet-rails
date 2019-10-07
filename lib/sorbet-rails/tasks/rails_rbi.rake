@@ -34,7 +34,9 @@ namespace :rails_rbi do
 
   desc "Copy additional rbis for ActionController::Parameters"
   task params: :environment do
+    copy_bundled_rbi('type_assert.rbi')
     copy_bundled_rbi('parameters.rbi')
+    copy_bundled_rbi('pluck_to_tstruct.rbi')
   end
 
   desc "Generate rbis for rails models. Pass models name to regenerate rbi for only the given models."
