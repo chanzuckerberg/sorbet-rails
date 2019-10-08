@@ -12,6 +12,11 @@ module SorbetRails::PluckToTStruct
   }
   def pluck_to_tstruct(ta_struct)
     tstruct = ta_struct.get_type
+  
+    if !(tstruct < T::Struct)
+      raise UnexpectedType.new("pluck_to_tstruct expects a tstruct subclass, given #{tstruct}")
+    end
+
     keys = tstruct.props.keys
 
     # loosely based on pluck_to_hash gem
@@ -23,4 +28,6 @@ module SorbetRails::PluckToTStruct
       tstruct.new(value)
     end
   end
+  
+  class UnexpectedType < StandardError; end
 end
