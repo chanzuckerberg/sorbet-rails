@@ -14,7 +14,11 @@ namespace :rails_rbi do
     FileUtils.rm_rf(rails_rbi_root_path)
 
     # run all rake tasks
-    Rake::Task['rails_rbi:all'].invoke
+    Rake::Task['rails_rbi:routes'].invoke
+    Rake::Task['rails_rbi:models'].invoke
+    Rake::Task['rails_rbi:helpers'].invoke
+    Rake::Task['rails_rbi:mailers'].invoke
+    Rake::Task['rails_rbi:custom'].invoke
   end
 
   desc "Generate rbis for rails routes"
