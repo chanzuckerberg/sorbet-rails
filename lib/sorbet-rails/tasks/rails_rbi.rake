@@ -18,7 +18,7 @@ namespace :rails_rbi do
     Rake::Task['rails_rbi:models'].invoke
     Rake::Task['rails_rbi:helpers'].invoke
     Rake::Task['rails_rbi:mailers'].invoke
-    Rake::Task['rails_rbi:params'].invoke
+    Rake::Task['rails_rbi:custom'].invoke
   end
 
   desc "Generate rbis for rails routes"
@@ -32,8 +32,8 @@ namespace :rails_rbi do
     File.write(file_path, inspector.format(SorbetRails::RoutesRbiFormatter.new))
   end
 
-  desc "Copy additional rbis for ActionController::Parameters"
-  task params: :environment do
+  desc "Copy custom rbis for ActionController::Parameters, pluck_to_struct, etc."
+  task custom: :environment do
     copy_bundled_rbi('type_assert.rbi')
     copy_bundled_rbi('parameters.rbi')
     copy_bundled_rbi('pluck_to_tstruct.rbi')
