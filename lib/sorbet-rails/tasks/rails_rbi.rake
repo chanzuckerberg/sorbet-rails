@@ -33,7 +33,7 @@ namespace :rails_rbi do
   end
 
   desc "Copy additional rbis for ActionController::Parameters"
-  task params: :environment do
+  task bundled: :environment do
     copy_bundled_rbi('type_assert.rbi')
     copy_bundled_rbi('parameters.rbi')
     copy_bundled_rbi('pluck_to_tstruct.rbi')
