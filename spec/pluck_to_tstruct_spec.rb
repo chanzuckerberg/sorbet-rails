@@ -68,4 +68,12 @@ RSpec.describe SorbetRails::PluckToTStruct do
       WizardT.new(name: "Hermione Granger", house: "Gryffindor"),
     ]
   end
+
+  context 'given a wrong type' do
+    it 'should raise error' do
+      expect {
+        plucked = Wizard.pluck_to_tstruct(TA[String].new)
+      }.to raise_error(SorbetRails::PluckToTStruct::UnexpectedType)
+    end
+  end
 end
