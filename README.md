@@ -70,6 +70,10 @@ The generation task currently creates the following signatures:
 
 It is possible to add custom RBI generation logic for your custom module or gems via the plugin system. Check out the [plugins section](#extending-model-generation-task-with-custom-plugins) below if you are interested.
 
+We also add following methods to make type-checking more easily:
+- [`find_n`, `first_n`, `last_n`](https://github.com/chanzuckerberg/sorbet-rails#find-first-and-last)
+- [`pluck_to_tstruct`](https://github.com/chanzuckerberg/sorbet-rails#pluck-to-tstruct)
+
 ### Controllers
 ```sh
 ❯ rake rails_rbi:params
@@ -234,7 +238,27 @@ Model.unscoped.scoping do … end
 
 ### `select` with a block
 
-The [`select` method](https://apidock.com/rails/v4.0.2/ActiveRecord/QueryMethods/select) method in Rails has two modes: it can be given a list of symbols, in which case rails will only return the given columns from the database, or it can be given a block, in which case it acts like [`Enumerable.select`](https://ruby-doc.org/core-2.6.4/Enumerable.html) and returns an array. We have chosen to support the first use case. If you want to pass a block to `select`, you can simply call `to_a` before you do. Note that this would be done within the `select` call anyway, so the performance penalty will be minimal.
+The [`select` method](https://apidock.com/rails/v4.0.2/ActiveRecord/QueryMethods/select) in Rails has two modes: it can be given a list of symbols, in which case rails will only return the given columns from the database, or it can be given a block, in which case it acts like [`Enumerable.select`](https://ruby-doc.org/core-2.6.4/Enumerable.html) and returns an array. We have chosen to support the first use case. If you want to pass a block to `select`, you can simply call `to_a` before you do. Note that this would be done within the `select` call anyway, so the performance penalty will be minimal.
+
+### `pluck_to_tstruct` instead of `pluck`
+
+The [`pluck` method](https://apidock.com/rails/ActiveRecord/Calculations/pluck) in Rails is a performant way to query value without instantiating ActiveRecord objects. However, it doesn't have any type information: it doesn't have type information (or name) of the attribute plucked. Sorbet-rails provides `pluck_to_tstruct` method as a replacement that does the same thing, but creates `T::Struct` object instead, and returns an array of `T::Struct`. The attributes plucked is based on props defined in the `T::Struct`
+
+```ruby
+# -- API
+Arel.pluck_to_tstruct(TA[ <TStructSubClass> ].new)
+
+# -- example
+class WizardStruct < T::Struct
+  const :name, String
+  const :house, T.nilable(String)
+end
+
+Wizard.pluck_to_tstruct(TA[WizardStruct].new)  # T::Array[WizardStruct]
+Wizard.all.pluck_to_tstruct(TA[WizardStruct].new)  # T::Array[WizardStruct]
+```
+
+This method is based on [pluck_to_hash](https://github.com/girishso/pluck_to_hash) gem.
 
 ## Extending Model Generation Task with Custom Plugins
 
