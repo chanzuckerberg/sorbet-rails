@@ -72,7 +72,7 @@ It is possible to add custom RBI generation logic for your custom module or gems
 
 We also add following methods to make type-checking more easily:
 - [`find_n`, `first_n`, `last_n`](https://github.com/chanzuckerberg/sorbet-rails#find-first-and-last)
-- [`pluck_to_tstruct`](https://github.com/chanzuckerberg/sorbet-rails#pluck-to-tstruct)
+- [`pluck_to_tstruct`](#pluck_to_tstruct-instead-of-pluck)
 
 ### Controllers
 ```sh
