@@ -35,7 +35,7 @@ Warning: *don't* add `sorbet-rails` to a specific environment group (eg. `develo
 ❯ rake rails_rbi:models
 ❯ rake rails_rbi:helpers
 ❯ rake rails_rbi:mailers
-❯ rake rails_rbi:params
+❯ rake rails_rbi:bundled
 
 # or run them all at once
 ❯ rake rails_rbi:all
