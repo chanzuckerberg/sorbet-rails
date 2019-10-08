@@ -229,3 +229,20 @@ T.assert_type!(
   params.fetch_typed(:nonexistence, TA[T::Array[Integer]].new, []),
   T::Array[Integer],
 )
+
+
+# -- pluck to tstruct
+class WizardStruct < T::Struct
+  const :name, String
+  const :house, T.nilable(String)
+end
+
+T.assert_type!(Wizard.pluck_to_tstruct(TA[WizardStruct].new), T::Array[WizardStruct])
+T.assert_type!(Wizard.all.pluck_to_tstruct(TA[WizardStruct].new), T::Array[WizardStruct])
+
+Wizard.pluck_to_tstruct(TA[WizardStruct].new).each do |row|
+  T.assert_type!(row, WizardStruct)
+end
+Wizard.all.pluck_to_tstruct(TA[WizardStruct].new).each do |row|
+  T.assert_type!(row, WizardStruct)
+end

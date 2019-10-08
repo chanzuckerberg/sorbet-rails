@@ -2,4 +2,4 @@
 .
 
 --ignore
-bundled_rbi/parameters.rbi
+bundled_rbi/

@@ -1,10 +1,9 @@
 require "byebug"
 require "simplecov"
 
-SimpleCov.start
-
 if ENV["CI"] == "true"
   require "codecov"
+  SimpleCov.start
   SimpleCov.formatter = SimpleCov::Formatter::Codecov
 end
 
