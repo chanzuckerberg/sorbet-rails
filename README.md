@@ -35,7 +35,7 @@ Warning: *don't* add `sorbet-rails` to a specific environment group (eg. `develo
 ❯ rake rails_rbi:models
 ❯ rake rails_rbi:helpers
 ❯ rake rails_rbi:mailers
-❯ rake rails_rbi:params
+❯ rake rails_rbi:custom
 
 # or run them all at once
 ❯ rake rails_rbi:all
@@ -76,7 +76,7 @@ We also add following methods to make type-checking more easily:
 
 ### Controllers
 ```sh
-❯ rake rails_rbi:params
+❯ rake rails_rbi:custom
 ```
 
 `sorbet-rails` adds methods to extract typed parameters from `params`, namely `require_typed` and `fetch_typed`. They are direct replacement of `require` and `fetch` that return typed object. They have the same API their counterpart, with an addition of the parameter's type, which can be any type understood by `sorbet`
