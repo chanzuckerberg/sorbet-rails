@@ -66,7 +66,7 @@ module ActiveModel::Validations
         # like { in: [1, 2, 3], ... }
         inclusion: T::Enumerable[T.untyped],
         # if Hash, must contain :in, :within, :maximum, :minimum, or :is keys
-        length: T.any(T::Range, T::Hash[T.untyped, T.untyped]),
+        length: T.any(T::Range[T.untyped], T::Hash[T.untyped, T.untyped]),
         numericality: T.any(T::Boolean, T::Hash[T.untyped, T.untyped]),
         on: T.any(Symbol, String, T::Array[T.any(Symbol, String)]),
         presence: T::Boolean,
@@ -120,12 +120,12 @@ module ActiveModel::Validations::HelperMethods
   end
   def validates_absence_of(
     *attr_names,
-    message: 'must be blank', 
-    if: nil, 
-    unless: :_, 
-    on: :_, 
-    allow_nil: false, 
-    allow_blank: false, 
+    message: 'must be blank',
+    if: nil,
+    unless: :_,
+    on: :_,
+    allow_nil: false,
+    allow_blank: false,
     strict: false
   ); end
 
@@ -144,12 +144,12 @@ module ActiveModel::Validations::HelperMethods
   end
   def validates_acceptance_of(
     *attr_names,
-    message: 'must be accepted', 
-    accept: ['1', true], 
-    if: nil, 
-    unless: :_, 
-    on: :_, 
-    allow_nil: false, 
+    message: 'must be accepted',
+    accept: ['1', true],
+    if: nil,
+    unless: :_,
+    on: :_,
+    allow_nil: false,
     allow_blank: false,
     strict: false
   ); end
@@ -313,7 +313,7 @@ module ActiveModel::Validations::HelperMethods
     allow_blank: false,
     strict: false
   ); end
-  
+
   # validates_size_of is an alias of validates_length_of
   sig do
     params(
