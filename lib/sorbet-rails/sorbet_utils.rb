@@ -30,6 +30,12 @@ module SorbetRails::SorbetUtils
         else ''
         end
 
+      suffix =
+        case param_def[0]
+        when :key, :keyreq; ':'
+        else ''
+        end
+
       param_type = param_def[2].to_s
       if param_def[0] == :block
         # special case `.void` in a proc
@@ -37,7 +43,7 @@ module SorbetRails::SorbetUtils
         param_type = param_type.gsub('returns(<VOID>)', 'void')
       end
 
-      ::Parlour::RbiGenerator::Parameter.new("#{prefix}#{param_name}", type: param_type)
+      ::Parlour::RbiGenerator::Parameter.new("#{prefix}#{param_name}#{suffix}", type: param_type)
     end
   end
 
