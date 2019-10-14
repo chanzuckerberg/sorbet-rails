@@ -240,13 +240,13 @@ module Wizard::GeneratedAssociationMethods
   sig { returns(::ActiveStorage::Attachment::ActiveRecord_Associations_CollectionProxy) }
   def hats_attachments; end
 
-  sig { params(value: T.any(T::Array[::ActiveStorage::Attachment], ::ActiveStorage::Attachment::ActiveRecord_Associations_CollectionProxy)).void }
+  sig { params(value: T::Enumerable[::ActiveStorage::Attachment]).void }
   def hats_attachments=(value); end
 
   sig { returns(::ActiveStorage::Blob::ActiveRecord_Associations_CollectionProxy) }
   def hats_blobs; end
 
-  sig { params(value: T.any(T::Array[::ActiveStorage::Blob], ::ActiveStorage::Blob::ActiveRecord_Associations_CollectionProxy)).void }
+  sig { params(value: T::Enumerable[::ActiveStorage::Blob]).void }
   def hats_blobs=(value); end
 
   sig { returns(T.nilable(::ActiveStorage::Attachment)) }
@@ -264,7 +264,7 @@ module Wizard::GeneratedAssociationMethods
   sig { returns(::SpellBook::ActiveRecord_Associations_CollectionProxy) }
   def spell_books; end
 
-  sig { params(value: T.any(T::Array[::SpellBook], ::SpellBook::ActiveRecord_Associations_CollectionProxy)).void }
+  sig { params(value: T::Enumerable[::SpellBook]).void }
   def spell_books=(value); end
 
   sig { returns(T.nilable(::Wand)) }
