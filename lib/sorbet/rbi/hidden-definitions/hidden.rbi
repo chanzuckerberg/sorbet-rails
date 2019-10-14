@@ -7156,8 +7156,6 @@ module Etc
 
   def self.getgrent(); end
 
-  def self.getgrgid(*_); end
-
   def self.getgrnam(_); end
 
   def self.getlogin(); end
@@ -7165,8 +7163,6 @@ module Etc
   def self.getpwent(); end
 
   def self.getpwnam(_); end
-
-  def self.getpwuid(*_); end
 
   def self.group(); end
 
@@ -13177,8 +13173,6 @@ class String
   def delete_suffix!(_); end
 
   def each_grapheme_cluster(); end
-
-  def encode(*_); end
 
   def encode!(*_); end
 
