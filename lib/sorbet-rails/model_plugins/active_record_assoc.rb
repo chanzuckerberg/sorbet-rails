@@ -53,7 +53,7 @@ class SorbetRails::ModelPlugins::ActiveRecordAssoc < SorbetRails::ModelPlugins::
   sig { params(reflection: T.untyped).returns(T::Boolean) }
   private def belongs_to_and_required?(reflection)
     # In Rails 5 and later, belongs_to are required unless specified to be
-    # optional (via `option` or `!belongs_to_required_by_default`)
+    # optional (via `optional` or `!required` or `!belongs_to_required_by_default`)
     return false if !reflection.belongs_to?
 
     if reflection.options[:required].present?
