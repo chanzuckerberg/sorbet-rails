@@ -35,12 +35,7 @@ class SorbetRails::ModelPlugins::ActiveRecordAssoc < SorbetRails::ModelPlugins::
   def populate_single_assoc_getter_setter(assoc_module_rbi, assoc_name, reflection)
     # TODO allow people to specify the possible values of polymorphic associations
     assoc_class = assoc_should_be_untyped?(reflection) ? "T.untyped" : "::#{reflection.klass.name}"
-    assoc_type = "T.nilable(#{assoc_class})"
-    if reflection.belongs_to?
-      column_def = @columns_hash[reflection.foreign_key.to_s]
-      # In Rails 5 and later, belongs_to are required unless specified to be optional
-      assoc_type = assoc_class if !reflection.options[:optional]
-    end
+    assoc_type = belongs_to_and_required?(reflection) ? assoc_class : "T.nilable(#{assoc_class})"
 
     assoc_module_rbi.create_method(
       assoc_name.to_s,
@@ -53,6 +48,19 @@ class SorbetRails::ModelPlugins::ActiveRecordAssoc < SorbetRails::ModelPlugins::
       ],
       return_type: nil,
     )
+  end
+
+  sig { params(reflection: T.untyped).returns(T::Boolean) }
+  private def belongs_to_and_required?(reflection)
+    # In Rails 5 and later, belongs_to are required unless specified to be
+    # optional (via `option` or `!belongs_to_required_by_default`)
+    return false if !reflection.belongs_to?
+
+    if reflection.options[:option].nil?
+      !!reflection.active_record.belongs_to_required_by_default
+    else
+      !reflection.options[:optional]
+    end
   end
 
   sig do
