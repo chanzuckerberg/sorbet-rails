@@ -240,7 +240,7 @@ module Wizard::GeneratedAssociationMethods
   sig { returns(::SpellBook::ActiveRecord_Associations_CollectionProxy) }
   def spell_books; end
 
-  sig { params(value: T.any(T::Array[::SpellBook], ::SpellBook::ActiveRecord_Associations_CollectionProxy)).void }
+  sig { params(value: T::Enumerable[::SpellBook]).void }
   def spell_books=(value); end
 
   sig { returns(T.nilable(::Wand)) }

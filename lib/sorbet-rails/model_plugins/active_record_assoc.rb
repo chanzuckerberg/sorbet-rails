@@ -76,7 +76,7 @@ class SorbetRails::ModelPlugins::ActiveRecordAssoc < SorbetRails::ModelPlugins::
     assoc_module_rbi.create_method(
       "#{assoc_name}=",
       parameters: [
-        Parameter.new("value", type: "T.any(T::Array[#{assoc_class}], #{relation_class})")
+        Parameter.new("value", type: "T::Enumerable[#{assoc_class}]")
       ],
       return_type: nil,
     )
