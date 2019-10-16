@@ -65,6 +65,12 @@ class ShrinePlugin < SorbetRails::ModelPlugins::Base
           ]
         )
         #--
+        attacher = Object.const_get("#{included_module.shrine_class}::Attacher")
+        attacher_rbi = root.create_class(
+          attacher.name,
+          superclass: 'Shrine::Attacher',
+        )
+        #--
         uploaded_file = Object.const_get("#{included_module.shrine_class}::UploadedFile")
         uploaded_file_rbi = root.create_class(
           uploaded_file.name,
