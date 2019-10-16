@@ -11,7 +11,7 @@ class Wand < ApplicationRecord
     basilisk_horn: 3,
   }
 
-  belongs_to :wizard
+  belongs_to :wizard, required: true
 
   def wood_type
     'Type ' + super

@@ -11,7 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190620000007) do
+ActiveRecord::Schema.define(version: 20190620000008) do
+
+  create_table "robe", force: :cascade do |t|
+    t.integer "wizard_id"
+    t.index ["wizard_id"], name: "index_robe_on_wizard_id"
+  end
 
   create_table "spell_books", force: :cascade do |t|
     t.string  "name"

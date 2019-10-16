@@ -13,6 +13,7 @@ RSpec.describe 'rake rails_rbi:models', type: :task do
       base_dir: generated_dir_path,
       files: [
         'potion.rbi',
+        'robe.rbi',
         'spell_book.rbi',
         'squib.rbi',
         'wand.rbi',
