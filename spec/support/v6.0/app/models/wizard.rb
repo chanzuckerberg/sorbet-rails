@@ -42,6 +42,8 @@ class Wizard < ApplicationRecord
   }, _prefix: :color, _suffix: :eyes
 
   has_one :wand
+  has_one :hat
+  has_one :robe
   has_many :spell_books
 
   scope :recent, -> { where('created_at > ?', 1.month.ago) }

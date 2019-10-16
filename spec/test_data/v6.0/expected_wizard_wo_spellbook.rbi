@@ -1459,6 +1459,12 @@ end
 module Wizard::GeneratedAssociationMethods
   extend T::Sig
 
+  sig { returns(T.nilable(T.untyped)) }
+  def hat; end
+
+  sig { params(value: T.nilable(T.untyped)).void }
+  def hat=(value); end
+
   sig { returns(::ActiveStorage::Attachment::ActiveRecord_Associations_CollectionProxy) }
   def hats_attachments; end
 
@@ -1470,6 +1476,12 @@ module Wizard::GeneratedAssociationMethods
 
   sig { params(value: T::Enumerable[::ActiveStorage::Blob]).void }
   def hats_blobs=(value); end
+
+  sig { returns(T.nilable(T.untyped)) }
+  def robe; end
+
+  sig { params(value: T.nilable(T.untyped)).void }
+  def robe=(value); end
 
   sig { returns(T.nilable(::ActiveStorage::Attachment)) }
   def school_photo_attachment; end
