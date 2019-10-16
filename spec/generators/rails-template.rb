@@ -109,7 +109,7 @@ def create_models
         basilisk_horn: 3,
       }
 
-      belongs_to :wizard
+      belongs_to :wizard, required: true
 
       def wood_type
         'Type ' + super
@@ -192,6 +192,12 @@ def create_models
       def is_magical
         false
       end
+    end
+  RUBY
+
+  file "app/models/robe.rb", <<~RUBY
+    class Robe < ApplicationRecord
+      belongs_to :wizard, required: false
     end
   RUBY
 end
@@ -282,6 +288,16 @@ def create_migrations
     class AddTypeToWizard < #{migration_superclass}
       def change
         add_column :wizards, :type, :string, null: false, default: 'Wizard'
+      end
+    end
+  RUBY
+
+  file "db/migrate/20190620000008_add_robe_to_wizard.rb", <<~RUBY
+    class AddRobeToWizard < #{migration_superclass}
+      def change
+        create_table :robe do |t|
+          t.references :wizard
+        end
       end
     end
   RUBY
