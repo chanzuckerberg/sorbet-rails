@@ -1,7 +1,7 @@
 PATH
   remote: ../../..
   specs:
-    sorbet-rails (0.5.7)
+    sorbet-rails (0.5.8)
       parlour (~> 0.8.0)
 
 GEM
