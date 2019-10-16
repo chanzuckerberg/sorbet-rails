@@ -64,8 +64,8 @@ RSpec.describe SorbetRails::SorbetUtils do
     method_def = SorbetUtilsExampleClass.instance_method(:method_req_kwarg)
     parameters = SorbetRails::SorbetUtils.parameters_from_method_def(method_def)
     expect(parameters).to match_array([
-      Parameter.new('p1', type: 'T.any(Integer, String)'), # sorbet re-order the types
-      Parameter.new('p2', type: 'T.nilable(String)'),
+      Parameter.new('p1:', type: 'T.any(Integer, String)'), # sorbet re-order the types
+      Parameter.new('p2:', type: 'T.nilable(String)'),
     ])
   end
 
@@ -74,7 +74,7 @@ RSpec.describe SorbetRails::SorbetUtils do
     parameters = SorbetRails::SorbetUtils.parameters_from_method_def(method_def)
     expect(parameters).to match_array([
       Parameter.new('p1', type: 'SorbetUtilsExampleModule'),
-      Parameter.new('p2', type: 'T.nilable(T.any(Integer, String))'),
+      Parameter.new('p2:', type: 'T.nilable(T.any(Integer, String))'),
     ])
   end
 
@@ -92,7 +92,7 @@ RSpec.describe SorbetRails::SorbetUtils do
     parameters = SorbetRails::SorbetUtils.parameters_from_method_def(method_def)
     expect(parameters).to match_array([
       Parameter.new('p1', type: 'T::Array[String]'),
-      Parameter.new('p2', type: 'T::Set[Integer]'),
+      Parameter.new('p2:', type: 'T::Set[Integer]'),
       Parameter.new('**p3', type: 'Integer'),
     ])
   end
@@ -125,7 +125,7 @@ RSpec.describe SorbetRails::SorbetUtils do
       Parameter.new('p1', type: 'T.untyped'),
       Parameter.new('p2', type: 'T.untyped'),
       Parameter.new('*p3', type: 'T.untyped'),
-      Parameter.new('p4', type: 'T.untyped'),
+      Parameter.new('p4:', type: 'T.untyped'),
       Parameter.new('**p5', type: 'T.untyped'),
       Parameter.new('&p6', type: 'T.untyped'),
     ])
