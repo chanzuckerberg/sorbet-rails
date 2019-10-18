@@ -56,9 +56,9 @@ class SorbetRails::ModelPlugins::ActiveRecordAssoc < SorbetRails::ModelPlugins::
     # optional (via `optional` or `!required` or `!belongs_to_required_by_default`)
     return false if !reflection.belongs_to?
 
-    if reflection.options[:required].present?
+    if reflection.options.key?(:required)
       !!reflection.options[:required]
-    elsif reflection.options[:optional].present?
+    elsif reflection.options.key?(:optional)
       !reflection.options[:optional]
     else
       !!reflection.active_record.belongs_to_required_by_default
