@@ -19,15 +19,14 @@ This gem adds a few Rake tasks to generate Ruby Interface (RBI) files for dynami
 
 ```
 # -- Gemfile --
-
 gem 'sorbet-rails'
 ```
+
+Add `sorbet-rails` to the [`:default` group](https://bundler.io/v2.0/guides/groups.html) because of "Features Provided at Runtime" below.
 
 ```sh
 ❯ bundle install
 ```
-
-Warning: *don't* add `sorbet-rails` to a specific environment group (eg. `development` only). `sorbet-rails` adds a bunch of helper methods to your Rails runtime as well as generators for RBI files. You'll want to run the gem in all environments.
 
 3. Generate RBI files for your routes, models, etc
 ```sh
@@ -48,7 +47,7 @@ Warning: *don't* add `sorbet-rails` to a specific environment group (eg. `develo
 ```
 Because we've generated RBI files for routes, models, and helpers, a lot more files should be typecheckable now. Many methods in `hidden.rbi` may be removed because they are now typed.
 
-## Type-checking Rails code
+## Static RBI Generation
 
 ### Models
 
@@ -147,6 +146,26 @@ Since mailing action methods is based on instance methods defined in a mailer cl
 - If there is a (sorbet) sig written for the instance method, it generates a matching sig for the mailing action method
 - If not, all the params in the mailing action method will be T.untyped.
 - For return type though, the mailing action method will return `ActionMailer::MessageDelivery` instead of the return type of the instance method.
+
+## Runtime Features
+
+In addition to features provided by the static generator, `sorbet-rails` can
+provide additional features when `require`d. This is why the installation
+instructions specify that `sorbet-rails` should be placed in the [`:default`
+group](https://bundler.io/v2.0/guides/groups.html) of the `Gemfile`, not a
+specific environment group (eg. `development` only).
+
+- Relation class: Making the relations available at runtime (they are normally private constants, the gem makes them public)
+  - Examples: `User::ActiveRecord_Relation`, `User::ActiveRecord_AssociationRelation`
+- Model: `find_n`, `first_n`, `last_n` are the methods we added. `pluck_to_tstruct` as well.
+- Controller: adding `fetch_typed` and `require_typed`
+
+In addition to `require`ing `sorbet-rails`, you must also run
+`rake rails_rbi:custom`, which will produce the RBI for these runtime features.
+
+Discussion:
+[#211](https://github.com/chanzuckerberg/sorbet-rails/issues/211),
+[#214](https://github.com/chanzuckerberg/sorbet-rails/pull/214#issuecomment-546505485)
 
 ## Tips & Tricks
 
