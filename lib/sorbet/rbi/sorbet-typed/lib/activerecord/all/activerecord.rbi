@@ -7,7 +7,7 @@
 #
 # typed: strong
 
-VariadicUntypedFunction = T.type_alias(
+VariadicUntypedFunction = T.type_alias do
   T.any(
     T.proc.returns(T.untyped),
     T.proc.params(arg0: T.untyped).returns(T.untyped),
@@ -22,7 +22,7 @@ VariadicUntypedFunction = T.type_alias(
     T.proc.params(arg0: T.untyped, arg1: T.untyped, arg2: T.untyped, arg3: T.untyped, arg4: T.untyped, arg5: T.untyped, arg6: T.untyped, arg7: T.untyped, arg8: T.untyped, arg9: T.untyped).returns(T.untyped)
     # Currently Sorbet is limited to procs with 9 args: https://github.com/sorbet/sorbet/blob/df6085e6ae9846f033064513ea14f069c68b0bf9/core/SymbolRef.h#L387
   )
-)
+end
 
 module ActiveRecord::Associations::ClassMethods
   sig do
