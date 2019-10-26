@@ -181,7 +181,7 @@ module ActiveModel::Validations::HelperMethods
 
   # A type alias for the in/within parameters on the
   # validates_(inclusion/exclusion)_of methods.
-  InWithinType = T.type_alias(
+  InWithinType = T.type_alias do
     T.nilable(
       T.any(
         Symbol,
@@ -191,7 +191,7 @@ module ActiveModel::Validations::HelperMethods
         T.proc.params(arg0: T.untyped).returns(T::Boolean)
       )
     )
-  )
+  end
   sig do
     params(
       attr_names: T.any(String, Symbol),
@@ -355,7 +355,7 @@ module ActiveModel::Validations::HelperMethods
   ); end
 
   # Create a type alias so we don't have to repeat this long type signature 6 times.
-  NumberComparatorType = T.type_alias(T.nilable(T.any(Integer, Float, T.proc.params(arg0: T.untyped).returns(T::Boolean), Symbol)))
+  NumberComparatorType = T.type_alias {T.nilable(T.any(Integer, Float, T.proc.params(arg0: T.untyped).returns(T::Boolean), Symbol))}
   sig do
     params(
       attr_names: T.any(String, Symbol),
