@@ -5813,8 +5813,6 @@ class Array
 
   def collect!(); end
 
-  def dig(*_); end
-
   def flatten!(*_); end
 
   def pack(*_); end
@@ -7439,8 +7437,6 @@ class Hash
 
   def default_proc=(default_proc); end
 
-  def dig(*_); end
-
   def fetch_values(*_); end
 
   def flatten(*_); end
@@ -8089,8 +8085,6 @@ IO::EWOULDBLOCKWaitWritable = IO::EAGAINWaitWritable
 
 class IO
   def self.foreach(*_); end
-
-  def self.pipe(*_); end
 
 end
 
