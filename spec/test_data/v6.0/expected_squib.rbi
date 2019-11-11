@@ -155,7 +155,7 @@ module Squib::GeneratedAttributeMethods
   sig { returns(T.nilable(Integer)) }
   def hair_length; end
 
-  sig { params(value: T.nilable(Integer)).void }
+  sig { params(value: T.nilable(T.any(Integer, Float, ActiveSupport::Duration))).void }
   def hair_length=(value); end
 
   sig { returns(T::Boolean) }
@@ -173,7 +173,7 @@ module Squib::GeneratedAttributeMethods
   sig { returns(Integer) }
   def id; end
 
-  sig { params(value: Integer).void }
+  sig { params(value: T.any(Integer, Float, ActiveSupport::Duration)).void }
   def id=(value); end
 
   sig { returns(T::Boolean) }
