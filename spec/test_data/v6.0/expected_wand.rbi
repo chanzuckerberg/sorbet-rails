@@ -95,7 +95,7 @@ module Wand::GeneratedAttributeMethods
   sig { returns(Float) }
   def flexibility; end
 
-  sig { params(value: Float).void }
+  sig { params(value: T.any(Integer, Float, ActiveSupport::Duration)).void }
   def flexibility=(value); end
 
   sig { returns(T::Boolean) }
@@ -113,7 +113,7 @@ module Wand::GeneratedAttributeMethods
   sig { returns(Integer) }
   def id; end
 
-  sig { params(value: Integer).void }
+  sig { params(value: T.any(Integer, Float, ActiveSupport::Duration)).void }
   def id=(value); end
 
   sig { returns(T::Boolean) }
@@ -131,7 +131,7 @@ module Wand::GeneratedAttributeMethods
   sig { returns(Integer) }
   def reflectance; end
 
-  sig { params(value: Integer).void }
+  sig { params(value: T.any(Integer, Float, ActiveSupport::Duration)).void }
   def reflectance=(value); end
 
   sig { returns(T::Boolean) }
@@ -158,7 +158,7 @@ module Wand::GeneratedAttributeMethods
   sig { returns(Integer) }
   def wizard_id; end
 
-  sig { params(value: Integer).void }
+  sig { params(value: T.any(Integer, Float, ActiveSupport::Duration)).void }
   def wizard_id=(value); end
 
   sig { returns(T::Boolean) }

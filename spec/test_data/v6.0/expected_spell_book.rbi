@@ -44,7 +44,7 @@ module SpellBook::GeneratedAttributeMethods
   sig { returns(Integer) }
   def id; end
 
-  sig { params(value: Integer).void }
+  sig { params(value: T.any(Integer, Float, ActiveSupport::Duration)).void }
   def id=(value); end
 
   sig { returns(T::Boolean) }
@@ -62,7 +62,7 @@ module SpellBook::GeneratedAttributeMethods
   sig { returns(T.nilable(Integer)) }
   def wizard_id; end
 
-  sig { params(value: T.nilable(Integer)).void }
+  sig { params(value: T.nilable(T.any(Integer, Float, ActiveSupport::Duration))).void }
   def wizard_id=(value); end
 
   sig { returns(T::Boolean) }

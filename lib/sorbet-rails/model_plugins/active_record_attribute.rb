@@ -131,15 +131,23 @@ class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugi
 
   sig { params(column_type: Object).returns(String) }
   def value_type_for_attr_writer(column_type)
-    assignable_time_types = [DateTime, Date, Time, ActiveSupport::TimeWithZone].map(&:to_s)
-
     # it's safe - and convenient - to assign any "time like" object to a time zone
     # aware attribute because Rails will cast it to a `ActiveSupport::TimeWithZone`
     # (so rereading the attribute will always return the `TimeWithZone` type)
+    assignable_time_types = [DateTime, Date, Time, ActiveSupport::TimeWithZone].map(&:to_s)
+
+    # same thing applies with the many types that respond to `#to_i` or `#to_f`
+    assignable_numeric_types = [Integer, Float, ActiveSupport::Duration]
+
+    # TODO: this could be a lot tidier
     if column_type == ActiveSupport::TimeWithZone
       "T.any(#{assignable_time_types.join(', ')})"
     elsif column_type == "T.nilable(ActiveSupport::TimeWithZone)"
       "T.nilable(T.any(#{assignable_time_types.join(', ')}))"
+    elsif ["T.nilable(Float)", "T.nilable(Integer)"].include?(column_type)
+      "T.nilable(T.any(#{assignable_numeric_types.join(', ')}))"
+    elsif ["Float", "Integer"].include?(column_type.to_s)
+      "T.any(#{assignable_numeric_types.join(', ')})"
     elsif column_type == String
       'T.any(String, Symbol)'
     else
