@@ -26,5 +26,14 @@ class KaminariPlugin < SorbetRails::ModelPlugins::Base
         Parameter.new('max_per_page', type: 'T.nilable(Integer)', default: 'nil')
       ],
     )
+
+    # https://github.com/kaminari/kaminari/blob/c5186f5d9b7f23299d115408e62047447fd3189d/kaminari-core/lib/kaminari/models/page_scope_methods.rb#L27
+    add_relation_query_method(
+      root,
+      "padding",
+      parameters: [
+        Parameter.new('num', type: 'Integer')
+      ],
+    )
   end
 end
