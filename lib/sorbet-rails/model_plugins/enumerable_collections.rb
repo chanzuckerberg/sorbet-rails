@@ -54,19 +54,18 @@ class SorbetRails::ModelPlugins::EnumerableCollections < SorbetRails::ModelPlugi
         "to_a",
         return_type: "T::Array[#{self.model_class_name}]",
       )
+      # TODO use type_parameters(:U) when parlour supports it
+      class_rbi.create_arbitrary(
+        code: <<~RUBY
+          sig do
+            type_parameters(:U).params(
+                blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),
+            )
+            .returns(T::Array[T.type_parameter(:U)])
+          end
+          def map(&blk); end
+        RUBY
+      )
     end
-
-    # TODO use type_parameters(:U) when parlour supports it
-    class_rbi.create_arbitrary(
-      code: <<~RUBY
-        sig do
-          type_parameters(:U).params(
-              blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),
-          )
-          .returns(T::Array[T.type_parameter(:U)])
-        end
-        def map(&blk); end
-      RUBY
-    )
   end
 end

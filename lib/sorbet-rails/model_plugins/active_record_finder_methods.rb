@@ -52,22 +52,22 @@ class SorbetRails::ModelPlugins::ActiveRecordFinderMethods < SorbetRails::ModelP
         each do |method_name|
           create_finder_method_pair(class_rbi, method_name, class_method)
         end
-    end
 
-    # Checker methods
-    class_rbi.create_method(
-      "exists?",
-      parameters: [ Parameter.new("conditions", type: "T.untyped", default: "nil") ],
-      return_type: "T::Boolean",
-      class_method: class_method,
-    )
-    ["any?", "many?", "none?", "one?"].each do |method_name|
+      # Checker methods
       class_rbi.create_method(
-        method_name,
-        parameters: [ Parameter.new("*args", type: "T.untyped") ],
+        "exists?",
+        parameters: [ Parameter.new("conditions", type: "T.untyped", default: "nil") ],
         return_type: "T::Boolean",
         class_method: class_method,
       )
+      ["any?", "many?", "none?", "one?"].each do |method_name|
+        class_rbi.create_method(
+          method_name,
+          parameters: [ Parameter.new("*args", type: "T.untyped") ],
+          return_type: "T::Boolean",
+          class_method: class_method,
+        )
+      end
     end
   end
 

@@ -53,4 +53,27 @@ class ActiveRecord::Relation
 
   sig { returns(T::Array[Elem]) }
   def to_a; end
+
+  sig do
+    type_parameters(:U).params(
+        blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),
+    )
+    .returns(T::Array[T.type_parameter(:U)])
+  end
+  def map(&blk); end
+
+  sig { params(conditions: T.untyped).returns(T::Boolean) }
+  def exists?(conditions = nil); end
+
+  sig { returns(T::Boolean) }
+  def any?; end
+
+  sig { returns(T::Boolean) }
+  def many?; end
+
+  sig { returns(T::Boolean) }
+  def none?; end
+
+  sig { returns(T::Boolean) }
+  def one?; end
 end
