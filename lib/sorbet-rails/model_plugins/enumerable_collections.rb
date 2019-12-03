@@ -4,11 +4,8 @@ class SorbetRails::ModelPlugins::EnumerableCollections < SorbetRails::ModelPlugi
 
   sig { override.params(root: Parlour::RbiGenerator::Namespace).void }
   def generate(root)
-    # model relation & association proxy are enumerable
+    # assocation relation & association proxy are enumerable
     # we need to implement "each" in these methods so that they work
-    model_relation_class_rbi = root.create_class(self.model_relation_class_name)
-    create_enumerable_methods_for(model_relation_class_rbi)
-
     model_assoc_relation_rbi = root.create_class(self.model_assoc_relation_class_name)
     create_enumerable_methods_for(model_assoc_relation_rbi)
 

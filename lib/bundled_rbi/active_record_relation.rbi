@@ -44,4 +44,13 @@ class ActiveRecord::Relation
 
   sig { returns(Elem) }
   def last!; end
+
+  sig { override.params(block: T.proc.params(e: Elem).void).returns(T::Array[Elem]) }
+  def each(&block); end
+
+  sig { params(level: T.nilable(Integer)).returns(T::Array[Elem]) }
+  def flatten(level); end
+
+  sig { returns(T::Array[Elem]) }
+  def to_a; end
 end
