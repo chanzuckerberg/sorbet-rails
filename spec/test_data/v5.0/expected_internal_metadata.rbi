@@ -331,15 +331,6 @@ class ActiveRecord::InternalMetadata::ActiveRecord_Relation < ActiveRecord::Rela
   sig { params(args: T.untyped).returns(T::Boolean) }
   def one?(*args); end
 
-  sig { override.params(block: T.proc.params(e: ActiveRecord::InternalMetadata).void).returns(T::Array[ActiveRecord::InternalMetadata]) }
-  def each(&block); end
-
-  sig { params(level: T.nilable(Integer)).returns(T::Array[ActiveRecord::InternalMetadata]) }
-  def flatten(level); end
-
-  sig { returns(T::Array[ActiveRecord::InternalMetadata]) }
-  def to_a; end
-
   sig do
     type_parameters(:U).params(
         blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),

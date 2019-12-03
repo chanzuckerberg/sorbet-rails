@@ -334,15 +334,6 @@ class ActiveRecord::SchemaMigration::ActiveRecord_Relation < ActiveRecord::Relat
   sig { params(args: T.untyped).returns(T::Boolean) }
   def one?(*args); end
 
-  sig { override.params(block: T.proc.params(e: ActiveRecord::SchemaMigration).void).returns(T::Array[ActiveRecord::SchemaMigration]) }
-  def each(&block); end
-
-  sig { params(level: T.nilable(Integer)).returns(T::Array[ActiveRecord::SchemaMigration]) }
-  def flatten(level); end
-
-  sig { returns(T::Array[ActiveRecord::SchemaMigration]) }
-  def to_a; end
-
   sig do
     type_parameters(:U).params(
         blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),

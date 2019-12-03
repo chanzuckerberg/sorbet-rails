@@ -668,15 +668,6 @@ class Squib::ActiveRecord_Relation < ActiveRecord::Relation
   sig { params(args: T.untyped).returns(T::Boolean) }
   def one?(*args); end
 
-  sig { override.params(block: T.proc.params(e: Squib).void).returns(T::Array[Squib]) }
-  def each(&block); end
-
-  sig { params(level: T.nilable(Integer)).returns(T::Array[Squib]) }
-  def flatten(level); end
-
-  sig { returns(T::Array[Squib]) }
-  def to_a; end
-
   sig do
     type_parameters(:U).params(
         blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),
