@@ -5,7 +5,7 @@ class SorbetRails::ModelPlugins::ActiveRecordFinderMethods < SorbetRails::ModelP
   sig { override.params(root: Parlour::RbiGenerator::Namespace).void }
   def generate(root)
     model_class_rbi = root.create_class(self.model_class_name)
-    create_finder_methods_for(model_class_rbi, class_method: true)
+    create_finder_methods_for(model_class_rbi, class_method: true, include_methods_that_return_self: false)
 
     model_relation_class_rbi = root.create_class(self.model_relation_class_name)
     create_finder_methods_for(model_relation_class_rbi, class_method: false, include_methods_that_return_self: false)
@@ -52,22 +52,23 @@ class SorbetRails::ModelPlugins::ActiveRecordFinderMethods < SorbetRails::ModelP
         each do |method_name|
           create_finder_method_pair(class_rbi, method_name, class_method)
         end
+    end
 
-      # Checker methods
+    # Checker methods
+    class_rbi.create_method(
+      "exists?",
+      parameters: [ Parameter.new("conditions", type: "T.untyped", default: "nil") ],
+      return_type: "T::Boolean",
+      class_method: class_method,
+    )
+
+    ["any?", "many?", "none?", "one?"].each do |method_name|
       class_rbi.create_method(
-        "exists?",
-        parameters: [ Parameter.new("conditions", type: "T.untyped", default: "nil") ],
+        method_name,
+        parameters: [ Parameter.new("*args", type: "T.untyped") ],
         return_type: "T::Boolean",
         class_method: class_method,
       )
-      ["any?", "many?", "none?", "one?"].each do |method_name|
-        class_rbi.create_method(
-          method_name,
-          parameters: [ Parameter.new("*args", type: "T.untyped") ],
-          return_type: "T::Boolean",
-          class_method: class_method,
-        )
-      end
     end
   end
 

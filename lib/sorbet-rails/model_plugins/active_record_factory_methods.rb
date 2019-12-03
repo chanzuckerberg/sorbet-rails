@@ -8,9 +8,9 @@ class SorbetRails::ModelPlugins::ActiveRecordFactoryMethods < SorbetRails::Model
 
     factory_methods = ['create', 'create!', 'new']
 
-    factory_methods.each do |factory_method|
-      add_factory_method(model_rbi, factory_method)
-    end
+    # factory_methods.each do |factory_method|
+    #   add_factory_method(model_rbi, factory_method)
+    # end
   end
 
   sig { params(model_rbi: Parlour::RbiGenerator::ClassNamespace, method_name: String).void }
