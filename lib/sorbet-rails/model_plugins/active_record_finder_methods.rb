@@ -8,7 +8,7 @@ class SorbetRails::ModelPlugins::ActiveRecordFinderMethods < SorbetRails::ModelP
     create_finder_methods_for(model_class_rbi, class_method: true)
 
     model_relation_class_rbi = root.create_class(self.model_relation_class_name)
-    create_finder_methods_for(model_relation_class_rbi, class_method: false)
+    create_finder_methods_for(model_relation_class_rbi, class_method: false, include_methods_that_return_self: false)
 
     model_assoc_proxy_class_rbi = root.create_class(self.model_assoc_proxy_class_name)
     create_finder_methods_for(model_assoc_proxy_class_rbi, class_method: false)

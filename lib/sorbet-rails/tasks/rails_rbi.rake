@@ -37,6 +37,7 @@ namespace :rails_rbi do
     copy_bundled_rbi('type_assert.rbi')
     copy_bundled_rbi('parameters.rbi')
     copy_bundled_rbi('pluck_to_tstruct.rbi')
+    copy_bundled_rbi('active_record_relation.rbi')
   end
 
   desc "Generate rbis for rails models. Pass models name to regenerate rbi for only the given models."
