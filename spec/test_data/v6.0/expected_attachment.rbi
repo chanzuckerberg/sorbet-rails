@@ -322,51 +322,6 @@ class ActiveStorage::Attachment::ActiveRecord_Relation < ActiveRecord::Relation
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(ActiveStorage::Attachment::ActiveRecord_Relation) }
   def extending(*args, &block); end
 
-  sig { params(args: T.untyped).returns(ActiveStorage::Attachment) }
-  def find(*args); end
-
-  sig { params(args: T.untyped).returns(T.nilable(ActiveStorage::Attachment)) }
-  def find_by(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Attachment) }
-  def find_by!(*args); end
-
-  sig { returns(T.nilable(ActiveStorage::Attachment)) }
-  def first; end
-
-  sig { returns(ActiveStorage::Attachment) }
-  def first!; end
-
-  sig { returns(T.nilable(ActiveStorage::Attachment)) }
-  def second; end
-
-  sig { returns(ActiveStorage::Attachment) }
-  def second!; end
-
-  sig { returns(T.nilable(ActiveStorage::Attachment)) }
-  def third; end
-
-  sig { returns(ActiveStorage::Attachment) }
-  def third!; end
-
-  sig { returns(T.nilable(ActiveStorage::Attachment)) }
-  def third_to_last; end
-
-  sig { returns(ActiveStorage::Attachment) }
-  def third_to_last!; end
-
-  sig { returns(T.nilable(ActiveStorage::Attachment)) }
-  def second_to_last; end
-
-  sig { returns(ActiveStorage::Attachment) }
-  def second_to_last!; end
-
-  sig { returns(T.nilable(ActiveStorage::Attachment)) }
-  def last; end
-
-  sig { returns(ActiveStorage::Attachment) }
-  def last!; end
-
   sig { params(conditions: T.untyped).returns(T::Boolean) }
   def exists?(conditions = nil); end
 

@@ -653,51 +653,6 @@ class Squib::ActiveRecord_Relation < ActiveRecord::Relation
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Squib::ActiveRecord_Relation) }
   def extending(*args, &block); end
 
-  sig { params(args: T.untyped).returns(Squib) }
-  def find(*args); end
-
-  sig { params(args: T.untyped).returns(T.nilable(Squib)) }
-  def find_by(*args); end
-
-  sig { params(args: T.untyped).returns(Squib) }
-  def find_by!(*args); end
-
-  sig { returns(T.nilable(Squib)) }
-  def first; end
-
-  sig { returns(Squib) }
-  def first!; end
-
-  sig { returns(T.nilable(Squib)) }
-  def second; end
-
-  sig { returns(Squib) }
-  def second!; end
-
-  sig { returns(T.nilable(Squib)) }
-  def third; end
-
-  sig { returns(Squib) }
-  def third!; end
-
-  sig { returns(T.nilable(Squib)) }
-  def third_to_last; end
-
-  sig { returns(Squib) }
-  def third_to_last!; end
-
-  sig { returns(T.nilable(Squib)) }
-  def second_to_last; end
-
-  sig { returns(Squib) }
-  def second_to_last!; end
-
-  sig { returns(T.nilable(Squib)) }
-  def last; end
-
-  sig { returns(Squib) }
-  def last!; end
-
   sig { params(conditions: T.untyped).returns(T::Boolean) }
   def exists?(conditions = nil); end
 

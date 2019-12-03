@@ -647,51 +647,6 @@ class Wizard::ActiveRecord_Relation < ActiveRecord::Relation
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
   def extending(*args, &block); end
 
-  sig { params(args: T.untyped).returns(Wizard) }
-  def find(*args); end
-
-  sig { params(args: T.untyped).returns(T.nilable(Wizard)) }
-  def find_by(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard) }
-  def find_by!(*args); end
-
-  sig { returns(T.nilable(Wizard)) }
-  def first; end
-
-  sig { returns(Wizard) }
-  def first!; end
-
-  sig { returns(T.nilable(Wizard)) }
-  def second; end
-
-  sig { returns(Wizard) }
-  def second!; end
-
-  sig { returns(T.nilable(Wizard)) }
-  def third; end
-
-  sig { returns(Wizard) }
-  def third!; end
-
-  sig { returns(T.nilable(Wizard)) }
-  def third_to_last; end
-
-  sig { returns(Wizard) }
-  def third_to_last!; end
-
-  sig { returns(T.nilable(Wizard)) }
-  def second_to_last; end
-
-  sig { returns(Wizard) }
-  def second_to_last!; end
-
-  sig { returns(T.nilable(Wizard)) }
-  def last; end
-
-  sig { returns(Wizard) }
-  def last!; end
-
   sig { params(conditions: T.untyped).returns(T::Boolean) }
   def exists?(conditions = nil); end
 

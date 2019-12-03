@@ -319,51 +319,6 @@ class ActiveRecord::SchemaMigration::ActiveRecord_Relation < ActiveRecord::Relat
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(ActiveRecord::SchemaMigration::ActiveRecord_Relation) }
   def extending(*args, &block); end
 
-  sig { params(args: T.untyped).returns(ActiveRecord::SchemaMigration) }
-  def find(*args); end
-
-  sig { params(args: T.untyped).returns(T.nilable(ActiveRecord::SchemaMigration)) }
-  def find_by(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveRecord::SchemaMigration) }
-  def find_by!(*args); end
-
-  sig { returns(T.nilable(ActiveRecord::SchemaMigration)) }
-  def first; end
-
-  sig { returns(ActiveRecord::SchemaMigration) }
-  def first!; end
-
-  sig { returns(T.nilable(ActiveRecord::SchemaMigration)) }
-  def second; end
-
-  sig { returns(ActiveRecord::SchemaMigration) }
-  def second!; end
-
-  sig { returns(T.nilable(ActiveRecord::SchemaMigration)) }
-  def third; end
-
-  sig { returns(ActiveRecord::SchemaMigration) }
-  def third!; end
-
-  sig { returns(T.nilable(ActiveRecord::SchemaMigration)) }
-  def third_to_last; end
-
-  sig { returns(ActiveRecord::SchemaMigration) }
-  def third_to_last!; end
-
-  sig { returns(T.nilable(ActiveRecord::SchemaMigration)) }
-  def second_to_last; end
-
-  sig { returns(ActiveRecord::SchemaMigration) }
-  def second_to_last!; end
-
-  sig { returns(T.nilable(ActiveRecord::SchemaMigration)) }
-  def last; end
-
-  sig { returns(ActiveRecord::SchemaMigration) }
-  def last!; end
-
   sig { params(conditions: T.untyped).returns(T::Boolean) }
   def exists?(conditions = nil); end
 
