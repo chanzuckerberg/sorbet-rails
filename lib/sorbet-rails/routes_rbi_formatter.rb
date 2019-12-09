@@ -31,6 +31,10 @@ class SorbetRails::RoutesRbiFormatter
     @parlour.root.create_module('ActionView::Helpers') do |mod|
       mod.create_include('GeneratedUrlHelpers')
     end
+
+    @parlour.root.create_class('ActionMailer::Base') do |mod|
+      mod.create_include('GeneratedUrlHelpers')
+    end
   end
 
   sig { params(routes: T.untyped, filter: T.untyped).void }

@@ -114,7 +114,7 @@ namespace :rails_rbi do
       begin
         formatter = SorbetRails::ModelRbiFormatter.new(model_class, available_class_names)
         [model_class.name, formatter.generate_rbi]
-      rescue StandardError => ex
+      rescue StandardError, NotImplementedError => ex
         puts "---"
         puts "Error when handling model #{model_class.name}: #{ex}"
         nil
