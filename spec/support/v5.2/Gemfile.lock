@@ -144,7 +144,7 @@ PLATFORMS
 DEPENDENCIES
   byebug
   jbuilder (~> 2.5)
-  puma (~> 3.11)
+  puma (~> 3.12)
   rails (~> 5.2.3)
   sorbet
   sorbet-rails!

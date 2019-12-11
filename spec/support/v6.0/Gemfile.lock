@@ -160,7 +160,7 @@ PLATFORMS
 DEPENDENCIES
   byebug
   jbuilder (~> 2.7)
-  puma (~> 3.11)
+  puma (~> 3.12)
   rails (~> 6.0.0)
   sorbet
   sorbet-rails!
