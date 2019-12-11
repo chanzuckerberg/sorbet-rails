@@ -59,10 +59,10 @@ module SpellBook::GeneratedAttributeMethods
   sig { returns(T::Boolean) }
   def name?; end
 
-  sig { returns(T.nilable(Integer)) }
+  sig { returns(Integer) }
   def wizard_id; end
 
-  sig { params(value: T.nilable(T.any(Integer, Float, ActiveSupport::Duration))).void }
+  sig { params(value: T.any(Integer, Float, ActiveSupport::Duration)).void }
   def wizard_id=(value); end
 
   sig { returns(T::Boolean) }

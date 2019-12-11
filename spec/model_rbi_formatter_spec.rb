@@ -15,7 +15,7 @@ RSpec.describe SorbetRails::ModelRbiFormatter do
   end
 
   it 'generates correct rbi file for Wizard' do
-    class_set = Set.new(['Wizard', 'Wand', 'SpellBook'])
+    class_set = Set.new(['Wizard', 'Wand', 'SpellBook', 'School'])
     if Object.const_defined?('ActiveStorage::Attachment')
       class_set << 'ActiveStorage::Attachment'
     end
