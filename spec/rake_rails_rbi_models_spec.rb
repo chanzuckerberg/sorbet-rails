@@ -14,6 +14,7 @@ RSpec.describe 'rake rails_rbi:models', type: :task do
       files: [
         'potion.rbi',
         'robe.rbi',
+        'school.rbi',
         'spell_book.rbi',
         'squib.rbi',
         'wand.rbi',

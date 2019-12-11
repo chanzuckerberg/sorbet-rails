@@ -215,6 +215,15 @@ module Wizard::GeneratedAttributeMethods
   sig { returns(T::Boolean) }
   def quidditch_position?; end
 
+  sig { returns(T.nilable(Integer)) }
+  def school_id; end
+
+  sig { params(value: T.nilable(T.any(Integer, Float, ActiveSupport::Duration))).void }
+  def school_id=(value); end
+
+  sig { returns(T::Boolean) }
+  def school_id?; end
+
   sig { returns(String) }
   def type; end
 
@@ -236,6 +245,12 @@ end
 
 module Wizard::GeneratedAssociationMethods
   extend T::Sig
+
+  sig { returns(T.nilable(T.untyped)) }
+  def school; end
+
+  sig { params(value: T.nilable(T.untyped)).void }
+  def school=(value); end
 
   sig { returns(ActiveRecord::Associations::CollectionProxy) }
   def spell_books; end
