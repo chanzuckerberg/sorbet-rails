@@ -70,13 +70,12 @@ class SorbetRails::ModelPlugins::ActiveRecordAssoc < SorbetRails::ModelPlugins::
 
     if rails_required_config && !db_required_config
       puts "Warning: belongs_to association #{reflection.name} is required at the application
-        level but **nullable** at the DB level. It's recommended to enforce it by adding
-        not-null & foreign key constraint at the DB level.".squish!
-    end
-    if !rails_required_config && db_required_config
+        level but **nullable** at the DB level. Add a constraint at the DB level
+        (using `null: false` and foreign key constraint) to ensure it is enforced.".squish!
+    elsif !rails_required_config && db_required_config
       puts "Warning: belongs_to association #{reflection.name} is specified as not-null at the
-        DB level but **not required** at the application level. It's recommended to enforce it by
-        specifying that the association is **required: true**.".squish!
+        DB level but **not required** at the application level. Add a constraint at the app level
+        (using `optional: false`) as a validation hint to Rails.".squish!
     end
 
     rails_required_config || db_required_config
