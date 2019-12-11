@@ -215,6 +215,15 @@ module Wizard::GeneratedAttributeMethods
   sig { returns(T::Boolean) }
   def quidditch_position?; end
 
+  sig { returns(T.nilable(Integer)) }
+  def school_id; end
+
+  sig { params(value: T.nilable(T.any(Integer, Float, ActiveSupport::Duration))).void }
+  def school_id=(value); end
+
+  sig { returns(T::Boolean) }
+  def school_id?; end
+
   sig { returns(String) }
   def type; end
 
@@ -1393,6 +1402,12 @@ module Wizard::GeneratedAssociationMethods
 
   sig { params(value: T::Enumerable[::ActiveStorage::Blob]).void }
   def hats_blobs=(value); end
+
+  sig { returns(T.nilable(::School)) }
+  def school; end
+
+  sig { params(value: T.nilable(::School)).void }
+  def school=(value); end
 
   sig { returns(T.nilable(::ActiveStorage::Attachment)) }
   def school_photo_attachment; end

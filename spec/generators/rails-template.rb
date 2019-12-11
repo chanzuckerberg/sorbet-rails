@@ -79,7 +79,9 @@ def create_models
   file "app/models/spell_book.rb", <<~RUBY
     class SpellBook < ApplicationRecord
       validates :name, length: { minimum: 5 }, presence: true
-      belongs_to :wizard
+
+      # simulate when belongs_to is optional by default, but it is enforced at the DB level
+      belongs_to :wizard, optional: true
 
       enum book_type: {
         unclassified: 0,
@@ -169,6 +171,9 @@ def create_models
       has_one :wand
       has_many :spell_books
 
+      # simulate when belongs_to is optional by default
+      belongs_to :school, optional: true
+
       scope :recent, -> { where('created_at > ?', 1.month.ago) }
       #{attachments}
     end
@@ -198,6 +203,11 @@ def create_models
   file "app/models/robe.rb", <<~RUBY
     class Robe < ApplicationRecord
       belongs_to :wizard, required: false
+    end
+  RUBY
+
+  file "app/models/school.rb", <<~RUBY
+    class School < ApplicationRecord
     end
   RUBY
 end
@@ -239,7 +249,7 @@ def create_migrations
       def change
         create_table :spell_books do |t|
           t.string :name
-          t.references :wizard
+          t.references :wizard, null: false
           t.integer :book_type, null: false, default: 0
         end
       end
@@ -295,9 +305,21 @@ def create_migrations
   file "db/migrate/20190620000008_add_robe_to_wizard.rb", <<~RUBY
     class AddRobeToWizard < #{migration_superclass}
       def change
-        create_table :robe do |t|
+        create_table :robes do |t|
           t.references :wizard
         end
+      end
+    end
+  RUBY
+
+  file "db/migrate/20190620000009_add_school.rb", <<~RUBY
+    class AddSchool < #{migration_superclass}
+      def change
+        create_table :schools do |t|
+          t.string :name
+        end
+        add_column :wizards, :school_id, :integer
+        add_foreign_key :wizards, :schools
       end
     end
   RUBY

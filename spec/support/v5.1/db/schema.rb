@@ -11,16 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190620000008) do
+ActiveRecord::Schema.define(version: 20190620000009) do
 
-  create_table "robe", force: :cascade do |t|
+  create_table "robes", force: :cascade do |t|
     t.integer "wizard_id"
-    t.index ["wizard_id"], name: "index_robe_on_wizard_id"
+    t.index ["wizard_id"], name: "index_robes_on_wizard_id"
+  end
+
+  create_table "schools", force: :cascade do |t|
+    t.string "name"
   end
 
   create_table "spell_books", force: :cascade do |t|
     t.string "name"
-    t.integer "wizard_id"
+    t.integer "wizard_id", null: false
     t.integer "book_type", default: 0, null: false
     t.index ["wizard_id"], name: "index_spell_books_on_wizard_id"
   end
@@ -54,6 +58,7 @@ ActiveRecord::Schema.define(version: 20190620000008) do
     t.integer "eye_color"
     t.integer "hair_length"
     t.string "type", default: "Wizard", null: false
+    t.integer "school_id"
   end
 
 end

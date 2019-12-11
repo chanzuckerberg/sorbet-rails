@@ -44,6 +44,9 @@ class Wizard < ApplicationRecord
   has_one :wand
   has_many :spell_books
 
+  # simulate when belongs_to is optional by default
+  belongs_to :school, optional: true
+
   scope :recent, -> { where('created_at > ?', 1.month.ago) }
   
 end
