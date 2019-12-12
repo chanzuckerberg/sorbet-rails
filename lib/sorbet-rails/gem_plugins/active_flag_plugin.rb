@@ -12,6 +12,12 @@ class ActiveFlagPlugin < SorbetRails::ModelPlugins::Base
     model_class_rbi = root.create_class(self.model_class_name)
     model_class_rbi.create_include(module_name)
 
+    module_rbi.create_method(
+      "active_flags",
+      return_type: "T::Hash[Symbol, ActiveFlag::Definition]",
+      class_method: true
+    )
+
     model_class.active_flags.keys.each do |flag|
       module_rbi.create_method(
         flag.to_s,
