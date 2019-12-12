@@ -78,6 +78,12 @@ module SorbetRails::ModelPlugins
     when :elastic_search
       require('sorbet-rails/gem_plugins/elastic_search_plugin')
       ElasticSearchPlugin
+    when :active_flag
+      require('sorbet-rails/gem_plugins/active_flag_plugin')
+      ActiveFlagPlugin
+    when :paperclip
+      require('sorbet-rails/gem_plugins/paperclip_plugin')
+      PaperclipPlugin
     else
       raise UnrecognizedPluginName.new(
         "Unrecognized plugin with name: #{plugin_name}. Please check available plugins in the
