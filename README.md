@@ -361,6 +361,8 @@ These are the currently-supported gems and their symbolized names:
 | [Kaminari]   | `:kaminari`    |
 | [PgSearch]   | `:pg_search`   |
 | [Shrine]     | `:shrine`      |
+| [active_flag]| `:active_flag` |
+| [Paperclip]  | `:paperclip` |
 
 You can also configure the core model plugins if needed. The default plugins are defined in the [config](https://github.com/chanzuckerberg/sorbet-rails/blob/master/lib/sorbet-rails/config.rb). For the full list of plugin symbols, check out [here](https://github.com/chanzuckerberg/sorbet-rails/blob/master/lib/sorbet-rails/model_plugins/plugins.rb).
 
@@ -370,6 +372,8 @@ You can also configure the core model plugins if needed. The default plugins are
 [FriendlyId]: https://github.com/norman/friendly_id
 [ElasticSearch]: https://github.com/elastic/elasticsearch-rails
 [Shrine]: https://github.com/shrinerb/shrine
+[active_flag]: https://github.com/kenn/active_flag
+[Paperclip]: https://github.com/thoughtbot/paperclip
 
 ## Contributing
 
