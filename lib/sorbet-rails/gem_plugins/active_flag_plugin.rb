@@ -18,7 +18,7 @@ class ActiveFlagPlugin < SorbetRails::ModelPlugins::Base
       class_method: true
     )
 
-    model_class.active_flags.keys.each do |flag|
+    active_flag_keys(model_class).each do |flag|
       module_rbi.create_method(
         flag.to_s,
         return_type: "::ActiveFlag::Value"
@@ -38,5 +38,10 @@ class ActiveFlagPlugin < SorbetRails::ModelPlugins::Base
         class_method: true
       )
     end
+  end
+
+  sig { params(model_class: T.class_of(ActiveRecord::Base)).returns(T::Array[Symbol]) }
+  def active_flag_keys(model_class)
+    T.unsafe(model_class).active_flags.keys
   end
 end

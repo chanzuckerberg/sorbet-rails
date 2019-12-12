@@ -6,6 +6,7 @@ module ::Elasticsearch::Model; end
 module ::FriendlyId; end
 module ::Kaminari; end
 module ::Kaminari::ActiveRecordModelExtension; end
+module ::Paperclip::AttachmentRegistry; end
 module ::PgSearch::Model; end
 module ActionController::Helpers; end
 module ActionMailer::Base::Mail::Message; end
@@ -26,6 +27,13 @@ module ActiveRecord::AutosaveAssociation; end
 module ActiveRecord::Callbacks; end
 module ActiveRecord::CollectionCacheKey; end
 module ActiveRecord::ConnectionAdapters::TableDefinition; end
+module ActiveRecord::ConnectionAdapters::TableDefinition; end
+module ActiveRecord::ConnectionAdapters::TableDefinition; end
+module ActiveRecord::ConnectionAdapters::TableDefinition; end
+module ActiveRecord::ConnectionAdapters::TableDefinition; end
+module ActiveRecord::ConnectionAdapters::TableDefinition; end
+module ActiveRecord::ConnectionAdapters::TableDefinition; end
+module ActiveRecord::ConnectionAdapters::TableDefinition; end
 module ActiveRecord::ConnectionHandling; end
 module ActiveRecord::Core; end
 module ActiveRecord::CounterCache; end
@@ -43,6 +51,7 @@ module ActiveRecord::QueryCache::ClassMethods; end
 module ActiveRecord::Querying; end
 module ActiveRecord::ReadonlyAttributes; end
 module ActiveRecord::Reflection; end
+module ActiveRecord::Relation; end
 module ActiveRecord::Relation; end
 module ActiveRecord::Sanitization; end
 module ActiveRecord::SecureToken; end
@@ -66,8 +75,8 @@ module ActiveRecord::Type::String; end
 module ActiveRecord::Type::Text; end
 module ActiveRecord::Type::Time; end
 module ActiveRecord::Type::UnsignedInteger; end
-module Shrine::Attachment; end
-module Shrine::Plugins::RemoteUrl::AttachmentMethods; end
+module ShrinePlugin::Shrine::Attachment; end
+module ShrinePlugin::Shrine::Plugins::RemoteUrl::AttachmentMethods; end
 module SorbetRails::Utils::Zeitwerk::Loader; end
 module T::InterfaceWrapper::Helpers; end
 module T::InterfaceWrapper::Helpers; end

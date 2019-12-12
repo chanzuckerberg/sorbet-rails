@@ -13,7 +13,7 @@ class PaperclipPlugin < SorbetRails::ModelPlugins::Base
     model_class_rbi = root.create_class(self.model_class_name)
     model_class_rbi.create_include(module_name)
 
-    ::Paperclip::AttachmentRegistry.names_for(model_class).each do |attachment|
+    T.unsafe(::Paperclip::AttachmentRegistry).names_for(model_class).each do |attachment|
       # https://github.com/thoughtbot/paperclip/blob/v5.2.1/lib/paperclip/has_attached_file.rb#L42
       module_rbi.create_method(
         attachment.to_s,
