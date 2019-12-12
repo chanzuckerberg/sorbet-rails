@@ -31,6 +31,12 @@ class ActiveFlagPlugin < SorbetRails::ModelPlugins::Base
         ],
         return_type: nil
       )
+
+      module_rbi.create_method(
+        flag.to_s.pluralize,
+        return_type: "::ActiveFlag::Definition",
+        class_method: true
+      )
     end
   end
 end
