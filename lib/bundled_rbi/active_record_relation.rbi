@@ -1,0 +1,79 @@
+# typed: strong
+class ActiveRecord::Relation
+  sig { params(args: T.untyped).returns(Elem) }
+  def find(*args); end
+
+  sig { params(args: T.untyped).returns(T.nilable(Elem)) }
+  def find_by(*args); end
+
+  sig { params(args: T.untyped).returns(Elem) }
+  def find_by!(*args); end
+
+  sig { returns(T.nilable(Elem)) }
+  def first; end
+
+  sig { returns(Elem) }
+  def first!; end
+
+  sig { returns(T.nilable(Elem)) }
+  def second; end
+
+  sig { returns(Elem) }
+  def second!; end
+
+  sig { returns(T.nilable(Elem)) }
+  def third; end
+
+  sig { returns(Elem) }
+  def third!; end
+
+  sig { returns(T.nilable(Elem)) }
+  def third_to_last; end
+
+  sig { returns(Elem) }
+  def third_to_last!; end
+
+  sig { returns(T.nilable(Elem)) }
+  def second_to_last; end
+
+  sig { returns(Elem) }
+  def second_to_last!; end
+
+  sig { returns(T.nilable(Elem)) }
+  def last; end
+
+  sig { returns(Elem) }
+  def last!; end
+
+  sig { override.params(block: T.proc.params(e: Elem).void).returns(T::Array[Elem]) }
+  def each(&block); end
+
+  sig { params(level: T.nilable(Integer)).returns(T::Array[Elem]) }
+  def flatten(level); end
+
+  sig { returns(T::Array[Elem]) }
+  def to_a; end
+
+  sig do
+    type_parameters(:U).params(
+        blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),
+    )
+    .returns(T::Array[T.type_parameter(:U)])
+  end
+  def map(&blk); end
+
+  sig { params(conditions: T.untyped).returns(T::Boolean) }
+  def exists?(conditions = nil); end
+
+  sig { returns(T::Boolean) }
+  def any?; end
+
+  sig { returns(T::Boolean) }
+  def many?; end
+
+  sig { returns(T::Boolean) }
+  def none?; end
+
+  sig { returns(T::Boolean) }
+  def one?; end
+end
