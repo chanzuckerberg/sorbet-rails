@@ -180,6 +180,11 @@ T.assert_type!(wizard.color_brown_eyes?, T::Boolean)
 T.assert_type!(wizard.quidditch_keeper?, T::Boolean)
 T.assert_type!(wizard.brown_hair?, T::Boolean)
 
+# Relations
+T.assert_type!(wizard.spell_books.any?, T::Boolean)
+T.assert_type!(wizard.spell_books.none?, T::Boolean)
+T.assert_type!(wizard.spell_books.one?, T::Boolean)
+
 # -- Custom ActionController::Parameters Methods
 params = ActionController::Parameters.new({
   age: 11,
