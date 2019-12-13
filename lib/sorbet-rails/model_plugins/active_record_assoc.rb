@@ -66,7 +66,7 @@ class SorbetRails::ModelPlugins::ActiveRecordAssoc < SorbetRails::ModelPlugins::
       end
 
     column_def = @columns_hash[reflection.foreign_key.to_s]
-    db_required_config = column_def && !column_def.null
+    db_required_config = column_def.present? && !column_def.null
 
     if rails_required_config && !db_required_config
       puts "Warning: belongs_to association #{reflection.name} is required at the application
