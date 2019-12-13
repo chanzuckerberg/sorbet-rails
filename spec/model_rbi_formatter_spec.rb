@@ -7,7 +7,7 @@ RSpec.describe SorbetRails::ModelRbiFormatter do
   end
 
   it 'does not throw an error when given an abstract class' do
-    formatter = SorbetRails::ModelRbiFormatter.new(Potion, Set.new(['Potion']))
+    formatter = SorbetRails::ModelRbiFormatter.new(Potion, Set.new(['Potion', 'Wizard']))
     expect_match_file(
       formatter.generate_rbi,
       'expected_potion.rbi',
