@@ -7,6 +7,16 @@ module Potion::ActiveRelation_WhereNot
   def not(opts, *rest); end
 end
 
+module Potion::GeneratedAssociationMethods
+  extend T::Sig
+
+  sig { returns(T.nilable(::Wizard)) }
+  def wizard; end
+
+  sig { params(value: T.nilable(::Wizard)).void }
+  def wizard=(value); end
+end
+
 module Potion::CustomFinderMethods
   sig { params(limit: Integer).returns(T::Array[Potion]) }
   def first_n(limit); end
@@ -25,6 +35,7 @@ module Potion::CustomFinderMethods
 end
 
 class Potion < ApplicationRecord
+  include Potion::GeneratedAssociationMethods
   extend Potion::CustomFinderMethods
   extend T::Sig
   extend T::Generic
