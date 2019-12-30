@@ -69,6 +69,9 @@ class ActiveRecord::Relation
   def any?; end
 
   sig { returns(T::Boolean) }
+  def empty?; end
+
+  sig { returns(T::Boolean) }
   def many?; end
 
   sig { returns(T::Boolean) }
