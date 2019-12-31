@@ -116,11 +116,11 @@ end
 module Wizard::GeneratedAttributeMethods
   extend T::Sig
 
-  sig { returns(T.nilable(String)) }
-  def broom; end
+  sig { returns(T.nilable(Wizard::Broom)) }
+  def t_broom; end
 
-  sig { params(value: T.nilable(T.any(Integer, String, Symbol))).void }
-  def broom=(value); end
+  sig { params(value: T.nilable(Wizard::Broom)).void }
+  def t_broom=(value); end
 
   sig { returns(T::Boolean) }
   def broom?; end
@@ -160,6 +160,12 @@ module Wizard::GeneratedAttributeMethods
 
   sig { returns(T::Boolean) }
   def hair_length?; end
+
+  sig { returns(T.nilable(Wizard::House)) }
+  def t_house; end
+
+  sig { params(value: T.nilable(Wizard::House)).void }
+  def t_house=(value); end
 
   sig { returns(T.nilable(String)) }
   def house; end
@@ -206,6 +212,12 @@ module Wizard::GeneratedAttributeMethods
   sig { returns(T::Boolean) }
   def parent_email?; end
 
+  sig { returns(T.nilable(Wizard::QPos)) }
+  def t_quidditch_position; end
+
+  sig { params(value: T.nilable(Wizard::QPos)).void }
+  def t_quidditch_position=(value); end
+
   sig { returns(T.nilable(String)) }
   def quidditch_position; end
 
@@ -241,6 +253,34 @@ module Wizard::GeneratedAttributeMethods
 
   sig { returns(T::Boolean) }
   def updated_at?; end
+end
+
+class Wizard::Broom < T::Enum
+  enums do
+    Nimbus = new('nimbus')
+    Firebolt = new('firebolt')
+  end
+
+end
+
+class Wizard::House < T::Enum
+  enums do
+    Gryffindor = new('Gryffindor')
+    Hufflepuff = new('Hufflepuff')
+    Ravenclaw = new('Ravenclaw')
+    Slytherin = new('Slytherin')
+  end
+
+end
+
+class Wizard::QPos < T::Enum
+  enums do
+    Keeper = new('keeper')
+    Seeker = new('seeker')
+    Beater = new('beater')
+    Chaser = new('chaser')
+  end
+
 end
 
 module Wizard::CustomFinderMethods
