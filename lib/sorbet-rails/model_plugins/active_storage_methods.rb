@@ -1,4 +1,4 @@
-# typed: true
+# typed: strict
 require ('sorbet-rails/model_plugins/base')
 class SorbetRails::ModelPlugins::ActiveStorageMethods < SorbetRails::ModelPlugins::Base
   sig { params(model_class: T.class_of(ActiveRecord::Base), available_classes: T::Set[String]).void }

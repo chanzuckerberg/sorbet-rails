@@ -1,4 +1,4 @@
-# typed: true
+# typed: strict
 class ElasticSearchPlugin < SorbetRails::ModelPlugins::Base
   sig { override.params(root: Parlour::RbiGenerator::Namespace).void }
   def generate(root)

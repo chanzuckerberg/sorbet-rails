@@ -1,4 +1,4 @@
-# typed: true
+# typed: strict
 require 'sorbet-runtime'
 require 'sorbet-rails/type_assert/type_assert_interface'
 require 'sorbet-rails/type_assert/type_assert_impl'

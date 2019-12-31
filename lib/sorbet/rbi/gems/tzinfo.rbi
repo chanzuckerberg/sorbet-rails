@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/tzinfo/all/tzinfo.rbi
 #
-# tzinfo-1.2.5
+# tzinfo-1.2.6
 module TZInfo
 end
 module TZInfo::RubyCoreSupport
@@ -174,6 +174,7 @@ end
 class TZInfo::RubyDataSource < TZInfo::DataSource
   def country_codes; end
   def data_timezone_identifiers; end
+  def initialize; end
   def linked_timezone_identifiers; end
   def load_country_index; end
   def load_country_info(code); end
@@ -181,10 +182,7 @@ class TZInfo::RubyDataSource < TZInfo::DataSource
   def load_timezone_info(identifier); end
   def require_data(*file); end
   def require_definition(identifier); end
-  def self.load_country_index; end
-  def self.load_timezone_index; end
-  def self.require_data(*file); end
-  def self.require_index(name); end
+  def require_index(name); end
   def timezone_identifiers; end
   def to_s; end
 end

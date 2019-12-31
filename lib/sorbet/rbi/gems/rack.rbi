@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/rack/all/rack.rbi
 #
-# rack-2.0.7
+# rack-2.0.8
 module Rack
   def self.release; end
   def self.version; end

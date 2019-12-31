@@ -1,4 +1,4 @@
-# typed: true
+# typed: false
 require "rails"
 require "sorbet-runtime"
 require "sorbet-rails/config"
@@ -16,12 +16,15 @@ class SorbetRails::Railtie < Rails::Railtie
       require "sorbet-rails/rails_mixins/active_record_overrides"
       require "sorbet-rails/rails_mixins/custom_finder_methods"
       require "sorbet-rails/rails_mixins/pluck_to_tstruct"
+      require "sorbet-rails/rails_mixins/active_record_t_enum"
 
       ActiveRecord::Base.extend SorbetRails::CustomFinderMethods
       ActiveRecord::Relation.include SorbetRails::CustomFinderMethods
 
       ActiveRecord::Base.extend SorbetRails::PluckToTStruct
       ActiveRecord::Relation.include SorbetRails::PluckToTStruct
+
+      ActiveRecord::Base.extend SorbetRails::ActiveRecordTEnum
 
       class ::ActiveRecord::Base
         # open ActiveRecord::Base to override inherited

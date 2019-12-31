@@ -9,6 +9,8 @@ class Wizard < ApplicationRecord
     Slytherin: 3,
   }
 
+  enable_t_enum! :house
+
   enum professor: {
     "Severus Snape": 0,
     "Minerva McGonagall": 1,
