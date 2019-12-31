@@ -169,6 +169,15 @@ T.assert_type!(Wizard.brooms, T::Hash[T.any(String, Symbol), String])
 T.assert_type!(spell_book.biology?, T::Boolean)
 T.assert_type!(spell_book.book_type, String)
 T.assert_type!(SpellBook.book_types, T::Hash[T.any(String, Symbol), Integer])
+# Model T::Enum
+T.assert_type!(wizard.t_house, Wizard::House)
+T.assert_type!(wizard.t_broom, Wizard::Broom)
+T.assert_type!(wizard.t_quidditch_position, Wizard::QPos)
+T.assert_type!(Wizard::House, T.class_of(T::Enum))
+T.assert_type!(Wizard::House::Gryffindor, Wizard::House)
+T.assert_type!(Wizard::House::Hufflepuff, Wizard::House)
+T.assert_type!(Wizard::House::Ravenclaw, Wizard::House)
+T.assert_type!(Wizard::House::Slytherin, Wizard::House)
 
 # Mythical plugin
 T.assert_type!(Wand.mythicals, T::Array[Wand])
