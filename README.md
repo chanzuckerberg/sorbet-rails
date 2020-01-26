@@ -97,7 +97,7 @@ T.reveal_type(key) # String
 # nested params
 nested_params = params.require_typed(:nested, TA[ActionController::Parameters].new)
 T.reveal_type(nested_params) # ActionController::Parameters
-key = nested_params.require_typed(:key, TA[String.new])
+key = nested_params.require_typed(:key, TA[String].new)
 T.reveal_type(key) # String
 
 # fetch_typed
@@ -204,7 +204,9 @@ Following are the list of attribute dynamic methods and their static counterpart
 - `find_by_<attributes>` -> `find_by(<attributes>)`
 - `find_by_<attributes>!` -> `find_by!(<attributes>)`
 - `<attribute>_changed?` -> `attribute_changed?(<attribute>)`
+- `<attribute>_was` -> `attribute_was(<attribute>)`
 - `saved_change_to_<attribute>?` -> `saved_change_to_attribute?(<attribute>)`
+- `<attribute>_before_type_cast` -> `read_attribute_before_type_cast(<attribute>)`
 
 ### `after_commit` and other callbacks
 
