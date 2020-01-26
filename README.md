@@ -204,7 +204,9 @@ Following are the list of attribute dynamic methods and their static counterpart
 - `find_by_<attributes>` -> `find_by(<attributes>)`
 - `find_by_<attributes>!` -> `find_by!(<attributes>)`
 - `<attribute>_changed?` -> `attribute_changed?(<attribute>)`
+- `<attribute>_was` -> `attribute_was(<attribute>)`
 - `saved_change_to_<attribute>?` -> `saved_change_to_attribute?(<attribute>)`
+- `<attribute>_before_type_cast` -> `read_attribute_before_type_cast(<attribute>)`
 
 ### `after_commit` and other callbacks
 
