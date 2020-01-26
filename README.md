@@ -97,7 +97,7 @@ T.reveal_type(key) # String
 # nested params
 nested_params = params.require_typed(:nested, TA[ActionController::Parameters].new)
 T.reveal_type(nested_params) # ActionController::Parameters
-key = nested_params.require_typed(:key, TA[String.new])
+key = nested_params.require_typed(:key, TA[String].new)
 T.reveal_type(key) # String
 
 # fetch_typed
