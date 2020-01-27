@@ -160,42 +160,27 @@ Generates only typed enum setter & getter:
 ```
 
 ### Controllers
-```sh
-❯ rake rails_rbi:custom
-```
+`sorbet-rails` adds `TypedParams` to extact typed controller parameters.
 
-`sorbet-rails` adds methods to extract typed parameters from `params`, namely `require_typed` and `fetch_typed`. They are direct replacement of `require` and `fetch` that return typed object. They have the same API their counterpart, with an addition of the parameter's type, which can be any type understood by `sorbet`
-
-This is the conversion in essence:
+TypedParams takes a parameter definition, which is a subclass of `T::Struct` and coerces the `params` object into an instance of that subclass using [sorbet-coerce](https://github.com/chanzuckerberg/sorbet-coerce):
 ```ruby
-params.require(:key)              -> params.require_typed(:key, TA[Type].new)
-params.fetch(:key)                -> params.fetch_typed(:key, TA[Type].new)
-params.fetch(:key, default_value) -> params.fetch_typed(:key, TA[Type].new, default_value)
-params[:key]                      -> params.fetch_typed(:key, TA[T.nilable(Type)].new, nil)
+class MyCoolController < ApplicationController
+  class MyActionParams < T::Struct
+    const :id, T.nilable(Integer)
+    const :show, T.nilable(T::Boolean)
+    const :wands, T::Array[Integer]
+  end
+  sig { void }
+  def my_action
+    typed_params = TypedParams[MyActionParams].new.extract!(params)
+    # T.reveal_type(typed_params) => MyActionParams
+    # T.reveal_type(typed_params.show) => T.nilable(T::Boolean)
+  end
+end
 ```
+If it fails to coerce the params into the right type, an `ActionController::BadRequest` exception will be raised with the coercion context for debugging. 
 
-For example:
-```ruby
-# require_typed
-key = params.require_typed(:key, TA[String].new)
-T.reveal_type(key) # String
-
-# nested params
-nested_params = params.require_typed(:nested, TA[ActionController::Parameters].new)
-T.reveal_type(nested_params) # ActionController::Parameters
-key = nested_params.require_typed(:key, TA[String].new)
-T.reveal_type(key) # String
-
-# fetch_typed
-key = params.fetch_typed(:key, TA[T.nilable(String)].new) # raises error if params doesn't have :key
-T.reveal_type(key) # T.nilable(String)
-
-key = params.fetch_typed(:key, TA[T.nilable(String)].new, nil) # returns nil when key doesn't have :key
-T.reveal_type(key) # T.nilable(String)
-```
-The parameters are type-checked both statically and at runtime.
-
-Note: The API `TA[...].new` may seem verbose, but necessary to support this feature. Ideally, the API can be simply `require_typed(:key, Type)`. However, `sorbet` [doesn't support](http://github.com/sorbet/sorbet/issues/62) defining a method that accept a type and return an instance of the type. The library provides a wrapper `TA` (which stands for `TypeAssert`) in order to achieve the behavior. If this feature is supported by `sorbet` in the future, it will be easy to codemod to remove the `TA[...].new` part from your code.
+Note: The API `TypedParams[...].new.extract!` may seem verbose, but necessary to support this feature. Ideally, the API can be simply `TypedParams[...].extract!`. However, `sorbet` [doesn't support](http://github.com/sorbet/sorbet/issues/62) defining a method that accept a type and return an instance of the type. If this feature is supported by `sorbet` in the future, it will be easy to codemod to remove the `TypedParams[...].extract!` part from your code.
 
 ### Routes
 
