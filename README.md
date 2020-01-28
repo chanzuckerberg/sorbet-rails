@@ -188,6 +188,21 @@ class ModelName
 end
 ```
 
+### Replace `Rails.application.routes.url_helpers`
+
+When using url helpers like _url or _path methods outside of a controller,
+we usually have to add `include Rails.application.routes.url_helpers`. However,
+Sorbet does not allow [including dynamic module](https://sorbet.org/docs/error-reference#4002). Sorbet Rails provides a drop-in replacement module for
+the dynamic url_helpers module, called `GeneratedUrlHelpers`. Following code
+should resolve the sorbet type-check error:
+
+```ruby
+class MyClass
+-  include Rails.application.routes.url_helpers
++  include GeneratedUrlHelpers
+end
+```
+
 ### `find`, `first` and `last`
 
 These 3 methods can either return a single nilable record or an array of records. Sorbet does not allow us to define multiple signatures for a function ([except stdlib](https://github.com/chanzuckerberg/sorbet-rails/issues/18)). It doesn't support defining one function signature that has varying returning value depending on the input parameter type. We opt to define the most commonly used signature for these methods, and monkey-patch new functions for the secondary use case.
