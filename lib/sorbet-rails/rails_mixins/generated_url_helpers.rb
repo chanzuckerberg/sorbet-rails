@@ -1,4 +1,4 @@
-# typed: false
+# typed: ignore
 
 # Sorbet does not allow dynamic includes like `url_helpers`
 # This module is a drop-in replacement for the dynamic include, and should
