@@ -1,4 +1,4 @@
-# typed: false
+# typed: true
 require 'sorbet-runtime'
 
 wand = Wand.first!
@@ -251,3 +251,23 @@ end
 Wizard.all.pluck_to_tstruct(TA[WizardStruct].new).each do |row|
   T.assert_type!(row, WizardStruct)
 end
+
+
+# -- GeneratedUrlHelpers
+class TestHelper
+  include GeneratedUrlHelpers
+
+  # need to implement this for the url
+  def default_url_options
+    {
+      protocol: 'http',
+      host: 'localhost',
+      port: 3000,
+    }
+  end
+
+  def test_url_helper
+    T.assert_type!(test_index_path, String)
+  end
+end
+TestHelper.new.test_url_helper
