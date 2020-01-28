@@ -39,11 +39,11 @@ class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugi
             assignable_type = t_enum_type
             assignable_type = "T.nilable(#{assignable_type})" if column_def.null
             attribute_module_rbi.create_method(
-              "t_#{column_name}",
+              "typed_#{column_name}",
               return_type: assignable_type,
             )
             attribute_module_rbi.create_method(
-              "t_#{column_name}=",
+              "typed_#{column_name}=",
               parameters: [
                 Parameter.new("value", type: assignable_type)
               ],

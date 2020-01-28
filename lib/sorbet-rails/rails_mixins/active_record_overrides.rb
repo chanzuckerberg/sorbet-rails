@@ -31,11 +31,141 @@ class ActiveRecordOverrides
   end
 end
 
+class SorbetRails::TypedEnumConfig < T::Struct
+  # set the method to be true or false
+  const :strict_mode, T::Boolean
+  const :class_name, String
+end
+
 module ::ActiveRecord::Enum
   alias old_enum enum
 
-  def enum(*args, **kwargs)
+  _SR_ENUM_KEYWORDS = [
+    # keywords from https://github.com/rails/rails/blob/master/activerecord/lib/active_record/enum.rb
+    :_prefix,
+    :_suffix,
+    :_scopes,
+    # typed_enum keywords
+    :_typed_class_name,
+    :_typed_strict,
+  ]
+
+  sig { params(definitions: T::Hash[Symbol, T.untyped]).void }
+  def _define_enum(definitions)
     ActiveRecordOverrides.instance.store_enum_call(self, kwargs)
-    old_enum(*args, **kwargs)
+    old_enum(definitions)
   end
+
+  sig { params(definitions: T::Hash[Symbol, T.untyped]).void }
+  def enum(definitions)
+    _define_enum(definitions)
+    definitions.each do |enum_name, values|
+      begin
+        # skip irrelevant keywords
+        next if _SR_ENUM_KEYWORDS.include?(enum_name)
+        _define_typed_enum(enum_name, values)
+      rescue ArgumentError, ConflictTypedEnumNameError => ex # TODO rescue errors
+        # do nothing if we cannot define t_enum
+        puts "warning: #{ex.message}"
+      end
+    end
+  end
+
+  sig { params(definitions: T::Hash[Symbol, T.untyped]).void }
+  def typed_enum(definitions)
+    enum_names = definitions.keys - _SR_ENUM_KEYWORDS
+
+    if enum_names.size != 1
+      raise MultipleEnumsDefinedError.new(
+        "typed_enum only supports 1 enum defined at a time,
+        given #{enum_names.count}: #{enum_names.join(', ')}".squish!
+      )
+    end
+
+    typed_class_name = definitions.delete(:_typed_class_name)
+    strict_mode = definitions.delete(:_typed_strict)
+
+    _define_enum(definitions)
+    _define_typed_enum(
+      enum_name,
+      enum_values,
+      typed_class_name: typed_class_name,
+      strict_mode: strict_mode,
+    )
+  end
+
+  # this config is for sorbet-rails to inflect on the settings
+  sig { returns(T::Hash[String, SorbetRails::TypedEnumConfig]) }
+  def typed_enum_reflections
+    @typed_enum_reflections ||= {}
+  end
+
+  sig {
+    params(
+      enum_name: String,
+      enum_values: T::Hash[Symbol, T.untyped],
+      typed_class_name: String,
+      strict_mode: T::Boolean,
+    ).
+    void
+  }
+  def _define_typed_enum(
+    enum_name,
+    enum_values,
+    typed_class_name: nil,
+    strict_mode: false,
+  )
+    enum_klass_name = typed_class_name || enum_name.camelize
+
+    # we don't need to use the actual enum value
+    typed_enum_values = gen_typed_enum_values(enum_values.keys)
+
+    # create dynamic T::Enum definition
+    if const_defined?(enum_klass_name)
+      raise ConflictTypedEnumNameError.new(
+        "Unable to define enum class #{enum_klass_name} because
+        it's already defined".squish!
+      )
+    end
+    enum_klass = Class.new(T::Enum) do
+      enums do
+        typed_enum_values.each do |enum_key_name, typed_enum_value|
+          const_set(typed_enum_value, new(enum_key_name))
+        end
+      end
+    end
+    const_set(enum_klass_name, enum_klass)
+
+    # create t_enum getter to get T::Enum value
+    # assuming there shouldn't be any conflict
+    typed_enum_getter_name = "typed_#{enum_name}"
+    detect_enum_conflict!(enum_name, typed_enum_getter_name)
+    define_method(typed_enum_getter_name) do
+      T.unsafe(enum_klass).try_deserialize(send(enum_name))
+    end
+
+    # override the setter to accept T::Enum values
+    enum_setter_name = "#{enum_name}="
+    typed_enum_setter_name = "typed_#{enum_name}="
+    detect_enum_conflict!(enum_name, typed_enum_setter_name)
+    define_method(typed_enum_setter_name) do |value|
+      send(enum_setter_name, value.serialize)
+    end
+
+    # add to the config for RBI generation only if it works
+    typed_enum_reflections[enum_name] = SorbetRails::TypedEnumConfig.new(
+      strict_mode: strict_mode,
+      class_name: enum_klass_name,
+    )
+  end
+
+  sig { params(enum_values: T::Array[String]).returns(T::Hash[String, String]) }
+  def gen_typed_enum_values(enum_values)
+    Hash[enum_values.map do |val|
+      [val, val.gsub(/[^0-9a-z_]/i, '').camelize]
+    end]
+  end
+
+  class MultipleEnumsDefinedError < StandardError; end
+  class ConflictTypedEnumNameError < StandardError; end
 end
