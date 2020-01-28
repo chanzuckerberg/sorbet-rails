@@ -191,8 +191,9 @@ end
 ### Replace `Rails.application.routes.url_helpers`
 
 When using url helpers like _url or _path methods outside of a controller,
-we usually have to add `include Rails.application.routes.url_helpers`. However,
-Sorbet does not allow [including dynamic module](https://sorbet.org/docs/error-reference#4002).
+we usually have to add `include Rails.application.routes.url_helpers` in the class.
+However, Sorbet does not allow code that
+[includes dynamic module](https://sorbet.org/docs/error-reference#4002).
 Sorbet Rails provides a drop-in replacement module for the dynamic url_helpers module, called `GeneratedUrlHelpers`.
 Following code change should resolve the sorbet type-check error:
 
