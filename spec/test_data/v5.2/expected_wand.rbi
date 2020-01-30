@@ -74,6 +74,12 @@ module Wand::GeneratedAttributeMethods
   sig { returns(T::Boolean) }
   def chosen_at_time?; end
 
+  sig { returns(T.nilable(Wand::CoreType)) }
+  def typed_core_type; end
+
+  sig { params(value: T.nilable(Wand::CoreType)).void }
+  def typed_core_type=(value); end
+
   sig { returns(T.nilable(String)) }
   def core_type; end
 
@@ -172,6 +178,16 @@ module Wand::GeneratedAttributeMethods
 
   sig { returns(T::Boolean) }
   def wood_type?; end
+end
+
+class Wand::CoreType < T::Enum
+  enums do
+    PhoenixFeather = new('phoenix_feather')
+    DragonHeartstring = new('dragon_heartstring')
+    UnicornTailHair = new('unicorn_tail_hair')
+    BasiliskHorn = new('basilisk_horn')
+  end
+
 end
 
 module Wand::GeneratedAssociationMethods

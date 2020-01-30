@@ -7,19 +7,6 @@ module ActiveRecord::SchemaMigration::ActiveRelation_WhereNot
   def not(opts, *rest); end
 end
 
-module ActiveRecord::SchemaMigration::GeneratedAttributeMethods
-  extend T::Sig
-
-  sig { returns(String) }
-  def version; end
-
-  sig { params(value: T.any(String, Symbol)).void }
-  def version=(value); end
-
-  sig { returns(T::Boolean) }
-  def version?; end
-end
-
 module ActiveRecord::SchemaMigration::CustomFinderMethods
   sig { params(limit: Integer).returns(T::Array[ActiveRecord::SchemaMigration]) }
   def first_n(limit); end
@@ -38,7 +25,6 @@ module ActiveRecord::SchemaMigration::CustomFinderMethods
 end
 
 class ActiveRecord::SchemaMigration < ActiveRecord::Base
-  include ActiveRecord::SchemaMigration::GeneratedAttributeMethods
   extend ActiveRecord::SchemaMigration::CustomFinderMethods
   extend T::Sig
   extend T::Generic

@@ -7,28 +7,6 @@ module School::ActiveRelation_WhereNot
   def not(opts, *rest); end
 end
 
-module School::GeneratedAttributeMethods
-  extend T::Sig
-
-  sig { returns(Integer) }
-  def id; end
-
-  sig { params(value: T.any(Integer, Float, ActiveSupport::Duration)).void }
-  def id=(value); end
-
-  sig { returns(T::Boolean) }
-  def id?; end
-
-  sig { returns(T.nilable(String)) }
-  def name; end
-
-  sig { params(value: T.nilable(String)).void }
-  def name=(value); end
-
-  sig { returns(T::Boolean) }
-  def name?; end
-end
-
 module School::CustomFinderMethods
   sig { params(limit: Integer).returns(T::Array[School]) }
   def first_n(limit); end
@@ -47,7 +25,6 @@ module School::CustomFinderMethods
 end
 
 class School < ApplicationRecord
-  include School::GeneratedAttributeMethods
   extend School::CustomFinderMethods
   extend T::Sig
   extend T::Generic

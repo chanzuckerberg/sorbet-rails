@@ -6,52 +6,40 @@ module Squib::EnumInstanceMethods
   extend T::Sig
 
   sig { returns(T::Boolean) }
-  def broom_nimbus?; end
+  def nimbus?; end
 
   sig { void }
-  def broom_nimbus!; end
+  def nimbus!; end
 
   sig { returns(T::Boolean) }
-  def broom_firebolt?; end
+  def firebolt?; end
 
   sig { void }
-  def broom_firebolt!; end
+  def firebolt!; end
 
   sig { returns(T::Boolean) }
-  def color_brown_eyes?; end
+  def green?; end
 
   sig { void }
-  def color_brown_eyes!; end
+  def green!; end
 
   sig { returns(T::Boolean) }
-  def color_green_eyes?; end
+  def blue?; end
 
   sig { void }
-  def color_green_eyes!; end
+  def blue!; end
 
   sig { returns(T::Boolean) }
-  def color_blue_eyes?; end
+  def black?; end
 
   sig { void }
-  def color_blue_eyes!; end
+  def black!; end
 
   sig { returns(T::Boolean) }
-  def brown_hair?; end
+  def blonde?; end
 
   sig { void }
-  def brown_hair!; end
-
-  sig { returns(T::Boolean) }
-  def black_hair?; end
-
-  sig { void }
-  def black_hair!; end
-
-  sig { returns(T::Boolean) }
-  def blonde_hair?; end
-
-  sig { void }
-  def blonde_hair!; end
+  def blonde!; end
 
   sig { returns(T::Boolean) }
   def Gryffindor?; end
@@ -84,28 +72,34 @@ module Squib::EnumInstanceMethods
   def Hagrid!; end
 
   sig { returns(T::Boolean) }
-  def quidditch_keeper?; end
+  def keeper?; end
 
   sig { void }
-  def quidditch_keeper!; end
+  def keeper!; end
 
   sig { returns(T::Boolean) }
-  def quidditch_seeker?; end
+  def seeker?; end
 
   sig { void }
-  def quidditch_seeker!; end
+  def seeker!; end
 
   sig { returns(T::Boolean) }
-  def quidditch_beater?; end
+  def beater?; end
 
   sig { void }
-  def quidditch_beater!; end
+  def beater!; end
 
   sig { returns(T::Boolean) }
-  def quidditch_chaser?; end
+  def chaser?; end
 
   sig { void }
-  def quidditch_chaser!; end
+  def chaser!; end
+
+  sig { returns(T::Boolean) }
+  def brown?; end
+
+  sig { void }
+  def brown!; end
 end
 
 module Squib::ActiveRelation_WhereNot

@@ -7,28 +7,6 @@ module Robe::ActiveRelation_WhereNot
   def not(opts, *rest); end
 end
 
-module Robe::GeneratedAttributeMethods
-  extend T::Sig
-
-  sig { returns(Integer) }
-  def id; end
-
-  sig { params(value: T.any(Integer, Float, ActiveSupport::Duration)).void }
-  def id=(value); end
-
-  sig { returns(T::Boolean) }
-  def id?; end
-
-  sig { returns(T.nilable(Integer)) }
-  def wizard_id; end
-
-  sig { params(value: T.nilable(T.any(Integer, Float, ActiveSupport::Duration))).void }
-  def wizard_id=(value); end
-
-  sig { returns(T::Boolean) }
-  def wizard_id?; end
-end
-
 module Robe::GeneratedAssociationMethods
   extend T::Sig
 
@@ -57,7 +35,6 @@ module Robe::CustomFinderMethods
 end
 
 class Robe < ApplicationRecord
-  include Robe::GeneratedAttributeMethods
   include Robe::GeneratedAssociationMethods
   extend Robe::CustomFinderMethods
   extend T::Sig

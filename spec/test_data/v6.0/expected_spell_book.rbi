@@ -32,6 +32,12 @@ end
 module SpellBook::GeneratedAttributeMethods
   extend T::Sig
 
+  sig { returns(SpellBook::BookType) }
+  def typed_book_type; end
+
+  sig { params(value: SpellBook::BookType).void }
+  def typed_book_type=(value); end
+
   sig { returns(String) }
   def book_type; end
 
@@ -67,6 +73,15 @@ module SpellBook::GeneratedAttributeMethods
 
   sig { returns(T::Boolean) }
   def wizard_id?; end
+end
+
+class SpellBook::BookType < T::Enum
+  enums do
+    Unclassified = new('unclassified')
+    Biology = new('biology')
+    DarkArt = new('dark_art')
+  end
+
 end
 
 module SpellBook::GeneratedAssociationMethods

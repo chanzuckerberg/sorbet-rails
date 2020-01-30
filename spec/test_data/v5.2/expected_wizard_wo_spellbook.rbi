@@ -6,52 +6,40 @@ module Wizard::EnumInstanceMethods
   extend T::Sig
 
   sig { returns(T::Boolean) }
-  def broom_nimbus?; end
+  def nimbus?; end
 
   sig { void }
-  def broom_nimbus!; end
+  def nimbus!; end
 
   sig { returns(T::Boolean) }
-  def broom_firebolt?; end
+  def firebolt?; end
 
   sig { void }
-  def broom_firebolt!; end
+  def firebolt!; end
 
   sig { returns(T::Boolean) }
-  def color_brown_eyes?; end
+  def green?; end
 
   sig { void }
-  def color_brown_eyes!; end
+  def green!; end
 
   sig { returns(T::Boolean) }
-  def color_green_eyes?; end
+  def blue?; end
 
   sig { void }
-  def color_green_eyes!; end
+  def blue!; end
 
   sig { returns(T::Boolean) }
-  def color_blue_eyes?; end
+  def black?; end
 
   sig { void }
-  def color_blue_eyes!; end
+  def black!; end
 
   sig { returns(T::Boolean) }
-  def brown_hair?; end
+  def blonde?; end
 
   sig { void }
-  def brown_hair!; end
-
-  sig { returns(T::Boolean) }
-  def black_hair?; end
-
-  sig { void }
-  def black_hair!; end
-
-  sig { returns(T::Boolean) }
-  def blonde_hair?; end
-
-  sig { void }
-  def blonde_hair!; end
+  def blonde!; end
 
   sig { returns(T::Boolean) }
   def Gryffindor?; end
@@ -84,28 +72,34 @@ module Wizard::EnumInstanceMethods
   def Hagrid!; end
 
   sig { returns(T::Boolean) }
-  def quidditch_keeper?; end
+  def keeper?; end
 
   sig { void }
-  def quidditch_keeper!; end
+  def keeper!; end
 
   sig { returns(T::Boolean) }
-  def quidditch_seeker?; end
+  def seeker?; end
 
   sig { void }
-  def quidditch_seeker!; end
+  def seeker!; end
 
   sig { returns(T::Boolean) }
-  def quidditch_beater?; end
+  def beater?; end
 
   sig { void }
-  def quidditch_beater!; end
+  def beater!; end
 
   sig { returns(T::Boolean) }
-  def quidditch_chaser?; end
+  def chaser?; end
 
   sig { void }
-  def quidditch_chaser!; end
+  def chaser!; end
+
+  sig { returns(T::Boolean) }
+  def brown?; end
+
+  sig { void }
+  def brown!; end
 end
 
 module Wizard::ActiveRelation_WhereNot
@@ -117,10 +111,16 @@ module Wizard::GeneratedAttributeMethods
   extend T::Sig
 
   sig { returns(T.nilable(Wizard::Broom)) }
-  def t_broom; end
+  def typed_broom; end
 
   sig { params(value: T.nilable(Wizard::Broom)).void }
-  def t_broom=(value); end
+  def typed_broom=(value); end
+
+  sig { returns(T.nilable(String)) }
+  def broom; end
+
+  sig { params(value: T.nilable(T.any(Integer, String, Symbol))).void }
+  def broom=(value); end
 
   sig { returns(T::Boolean) }
   def broom?; end
@@ -134,6 +134,12 @@ module Wizard::GeneratedAttributeMethods
   sig { returns(T::Boolean) }
   def created_at?; end
 
+  sig { returns(T.nilable(Wizard::EyeColor)) }
+  def typed_eye_color; end
+
+  sig { params(value: T.nilable(Wizard::EyeColor)).void }
+  def typed_eye_color=(value); end
+
   sig { returns(T.nilable(String)) }
   def eye_color; end
 
@@ -142,6 +148,12 @@ module Wizard::GeneratedAttributeMethods
 
   sig { returns(T::Boolean) }
   def eye_color?; end
+
+  sig { returns(T.nilable(Wizard::HairColor)) }
+  def typed_hair_color; end
+
+  sig { params(value: T.nilable(Wizard::HairColor)).void }
+  def typed_hair_color=(value); end
 
   sig { returns(T.nilable(String)) }
   def hair_color; end
@@ -162,10 +174,10 @@ module Wizard::GeneratedAttributeMethods
   def hair_length?; end
 
   sig { returns(T.nilable(Wizard::House)) }
-  def t_house; end
+  def typed_house; end
 
   sig { params(value: T.nilable(Wizard::House)).void }
-  def t_house=(value); end
+  def typed_house=(value); end
 
   sig { returns(T.nilable(String)) }
   def house; end
@@ -212,11 +224,11 @@ module Wizard::GeneratedAttributeMethods
   sig { returns(T::Boolean) }
   def parent_email?; end
 
-  sig { returns(T.nilable(Wizard::QPos)) }
-  def t_quidditch_position; end
+  sig { returns(T.nilable(Wizard::QDPosition)) }
+  def typed_quidditch_position; end
 
-  sig { params(value: T.nilable(Wizard::QPos)).void }
-  def t_quidditch_position=(value); end
+  sig { params(value: T.nilable(Wizard::QDPosition)).void }
+  def typed_quidditch_position=(value); end
 
   sig { returns(T.nilable(String)) }
   def quidditch_position; end
@@ -263,6 +275,24 @@ class Wizard::Broom < T::Enum
 
 end
 
+class Wizard::EyeColor < T::Enum
+  enums do
+    Brown = new('brown')
+    Green = new('green')
+    Blue = new('blue')
+  end
+
+end
+
+class Wizard::HairColor < T::Enum
+  enums do
+    Brown = new('brown')
+    Black = new('black')
+    Blonde = new('blonde')
+  end
+
+end
+
 class Wizard::House < T::Enum
   enums do
     Gryffindor = new('Gryffindor')
@@ -273,7 +303,7 @@ class Wizard::House < T::Enum
 
 end
 
-class Wizard::QPos < T::Enum
+class Wizard::QDPosition < T::Enum
   enums do
     Keeper = new('keeper')
     Seeker = new('seeker')

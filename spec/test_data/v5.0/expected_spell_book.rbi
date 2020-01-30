@@ -29,53 +29,13 @@ module SpellBook::ActiveRelation_WhereNot
   def not(opts, *rest); end
 end
 
-module SpellBook::GeneratedAttributeMethods
-  extend T::Sig
-
-  sig { returns(String) }
-  def book_type; end
-
-  sig { params(value: T.any(Integer, String, Symbol)).void }
-  def book_type=(value); end
-
-  sig { returns(T::Boolean) }
-  def book_type?; end
-
-  sig { returns(Integer) }
-  def id; end
-
-  sig { params(value: T.any(Integer, Float, ActiveSupport::Duration)).void }
-  def id=(value); end
-
-  sig { returns(T::Boolean) }
-  def id?; end
-
-  sig { returns(T.nilable(String)) }
-  def name; end
-
-  sig { params(value: T.nilable(String)).void }
-  def name=(value); end
-
-  sig { returns(T::Boolean) }
-  def name?; end
-
-  sig { returns(Integer) }
-  def wizard_id; end
-
-  sig { params(value: T.any(Integer, Float, ActiveSupport::Duration)).void }
-  def wizard_id=(value); end
-
-  sig { returns(T::Boolean) }
-  def wizard_id?; end
-end
-
 module SpellBook::GeneratedAssociationMethods
   extend T::Sig
 
-  sig { returns(::Wizard) }
+  sig { returns(T.nilable(::Wizard)) }
   def wizard; end
 
-  sig { params(value: ::Wizard).void }
+  sig { params(value: T.nilable(::Wizard)).void }
   def wizard=(value); end
 end
 
@@ -98,7 +58,6 @@ end
 
 class SpellBook < ApplicationRecord
   include SpellBook::EnumInstanceMethods
-  include SpellBook::GeneratedAttributeMethods
   include SpellBook::GeneratedAssociationMethods
   extend SpellBook::CustomFinderMethods
   extend T::Sig
