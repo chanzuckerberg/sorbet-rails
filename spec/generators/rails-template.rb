@@ -130,14 +130,12 @@ def create_models
     class Wizard < ApplicationRecord
       validates :name, length: { minimum: 5 }, presence: true
 
-      enum house: {
+      typed_enum house: {
         Gryffindor: 0,
         Hufflepuff: 1,
         Ravenclaw: 2,
         Slytherin: 3,
-      }
-
-      enable_t_enum :house
+      }, _typed_strict: false
 
       enum professor: {
         "Severus Snape": 0,
@@ -147,21 +145,17 @@ def create_models
         "Hagrid": 4,
       }
 
-      enum broom: {
+      typed_enum broom: {
         nimbus: 'nimbus',
         firebolt: 'firebolt',
       }, _prefix: true
 
-      enable_t_enum :broom, strict_mode: true
-
-      enum quidditch_position: {
+      typed_enum quidditch_position: {
         keeper: 0,
         seeker: 1,
         beater: 2,
         chaser: 3,
-      }, _prefix: :quidditch
-
-      enable_t_enum :quidditch_position, t_enum_name: "QPos"
+      }, _prefix: :quidditch, _typed_class_name: "QDPosition"
 
       enum hair_color: {
         brown: 0,

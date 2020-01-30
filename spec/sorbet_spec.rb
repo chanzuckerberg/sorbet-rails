@@ -6,6 +6,8 @@ RSpec.describe 'sorbet' do
     Wizard.create!(
       name: 'Harry Potter',
       house: :Gryffindor,
+      broom: :nimbus,
+      quidditch_position: :seeker,
     )
   end
   let!(:book) do

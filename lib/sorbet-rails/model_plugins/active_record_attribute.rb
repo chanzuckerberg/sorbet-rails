@@ -19,8 +19,8 @@ class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugi
       if model_defined_enums.has_key?(column_name)
 
         should_skip_setter_getter = false
-        if @model_class.is_a?(SorbetRails::ActiveRecordTEnum)
-          config = @model_class.t_enum_config[column_name]
+        if @model_class.is_a?(::ActiveRecord::Enum)
+          config = @model_class.typed_enum_reflections[column_name]
           if config.present?
             # do not generate the methods for enums in strict_mode
             should_skip_setter_getter = config.strict_mode
@@ -29,7 +29,7 @@ class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugi
 
             # define T::Enum class & values
             enum_values = T.must(model_defined_enums[column_name])
-            t_enum_values = @model_class.gen_t_enum_values(enum_values.keys)
+            t_enum_values = @model_class.gen_typed_enum_values(enum_values.keys)
             root.create_enum_class(
               t_enum_type,
               enums: t_enum_values.map { |k, v| [v, "'#{k}'"] },

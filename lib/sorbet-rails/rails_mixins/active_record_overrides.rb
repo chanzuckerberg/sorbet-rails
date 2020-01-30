@@ -38,9 +38,12 @@ class SorbetRails::TypedEnumConfig < T::Struct
 end
 
 module ::ActiveRecord::Enum
+  extend T::Sig
+  include Kernel
+
   alias old_enum enum
 
-  _SR_ENUM_KEYWORDS = [
+  SR_ENUM_KEYWORDS = [
     # keywords from https://github.com/rails/rails/blob/master/activerecord/lib/active_record/enum.rb
     :_prefix,
     :_suffix,
@@ -52,7 +55,7 @@ module ::ActiveRecord::Enum
 
   sig { params(definitions: T::Hash[Symbol, T.untyped]).void }
   def _define_enum(definitions)
-    ActiveRecordOverrides.instance.store_enum_call(self, kwargs)
+    ActiveRecordOverrides.instance.store_enum_call(self, definitions)
     old_enum(definitions)
   end
 
@@ -62,18 +65,24 @@ module ::ActiveRecord::Enum
     definitions.each do |enum_name, values|
       begin
         # skip irrelevant keywords
-        next if _SR_ENUM_KEYWORDS.include?(enum_name)
-        _define_typed_enum(enum_name, values)
-      rescue ArgumentError, ConflictTypedEnumNameError => ex # TODO rescue errors
+        next if ::ActiveRecord::Enum::SR_ENUM_KEYWORDS.include?(enum_name)
+        _define_typed_enum(enum_name, extract_enum_values(values))
+      rescue ArgumentError, ConflictTypedEnumNameError, TypeError => ex
+        # known errors
         # do nothing if we cannot define t_enum
         puts "warning: #{ex.message}"
+      rescue => ex
+        # rescue any other kind of error to unblock the application
+        # can be disabled in development
+        puts "warning: #{ex.message}"
+        # raise ex
       end
     end
   end
 
   sig { params(definitions: T::Hash[Symbol, T.untyped]).void }
   def typed_enum(definitions)
-    enum_names = definitions.keys - _SR_ENUM_KEYWORDS
+    enum_names = definitions.keys - ::ActiveRecord::Enum::SR_ENUM_KEYWORDS
 
     if enum_names.size != 1
       raise MultipleEnumsDefinedError.new(
@@ -82,13 +91,14 @@ module ::ActiveRecord::Enum
       )
     end
 
+    enum_name = enum_names[0]
     typed_class_name = definitions.delete(:_typed_class_name)
     strict_mode = definitions.delete(:_typed_strict)
 
     _define_enum(definitions)
     _define_typed_enum(
-      enum_name,
-      enum_values,
+      T.must(enum_name),
+      extract_enum_values(definitions[enum_name]),
       typed_class_name: typed_class_name,
       strict_mode: strict_mode,
     )
@@ -102,10 +112,10 @@ module ::ActiveRecord::Enum
 
   sig {
     params(
-      enum_name: String,
-      enum_values: T::Hash[Symbol, T.untyped],
-      typed_class_name: String,
-      strict_mode: T::Boolean,
+      enum_name: Symbol,
+      enum_values: T::Array[Symbol],
+      typed_class_name: T.nilable(String),
+      strict_mode: T.nilable(T::Boolean),
     ).
     void
   }
@@ -113,12 +123,12 @@ module ::ActiveRecord::Enum
     enum_name,
     enum_values,
     typed_class_name: nil,
-    strict_mode: false,
+    strict_mode: false
   )
-    enum_klass_name = typed_class_name || enum_name.camelize
+    enum_klass_name = typed_class_name || enum_name.to_s.camelize
 
     # we don't need to use the actual enum value
-    typed_enum_values = gen_typed_enum_values(enum_values.keys)
+    typed_enum_values = gen_typed_enum_values(enum_values.map(&:to_s))
 
     # create dynamic T::Enum definition
     if const_defined?(enum_klass_name)
@@ -153,8 +163,8 @@ module ::ActiveRecord::Enum
     end
 
     # add to the config for RBI generation only if it works
-    typed_enum_reflections[enum_name] = SorbetRails::TypedEnumConfig.new(
-      strict_mode: strict_mode,
+    typed_enum_reflections[enum_name.to_s] = SorbetRails::TypedEnumConfig.new(
+      strict_mode: strict_mode || false,
       class_name: enum_klass_name,
     )
   end
@@ -162,8 +172,17 @@ module ::ActiveRecord::Enum
   sig { params(enum_values: T::Array[String]).returns(T::Hash[String, String]) }
   def gen_typed_enum_values(enum_values)
     Hash[enum_values.map do |val|
-      [val, val.gsub(/[^0-9a-z_]/i, '').camelize]
+      [val, val.to_s.gsub(/[^0-9a-z_]/i, '').camelize]
     end]
+  end
+
+  sig {
+    params(
+      enum_def: T.any(T::Array[Symbol], T::Hash[Symbol, T.untyped]),
+    ).returns(T::Array[Symbol])
+  }
+  def extract_enum_values(enum_def)
+    enum_def.is_a?(Hash) ? enum_def.keys : enum_def
   end
 
   class MultipleEnumsDefinedError < StandardError; end
