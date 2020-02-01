@@ -47,6 +47,24 @@ class SorbetRails::ModelPlugins::ActiveRecordFinderMethods < SorbetRails::ModelP
         return_type: self.model_class_name,
         class_method: class_method
       )
+      class_rbi.create_method(
+        "find_or_initialize_by",
+        parameters: [ Parameter.new("*args", type: "T.untyped") ],
+        return_type: self.model_class_name,
+        class_method: class_method
+      )
+      class_rbi.create_method(
+        "find_or_create_by",
+        parameters: [ Parameter.new("*args", type: "T.untyped") ],
+        return_type: self.model_class_name,
+        class_method: class_method
+      )
+      class_rbi.create_method(
+        "find_or_create_by!",
+        parameters: [ Parameter.new("*args", type: "T.untyped") ],
+        return_type: self.model_class_name,
+        class_method: class_method
+      )
 
       ["first", "second", "third", "third_to_last", "second_to_last", "last"].
         each do |method_name|
