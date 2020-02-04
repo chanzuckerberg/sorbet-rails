@@ -45,6 +45,17 @@ class ActiveRecord::Relation
   sig { returns(Elem) }
   def last!; end
 
+  sig do
+    override.params(
+      start: T.nilable(Integer),
+      finish: T.nilable(Integer),
+      batch_size: T.nilable(Integer),
+      error_on_ignore: T.nilable(T::Boolean),
+      block: T.nilable(T.proc.params(e: Elem).void) # block is optional, eg. you can do Klass.find_each.map
+    ).returns(T::Array[Elem])
+  end
+  def find_each(start: nil, finish: nil, batch_size: 1000, error_on_ignore: nil, &block); end
+
   sig { override.params(block: T.proc.params(e: Elem).void).returns(T::Array[Elem]) }
   def each(&block); end
 
