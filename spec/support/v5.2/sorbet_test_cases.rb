@@ -172,7 +172,7 @@ T.assert_type!(SpellBook.book_types, T::Hash[T.any(String, Symbol), Integer])
 # Model T::Enum
 T.assert_type!(wizard.typed_house, Wizard::House)
 T.assert_type!(wizard.typed_broom, Wizard::Broom)
-T.assert_type!(wizard.typed_quidditch_position, Wizard::QDPosition)
+T.assert_type!(wizard.typed_quidditch_position, Wizard::QuiddichPosition)
 T.assert_type!(Wizard::House, T.class_of(T::Enum))
 T.assert_type!(Wizard::House::Gryffindor, Wizard::House)
 T.assert_type!(Wizard::House::Hufflepuff, Wizard::House)

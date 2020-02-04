@@ -1,4 +1,4 @@
-# typed: false
+# typed: strict
 class Wizard < ApplicationRecord
   validates :name, length: { minimum: 5 }, presence: true
 
@@ -7,7 +7,7 @@ class Wizard < ApplicationRecord
     Hufflepuff: 1,
     Ravenclaw: 2,
     Slytherin: 3,
-  }, _typed_strict: false
+  }
 
   enum professor: {
     "Severus Snape": 0,
@@ -27,7 +27,7 @@ class Wizard < ApplicationRecord
     seeker: 1,
     beater: 2,
     chaser: 3,
-  }, _prefix: :quidditch, _typed_class_name: "QDPosition"
+  }, _prefix: :quidditch
 
   enum hair_color: {
     brown: 0,

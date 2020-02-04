@@ -49,8 +49,8 @@ module ::ActiveRecord::Enum
     :_suffix,
     :_scopes,
     # typed_enum keywords
-    :_typed_class_name,
-    :_typed_strict,
+    # :_typed_class_name,
+    # :_typed_strict,
   ]
 
   sig { params(definitions: T::Hash[Symbol, T.untyped]).void }
@@ -92,15 +92,12 @@ module ::ActiveRecord::Enum
     end
 
     enum_name = enum_names[0]
-    typed_class_name = definitions.delete(:_typed_class_name)
-    strict_mode = definitions.delete(:_typed_strict)
 
     _define_enum(definitions)
     _define_typed_enum(
       T.must(enum_name),
       extract_enum_values(definitions[enum_name]),
-      typed_class_name: typed_class_name,
-      strict_mode: strict_mode,
+      strict_mode: true,
     )
   end
 
@@ -114,18 +111,16 @@ module ::ActiveRecord::Enum
     params(
       enum_name: Symbol,
       enum_values: T::Array[Symbol],
-      typed_class_name: T.nilable(String),
-      strict_mode: T.nilable(T::Boolean),
+      strict_mode: T::Boolean,
     ).
     void
   }
   def _define_typed_enum(
     enum_name,
     enum_values,
-    typed_class_name: nil,
     strict_mode: false
   )
-    enum_klass_name = typed_class_name || enum_name.to_s.camelize
+    enum_klass_name = enum_name.to_s.camelize
 
     # we don't need to use the actual enum value
     typed_enum_values = gen_typed_enum_values(enum_values.map(&:to_s))
