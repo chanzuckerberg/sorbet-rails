@@ -75,14 +75,12 @@ We also add following methods to make type-checking more easily:
 
 #### Enums
 
-If you use [Rails enums](https://guides.rubyonrails.org/active_record_querying.html#enums), `sorbet-rails` will include getters, setters, and scope methods in the rbi file it generates.
+If you use [Rails `enum`](https://guides.rubyonrails.org/active_record_querying.html#enums), `sorbet-rails` will generate a corresponding `T::Enum`. It will also include getters, setters, and scope methods in the rbi file it generates.
 
-Alternatively, you can replace your call to `enum` with `typed_enum`. This will generate [`T::Enum`s](https://sorbet.org/docs/tenum) in your rbi in addition to the standard Rails methods.
-
-For example:
+ie.
 
 ```ruby
-  typed_enum house: {
+  enum house: {
     Gryffindor: 0,
     Hufflepuff: 1,
     Ravenclaw: 2,
@@ -104,6 +102,27 @@ end
 ```
 
 And these methods:
+
+```ruby
+  sig { returns(T.nilable(String)) }
+  def house; end
+
+  sig { params(value: T.nilable(T.any(Integer, String, Symbol))).void }
+  def house=(value); end
+```
+
+Alternatively, you can replace your call to `enum` with `typed_enum`. This will hide the Rails methods (`house`) and replace them with getters & setters that expect a `T::Enum`, called `typed_house`:
+
+```ruby
+  typed_enum house: {
+    Gryffindor: 0,
+    Hufflepuff: 1,
+    Ravenclaw: 2,
+    Slytherin: 3,
+  }
+```
+
+Generates:
 
 ```ruby
   sig { returns(T.nilable(Wizard::House)) }
