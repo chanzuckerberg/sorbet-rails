@@ -6,7 +6,7 @@ wizard = Wizard.first!
 T.assert_type!(wizard, Wizard)
 
 # -- model columns
-T.assert_type!(wizard.name, T.nilable(String))
+T.assert_type!(wizard.name, T.nilaxble(String))
 
 # -- time/date columns
 T.assert_type!(wizard.created_at, ActiveSupport::TimeWithZone)
@@ -163,16 +163,15 @@ T.assert_type!(wizard.notes, T.nilable(String))
 
 # Model enum
 T.assert_type!(wizard.Gryffindor?, T::Boolean)
-T.assert_type!(wizard.house, T.nilable(String))
 T.assert_type!(Wizard.houses, T::Hash[T.any(String, Symbol), Integer])
 T.assert_type!(Wizard.brooms, T::Hash[T.any(String, Symbol), String])
 T.assert_type!(spell_book.biology?, T::Boolean)
 T.assert_type!(spell_book.book_type, String)
 T.assert_type!(SpellBook.book_types, T::Hash[T.any(String, Symbol), Integer])
 # Model T::Enum
-T.assert_type!(wizard.typed_house, Wizard::House)
-T.assert_type!(wizard.typed_broom, Wizard::Broom)
-T.assert_type!(wizard.typed_quidditch_position, Wizard::QuidditchPosition)
+T.assert_type!(wizard.typed_house, T.nilable(Wizard::House))
+T.assert_type!(wizard.typed_broom, T.nilable(Wizard::Broom))
+T.assert_type!(wizard.typed_quidditch_position, T.nilable(Wizard::QuidditchPosition))
 T.assert_type!(Wizard::House, T.class_of(T::Enum))
 T.assert_type!(Wizard::House::Gryffindor, Wizard::House)
 T.assert_type!(Wizard::House::Hufflepuff, Wizard::House)
