@@ -111,7 +111,7 @@ And these methods:
   def house=(value); end
 ```
 
-Alternatively, you can replace your call to `enum` with `typed_enum`. This will hide the Rails methods (`house`) and replace them with getters & setters that expect a `T::Enum`, called `typed_house`:
+Alternatively, you can replace your call to `enum` with `typed_enum`. This will hide the Rails methods (`house`) from Sorbet static-check (they are still usable in un-checked files).
 
 ```ruby
   typed_enum house: {
