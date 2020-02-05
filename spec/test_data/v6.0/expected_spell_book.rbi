@@ -32,12 +32,6 @@ end
 module SpellBook::GeneratedAttributeMethods
   extend T::Sig
 
-  sig { returns(SpellBook::BookType) }
-  def typed_book_type; end
-
-  sig { params(value: SpellBook::BookType).void }
-  def typed_book_type=(value); end
-
   sig { returns(String) }
   def book_type; end
 
@@ -238,6 +232,12 @@ class SpellBook < ApplicationRecord
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::ActiveRecord_Relation) }
   def self.extending(*args, &block); end
+
+  sig { returns(SpellBook::BookType) }
+  def typed_book_type; end
+
+  sig { params(value: SpellBook::BookType).void }
+  def typed_book_type=(value); end
 
   sig { params(args: T.untyped).returns(SpellBook) }
   def self.find(*args); end

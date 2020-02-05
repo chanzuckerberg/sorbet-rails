@@ -116,12 +116,6 @@ end
 module Wizard::GeneratedAttributeMethods
   extend T::Sig
 
-  sig { returns(T.nilable(Wizard::Broom)) }
-  def typed_broom; end
-
-  sig { params(value: T.nilable(Wizard::Broom)).void }
-  def typed_broom=(value); end
-
   sig { returns(T::Boolean) }
   def broom?; end
 
@@ -134,12 +128,6 @@ module Wizard::GeneratedAttributeMethods
   sig { returns(T::Boolean) }
   def created_at?; end
 
-  sig { returns(T.nilable(Wizard::EyeColor)) }
-  def typed_eye_color; end
-
-  sig { params(value: T.nilable(Wizard::EyeColor)).void }
-  def typed_eye_color=(value); end
-
   sig { returns(T.nilable(String)) }
   def eye_color; end
 
@@ -148,12 +136,6 @@ module Wizard::GeneratedAttributeMethods
 
   sig { returns(T::Boolean) }
   def eye_color?; end
-
-  sig { returns(T.nilable(Wizard::HairColor)) }
-  def typed_hair_color; end
-
-  sig { params(value: T.nilable(Wizard::HairColor)).void }
-  def typed_hair_color=(value); end
 
   sig { returns(T.nilable(String)) }
   def hair_color; end
@@ -172,12 +154,6 @@ module Wizard::GeneratedAttributeMethods
 
   sig { returns(T::Boolean) }
   def hair_length?; end
-
-  sig { returns(T.nilable(Wizard::House)) }
-  def typed_house; end
-
-  sig { params(value: T.nilable(Wizard::House)).void }
-  def typed_house=(value); end
 
   sig { returns(T::Boolean) }
   def house?; end
@@ -217,12 +193,6 @@ module Wizard::GeneratedAttributeMethods
 
   sig { returns(T::Boolean) }
   def parent_email?; end
-
-  sig { returns(T.nilable(Wizard::QuidditchPosition)) }
-  def typed_quidditch_position; end
-
-  sig { params(value: T.nilable(Wizard::QuidditchPosition)).void }
-  def typed_quidditch_position=(value); end
 
   sig { returns(T::Boolean) }
   def quidditch_position?; end
@@ -553,6 +523,36 @@ class Wizard < ApplicationRecord
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
   def self.extending(*args, &block); end
+
+  sig { returns(T.nilable(Wizard::Broom)) }
+  def typed_broom; end
+
+  sig { params(value: T.nilable(Wizard::Broom)).void }
+  def typed_broom=(value); end
+
+  sig { returns(T.nilable(Wizard::EyeColor)) }
+  def typed_eye_color; end
+
+  sig { params(value: T.nilable(Wizard::EyeColor)).void }
+  def typed_eye_color=(value); end
+
+  sig { returns(T.nilable(Wizard::HairColor)) }
+  def typed_hair_color; end
+
+  sig { params(value: T.nilable(Wizard::HairColor)).void }
+  def typed_hair_color=(value); end
+
+  sig { returns(T.nilable(Wizard::House)) }
+  def typed_house; end
+
+  sig { params(value: T.nilable(Wizard::House)).void }
+  def typed_house=(value); end
+
+  sig { returns(T.nilable(Wizard::QuidditchPosition)) }
+  def typed_quidditch_position; end
+
+  sig { params(value: T.nilable(Wizard::QuidditchPosition)).void }
+  def typed_quidditch_position=(value); end
 
   sig { params(args: T.untyped).returns(Wizard) }
   def self.find(*args); end

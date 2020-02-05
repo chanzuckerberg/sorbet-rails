@@ -74,12 +74,6 @@ module Wand::GeneratedAttributeMethods
   sig { returns(T::Boolean) }
   def chosen_at_time?; end
 
-  sig { returns(T.nilable(Wand::CoreType)) }
-  def typed_core_type; end
-
-  sig { params(value: T.nilable(Wand::CoreType)).void }
-  def typed_core_type=(value); end
-
   sig { returns(T.nilable(String)) }
   def core_type; end
 
@@ -350,6 +344,12 @@ class Wand < ApplicationRecord
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::ActiveRecord_Relation) }
   def self.extending(*args, &block); end
+
+  sig { returns(T.nilable(Wand::CoreType)) }
+  def typed_core_type; end
+
+  sig { params(value: T.nilable(Wand::CoreType)).void }
+  def typed_core_type=(value); end
 
   sig { params(args: T.untyped).returns(Wand) }
   def self.find(*args); end
