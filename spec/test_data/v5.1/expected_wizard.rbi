@@ -194,6 +194,15 @@ module Wizard::GeneratedAttributeMethods
   sig { returns(T::Boolean) }
   def parent_email?; end
 
+  sig { returns(T.nilable(String)) }
+  def professor; end
+
+  sig { params(value: T.nilable(T.any(Integer, String, Symbol))).void }
+  def professor=(value); end
+
+  sig { returns(T::Boolean) }
+  def professor?; end
+
   sig { returns(T::Boolean) }
   def quidditch_position?; end
 
@@ -257,6 +266,17 @@ class Wizard::House < T::Enum
     Hufflepuff = new('Hufflepuff')
     Ravenclaw = new('Ravenclaw')
     Slytherin = new('Slytherin')
+  end
+
+end
+
+class Wizard::Professor < T::Enum
+  enums do
+    SeverusSnape = new('Severus Snape')
+    MinervaMcGonagall = new('Minerva McGonagall')
+    PomonaSprout = new('Pomona Sprout')
+    FiliusFlitwick = new('Filius Flitwick')
+    Hagrid = new('Hagrid')
   end
 
 end
@@ -500,6 +520,12 @@ class Wizard < ApplicationRecord
 
   sig { params(value: T.nilable(Wizard::House)).void }
   def typed_house=(value); end
+
+  sig { returns(T.nilable(Wizard::Professor)) }
+  def typed_professor; end
+
+  sig { params(value: T.nilable(Wizard::Professor)).void }
+  def typed_professor=(value); end
 
   sig { returns(T.nilable(Wizard::QuidditchPosition)) }
   def typed_quidditch_position; end

@@ -207,6 +207,15 @@ module Squib::GeneratedAttributeMethods
   def parent_email?; end
 
   sig { returns(T.nilable(String)) }
+  def professor; end
+
+  sig { params(value: T.nilable(T.any(Integer, String, Symbol))).void }
+  def professor=(value); end
+
+  sig { returns(T::Boolean) }
+  def professor?; end
+
+  sig { returns(T.nilable(String)) }
   def quidditch_position; end
 
   sig { params(value: T.nilable(T.any(Integer, String, Symbol))).void }
