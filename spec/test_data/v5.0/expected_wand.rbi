@@ -35,6 +35,143 @@ module Wand::ActiveRelation_WhereNot
   def not(opts, *rest); end
 end
 
+module Wand::GeneratedAttributeMethods
+  extend T::Sig
+
+  sig { returns(T::Boolean) }
+  def broken; end
+
+  sig { params(value: T::Boolean).void }
+  def broken=(value); end
+
+  sig { returns(T::Boolean) }
+  def broken?; end
+
+  sig { returns(T.nilable(Time)) }
+  def broken_at; end
+
+  sig { params(value: T.nilable(Time)).void }
+  def broken_at=(value); end
+
+  sig { returns(T::Boolean) }
+  def broken_at?; end
+
+  sig { returns(T.nilable(Date)) }
+  def chosen_at_date; end
+
+  sig { params(value: T.nilable(Date)).void }
+  def chosen_at_date=(value); end
+
+  sig { returns(T::Boolean) }
+  def chosen_at_date?; end
+
+  sig { returns(T.nilable(ActiveSupport::TimeWithZone)) }
+  def chosen_at_time; end
+
+  sig { params(value: T.nilable(T.any(DateTime, Date, Time, ActiveSupport::TimeWithZone))).void }
+  def chosen_at_time=(value); end
+
+  sig { returns(T::Boolean) }
+  def chosen_at_time?; end
+
+  sig { returns(T.nilable(Wand::CoreType)) }
+  def typed_core_type; end
+
+  sig { params(value: T.nilable(Wand::CoreType)).void }
+  def typed_core_type=(value); end
+
+  sig { returns(T.nilable(String)) }
+  def core_type; end
+
+  sig { params(value: T.nilable(T.any(Integer, String, Symbol))).void }
+  def core_type=(value); end
+
+  sig { returns(T::Boolean) }
+  def core_type?; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def created_at; end
+
+  sig { params(value: T.any(DateTime, Date, Time, ActiveSupport::TimeWithZone)).void }
+  def created_at=(value); end
+
+  sig { returns(T::Boolean) }
+  def created_at?; end
+
+  sig { returns(Float) }
+  def flexibility; end
+
+  sig { params(value: T.any(Integer, Float, ActiveSupport::Duration)).void }
+  def flexibility=(value); end
+
+  sig { returns(T::Boolean) }
+  def flexibility?; end
+
+  sig { returns(BigDecimal) }
+  def hardness; end
+
+  sig { params(value: BigDecimal).void }
+  def hardness=(value); end
+
+  sig { returns(T::Boolean) }
+  def hardness?; end
+
+  sig { returns(Integer) }
+  def id; end
+
+  sig { params(value: T.any(Integer, Float, ActiveSupport::Duration)).void }
+  def id=(value); end
+
+  sig { returns(T::Boolean) }
+  def id?; end
+
+  sig { returns(Integer) }
+  def reflectance; end
+
+  sig { params(value: T.any(Integer, Float, ActiveSupport::Duration)).void }
+  def reflectance=(value); end
+
+  sig { returns(T::Boolean) }
+  def reflectance?; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def updated_at; end
+
+  sig { params(value: T.any(DateTime, Date, Time, ActiveSupport::TimeWithZone)).void }
+  def updated_at=(value); end
+
+  sig { returns(T::Boolean) }
+  def updated_at?; end
+
+  sig { returns(Integer) }
+  def wizard_id; end
+
+  sig { params(value: T.any(Integer, Float, ActiveSupport::Duration)).void }
+  def wizard_id=(value); end
+
+  sig { returns(T::Boolean) }
+  def wizard_id?; end
+
+  sig { returns(T.nilable(String)) }
+  def wood_type; end
+
+  sig { params(value: T.nilable(String)).void }
+  def wood_type=(value); end
+
+  sig { returns(T::Boolean) }
+  def wood_type?; end
+end
+
+class Wand::CoreType < T::Enum
+  enums do
+    PhoenixFeather = new('phoenix_feather')
+    DragonHeartstring = new('dragon_heartstring')
+    UnicornTailHair = new('unicorn_tail_hair')
+    BasiliskHorn = new('basilisk_horn')
+  end
+
+end
+
 module Wand::GeneratedAssociationMethods
   extend T::Sig
 
@@ -64,6 +201,7 @@ end
 
 class Wand < ApplicationRecord
   include Wand::EnumInstanceMethods
+  include Wand::GeneratedAttributeMethods
   include Wand::GeneratedAssociationMethods
   extend Wand::CustomFinderMethods
   extend T::Sig

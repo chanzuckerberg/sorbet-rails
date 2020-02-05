@@ -6,7 +6,7 @@ wizard = Wizard.first!
 T.assert_type!(wizard, Wizard)
 
 # -- model columns
-T.assert_type!(wizard.name, T.nilaxble(String))
+T.assert_type!(wizard.name, T.nilable(String))
 
 # -- time/date columns
 T.assert_type!(wizard.created_at, ActiveSupport::TimeWithZone)
