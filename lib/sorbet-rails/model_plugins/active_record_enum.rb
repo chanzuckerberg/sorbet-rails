@@ -14,8 +14,6 @@ class SorbetRails::ModelPlugins::ActiveRecordEnum < SorbetRails::ModelPlugins::B
     model_class_rbi = root.create_class(self.model_class_name)
     model_class_rbi.create_include(enum_module_name)
 
-    enum_calls = ActiveRecordOverrides.instance.enum_calls[self.model_class_name]
-
     # TODO: add any method for signature verification?
     model_class.defined_enums.sort.each do |enum_name, enum_hash|
       value_type = enum_hash.values.map { |v| v.is_a?(Integer) ? 'Integer' : v.class.name }.uniq
