@@ -17,7 +17,7 @@ class ActiveRecordOverrides
     # modeling the logic in
     # https://github.com/rails/rails/blob/master/activerecord/lib/active_record/enum.rb#L152
     kwargs.each do |name, values|
-      next if [:_prefix, :_suffix, :_scopes].include?(name)
+      next if ::ActiveRecord::Enum::SR_ENUM_KEYWORDS.include?(name)
       @enum_calls[class_name][name] = kwargs
     end
   end
@@ -47,10 +47,7 @@ module ::ActiveRecord::Enum
     # keywords from https://github.com/rails/rails/blob/master/activerecord/lib/active_record/enum.rb
     :_prefix,
     :_suffix,
-    :_scopes,
-    # typed_enum keywords
-    # :_typed_class_name,
-    # :_typed_strict,
+    :_scopes
   ]
 
   sig { params(definitions: T::Hash[Symbol, T.untyped]).void }
@@ -65,7 +62,7 @@ module ::ActiveRecord::Enum
     definitions.each do |enum_name, values|
       begin
         # skip irrelevant keywords
-        next if ::ActiveRecord::Enum::SR_ENUM_KEYWORDS.include?(enum_name)
+        next if SR_ENUM_KEYWORDS.include?(enum_name)
         _define_typed_enum(enum_name, extract_enum_values(values))
       rescue ArgumentError, ConflictTypedEnumNameError, TypeError => ex
         # known errors
@@ -82,7 +79,7 @@ module ::ActiveRecord::Enum
 
   sig { params(definitions: T::Hash[Symbol, T.untyped]).void }
   def typed_enum(definitions)
-    enum_names = definitions.keys - ::ActiveRecord::Enum::SR_ENUM_KEYWORDS
+    enum_names = definitions.keys - SR_ENUM_KEYWORDS
 
     if enum_names.size != 1
       raise MultipleEnumsDefinedError.new(
