@@ -73,6 +73,46 @@ We also add following methods to make type-checking more easily:
 - [`find_n`, `first_n`, `last_n`](https://github.com/chanzuckerberg/sorbet-rails#find-first-and-last)
 - [`pluck_to_tstruct`](#pluck_to_tstruct-instead-of-pluck)
 
+#### Enums
+
+If you use [Rails enums](https://guides.rubyonrails.org/active_record_querying.html#enums), `sorbet-rails` will include getters, setters, and scope methods in the rbi file it generates.
+
+Alternatively, you can replace your call to `enum` with `typed_enum`. This will generate [`T::Enum`s](https://sorbet.org/docs/tenum) in your rbi in addition to the standard Rails methods.
+
+For example:
+
+```ruby
+  typed_enum house: {
+    Gryffindor: 0,
+    Hufflepuff: 1,
+    Ravenclaw: 2,
+    Slytherin: 3,
+  }
+```
+
+Will generate this enum:
+
+```ruby
+class Wizard::House < T::Enum
+  enums do
+    Gryffindor = new('Gryffindor')
+    Hufflepuff = new('Hufflepuff')
+    Ravenclaw = new('Ravenclaw')
+    Slytherin = new('Slytherin')
+  end
+end
+```
+
+And these methods:
+
+```ruby
+  sig { returns(T.nilable(Wizard::House)) }
+  def typed_house; end
+
+  sig { params(value: T.nilable(Wizard::House)).void }
+  def typed_house=(value); end
+```
+
 ### Controllers
 ```sh
 ❯ rake rails_rbi:custom
