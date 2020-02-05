@@ -18,7 +18,9 @@ class ActiveRecordOverrides
     # https://github.com/rails/rails/blob/master/activerecord/lib/active_record/enum.rb#L152
     kwargs.each do |name, values|
       next if ::ActiveRecord::Enum::SR_ENUM_KEYWORDS.include?(name)
-      @enum_calls[class_name][name] = kwargs
+
+      # calling dup is required, because Rails internally mutates `kwargs` (the args you passed to `enum`)
+      @enum_calls[class_name][name] = kwargs.dup
     end
   end
 

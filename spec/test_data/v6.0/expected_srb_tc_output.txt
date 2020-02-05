@@ -14,12 +14,12 @@ sorbet_test_cases.rb:174: Argument does not have asserted type `Wizard::Broom` h
      174 |T.assert_type!(wizard.typed_broom, Wizard::Broom)
                          ^^^^^^^^^^^^^^^^^^
 
-sorbet_test_cases.rb:175: Argument does not have asserted type `Wizard::QDPosition` https://srb.help/7007
-     175 |T.assert_type!(wizard.typed_quidditch_position, Wizard::QDPosition)
+sorbet_test_cases.rb:175: Argument does not have asserted type `Wizard::QuidditchPosition` https://srb.help/7007
+     175 |T.assert_type!(wizard.typed_quidditch_position, Wizard::QuidditchPosition)
           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  Got T.nilable(Wizard::QDPosition) originating from:
+  Got T.nilable(Wizard::QuidditchPosition) originating from:
     sorbet_test_cases.rb:175:
-     175 |T.assert_type!(wizard.typed_quidditch_position, Wizard::QDPosition)
+     175 |T.assert_type!(wizard.typed_quidditch_position, Wizard::QuidditchPosition)
                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 sorbet_test_cases.rb:187: Method `broom_nimbus?` does not exist on `Wizard` https://srb.help/7003

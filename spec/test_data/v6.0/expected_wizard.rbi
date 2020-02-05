@@ -224,10 +224,10 @@ module Wizard::GeneratedAttributeMethods
   sig { returns(T::Boolean) }
   def parent_email?; end
 
-  sig { returns(T.nilable(Wizard::QDPosition)) }
+  sig { returns(T.nilable(Wizard::QuidditchPosition)) }
   def typed_quidditch_position; end
 
-  sig { params(value: T.nilable(Wizard::QDPosition)).void }
+  sig { params(value: T.nilable(Wizard::QuidditchPosition)).void }
   def typed_quidditch_position=(value); end
 
   sig { returns(T.nilable(String)) }
@@ -303,7 +303,7 @@ class Wizard::House < T::Enum
 
 end
 
-class Wizard::QDPosition < T::Enum
+class Wizard::QuidditchPosition < T::Enum
   enums do
     Keeper = new('keeper')
     Seeker = new('seeker')

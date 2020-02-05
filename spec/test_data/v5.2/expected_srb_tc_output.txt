@@ -17,11 +17,11 @@ sorbet_test_cases.rb:174: The typechecker was unable to infer the type of the as
   You may need to add additional `sig` annotations
 
 sorbet_test_cases.rb:175: The typechecker was unable to infer the type of the asserted value https://srb.help/7007
-     175 |T.assert_type!(wizard.typed_quidditch_position, Wizard::QDPosition)
+     175 |T.assert_type!(wizard.typed_quidditch_position, Wizard::QuidditchPosition)
           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   Got T.untyped originating from:
     sorbet_test_cases.rb:175:
-     175 |T.assert_type!(wizard.typed_quidditch_position, Wizard::QDPosition)
+     175 |T.assert_type!(wizard.typed_quidditch_position, Wizard::QuidditchPosition)
                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   You may need to add additional `sig` annotations
 
