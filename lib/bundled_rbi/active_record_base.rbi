@@ -1,5 +1,5 @@
 # typed: strong
-class ApplicationRecord < ActiveRecord::Base
+class ActiveRecord::Base
   sig { params(args: T.untyped).returns(T.attached_class) }
   def self.find(*args); end
 
