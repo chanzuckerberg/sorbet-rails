@@ -153,7 +153,7 @@ module ::ActiveRecord::Enum
     typed_enum_setter_name = "typed_#{enum_name}="
     detect_enum_conflict!(enum_name, typed_enum_setter_name)
     define_method(typed_enum_setter_name) do |value|
-      send(enum_setter_name, value.serialize)
+      send(enum_setter_name, value&.serialize)
     end
 
     # add to the config for RBI generation only if it works
