@@ -9,6 +9,15 @@ class ActiveRecord::Relation
   sig { params(args: T.untyped).returns(Elem) }
   def find_by!(*args); end
 
+  sig { params(args: T.untyped).returns(Elem) }
+  def find_or_initialize_by(*args); end
+
+  sig { params(args: T.untyped).returns(Elem) }
+  def find_or_create_by(*args); end
+
+  sig { params(args: T.untyped).returns(Elem) }
+  def find_or_create_by!(*args); end
+
   sig { returns(T.nilable(Elem)) }
   def first; end
 
