@@ -388,6 +388,15 @@ class ActiveRecord::InternalMetadata::ActiveRecord_AssociationRelation < ActiveR
   sig { params(args: T.untyped).returns(ActiveRecord::InternalMetadata) }
   def find_by!(*args); end
 
+  sig { params(attributes: T.untyped, block: T.proc.params(object: ActiveRecord::InternalMetadata).void).returns(ActiveRecord::InternalMetadata) }
+  def find_or_initialize_by(attributes, &block); end
+
+  sig { params(attributes: T.untyped, block: T.proc.params(object: ActiveRecord::InternalMetadata).void).returns(ActiveRecord::InternalMetadata) }
+  def find_or_create_by(attributes, &block); end
+
+  sig { params(attributes: T.untyped, block: T.proc.params(object: ActiveRecord::InternalMetadata).void).returns(ActiveRecord::InternalMetadata) }
+  def find_or_create_by!(attributes, &block); end
+
   sig { returns(T.nilable(ActiveRecord::InternalMetadata)) }
   def first; end
 
@@ -559,6 +568,15 @@ class ActiveRecord::InternalMetadata::ActiveRecord_Associations_CollectionProxy 
 
   sig { params(args: T.untyped).returns(ActiveRecord::InternalMetadata) }
   def find_by!(*args); end
+
+  sig { params(attributes: T.untyped, block: T.proc.params(object: ActiveRecord::InternalMetadata).void).returns(ActiveRecord::InternalMetadata) }
+  def find_or_initialize_by(attributes, &block); end
+
+  sig { params(attributes: T.untyped, block: T.proc.params(object: ActiveRecord::InternalMetadata).void).returns(ActiveRecord::InternalMetadata) }
+  def find_or_create_by(attributes, &block); end
+
+  sig { params(attributes: T.untyped, block: T.proc.params(object: ActiveRecord::InternalMetadata).void).returns(ActiveRecord::InternalMetadata) }
+  def find_or_create_by!(attributes, &block); end
 
   sig { returns(T.nilable(ActiveRecord::InternalMetadata)) }
   def first; end

@@ -364,6 +364,15 @@ class ActiveStorage::Attachment::ActiveRecord_AssociationRelation < ActiveRecord
   sig { params(args: T.untyped).returns(ActiveStorage::Attachment) }
   def find_by!(*args); end
 
+  sig { params(attributes: T.untyped, block: T.proc.params(object: ActiveStorage::Attachment).void).returns(ActiveStorage::Attachment) }
+  def find_or_initialize_by(attributes, &block); end
+
+  sig { params(attributes: T.untyped, block: T.proc.params(object: ActiveStorage::Attachment).void).returns(ActiveStorage::Attachment) }
+  def find_or_create_by(attributes, &block); end
+
+  sig { params(attributes: T.untyped, block: T.proc.params(object: ActiveStorage::Attachment).void).returns(ActiveStorage::Attachment) }
+  def find_or_create_by!(attributes, &block); end
+
   sig { returns(T.nilable(ActiveStorage::Attachment)) }
   def first; end
 
@@ -535,6 +544,15 @@ class ActiveStorage::Attachment::ActiveRecord_Associations_CollectionProxy < Act
 
   sig { params(args: T.untyped).returns(ActiveStorage::Attachment) }
   def find_by!(*args); end
+
+  sig { params(attributes: T.untyped, block: T.proc.params(object: ActiveStorage::Attachment).void).returns(ActiveStorage::Attachment) }
+  def find_or_initialize_by(attributes, &block); end
+
+  sig { params(attributes: T.untyped, block: T.proc.params(object: ActiveStorage::Attachment).void).returns(ActiveStorage::Attachment) }
+  def find_or_create_by(attributes, &block); end
+
+  sig { params(attributes: T.untyped, block: T.proc.params(object: ActiveStorage::Attachment).void).returns(ActiveStorage::Attachment) }
+  def find_or_create_by!(attributes, &block); end
 
   sig { returns(T.nilable(ActiveStorage::Attachment)) }
   def first; end

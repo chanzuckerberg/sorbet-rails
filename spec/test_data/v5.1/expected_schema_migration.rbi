@@ -361,6 +361,15 @@ class ActiveRecord::SchemaMigration::ActiveRecord_AssociationRelation < ActiveRe
   sig { params(args: T.untyped).returns(ActiveRecord::SchemaMigration) }
   def find_by!(*args); end
 
+  sig { params(attributes: T.untyped, block: T.proc.params(object: ActiveRecord::SchemaMigration).void).returns(ActiveRecord::SchemaMigration) }
+  def find_or_initialize_by(attributes, &block); end
+
+  sig { params(attributes: T.untyped, block: T.proc.params(object: ActiveRecord::SchemaMigration).void).returns(ActiveRecord::SchemaMigration) }
+  def find_or_create_by(attributes, &block); end
+
+  sig { params(attributes: T.untyped, block: T.proc.params(object: ActiveRecord::SchemaMigration).void).returns(ActiveRecord::SchemaMigration) }
+  def find_or_create_by!(attributes, &block); end
+
   sig { returns(T.nilable(ActiveRecord::SchemaMigration)) }
   def first; end
 
@@ -532,6 +541,15 @@ class ActiveRecord::SchemaMigration::ActiveRecord_Associations_CollectionProxy <
 
   sig { params(args: T.untyped).returns(ActiveRecord::SchemaMigration) }
   def find_by!(*args); end
+
+  sig { params(attributes: T.untyped, block: T.proc.params(object: ActiveRecord::SchemaMigration).void).returns(ActiveRecord::SchemaMigration) }
+  def find_or_initialize_by(attributes, &block); end
+
+  sig { params(attributes: T.untyped, block: T.proc.params(object: ActiveRecord::SchemaMigration).void).returns(ActiveRecord::SchemaMigration) }
+  def find_or_create_by(attributes, &block); end
+
+  sig { params(attributes: T.untyped, block: T.proc.params(object: ActiveRecord::SchemaMigration).void).returns(ActiveRecord::SchemaMigration) }
+  def find_or_create_by!(attributes, &block); end
 
   sig { returns(T.nilable(ActiveRecord::SchemaMigration)) }
   def first; end

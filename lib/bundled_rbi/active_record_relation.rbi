@@ -9,14 +9,32 @@ class ActiveRecord::Relation
   sig { params(args: T.untyped).returns(Elem) }
   def find_by!(*args); end
 
-  sig { params(args: T.untyped).returns(Elem) }
-  def find_or_initialize_by(*args); end
+  sig {
+    params(
+      attributes: T.untyped,
+      block: T.proc.params(object: Elem).void
+    ).
+    returns(Elem)
+  }
+  def find_or_initialize_by(attributes, &block); end
 
-  sig { params(args: T.untyped).returns(Elem) }
-  def find_or_create_by(*args); end
+  sig {
+    params(
+      attributes: T.untyped,
+      block: T.proc.params(object: Elem).void
+    ).
+    returns(Elem)
+  }
+  def find_or_create_by(attributes, &block); end
 
-  sig { params(args: T.untyped).returns(Elem) }
-  def find_or_create_by!(*args); end
+  sig {
+    params(
+      attributes: T.untyped,
+      block: T.proc.params(object: Elem).void
+    ).
+    returns(Elem)
+  }
+  def find_or_create_by!(attributes, &block); end
 
   sig { returns(T.nilable(Elem)) }
   def first; end

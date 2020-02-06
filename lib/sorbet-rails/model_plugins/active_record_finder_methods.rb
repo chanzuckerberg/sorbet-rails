@@ -49,19 +49,28 @@ class SorbetRails::ModelPlugins::ActiveRecordFinderMethods < SorbetRails::ModelP
       )
       class_rbi.create_method(
         "find_or_initialize_by",
-        parameters: [ Parameter.new("*args", type: "T.untyped") ],
+        parameters: [
+          Parameter.new("attributes", type: "T.untyped") ,
+          Parameter.new("&block", type: "T.proc.params(object: #{self.model_class_name}).void"),
+        ],
         return_type: self.model_class_name,
         class_method: class_method
       )
       class_rbi.create_method(
         "find_or_create_by",
-        parameters: [ Parameter.new("*args", type: "T.untyped") ],
+        parameters: [
+          Parameter.new("attributes", type: "T.untyped") ,
+          Parameter.new("&block", type: "T.proc.params(object: #{self.model_class_name}).void"),
+        ],
         return_type: self.model_class_name,
         class_method: class_method
       )
       class_rbi.create_method(
         "find_or_create_by!",
-        parameters: [ Parameter.new("*args", type: "T.untyped") ],
+        parameters: [
+          Parameter.new("attributes", type: "T.untyped") ,
+          Parameter.new("&block", type: "T.proc.params(object: #{self.model_class_name}).void"),
+        ],
         return_type: self.model_class_name,
         class_method: class_method
       )

@@ -388,6 +388,15 @@ class ActiveStorage::Blob::ActiveRecord_AssociationRelation < ActiveRecord::Asso
   sig { params(args: T.untyped).returns(ActiveStorage::Blob) }
   def find_by!(*args); end
 
+  sig { params(attributes: T.untyped, block: T.proc.params(object: ActiveStorage::Blob).void).returns(ActiveStorage::Blob) }
+  def find_or_initialize_by(attributes, &block); end
+
+  sig { params(attributes: T.untyped, block: T.proc.params(object: ActiveStorage::Blob).void).returns(ActiveStorage::Blob) }
+  def find_or_create_by(attributes, &block); end
+
+  sig { params(attributes: T.untyped, block: T.proc.params(object: ActiveStorage::Blob).void).returns(ActiveStorage::Blob) }
+  def find_or_create_by!(attributes, &block); end
+
   sig { returns(T.nilable(ActiveStorage::Blob)) }
   def first; end
 
@@ -565,6 +574,15 @@ class ActiveStorage::Blob::ActiveRecord_Associations_CollectionProxy < ActiveRec
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob) }
   def find_by!(*args); end
+
+  sig { params(attributes: T.untyped, block: T.proc.params(object: ActiveStorage::Blob).void).returns(ActiveStorage::Blob) }
+  def find_or_initialize_by(attributes, &block); end
+
+  sig { params(attributes: T.untyped, block: T.proc.params(object: ActiveStorage::Blob).void).returns(ActiveStorage::Blob) }
+  def find_or_create_by(attributes, &block); end
+
+  sig { params(attributes: T.untyped, block: T.proc.params(object: ActiveStorage::Blob).void).returns(ActiveStorage::Blob) }
+  def find_or_create_by!(attributes, &block); end
 
   sig { returns(T.nilable(ActiveStorage::Blob)) }
   def first; end
