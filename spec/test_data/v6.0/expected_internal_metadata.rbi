@@ -169,51 +169,6 @@ class ActiveRecord::InternalMetadata < ActiveRecord::Base
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(ActiveRecord::InternalMetadata::ActiveRecord_Relation) }
   def self.extending(*args, &block); end
 
-  sig { params(args: T.untyped).returns(ActiveRecord::InternalMetadata) }
-  def self.find(*args); end
-
-  sig { params(args: T.untyped).returns(T.nilable(ActiveRecord::InternalMetadata)) }
-  def self.find_by(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveRecord::InternalMetadata) }
-  def self.find_by!(*args); end
-
-  sig { returns(T.nilable(ActiveRecord::InternalMetadata)) }
-  def self.first; end
-
-  sig { returns(ActiveRecord::InternalMetadata) }
-  def self.first!; end
-
-  sig { returns(T.nilable(ActiveRecord::InternalMetadata)) }
-  def self.second; end
-
-  sig { returns(ActiveRecord::InternalMetadata) }
-  def self.second!; end
-
-  sig { returns(T.nilable(ActiveRecord::InternalMetadata)) }
-  def self.third; end
-
-  sig { returns(ActiveRecord::InternalMetadata) }
-  def self.third!; end
-
-  sig { returns(T.nilable(ActiveRecord::InternalMetadata)) }
-  def self.third_to_last; end
-
-  sig { returns(ActiveRecord::InternalMetadata) }
-  def self.third_to_last!; end
-
-  sig { returns(T.nilable(ActiveRecord::InternalMetadata)) }
-  def self.second_to_last; end
-
-  sig { returns(ActiveRecord::InternalMetadata) }
-  def self.second_to_last!; end
-
-  sig { returns(T.nilable(ActiveRecord::InternalMetadata)) }
-  def self.last; end
-
-  sig { returns(ActiveRecord::InternalMetadata) }
-  def self.last!; end
-
   sig { params(conditions: T.untyped).returns(T::Boolean) }
   def self.exists?(conditions = nil); end
 
@@ -228,15 +183,6 @@ class ActiveRecord::InternalMetadata < ActiveRecord::Base
 
   sig { params(args: T.untyped).returns(T::Boolean) }
   def self.one?(*args); end
-
-  sig { params(attributes: T.untyped, block: T.untyped).returns(ActiveRecord::InternalMetadata) }
-  def self.create(attributes = nil, &block); end
-
-  sig { params(attributes: T.untyped, block: T.untyped).returns(ActiveRecord::InternalMetadata) }
-  def self.create!(attributes = nil, &block); end
-
-  sig { params(attributes: T.untyped, block: T.untyped).returns(ActiveRecord::InternalMetadata) }
-  def self.new(attributes = nil, &block); end
 end
 
 class ActiveRecord::InternalMetadata::ActiveRecord_Relation < ActiveRecord::Relation

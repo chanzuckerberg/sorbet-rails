@@ -127,51 +127,6 @@ class Potion < ApplicationRecord
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Potion::ActiveRecord_Relation) }
   def self.extending(*args, &block); end
 
-  sig { params(args: T.untyped).returns(Potion) }
-  def self.find(*args); end
-
-  sig { params(args: T.untyped).returns(T.nilable(Potion)) }
-  def self.find_by(*args); end
-
-  sig { params(args: T.untyped).returns(Potion) }
-  def self.find_by!(*args); end
-
-  sig { returns(T.nilable(Potion)) }
-  def self.first; end
-
-  sig { returns(Potion) }
-  def self.first!; end
-
-  sig { returns(T.nilable(Potion)) }
-  def self.second; end
-
-  sig { returns(Potion) }
-  def self.second!; end
-
-  sig { returns(T.nilable(Potion)) }
-  def self.third; end
-
-  sig { returns(Potion) }
-  def self.third!; end
-
-  sig { returns(T.nilable(Potion)) }
-  def self.third_to_last; end
-
-  sig { returns(Potion) }
-  def self.third_to_last!; end
-
-  sig { returns(T.nilable(Potion)) }
-  def self.second_to_last; end
-
-  sig { returns(Potion) }
-  def self.second_to_last!; end
-
-  sig { returns(T.nilable(Potion)) }
-  def self.last; end
-
-  sig { returns(Potion) }
-  def self.last!; end
-
   sig { params(conditions: T.untyped).returns(T::Boolean) }
   def self.exists?(conditions = nil); end
 
@@ -186,15 +141,6 @@ class Potion < ApplicationRecord
 
   sig { params(args: T.untyped).returns(T::Boolean) }
   def self.one?(*args); end
-
-  sig { params(attributes: T.untyped, block: T.untyped).returns(Potion) }
-  def self.create(attributes = nil, &block); end
-
-  sig { params(attributes: T.untyped, block: T.untyped).returns(Potion) }
-  def self.create!(attributes = nil, &block); end
-
-  sig { params(attributes: T.untyped, block: T.untyped).returns(Potion) }
-  def self.new(attributes = nil, &block); end
 end
 
 class Potion::ActiveRecord_Relation < ActiveRecord::Relation

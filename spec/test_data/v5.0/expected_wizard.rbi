@@ -530,51 +530,6 @@ class Wizard < ApplicationRecord
   sig { params(value: T.nilable(Wizard::QuidditchPosition)).void }
   def typed_quidditch_position=(value); end
 
-  sig { params(args: T.untyped).returns(Wizard) }
-  def self.find(*args); end
-
-  sig { params(args: T.untyped).returns(T.nilable(Wizard)) }
-  def self.find_by(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard) }
-  def self.find_by!(*args); end
-
-  sig { returns(T.nilable(Wizard)) }
-  def self.first; end
-
-  sig { returns(Wizard) }
-  def self.first!; end
-
-  sig { returns(T.nilable(Wizard)) }
-  def self.second; end
-
-  sig { returns(Wizard) }
-  def self.second!; end
-
-  sig { returns(T.nilable(Wizard)) }
-  def self.third; end
-
-  sig { returns(Wizard) }
-  def self.third!; end
-
-  sig { returns(T.nilable(Wizard)) }
-  def self.third_to_last; end
-
-  sig { returns(Wizard) }
-  def self.third_to_last!; end
-
-  sig { returns(T.nilable(Wizard)) }
-  def self.second_to_last; end
-
-  sig { returns(Wizard) }
-  def self.second_to_last!; end
-
-  sig { returns(T.nilable(Wizard)) }
-  def self.last; end
-
-  sig { returns(Wizard) }
-  def self.last!; end
-
   sig { params(conditions: T.untyped).returns(T::Boolean) }
   def self.exists?(conditions = nil); end
 
@@ -589,15 +544,6 @@ class Wizard < ApplicationRecord
 
   sig { params(args: T.untyped).returns(T::Boolean) }
   def self.one?(*args); end
-
-  sig { params(attributes: T.untyped, block: T.untyped).returns(Wizard) }
-  def self.create(attributes = nil, &block); end
-
-  sig { params(attributes: T.untyped, block: T.untyped).returns(Wizard) }
-  def self.create!(attributes = nil, &block); end
-
-  sig { params(attributes: T.untyped, block: T.untyped).returns(Wizard) }
-  def self.new(attributes = nil, &block); end
 end
 
 class Wizard::ActiveRecord_Relation < ActiveRecord::Relation
