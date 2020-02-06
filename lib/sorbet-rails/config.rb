@@ -48,7 +48,6 @@ module SorbetRails
         :active_record_attribute,
         :active_record_assoc,
         :active_record_finder_methods,
-        :active_record_factory_methods,
         :custom_finder_methods,
         :enumerable_collections,
       ]

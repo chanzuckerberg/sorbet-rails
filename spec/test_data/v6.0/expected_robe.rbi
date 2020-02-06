@@ -162,51 +162,6 @@ class Robe < ApplicationRecord
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Robe::ActiveRecord_Relation) }
   def self.extending(*args, &block); end
 
-  sig { params(args: T.untyped).returns(Robe) }
-  def self.find(*args); end
-
-  sig { params(args: T.untyped).returns(T.nilable(Robe)) }
-  def self.find_by(*args); end
-
-  sig { params(args: T.untyped).returns(Robe) }
-  def self.find_by!(*args); end
-
-  sig { returns(T.nilable(Robe)) }
-  def self.first; end
-
-  sig { returns(Robe) }
-  def self.first!; end
-
-  sig { returns(T.nilable(Robe)) }
-  def self.second; end
-
-  sig { returns(Robe) }
-  def self.second!; end
-
-  sig { returns(T.nilable(Robe)) }
-  def self.third; end
-
-  sig { returns(Robe) }
-  def self.third!; end
-
-  sig { returns(T.nilable(Robe)) }
-  def self.third_to_last; end
-
-  sig { returns(Robe) }
-  def self.third_to_last!; end
-
-  sig { returns(T.nilable(Robe)) }
-  def self.second_to_last; end
-
-  sig { returns(Robe) }
-  def self.second_to_last!; end
-
-  sig { returns(T.nilable(Robe)) }
-  def self.last; end
-
-  sig { returns(Robe) }
-  def self.last!; end
-
   sig { params(conditions: T.untyped).returns(T::Boolean) }
   def self.exists?(conditions = nil); end
 
@@ -221,15 +176,6 @@ class Robe < ApplicationRecord
 
   sig { params(args: T.untyped).returns(T::Boolean) }
   def self.one?(*args); end
-
-  sig { params(attributes: T.untyped, block: T.untyped).returns(Robe) }
-  def self.create(attributes = nil, &block); end
-
-  sig { params(attributes: T.untyped, block: T.untyped).returns(Robe) }
-  def self.create!(attributes = nil, &block); end
-
-  sig { params(attributes: T.untyped, block: T.untyped).returns(Robe) }
-  def self.new(attributes = nil, &block); end
 end
 
 class Robe::ActiveRecord_Relation < ActiveRecord::Relation
@@ -338,6 +284,21 @@ class Robe::ActiveRecord_Relation < ActiveRecord::Relation
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Robe::ActiveRecord_Relation) }
   def extending(*args, &block); end
+
+  sig { params(conditions: T.untyped).returns(T::Boolean) }
+  def exists?(conditions = nil); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def any?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def many?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def none?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def one?(*args); end
 end
 
 class Robe::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation

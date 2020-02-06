@@ -239,51 +239,6 @@ class SpellBook < ApplicationRecord
   sig { params(value: SpellBook::BookType).void }
   def typed_book_type=(value); end
 
-  sig { params(args: T.untyped).returns(SpellBook) }
-  def self.find(*args); end
-
-  sig { params(args: T.untyped).returns(T.nilable(SpellBook)) }
-  def self.find_by(*args); end
-
-  sig { params(args: T.untyped).returns(SpellBook) }
-  def self.find_by!(*args); end
-
-  sig { returns(T.nilable(SpellBook)) }
-  def self.first; end
-
-  sig { returns(SpellBook) }
-  def self.first!; end
-
-  sig { returns(T.nilable(SpellBook)) }
-  def self.second; end
-
-  sig { returns(SpellBook) }
-  def self.second!; end
-
-  sig { returns(T.nilable(SpellBook)) }
-  def self.third; end
-
-  sig { returns(SpellBook) }
-  def self.third!; end
-
-  sig { returns(T.nilable(SpellBook)) }
-  def self.third_to_last; end
-
-  sig { returns(SpellBook) }
-  def self.third_to_last!; end
-
-  sig { returns(T.nilable(SpellBook)) }
-  def self.second_to_last; end
-
-  sig { returns(SpellBook) }
-  def self.second_to_last!; end
-
-  sig { returns(T.nilable(SpellBook)) }
-  def self.last; end
-
-  sig { returns(SpellBook) }
-  def self.last!; end
-
   sig { params(conditions: T.untyped).returns(T::Boolean) }
   def self.exists?(conditions = nil); end
 
@@ -298,15 +253,6 @@ class SpellBook < ApplicationRecord
 
   sig { params(args: T.untyped).returns(T::Boolean) }
   def self.one?(*args); end
-
-  sig { params(attributes: T.untyped, block: T.untyped).returns(SpellBook) }
-  def self.create(attributes = nil, &block); end
-
-  sig { params(attributes: T.untyped, block: T.untyped).returns(SpellBook) }
-  def self.create!(attributes = nil, &block); end
-
-  sig { params(attributes: T.untyped, block: T.untyped).returns(SpellBook) }
-  def self.new(attributes = nil, &block); end
 end
 
 class SpellBook::ActiveRecord_Relation < ActiveRecord::Relation
@@ -433,6 +379,21 @@ class SpellBook::ActiveRecord_Relation < ActiveRecord::Relation
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::ActiveRecord_Relation) }
   def extending(*args, &block); end
+
+  sig { params(conditions: T.untyped).returns(T::Boolean) }
+  def exists?(conditions = nil); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def any?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def many?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def none?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def one?(*args); end
 end
 
 class SpellBook::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
