@@ -116,12 +116,6 @@ end
 module Wizard::GeneratedAttributeMethods
   extend T::Sig
 
-  sig { returns(T.nilable(String)) }
-  def broom; end
-
-  sig { params(value: T.nilable(T.any(Integer, String, Symbol))).void }
-  def broom=(value); end
-
   sig { returns(T::Boolean) }
   def broom?; end
 
@@ -160,12 +154,6 @@ module Wizard::GeneratedAttributeMethods
 
   sig { returns(T::Boolean) }
   def hair_length?; end
-
-  sig { returns(T.nilable(String)) }
-  def house; end
-
-  sig { params(value: T.nilable(T.any(Integer, String, Symbol))).void }
-  def house=(value); end
 
   sig { returns(T::Boolean) }
   def house?; end
@@ -207,10 +195,13 @@ module Wizard::GeneratedAttributeMethods
   def parent_email?; end
 
   sig { returns(T.nilable(String)) }
-  def quidditch_position; end
+  def professor; end
 
   sig { params(value: T.nilable(T.any(Integer, String, Symbol))).void }
-  def quidditch_position=(value); end
+  def professor=(value); end
+
+  sig { returns(T::Boolean) }
+  def professor?; end
 
   sig { returns(T::Boolean) }
   def quidditch_position?; end
@@ -241,6 +232,63 @@ module Wizard::GeneratedAttributeMethods
 
   sig { returns(T::Boolean) }
   def updated_at?; end
+end
+
+class Wizard::Broom < T::Enum
+  enums do
+    Nimbus = new('nimbus')
+    Firebolt = new('firebolt')
+  end
+
+end
+
+class Wizard::EyeColor < T::Enum
+  enums do
+    Brown = new('brown')
+    Green = new('green')
+    Blue = new('blue')
+  end
+
+end
+
+class Wizard::HairColor < T::Enum
+  enums do
+    Brown = new('brown')
+    Black = new('black')
+    Blonde = new('blonde')
+  end
+
+end
+
+class Wizard::House < T::Enum
+  enums do
+    Gryffindor = new('Gryffindor')
+    Hufflepuff = new('Hufflepuff')
+    Ravenclaw = new('Ravenclaw')
+    Slytherin = new('Slytherin')
+  end
+
+end
+
+class Wizard::Professor < T::Enum
+  enums do
+    SeverusSnape = new('Severus Snape')
+    MinervaMcGonagall = new('Minerva McGonagall')
+    PomonaSprout = new('Pomona Sprout')
+    FiliusFlitwick = new('Filius Flitwick')
+    Hagrid = new('Hagrid')
+  end
+
+end
+
+class Wizard::QuidditchPosition < T::Enum
+  enums do
+    Keeper = new('keeper')
+    Seeker = new('seeker')
+    Beater = new('beater')
+    Chaser = new('chaser')
+  end
+
 end
 
 module Wizard::GeneratedAssociationMethods
@@ -445,6 +493,42 @@ class Wizard < ApplicationRecord
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
   def self.extending(*args, &block); end
+
+  sig { returns(T.nilable(Wizard::Broom)) }
+  def typed_broom; end
+
+  sig { params(value: T.nilable(Wizard::Broom)).void }
+  def typed_broom=(value); end
+
+  sig { returns(T.nilable(Wizard::EyeColor)) }
+  def typed_eye_color; end
+
+  sig { params(value: T.nilable(Wizard::EyeColor)).void }
+  def typed_eye_color=(value); end
+
+  sig { returns(T.nilable(Wizard::HairColor)) }
+  def typed_hair_color; end
+
+  sig { params(value: T.nilable(Wizard::HairColor)).void }
+  def typed_hair_color=(value); end
+
+  sig { returns(T.nilable(Wizard::House)) }
+  def typed_house; end
+
+  sig { params(value: T.nilable(Wizard::House)).void }
+  def typed_house=(value); end
+
+  sig { returns(T.nilable(Wizard::Professor)) }
+  def typed_professor; end
+
+  sig { params(value: T.nilable(Wizard::Professor)).void }
+  def typed_professor=(value); end
+
+  sig { returns(T.nilable(Wizard::QuidditchPosition)) }
+  def typed_quidditch_position; end
+
+  sig { params(value: T.nilable(Wizard::QuidditchPosition)).void }
+  def typed_quidditch_position=(value); end
 
   sig { params(args: T.untyped).returns(Wizard) }
   def self.find(*args); end

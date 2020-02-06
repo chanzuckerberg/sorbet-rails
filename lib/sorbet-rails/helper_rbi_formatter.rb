@@ -1,4 +1,4 @@
-# typed: strict
+# typed: true
 require 'parlour'
 class SorbetRails::HelperRbiFormatter
   extend T::Sig

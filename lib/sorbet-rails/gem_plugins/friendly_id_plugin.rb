@@ -1,4 +1,4 @@
-# typed: strict
+# typed: strong
 class FriendlyIdPlugin < SorbetRails::ModelPlugins::Base
   sig { override.params(root: Parlour::RbiGenerator::Namespace).void }
   def generate(root)

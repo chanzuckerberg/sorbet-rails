@@ -174,6 +174,16 @@ module Wand::GeneratedAttributeMethods
   def wood_type?; end
 end
 
+class Wand::CoreType < T::Enum
+  enums do
+    PhoenixFeather = new('phoenix_feather')
+    DragonHeartstring = new('dragon_heartstring')
+    UnicornTailHair = new('unicorn_tail_hair')
+    BasiliskHorn = new('basilisk_horn')
+  end
+
+end
+
 module Wand::GeneratedAssociationMethods
   extend T::Sig
 
@@ -310,6 +320,12 @@ class Wand < ApplicationRecord
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::ActiveRecord_Relation) }
   def self.extending(*args, &block); end
+
+  sig { returns(T.nilable(Wand::CoreType)) }
+  def typed_core_type; end
+
+  sig { params(value: T.nilable(Wand::CoreType)).void }
+  def typed_core_type=(value); end
 
   sig { params(args: T.untyped).returns(Wand) }
   def self.find(*args); end

@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/railties/all/railties.rbi
 #
-# railties-5.2.3
+# railties-5.2.4.1
 module Rails
   def self.app_class; end
   def self.app_class=(arg0); end
@@ -117,7 +117,7 @@ class Rails::Engine < Rails::Railtie
   def paths(*args, &block); end
   def railties; end
   def root(*args, &block); end
-  def routes; end
+  def routes(&block); end
   def routes?; end
   def run_tasks_blocks(*arg0); end
   def self.called_from; end

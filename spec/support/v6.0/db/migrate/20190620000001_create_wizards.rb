@@ -4,6 +4,7 @@ class CreateWizards < ActiveRecord::Migration[6.0]
     create_table :wizards do |t|
       t.string :name
       t.integer :house
+      t.integer :professor
       t.string :parent_email
       t.text :notes
 

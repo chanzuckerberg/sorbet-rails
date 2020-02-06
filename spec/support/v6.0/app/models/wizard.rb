@@ -2,7 +2,7 @@
 class Wizard < ApplicationRecord
   validates :name, length: { minimum: 5 }, presence: true
 
-  enum house: {
+  typed_enum house: {
     Gryffindor: 0,
     Hufflepuff: 1,
     Ravenclaw: 2,
@@ -17,12 +17,12 @@ class Wizard < ApplicationRecord
     "Hagrid": 4,
   }
 
-  enum broom: {
+  typed_enum broom: {
     nimbus: 'nimbus',
     firebolt: 'firebolt',
   }, _prefix: true
 
-  enum quidditch_position: {
+  typed_enum quidditch_position: {
     keeper: 0,
     seeker: 1,
     beater: 2,

@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/actionpack/all/actionpack.rbi
 #
-# actionpack-5.2.3
+# actionpack-5.2.4.1
 module ActionPack
   def self.gem_version; end
   def self.version; end
@@ -32,4 +32,3 @@ module ActionDispatch::Session
 end
 class ActionDispatch::Railtie < Rails::Railtie
 end
-class ActionController::BadRequest; end

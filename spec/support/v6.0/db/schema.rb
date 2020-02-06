@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 2019_06_20_000009) do
   create_table "wizards", force: :cascade do |t|
     t.string "name"
     t.integer "house"
+    t.integer "professor"
     t.string "parent_email"
     t.text "notes"
     t.datetime "created_at", precision: 6, null: false

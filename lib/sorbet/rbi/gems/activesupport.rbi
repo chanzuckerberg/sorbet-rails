@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/activesupport/all/activesupport.rbi
 #
-# activesupport-5.2.3
+# activesupport-5.2.4.1
 class Array
   def as_json(options = nil); end
   def blank?; end
@@ -47,7 +47,7 @@ class Hash
   def reverse_merge!(other_hash); end
   def reverse_merge(other_hash); end
   def reverse_update(other_hash); end
-  def self.from_trusted_xml(xml); end
+  def self.[](*arg0); end
   def self.from_xml(xml, disallowed_types = nil); end
   def slice!(*keys); end
   def stringify_keys!; end
@@ -115,7 +115,6 @@ end
 class Module::DelegationError < NoMethodError
 end
 class ActiveSupport::Deprecation
-  def self.allocate; end
   def self.behavior(*args, &block); end
   def self.behavior=(arg); end
   def self.debug(*args, &block); end
@@ -128,7 +127,6 @@ class ActiveSupport::Deprecation
   def self.gem_name=(arg); end
   def self.initialize(*args, &block); end
   def self.instance; end
-  def self.new(*arg0); end
   def self.silence(*args, &block); end
   def self.silenced(*args, &block); end
   def self.silenced=(arg); end
@@ -193,7 +191,7 @@ class ActiveSupport::Notifications::Fanout
   def locked?; end
   def publish(name, *args); end
   def start(name, id, payload); end
-  def subscribe(pattern = nil, block = nil); end
+  def subscribe(pattern = nil, callable = nil, &block); end
   def synchronize(&block); end
   def try_lock; end
   def unlock; end
