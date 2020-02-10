@@ -9,6 +9,33 @@ class ActiveRecord::Base
   sig { params(args: T.untyped).returns(T.attached_class) }
   def self.find_by!(*args); end
 
+  sig {
+    params(
+      attributes: T.untyped,
+      block: T.proc.params(object: T.attached_class).void
+    ).
+    returns(Elem)
+  }
+  def self.find_or_initialize_by(attributes, &block); end
+
+  sig {
+    params(
+      attributes: T.untyped,
+      block: T.proc.params(object: T.attached_class).void
+    ).
+    returns(Elem)
+  }
+  def self.find_or_create_by(attributes, &block); end
+
+  sig {
+    params(
+      attributes: T.untyped,
+      block: T.proc.params(object: T.attached_class).void
+    ).
+    returns(Elem)
+  }
+  def self.find_or_create_by!(attributes, &block); end
+
   sig { returns(T.nilable(T.attached_class)) }
   def self.first; end
 

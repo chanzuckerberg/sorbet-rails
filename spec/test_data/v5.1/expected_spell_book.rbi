@@ -467,6 +467,15 @@ class SpellBook::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRel
   sig { params(args: T.untyped).returns(SpellBook) }
   def find_by!(*args); end
 
+  sig { params(attributes: T.untyped, block: T.proc.params(object: SpellBook).void).returns(SpellBook) }
+  def find_or_initialize_by(attributes, &block); end
+
+  sig { params(attributes: T.untyped, block: T.proc.params(object: SpellBook).void).returns(SpellBook) }
+  def find_or_create_by(attributes, &block); end
+
+  sig { params(attributes: T.untyped, block: T.proc.params(object: SpellBook).void).returns(SpellBook) }
+  def find_or_create_by!(attributes, &block); end
+
   sig { returns(T.nilable(SpellBook)) }
   def first; end
 
@@ -647,6 +656,15 @@ class SpellBook::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Assoc
 
   sig { params(args: T.untyped).returns(SpellBook) }
   def find_by!(*args); end
+
+  sig { params(attributes: T.untyped, block: T.proc.params(object: SpellBook).void).returns(SpellBook) }
+  def find_or_initialize_by(attributes, &block); end
+
+  sig { params(attributes: T.untyped, block: T.proc.params(object: SpellBook).void).returns(SpellBook) }
+  def find_or_create_by(attributes, &block); end
+
+  sig { params(attributes: T.untyped, block: T.proc.params(object: SpellBook).void).returns(SpellBook) }
+  def find_or_create_by!(attributes, &block); end
 
   sig { returns(T.nilable(SpellBook)) }
   def first; end
