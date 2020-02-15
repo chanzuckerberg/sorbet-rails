@@ -1,8 +1,9 @@
 PATH
   remote: ../../..
   specs:
-    sorbet-rails (0.5.9.1)
-      parlour (~> 1.0)
+    sorbet-rails (0.6.0.pre)
+      parlour (~> 2.0)
+      sorbet (>= 0.5)
 
 GEM
   remote: https://rubygems.org/
@@ -62,10 +63,11 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.2)
+    ast (2.4.0)
     bindex (0.8.1)
     builder (3.2.4)
     byebug (11.1.1)
-    commander (4.4.7)
+    commander (4.5.0)
       highline (~> 2.0.0)
     concurrent-ruby (1.1.5)
     crass (1.0.6)
@@ -92,10 +94,13 @@ GEM
     nio4r (2.5.2)
     nokogiri (1.10.7)
       mini_portile2 (~> 2.4.0)
-    parlour (1.0.0)
-      commander (~> 4.4.0)
-      rainbow (~> 3.0.0)
-      sorbet-runtime
+    parlour (2.0.0)
+      commander (~> 4.5)
+      parser
+      rainbow (~> 3.0)
+      sorbet-runtime (>= 0.5)
+    parser (2.7.0.2)
+      ast (~> 2.4.0)
     puma (3.12.2)
     rack (2.1.2)
     rack-test (1.1.0)
