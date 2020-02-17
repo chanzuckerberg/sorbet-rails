@@ -17,6 +17,5 @@ class ActiveRecord::Base
 end
 
 class ActiveRecord::Relation
-  Elem = type_member
   include SorbetRails::PluckToTStruct
 end
