@@ -1,5 +1,7 @@
 # typed: strong
 class ActiveRecord::Relation
+  Elem = type_member(fixed: T.untyped)
+
   sig { params(args: T.untyped).returns(Elem) }
   def find(*args); end
 
