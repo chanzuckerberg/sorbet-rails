@@ -1,1 +1,312 @@
-No errors! Great job.
+sorbet/rails-rbi/models/wizard.rbi:1060: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+    1060 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Wizard)).void).returns(Wizard) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/wizard.rbi:1063: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+    1063 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Wizard)).void).returns(Wizard) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/wizard.rbi:1066: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+    1066 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Wizard)).void).returns(Wizard) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/wizard.rbi:1364: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+    1364 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Wizard)).void).returns(Wizard) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/wizard.rbi:1367: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+    1367 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Wizard)).void).returns(Wizard) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/wizard.rbi:1370: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+    1370 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Wizard)).void).returns(Wizard) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/wand.rbi:660: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     660 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Wand)).void).returns(Wand) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/wand.rbi:663: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     663 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Wand)).void).returns(Wand) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/wand.rbi:666: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     666 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Wand)).void).returns(Wand) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/wand.rbi:877: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     877 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Wand)).void).returns(Wand) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/wand.rbi:880: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     880 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Wand)).void).returns(Wand) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/wand.rbi:883: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     883 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Wand)).void).returns(Wand) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/squib.rbi:985: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     985 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Squib)).void).returns(Squib) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/squib.rbi:988: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     988 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Squib)).void).returns(Squib) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/squib.rbi:991: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     991 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Squib)).void).returns(Squib) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/squib.rbi:1289: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+    1289 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Squib)).void).returns(Squib) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/squib.rbi:1292: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+    1292 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Squib)).void).returns(Squib) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/squib.rbi:1295: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+    1295 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Squib)).void).returns(Squib) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/spell_book.rbi:533: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     533 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: SpellBook)).void).returns(SpellBook) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/spell_book.rbi:536: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     536 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: SpellBook)).void).returns(SpellBook) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/spell_book.rbi:539: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     539 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: SpellBook)).void).returns(SpellBook) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/spell_book.rbi:744: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     744 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: SpellBook)).void).returns(SpellBook) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/spell_book.rbi:747: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     747 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: SpellBook)).void).returns(SpellBook) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/spell_book.rbi:750: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     750 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: SpellBook)).void).returns(SpellBook) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/school.rbi:409: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     409 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: School)).void).returns(School) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/school.rbi:412: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     412 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: School)).void).returns(School) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/school.rbi:415: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     415 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: School)).void).returns(School) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/school.rbi:602: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     602 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: School)).void).returns(School) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/school.rbi:605: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     605 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: School)).void).returns(School) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/school.rbi:608: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     608 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: School)).void).returns(School) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/robe.rbi:420: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     420 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Robe)).void).returns(Robe) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/robe.rbi:423: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     423 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Robe)).void).returns(Robe) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/robe.rbi:426: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     426 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Robe)).void).returns(Robe) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/robe.rbi:613: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     613 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Robe)).void).returns(Robe) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/robe.rbi:616: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     616 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Robe)).void).returns(Robe) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/robe.rbi:619: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     619 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Robe)).void).returns(Robe) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/potion.rbi:397: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     397 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Potion)).void).returns(Potion) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/potion.rbi:400: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     400 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Potion)).void).returns(Potion) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/potion.rbi:403: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     403 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Potion)).void).returns(Potion) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/potion.rbi:590: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     590 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Potion)).void).returns(Potion) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/potion.rbi:593: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     593 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Potion)).void).returns(Potion) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/potion.rbi:596: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     596 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Potion)).void).returns(Potion) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/active_storage/blob.rbi:405: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     405 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActiveStorage::Blob)).void).returns(ActiveStorage::Blob) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/active_storage/blob.rbi:408: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     408 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActiveStorage::Blob)).void).returns(ActiveStorage::Blob) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/active_storage/blob.rbi:411: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     411 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActiveStorage::Blob)).void).returns(ActiveStorage::Blob) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/active_storage/blob.rbi:604: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     604 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActiveStorage::Blob)).void).returns(ActiveStorage::Blob) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/active_storage/blob.rbi:607: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     607 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActiveStorage::Blob)).void).returns(ActiveStorage::Blob) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/active_storage/blob.rbi:610: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     610 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActiveStorage::Blob)).void).returns(ActiveStorage::Blob) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/active_storage/attachment.rbi:403: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     403 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActiveStorage::Attachment)).void).returns(ActiveStorage::Attachment) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/active_storage/attachment.rbi:406: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     406 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActiveStorage::Attachment)).void).returns(ActiveStorage::Attachment) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/active_storage/attachment.rbi:409: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     409 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActiveStorage::Attachment)).void).returns(ActiveStorage::Attachment) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/active_storage/attachment.rbi:596: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     596 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActiveStorage::Attachment)).void).returns(ActiveStorage::Attachment) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/active_storage/attachment.rbi:599: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     599 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActiveStorage::Attachment)).void).returns(ActiveStorage::Attachment) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/active_storage/attachment.rbi:602: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     602 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActiveStorage::Attachment)).void).returns(ActiveStorage::Attachment) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/active_record/schema_migration.rbi:400: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     400 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActiveRecord::SchemaMigration)).void).returns(ActiveRecord::SchemaMigration) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/active_record/schema_migration.rbi:403: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     403 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActiveRecord::SchemaMigration)).void).returns(ActiveRecord::SchemaMigration) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/active_record/schema_migration.rbi:406: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     406 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActiveRecord::SchemaMigration)).void).returns(ActiveRecord::SchemaMigration) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/active_record/schema_migration.rbi:593: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     593 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActiveRecord::SchemaMigration)).void).returns(ActiveRecord::SchemaMigration) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/active_record/schema_migration.rbi:596: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     596 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActiveRecord::SchemaMigration)).void).returns(ActiveRecord::SchemaMigration) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/active_record/schema_migration.rbi:599: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     599 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActiveRecord::SchemaMigration)).void).returns(ActiveRecord::SchemaMigration) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/active_record/internal_metadata.rbi:427: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     427 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActiveRecord::InternalMetadata)).void).returns(ActiveRecord::InternalMetadata) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/active_record/internal_metadata.rbi:430: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     430 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActiveRecord::InternalMetadata)).void).returns(ActiveRecord::InternalMetadata) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/active_record/internal_metadata.rbi:433: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     433 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActiveRecord::InternalMetadata)).void).returns(ActiveRecord::InternalMetadata) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/active_record/internal_metadata.rbi:620: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     620 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActiveRecord::InternalMetadata)).void).returns(ActiveRecord::InternalMetadata) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/active_record/internal_metadata.rbi:623: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     623 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActiveRecord::InternalMetadata)).void).returns(ActiveRecord::InternalMetadata) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/active_record/internal_metadata.rbi:626: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     626 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActiveRecord::InternalMetadata)).void).returns(ActiveRecord::InternalMetadata) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/action_text/rich_text.rbi:396: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     396 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActionText::RichText)).void).returns(ActionText::RichText) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/action_text/rich_text.rbi:399: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     399 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActionText::RichText)).void).returns(ActionText::RichText) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/action_text/rich_text.rbi:402: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     402 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActionText::RichText)).void).returns(ActionText::RichText) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/action_text/rich_text.rbi:592: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     592 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActionText::RichText)).void).returns(ActionText::RichText) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/action_text/rich_text.rbi:595: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     595 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActionText::RichText)).void).returns(ActionText::RichText) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/action_text/rich_text.rbi:598: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     598 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActionText::RichText)).void).returns(ActionText::RichText) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/action_mailbox/inbound_email.rbi:524: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     524 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActionMailbox::InboundEmail)).void).returns(ActionMailbox::InboundEmail) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/action_mailbox/inbound_email.rbi:527: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     527 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActionMailbox::InboundEmail)).void).returns(ActionMailbox::InboundEmail) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/action_mailbox/inbound_email.rbi:530: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     530 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActionMailbox::InboundEmail)).void).returns(ActionMailbox::InboundEmail) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/action_mailbox/inbound_email.rbi:750: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     750 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActionMailbox::InboundEmail)).void).returns(ActionMailbox::InboundEmail) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/action_mailbox/inbound_email.rbi:753: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     753 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActionMailbox::InboundEmail)).void).returns(ActionMailbox::InboundEmail) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet/rails-rbi/models/action_mailbox/inbound_email.rbi:756: Malformed type declaration. Unknown type syntax. Expected a ClassName or T.<func> https://srb.help/5004
+     756 |  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActionMailbox::InboundEmail)).void).returns(ActionMailbox::InboundEmail) }
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Errors: 78
