@@ -14,7 +14,7 @@ class ActiveRecord::Relation
   sig {
     params(
       attributes: T.untyped,
-      block: T.proc.params(object: Elem).void
+      block: T.nilable(T.proc.params(object: Elem).void)
     ).
     returns(Elem)
   }
@@ -23,7 +23,7 @@ class ActiveRecord::Relation
   sig {
     params(
       attributes: T.untyped,
-      block: T.proc.params(object: Elem).void
+      block: T.nilable(T.proc.params(object: Elem).void)
     ).
     returns(Elem)
   }
@@ -32,7 +32,7 @@ class ActiveRecord::Relation
   sig {
     params(
       attributes: T.untyped,
-      block: T.proc.params(object: Elem).void
+      block: T.nilable(T.proc.params(object: Elem).void)
     ).
     returns(Elem)
   }
