@@ -12,7 +12,7 @@ class ActiveRecord::Base
   sig {
     params(
       attributes: T.untyped,
-      block: T.proc.params(object: T.attached_class).void
+      block: T.nilable(T.proc.params(object: T.attached_class).void)
     ).
     returns(Elem)
   }
@@ -21,7 +21,7 @@ class ActiveRecord::Base
   sig {
     params(
       attributes: T.untyped,
-      block: T.proc.params(object: T.attached_class).void
+      block: T.nilable(T.proc.params(object: T.attached_class).void)
     ).
     returns(Elem)
   }
@@ -30,7 +30,7 @@ class ActiveRecord::Base
   sig {
     params(
       attributes: T.untyped,
-      block: T.proc.params(object: T.attached_class).void
+      block: T.nilable(T.proc.params(object: T.attached_class).void)
     ).
     returns(Elem)
   }
