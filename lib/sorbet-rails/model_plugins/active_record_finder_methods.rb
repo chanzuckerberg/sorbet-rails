@@ -77,7 +77,7 @@ class SorbetRails::ModelPlugins::ActiveRecordFinderMethods < SorbetRails::ModelP
           Parameter.new("attributes", type: "T.untyped") ,
           Parameter.new(
             "&block",
-            type: "T.nilable(T.proc.params(object: #{self.model_class_name})).void",
+            type: "T.nilable(T.proc.params(object: #{self.model_class_name}).void)",
           ),
         ],
         return_type: self.model_class_name,
