@@ -417,13 +417,13 @@ class Robe::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
   sig { params(args: T.untyped).returns(Robe) }
   def find_by!(*args); end
 
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Robe)).void).returns(Robe) }
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Robe).void)).returns(Robe) }
   def find_or_initialize_by(attributes, &block); end
 
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Robe)).void).returns(Robe) }
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Robe).void)).returns(Robe) }
   def find_or_create_by(attributes, &block); end
 
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Robe)).void).returns(Robe) }
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Robe).void)).returns(Robe) }
   def find_or_create_by!(attributes, &block); end
 
   sig { returns(T.nilable(Robe)) }
@@ -610,13 +610,13 @@ class Robe::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associatio
   sig { params(args: T.untyped).returns(Robe) }
   def find_by!(*args); end
 
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Robe)).void).returns(Robe) }
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Robe).void)).returns(Robe) }
   def find_or_initialize_by(attributes, &block); end
 
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Robe)).void).returns(Robe) }
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Robe).void)).returns(Robe) }
   def find_or_create_by(attributes, &block); end
 
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Robe)).void).returns(Robe) }
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Robe).void)).returns(Robe) }
   def find_or_create_by!(attributes, &block); end
 
   sig { returns(T.nilable(Robe)) }
