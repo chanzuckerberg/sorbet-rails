@@ -45,4 +45,3 @@ else
   gem 'sorbet'
   gem 'sorbet-runtime'
 end
-gem 'sorbet-coerce'
