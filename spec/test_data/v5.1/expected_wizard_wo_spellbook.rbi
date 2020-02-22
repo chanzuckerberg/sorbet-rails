@@ -872,13 +872,13 @@ class Wizard::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelati
   sig { params(args: T.untyped).returns(Wizard) }
   def find_by!(*args); end
 
-  sig { params(attributes: T.untyped, block: T.proc.params(object: Wizard).void).returns(Wizard) }
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Wizard).void)).returns(Wizard) }
   def find_or_initialize_by(attributes, &block); end
 
-  sig { params(attributes: T.untyped, block: T.proc.params(object: Wizard).void).returns(Wizard) }
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Wizard).void)).returns(Wizard) }
   def find_or_create_by(attributes, &block); end
 
-  sig { params(attributes: T.untyped, block: T.proc.params(object: Wizard).void).returns(Wizard) }
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Wizard).void)).returns(Wizard) }
   def find_or_create_by!(attributes, &block); end
 
   sig { returns(T.nilable(Wizard)) }
@@ -1107,13 +1107,13 @@ class Wizard::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associat
   sig { params(args: T.untyped).returns(Wizard) }
   def find_by!(*args); end
 
-  sig { params(attributes: T.untyped, block: T.proc.params(object: Wizard).void).returns(Wizard) }
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Wizard).void)).returns(Wizard) }
   def find_or_initialize_by(attributes, &block); end
 
-  sig { params(attributes: T.untyped, block: T.proc.params(object: Wizard).void).returns(Wizard) }
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Wizard).void)).returns(Wizard) }
   def find_or_create_by(attributes, &block); end
 
-  sig { params(attributes: T.untyped, block: T.proc.params(object: Wizard).void).returns(Wizard) }
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Wizard).void)).returns(Wizard) }
   def find_or_create_by!(attributes, &block); end
 
   sig { returns(T.nilable(Wizard)) }

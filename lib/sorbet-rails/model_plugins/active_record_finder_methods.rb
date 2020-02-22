@@ -51,7 +51,10 @@ class SorbetRails::ModelPlugins::ActiveRecordFinderMethods < SorbetRails::ModelP
         "find_or_initialize_by",
         parameters: [
           Parameter.new("attributes", type: "T.untyped") ,
-          Parameter.new("&block", type: "T.proc.params(object: #{self.model_class_name}).void"),
+          Parameter.new(
+            "&block",
+            type: "T.nilable(T.proc.params(object: #{self.model_class_name}).void)",
+          ),
         ],
         return_type: self.model_class_name,
         class_method: class_method
@@ -60,7 +63,10 @@ class SorbetRails::ModelPlugins::ActiveRecordFinderMethods < SorbetRails::ModelP
         "find_or_create_by",
         parameters: [
           Parameter.new("attributes", type: "T.untyped") ,
-          Parameter.new("&block", type: "T.proc.params(object: #{self.model_class_name}).void"),
+          Parameter.new(
+            "&block",
+            type: "T.nilable(T.proc.params(object: #{self.model_class_name}).void)"
+          ),
         ],
         return_type: self.model_class_name,
         class_method: class_method
@@ -69,7 +75,10 @@ class SorbetRails::ModelPlugins::ActiveRecordFinderMethods < SorbetRails::ModelP
         "find_or_create_by!",
         parameters: [
           Parameter.new("attributes", type: "T.untyped") ,
-          Parameter.new("&block", type: "T.proc.params(object: #{self.model_class_name}).void"),
+          Parameter.new(
+            "&block",
+            type: "T.nilable(T.proc.params(object: #{self.model_class_name}).void)",
+          ),
         ],
         return_type: self.model_class_name,
         class_method: class_method

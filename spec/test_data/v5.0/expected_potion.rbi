@@ -349,13 +349,13 @@ class Potion::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelati
   sig { params(args: T.untyped).returns(Potion) }
   def find_by!(*args); end
 
-  sig { params(attributes: T.untyped, block: T.proc.params(object: Potion).void).returns(Potion) }
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Potion).void)).returns(Potion) }
   def find_or_initialize_by(attributes, &block); end
 
-  sig { params(attributes: T.untyped, block: T.proc.params(object: Potion).void).returns(Potion) }
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Potion).void)).returns(Potion) }
   def find_or_create_by(attributes, &block); end
 
-  sig { params(attributes: T.untyped, block: T.proc.params(object: Potion).void).returns(Potion) }
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Potion).void)).returns(Potion) }
   def find_or_create_by!(attributes, &block); end
 
   sig { returns(T.nilable(Potion)) }
@@ -527,13 +527,13 @@ class Potion::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associat
   sig { params(args: T.untyped).returns(Potion) }
   def find_by!(*args); end
 
-  sig { params(attributes: T.untyped, block: T.proc.params(object: Potion).void).returns(Potion) }
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Potion).void)).returns(Potion) }
   def find_or_initialize_by(attributes, &block); end
 
-  sig { params(attributes: T.untyped, block: T.proc.params(object: Potion).void).returns(Potion) }
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Potion).void)).returns(Potion) }
   def find_or_create_by(attributes, &block); end
 
-  sig { params(attributes: T.untyped, block: T.proc.params(object: Potion).void).returns(Potion) }
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Potion).void)).returns(Potion) }
   def find_or_create_by!(attributes, &block); end
 
   sig { returns(T.nilable(Potion)) }

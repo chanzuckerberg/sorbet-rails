@@ -797,13 +797,13 @@ class Squib::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelatio
   sig { params(args: T.untyped).returns(Squib) }
   def find_by!(*args); end
 
-  sig { params(attributes: T.untyped, block: T.proc.params(object: Squib).void).returns(Squib) }
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Squib).void)).returns(Squib) }
   def find_or_initialize_by(attributes, &block); end
 
-  sig { params(attributes: T.untyped, block: T.proc.params(object: Squib).void).returns(Squib) }
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Squib).void)).returns(Squib) }
   def find_or_create_by(attributes, &block); end
 
-  sig { params(attributes: T.untyped, block: T.proc.params(object: Squib).void).returns(Squib) }
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Squib).void)).returns(Squib) }
   def find_or_create_by!(attributes, &block); end
 
   sig { returns(T.nilable(Squib)) }
@@ -1032,13 +1032,13 @@ class Squib::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associati
   sig { params(args: T.untyped).returns(Squib) }
   def find_by!(*args); end
 
-  sig { params(attributes: T.untyped, block: T.proc.params(object: Squib).void).returns(Squib) }
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Squib).void)).returns(Squib) }
   def find_or_initialize_by(attributes, &block); end
 
-  sig { params(attributes: T.untyped, block: T.proc.params(object: Squib).void).returns(Squib) }
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Squib).void)).returns(Squib) }
   def find_or_create_by(attributes, &block); end
 
-  sig { params(attributes: T.untyped, block: T.proc.params(object: Squib).void).returns(Squib) }
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Squib).void)).returns(Squib) }
   def find_or_create_by!(attributes, &block); end
 
   sig { returns(T.nilable(Squib)) }
