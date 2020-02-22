@@ -160,6 +160,10 @@ Generates only typed enum setter & getter:
 ```
 
 ### Controllers
+```sh
+❯ rake rails_rbi:custom
+```
+
 `sorbet-rails` adds `TypedParams` to extact typed controller parameters.
 
 TypedParams takes a parameter definition, which is a subclass of `T::Struct` and coerces the `params` object into an instance of that subclass using [sorbet-coerce](https://github.com/chanzuckerberg/sorbet-coerce):
