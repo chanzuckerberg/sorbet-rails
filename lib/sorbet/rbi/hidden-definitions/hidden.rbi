@@ -8086,7 +8086,7 @@ module Kernel
 
   def pretty_inspect(); end
 
-  def respond_to?(*_); end
+  def respond_to?(arg0,include_all=false); end
 
   def yield_self(); end
 end
