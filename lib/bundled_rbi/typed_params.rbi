@@ -4,6 +4,6 @@ module TypedParams
 
   Elem = type_member
 
-  sig { params(args: ActionController::Parameters).returns(Elem) }
-  def extract!(args); end
+  sig { params(args: ActionController::Parameters, raise_coercion_error: T.nilable(T::Boolean)).returns(Elem) }
+  def extract!(args, raise_coercion_error: nil); end
 end
