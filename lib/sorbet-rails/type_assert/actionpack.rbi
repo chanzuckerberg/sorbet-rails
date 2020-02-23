@@ -1,2 +1,4 @@
 # typed: strong
-class ActionController::BadRequest; end
+class ActionController::BadRequest < StandardError
+  def initialize(*args); end
+end
