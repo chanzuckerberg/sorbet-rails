@@ -185,6 +185,7 @@ end
 If it fails to coerce the params into the right type, an `ActionController::BadRequest` exception will be raised with the coercion context for debugging. 
 
 Note: The API `TypedParams[...].new.extract!` may seem verbose, but necessary to support this feature. Ideally, the API can be simply `TypedParams[...].extract!`. However, `sorbet` [doesn't support](http://github.com/sorbet/sorbet/issues/62) defining a method that accept a type and return an instance of the type. If this feature is supported by `sorbet` in the future, it will be easy to codemod to remove the `TypedParams[...].extract!` part from your code.
+Note: [`require_typed` and `fetch_typed`](https://github.com/chanzuckerberg/sorbet-rails/blob/v0.5.9.1/README.md) are deprecated in favor of `TypedParams`.
 
 ### Routes
 
@@ -236,7 +237,7 @@ specific environment group (eg. `development` only).
   - `find_n`, `first_n`, `last_n`
   - `pluck_to_tstruct`
   - `typed_enum`
-- Controller: adding `fetch_typed` and `require_typed`
+- Controller: using `TypedParams`
 
 In addition to `require`ing `sorbet-rails`, you must also run
 `rake rails_rbi:custom`, which will produce the RBI for these runtime features.
