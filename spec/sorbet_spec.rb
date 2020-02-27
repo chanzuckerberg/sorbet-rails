@@ -85,7 +85,7 @@ RSpec.describe 'sorbet' do
 
   it 'runs with srb tc --lsp' do
     stdout, stderr, status = Open3.capture3(
-      'bundle', 'exec', 'srb', 'tc', '--lsp',
+      "#{`bundle show sorbet-static`}/libexec/sorbet", '--lsp',
       chdir: Rails.root.to_path,
     )
     expect(status.exitstatus).to eql(10)
