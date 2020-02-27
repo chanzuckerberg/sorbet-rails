@@ -88,6 +88,9 @@ RSpec.describe 'sorbet' do
       'bundle', 'exec', 'srb', 'tc', '--lsp',
       chdir: Rails.root.to_path,
     )
+    puts "rails root: #{Rails.root.to_path}"
+    puts stdout
+    puts stderr
     expect(status.exitstatus).to eql(10)
   end
 end
