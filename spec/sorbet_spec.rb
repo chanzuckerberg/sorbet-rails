@@ -85,7 +85,7 @@ RSpec.describe 'sorbet' do
 
   it 'runs with srb tc --lsp' do
     stdout, stderr, status = Open3.capture3(
-      'bundle', 'exec', 'srb', 'tc', '--lsp',
+      'bundle', 'exec', 'srb', 'tc', '--lsp', '--verbose',
       chdir: Rails.root.to_path,
     )
     puts "rails root: #{Rails.root.to_path}"
