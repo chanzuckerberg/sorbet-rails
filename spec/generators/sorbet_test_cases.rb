@@ -194,6 +194,18 @@ T.assert_type!(wizard.spell_books.none?, T::Boolean)
 T.assert_type!(wizard.spell_books.one?, T::Boolean)
 
 # -- Custom ActionController::Parameters Methods
+class MyActionParams < T::Struct
+  class Info < T::Struct
+    const :birthday, Date
+    const :friends, T::Array[String]
+    const :grandson, T.nilable(String)
+  end
+
+  const :age, Integer
+  const :name, String
+  const :info, Info
+end
+
 params = ActionController::Parameters.new({
   age: 11,
   name: 'Harry Potter',
@@ -206,6 +218,10 @@ params = ActionController::Parameters.new({
     grandson: nil,
   },
 })
+
+typed_params = TypedParams[MyActionParams].new.extract!(params)
+T.assert_type!(typed_params, MyActionParams)
+
 # -- require_typed
 T.assert_type!(
   params.require_typed(:age, TA[Integer].new),
