@@ -7,7 +7,8 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/i18n/all/i18n.rbi
 #
-# i18n-1.7.0
+# i18n-1.8.2
+
 module I18n
   def self.interpolate(string, values); end
   def self.interpolate_hash(string, values); end

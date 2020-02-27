@@ -1,4 +1,4 @@
-# typed: false
+# typed: true
 require "rails"
 require "sorbet-runtime"
 require "sorbet-rails/config"

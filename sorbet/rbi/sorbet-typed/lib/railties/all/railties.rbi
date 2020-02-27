@@ -10,6 +10,9 @@
 module Rails
   sig {returns(Rails::Application)}
   def self.application; end
+  
+  sig { returns(Pathname) }
+  def self.root; end
 end
 
 class Rails::Application

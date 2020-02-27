@@ -28,7 +28,7 @@ before_install:
 - gem install bundler -v 2.0.1 --no-doc
 - gem install bundler -v 1.17.3 --no-doc
 script:
-- (cd lib && bundle exec srb tc)
+- bundle exec srb tc
 - "./spec/bin/run_spec.sh"
 deploy:
   provider: rubygems

@@ -8,6 +8,7 @@
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/thread_safe/all/thread_safe.rbi
 #
 # thread_safe-0.3.6
+
 module ThreadSafe
 end
 module Threadsafe

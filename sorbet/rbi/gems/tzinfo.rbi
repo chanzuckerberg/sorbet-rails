@@ -8,6 +8,7 @@
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/tzinfo/all/tzinfo.rbi
 #
 # tzinfo-1.2.6
+
 module TZInfo
 end
 module TZInfo::RubyCoreSupport

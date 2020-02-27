@@ -8,6 +8,7 @@
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/railties/all/railties.rbi
 #
 # railties-5.2.4.1
+
 module Rails
   def self.app_class; end
   def self.app_class=(arg0); end
@@ -328,4 +329,30 @@ class Rails::Railtie::Configuration
   def to_prepare_blocks; end
   def watchable_dirs; end
   def watchable_files; end
+end
+class SourceAnnotationExtractor
+  def display(results, options = nil); end
+  def extract_annotations_from(file, pattern); end
+  def find(dirs); end
+  def find_in(dir); end
+  def initialize(tag); end
+  def self.enumerate(tag, options = nil); end
+  def tag; end
+end
+class SourceAnnotationExtractor::Annotation < Struct
+  def line; end
+  def line=(_); end
+  def self.[](*arg0); end
+  def self.directories; end
+  def self.extensions; end
+  def self.inspect; end
+  def self.members; end
+  def self.new(*arg0); end
+  def self.register_directories(*dirs); end
+  def self.register_extensions(*exts, &block); end
+  def tag; end
+  def tag=(_); end
+  def text; end
+  def text=(_); end
+  def to_s(options = nil); end
 end

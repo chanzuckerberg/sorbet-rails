@@ -160,7 +160,8 @@ class String
   sig { params(capitalize: T::Boolean, keep_id_suffix: T::Boolean).returns(String) }
   def humanize(capitalize: true, keep_id_suffix: false); end
 
-  sig { params(zone: String).returns(T.any(Time, ActiveSupport::TimeWithZone)) }
+  # returns Time in the case zone is passed nil and ActiveSupport::TimeWithZone otherwise
+  sig { params(zone: T.nilable(T.any(String, ActiveSupport::TimeZone))).returns(T.any(ActiveSupport::TimeWithZone, Time)) }
   def in_time_zone(zone = ::Time.zone); end
 
   sig { params(amount: Integer, indent_string: T.nilable(String), indent_empty_lines: T::Boolean).returns(T.nilable(String)) }
@@ -196,7 +197,7 @@ class String
   sig { returns(T.untyped) }
   def safe_constantize; end
 
-  sig { params(locale: Symbol).returns(T.nilable(String)) }
+  sig { params(locale: Symbol).returns(String) }
   def singularize(locale = :en); end
 
   sig { returns(T.untyped) }
@@ -425,34 +426,554 @@ module ActiveSupport::NumberHelper
   def number_to_rounded(number, locale: :en, precision: 3, significant: false, separator: ".", delimiter: "", strip_insignificant_zeros: false); end
 end
 
+module ActiveSupport::Inflector
+  sig do
+    params(
+      term: String,
+      uppercase_first_letter: T::Boolean
+    ).returns(String)
+  end
+  def camelize(term, uppercase_first_letter = true); end
+
+  sig { params(table_name: String).returns(String) }
+  def classify(table_name); end
+
+  sig { params(camel_cased_word: String).returns(T.untyped) }
+  def constantize(camel_cased_word); end
+
+  sig { params(underscored_word: String).returns(String) }
+  def dasherize(underscored_word); end
+
+  sig { params(path: String).returns(String) }
+  def deconstantize(path); end
+
+  sig { params(path: String).returns(String) }
+  def demodulize(path); end
+
+  sig do
+    params(
+      class_name: String,
+      separate_class_name_and_id_with_underscore: T::Boolean
+    ).returns(String)
+  end
+  def foreign_key(class_name, separate_class_name_and_id_with_underscore = true); end
+
+  sig do
+    params(
+      lower_case_and_underscored_word: String,
+      capitalize: T::Boolean,
+      keep_id_suffix: T::Boolean
+    ).returns(String)
+  end
+  def humanize(lower_case_and_underscored_word, capitalize: true, keep_id_suffix: false); end
+
+  sig { params(locale: Symbol, blk: T.untyped).returns(T.untyped) }
+  def inflections(locale = :en, &blk); end
+
+  sig { params(number: Integer).returns(String) }
+  def ordinal(number); end
+
+  sig { params(number: Integer).returns(String) }
+  def ordinalize(number); end
+
+  sig do
+    params(
+      string: String,
+      separator: String,
+      preserve_case: T::Boolean,
+      locale: Symbol
+    ).returns(String)
+  end
+  def parameterize(string, separator: '-', preserve_case: false, locale: nil); end
+
+  sig { params(word: String, locale: Symbol).returns(String) }
+  def pluralize(word, locale = :en); end
+
+  sig { params(camel_cased_word: String).returns(T.untyped) }
+  def safe_constantize(camel_cased_word); end
+
+  sig { params(word: String, locale: Symbol).returns(String) }
+  def singularize(word, locale = :en); end
+
+  sig { params(class_name: String).returns(String) }
+  def tableize(class_name); end
+
+  sig { params(word: String, keep_id_suffix: T::Boolean).returns(String) }
+  def titleize(word, keep_id_suffix: false); end
+
+  sig { params(string: String, replacement: String, locale: Symbol).returns(String) }
+  def transliterate(string, replacement = '?', locale: nil); end
+
+  sig { params(camel_cased_word: String).returns(String) }
+  def underscore(camel_cased_word); end
+
+  sig { params(string: String).returns(String) }
+  def upcase_first(string); end
+end
+
+
+# defines some of the methods at https://github.com/rails/rails/blob/v6.0.0/activesupport/lib/active_support/core_ext/time/calculations.rb
+# these get added to Time, but are available on TimeWithZone thanks to https://github.com/rails/rails/blob/v6.0.0/activesupport/lib/active_support/time_with_zone.rb#L520
+# this is not a complete definition!
+class ActiveSupport::TimeWithZone
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def midnight; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def beginning_of_day; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def at_midnight; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def at_beginning_of_day; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def middle_of_day; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def midday; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def noon; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def at_midday; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def at_noon; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def at_middle_of_day; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def end_of_day; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def at_end_of_day; end
+end
+
+# defines some of the methods at https://github.com/rails/rails/blob/v6.0.0/activesupport/lib/active_support/core_ext/date
+# this is not a complete definition!
+class Date
+  sig { params(options: T::Hash[Symbol, Integer]).returns(Date) }
+  def advance(options); end
+
+  # these are the sigs for Date- in the stdlib
+  # https://github.com/sorbet/sorbet/blob/3910f6cfd9935c9b42e2135e32e15ab8a6e5b9be/rbi/stdlib/date.rbi#L373
+  # note that if more sigs are added to sorbet you should replicate them here
+  # check sorbet master: https://github.com/sorbet/sorbet/blob/master/rbi/stdlib/date.rbi
+  sig {params(arg0: Numeric).returns(T.self_type)}
+  sig {params(arg0: Date).returns(Rational)}
+  # these sigs are added for activesupport users
+  sig {params(arg0: ActiveSupport::Duration).returns(T.self_type)}
+  def -(arg0); end
+end
+
+# defines some of the methods at https://github.com/rails/rails/blob/v6.0.0/activesupport/lib/active_support/core_ext/time
+# this is not a complete definition!
+class Time
+  sig { returns(Time) }
+  def midnight; end
+
+  sig { returns(Time) }
+  def beginning_of_day; end
+
+  sig { params(options: T::Hash[Symbol, Integer]).returns(Time) }
+  def advance(options); end
+
+  sig { returns(Time) }
+  def at_midnight; end
+
+  sig { returns(Time) }
+  def at_beginning_of_day; end
+
+  sig { returns(Time) }
+  def middle_of_day; end
+
+  sig { returns(Time) }
+  def midday; end
+
+  sig { returns(Time) }
+  def noon; end
+
+  sig { returns(Time) }
+  def at_midday; end
+
+  sig { returns(Time) }
+  def at_noon; end
+
+  sig { returns(Time) }
+  def at_middle_of_day; end
+
+  # https://github.com/rails/rails/blob/v6.0.0/activesupport/lib/active_support/core_ext/date_and_time/zones.rb
+  # returns Time in the case zone is passed nil and ActiveSupport::TimeWithZone otherwise
+  sig { params(zone: T.nilable(T.any(String, ActiveSupport::TimeZone))).returns(T.any(ActiveSupport::TimeWithZone, Time)) }
+  def in_time_zone(zone = ::Time.zone); end
+
+  # these are the sigs for Time- in the stdlib
+  # https://github.com/sorbet/sorbet/blob/c3691753e4ce545e1eb66cbd3e55de67d8879b98/rbi/core/time.rbi#L347
+  # note that if more sigs are added to sorbet you should replicate them here
+  # check sorbet master: https://github.com/sorbet/sorbet/blob/master/rbi/core/time.rbi#L347
+  sig do
+    params(
+        arg0: Time,
+    )
+    .returns(Float)
+  end
+  sig do
+    params(
+        arg0: Numeric,
+    )
+    .returns(Time)
+  end
+  # these sigs are added for activesupport users
+  sig {params(arg0: ActiveSupport::Duration).returns(Time)}
+  def -(arg0); end
+end
+
+# defines some of the methods at https://github.com/rails/rails/tree/v6.0.0/activesupport/lib/active_support/core_ext/hash
+# this is not a complete definition!
 class Hash
-  sig { returns(T.self_type) }
-  def deep_stringify_keys; end
-
-  sig { returns(T.self_type) }
-  def deep_stringify_keys!; end
-
-  sig { returns(T.self_type) }
-  def deep_symbolize_keys; end
-
-  sig { returns(T.self_type) }
-  def deep_symbolize_keys!; end
-
-  sig { returns(T.self_type) }
-  def deep_transform_keys; end
-
-  sig { returns(T.self_type) }
-  def deep_transform_keys!; end
-
-  sig { returns(T.self_type) }
+  sig { returns(T::Hash[String, T.untyped]) }
   def stringify_keys; end
 
-  sig { returns(T.self_type) }
+  sig { returns(T::Hash[String, T.untyped]) }
   def stringify_keys!; end
 
-  sig { returns(T.self_type) }
+  sig { returns(T::Hash[String, T.untyped]) }
+  def deep_stringify_keys; end
+
+  sig { returns(T::Hash[String, T.untyped]) }
+  def deep_stringify_keys!; end
+
+  sig { returns(T::Hash[Symbol, T.untyped]) }
   def symbolize_keys; end
 
-  sig { returns(T.self_type) }
+  sig { returns(T::Hash[Symbol, T.untyped]) }
   def symbolize_keys!; end
+
+  sig { returns(T::Hash[Symbol, T.untyped]) }
+  def deep_symbolize_keys; end
+
+  sig { returns(T::Hash[Symbol, T.untyped]) }
+  def deep_symbolize_keys!; end
+
+  # in an ideal world, `arg` would be the type of all keys, the 1st `T.untyped` would be
+  # the type of keys your block returns, and the 2nd `T.untyped` would be the type of values
+  # that the hash had.
+  sig { params(block: T.proc.params(arg: T.untyped).void).returns(T::Hash[T.untyped, T.untyped]) }
+  def deep_transform_keys(&block); end
+
+  sig { params(block: T.proc.params(arg: T.untyped).void).returns(T::Hash[T.untyped, T.untyped]) }
+  def deep_transform_keys!(&block); end
+
+  sig { returns(T::Hash[Symbol, T.untyped]) }
+  def to_options; end
+end
+
+class Integer
+  # Returns a Duration instance matching the number of months provided.
+  #
+  # ```ruby
+  # 2.months # => 2 months
+  # ```
+  sig { returns(ActiveSupport::Duration) }
+  def months; end
+
+  sig { returns(ActiveSupport::Duration) }
+  def month; end
+
+  # Returns a Duration instance matching the number of years provided.
+  #
+  # ```ruby
+  # 2.years # => 2 years
+  # ```
+  sig { returns(ActiveSupport::Duration) }
+  def years; end
+
+  sig { returns(ActiveSupport::Duration) }
+  def year; end
+end
+
+class Numeric
+  sig { returns(ActiveSupport::Duration) }
+  def second; end
+
+  sig { returns(ActiveSupport::Duration) }
+  def seconds; end
+
+  sig { returns(ActiveSupport::Duration) }
+  def minute; end
+
+  sig { returns(ActiveSupport::Duration) }
+  def minutes; end
+
+  sig { returns(ActiveSupport::Duration) }
+  def hour; end
+
+  sig { returns(ActiveSupport::Duration) }
+  def hours; end
+
+  sig { returns(ActiveSupport::Duration) }
+  def day; end
+
+  sig { returns(ActiveSupport::Duration) }
+  def days; end
+
+  sig { returns(ActiveSupport::Duration) }
+  def week; end
+
+  sig { returns(ActiveSupport::Duration) }
+  def weeks; end
+
+  sig { returns(ActiveSupport::Duration) }
+  def fortnight; end
+
+  sig { returns(ActiveSupport::Duration) }
+  def fortnights; end
+
+  sig { returns(T.self_type) }
+  def in_milliseconds; end
+
+  KILOBYTE = T.let(1024, Integer)
+  MEGABYTE = T.let(KILOBYTE * 1024, Integer)
+  GIGABYTE = T.let(MEGABYTE * 1024, Integer)
+  TERABYTE = T.let(GIGABYTE * 1024, Integer)
+  PETABYTE = T.let(TERABYTE * 1024, Integer)
+  EXABYTE  = T.let(PETABYTE * 1024, Integer)
+
+  # Enables the use of byte calculations and declarations, like 45.bytes + 2.6.megabytes
+  #
+  # ```ruby
+  # 2.bytes # => 2
+  # ```
+  sig { returns(T.self_type) }
+  def byte; end
+
+  # Enables the use of byte calculations and declarations, like 45.bytes + 2.6.megabytes
+  #
+  # ```ruby
+  # 2.bytes # => 2
+  # ```
+  sig { returns(T.self_type) }
+  def bytes; end
+
+  # Returns the number of bytes equivalent to the kilobytes provided.
+  #
+  # ```ruby
+  # 2.kilobytes # => 2048
+  # ```
+  sig { returns(T.self_type) }
+  def kilobyte; end
+
+  # Returns the number of bytes equivalent to the kilobytes provided.
+  #
+  # ```ruby
+  # 2.kilobytes # => 2048
+  # ```
+  sig { returns(T.self_type) }
+  def kilobytes; end
+
+  # Returns the number of bytes equivalent to the megabytes provided.
+  #
+  # ```ruby
+  # 2.megabytes # => 2_097_152
+  # ```
+  sig { returns(T.self_type) }
+  def megabyte; end
+
+  # Returns the number of bytes equivalent to the megabytes provided.
+  #
+  # ```ruby
+  # 2.megabytes # => 2_097_152
+  # ```
+  sig { returns(T.self_type) }
+  def megabytes; end
+
+  # Returns the number of bytes equivalent to the gigabytes provided.
+  #
+  # ```ruby
+  # 2.gigabytes # => 2_147_483_648
+  # ```
+  sig { returns(T.self_type) }
+  def gigabyte; end
+
+  # Returns the number of bytes equivalent to the gigabytes provided.
+  #
+  # ```ruby
+  # 2.gigabytes # => 2_147_483_648
+  # ```
+  sig { returns(T.self_type) }
+  def gigabytes; end
+
+  # Returns the number of bytes equivalent to the terabytes provided.
+  #
+  # ```ruby
+  # 2.terabytes # => 2_199_023_255_552
+  # ```
+  sig { returns(T.self_type) }
+  def terabyte; end
+
+  # Returns the number of bytes equivalent to the terabytes provided.
+  #
+  # ```ruby
+  # 2.terabytes # => 2_199_023_255_552
+  # ```
+  sig { returns(T.self_type) }
+  def terabytes; end
+
+  # Returns the number of bytes equivalent to the petabytes provided.
+  #
+  # ```ruby
+  # 2.petabytes # => 2_251_799_813_685_248
+  # ```
+  sig { returns(T.self_type) }
+  def petabyte; end
+
+  # Returns the number of bytes equivalent to the petabytes provided.
+  #
+  # ```ruby
+  # 2.petabytes # => 2_251_799_813_685_248
+  # ```
+  sig { returns(T.self_type) }
+  def petabytes; end
+
+  # Returns the number of bytes equivalent to the exabytes provided.
+  #
+  # ```ruby
+  # 2.exabytes # => 2_305_843_009_213_693_952
+  # ```
+  sig { returns(T.self_type) }
+  def exabyte; end
+
+  # Returns the number of bytes equivalent to the exabytes provided.
+  #
+  # ```ruby
+  # 2.exabytes # => 2_305_843_009_213_693_952
+  # ```
+  sig { returns(T.self_type) }
+  def exabytes; end
+end
+
+module Enumerable
+  # https://github.com/rails/rails/blob/v5.2.3/activesupport/lib/active_support/core_ext/enumerable.rb#L64..L72
+  # the case where a block isn't given isn't handled - that seems like an unlikely case
+  sig do
+    type_parameters(:key).params(
+      block: T.proc.params(o: Enumerable::Elem).returns(T.type_parameter(:key))
+    ).returns(
+      T::Hash[T.type_parameter(:key), Enumerable::Elem]
+    )
+  end
+  def index_by(&block); end
+end
+
+class ActiveSupport::Duration
+  # Returns the number of seconds that this Duration represents.
+  #
+  # ```ruby
+  # 1.minute.to_i   # => 60
+  # 1.hour.to_i     # => 3600
+  # 1.day.to_i      # => 86400
+  # ```
+  #
+  # Note that this conversion makes some assumptions about the
+  # duration of some periods, e.g. months are always 1/12 of year
+  # and years are 365.2425 days:
+  #
+  # ```ruby
+  # # equivalent to (1.year / 12).to_i
+  # 1.month.to_i    # => 2629746
+  #
+  # # equivalent to 365.2425.days.to_i
+  # 1.year.to_i     # => 31556952
+  # ```
+  #
+  # In such cases, Ruby's core
+  # [Date](https://ruby-doc.org/stdlib/libdoc/date/rdoc/Date.html) and
+  # [Time](https://ruby-doc.org/stdlib/libdoc/time/rdoc/Time.html) should be used for precision
+  # date and time arithmetic.
+  sig { returns(Integer) }
+  def to_i; end
+
+  sig { returns(Float) }
+  def to_f; end
+
+  # Returns the amount of seconds a duration covers as a string.
+  # For more information check to_i method.
+  #
+  # ```ruby
+  # 1.day.to_s # => "86400"
+  # ```
+  sig { returns(String) }
+  def to_s; end
+
+  # Creates a new Duration from string formatted according to ISO 8601 Duration.
+  #
+  # See [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Durations) for more information.
+  # This method allows negative parts to be present in pattern.
+  # If invalid string is provided, it will raise `ActiveSupport::Duration::ISO8601Parser::ParsingError`.
+  sig { params(iso8601duration: String).returns(ActiveSupport::Duration) }
+  def self.parse(iso8601duration); end
+
+  # Creates a new Duration from a seconds value that is converted
+  # to the individual parts:
+  #
+  # ```ruby
+  # ActiveSupport::Duration.build(31556952).parts # => {:years=>1}
+  # ActiveSupport::Duration.build(2716146).parts  # => {:months=>1, :days=>1}
+  # ```
+  sig { params(value: Numeric).returns(ActiveSupport::Duration) }
+  def self.build(value); end
+
+  # Returns `true` if `other` is also a Duration instance, which has the
+  # same parts as this one.
+  sig { params(other: T.untyped).returns(T::Boolean) }
+  def eql?(other); end
+
+  # Compares one Duration with another or a Numeric to this Duration.
+  # Numeric values are treated as seconds.
+  sig { params(other: T.any(ActiveSupport::Duration, Numeric)).returns(Integer) }
+  def <=>(other); end
+
+  # Adds another Duration or a Numeric to this Duration. Numeric values
+  # are treated as seconds.
+  sig { params(other: T.any(ActiveSupport::Duration, Numeric)).returns(ActiveSupport::Duration) }
+  def +(other); end
+
+  # Subtracts another Duration or a Numeric from this Duration. Numeric
+  # values are treated as seconds.
+  sig { params(other: T.any(ActiveSupport::Duration, Numeric)).returns(ActiveSupport::Duration) }
+  def -(other); end
+
+  # Multiplies this Duration by a Numeric and returns a new Duration.
+  sig { params(other: Numeric).returns(ActiveSupport::Duration) }
+  def *(other); end
+
+  # Divides this Duration by a Numeric and returns a new Duration.
+  sig { params(other: Numeric).returns(ActiveSupport::Duration) }
+  def /(other); end
+
+  # Returns the modulo of this Duration by another Duration or Numeric.
+  # Numeric values are treated as seconds.
+  sig { params(other: T.any(ActiveSupport::Duration, Numeric)).returns(ActiveSupport::Duration) }
+  def %(other); end
+
+  # Returns `true` if `other` is also a Duration instance with the
+  # same `value`, or if `other == value`.
+  sig { params(other: T.untyped).returns(T::Boolean) }
+  def ==(other); end
+
+  # Build ISO 8601 Duration string for this duration.
+  # The `precision` parameter can be used to limit seconds' precision of duration.
+  sig { params(precision: T.nilable(Integer)).returns(String) }
+  def iso8601(precision: nil); end
+end
+
+module Benchmark
+  extend T::Sig
+
+  sig { params(block: T.proc.void).returns(Float) }
+  def self.ms(&block); end
 end

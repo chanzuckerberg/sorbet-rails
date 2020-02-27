@@ -8,6 +8,7 @@
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/rainbow/all/rainbow.rbi
 #
 # rainbow-3.0.0
+
 module Rainbow
   def self.enabled; end
   def self.enabled=(value); end

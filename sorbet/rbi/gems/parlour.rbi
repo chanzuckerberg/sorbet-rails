@@ -7,7 +7,8 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/parlour/all/parlour.rbi
 #
-# parlour-1.0.0
+# parlour-2.0.0
+
 module Parlour
 end
 module Parlour::Debugging
@@ -30,6 +31,7 @@ module Parlour::Debugging::Tree
   extend T::Sig
 end
 module Kernel
+  def then; end
 end
 class Parlour::Plugin
   def generate(*args, &blk); end
@@ -138,6 +140,7 @@ class Parlour::RbiGenerator::Options
   def break_params(*args, &blk); end
   def indented(*args, &blk); end
   def initialize(*args, &blk); end
+  def sort_namespaces(*args, &blk); end
   def tab_size(*args, &blk); end
   extend T::Private::Methods::MethodHooks
   extend T::Private::Methods::SingletonMethodHooks
@@ -241,10 +244,89 @@ class Parlour::RbiGenerator::EnumClassNamespace < Parlour::RbiGenerator::ClassNa
   extend T::Private::Methods::SingletonMethodHooks
   extend T::Sig
 end
+class Parlour::DetachedRbiGenerator < Parlour::RbiGenerator
+  def current_plugin(*args, &blk); end
+  def detached!(*args, &blk); end
+  def options(*args, &blk); end
+  def rbi(*args, &blk); end
+  def root(*args, &blk); end
+  extend T::Private::Methods::MethodHooks
+  extend T::Private::Methods::SingletonMethodHooks
+end
 class Parlour::ConflictResolver
   def all_eql?(*args, &blk); end
+  def merge_strategy(*args, &blk); end
   def resolve_conflicts(*args, &blk); end
-  def single_type_of_array(*args, &blk); end
+  extend T::Private::Methods::MethodHooks
+  extend T::Private::Methods::SingletonMethodHooks
+  extend T::Sig
+end
+class Parlour::ParseError < StandardError
+  def buffer(*args, &blk); end
+  def initialize(buffer, range); end
+  def range(*args, &blk); end
+  extend T::Private::Methods::MethodHooks
+  extend T::Private::Methods::SingletonMethodHooks
+  extend T::Sig
+end
+class Parlour::TypeParser
+  def ast(*args, &blk); end
+  def ast=(arg0); end
+  def body_has_modifier?(*args, &blk); end
+  def body_includes_and_extends(*args, &blk); end
+  def constant_names(*args, &blk); end
+  def initialize(*args, &blk); end
+  def node_to_s(*args, &blk); end
+  def parse_all(*args, &blk); end
+  def parse_err(*args, &blk); end
+  def parse_path_to_object(*args, &blk); end
+  def parse_sig_into_methods(*args, &blk); end
+  def parse_sig_into_sig(*args, &blk); end
+  def self.from_source(*args, &blk); end
+  def sig_node?(*args, &blk); end
+  def unknown_node_errors(*args, &blk); end
+  def zip_by(*args, &blk); end
+  extend T::Private::Methods::MethodHooks
+  extend T::Private::Methods::SingletonMethodHooks
+  extend T::Sig
+end
+class Parlour::TypeParser::NodePath
+  def child(*args, &blk); end
+  def indices(*args, &blk); end
+  def initialize(*args, &blk); end
+  def parent(*args, &blk); end
+  def sibling(*args, &blk); end
+  def traverse(*args, &blk); end
+  extend T::Private::Methods::MethodHooks
+  extend T::Private::Methods::SingletonMethodHooks
+  extend T::Sig
+end
+class Parlour::TypeParser::IntermediateSig < T::Struct
+  def abstract; end
+  def abstract=(val); end
+  def final; end
+  def final=(val); end
+  def overridable; end
+  def overridable=(val); end
+  def override; end
+  def override=(val); end
+  def params; end
+  def params=(val); end
+  def return_type; end
+  def return_type=(val); end
+  def self.inherited(s); end
+  extend T::Props::ClassMethods
+  extend T::Props::Plugin::ClassMethods
+  extend T::Props::Plugin::ClassMethods
+  extend T::Props::Plugin::ClassMethods
+  extend T::Props::Plugin::ClassMethods
+  extend T::Props::Plugin::ClassMethods
+  extend T::Props::Serializable::ClassMethods
+end
+module Parlour::TypeLoader
+  def self.load_file(*args, &blk); end
+  def self.load_project(*args, &blk); end
+  def self.load_source(*args, &blk); end
   extend T::Private::Methods::MethodHooks
   extend T::Private::Methods::SingletonMethodHooks
   extend T::Sig
