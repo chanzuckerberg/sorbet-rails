@@ -1,0 +1,8 @@
+--dir
+.
+
+--ignore
+lib/bundled_rbi/
+
+--ignore
+spec/

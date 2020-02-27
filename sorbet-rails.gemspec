@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.license       = 'MIT'
   s.require_paths = ["lib"]
   s.files         = Dir.chdir(File.expand_path('..', __FILE__)) do
-    `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features|lib/sorbet)/}) }
+    `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features|sorbet)/}) }
   end
   s.test_files    = Dir.chdir(File.expand_path('..', __FILE__)) do
     `git ls-files -z`.split("\x0").select { |f| f.match(%r{^(test|spec|features)/}) }
