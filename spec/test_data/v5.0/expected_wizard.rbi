@@ -270,7 +270,7 @@ class Wizard::House < T::Enum
 
 end
 
-class Wizard::Professor < T::Enum
+class Wizard::ProfessorEnum < T::Enum
   enums do
     SeverusSnape = new('Severus Snape')
     MinervaMcGonagall = new('Minerva McGonagall')
@@ -518,10 +518,10 @@ class Wizard < ApplicationRecord
   sig { params(value: T.nilable(Wizard::House)).void }
   def typed_house=(value); end
 
-  sig { returns(T.nilable(Wizard::Professor)) }
+  sig { returns(T.nilable(Wizard::ProfessorEnum)) }
   def typed_professor; end
 
-  sig { params(value: T.nilable(Wizard::Professor)).void }
+  sig { params(value: T.nilable(Wizard::ProfessorEnum)).void }
   def typed_professor=(value); end
 
   sig { returns(T.nilable(Wizard::QuidditchPosition)) }
