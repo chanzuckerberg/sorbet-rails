@@ -4,6 +4,7 @@ PATH
     sorbet-rails (0.6.0.pre)
       parlour (~> 2.0)
       sorbet (>= 0.5)
+      sorbet-coerce (>= 0.2.3)
 
 GEM
   remote: https://rubygems.org/
@@ -79,9 +80,10 @@ GEM
       parser
       rainbow (~> 3.0)
       sorbet-runtime (>= 0.5)
-    parser (2.7.0.2)
+    parser (2.7.0.3)
       ast (~> 2.4.0)
-    puma (3.12.2)
+    polyfill (1.8.0)
+    puma (3.12.3)
     rack (2.1.2)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -110,8 +112,14 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rainbow (3.0.0)
     rake (13.0.1)
+    safe_type (1.1.1)
     sorbet (0.5.5337)
       sorbet-static (= 0.5.5337)
+    sorbet-coerce (0.2.3)
+      polyfill (~> 1.8)
+      safe_type (~> 1.1, >= 1.1.1)
+      sorbet (>= 0.4.4704)
+      sorbet-runtime (>= 0.4.4704)
     sorbet-runtime (0.5.5337)
     sorbet-static (0.5.5337-universal-darwin-14)
     sprockets (4.0.0)
@@ -141,7 +149,7 @@ PLATFORMS
 DEPENDENCIES
   byebug
   jbuilder (~> 2.5)
-  puma (~> 3.7)
+  puma (~> 3.12)
   rails (~> 5.1.7)
   sorbet
   sorbet-rails!
