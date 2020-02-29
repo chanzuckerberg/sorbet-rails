@@ -126,10 +126,14 @@ module ::ActiveRecord::Enum
 
     # create dynamic T::Enum definition
     if const_defined?(enum_klass_name)
-      raise ConflictTypedEnumNameError.new(
-        "Unable to define enum class #{enum_klass_name} because
-        it's already defined".squish!
-      )
+      # append Enum to avoid conflict
+      enum_klass_name = "#{enum_klass_name}Enum"
+      if const_defined?(enum_klass_name)
+        raise ConflictTypedEnumNameError.new(
+          "Unable to define enum class #{enum_klass_name} because
+          it's already defined".squish!
+        )
+      end
     end
     enum_klass = Class.new(T::Enum) do
       enums do
@@ -172,11 +176,15 @@ module ::ActiveRecord::Enum
 
   sig {
     params(
-      enum_def: T.any(T::Array[Symbol], T::Hash[Symbol, T.untyped]),
+      enum_def: T.any(
+        T::Array[T.untyped],
+        T::Hash[T.untyped, T.untyped],
+        ActiveSupport::HashWithIndifferentAccess
+      ),
     ).returns(T::Array[Symbol])
   }
   def extract_enum_values(enum_def)
-    enum_def.is_a?(Hash) ? enum_def.keys : enum_def
+    enum_def.is_a?(Array) ? enum_def.map(&:to_sym) : enum_def.keys.map(&:to_sym)
   end
 
   class MultipleEnumsDefinedError < StandardError; end

@@ -9,6 +9,9 @@ class Wizard < ApplicationRecord
     Slytherin: 3,
   }
 
+  # To create conflict with enum
+  class Professor; end
+
   enum professor: {
     "Severus Snape": 0,
     "Minerva McGonagall": 1,
