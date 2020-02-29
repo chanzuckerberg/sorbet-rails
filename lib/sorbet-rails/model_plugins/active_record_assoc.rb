@@ -69,12 +69,12 @@ class SorbetRails::ModelPlugins::ActiveRecordAssoc < SorbetRails::ModelPlugins::
     db_required_config = column_def.present? && !column_def.null
 
     if rails_required_config && !db_required_config
-      puts "Warning: belongs_to association #{reflection.name} is required at the application
-        level but **nullable** at the DB level. Add a constraint at the DB level
+      puts "Note: belongs_to association #{reflection.name} is required at the application
+        level but **nullable** at the DB level.\n Add a constraint at the DB level
         (using `null: false` and foreign key constraint) to ensure it is enforced.".squish!
     elsif !rails_required_config && db_required_config
-      puts "Warning: belongs_to association #{reflection.name} is specified as not-null at the
-        DB level but **not required** at the application level. Add a constraint at the app level
+      puts "Note: belongs_to association #{reflection.name} is specified as not-null at the
+        DB level but **optional** at the application level.\n Add a constraint at the app level
         (using `optional: false`) as a validation hint to Rails.".squish!
     end
 
