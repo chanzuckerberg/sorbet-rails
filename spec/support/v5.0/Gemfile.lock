@@ -1,7 +1,7 @@
 PATH
   remote: ../../..
   specs:
-    sorbet-rails (0.6.0.pre)
+    sorbet-rails (0.6.0)
       parlour (~> 2.0)
       sorbet (>= 0.5)
       sorbet-coerce (>= 0.2.3)
