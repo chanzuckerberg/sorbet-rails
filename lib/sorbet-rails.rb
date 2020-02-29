@@ -6,5 +6,6 @@ module SorbetRails
     require 'sorbet-rails/type_assert/type_assert'
     require 'sorbet-rails/custom_types/integer_string'
     require 'sorbet-rails/custom_types/boolean_string'
+    require 'sorbet-rails/typed_params'
   end
 end
