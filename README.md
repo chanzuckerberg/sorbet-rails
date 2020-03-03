@@ -30,14 +30,14 @@ Add `sorbet-rails` to the [`:default` group](https://bundler.io/v2.0/guides/grou
 
 3. Generate RBI files for your routes, models, etc
 ```sh
-❯ rake rails_rbi:routes
-❯ rake rails_rbi:models
-❯ rake rails_rbi:helpers
-❯ rake rails_rbi:mailers
-❯ rake rails_rbi:custom
+❯ bundle exec rake rails_rbi:routes
+❯ bundle exec rake rails_rbi:models
+❯ bundle exec rake rails_rbi:helpers
+❯ bundle exec rake rails_rbi:mailers
+❯ bundle exec rake rails_rbi:custom
 
 # or run them all at once
-❯ rake rails_rbi:all
+❯ bundle exec rake rails_rbi:all
 ```
 
 4. Update hidden-definition files and automatically upgrade each file's typecheck level:
@@ -53,11 +53,11 @@ Because we've generated RBI files for routes, models, and helpers, a lot more fi
 
 This Rake task generates RBI files for all models in the Rails application (all descendants of `ActiveRecord::Base`):
 ```sh
-❯ rake rails_rbi:models
+❯ bundle exec rake rails_rbi:models
 ```
 You can also regenerate RBI files for specific models. To accommodate for STI, this will generate rbi for all the subclasses of the models included.
 ```sh
-❯ rake rails_rbi:models[ModelName,AnotherOne,...]
+❯ bundle exec rake rails_rbi:models[ModelName,AnotherOne,...]
 ```
 The generation task currently creates the following signatures:
 - Column getters & setters
@@ -161,7 +161,7 @@ Generates only typed enum setter & getter:
 
 ### Controllers
 ```sh
-❯ rake rails_rbi:custom
+❯ bundle exec  rake rails_rbi:custom
 ```
 
 `sorbet-rails` adds `TypedParams` to extact typed controller parameters.
@@ -191,7 +191,7 @@ Note: [`require_typed` and `fetch_typed`](https://github.com/chanzuckerberg/sorb
 
 This Rake task generates an RBI file defining `_path` and `_url` methods for all named routes in `routes.rb`:
 ```sh
-❯ rake rails_rbi:routes
+❯ bundle exec rake rails_rbi:routes
 ```
 
 ### Helpers
@@ -199,7 +199,7 @@ This Rake task generates an RBI file defining `_path` and `_url` methods for all
 This Rake task generates a `helpers.rbi` file that includes a basic module definition which includes the `Kernel` module and `ActionView::Helpers`, to allow for some basic Ruby methods to be used in helpers without Sorbet complaining.
 
 ```sh
-❯ rake rails_rbi:helpers
+❯ bundle exec rake rails_rbi:helpers
 ```
 
 If you have additional modules that are included in all your helpers and you want `helpers.rbi` to reflect this, you can configure it:
@@ -215,7 +215,7 @@ end
 
 This Rake task generates RBI files for all mailer classes in the Rails application (all descendants of `ActionMailer::Base`)
 ```sh
-❯ rake rails_rbi:mailers
+❯ bundle exec rake rails_rbi:mailers
 ```
 
 Since mailing action methods is based on instance methods defined in a mailer class, the signature of a mailing action method will be dependent on the signature the instance method has
@@ -240,7 +240,7 @@ specific environment group (eg. `development` only).
 - Controller: using `TypedParams`
 
 In addition to `require`ing `sorbet-rails`, you must also run
-`rake rails_rbi:custom`, which will produce the RBI for these runtime features.
+`bundle exec rake rails_rbi:custom`, which will produce the RBI for these runtime features.
 
 Discussion:
 [#211](https://github.com/chanzuckerberg/sorbet-rails/issues/211),
