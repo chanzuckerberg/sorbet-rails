@@ -68,7 +68,7 @@ module Wand::GeneratedAttributeMethods
   sig { returns(T.nilable(ActiveSupport::TimeWithZone)) }
   def chosen_at_time; end
 
-  sig { params(value: T.nilable(T.any(DateTime, Date, Time, ActiveSupport::TimeWithZone))).void }
+  sig { params(value: T.nilable(T.any(Date, Time, ActiveSupport::TimeWithZone))).void }
   def chosen_at_time=(value); end
 
   sig { returns(T::Boolean) }
@@ -86,7 +86,7 @@ module Wand::GeneratedAttributeMethods
   sig { returns(ActiveSupport::TimeWithZone) }
   def created_at; end
 
-  sig { params(value: T.any(DateTime, Date, Time, ActiveSupport::TimeWithZone)).void }
+  sig { params(value: T.any(Date, Time, ActiveSupport::TimeWithZone)).void }
   def created_at=(value); end
 
   sig { returns(T::Boolean) }
@@ -95,7 +95,7 @@ module Wand::GeneratedAttributeMethods
   sig { returns(Float) }
   def flexibility; end
 
-  sig { params(value: T.any(Integer, Float, ActiveSupport::Duration)).void }
+  sig { params(value: T.any(Numeric, ActiveSupport::Duration)).void }
   def flexibility=(value); end
 
   sig { returns(T::Boolean) }
@@ -104,7 +104,7 @@ module Wand::GeneratedAttributeMethods
   sig { returns(BigDecimal) }
   def hardness; end
 
-  sig { params(value: BigDecimal).void }
+  sig { params(value: T.any(Numeric, ActiveSupport::Duration)).void }
   def hardness=(value); end
 
   sig { returns(T::Boolean) }
@@ -113,7 +113,7 @@ module Wand::GeneratedAttributeMethods
   sig { returns(Integer) }
   def id; end
 
-  sig { params(value: T.any(Integer, Float, ActiveSupport::Duration)).void }
+  sig { params(value: T.any(Numeric, ActiveSupport::Duration)).void }
   def id=(value); end
 
   sig { returns(T::Boolean) }
@@ -131,7 +131,7 @@ module Wand::GeneratedAttributeMethods
   sig { returns(Integer) }
   def reflectance; end
 
-  sig { params(value: T.any(Integer, Float, ActiveSupport::Duration)).void }
+  sig { params(value: T.any(Numeric, ActiveSupport::Duration)).void }
   def reflectance=(value); end
 
   sig { returns(T::Boolean) }
@@ -149,7 +149,7 @@ module Wand::GeneratedAttributeMethods
   sig { returns(ActiveSupport::TimeWithZone) }
   def updated_at; end
 
-  sig { params(value: T.any(DateTime, Date, Time, ActiveSupport::TimeWithZone)).void }
+  sig { params(value: T.any(Date, Time, ActiveSupport::TimeWithZone)).void }
   def updated_at=(value); end
 
   sig { returns(T::Boolean) }
@@ -158,7 +158,7 @@ module Wand::GeneratedAttributeMethods
   sig { returns(Integer) }
   def wizard_id; end
 
-  sig { params(value: T.any(Integer, Float, ActiveSupport::Duration)).void }
+  sig { params(value: T.any(Numeric, ActiveSupport::Duration)).void }
   def wizard_id=(value); end
 
   sig { returns(T::Boolean) }
@@ -167,7 +167,7 @@ module Wand::GeneratedAttributeMethods
   sig { returns(T.nilable(String)) }
   def wood_type; end
 
-  sig { params(value: T.nilable(String)).void }
+  sig { params(value: T.nilable(T.any(String, Symbol))).void }
   def wood_type=(value); end
 
   sig { returns(T::Boolean) }

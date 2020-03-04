@@ -13,7 +13,7 @@ module Robe::GeneratedAttributeMethods
   sig { returns(Integer) }
   def id; end
 
-  sig { params(value: T.any(Integer, Float, ActiveSupport::Duration)).void }
+  sig { params(value: T.any(Numeric, ActiveSupport::Duration)).void }
   def id=(value); end
 
   sig { returns(T::Boolean) }
@@ -22,7 +22,7 @@ module Robe::GeneratedAttributeMethods
   sig { returns(T.nilable(Integer)) }
   def wizard_id; end
 
-  sig { params(value: T.nilable(T.any(Integer, Float, ActiveSupport::Duration))).void }
+  sig { params(value: T.nilable(T.any(Numeric, ActiveSupport::Duration))).void }
   def wizard_id=(value); end
 
   sig { returns(T::Boolean) }
