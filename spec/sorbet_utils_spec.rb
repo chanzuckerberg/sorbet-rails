@@ -34,8 +34,10 @@ class SorbetUtilsExampleClass
 
   def method_without_sig(p1, p2, *p3, p4:, **p5, &p6); end
 
-  sig { params(p1: String, p2: String, p3: Integer).void }
-  def method_with_default(p1, p2='abc', p3: 123); end
+  sig { params(p1: String, p2: String, p3: Integer, p4: Integer).void }
+  def method_with_default_with_sig(p1, p2='abc', p3:, p4: 123); end
+
+  def method_with_default(p1, p2='abc', p3:, p4: 123); end
 
   def method_with_missing_args_name(p1, *); end
 
@@ -131,17 +133,27 @@ RSpec.describe SorbetRails::SorbetUtils do
     ])
   end
 
-  # TODO it doesn't know how to extract default values from method yet
-  # Would have to rely on reading & parsing the source code :(
-  # it 'works when method arguments have default' do
-  #   method_def = SorbetUtilsExampleClass.instance_method(:method_with_default)
-  #   parameters = SorbetRails::SorbetUtils.parameters_from_method_def(method_def)
-  #   expect(parameters).to match_array([
-  #     Parameter.new('p1', type: 'T.untyped'),
-  #     Parameter.new('p2', type: 'T.untyped', default: '"abc"'),
-  #     Parameter.new('p3:', type: 'T.untyped', default: '123'),
-  #   ])
-  # end
+  it 'works when method arguments have default' do
+    method_def = SorbetUtilsExampleClass.instance_method(:method_with_default)
+    parameters = SorbetRails::SorbetUtils.parameters_from_method_def(method_def)
+    expect(parameters).to match_array([
+      Parameter.new('p1', type: 'T.untyped'),
+      Parameter.new('p2', type: 'T.untyped', default: "'abc'"),
+      Parameter.new('p3:', type: 'T.untyped'),
+      Parameter.new('p4:', type: 'T.untyped', default: '123'),
+    ])
+  end
+
+  it 'works when method arguments have default and method has sig' do
+    method_def = SorbetUtilsExampleClass.instance_method(:method_with_default_with_sig)
+    parameters = SorbetRails::SorbetUtils.parameters_from_method_def(method_def)
+    expect(parameters).to match_array([
+      Parameter.new('p1', type: 'String'),
+      Parameter.new('p2', type: 'String', default: "'abc'"),
+      Parameter.new('p3:', type: 'Integer'),
+      Parameter.new('p4:', type: 'Integer', default: '123'),
+    ])
+  end
 
   it 'works when method args doesnt have name' do
     method_def = SorbetUtilsExampleClass.instance_method(:method_with_missing_args_name)
