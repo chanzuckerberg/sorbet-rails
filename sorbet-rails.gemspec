@@ -16,8 +16,10 @@ Gem::Specification.new do |s|
   end
 
   s.add_dependency 'parlour', '~> 2.0'
-  s.add_dependency 'sorbet', '>= 0.5'
+  s.add_dependency 'sorbet-runtime', '>= 0.5'
   s.add_dependency 'sorbet-coerce', '>= 0.2.3'
+  s.add_dependency 'method_source', '>= 0.9.2'
+  s.add_dependency 'parser', '>= 2.7'
 
   # Development
   s.add_development_dependency 'rspec', '~> 3.8', '>= 3.8'
