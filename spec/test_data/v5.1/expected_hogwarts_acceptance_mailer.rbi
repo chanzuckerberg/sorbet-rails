@@ -7,4 +7,14 @@ class HogwartsAcceptanceMailer
 
   sig { params(student: T.untyped).returns(ActionMailer::MessageDelivery) }
   def self.notify_retry(student); end
+
+  sig do
+    params(
+      teacher: Wizard,
+      note: String,
+      student: Wizard,
+      special: T::Boolean
+    ).returns(ActionMailer::MessageDelivery)
+  end
+  def self.notify_teacher(teacher, note = nil, student:, special: false); end
 end

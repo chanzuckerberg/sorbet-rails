@@ -340,6 +340,22 @@ def create_mailers
         # TODO: mail acceptance letter to student
       end
 
+      sig {
+        params(
+          teacher: Wizard,
+          note: String,
+          student: Wizard,
+          special: T::Boolean,
+        ).void
+      }
+      def notify_teacher(
+        teacher,
+        note=nil,
+        student:,
+        special: false
+      ) # TODO: let the teacher know when a students accepted offer
+      end
+
       def notify_retry(student)
         # TODO: send more owls!!
       end

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+set -e
+
+`bundle show sorbet-static`/libexec/sorbet $@
+
