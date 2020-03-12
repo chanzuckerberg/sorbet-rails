@@ -13,7 +13,7 @@ module School::GeneratedAttributeMethods
   sig { returns(Integer) }
   def id; end
 
-  sig { params(value: T.any(Integer, Float, ActiveSupport::Duration)).void }
+  sig { params(value: T.any(Numeric, ActiveSupport::Duration)).void }
   def id=(value); end
 
   sig { returns(T::Boolean) }
@@ -22,7 +22,7 @@ module School::GeneratedAttributeMethods
   sig { returns(T.nilable(String)) }
   def name; end
 
-  sig { params(value: T.nilable(String)).void }
+  sig { params(value: T.nilable(T.any(String, Symbol))).void }
   def name=(value); end
 
   sig { returns(T::Boolean) }

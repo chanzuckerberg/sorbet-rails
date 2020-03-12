@@ -13,7 +13,7 @@ module ActiveRecord::InternalMetadata::GeneratedAttributeMethods
   sig { returns(ActiveSupport::TimeWithZone) }
   def created_at; end
 
-  sig { params(value: T.any(DateTime, Date, Time, ActiveSupport::TimeWithZone)).void }
+  sig { params(value: T.any(Date, Time, ActiveSupport::TimeWithZone)).void }
   def created_at=(value); end
 
   sig { returns(T::Boolean) }
@@ -31,7 +31,7 @@ module ActiveRecord::InternalMetadata::GeneratedAttributeMethods
   sig { returns(ActiveSupport::TimeWithZone) }
   def updated_at; end
 
-  sig { params(value: T.any(DateTime, Date, Time, ActiveSupport::TimeWithZone)).void }
+  sig { params(value: T.any(Date, Time, ActiveSupport::TimeWithZone)).void }
   def updated_at=(value); end
 
   sig { returns(T::Boolean) }
@@ -40,7 +40,7 @@ module ActiveRecord::InternalMetadata::GeneratedAttributeMethods
   sig { returns(T.nilable(String)) }
   def value; end
 
-  sig { params(value: T.nilable(String)).void }
+  sig { params(value: T.nilable(T.any(String, Symbol))).void }
   def value=(value); end
 
   sig { returns(T::Boolean) }

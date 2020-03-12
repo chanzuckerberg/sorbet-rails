@@ -128,7 +128,7 @@ module Squib::GeneratedAttributeMethods
   sig { returns(ActiveSupport::TimeWithZone) }
   def created_at; end
 
-  sig { params(value: T.any(DateTime, Date, Time, ActiveSupport::TimeWithZone)).void }
+  sig { params(value: T.any(Date, Time, ActiveSupport::TimeWithZone)).void }
   def created_at=(value); end
 
   sig { returns(T::Boolean) }
@@ -155,7 +155,7 @@ module Squib::GeneratedAttributeMethods
   sig { returns(T.nilable(Integer)) }
   def hair_length; end
 
-  sig { params(value: T.nilable(T.any(Integer, Float, ActiveSupport::Duration))).void }
+  sig { params(value: T.nilable(T.any(Numeric, ActiveSupport::Duration))).void }
   def hair_length=(value); end
 
   sig { returns(T::Boolean) }
@@ -173,7 +173,7 @@ module Squib::GeneratedAttributeMethods
   sig { returns(Integer) }
   def id; end
 
-  sig { params(value: T.any(Integer, Float, ActiveSupport::Duration)).void }
+  sig { params(value: T.any(Numeric, ActiveSupport::Duration)).void }
   def id=(value); end
 
   sig { returns(T::Boolean) }
@@ -182,7 +182,7 @@ module Squib::GeneratedAttributeMethods
   sig { returns(T.nilable(String)) }
   def name; end
 
-  sig { params(value: T.nilable(String)).void }
+  sig { params(value: T.nilable(T.any(String, Symbol))).void }
   def name=(value); end
 
   sig { returns(T::Boolean) }
@@ -191,7 +191,7 @@ module Squib::GeneratedAttributeMethods
   sig { returns(T.nilable(String)) }
   def notes; end
 
-  sig { params(value: T.nilable(String)).void }
+  sig { params(value: T.nilable(T.any(String, Symbol))).void }
   def notes=(value); end
 
   sig { returns(T::Boolean) }
@@ -200,7 +200,7 @@ module Squib::GeneratedAttributeMethods
   sig { returns(T.nilable(String)) }
   def parent_email; end
 
-  sig { params(value: T.nilable(String)).void }
+  sig { params(value: T.nilable(T.any(String, Symbol))).void }
   def parent_email=(value); end
 
   sig { returns(T::Boolean) }
@@ -227,7 +227,7 @@ module Squib::GeneratedAttributeMethods
   sig { returns(T.nilable(Integer)) }
   def school_id; end
 
-  sig { params(value: T.nilable(T.any(Integer, Float, ActiveSupport::Duration))).void }
+  sig { params(value: T.nilable(T.any(Numeric, ActiveSupport::Duration))).void }
   def school_id=(value); end
 
   sig { returns(T::Boolean) }
@@ -245,7 +245,7 @@ module Squib::GeneratedAttributeMethods
   sig { returns(ActiveSupport::TimeWithZone) }
   def updated_at; end
 
-  sig { params(value: T.any(DateTime, Date, Time, ActiveSupport::TimeWithZone)).void }
+  sig { params(value: T.any(Date, Time, ActiveSupport::TimeWithZone)).void }
   def updated_at=(value); end
 
   sig { returns(T::Boolean) }
