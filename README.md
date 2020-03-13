@@ -248,7 +248,13 @@ Discussion:
 
 ## Tips & Tricks
 
-### Overriding generated signatures
+### Look for `# typed: ignore` files
+
+Because Sorbet's initial setup tries to flag files at whichever typecheck level generates 0 errors, there may be files in your repository that are `# typed: ignore`. This is because sometimes Rails allows very dynamic code that Sorbet does not believe it can typecheck.
+
+It is worth going through the list of files that is ignored and resolve them (and auto upgrade the types of other files; see [initial setup](#initial-setup) above). Usually this will make many more files able to be typechecked.
+
+### Overriding generated signatures if needed
 
 `sorbet-rails` relies on Rails reflection to generate signatures. There are features this gem doesn't support yet such as [serialize](https://github.com/chanzuckerberg/sorbet-rails/issues/49) and [attribute custom types](https://github.com/chanzuckerberg/sorbet-rails/issues/16). The gem also doesn't know the signature of any methods you have overridden. However, it is possible to override the signatures that `sorbet-rails` generates.
 
@@ -333,12 +339,6 @@ If you wanted to make these changes using [Codemod](https://github.com/facebook/
 ```
 Note that Codemod's preview may show that the indentation is off, but it works.
 
-### Look for `# typed: ignore` files
-
-Because Sorbet's initial setup tries to flag files at whichever typecheck level generates 0 errors, there may be files in your repository that are `# typed: ignore`. This is because sometimes Rails allows very dynamic code that Sorbet does not believe it can typecheck.
-
-It is worth going through the list of files that is ignored and resolve them (and auto upgrade the types of other files; see [initial setup](#initial-setup) above). Usually this will make many more files able to be typechecked.
-
 ### `unscoped` with a block
 
 The [`unscoped` method](https://apidock.com/rails/ActiveRecord/Scoping/Default/ClassMethods/unscoped) returns a `Relation` when no block is provided. When a block is provided, `unscoped` calls the block and returns its result, which could be any type.
@@ -355,6 +355,31 @@ Model.unscoped.scoping do … end
 ### `select` with a block
 
 The [`select` method](https://apidock.com/rails/v4.0.2/ActiveRecord/QueryMethods/select) in Rails has two modes: it can be given a list of symbols, in which case rails will only return the given columns from the database, or it can be given a block, in which case it acts like [`Enumerable.select`](https://ruby-doc.org/core-2.6.4/Enumerable.html) and returns an array. We have chosen to support the first use case. If you want to pass a block to `select`, you can simply call `to_a` before you do. Note that this would be done within the `select` call anyway, so the performance penalty will be minimal.
+
+### `flatten` an array of relation
+
+When you call `flatten` on an array of ActiveRecord::Relation, sorbet [doesn't recognize](https://github.com/sorbet/sorbet/issues/2767) that it will flatten the relation and return an array of model. The work around is to call `to_a` on the relation first.
+
+```ruby
+# doesn't work
+arr = [Model.recent, Model.old].flatten # T::Array[Model::ActiveRecord_Relation]
+
+# work around
+arr = [Model.recent, Model.old].map(&:to_a).flatten # T::Array[Model]
+```
+
+### Avoid `and_call_original` in rspecs
+
+If you run into the following issue when running rspec, it's likely because you're using `expect(:method_name).and_call_original` to mock a method in RSpec. We've found the double mock doesn't interact well with Sorbet's sig wrapper and caused flaky spec. The spec should be rewritten to expect the outcome of the method instead. (It still works with `expect(:method_name)` and `expect(:method_name).and_return(...)`
+
+```
+     RuntimeError:
+       `sig` not present for method `:method_name` but you're trying to run it anyways. This should
+       only be executed if you used `alias_method` to grab a handle to a method after `sig`ing it, but
+       that clearly isn't what you are doing. Maybe look to see if an exception was thrown in your `sig`
+       lambda or somehow else your `sig` wasn't actually applied to the method. Contact #dev-productivity
+       if you're really stuck.
+```
 
 ## Extending Model Generation Task with Custom Plugins
 
