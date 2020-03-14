@@ -112,6 +112,7 @@ class SpellBook < ApplicationRecord
   extend SpellBook::CustomFinderMethods
   extend T::Sig
   extend T::Generic
+  RelationType = T.type_alias { T.any(SpellBook::ActiveRecord_Relation, SpellBook::ActiveRecord_Associations_CollectionProxy, SpellBook::ActiveRecord_AssociationRelation) }
 
   sig { returns(T::Hash[T.any(String, Symbol), Integer]) }
   def self.book_types; end
