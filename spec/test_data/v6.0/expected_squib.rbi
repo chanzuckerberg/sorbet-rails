@@ -276,6 +276,7 @@ class Squib < Wizard
   extend Squib::CustomFinderMethods
   extend T::Sig
   extend T::Generic
+  RelationType = T.type_alias { T.any(Squib::ActiveRecord_Relation, Squib::ActiveRecord_Associations_CollectionProxy, Squib::ActiveRecord_AssociationRelation) }
 
   sig { returns(T::Hash[T.any(String, Symbol), String]) }
   def self.brooms; end

@@ -361,6 +361,7 @@ class Wizard < ApplicationRecord
   extend Wizard::CustomFinderMethods
   extend T::Sig
   extend T::Generic
+  RelationType = T.type_alias { T.any(Wizard::ActiveRecord_Relation, Wizard::ActiveRecord_Associations_CollectionProxy, Wizard::ActiveRecord_AssociationRelation) }
 
   sig { returns(T::Hash[T.any(String, Symbol), String]) }
   def self.brooms; end

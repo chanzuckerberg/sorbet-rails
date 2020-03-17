@@ -69,6 +69,7 @@ class ActiveRecord::InternalMetadata < ActiveRecord::Base
   extend ActiveRecord::InternalMetadata::CustomFinderMethods
   extend T::Sig
   extend T::Generic
+  RelationType = T.type_alias { T.any(ActiveRecord::InternalMetadata::ActiveRecord_Relation, ActiveRecord::InternalMetadata::ActiveRecord_Associations_CollectionProxy, ActiveRecord::InternalMetadata::ActiveRecord_AssociationRelation) }
 
   sig { returns(ActiveRecord::InternalMetadata::ActiveRecord_Relation) }
   def self.all; end

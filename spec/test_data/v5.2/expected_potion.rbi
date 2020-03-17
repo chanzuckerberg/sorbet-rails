@@ -39,6 +39,7 @@ class Potion < ApplicationRecord
   extend Potion::CustomFinderMethods
   extend T::Sig
   extend T::Generic
+  RelationType = T.type_alias { T.any(Potion::ActiveRecord_Relation, Potion::ActiveRecord_Associations_CollectionProxy, Potion::ActiveRecord_AssociationRelation) }
 
   sig { returns(Potion::ActiveRecord_Relation) }
   def self.all; end

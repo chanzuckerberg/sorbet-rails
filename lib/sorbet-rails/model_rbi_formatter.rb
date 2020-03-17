@@ -109,6 +109,10 @@ class SorbetRails::ModelRbiFormatter
     )
     model_rbi.create_extend("T::Sig")
     model_rbi.create_extend("T::Generic")
+    model_rbi.create_type_alias(
+      self.model_relation_type_class_name,
+      type: self.model_relation_type_alias
+    )
   end
 
   sig {
