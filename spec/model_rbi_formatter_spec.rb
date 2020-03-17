@@ -53,4 +53,11 @@ RSpec.describe SorbetRails::ModelRbiFormatter do
       )
     end
   end
+
+  it 'creates Model::RelationType alias at runtime' do
+    ActiveRecord::Base.descendants.each do |model|
+      expect(model.const_defined?("RelationType")).to be(true)
+      expect(model.const_get("RelationType")).to be_a(T::Private::Types::TypeAlias)
+    end
+  end
 end
