@@ -73,7 +73,7 @@ We also add following methods to make type-checking more easily:
 - [`find_n`, `first_n`, `last_n`](https://github.com/chanzuckerberg/sorbet-rails#find-first-and-last)
 - [`pluck_to_tstruct`](#pluck_to_tstruct-instead-of-pluck)
 - [`typed_enum`](#enums)
-- [`Model::RelationType`](#relation-type-alias)
+- [`Model::RelationType`](#relationtype-alias)
 
 #### `pluck_to_tstruct` instead of `pluck`
 
