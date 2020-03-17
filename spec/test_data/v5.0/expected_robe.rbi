@@ -62,6 +62,7 @@ class Robe < ApplicationRecord
   extend Robe::CustomFinderMethods
   extend T::Sig
   extend T::Generic
+  RelationType = T.type_alias { T.any(Robe::ActiveRecord_Relation, Robe::ActiveRecord_Associations_CollectionProxy, Robe::ActiveRecord_AssociationRelation) }
 
   sig { returns(Robe::ActiveRecord_Relation) }
   def self.all; end

@@ -45,6 +45,7 @@ class ActiveStorage::Attachment < ActiveRecord::Base
   extend ActiveStorage::Attachment::CustomFinderMethods
   extend T::Sig
   extend T::Generic
+  RelationType = T.type_alias { T.any(ActiveStorage::Attachment::ActiveRecord_Relation, ActiveStorage::Attachment::ActiveRecord_Associations_CollectionProxy, ActiveStorage::Attachment::ActiveRecord_AssociationRelation) }
 
   sig { returns(ActiveStorage::Attachment::ActiveRecord_Relation) }
   def self.all; end

@@ -218,6 +218,7 @@ class Wand < ApplicationRecord
   extend Wand::CustomFinderMethods
   extend T::Sig
   extend T::Generic
+  RelationType = T.type_alias { T.any(Wand::ActiveRecord_Relation, Wand::ActiveRecord_Associations_CollectionProxy, Wand::ActiveRecord_AssociationRelation) }
 
   sig { returns(T::Hash[T.any(String, Symbol), Integer]) }
   def self.core_types; end
