@@ -42,6 +42,7 @@ class ActiveRecord::SchemaMigration < ActiveRecord::Base
   extend ActiveRecord::SchemaMigration::CustomFinderMethods
   extend T::Sig
   extend T::Generic
+  RelationType = T.type_alias { T.any(ActiveRecord::SchemaMigration::ActiveRecord_Relation, ActiveRecord::SchemaMigration::ActiveRecord_Associations_CollectionProxy, ActiveRecord::SchemaMigration::ActiveRecord_AssociationRelation) }
 
   sig { returns(ActiveRecord::SchemaMigration::ActiveRecord_Relation) }
   def self.all; end

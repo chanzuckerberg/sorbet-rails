@@ -34,6 +34,16 @@ class SorbetRails::Railtie < Rails::Railtie
             child.send(:public_constant, :ActiveRecord_Relation)
             child.send(:public_constant, :ActiveRecord_AssociationRelation)
             child.send(:public_constant, :ActiveRecord_Associations_CollectionProxy)
+
+            relation_type = T.type_alias do
+              T.any(
+                child.const_get(:ActiveRecord_Relation),
+                child.const_get(:ActiveRecord_AssociationRelation),
+                child.const_get(:ActiveRecord_Associations_CollectionProxy)
+              )
+            end
+            child.const_set(:RelationType, relation_type)
+            child.send(:public_constant, :RelationType)
           end
         end
       end

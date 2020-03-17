@@ -51,6 +51,7 @@ class School < ApplicationRecord
   extend School::CustomFinderMethods
   extend T::Sig
   extend T::Generic
+  RelationType = T.type_alias { T.any(School::ActiveRecord_Relation, School::ActiveRecord_Associations_CollectionProxy, School::ActiveRecord_AssociationRelation) }
 
   sig { returns(School::ActiveRecord_Relation) }
   def self.all; end

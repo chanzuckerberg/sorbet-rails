@@ -28,6 +28,22 @@ module SorbetRails::ModelUtils
     "#{model_class.name}::ActiveRecord_AssociationRelation"
   end
 
+  sig { returns(String) }
+  def model_relation_type_alias
+    types = [
+      self.model_relation_class_name,
+      self.model_assoc_proxy_class_name,
+      self.model_assoc_relation_class_name
+    ].join(', ')
+
+    "T.any(#{types})"
+  end
+
+  sig { returns(String) }
+  def model_relation_type_class_name
+    'RelationType'
+  end
+
   sig { params(module_name: String).returns(String) }
   def model_module_name(module_name)
     "#{model_class.name}::#{module_name}"
