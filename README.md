@@ -73,6 +73,7 @@ We also add following methods to make type-checking more easily:
 - [`find_n`, `first_n`, `last_n`](https://github.com/chanzuckerberg/sorbet-rails#find-first-and-last)
 - [`pluck_to_tstruct`](#pluck_to_tstruct-instead-of-pluck)
 - [`typed_enum`](#enums)
+- [`Model::RelationType`](#relation-type-alias)
 
 #### `pluck_to_tstruct` instead of `pluck`
 
@@ -159,6 +160,22 @@ Generates only typed enum setter & getter:
   def typed_house=(value); end
 ```
 
+#### `RelationType` alias
+
+There are several kinds of relations of a model: `User::ActiveRecord_Relation`, `User::ActiveRecord_AssociationRelation` and `User::ActiveRecord_Associations_CollectionProxy`. Usually the code may need just any relation type. We add a `Model::RelationType` type alias for every model to use it.
+ 
+```ruby
+class User
+  RelationType = T.type_alias do
+    T.any(
+      User::ActiveRecord_Relation,
+      User::ActiveRecord_AssociationRelation,
+      User::ActiveRecord_Associations_CollectionProxy
+    )
+  end
+end
+```
+
 ### Controllers
 ```sh
 ❯ bundle exec  rake rails_rbi:custom
@@ -231,13 +248,16 @@ instructions specify that `sorbet-rails` should be placed in the [`:default`
 group](https://bundler.io/v2.0/guides/groups.html) of the `Gemfile`, not a
 specific environment group (eg. `development` only).
 
-- Relation class: Making the relations available at runtime (they are normally private constants, the gem makes them public)
-  - Examples: `User::ActiveRecord_Relation`, `User::ActiveRecord_AssociationRelation`
-- Model:
+- Model: The gem provides some helper method to a model to make type-checking easier:
   - `find_n`, `first_n`, `last_n`
   - `pluck_to_tstruct`
   - `typed_enum`
-- Controller: using `TypedParams`
+  
+- Model Relation: 
+  - Make relation classes public. By default, relation classes like `User::ActiveRecord_Relation`, `User::ActiveRecord_AssociationRelation` are private
+  - Add type alias, eg `Model::RelationType`, to represents any type of relation of a model.
+
+- Controller: use `TypedParams` to convert controller parameters to a typed structure
 
 In addition to `require`ing `sorbet-rails`, you must also run
 `bundle exec rake rails_rbi:custom`, which will produce the RBI for these runtime features.
