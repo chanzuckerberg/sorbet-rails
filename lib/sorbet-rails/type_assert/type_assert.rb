@@ -3,6 +3,11 @@ require 'sorbet-runtime'
 require 'sorbet-rails/type_assert/type_assert_interface'
 require 'sorbet-rails/type_assert/type_assert_impl'
 
+# Make this type visible even when the concrete
+# implementation cannot be loaded.
+module TypeAssertImpl
+end
+
 class TA
   extend T::Sig
   extend T::Generic
