@@ -1,0 +1,1 @@
+This folder contains RBI files used for type-checking sorbet-rails source code itself.

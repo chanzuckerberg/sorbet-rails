@@ -34,6 +34,7 @@ Add `sorbet-rails` to the [`:default` group](https://bundler.io/v2.0/guides/grou
 ❯ bundle exec rake rails_rbi:models
 ❯ bundle exec rake rails_rbi:helpers
 ❯ bundle exec rake rails_rbi:mailers
+❯ bundle exec rake rails_rbi:jobs
 ❯ bundle exec rake rails_rbi:custom
 
 # or run them all at once
@@ -163,7 +164,7 @@ Generates only typed enum setter & getter:
 #### `RelationType` alias
 
 There are several kinds of relations of a model: `User::ActiveRecord_Relation`, `User::ActiveRecord_AssociationRelation` and `User::ActiveRecord_Associations_CollectionProxy`. Usually the code may need just any relation type. We add a `Model::RelationType` type alias for every model to use it.
- 
+
 ```ruby
 class User
   RelationType = T.type_alias do
@@ -235,10 +236,20 @@ This Rake task generates RBI files for all mailer classes in the Rails applicati
 ❯ bundle exec rake rails_rbi:mailers
 ```
 
-Since mailing action methods is based on instance methods defined in a mailer class, the signature of a mailing action method will be dependent on the signature the instance method has
+Since mailing action methods are based on instance methods defined in a mailer class, the signature of a mailing action method will be dependent on the signature the instance method has
 - If there is a (sorbet) sig written for the instance method, it generates a matching sig for the mailing action method
 - If not, all the params in the mailing action method will be T.untyped.
 - For return type though, the mailing action method will return `ActionMailer::MessageDelivery` instead of the return type of the instance method.
+
+### Jobs
+
+This Rake task generates RBI files for all jobs classes in the Rails application (all descendants of `ActiveJob::Base`).
+```sh
+❯ bundle exec rake rails_rbi:jobs
+```
+
+It will generate `perform_later` and `perform_now` methods for
+the job classes matching the signature of the `perform` method of the job. If there is a (sorbet) sig written for `perform`, it will use the same sig for `perform_*` methods.
 
 ## Runtime Features
 
@@ -252,8 +263,8 @@ specific environment group (eg. `development` only).
   - `find_n`, `first_n`, `last_n`
   - `pluck_to_tstruct`
   - `typed_enum`
-  
-- Model Relation: 
+
+- Model Relation:
   - Make relation classes public. By default, relation classes like `User::ActiveRecord_Relation`, `User::ActiveRecord_AssociationRelation` are private
   - Add type alias, eg `Model::RelationType`, to represents any type of relation of a model.
 
