@@ -98,7 +98,7 @@ class SorbetRails::ModelPlugins::ActiveRecordFinderMethods < SorbetRails::ModelP
       class_method: class_method,
     )
 
-    ["any?", "many?", "none?", "one?"].each do |method_name|
+    ["any?", "many?", "none?", "one?", "empty?"].each do |method_name|
       class_rbi.create_method(
         method_name,
         parameters: [ Parameter.new("*args", type: "T.untyped") ],
