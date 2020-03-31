@@ -181,7 +181,19 @@ T.assert_type!(Wizard::House::Slytherin, Wizard::House)
 # Mythical plugin
 T.assert_type!(Wand.mythicals, T::Array[Wand])
 
+# Mailers
 T.assert_type!(HogwartsAcceptanceMailer.notify(wizard), ActionMailer::MessageDelivery)
+
+# Jobs
+AwardHousePointHourglasses.perform_later(student: wizard, point: 10)
+AwardHousePointHourglasses.perform_now(student: wizard, point: 10)
+AwardHousePointHourglasses.
+  set(queue: :daily, wait: 5.minutes).
+  perform_later(student: wizard, point: 10)
+AwardHousePointHourglasses.
+  set(priority: 10, wait_until: Time.now.tomorrow).
+  perform_later(student: wizard, point: 10)
+
 
 T.assert_type!(wizard.broom_nimbus?, T::Boolean)
 T.assert_type!(wizard.color_brown_eyes?, T::Boolean)
