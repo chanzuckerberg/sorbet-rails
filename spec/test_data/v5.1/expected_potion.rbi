@@ -142,6 +142,9 @@ class Potion < ApplicationRecord
 
   sig { params(args: T.untyped).returns(T::Boolean) }
   def self.one?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def self.empty?(*args); end
 end
 
 class Potion::ActiveRecord_Relation < ActiveRecord::Relation
@@ -253,6 +256,9 @@ class Potion::ActiveRecord_Relation < ActiveRecord::Relation
 
   sig { params(args: T.untyped).returns(T::Boolean) }
   def one?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def empty?(*args); end
 end
 
 class Potion::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
@@ -418,6 +424,9 @@ class Potion::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelati
 
   sig { params(args: T.untyped).returns(T::Boolean) }
   def one?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def empty?(*args); end
 
   sig { override.params(block: T.proc.params(e: Potion).void).returns(T::Array[Potion]) }
   def each(&block); end
@@ -599,6 +608,9 @@ class Potion::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associat
 
   sig { params(args: T.untyped).returns(T::Boolean) }
   def one?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def empty?(*args); end
 
   sig { override.params(block: T.proc.params(e: Potion).void).returns(T::Array[Potion]) }
   def each(&block); end

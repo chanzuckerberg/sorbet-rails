@@ -169,6 +169,9 @@ class ActiveRecord::InternalMetadata < ActiveRecord::Base
 
   sig { params(args: T.untyped).returns(T::Boolean) }
   def self.one?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def self.empty?(*args); end
 end
 
 class ActiveRecord::InternalMetadata::ActiveRecord_Relation < ActiveRecord::Relation
@@ -277,6 +280,9 @@ class ActiveRecord::InternalMetadata::ActiveRecord_Relation < ActiveRecord::Rela
 
   sig { params(args: T.untyped).returns(T::Boolean) }
   def one?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def empty?(*args); end
 end
 
 class ActiveRecord::InternalMetadata::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
@@ -439,6 +445,9 @@ class ActiveRecord::InternalMetadata::ActiveRecord_AssociationRelation < ActiveR
 
   sig { params(args: T.untyped).returns(T::Boolean) }
   def one?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def empty?(*args); end
 
   sig { override.params(block: T.proc.params(e: ActiveRecord::InternalMetadata).void).returns(T::Array[ActiveRecord::InternalMetadata]) }
   def each(&block); end
@@ -617,6 +626,9 @@ class ActiveRecord::InternalMetadata::ActiveRecord_Associations_CollectionProxy 
 
   sig { params(args: T.untyped).returns(T::Boolean) }
   def one?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def empty?(*args); end
 
   sig { override.params(block: T.proc.params(e: ActiveRecord::InternalMetadata).void).returns(T::Array[ActiveRecord::InternalMetadata]) }
   def each(&block); end

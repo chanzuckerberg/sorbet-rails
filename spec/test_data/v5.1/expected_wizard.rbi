@@ -548,6 +548,9 @@ class Wizard < ApplicationRecord
 
   sig { params(args: T.untyped).returns(T::Boolean) }
   def self.one?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def self.empty?(*args); end
 end
 
 class Wizard::ActiveRecord_Relation < ActiveRecord::Relation
@@ -713,6 +716,9 @@ class Wizard::ActiveRecord_Relation < ActiveRecord::Relation
 
   sig { params(args: T.untyped).returns(T::Boolean) }
   def one?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def empty?(*args); end
 end
 
 class Wizard::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
@@ -932,6 +938,9 @@ class Wizard::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelati
 
   sig { params(args: T.untyped).returns(T::Boolean) }
   def one?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def empty?(*args); end
 
   sig { override.params(block: T.proc.params(e: Wizard).void).returns(T::Array[Wizard]) }
   def each(&block); end
@@ -1167,6 +1176,9 @@ class Wizard::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associat
 
   sig { params(args: T.untyped).returns(T::Boolean) }
   def one?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def empty?(*args); end
 
   sig { override.params(block: T.proc.params(e: Wizard).void).returns(T::Array[Wizard]) }
   def each(&block); end

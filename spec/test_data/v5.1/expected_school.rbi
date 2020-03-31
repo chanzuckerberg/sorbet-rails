@@ -154,6 +154,9 @@ class School < ApplicationRecord
 
   sig { params(args: T.untyped).returns(T::Boolean) }
   def self.one?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def self.empty?(*args); end
 end
 
 class School::ActiveRecord_Relation < ActiveRecord::Relation
@@ -265,6 +268,9 @@ class School::ActiveRecord_Relation < ActiveRecord::Relation
 
   sig { params(args: T.untyped).returns(T::Boolean) }
   def one?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def empty?(*args); end
 end
 
 class School::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
@@ -430,6 +436,9 @@ class School::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelati
 
   sig { params(args: T.untyped).returns(T::Boolean) }
   def one?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def empty?(*args); end
 
   sig { override.params(block: T.proc.params(e: School).void).returns(T::Array[School]) }
   def each(&block); end
@@ -611,6 +620,9 @@ class School::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associat
 
   sig { params(args: T.untyped).returns(T::Boolean) }
   def one?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def empty?(*args); end
 
   sig { override.params(block: T.proc.params(e: School).void).returns(T::Array[School]) }
   def each(&block); end

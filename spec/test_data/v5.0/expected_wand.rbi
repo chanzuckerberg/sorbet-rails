@@ -322,6 +322,9 @@ class Wand < ApplicationRecord
   sig { params(args: T.untyped).returns(T::Boolean) }
   def self.one?(*args); end
 
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def self.empty?(*args); end
+
   sig { returns(T::Array[Wand]) }
   def self.mythicals; end
 end
@@ -444,6 +447,9 @@ class Wand::ActiveRecord_Relation < ActiveRecord::Relation
 
   sig { params(args: T.untyped).returns(T::Boolean) }
   def one?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def empty?(*args); end
 end
 
 class Wand::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
@@ -618,6 +624,9 @@ class Wand::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
 
   sig { params(args: T.untyped).returns(T::Boolean) }
   def one?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def empty?(*args); end
 
   sig { override.params(block: T.proc.params(e: Wand).void).returns(T::Array[Wand]) }
   def each(&block); end
@@ -808,6 +817,9 @@ class Wand::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associatio
 
   sig { params(args: T.untyped).returns(T::Boolean) }
   def one?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def empty?(*args); end
 
   sig { override.params(block: T.proc.params(e: Wand).void).returns(T::Array[Wand]) }
   def each(&block); end

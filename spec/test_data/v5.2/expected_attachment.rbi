@@ -148,6 +148,9 @@ class ActiveStorage::Attachment < ActiveRecord::Base
 
   sig { params(args: T.untyped).returns(T::Boolean) }
   def self.one?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def self.empty?(*args); end
 end
 
 class ActiveStorage::Attachment::ActiveRecord_Relation < ActiveRecord::Relation
@@ -259,6 +262,9 @@ class ActiveStorage::Attachment::ActiveRecord_Relation < ActiveRecord::Relation
 
   sig { params(args: T.untyped).returns(T::Boolean) }
   def one?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def empty?(*args); end
 end
 
 class ActiveStorage::Attachment::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
@@ -424,6 +430,9 @@ class ActiveStorage::Attachment::ActiveRecord_AssociationRelation < ActiveRecord
 
   sig { params(args: T.untyped).returns(T::Boolean) }
   def one?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def empty?(*args); end
 
   sig { override.params(block: T.proc.params(e: ActiveStorage::Attachment).void).returns(T::Array[ActiveStorage::Attachment]) }
   def each(&block); end
@@ -605,6 +614,9 @@ class ActiveStorage::Attachment::ActiveRecord_Associations_CollectionProxy < Act
 
   sig { params(args: T.untyped).returns(T::Boolean) }
   def one?(*args); end
+
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def empty?(*args); end
 
   sig { override.params(block: T.proc.params(e: ActiveStorage::Attachment).void).returns(T::Array[ActiveStorage::Attachment]) }
   def each(&block); end
