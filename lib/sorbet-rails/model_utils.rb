@@ -5,27 +5,38 @@ module SorbetRails::ModelUtils
 
   abstract!
 
-  sig { abstract.returns(T.class_of(ActiveRecord::Base)) }
+  sig { abstract.returns(T.any(T.class_of(ActiveRecord::Base), T.class_of(Class))) }
   def model_class; end
+
+  sig { returns(T::Boolean) }
+  def habtm?
+    # checking the class name seems to be the cleanest way to figure this out, see:
+    # https://github.com/rails/rails/blob/master/activerecord/lib/active_record/associations/builder/has_and_belongs_to_many.rb#L54
+    T.must(model_class.name).start_with?('HABTM_')
+  end
 
   sig { returns(String) }
   def model_class_name
-    "#{model_class.name}"
+    if habtm?
+      "#{T.unsafe(model_class).left_model.name}::#{model_class.name}"
+    else
+      "#{model_class.name}"
+    end
   end
 
   sig { returns(String) }
   def model_relation_class_name
-    "#{model_class.name}::ActiveRecord_Relation"
+    "#{model_class_name}::ActiveRecord_Relation"
   end
 
   sig { returns(String) }
   def model_assoc_proxy_class_name
-    "#{model_class.name}::ActiveRecord_Associations_CollectionProxy"
+    "#{model_class_name}::ActiveRecord_Associations_CollectionProxy"
   end
 
   sig { returns(String) }
   def model_assoc_relation_class_name
-    "#{model_class.name}::ActiveRecord_AssociationRelation"
+    "#{model_class_name}::ActiveRecord_AssociationRelation"
   end
 
   sig { returns(String) }
@@ -46,7 +57,7 @@ module SorbetRails::ModelUtils
 
   sig { params(module_name: String).returns(String) }
   def model_module_name(module_name)
-    "#{model_class.name}::#{module_name}"
+    "#{model_class_name}::#{module_name}"
   end
 
   sig { params(method_name: T.any(String, Symbol)).returns(T::Boolean) }

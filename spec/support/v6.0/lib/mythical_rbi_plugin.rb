@@ -10,7 +10,7 @@ class MythicalRbiPlugin < SorbetRails::ModelPlugins::Base
     model_class_rbi.create_method(
       'mythicals',
       class_method: true,
-      return_type: "T::Array[#{@model_class.name}]",
+      return_type: "T::Array[#{model_class_name}]",
     )
   end
 end

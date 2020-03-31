@@ -1503,6 +1503,12 @@ module Wizard::GeneratedAssociationMethods
   sig { params(value: T::Enumerable[T.untyped]).void }
   def spell_books=(value); end
 
+  sig { returns(ActiveRecord::Associations::CollectionProxy) }
+  def subjects; end
+
+  sig { params(value: T::Enumerable[T.untyped]).void }
+  def subjects=(value); end
+
   sig { returns(T.nilable(::Wand)) }
   def wand; end
 
