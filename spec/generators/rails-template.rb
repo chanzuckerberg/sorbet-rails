@@ -374,6 +374,22 @@ def create_mailers
   RUBY
 end
 
+def create_jobs
+  file "app/jobs/award_house_point_hourglasses.rb", <<~RUBY
+    # N.B. You imagine the wizards update the point magically somehow?
+    # Nope, there is a "goblin" that takes their "give points" request and do it
+    # behind the scene.
+    class AwardHousePointHourglasses < ApplicationJob
+      extend T::Sig
+
+      sig { params(student: Wizard, point: Integer).void }
+      def perform(student:, point:)
+        # TODO: award point to student's house
+      end
+    end
+  RUBY
+end
+
 def add_sorbet_test_files
   file "typed-override.yaml", <<~YAML
     true:
@@ -417,6 +433,7 @@ after_bundle do
   create_models
   create_migrations
   create_mailers
+  create_jobs
   add_sorbet_test_files
 
   Bundler.with_clean_env do
