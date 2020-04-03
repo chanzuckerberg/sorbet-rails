@@ -5,6 +5,8 @@ module SorbetRails::ModelUtils
 
   abstract!
 
+  # if we're a HABTM class then model_class is an anonymous class (see the rails link below) and
+  # i'm not sure how to explain that to sorbet other than T.class_of(Class).
   sig { abstract.returns(T.any(T.class_of(ActiveRecord::Base), T.class_of(Class))) }
   def model_class; end
 
@@ -17,7 +19,9 @@ module SorbetRails::ModelUtils
 
   sig { returns(String) }
   def model_class_name
-    if habtm?
+    if habtm? && model_class.respond_to?(:left_model)
+      # i'm quite sure this is safe without the respond_to? check above but somehow that made me feel better about using
+      # T.unsafe here.
       "#{T.unsafe(model_class).left_model.name}::#{model_class.name}"
     else
       "#{model_class.name}"
