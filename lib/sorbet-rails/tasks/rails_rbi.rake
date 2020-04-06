@@ -133,10 +133,7 @@ namespace :rails_rbi do
   def generate_rbis_for_models(model_classes, available_classes)
     available_class_names = Set.new(available_classes.map { |c| c.name })
     formatted = model_classes.map do |model_class|
-      # NOTE: this logic is duplicated in SorbetRails::ModelUtils#model_class_name
-      model_class_name = model_class.name.start_with?('HABTM_') ?
-                         "#{model_class.left_model.name}::#{model_class.name}" :
-                         model_class.name
+      model_class_name = model_class.to_s
       begin
         formatter = SorbetRails::ModelRbiFormatter.new(model_class, available_class_names)
         [model_class_name, formatter.generate_rbi]

@@ -19,13 +19,7 @@ module SorbetRails::ModelUtils
 
   sig { returns(String) }
   def model_class_name
-    if habtm? && model_class.respond_to?(:left_model)
-      # i'm quite sure this is safe without the respond_to? check above but somehow that made me feel better about using
-      # T.unsafe here.
-      "#{T.unsafe(model_class).left_model.name}::#{model_class.name}"
-    else
-      "#{model_class.name}"
-    end
+    model_class.to_s
   end
 
   sig { returns(String) }
