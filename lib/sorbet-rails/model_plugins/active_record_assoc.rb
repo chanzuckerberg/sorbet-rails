@@ -73,11 +73,10 @@ class SorbetRails::ModelPlugins::ActiveRecordAssoc < SorbetRails::ModelPlugins::
         level but **nullable** at the DB level.\n Add a constraint at the DB level
         (using `null: false` and foreign key constraint) to ensure it is enforced.".squish!
     elsif !rails_required_config && db_required_config
-      if habtm?
+      if habtm_class?
         puts "Note: belongs_to association #{reflection.name} is specified as not-null at the
           DB level but will always be **optional** at the application level since it's part of a
-          has_and_belongs_to_many association.\n To resolve either remove the NOT NULL constraint
-          from the DB or move to a 'has_many through:' association.".squish!
+          has_and_belongs_to_many association.\n To resolve move to a 'has_many through:' association.".squish!
       else
         puts "Note: belongs_to association #{reflection.name} is specified as not-null at the
           DB level but **optional** at the application level.\n Add a constraint at the app level

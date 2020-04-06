@@ -11,7 +11,7 @@ module SorbetRails::ModelUtils
   def model_class; end
 
   sig { returns(T::Boolean) }
-  def habtm?
+  def habtm_class?
     # checking the class name seems to be the cleanest way to figure this out, see:
     # https://github.com/rails/rails/blob/master/activerecord/lib/active_record/associations/builder/has_and_belongs_to_many.rb#L54
     T.must(model_class.name).start_with?('HABTM_')
