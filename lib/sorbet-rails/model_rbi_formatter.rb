@@ -28,13 +28,13 @@ class SorbetRails::ModelRbiFormatter
       # Load all dynamic instance methods of this model by instantiating a fake model
       @model_class.new unless @model_class.abstract_class?
     rescue StandardError => err
-      puts "#{err.class}: Note: Unable to create new instance of #{model_class.name}"
+      puts "#{err.class}: Note: Unable to create new instance of #{model_class_name}"
     end
   end
 
   sig {returns(String)}
   def generate_rbi
-    puts "-- Generate sigs for #{@model_class.name} --"
+    puts "-- Generate sigs for #{model_class_name} --"
 
     # Collect the instances of each plugin into an array
     plugin_instances = self.class.get_plugins.map do |plugin_klass|

@@ -67,8 +67,21 @@ def expect_match_file(content, file_path)
   expect(content).to eql(expected_value)
 end
 
+# File uses File::SEPARATOR by default but will also use File::ALT_SEPARATOR if it's not nil
+FILE_SEPARATOR_RE = Regexp.union(*[File::SEPARATOR, File::ALT_SEPARATOR].compact).freeze
+
 def expect_files(base_dir:, files:)
-  rbi_files = Dir[File.join(base_dir, "*.rbi")]
+  dirs = Set.new([base_dir])
+  # if any files contain file separators then include those paths in our globbing as well
+  files.each do |f|
+    next unless f.match?(FILE_SEPARATOR_RE)
+    dirs << File.join(base_dir, File.dirname(f))
+  end
+
+  # glob all of our dirs
+  rbi_files = dirs.reduce([]) do |memo, dir|
+    memo += Dir[File.join(dir, "*.rbi")]
+  end
 
   # smoke test
   # expect(rbi_files.size).to eql(files.size)

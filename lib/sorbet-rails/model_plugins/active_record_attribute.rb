@@ -89,7 +89,7 @@ class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugi
         # do not generate the methods for enums in strict_mode
         should_skip_setter_getter = config.strict_mode
 
-        t_enum_type = "#{@model_class.name}::#{config.class_name}"
+        t_enum_type = "#{model_class_name}::#{config.class_name}"
 
         # define T::Enum class & values
         enum_values = T.must(model_defined_enums[column_name])

@@ -46,6 +46,8 @@ class Wizard < ApplicationRecord
 
   has_one :wand
   has_many :spell_books
+  # habtm which is optional at the db level
+  has_and_belongs_to_many :subjects
 
   # simulate when belongs_to is optional by default
   belongs_to :school, optional: true
