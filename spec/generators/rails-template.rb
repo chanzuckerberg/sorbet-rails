@@ -51,7 +51,7 @@ def create_lib
         model_class_rbi.create_method(
           'mythicals',
           class_method: true,
-          return_type: "T::Array[#{@model_class.name}]",
+          return_type: "T::Array[#{model_class_name}]",
         )
       end
     end
@@ -82,6 +82,9 @@ def create_models
 
       # simulate when belongs_to is optional by default, but it is enforced at the DB level
       belongs_to :wizard, optional: true
+
+      # habtm enforced at the DB level
+      has_and_belongs_to_many :spells
 
       enum book_type: {
         unclassified: 0,
@@ -174,6 +177,8 @@ def create_models
 
       has_one :wand
       has_many :spell_books
+      # habtm which is optional at the db level
+      has_and_belongs_to_many :subjects
 
       # simulate when belongs_to is optional by default
       belongs_to :school, optional: true
@@ -214,6 +219,21 @@ def create_models
     class School < ApplicationRecord
     end
   RUBY
+
+  file "app/models/subject.rb", <<~RUBY
+    class Subject < ApplicationRecord
+      # habtm which is optional at the db level
+      has_and_belongs_to_many :wizards
+    end
+  RUBY
+
+  file "app/models/spell.rb", <<~RUBY
+    class Spell < ApplicationRecord
+      # habtm enforced at the DB level
+      has_and_belongs_to_many :spell_books
+    end
+  RUBY
+
 end
 
 def create_migrations
@@ -328,6 +348,47 @@ def create_migrations
       end
     end
   RUBY
+
+  file "db/migrate/20190620000010_add_subject.rb", <<~RUBY
+    class AddSubject < #{migration_superclass}
+      def change
+        create_table :subjects do |t|
+          t.string :name
+        end
+      end
+    end
+  RUBY
+
+  file "db/migrate/20190620000011_add_subjects_wizards.rb", <<~RUBY
+    class AddSubjectsWizards < #{migration_superclass}
+      def change
+        create_join_table :subjects, :wizards, column_options: { null: true } do |t|
+          t.index [:subject_id, :wizard_id]
+        end
+      end
+    end
+  RUBY
+
+  file "db/migrate/20190620000012_add_spell.rb", <<~RUBY
+    class AddSpell < #{migration_superclass}
+      def change
+        create_table :spells do |t|
+          t.string :name
+        end
+      end
+    end
+  RUBY
+
+  file "db/migrate/20190620000013_add_spells_spell_books.rb", <<~RUBY
+    class AddSpellsSpellBooks < #{migration_superclass}
+      def change
+        create_join_table :spells, :spell_books do |t|
+          t.index [:spell_id, :spell_book_id]
+        end
+      end
+    end
+  RUBY
+
 end
 
 def create_mailers

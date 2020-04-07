@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190620000009) do
+ActiveRecord::Schema.define(version: 20190620000013) do
 
   create_table "robes", force: :cascade do |t|
     t.integer "wizard_id"
@@ -27,6 +27,26 @@ ActiveRecord::Schema.define(version: 20190620000009) do
     t.integer "wizard_id", null: false
     t.integer "book_type", default: 0, null: false
     t.index ["wizard_id"], name: "index_spell_books_on_wizard_id"
+  end
+
+  create_table "spell_books_spells", id: false, force: :cascade do |t|
+    t.integer "spell_id", null: false
+    t.integer "spell_book_id", null: false
+    t.index ["spell_id", "spell_book_id"], name: "index_spell_books_spells_on_spell_id_and_spell_book_id"
+  end
+
+  create_table "spells", force: :cascade do |t|
+    t.string "name"
+  end
+
+  create_table "subjects", force: :cascade do |t|
+    t.string "name"
+  end
+
+  create_table "subjects_wizards", id: false, force: :cascade do |t|
+    t.integer "subject_id"
+    t.integer "wizard_id"
+    t.index ["subject_id", "wizard_id"], name: "index_subjects_wizards_on_subject_id_and_wizard_id"
   end
 
   create_table "wands", force: :cascade do |t|

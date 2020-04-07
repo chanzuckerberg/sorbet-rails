@@ -15,10 +15,16 @@ RSpec.describe 'rake rails_rbi:models', type: :task do
         'potion.rbi',
         'robe.rbi',
         'school.rbi',
+        'spell.rbi',
+        'spell/habtm_spell_books.rbi',
         'spell_book.rbi',
+        'spell_book/habtm_spells.rbi',
         'squib.rbi',
+        'subject.rbi',
+        'subject/habtm_wizards.rbi',
         'wand.rbi',
         'wizard.rbi',
+        'wizard/habtm_subjects.rbi',
       ]
     )
     if Object.const_defined?('ActiveStorage')

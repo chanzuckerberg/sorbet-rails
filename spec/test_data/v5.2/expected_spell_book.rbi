@@ -81,6 +81,12 @@ end
 module SpellBook::GeneratedAssociationMethods
   extend T::Sig
 
+  sig { returns(::Spell::ActiveRecord_Associations_CollectionProxy) }
+  def spells; end
+
+  sig { params(value: T::Enumerable[::Spell]).void }
+  def spells=(value); end
+
   sig { returns(::Wizard) }
   def wizard; end
 
