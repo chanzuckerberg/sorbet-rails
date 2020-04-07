@@ -297,11 +297,17 @@ module Wizard::GeneratedAssociationMethods
   sig { returns(::ActiveStorage::Attachment::ActiveRecord_Associations_CollectionProxy) }
   def hats_attachments; end
 
+  sig { returns(T::Array[Integer]) }
+  def hats_attachment_ids; end
+
   sig { params(value: T::Enumerable[::ActiveStorage::Attachment]).void }
   def hats_attachments=(value); end
 
   sig { returns(::ActiveStorage::Blob::ActiveRecord_Associations_CollectionProxy) }
   def hats_blobs; end
+
+  sig { returns(T::Array[Integer]) }
+  def hats_blob_ids; end
 
   sig { params(value: T::Enumerable[::ActiveStorage::Blob]).void }
   def hats_blobs=(value); end

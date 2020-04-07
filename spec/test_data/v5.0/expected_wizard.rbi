@@ -303,6 +303,9 @@ module Wizard::GeneratedAssociationMethods
   sig { returns(::SpellBook::ActiveRecord_Associations_CollectionProxy) }
   def spell_books; end
 
+  sig { returns(T::Array[Integer]) }
+  def spell_book_ids; end
+
   sig { params(value: T::Enumerable[::SpellBook]).void }
   def spell_books=(value); end
 
