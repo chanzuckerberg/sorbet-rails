@@ -35,6 +35,9 @@ module Subject::GeneratedAssociationMethods
   sig { returns(::Wizard::ActiveRecord_Associations_CollectionProxy) }
   def wizards; end
 
+  sig { returns(T::Array[Integer]) }
+  def wizard_ids; end
+
   sig { params(value: T::Enumerable[::Wizard]).void }
   def wizards=(value); end
 end

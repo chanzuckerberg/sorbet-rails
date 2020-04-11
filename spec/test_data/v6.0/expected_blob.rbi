@@ -710,6 +710,9 @@ module ActiveStorage::Blob::GeneratedAssociationMethods
   sig { returns(::ActiveStorage::Attachment::ActiveRecord_Associations_CollectionProxy) }
   def attachments; end
 
+  sig { returns(T::Array[Integer]) }
+  def attachment_ids; end
+
   sig { params(value: T::Enumerable[::ActiveStorage::Attachment]).void }
   def attachments=(value); end
 

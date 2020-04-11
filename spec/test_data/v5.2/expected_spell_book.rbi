@@ -84,6 +84,9 @@ module SpellBook::GeneratedAssociationMethods
   sig { returns(::Spell::ActiveRecord_Associations_CollectionProxy) }
   def spells; end
 
+  sig { returns(T::Array[Integer]) }
+  def spell_ids; end
+
   sig { params(value: T::Enumerable[::Spell]).void }
   def spells=(value); end
 

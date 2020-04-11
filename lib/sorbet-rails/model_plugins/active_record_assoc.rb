@@ -105,6 +105,12 @@ class SorbetRails::ModelPlugins::ActiveRecordAssoc < SorbetRails::ModelPlugins::
       assoc_name.to_s,
       return_type: relation_class,
     )
+    unless assoc_should_be_untyped?(reflection)
+      assoc_module_rbi.create_method(
+        "#{assoc_name.singularize}_ids",
+        return_type: "T::Array[Integer]",
+      )
+    end
     assoc_module_rbi.create_method(
       "#{assoc_name}=",
       parameters: [

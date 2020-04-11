@@ -264,11 +264,17 @@ module Squib::GeneratedAssociationMethods
   sig { returns(::SpellBook::ActiveRecord_Associations_CollectionProxy) }
   def spell_books; end
 
+  sig { returns(T::Array[Integer]) }
+  def spell_book_ids; end
+
   sig { params(value: T::Enumerable[::SpellBook]).void }
   def spell_books=(value); end
 
   sig { returns(::Subject::ActiveRecord_Associations_CollectionProxy) }
   def subjects; end
+
+  sig { returns(T::Array[Integer]) }
+  def subject_ids; end
 
   sig { params(value: T::Enumerable[::Subject]).void }
   def subjects=(value); end

@@ -27,6 +27,7 @@ T.assert_type!(T.must(wizard.wand).wizard, Wizard)
 # T.assert_type!(wizard.spell_books, SpellBook::ActiveRecord_Relation)
 # T.assert_type!(wizard.spell_books, SpellBook::ActiveRecord_AssociationRelation)
 T.assert_type!(wizard.spell_books, SpellBook::ActiveRecord_Associations_CollectionProxy)
+T.assert_type!(wizard.spell_book_ids, T::Array[Integer])
 
 # -- model relation
 # default
