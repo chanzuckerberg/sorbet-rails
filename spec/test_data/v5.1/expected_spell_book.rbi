@@ -71,9 +71,9 @@ end
 
 class SpellBook::BookType < T::Enum
   enums do
-    Unclassified = new('unclassified')
-    Biology = new('biology')
-    DarkArt = new('dark_art')
+    Unclassified = new(%q{unclassified})
+    Biology = new(%q{biology})
+    DarkArt = new(%q{dark_art})
   end
 
 end

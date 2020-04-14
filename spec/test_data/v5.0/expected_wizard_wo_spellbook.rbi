@@ -236,57 +236,58 @@ end
 
 class Wizard::Broom < T::Enum
   enums do
-    Nimbus = new('nimbus')
-    Firebolt = new('firebolt')
+    Nimbus = new(%q{nimbus})
+    Firebolt = new(%q{firebolt})
   end
 
 end
 
 class Wizard::EyeColor < T::Enum
   enums do
-    Brown = new('brown')
-    Green = new('green')
-    Blue = new('blue')
+    Brown = new(%q{brown})
+    Green = new(%q{green})
+    Blue = new(%q{blue})
   end
 
 end
 
 class Wizard::HairColor < T::Enum
   enums do
-    Brown = new('brown')
-    Black = new('black')
-    Blonde = new('blonde')
+    Brown = new(%q{brown})
+    Black = new(%q{black})
+    Blonde = new(%q{blonde})
   end
 
 end
 
 class Wizard::House < T::Enum
   enums do
-    Gryffindor = new('Gryffindor')
-    Hufflepuff = new('Hufflepuff')
-    Ravenclaw = new('Ravenclaw')
-    Slytherin = new('Slytherin')
+    Gryffindor = new(%q{Gryffindor})
+    Hufflepuff = new(%q{Hufflepuff})
+    Ravenclaw = new(%q{Ravenclaw})
+    Slytherin = new(%q{Slytherin})
   end
 
 end
 
 class Wizard::ProfessorEnum < T::Enum
   enums do
-    SeverusSnape = new('Severus Snape')
-    MinervaMcGonagall = new('Minerva McGonagall')
-    PomonaSprout = new('Pomona Sprout')
-    FiliusFlitwick = new('Filius Flitwick')
-    Hagrid = new('Hagrid')
+    SeverusSnape = new(%q{Severus Snape})
+    MinervaMcGonagall = new(%q{Minerva McGonagall})
+    PomonaSprout = new(%q{Pomona Sprout})
+    FiliusFlitwick = new(%q{Filius Flitwick})
+    Hagrid = new(%q{Hagrid})
+    AlastorMadEyeMoody = new(%q{Alastor 'Mad-Eye' Moody})
   end
 
 end
 
 class Wizard::QuidditchPosition < T::Enum
   enums do
-    Keeper = new('keeper')
-    Seeker = new('seeker')
-    Beater = new('beater')
-    Chaser = new('chaser')
+    Keeper = new(%q{keeper})
+    Seeker = new(%q{seeker})
+    Beater = new(%q{beater})
+    Chaser = new(%q{chaser})
   end
 
 end

@@ -18,6 +18,7 @@ class Wizard < ApplicationRecord
     "Pomona Sprout": 2,
     "Filius Flitwick": 3,
     "Hagrid": 4,
+    "Alastor 'Mad-Eye' Moody": 5,
   }
 
   typed_enum broom: {
@@ -53,5 +54,5 @@ class Wizard < ApplicationRecord
   belongs_to :school, optional: true
 
   scope :recent, -> { where('created_at > ?', 1.month.ago) }
-  
+
 end

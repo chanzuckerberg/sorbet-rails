@@ -149,6 +149,7 @@ def create_models
         "Pomona Sprout": 2,
         "Filius Flitwick": 3,
         "Hagrid": 4,
+        "Alastor 'Mad-Eye' Moody": 5,
       }
 
       typed_enum broom: {
