@@ -29,6 +29,16 @@ module School::GeneratedAttributeMethods
   def name?; end
 end
 
+module School::GeneratedAssociationMethods
+  extend T::Sig
+
+  sig { returns(T.nilable(::Headmaster)) }
+  def headmaster; end
+
+  sig { params(value: T.nilable(::Headmaster)).void }
+  def headmaster=(value); end
+end
+
 module School::CustomFinderMethods
   sig { params(limit: Integer).returns(T::Array[School]) }
   def first_n(limit); end
@@ -48,6 +58,7 @@ end
 
 class School < ApplicationRecord
   include School::GeneratedAttributeMethods
+  include School::GeneratedAssociationMethods
   extend School::CustomFinderMethods
   extend T::Sig
   extend T::Generic

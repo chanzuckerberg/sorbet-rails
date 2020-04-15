@@ -12,6 +12,7 @@ RSpec.describe 'rake rails_rbi:models', type: :task do
     expect_files(
       base_dir: generated_dir_path,
       files: [
+        'headmaster.rbi',
         'potion.rbi',
         'robe.rbi',
         'school.rbi',
