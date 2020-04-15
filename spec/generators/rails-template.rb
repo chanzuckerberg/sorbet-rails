@@ -132,6 +132,8 @@ def create_models
   file "app/models/wizard.rb", <<~RUBY
     class Wizard < ApplicationRecord
       validates :name, length: { minimum: 5 }, presence: true
+      # simulate conditional validation
+      validates :parent_email, presence: true, if: -> { false }
 
       typed_enum house: {
         Gryffindor: 0,
