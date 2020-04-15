@@ -35,7 +35,7 @@ class SorbetRails::ModelPlugins::ActiveRecordAssoc < SorbetRails::ModelPlugins::
   def populate_single_assoc_getter_setter(assoc_module_rbi, assoc_name, reflection)
     # TODO allow people to specify the possible values of polymorphic associations
     assoc_class = assoc_should_be_untyped?(reflection) ? "T.untyped" : "::#{reflection.klass.name}"
-    assoc_type = belongs_to_and_required?(reflection) ? assoc_class : "T.nilable(#{assoc_class})"
+    assoc_type = (belongs_to_and_required?(reflection) || has_one_and_required?(reflection)) ? assoc_class : "T.nilable(#{assoc_class})"
 
     assoc_module_rbi.create_method(
       assoc_name.to_s,
@@ -56,6 +56,9 @@ class SorbetRails::ModelPlugins::ActiveRecordAssoc < SorbetRails::ModelPlugins::
     # optional (via `optional` or `!required` or `!belongs_to_required_by_default`)
     return false if !reflection.belongs_to?
 
+    column_def = @columns_hash[reflection.foreign_key.to_s]
+    db_required_config = column_def.present? && !column_def.null
+
     rails_required_config =
       if reflection.options.key?(:required)
         !!reflection.options[:required]
@@ -65,8 +68,7 @@ class SorbetRails::ModelPlugins::ActiveRecordAssoc < SorbetRails::ModelPlugins::
         !!reflection.active_record.belongs_to_required_by_default
       end
 
-    column_def = @columns_hash[reflection.foreign_key.to_s]
-    db_required_config = column_def.present? && !column_def.null
+    rails_required_config ||= [column_def&.name, reflection.name].compact.any? { |n| attribute_has_unconditional_presence_validation?(n) }
 
     if rails_required_config && !db_required_config
       puts "Warning: belongs_to association #{reflection.name} is required at the application
@@ -85,6 +87,11 @@ class SorbetRails::ModelPlugins::ActiveRecordAssoc < SorbetRails::ModelPlugins::
     end
 
     rails_required_config || db_required_config
+  end
+
+  sig { params(reflection: T.untyped).returns(T::Boolean) }
+  private def has_one_and_required?(reflection)
+    !!(reflection.has_one? && attribute_has_unconditional_presence_validation?(reflection.name))
   end
 
   sig do
@@ -136,5 +143,14 @@ class SorbetRails::ModelPlugins::ActiveRecordAssoc < SorbetRails::ModelPlugins::
     reflection.through_reflection ?
       polymorphic_assoc?(reflection.source_reflection) :
       reflection.polymorphic?
+  end
+
+  sig { params(attribute: T.any(String, Symbol)).returns(T::Boolean) }
+  def attribute_has_unconditional_presence_validation?(attribute)
+    @model_class.validators_on(attribute).any? do |validator|
+      validator.is_a?(ActiveModel::Validations::PresenceValidator) &&
+        !validator.options.key?(:if) &&
+        !validator.options.key?(:unless)
+    end
   end
 end

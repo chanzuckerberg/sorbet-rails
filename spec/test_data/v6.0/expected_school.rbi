@@ -32,10 +32,10 @@ end
 module School::GeneratedAssociationMethods
   extend T::Sig
 
-  sig { returns(T.nilable(::Headmaster)) }
+  sig { returns(::Headmaster) }
   def headmaster; end
 
-  sig { params(value: T.nilable(::Headmaster)).void }
+  sig { params(value: ::Headmaster).void }
   def headmaster=(value); end
 end
 
