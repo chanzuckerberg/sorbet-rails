@@ -167,10 +167,10 @@ module Wizard::GeneratedAttributeMethods
   sig { returns(T::Boolean) }
   def id?; end
 
-  sig { returns(T.nilable(String)) }
+  sig { returns(String) }
   def name; end
 
-  sig { params(value: T.nilable(T.any(String, Symbol))).void }
+  sig { params(value: T.any(String, Symbol)).void }
   def name=(value); end
 
   sig { returns(T::Boolean) }

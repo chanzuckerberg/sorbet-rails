@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_20_000013) do
+ActiveRecord::Schema.define(version: 2019_06_20_000014) do
+
+  create_table "headmasters", force: :cascade do |t|
+    t.integer "school_id"
+    t.integer "wizard_id"
+    t.index ["school_id"], name: "index_headmasters_on_school_id"
+    t.index ["wizard_id"], name: "index_headmasters_on_wizard_id"
+  end
 
   create_table "robes", force: :cascade do |t|
     t.integer "wizard_id"

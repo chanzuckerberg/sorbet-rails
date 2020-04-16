@@ -82,6 +82,7 @@ class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugi
     column_def
   )
     should_skip_setter_getter = false
+    nilable_column = nilable_column?(column_def)
 
     if @model_class.is_a?(::ActiveRecord::Enum)
       config = @model_class.typed_enum_reflections[column_name]
@@ -101,7 +102,7 @@ class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugi
 
         # define t_enum setter/getter
         assignable_type = t_enum_type
-        assignable_type = "T.nilable(#{assignable_type})" if column_def.null
+        assignable_type = "T.nilable(#{assignable_type})" if nilable_column
         # add directly to model_class_rbi because they are included
         # by sorbet's hidden.rbi
         model_class_rbi.create_method(
@@ -121,9 +122,9 @@ class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugi
     if !should_skip_setter_getter
       # enum attribute is treated differently
       assignable_type = "T.any(Integer, String, Symbol)"
-      assignable_type = "T.nilable(#{assignable_type})" if column_def.null
+      assignable_type = "T.nilable(#{assignable_type})" if nilable_column
       return_type = "String"
-      return_type = "T.nilable(#{return_type})" if column_def.null
+      return_type = "T.nilable(#{return_type})" if nilable_column
 
       attribute_module_rbi.create_method(
         column_name.to_s,
@@ -153,7 +154,7 @@ class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugi
 
     ColumnType.new(
       base_type: strict_type,
-      nilable: column_def.null,
+      nilable: nilable_column?(column_def),
       array_type: column_def.try(:array?),
     )
   end
@@ -212,6 +213,11 @@ class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugi
       column_def.name,
       cast_type
     )
+  end
+
+  sig { params(column_def: T.untyped).returns(T::Boolean) }
+  def nilable_column?(column_def)
+    !!(column_def.null && !attribute_has_unconditional_presence_validation?(column_def.name))
   end
 
   sig { params(column_type: ColumnType).returns(String) }

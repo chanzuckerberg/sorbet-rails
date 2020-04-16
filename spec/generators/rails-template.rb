@@ -132,6 +132,8 @@ def create_models
   file "app/models/wizard.rb", <<~RUBY
     class Wizard < ApplicationRecord
       validates :name, length: { minimum: 5 }, presence: true
+      # simulate conditional validation
+      validates :parent_email, presence: true, if: -> { false }
 
       typed_enum house: {
         Gryffindor: 0,
@@ -218,6 +220,8 @@ def create_models
 
   file "app/models/school.rb", <<~RUBY
     class School < ApplicationRecord
+      has_one :headmaster
+      validates :headmaster, presence: true
     end
   RUBY
 
@@ -232,6 +236,16 @@ def create_models
     class Spell < ApplicationRecord
       # habtm enforced at the DB level
       has_and_belongs_to_many :spell_books
+    end
+  RUBY
+
+  file "app/models/headmaster.rb", <<~RUBY
+    class Headmaster < ApplicationRecord
+      belongs_to :school, required: false
+      belongs_to :wizard, optional: true
+
+      validates :school, presence: true
+      validates :wizard_id, presence: true
     end
   RUBY
 
@@ -385,6 +399,17 @@ def create_migrations
       def change
         create_join_table :spells, :spell_books do |t|
           t.index [:spell_id, :spell_book_id]
+        end
+      end
+    end
+  RUBY
+
+  file "db/migrate/20190620000014_create_headmasters.rb", <<~RUBY
+    class CreateHeadmasters < #{migration_superclass}
+      def change
+        create_table :headmasters do |t|
+          t.references :school
+          t.references :wizard
         end
       end
     end
