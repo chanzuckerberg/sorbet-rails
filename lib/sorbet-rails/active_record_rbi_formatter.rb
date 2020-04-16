@@ -18,7 +18,7 @@ class SorbetRails::ActiveRecordRbiFormatter
     ])
 
     parlour.root.create_class('ActiveRecord::Base') do |class_rbi|
-      create_finder_methods(class_rbi, 'T.attached_class', true)
+      create_finder_methods(class_rbi, type: 'T.attached_class', class_method: true)
     end
 
     parlour.rbi
@@ -41,7 +41,7 @@ class SorbetRails::ActiveRecordRbiFormatter
         value: "type_member(fixed: T.untyped)",
       )
 
-      create_finder_methods(class_rbi, 'Elem', false)
+      create_finder_methods(class_rbi, type: 'Elem', class_method: false)
 
       class_rbi.create_method(
         "each",
@@ -61,17 +61,12 @@ class SorbetRails::ActiveRecordRbiFormatter
         "to_a",
         return_type: "T::Array[Elem]",
       )
-      # TODO use type_parameters(:U) when parlour supports it
-      class_rbi.create_arbitrary(
-        code: <<~RUBY
-          sig do
-            type_parameters(:U).params(
-                blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),
-            )
-            .returns(T::Array[T.type_parameter(:U)])
-          end
-          def map(&blk); end
-        RUBY
+
+      class_rbi.create_method(
+        "map",
+        type_parameters: [:U],
+        parameters: [ Parameter.new("&blk", type: "T.proc.params(arg0: Elem).returns(T.type_parameter(:U))") ],
+        return_type: "T::Array[T.type_parameter(:U)]",
       )
 
       class_rbi.create_method(
@@ -96,7 +91,7 @@ class SorbetRails::ActiveRecordRbiFormatter
       class_method: T::Boolean,
     ).void
   }
-  def create_finder_methods(class_rbi, type, class_method)
+  def create_finder_methods(class_rbi, type:, class_method:)
     finder_methods = %w(find find_by find_by!)
     finder_methods.each do |finder_method|
       class_rbi.create_method(

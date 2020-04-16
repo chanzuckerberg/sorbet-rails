@@ -78,12 +78,7 @@ class ActiveRecord::Relation
   sig { returns(T::Array[Elem]) }
   def to_a; end
 
-  sig do
-    type_parameters(:U).params(
-        blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),
-    )
-    .returns(T::Array[T.type_parameter(:U)])
-  end
+  sig { type_parameters(:U).params(blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U))).returns(T::Array[T.type_parameter(:U)]) }
   def map(&blk); end
 
   sig { params(conditions: T.untyped).returns(T::Boolean) }
