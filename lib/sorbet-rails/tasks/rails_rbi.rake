@@ -1,3 +1,4 @@
+require("sorbet-rails/active_record_rbi_formatter")
 require("sorbet-rails/model_rbi_formatter")
 require("sorbet-rails/routes_rbi_formatter")
 require("sorbet-rails/helper_rbi_formatter")
@@ -39,9 +40,23 @@ namespace :rails_rbi do
     copy_bundled_rbi('type_assert.rbi')
     copy_bundled_rbi('parameters.rbi')
     copy_bundled_rbi('pluck_to_tstruct.rbi')
-    copy_bundled_rbi('active_record_relation.rbi')
-    copy_bundled_rbi('active_record_base.rbi')
     copy_bundled_rbi('typed_params.rbi')
+
+    # These files were previously bundled_rbi but are now generated so this
+    # is needed for backwards compatibility with anyone using `rails_rbi:custom`
+    Rake::Task['rails_rbi:active_record'].invoke
+  end
+
+  desc "Generate rbis for rails mailers"
+  task :active_record, [:root_dir] => :environment do |t, args|
+    formatter = SorbetRails::ActiveRecordRbiFormatter.new
+    FileUtils.mkdir_p(Rails.root.join("sorbet", "rails-rbi"))
+
+    file_path = Rails.root.join("sorbet", "rails-rbi", "active_record_base.rbi")
+    File.write(file_path, formatter.generate_active_record_base_rbi)
+
+    file_path = Rails.root.join("sorbet", "rails-rbi", "active_record_relation.rbi")
+    File.write(file_path, formatter.generate_active_record_relation_rbi)
   end
 
   desc "Generate rbis for rails models. Pass models name to regenerate rbi for only the given models."
