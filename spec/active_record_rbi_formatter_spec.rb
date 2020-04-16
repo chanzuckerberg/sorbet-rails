@@ -11,4 +11,14 @@ RSpec.describe SorbetRails::ActiveRecordRbiFormatter do
       )
     end
   end
+
+  describe 'generate_active_record_relation_rbi' do
+    it 'returns the expected rbi' do
+      formatter = SorbetRails::ActiveRecordRbiFormatter.new
+      expect_match_file(
+        formatter.generate_active_record_relation_rbi,
+        'expected_active_record_relation.rbi'
+      )
+    end
+  end
 end
