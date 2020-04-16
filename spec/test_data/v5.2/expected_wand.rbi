@@ -176,10 +176,10 @@ end
 
 class Wand::CoreType < T::Enum
   enums do
-    PhoenixFeather = new('phoenix_feather')
-    DragonHeartstring = new('dragon_heartstring')
-    UnicornTailHair = new('unicorn_tail_hair')
-    BasiliskHorn = new('basilisk_horn')
+    PhoenixFeather = new(%q{phoenix_feather})
+    DragonHeartstring = new(%q{dragon_heartstring})
+    UnicornTailHair = new(%q{unicorn_tail_hair})
+    BasiliskHorn = new(%q{basilisk_horn})
   end
 
 end

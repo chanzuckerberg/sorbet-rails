@@ -96,7 +96,7 @@ class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugi
         t_enum_values = @model_class.gen_typed_enum_values(enum_values.keys)
         root.create_enum_class(
           t_enum_type,
-          enums: t_enum_values.map { |k, v| [v, "'#{k}'"] },
+          enums: t_enum_values.map { |k, v| [v, "%q{#{k}}"] },
         )
 
         # define t_enum setter/getter
