@@ -68,6 +68,8 @@ class SorbetRails::ModelPlugins::ActiveRecordAssoc < SorbetRails::ModelPlugins::
         !!reflection.active_record.belongs_to_required_by_default
       end
 
+    # We check for validations on both the column name (e.g. wizard_id) and
+    # association name (e.g. wizard).
     rails_required_config ||= [column_def&.name, reflection.name].compact.any? { |n| attribute_has_unconditional_presence_validation?(n) }
 
     if rails_required_config && !db_required_config
@@ -143,14 +145,5 @@ class SorbetRails::ModelPlugins::ActiveRecordAssoc < SorbetRails::ModelPlugins::
     reflection.through_reflection ?
       polymorphic_assoc?(reflection.source_reflection) :
       reflection.polymorphic?
-  end
-
-  sig { params(attribute: T.any(String, Symbol)).returns(T::Boolean) }
-  def attribute_has_unconditional_presence_validation?(attribute)
-    @model_class.validators_on(attribute).any? do |validator|
-      validator.is_a?(ActiveModel::Validations::PresenceValidator) &&
-        !validator.options.key?(:if) &&
-        !validator.options.key?(:unless)
-    end
   end
 end

@@ -239,13 +239,4 @@ class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugi
     end
     ColumnType.new(base_type: type, nilable: column_type.nilable, array_type: column_type.array_type).to_s
   end
-
-  sig { params(attribute: T.any(String, Symbol)).returns(T::Boolean) }
-  def attribute_has_unconditional_presence_validation?(attribute)
-    @model_class.validators_on(attribute).any? do |validator|
-      validator.is_a?(ActiveModel::Validations::PresenceValidator) &&
-        !validator.options.key?(:if) &&
-        !validator.options.key?(:unless)
-    end
-  end
 end

@@ -76,14 +76,3 @@ module T::Private::Methods::MethodHooks; end
 module T::Private::Methods::Signature; end
 module T::Private::Methods::SingletonMethodHooks; end
 module T::Props::Plugin::ClassMethods; end
-
-class ActiveModel::Validations::PresenceValidator
-  sig { returns(T::Hash[T.untyped, T.untyped]) }
-  attr_reader :options
-end
-
-module ActiveModel::Validations
-  module ClassMethods
-    def validators_on(*attributes); end
-  end
-end
