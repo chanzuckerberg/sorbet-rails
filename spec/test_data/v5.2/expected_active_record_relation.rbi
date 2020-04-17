@@ -58,6 +58,27 @@ class ActiveRecord::Relation
   sig { returns(Elem) }
   def last!; end
 
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Elem).void)).returns(Elem) }
+  def new(attributes = nil, &block); end
+
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Elem).void)).returns(Elem) }
+  def build(attributes = nil, &block); end
+
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Elem).void)).returns(Elem) }
+  def create(attributes = nil, &block); end
+
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Elem).void)).returns(Elem) }
+  def create!(attributes = nil, &block); end
+
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Elem).void)).returns(Elem) }
+  def first_or_create(attributes = nil, &block); end
+
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Elem).void)).returns(Elem) }
+  def first_or_create!(attributes = nil, &block); end
+
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Elem).void)).returns(Elem) }
+  def first_or_initialize(attributes = nil, &block); end
+
   sig do
     override.params(
       start: T.nilable(Integer),
@@ -68,6 +89,20 @@ class ActiveRecord::Relation
     ).returns(T::Array[Elem])
   end
   def find_each(start: nil, finish: nil, batch_size: 1000, error_on_ignore: nil, &block); end
+
+  sig do
+    override.params(
+      start: T.nilable(Integer),
+      finish: T.nilable(Integer),
+      batch_size: T.nilable(Integer),
+      error_on_ignore: T.nilable(T::Boolean),
+      block: T.nilable(T.proc.params(e: T::Array[Elem]).void)
+    ).returns(T::Array[T::Array[Elem]])
+  end
+  def find_in_batches(start: nil, finish: nil, batch_size: 1000, error_on_ignore: nil, &block); end
+
+  sig { returns(T::Array[Elem]) }
+  def destroy_all; end
 
   sig { override.params(block: T.proc.params(e: Elem).void).returns(T::Array[Elem]) }
   def each(&block); end
@@ -81,14 +116,29 @@ class ActiveRecord::Relation
   sig { type_parameters(:U).params(blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U))).returns(T::Array[T.type_parameter(:U)]) }
   def map(&blk); end
 
+  sig { returns(Integer) }
+  def size; end
+
+  sig { returns(T::Boolean) }
+  def empty?; end
+
+  sig { returns(T::Boolean) }
+  def loaded?; end
+
+  sig { returns(T.self_type) }
+  def reload; end
+
+  sig { params(args: T.untyped).returns(T::Array[T.untyped]) }
+  def ids(*args); end
+
+  sig { params(args: T.untyped).returns(T::Array[T.untyped]) }
+  def pluck(*args); end
+
   sig { params(conditions: T.untyped).returns(T::Boolean) }
   def exists?(conditions = nil); end
 
   sig { returns(T::Boolean) }
   def any?; end
-
-  sig { returns(T::Boolean) }
-  def empty?; end
 
   sig { returns(T::Boolean) }
   def many?; end
@@ -98,4 +148,90 @@ class ActiveRecord::Relation
 
   sig { returns(T::Boolean) }
   def one?; end
+
+  sig { params(args: T.untyped).returns(Numeric) }
+  def average(*args); end
+
+  sig { params(args: T.untyped).returns(Numeric) }
+  def calculate(*args); end
+
+  sig { params(args: T.untyped).returns(Numeric) }
+  def count(*args); end
+
+  sig { params(args: T.untyped).returns(Numeric) }
+  def maximum(*args); end
+
+  sig { params(args: T.untyped).returns(Numeric) }
+  def minimum(*args); end
+
+  sig { params(args: T.untyped).returns(Numeric) }
+  def sum(*args); end
+
+  sig { params(updates: T.untyped).returns(Integer) }
+  def update_all(updates); end
+
+  sig { returns(Integer) }
+  def delete_all; end
+end
+
+class ActiveRecord::AssociationRelation < ActiveRecord::Relation
+  Elem = type_member(fixed: T.untyped)
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: Elem).void)).returns(Elem) }
+  def new(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: Elem).void)).returns(Elem) }
+  def build(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: Elem).void)).returns(Elem) }
+  def create(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: Elem).void)).returns(Elem) }
+  def create!(*args, &block); end
+end
+
+class ActiveRecord::Associations::CollectionProxy < ActiveRecord::Relation
+  Elem = type_member(fixed: T.untyped)
+
+  sig { params(records: T.any(Elem, T::Enumerable[Elem])).returns(T.self_type) }
+  def <<(*records); end
+
+  sig { params(records: T.any(Elem, T::Enumerable[Elem])).returns(T.self_type) }
+  def append(*records); end
+
+  sig { params(records: T.any(Elem, T::Enumerable[Elem])).returns(T.self_type) }
+  def push(*records); end
+
+  sig { params(records: T.any(Elem, T::Enumerable[Elem])).returns(T.self_type) }
+  def concat(*records); end
+
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Elem).void)).returns(Elem) }
+  def new(attributes = nil, &block); end
+
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Elem).void)).returns(Elem) }
+  def build(attributes = nil, &block); end
+
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Elem).void)).returns(Elem) }
+  def create(attributes = nil, &block); end
+
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Elem).void)).returns(Elem) }
+  def create!(attributes = nil, &block); end
+
+  sig { params(args: T.untyped).returns(Elem) }
+  def find(*args); end
+
+  sig { returns(T::Boolean) }
+  def empty?; end
+
+  sig { returns(T.self_type) }
+  def reload; end
+
+  sig { returns(Integer) }
+  def size; end
+
+  sig { params(limit: T.untyped).returns(T.nilable(Elem)) }
+  def last(limit = nil); end
+
+  sig { params(args: T.untyped).returns(T::Array[T.untyped]) }
+  def pluck(*args); end
 end

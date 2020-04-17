@@ -18,7 +18,8 @@ class SorbetRails::ActiveRecordRbiFormatter
     ])
 
     parlour.root.create_class('ActiveRecord::Base') do |class_rbi|
-      create_finder_methods(class_rbi, type: 'T.attached_class', class_method: true)
+      create_elem_specific_query_methods(class_rbi, class_method: true, type: 'T.attached_class')
+      create_general_query_methods(class_rbi, class_method: true)
     end
 
     parlour.rbi
@@ -41,7 +42,7 @@ class SorbetRails::ActiveRecordRbiFormatter
         value: "type_member(fixed: T.untyped)",
       )
 
-      create_finder_methods(class_rbi, type: 'Elem', class_method: false)
+      create_elem_specific_query_methods(class_rbi, class_method: false, type: 'Elem')
 
       class_rbi.create_method(
         "each",
@@ -69,16 +70,94 @@ class SorbetRails::ActiveRecordRbiFormatter
         return_type: "T::Array[T.type_parameter(:U)]",
       )
 
-      class_rbi.create_method(
-        "exists?",
-        parameters: [ Parameter.new("conditions", type: "T.untyped", default: "nil") ],
-        return_type: "T::Boolean",
-      )
-      class_rbi.create_method('any?', return_type: "T::Boolean")
+      class_rbi.create_method('size', return_type: "Integer")
       class_rbi.create_method('empty?', return_type: "T::Boolean")
-      class_rbi.create_method('many?', return_type: "T::Boolean")
-      class_rbi.create_method('none?', return_type: "T::Boolean")
-      class_rbi.create_method('one?', return_type: "T::Boolean")
+      class_rbi.create_method('loaded?', return_type: "T::Boolean")
+      class_rbi.create_method('reload', return_type: "T.self_type")
+
+      create_general_query_methods(class_rbi, class_method: false)
+    end
+
+    parlour.root.create_class("ActiveRecord::AssociationRelation", superclass: "ActiveRecord::Relation") do |class_rbi|
+      class_rbi.create_constant(
+        "Elem",
+        value: "type_member(fixed: T.untyped)",
+      )
+
+      # Ideally we shouldn't need to define these but the activerecord.rbi that sorbet
+      # generates defines some methods which sorbet finds instead of the  methods
+      # inherited by ActiveRecord::Relation. These methods have different a different
+      # parameter type than the ones defined by `create_elem_specific_query_methods` to
+      # match the signatures in that conflicting rbi.
+      build_methods = %w(new build create create!)
+      build_methods.each do |build_method|
+        class_rbi.create_method(
+          build_method,
+          parameters: [
+            Parameter.new("*args", type: "T.untyped"),
+            Parameter.new(
+              "&block",
+              type: "T.nilable(T.proc.params(object: Elem).void)",
+            ),
+          ],
+          return_type: "Elem",
+        )
+      end
+    end
+
+    parlour.root.create_class("ActiveRecord::Associations::CollectionProxy", superclass: "ActiveRecord::Relation") do |class_rbi|
+      class_rbi.create_constant(
+        "Elem",
+        value: "type_member(fixed: T.untyped)",
+      )
+
+      push_methods = %w(<< append push concat)
+      push_methods.each do |push_method|
+        class_rbi.create_method(
+          push_method,
+          parameters: [ Parameter.new("*records", type: "T.any(Elem, T::Enumerable[Elem])") ],
+          return_type: "T.self_type",
+        )
+      end
+
+      # Ideally we shouldn't need to define these but the activerecord.rbi that sorbet
+      # generates defines some methods which sorbet finds instead of the  methods
+      # inherited by ActiveRecord::Relation. Some of these methods have different arity
+      # or parameters than the ones defined by `create_elem_specific_query_methods` to
+      # match the signatures in that conflicting rbi.
+      build_methods = %w(new build create create!)
+      build_methods.each do |build_method|
+        class_rbi.create_method(
+          build_method,
+          parameters: [
+            Parameter.new("attributes", type: "T.untyped", default: 'nil'),
+            Parameter.new(
+              "&block",
+              type: "T.nilable(T.proc.params(object: Elem).void)",
+            ),
+          ],
+          return_type: "Elem",
+        )
+      end
+
+      class_rbi.create_method(
+        "find",
+        parameters: [ Parameter.new("*args", type: "T.untyped") ],
+        return_type: "Elem",
+      )
+      class_rbi.create_method('empty?', return_type: "T::Boolean")
+      class_rbi.create_method('reload', return_type: "T.self_type")
+      class_rbi.create_method('size', return_type: "Integer")
+      class_rbi.create_method(
+        "last",
+        parameters: [ Parameter.new("limit", type: "T.untyped", default: "nil") ],
+        return_type: "T.nilable(Elem)",
+      )
+      class_rbi.create_method(
+        "pluck",
+        parameters: [ Parameter.new("*args", type: "T.untyped") ],
+        return_type: "T::Array[T.untyped]",
+      )
     end
 
     parlour.rbi
@@ -87,11 +166,11 @@ class SorbetRails::ActiveRecordRbiFormatter
   sig {
     params(
       class_rbi: Parlour::RbiGenerator::Namespace,
-      type: String,
       class_method: T::Boolean,
+      type: String,
     ).void
   }
-  def create_finder_methods(class_rbi, type:, class_method:)
+  def create_elem_specific_query_methods(class_rbi, class_method:, type:)
     finder_methods = %w(find find_by find_by!)
     finder_methods.each do |finder_method|
       class_rbi.create_method(
@@ -127,19 +206,15 @@ class SorbetRails::ActiveRecordRbiFormatter
       )
     end
 
-    build_methods = %w(create create! new)
+    build_methods = %w(new build create create! first_or_create first_or_create! first_or_initialize)
     build_methods.each do |build_method|
-      # This should be defined on both but trying to keep the diff small in this commit
-      next unless class_method
-
       class_rbi.create_method(
         build_method,
         parameters: [
           Parameter.new("attributes", type: "T.untyped", default: 'nil'),
           Parameter.new(
             "&block",
-            type: "T.untyped",
-            # type: "T.nilable(T.proc.params(object: #{type}).void)",
+            type: "T.nilable(T.proc.params(object: #{type}).void)",
           ),
         ],
         return_type: type,
@@ -147,8 +222,7 @@ class SorbetRails::ActiveRecordRbiFormatter
       )
     end
 
-    # batch_methods = %w(find_each find_in_batches)
-    batch_methods = %w(find_each)
+    batch_methods = %w(find_each find_in_batches)
     batch_methods.each do |batch_method|
       inner_type = batch_method == 'find_each' ? type : "T::Array[#{type}]"
 
@@ -166,5 +240,61 @@ class SorbetRails::ActiveRecordRbiFormatter
         override: true,
       )
     end
+
+    class_rbi.create_method(
+      "destroy_all",
+      return_type: "T::Array[#{type}]",
+      class_method: class_method,
+    )
+  end
+
+  sig {
+    params(
+      class_rbi: Parlour::RbiGenerator::Namespace,
+      class_method: T::Boolean,
+    ).void
+  }
+  def create_general_query_methods(class_rbi, class_method:)
+    class_rbi.create_method(
+      "ids",
+      parameters: [ Parameter.new("*args", type: "T.untyped") ],
+      return_type: "T::Array[T.untyped]",
+      class_method: class_method,
+    )
+    class_rbi.create_method(
+      "pluck",
+      parameters: [ Parameter.new("*args", type: "T.untyped") ],
+      return_type: "T::Array[T.untyped]",
+      class_method: class_method,
+    )
+    class_rbi.create_method(
+      "exists?",
+      parameters: [ Parameter.new("conditions", type: "T.untyped", default: "nil") ],
+      return_type: "T::Boolean",
+      class_method: class_method,
+    )
+
+    boolean_methods = %w(any? many? none? one?)
+    boolean_methods.each do |boolean_method|
+      class_rbi.create_method(boolean_method, return_type: "T::Boolean", class_method: class_method)
+    end
+
+    math_methods = %w(average calculate count maximum minimum sum)
+    math_methods.map do |math_method|
+      class_rbi.create_method(
+        math_method,
+        parameters: [ Parameter.new("*args", type: "T.untyped") ],
+        return_type: "Numeric",
+        class_method: class_method,
+      )
+    end
+
+    class_rbi.create_method(
+      "update_all",
+      parameters: [ Parameter.new("updates", type: "T.untyped") ],
+      return_type: "Integer",
+      class_method: class_method,
+    )
+    class_rbi.create_method("delete_all", return_type: "Integer", class_method: class_method)
   end
 end
