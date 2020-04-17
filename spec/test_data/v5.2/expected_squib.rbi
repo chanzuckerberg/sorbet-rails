@@ -506,30 +506,11 @@ class Squib < Wizard
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Squib::ActiveRecord_Relation) }
   def self.extending(*args, &block); end
-
-  sig { params(conditions: T.untyped).returns(T::Boolean) }
-  def self.exists?(conditions = nil); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def self.any?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def self.many?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def self.none?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def self.one?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def self.empty?(*args); end
 end
 
 class Squib::ActiveRecord_Relation < ActiveRecord::Relation
   include Squib::ActiveRelation_WhereNot
   include Squib::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: Squib)
@@ -680,30 +661,11 @@ class Squib::ActiveRecord_Relation < ActiveRecord::Relation
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Squib::ActiveRecord_Relation) }
   def extending(*args, &block); end
-
-  sig { params(conditions: T.untyped).returns(T::Boolean) }
-  def exists?(conditions = nil); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def any?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def many?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def none?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def one?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def empty?(*args); end
 end
 
 class Squib::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
   include Squib::ActiveRelation_WhereNot
   include Squib::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: Squib)
@@ -854,100 +816,10 @@ class Squib::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelatio
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Squib::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { params(args: T.untyped).returns(Squib) }
-  def find(*args); end
-
-  sig { params(args: T.untyped).returns(T.nilable(Squib)) }
-  def find_by(*args); end
-
-  sig { params(args: T.untyped).returns(Squib) }
-  def find_by!(*args); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Squib).void)).returns(Squib) }
-  def find_or_initialize_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Squib).void)).returns(Squib) }
-  def find_or_create_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Squib).void)).returns(Squib) }
-  def find_or_create_by!(attributes, &block); end
-
-  sig { returns(T.nilable(Squib)) }
-  def first; end
-
-  sig { returns(Squib) }
-  def first!; end
-
-  sig { returns(T.nilable(Squib)) }
-  def second; end
-
-  sig { returns(Squib) }
-  def second!; end
-
-  sig { returns(T.nilable(Squib)) }
-  def third; end
-
-  sig { returns(Squib) }
-  def third!; end
-
-  sig { returns(T.nilable(Squib)) }
-  def third_to_last; end
-
-  sig { returns(Squib) }
-  def third_to_last!; end
-
-  sig { returns(T.nilable(Squib)) }
-  def second_to_last; end
-
-  sig { returns(Squib) }
-  def second_to_last!; end
-
-  sig { returns(T.nilable(Squib)) }
-  def last; end
-
-  sig { returns(Squib) }
-  def last!; end
-
-  sig { params(conditions: T.untyped).returns(T::Boolean) }
-  def exists?(conditions = nil); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def any?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def many?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def none?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def one?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def empty?(*args); end
-
-  sig { override.params(block: T.proc.params(e: Squib).void).returns(T::Array[Squib]) }
-  def each(&block); end
-
-  sig { params(level: T.nilable(Integer)).returns(T::Array[Squib]) }
-  def flatten(level); end
-
-  sig { returns(T::Array[Squib]) }
-  def to_a; end
-
-  sig do
-    type_parameters(:U).params(
-        blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),
-    )
-    .returns(T::Array[T.type_parameter(:U)])
-  end
-  def map(&blk); end
 end
 
 class Squib::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include Squib::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: Squib)
@@ -1098,105 +970,4 @@ class Squib::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associati
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Squib::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { params(args: T.untyped).returns(Squib) }
-  def find(*args); end
-
-  sig { params(args: T.untyped).returns(T.nilable(Squib)) }
-  def find_by(*args); end
-
-  sig { params(args: T.untyped).returns(Squib) }
-  def find_by!(*args); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Squib).void)).returns(Squib) }
-  def find_or_initialize_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Squib).void)).returns(Squib) }
-  def find_or_create_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Squib).void)).returns(Squib) }
-  def find_or_create_by!(attributes, &block); end
-
-  sig { returns(T.nilable(Squib)) }
-  def first; end
-
-  sig { returns(Squib) }
-  def first!; end
-
-  sig { returns(T.nilable(Squib)) }
-  def second; end
-
-  sig { returns(Squib) }
-  def second!; end
-
-  sig { returns(T.nilable(Squib)) }
-  def third; end
-
-  sig { returns(Squib) }
-  def third!; end
-
-  sig { returns(T.nilable(Squib)) }
-  def third_to_last; end
-
-  sig { returns(Squib) }
-  def third_to_last!; end
-
-  sig { returns(T.nilable(Squib)) }
-  def second_to_last; end
-
-  sig { returns(Squib) }
-  def second_to_last!; end
-
-  sig { returns(T.nilable(Squib)) }
-  def last; end
-
-  sig { returns(Squib) }
-  def last!; end
-
-  sig { params(conditions: T.untyped).returns(T::Boolean) }
-  def exists?(conditions = nil); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def any?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def many?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def none?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def one?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def empty?(*args); end
-
-  sig { override.params(block: T.proc.params(e: Squib).void).returns(T::Array[Squib]) }
-  def each(&block); end
-
-  sig { params(level: T.nilable(Integer)).returns(T::Array[Squib]) }
-  def flatten(level); end
-
-  sig { returns(T::Array[Squib]) }
-  def to_a; end
-
-  sig do
-    type_parameters(:U).params(
-        blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),
-    )
-    .returns(T::Array[T.type_parameter(:U)])
-  end
-  def map(&blk); end
-
-  sig { params(records: T.any(Squib, T::Array[Squib])).returns(T.self_type) }
-  def <<(*records); end
-
-  sig { params(records: T.any(Squib, T::Array[Squib])).returns(T.self_type) }
-  def append(*records); end
-
-  sig { params(records: T.any(Squib, T::Array[Squib])).returns(T.self_type) }
-  def push(*records); end
-
-  sig { params(records: T.any(Squib, T::Array[Squib])).returns(T.self_type) }
-  def concat(*records); end
 end

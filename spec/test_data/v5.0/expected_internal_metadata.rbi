@@ -154,30 +154,11 @@ class ActiveRecord::InternalMetadata < ActiveRecord::Base
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(ActiveRecord::InternalMetadata::ActiveRecord_Relation) }
   def self.extending(*args, &block); end
-
-  sig { params(conditions: T.untyped).returns(T::Boolean) }
-  def self.exists?(conditions = nil); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def self.any?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def self.many?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def self.none?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def self.one?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def self.empty?(*args); end
 end
 
 class ActiveRecord::InternalMetadata::ActiveRecord_Relation < ActiveRecord::Relation
   include ActiveRecord::InternalMetadata::ActiveRelation_WhereNot
   include ActiveRecord::InternalMetadata::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: ActiveRecord::InternalMetadata)
@@ -265,30 +246,11 @@ class ActiveRecord::InternalMetadata::ActiveRecord_Relation < ActiveRecord::Rela
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(ActiveRecord::InternalMetadata::ActiveRecord_Relation) }
   def extending(*args, &block); end
-
-  sig { params(conditions: T.untyped).returns(T::Boolean) }
-  def exists?(conditions = nil); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def any?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def many?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def none?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def one?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def empty?(*args); end
 end
 
 class ActiveRecord::InternalMetadata::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
   include ActiveRecord::InternalMetadata::ActiveRelation_WhereNot
   include ActiveRecord::InternalMetadata::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: ActiveRecord::InternalMetadata)
@@ -376,100 +338,10 @@ class ActiveRecord::InternalMetadata::ActiveRecord_AssociationRelation < ActiveR
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(ActiveRecord::InternalMetadata::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { params(args: T.untyped).returns(ActiveRecord::InternalMetadata) }
-  def find(*args); end
-
-  sig { params(args: T.untyped).returns(T.nilable(ActiveRecord::InternalMetadata)) }
-  def find_by(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveRecord::InternalMetadata) }
-  def find_by!(*args); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActiveRecord::InternalMetadata).void)).returns(ActiveRecord::InternalMetadata) }
-  def find_or_initialize_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActiveRecord::InternalMetadata).void)).returns(ActiveRecord::InternalMetadata) }
-  def find_or_create_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActiveRecord::InternalMetadata).void)).returns(ActiveRecord::InternalMetadata) }
-  def find_or_create_by!(attributes, &block); end
-
-  sig { returns(T.nilable(ActiveRecord::InternalMetadata)) }
-  def first; end
-
-  sig { returns(ActiveRecord::InternalMetadata) }
-  def first!; end
-
-  sig { returns(T.nilable(ActiveRecord::InternalMetadata)) }
-  def second; end
-
-  sig { returns(ActiveRecord::InternalMetadata) }
-  def second!; end
-
-  sig { returns(T.nilable(ActiveRecord::InternalMetadata)) }
-  def third; end
-
-  sig { returns(ActiveRecord::InternalMetadata) }
-  def third!; end
-
-  sig { returns(T.nilable(ActiveRecord::InternalMetadata)) }
-  def third_to_last; end
-
-  sig { returns(ActiveRecord::InternalMetadata) }
-  def third_to_last!; end
-
-  sig { returns(T.nilable(ActiveRecord::InternalMetadata)) }
-  def second_to_last; end
-
-  sig { returns(ActiveRecord::InternalMetadata) }
-  def second_to_last!; end
-
-  sig { returns(T.nilable(ActiveRecord::InternalMetadata)) }
-  def last; end
-
-  sig { returns(ActiveRecord::InternalMetadata) }
-  def last!; end
-
-  sig { params(conditions: T.untyped).returns(T::Boolean) }
-  def exists?(conditions = nil); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def any?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def many?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def none?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def one?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def empty?(*args); end
-
-  sig { override.params(block: T.proc.params(e: ActiveRecord::InternalMetadata).void).returns(T::Array[ActiveRecord::InternalMetadata]) }
-  def each(&block); end
-
-  sig { params(level: T.nilable(Integer)).returns(T::Array[ActiveRecord::InternalMetadata]) }
-  def flatten(level); end
-
-  sig { returns(T::Array[ActiveRecord::InternalMetadata]) }
-  def to_a; end
-
-  sig do
-    type_parameters(:U).params(
-        blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),
-    )
-    .returns(T::Array[T.type_parameter(:U)])
-  end
-  def map(&blk); end
 end
 
 class ActiveRecord::InternalMetadata::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include ActiveRecord::InternalMetadata::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: ActiveRecord::InternalMetadata)
@@ -557,105 +429,4 @@ class ActiveRecord::InternalMetadata::ActiveRecord_Associations_CollectionProxy 
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(ActiveRecord::InternalMetadata::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { params(args: T.untyped).returns(ActiveRecord::InternalMetadata) }
-  def find(*args); end
-
-  sig { params(args: T.untyped).returns(T.nilable(ActiveRecord::InternalMetadata)) }
-  def find_by(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveRecord::InternalMetadata) }
-  def find_by!(*args); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActiveRecord::InternalMetadata).void)).returns(ActiveRecord::InternalMetadata) }
-  def find_or_initialize_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActiveRecord::InternalMetadata).void)).returns(ActiveRecord::InternalMetadata) }
-  def find_or_create_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActiveRecord::InternalMetadata).void)).returns(ActiveRecord::InternalMetadata) }
-  def find_or_create_by!(attributes, &block); end
-
-  sig { returns(T.nilable(ActiveRecord::InternalMetadata)) }
-  def first; end
-
-  sig { returns(ActiveRecord::InternalMetadata) }
-  def first!; end
-
-  sig { returns(T.nilable(ActiveRecord::InternalMetadata)) }
-  def second; end
-
-  sig { returns(ActiveRecord::InternalMetadata) }
-  def second!; end
-
-  sig { returns(T.nilable(ActiveRecord::InternalMetadata)) }
-  def third; end
-
-  sig { returns(ActiveRecord::InternalMetadata) }
-  def third!; end
-
-  sig { returns(T.nilable(ActiveRecord::InternalMetadata)) }
-  def third_to_last; end
-
-  sig { returns(ActiveRecord::InternalMetadata) }
-  def third_to_last!; end
-
-  sig { returns(T.nilable(ActiveRecord::InternalMetadata)) }
-  def second_to_last; end
-
-  sig { returns(ActiveRecord::InternalMetadata) }
-  def second_to_last!; end
-
-  sig { returns(T.nilable(ActiveRecord::InternalMetadata)) }
-  def last; end
-
-  sig { returns(ActiveRecord::InternalMetadata) }
-  def last!; end
-
-  sig { params(conditions: T.untyped).returns(T::Boolean) }
-  def exists?(conditions = nil); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def any?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def many?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def none?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def one?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def empty?(*args); end
-
-  sig { override.params(block: T.proc.params(e: ActiveRecord::InternalMetadata).void).returns(T::Array[ActiveRecord::InternalMetadata]) }
-  def each(&block); end
-
-  sig { params(level: T.nilable(Integer)).returns(T::Array[ActiveRecord::InternalMetadata]) }
-  def flatten(level); end
-
-  sig { returns(T::Array[ActiveRecord::InternalMetadata]) }
-  def to_a; end
-
-  sig do
-    type_parameters(:U).params(
-        blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),
-    )
-    .returns(T::Array[T.type_parameter(:U)])
-  end
-  def map(&blk); end
-
-  sig { params(records: T.any(ActiveRecord::InternalMetadata, T::Array[ActiveRecord::InternalMetadata])).returns(T.self_type) }
-  def <<(*records); end
-
-  sig { params(records: T.any(ActiveRecord::InternalMetadata, T::Array[ActiveRecord::InternalMetadata])).returns(T.self_type) }
-  def append(*records); end
-
-  sig { params(records: T.any(ActiveRecord::InternalMetadata, T::Array[ActiveRecord::InternalMetadata])).returns(T.self_type) }
-  def push(*records); end
-
-  sig { params(records: T.any(ActiveRecord::InternalMetadata, T::Array[ActiveRecord::InternalMetadata])).returns(T.self_type) }
-  def concat(*records); end
 end

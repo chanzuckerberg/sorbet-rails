@@ -47,9 +47,7 @@ module SorbetRails
         :active_relation_where_not,
         :active_record_attribute,
         :active_record_assoc,
-        :active_record_finder_methods,
         :custom_finder_methods,
-        :enumerable_collections,
       ]
       @enabled_model_plugins << :active_storage_methods if defined?(T.unsafe(ActiveStorage))
       @extra_helper_includes = []

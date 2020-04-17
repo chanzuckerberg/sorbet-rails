@@ -156,30 +156,11 @@ class Wizard::HABTM_Subjects < ActiveRecord::Base
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::HABTM_Subjects::ActiveRecord_Relation) }
   def self.extending(*args, &block); end
-
-  sig { params(conditions: T.untyped).returns(T::Boolean) }
-  def self.exists?(conditions = nil); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def self.any?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def self.many?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def self.none?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def self.one?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def self.empty?(*args); end
 end
 
 class Wizard::HABTM_Subjects::ActiveRecord_Relation < ActiveRecord::Relation
   include Wizard::HABTM_Subjects::ActiveRelation_WhereNot
   include Wizard::HABTM_Subjects::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: Wizard::HABTM_Subjects)
@@ -270,30 +251,11 @@ class Wizard::HABTM_Subjects::ActiveRecord_Relation < ActiveRecord::Relation
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::HABTM_Subjects::ActiveRecord_Relation) }
   def extending(*args, &block); end
-
-  sig { params(conditions: T.untyped).returns(T::Boolean) }
-  def exists?(conditions = nil); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def any?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def many?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def none?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def one?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def empty?(*args); end
 end
 
 class Wizard::HABTM_Subjects::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
   include Wizard::HABTM_Subjects::ActiveRelation_WhereNot
   include Wizard::HABTM_Subjects::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: Wizard::HABTM_Subjects)
@@ -384,100 +346,10 @@ class Wizard::HABTM_Subjects::ActiveRecord_AssociationRelation < ActiveRecord::A
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::HABTM_Subjects::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { params(args: T.untyped).returns(Wizard::HABTM_Subjects) }
-  def find(*args); end
-
-  sig { params(args: T.untyped).returns(T.nilable(Wizard::HABTM_Subjects)) }
-  def find_by(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::HABTM_Subjects) }
-  def find_by!(*args); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Wizard::HABTM_Subjects).void)).returns(Wizard::HABTM_Subjects) }
-  def find_or_initialize_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Wizard::HABTM_Subjects).void)).returns(Wizard::HABTM_Subjects) }
-  def find_or_create_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Wizard::HABTM_Subjects).void)).returns(Wizard::HABTM_Subjects) }
-  def find_or_create_by!(attributes, &block); end
-
-  sig { returns(T.nilable(Wizard::HABTM_Subjects)) }
-  def first; end
-
-  sig { returns(Wizard::HABTM_Subjects) }
-  def first!; end
-
-  sig { returns(T.nilable(Wizard::HABTM_Subjects)) }
-  def second; end
-
-  sig { returns(Wizard::HABTM_Subjects) }
-  def second!; end
-
-  sig { returns(T.nilable(Wizard::HABTM_Subjects)) }
-  def third; end
-
-  sig { returns(Wizard::HABTM_Subjects) }
-  def third!; end
-
-  sig { returns(T.nilable(Wizard::HABTM_Subjects)) }
-  def third_to_last; end
-
-  sig { returns(Wizard::HABTM_Subjects) }
-  def third_to_last!; end
-
-  sig { returns(T.nilable(Wizard::HABTM_Subjects)) }
-  def second_to_last; end
-
-  sig { returns(Wizard::HABTM_Subjects) }
-  def second_to_last!; end
-
-  sig { returns(T.nilable(Wizard::HABTM_Subjects)) }
-  def last; end
-
-  sig { returns(Wizard::HABTM_Subjects) }
-  def last!; end
-
-  sig { params(conditions: T.untyped).returns(T::Boolean) }
-  def exists?(conditions = nil); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def any?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def many?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def none?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def one?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def empty?(*args); end
-
-  sig { override.params(block: T.proc.params(e: Wizard::HABTM_Subjects).void).returns(T::Array[Wizard::HABTM_Subjects]) }
-  def each(&block); end
-
-  sig { params(level: T.nilable(Integer)).returns(T::Array[Wizard::HABTM_Subjects]) }
-  def flatten(level); end
-
-  sig { returns(T::Array[Wizard::HABTM_Subjects]) }
-  def to_a; end
-
-  sig do
-    type_parameters(:U).params(
-        blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),
-    )
-    .returns(T::Array[T.type_parameter(:U)])
-  end
-  def map(&blk); end
 end
 
 class Wizard::HABTM_Subjects::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include Wizard::HABTM_Subjects::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: Wizard::HABTM_Subjects)
@@ -568,105 +440,4 @@ class Wizard::HABTM_Subjects::ActiveRecord_Associations_CollectionProxy < Active
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::HABTM_Subjects::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { params(args: T.untyped).returns(Wizard::HABTM_Subjects) }
-  def find(*args); end
-
-  sig { params(args: T.untyped).returns(T.nilable(Wizard::HABTM_Subjects)) }
-  def find_by(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::HABTM_Subjects) }
-  def find_by!(*args); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Wizard::HABTM_Subjects).void)).returns(Wizard::HABTM_Subjects) }
-  def find_or_initialize_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Wizard::HABTM_Subjects).void)).returns(Wizard::HABTM_Subjects) }
-  def find_or_create_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Wizard::HABTM_Subjects).void)).returns(Wizard::HABTM_Subjects) }
-  def find_or_create_by!(attributes, &block); end
-
-  sig { returns(T.nilable(Wizard::HABTM_Subjects)) }
-  def first; end
-
-  sig { returns(Wizard::HABTM_Subjects) }
-  def first!; end
-
-  sig { returns(T.nilable(Wizard::HABTM_Subjects)) }
-  def second; end
-
-  sig { returns(Wizard::HABTM_Subjects) }
-  def second!; end
-
-  sig { returns(T.nilable(Wizard::HABTM_Subjects)) }
-  def third; end
-
-  sig { returns(Wizard::HABTM_Subjects) }
-  def third!; end
-
-  sig { returns(T.nilable(Wizard::HABTM_Subjects)) }
-  def third_to_last; end
-
-  sig { returns(Wizard::HABTM_Subjects) }
-  def third_to_last!; end
-
-  sig { returns(T.nilable(Wizard::HABTM_Subjects)) }
-  def second_to_last; end
-
-  sig { returns(Wizard::HABTM_Subjects) }
-  def second_to_last!; end
-
-  sig { returns(T.nilable(Wizard::HABTM_Subjects)) }
-  def last; end
-
-  sig { returns(Wizard::HABTM_Subjects) }
-  def last!; end
-
-  sig { params(conditions: T.untyped).returns(T::Boolean) }
-  def exists?(conditions = nil); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def any?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def many?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def none?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def one?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def empty?(*args); end
-
-  sig { override.params(block: T.proc.params(e: Wizard::HABTM_Subjects).void).returns(T::Array[Wizard::HABTM_Subjects]) }
-  def each(&block); end
-
-  sig { params(level: T.nilable(Integer)).returns(T::Array[Wizard::HABTM_Subjects]) }
-  def flatten(level); end
-
-  sig { returns(T::Array[Wizard::HABTM_Subjects]) }
-  def to_a; end
-
-  sig do
-    type_parameters(:U).params(
-        blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),
-    )
-    .returns(T::Array[T.type_parameter(:U)])
-  end
-  def map(&blk); end
-
-  sig { params(records: T.any(Wizard::HABTM_Subjects, T::Array[Wizard::HABTM_Subjects])).returns(T.self_type) }
-  def <<(*records); end
-
-  sig { params(records: T.any(Wizard::HABTM_Subjects, T::Array[Wizard::HABTM_Subjects])).returns(T.self_type) }
-  def append(*records); end
-
-  sig { params(records: T.any(Wizard::HABTM_Subjects, T::Array[Wizard::HABTM_Subjects])).returns(T.self_type) }
-  def push(*records); end
-
-  sig { params(records: T.any(Wizard::HABTM_Subjects, T::Array[Wizard::HABTM_Subjects])).returns(T.self_type) }
-  def concat(*records); end
 end

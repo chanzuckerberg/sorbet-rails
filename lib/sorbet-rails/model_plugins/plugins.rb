@@ -6,9 +6,7 @@ require('sorbet-rails/model_plugins/active_relation_where_not')
 require('sorbet-rails/model_plugins/active_record_named_scope')
 require('sorbet-rails/model_plugins/active_record_attribute')
 require('sorbet-rails/model_plugins/active_record_assoc')
-require('sorbet-rails/model_plugins/active_record_finder_methods')
 require('sorbet-rails/model_plugins/custom_finder_methods')
-require('sorbet-rails/model_plugins/enumerable_collections')
 require('sorbet-rails/model_plugins/active_storage_methods')
 
 module SorbetRails::ModelPlugins
@@ -52,12 +50,8 @@ module SorbetRails::ModelPlugins
       ActiveRecordAttribute
     when :active_record_assoc
       ActiveRecordAssoc
-    when :active_record_finder_methods
-      ActiveRecordFinderMethods
     when :custom_finder_methods
       CustomFinderMethods
-    when :enumerable_collections
-      EnumerableCollections
     when :active_storage_methods
       ActiveStorageMethods
     when :kaminari

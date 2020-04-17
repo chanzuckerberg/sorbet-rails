@@ -150,30 +150,11 @@ class Robe < ApplicationRecord
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Robe::ActiveRecord_Relation) }
   def self.extending(*args, &block); end
-
-  sig { params(conditions: T.untyped).returns(T::Boolean) }
-  def self.exists?(conditions = nil); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def self.any?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def self.many?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def self.none?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def self.one?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def self.empty?(*args); end
 end
 
 class Robe::ActiveRecord_Relation < ActiveRecord::Relation
   include Robe::ActiveRelation_WhereNot
   include Robe::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: Robe)
@@ -264,30 +245,11 @@ class Robe::ActiveRecord_Relation < ActiveRecord::Relation
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Robe::ActiveRecord_Relation) }
   def extending(*args, &block); end
-
-  sig { params(conditions: T.untyped).returns(T::Boolean) }
-  def exists?(conditions = nil); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def any?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def many?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def none?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def one?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def empty?(*args); end
 end
 
 class Robe::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
   include Robe::ActiveRelation_WhereNot
   include Robe::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: Robe)
@@ -378,100 +340,10 @@ class Robe::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Robe::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { params(args: T.untyped).returns(Robe) }
-  def find(*args); end
-
-  sig { params(args: T.untyped).returns(T.nilable(Robe)) }
-  def find_by(*args); end
-
-  sig { params(args: T.untyped).returns(Robe) }
-  def find_by!(*args); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Robe).void)).returns(Robe) }
-  def find_or_initialize_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Robe).void)).returns(Robe) }
-  def find_or_create_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Robe).void)).returns(Robe) }
-  def find_or_create_by!(attributes, &block); end
-
-  sig { returns(T.nilable(Robe)) }
-  def first; end
-
-  sig { returns(Robe) }
-  def first!; end
-
-  sig { returns(T.nilable(Robe)) }
-  def second; end
-
-  sig { returns(Robe) }
-  def second!; end
-
-  sig { returns(T.nilable(Robe)) }
-  def third; end
-
-  sig { returns(Robe) }
-  def third!; end
-
-  sig { returns(T.nilable(Robe)) }
-  def third_to_last; end
-
-  sig { returns(Robe) }
-  def third_to_last!; end
-
-  sig { returns(T.nilable(Robe)) }
-  def second_to_last; end
-
-  sig { returns(Robe) }
-  def second_to_last!; end
-
-  sig { returns(T.nilable(Robe)) }
-  def last; end
-
-  sig { returns(Robe) }
-  def last!; end
-
-  sig { params(conditions: T.untyped).returns(T::Boolean) }
-  def exists?(conditions = nil); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def any?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def many?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def none?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def one?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def empty?(*args); end
-
-  sig { override.params(block: T.proc.params(e: Robe).void).returns(T::Array[Robe]) }
-  def each(&block); end
-
-  sig { params(level: T.nilable(Integer)).returns(T::Array[Robe]) }
-  def flatten(level); end
-
-  sig { returns(T::Array[Robe]) }
-  def to_a; end
-
-  sig do
-    type_parameters(:U).params(
-        blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),
-    )
-    .returns(T::Array[T.type_parameter(:U)])
-  end
-  def map(&blk); end
 end
 
 class Robe::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include Robe::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: Robe)
@@ -562,105 +434,4 @@ class Robe::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associatio
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Robe::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { params(args: T.untyped).returns(Robe) }
-  def find(*args); end
-
-  sig { params(args: T.untyped).returns(T.nilable(Robe)) }
-  def find_by(*args); end
-
-  sig { params(args: T.untyped).returns(Robe) }
-  def find_by!(*args); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Robe).void)).returns(Robe) }
-  def find_or_initialize_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Robe).void)).returns(Robe) }
-  def find_or_create_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Robe).void)).returns(Robe) }
-  def find_or_create_by!(attributes, &block); end
-
-  sig { returns(T.nilable(Robe)) }
-  def first; end
-
-  sig { returns(Robe) }
-  def first!; end
-
-  sig { returns(T.nilable(Robe)) }
-  def second; end
-
-  sig { returns(Robe) }
-  def second!; end
-
-  sig { returns(T.nilable(Robe)) }
-  def third; end
-
-  sig { returns(Robe) }
-  def third!; end
-
-  sig { returns(T.nilable(Robe)) }
-  def third_to_last; end
-
-  sig { returns(Robe) }
-  def third_to_last!; end
-
-  sig { returns(T.nilable(Robe)) }
-  def second_to_last; end
-
-  sig { returns(Robe) }
-  def second_to_last!; end
-
-  sig { returns(T.nilable(Robe)) }
-  def last; end
-
-  sig { returns(Robe) }
-  def last!; end
-
-  sig { params(conditions: T.untyped).returns(T::Boolean) }
-  def exists?(conditions = nil); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def any?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def many?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def none?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def one?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def empty?(*args); end
-
-  sig { override.params(block: T.proc.params(e: Robe).void).returns(T::Array[Robe]) }
-  def each(&block); end
-
-  sig { params(level: T.nilable(Integer)).returns(T::Array[Robe]) }
-  def flatten(level); end
-
-  sig { returns(T::Array[Robe]) }
-  def to_a; end
-
-  sig do
-    type_parameters(:U).params(
-        blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),
-    )
-    .returns(T::Array[T.type_parameter(:U)])
-  end
-  def map(&blk); end
-
-  sig { params(records: T.any(Robe, T::Array[Robe])).returns(T.self_type) }
-  def <<(*records); end
-
-  sig { params(records: T.any(Robe, T::Array[Robe])).returns(T.self_type) }
-  def append(*records); end
-
-  sig { params(records: T.any(Robe, T::Array[Robe])).returns(T.self_type) }
-  def push(*records); end
-
-  sig { params(records: T.any(Robe, T::Array[Robe])).returns(T.self_type) }
-  def concat(*records); end
 end
