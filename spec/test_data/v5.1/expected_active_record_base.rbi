@@ -56,17 +56,17 @@ class ActiveRecord::Base
   sig { returns(T.attached_class) }
   def self.last!; end
 
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: T.attached_class).void)).returns(T.attached_class) }
-  def self.new(attributes = nil, &block); end
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: T.attached_class).void)).returns(T.attached_class) }
+  def self.new(*args, &block); end
 
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: T.attached_class).void)).returns(T.attached_class) }
-  def self.build(attributes = nil, &block); end
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: T.attached_class).void)).returns(T.attached_class) }
+  def self.build(*args, &block); end
 
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: T.attached_class).void)).returns(T.attached_class) }
-  def self.create(attributes = nil, &block); end
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: T.attached_class).void)).returns(T.attached_class) }
+  def self.create(*args, &block); end
 
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: T.attached_class).void)).returns(T.attached_class) }
-  def self.create!(attributes = nil, &block); end
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: T.attached_class).void)).returns(T.attached_class) }
+  def self.create!(*args, &block); end
 
   sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: T.attached_class).void)).returns(T.attached_class) }
   def self.first_or_create(attributes = nil, &block); end

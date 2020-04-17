@@ -56,17 +56,17 @@ class ActiveRecord::Base
   sig { returns(T.attached_class) }
   def self.last!; end
 
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: T.attached_class).void)).returns(T.attached_class) }
-  def self.new(attributes = nil, &block); end
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: T.attached_class).void)).returns(T.attached_class) }
+  def self.new(*args, &block); end
 
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: T.attached_class).void)).returns(T.attached_class) }
-  def self.build(attributes = nil, &block); end
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: T.attached_class).void)).returns(T.attached_class) }
+  def self.build(*args, &block); end
 
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: T.attached_class).void)).returns(T.attached_class) }
-  def self.create(attributes = nil, &block); end
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: T.attached_class).void)).returns(T.attached_class) }
+  def self.create(*args, &block); end
 
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: T.attached_class).void)).returns(T.attached_class) }
-  def self.create!(attributes = nil, &block); end
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: T.attached_class).void)).returns(T.attached_class) }
+  def self.create!(*args, &block); end
 
   sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: T.attached_class).void)).returns(T.attached_class) }
   def self.first_or_create(attributes = nil, &block); end
@@ -99,8 +99,8 @@ class ActiveRecord::Base
   end
   def self.find_in_batches(start: nil, finish: nil, batch_size: 1000, error_on_ignore: nil, &block); end
 
-  sig { returns(T::Array[T.attached_class]) }
-  def self.destroy_all; end
+  sig { params(conditions: T.untyped).returns(T::Array[T.attached_class]) }
+  def self.destroy_all(conditions = nil); end
 
   sig { params(args: T.untyped).returns(T::Array[T.untyped]) }
   def self.ids(*args); end
@@ -144,6 +144,6 @@ class ActiveRecord::Base
   sig { params(updates: T.untyped).returns(Integer) }
   def self.update_all(updates); end
 
-  sig { returns(Integer) }
-  def self.delete_all; end
+  sig { params(conditions: T.untyped).returns(Integer) }
+  def self.delete_all(conditions = nil); end
 end

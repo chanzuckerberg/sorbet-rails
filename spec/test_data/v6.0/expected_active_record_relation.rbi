@@ -217,6 +217,12 @@ class ActiveRecord::Associations::CollectionProxy < ActiveRecord::Relation
   sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Elem).void)).returns(Elem) }
   def create!(attributes = nil, &block); end
 
+  sig { returns(T::Boolean) }
+  def any?; end
+
+  sig { returns(T::Boolean) }
+  def many?; end
+
   sig { params(args: T.untyped).returns(Elem) }
   def find(*args); end
 
@@ -234,4 +240,7 @@ class ActiveRecord::Associations::CollectionProxy < ActiveRecord::Relation
 
   sig { params(args: T.untyped).returns(T::Array[T.untyped]) }
   def pluck(*args); end
+
+  sig { returns(T::Array[Elem]) }
+  def to_a; end
 end

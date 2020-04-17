@@ -62,7 +62,6 @@ class SorbetRails::ActiveRecordRbiFormatter
         "to_a",
         return_type: "T::Array[Elem]",
       )
-
       class_rbi.create_method(
         "map",
         type_parameters: [:U],
@@ -140,6 +139,11 @@ class SorbetRails::ActiveRecordRbiFormatter
         )
       end
 
+      boolean_methods = %w(any? many?)
+      boolean_methods.each do |boolean_method|
+        class_rbi.create_method(boolean_method, return_type: "T::Boolean")
+      end
+
       class_rbi.create_method(
         "find",
         parameters: [ Parameter.new("*args", type: "T.untyped") ],
@@ -150,13 +154,17 @@ class SorbetRails::ActiveRecordRbiFormatter
       class_rbi.create_method('size', return_type: "Integer")
       class_rbi.create_method(
         "last",
-        parameters: [ Parameter.new("limit", type: "T.untyped", default: "nil") ],
+        parameters: Rails.version =~ /^5\.0/ ? [Parameter.new("*args", type: "T.untyped")] : [Parameter.new("limit", type: "T.untyped", default: "nil")],
         return_type: "T.nilable(Elem)",
       )
       class_rbi.create_method(
         "pluck",
         parameters: [ Parameter.new("*args", type: "T.untyped") ],
         return_type: "T::Array[T.untyped]",
+      )
+      class_rbi.create_method(
+        "to_a",
+        return_type: "T::Array[Elem]",
       )
     end
 
@@ -208,10 +216,18 @@ class SorbetRails::ActiveRecordRbiFormatter
 
     build_methods = %w(new build create create! first_or_create first_or_create! first_or_initialize)
     build_methods.each do |build_method|
+      # This needs to match the generated method signature in activerecord.rbi and
+      # in Rails 5.0 and 5.1 the param was a splat and th
+      if Rails.version =~ /^5\.(0|1)/ && %w(new build create create!).include?(build_method)
+        param = Parameter.new("*args", type: "T.untyped")
+      elsif
+        param = Parameter.new("attributes", type: "T.untyped", default: 'nil')
+      end
+
       class_rbi.create_method(
         build_method,
         parameters: [
-          Parameter.new("attributes", type: "T.untyped", default: 'nil'),
+          param,
           Parameter.new(
             "&block",
             type: "T.nilable(T.proc.params(object: #{type}).void)",
@@ -243,6 +259,7 @@ class SorbetRails::ActiveRecordRbiFormatter
 
     class_rbi.create_method(
       "destroy_all",
+      parameters: Rails.version =~ /^5\.0/ ? [Parameter.new("conditions", type: "T.untyped", default: "nil")] : nil,
       return_type: "T::Array[#{type}]",
       class_method: class_method,
     )
@@ -295,6 +312,11 @@ class SorbetRails::ActiveRecordRbiFormatter
       return_type: "Integer",
       class_method: class_method,
     )
-    class_rbi.create_method("delete_all", return_type: "Integer", class_method: class_method)
+    class_rbi.create_method(
+      "delete_all",
+      parameters: Rails.version =~ /^5\.0/ ? [Parameter.new("conditions", type: "T.untyped", default: "nil")] : nil,
+      return_type: "Integer",
+      class_method: class_method,
+    )
   end
 end

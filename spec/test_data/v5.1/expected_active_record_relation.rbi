@@ -58,17 +58,17 @@ class ActiveRecord::Relation
   sig { returns(Elem) }
   def last!; end
 
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Elem).void)).returns(Elem) }
-  def new(attributes = nil, &block); end
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: Elem).void)).returns(Elem) }
+  def new(*args, &block); end
 
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Elem).void)).returns(Elem) }
-  def build(attributes = nil, &block); end
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: Elem).void)).returns(Elem) }
+  def build(*args, &block); end
 
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Elem).void)).returns(Elem) }
-  def create(attributes = nil, &block); end
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: Elem).void)).returns(Elem) }
+  def create(*args, &block); end
 
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Elem).void)).returns(Elem) }
-  def create!(attributes = nil, &block); end
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: Elem).void)).returns(Elem) }
+  def create!(*args, &block); end
 
   sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Elem).void)).returns(Elem) }
   def first_or_create(attributes = nil, &block); end
@@ -217,6 +217,12 @@ class ActiveRecord::Associations::CollectionProxy < ActiveRecord::Relation
   sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Elem).void)).returns(Elem) }
   def create!(attributes = nil, &block); end
 
+  sig { returns(T::Boolean) }
+  def any?; end
+
+  sig { returns(T::Boolean) }
+  def many?; end
+
   sig { params(args: T.untyped).returns(Elem) }
   def find(*args); end
 
@@ -234,4 +240,7 @@ class ActiveRecord::Associations::CollectionProxy < ActiveRecord::Relation
 
   sig { params(args: T.untyped).returns(T::Array[T.untyped]) }
   def pluck(*args); end
+
+  sig { returns(T::Array[Elem]) }
+  def to_a; end
 end
