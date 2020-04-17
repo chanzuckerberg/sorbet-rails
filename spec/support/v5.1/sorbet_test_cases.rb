@@ -80,6 +80,7 @@ T.assert_type!(Wizard.all.find_by_id!(wizard.id), Wizard)
 # Finder methods -- CollectionProxy
 spell_book = wizard.spell_books.first!
 spell_books = wizard.spell_books
+T.assert_type!(spell_books.new, SpellBook)
 T.assert_type!(spell_books.exists?(name: 'Fantastic Beasts'), T::Boolean)
 T.assert_type!(spell_books.find(spell_book.id), SpellBook)
 T.assert_type!(spell_books.first!, SpellBook)
@@ -99,9 +100,11 @@ T.assert_type!(spell_books.eager_load(:wizard), SpellBook::ActiveRecord_Associat
 T.assert_type!(spell_books.order(:id), SpellBook::ActiveRecord_AssociationRelation)
 T.assert_type!(spell_books.where.not(id: 1), SpellBook::ActiveRecord_AssociationRelation)
 T.assert_type!(spell_books.biology, SpellBook::ActiveRecord_AssociationRelation)
+T.assert_type!(spell_books << [spell_book], SpellBook::ActiveRecord_Associations_CollectionProxy)
 
 # finder methods -- AssociationRelation
 spell_books_query = spell_books.where(id: 1)
+T.assert_type!(spell_books_query.new, SpellBook)
 T.assert_type!(spell_books_query.exists?(name: 'Fantastic Beasts'), T::Boolean)
 T.assert_type!(spell_books_query.find(spell_book.id), SpellBook)
 T.assert_type!(spell_books_query.first!, SpellBook)
