@@ -12,8 +12,9 @@ class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugi
     sig { returns(String) }
     def to_s
       type = base_type.to_s
-      type = "T.nilable(#{type})" if nilable
+      # A nullable array column should be T.nilable(T::Array[column_type]) not T::Array[T.nilable(column_type)]
       type = "T::Array[#{type}]" if array_type
+      type = "T.nilable(#{type})" if nilable
       type
     end
   end
@@ -146,6 +147,11 @@ class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugi
       ActiveRecord::Base.connection.lookup_cast_type_from_column(column_def) :
       column_def.cast_type
 
+    array_type = false
+    if column_def.try(:array?)
+      cast_type = cast_type.subtype if cast_type.try(:subtype)
+      array_type = true
+    end
     strict_type =
       active_record_type_to_sorbet_type(
         cast_type,
@@ -155,7 +161,7 @@ class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugi
     ColumnType.new(
       base_type: strict_type,
       nilable: nilable_column?(column_def),
-      array_type: column_def.try(:array?),
+      array_type: array_type,
     )
   end
 
