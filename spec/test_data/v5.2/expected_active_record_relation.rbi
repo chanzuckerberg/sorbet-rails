@@ -58,13 +58,13 @@ class ActiveRecord::Relation
   sig { returns(Elem) }
   def last!; end
 
-  sig { params(attributes: T.untyped, block: T.untyped).returns(Elem) }
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Elem).void)).returns(Elem) }
   def create(attributes = nil, &block); end
 
-  sig { params(attributes: T.untyped, block: T.untyped).returns(Elem) }
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Elem).void)).returns(Elem) }
   def create!(attributes = nil, &block); end
 
-  sig { params(attributes: T.untyped, block: T.untyped).returns(Elem) }
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Elem).void)).returns(Elem) }
   def new(attributes = nil, &block); end
 
   sig do

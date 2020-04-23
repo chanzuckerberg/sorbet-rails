@@ -56,13 +56,13 @@ class ActiveRecord::Base
   sig { returns(T.attached_class) }
   def self.last!; end
 
-  sig { params(attributes: T.untyped, block: T.untyped).returns(T.attached_class) }
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: T.attached_class).void)).returns(T.attached_class) }
   def self.create(attributes = nil, &block); end
 
-  sig { params(attributes: T.untyped, block: T.untyped).returns(T.attached_class) }
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: T.attached_class).void)).returns(T.attached_class) }
   def self.create!(attributes = nil, &block); end
 
-  sig { params(attributes: T.untyped, block: T.untyped).returns(T.attached_class) }
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: T.attached_class).void)).returns(T.attached_class) }
   def self.new(attributes = nil, &block); end
 
   sig do

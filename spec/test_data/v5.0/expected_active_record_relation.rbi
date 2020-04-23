@@ -58,14 +58,14 @@ class ActiveRecord::Relation
   sig { returns(Elem) }
   def last!; end
 
-  sig { params(attributes: T.untyped, block: T.untyped).returns(Elem) }
-  def create(attributes = nil, &block); end
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: Elem).void)).returns(Elem) }
+  def create(*args, &block); end
 
-  sig { params(attributes: T.untyped, block: T.untyped).returns(Elem) }
-  def create!(attributes = nil, &block); end
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: Elem).void)).returns(Elem) }
+  def create!(*args, &block); end
 
-  sig { params(attributes: T.untyped, block: T.untyped).returns(Elem) }
-  def new(attributes = nil, &block); end
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: Elem).void)).returns(Elem) }
+  def new(*args, &block); end
 
   sig do
     override.params(
