@@ -18,7 +18,7 @@ class SorbetRails::ActiveRecordRbiFormatter
     ])
 
     parlour.root.create_class('ActiveRecord::Base') do |class_rbi|
-      create_finder_methods(class_rbi, type: 'T.attached_class', class_method: true)
+      create_elem_specific_query_methods(class_rbi, type: 'T.attached_class', class_method: true)
     end
 
     parlour.rbi
@@ -41,7 +41,7 @@ class SorbetRails::ActiveRecordRbiFormatter
         value: "type_member(fixed: T.untyped)",
       )
 
-      create_finder_methods(class_rbi, type: 'Elem', class_method: false)
+      create_elem_specific_query_methods(class_rbi, type: 'Elem', class_method: false)
 
       class_rbi.create_method(
         "each",
@@ -91,7 +91,7 @@ class SorbetRails::ActiveRecordRbiFormatter
       class_method: T::Boolean,
     ).void
   }
-  def create_finder_methods(class_rbi, type:, class_method:)
+  def create_elem_specific_query_methods(class_rbi, type:, class_method:)
     finder_methods = %w(find find_by find_by!)
     finder_methods.each do |finder_method|
       class_rbi.create_method(
@@ -129,9 +129,6 @@ class SorbetRails::ActiveRecordRbiFormatter
 
     build_methods = %w(create create! new)
     build_methods.each do |build_method|
-      # This should be defined on both but trying to keep the diff small in this commit
-      next unless class_method
-
       class_rbi.create_method(
         build_method,
         parameters: [
@@ -147,8 +144,7 @@ class SorbetRails::ActiveRecordRbiFormatter
       )
     end
 
-    # batch_methods = %w(find_each find_in_batches)
-    batch_methods = %w(find_each)
+    batch_methods = %w(find_each find_in_batches)
     batch_methods.each do |batch_method|
       inner_type = batch_method == 'find_each' ? type : "T::Array[#{type}]"
 
@@ -161,7 +157,7 @@ class SorbetRails::ActiveRecordRbiFormatter
           Parameter.new("error_on_ignore:", type: "T.nilable(T::Boolean)", default: "nil"),
           Parameter.new("&block", type: "T.nilable(T.proc.params(e: #{inner_type}).void)"),
         ],
-        return_type: "T::Array[#{inner_type}]",
+        return_type: "T::Enumerator[#{inner_type}]",
         class_method: class_method,
         override: true,
       )

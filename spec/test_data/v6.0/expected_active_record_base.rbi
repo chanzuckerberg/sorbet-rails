@@ -72,7 +72,18 @@ class ActiveRecord::Base
       batch_size: T.nilable(Integer),
       error_on_ignore: T.nilable(T::Boolean),
       block: T.nilable(T.proc.params(e: T.attached_class).void)
-    ).returns(T::Array[T.attached_class])
+    ).returns(T::Enumerator[T.attached_class])
   end
   def self.find_each(start: nil, finish: nil, batch_size: 1000, error_on_ignore: nil, &block); end
+
+  sig do
+    override.params(
+      start: T.nilable(Integer),
+      finish: T.nilable(Integer),
+      batch_size: T.nilable(Integer),
+      error_on_ignore: T.nilable(T::Boolean),
+      block: T.nilable(T.proc.params(e: T::Array[T.attached_class]).void)
+    ).returns(T::Enumerator[T::Array[T.attached_class]])
+  end
+  def self.find_in_batches(start: nil, finish: nil, batch_size: 1000, error_on_ignore: nil, &block); end
 end
