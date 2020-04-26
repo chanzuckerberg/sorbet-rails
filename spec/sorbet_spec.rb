@@ -49,6 +49,11 @@ RSpec.describe 'sorbet' do
       puts "================================="
     end
 
+    # Ensure sorbet_test_cases.rb is set to `typed: true` since srb init may
+    # set it to false.
+    sorbet_test_cases_path = Rails.root.join('sorbet_test_cases.rb')
+    File.write(sorbet_test_cases_path, File.read(sorbet_test_cases_path).gsub(/^# typed: \w+$/, "# typed: true"))
+
     # run sorbet-rails rake tasks
     Rake::Task['rails_rbi:all'].invoke
 
@@ -68,7 +73,7 @@ RSpec.describe 'sorbet' do
 
   it 'returns expected sorbet tc result' do
     stdout, stderr, status = Open3.capture3(
-      'bundle', 'exec', 'srb', 'tc', '--typed-override=typed-override.yaml',
+      'bundle', 'exec', 'srb', 'tc',
       chdir: Rails.root.to_path,
     )
     expected_file_path = 'expected_srb_tc_output.txt'

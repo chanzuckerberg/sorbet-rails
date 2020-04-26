@@ -1,4 +1,4 @@
-# typed: false
+# typed: true
 require 'sorbet-runtime'
 
 wand = Wand.first!
