@@ -127,13 +127,16 @@ class SorbetRails::ActiveRecordRbiFormatter
       )
     end
 
-    build_methods = %w(create create! new)
+    build_methods = %w(create create! new build first_or_create first_or_create! first_or_initialize)
     build_methods.each do |build_method|
+      # `build` method doesn't exist on the model, only on the relations
+      next if build_method == 'build' && class_method
+
       # This needs to match the generated method signature in activerecord.rbi and
       # in Rails 5.0 and 5.1 the param is a splat.
       if Rails.version =~ /^5\.(0|1)/ && %w(new build create create!).include?(build_method)
         param = Parameter.new("*args", type: "T.untyped")
-      elsif
+      else
         param = Parameter.new("attributes", type: "T.untyped", default: 'nil')
       end
 

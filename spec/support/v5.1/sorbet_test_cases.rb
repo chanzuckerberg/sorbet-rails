@@ -68,9 +68,9 @@ T.assert_type!(Wizard.find_or_create_by!(name: 'Harry Potter') { |w| T.assert_ty
 T.assert_type!(Wizard.new { |w| T.assert_type!(w, Wizard) }, Wizard)
 T.assert_type!(Wizard.create(name: 'Harry Potter') { |w| T.assert_type!(w, Wizard) }, Wizard)
 T.assert_type!(Wizard.create!(name: 'Harry Potter') { |w| T.assert_type!(w, Wizard) }, Wizard)
-# T.assert_type!(Wizard.first_or_create(name: 'Harry Potter') { |w| T.assert_type!(w, Wizard) }, Wizard) # Ignored until we add support
-# T.assert_type!(Wizard.first_or_create!(name: 'Harry Potter') { |w| T.assert_type!(w, Wizard) }, Wizard) # Ignored until we add support
-# T.assert_type!(Wizard.first_or_initialize { |w| T.assert_type!(w, Wizard) }, Wizard) # Ignored until we add support
+T.assert_type!(Wizard.first_or_create(name: 'Harry Potter') { |w| T.assert_type!(w, Wizard) }, Wizard)
+T.assert_type!(Wizard.first_or_create!(name: 'Harry Potter') { |w| T.assert_type!(w, Wizard) }, Wizard)
+T.assert_type!(Wizard.first_or_initialize { |w| T.assert_type!(w, Wizard) }, Wizard)
 Wizard.find_each { |w| T.assert_type!(w, Wizard) }
 T.assert_type!(Wizard.find_each, T::Enumerator[Wizard])
 Wizard.find_in_batches { |w| T.assert_type!(w, T::Array[Wizard]) }
@@ -100,12 +100,12 @@ T.assert_type!(Wizard.all.find_or_initialize_by(name: 'Harry Potter') { |w| T.as
 T.assert_type!(Wizard.all.find_or_create_by(name: 'Harry Potter') { |w| T.assert_type!(w, Wizard) }, Wizard)
 T.assert_type!(Wizard.all.find_or_create_by!(name: 'Harry Potter') { |w| T.assert_type!(w, Wizard) }, Wizard)
 T.assert_type!(Wizard.all.new { |w| T.assert_type!(w, Wizard) }, Wizard)
-# T.assert_type!(Wizard.all.build { |w| T.assert_type!(w, Wizard) }, Wizard) # Ignored until we add support
+T.assert_type!(Wizard.all.build { |w| T.assert_type!(w, Wizard) }, Wizard)
 T.assert_type!(Wizard.all.create(name: 'Harry Potter') { |w| T.assert_type!(w, Wizard) }, Wizard)
 T.assert_type!(Wizard.all.create!(name: 'Harry Potter') { |w| T.assert_type!(w, Wizard) }, Wizard)
-# T.assert_type!(Wizard.all.first_or_create(name: 'Harry Potter') { |w| T.assert_type!(w, Wizard) }, Wizard) # Ignored until we add support
-# T.assert_type!(Wizard.all.first_or_create!(name: 'Harry Potter') { |w| T.assert_type!(w, Wizard) }, Wizard) # Ignored until we add support
-# T.assert_type!(Wizard.all.first_or_initialize { |w| T.assert_type!(w, Wizard) }, Wizard) # Ignored until we add support
+T.assert_type!(Wizard.all.first_or_create(name: 'Harry Potter') { |w| T.assert_type!(w, Wizard) }, Wizard)
+T.assert_type!(Wizard.all.first_or_create!(name: 'Harry Potter') { |w| T.assert_type!(w, Wizard) }, Wizard)
+T.assert_type!(Wizard.all.first_or_initialize { |w| T.assert_type!(w, Wizard) }, Wizard)
 Wizard.all.find_each { |w| T.assert_type!(w, Wizard) }
 T.assert_type!(Wizard.all.find_each, T::Enumerator[Wizard])
 Wizard.all.find_in_batches { |w| T.assert_type!(w, T::Array[Wizard]) }
