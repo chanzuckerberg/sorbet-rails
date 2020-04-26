@@ -141,13 +141,13 @@ T.assert_type!(spell_books.find_by_id!(spell_book.id), SpellBook)
 T.assert_type!(spell_books.find_or_initialize_by(name: 'Fantastic Beasts') { |s| T.assert_type!(s, SpellBook) }, SpellBook)
 T.assert_type!(spell_books.find_or_create_by(name: 'Fantastic Beasts') { |s| T.assert_type!(s, SpellBook) }, SpellBook)
 T.assert_type!(spell_books.find_or_create_by!(name: 'Fantastic Beasts') { |s| T.assert_type!(s, SpellBook) }, SpellBook)
-# T.assert_type!(spell_books.new { |s| T.assert_type!(s, SpellBook) }, SpellBook) # Ignored until we add support
-# T.assert_type!(spell_books.build { |s| T.assert_type!(s, SpellBook) }, SpellBook) # Ignored until we add support # Ignored until we add support
-# T.assert_type!(spell_books.create(name: 'Fantastic Beasts') { |s| T.assert_type!(s, SpellBook) }, SpellBook) # Ignored until we add support
-# T.assert_type!(spell_books.create!(name: 'Fantastic Beasts') { |s| T.assert_type!(s, SpellBook) }, SpellBook) # Ignored until we add support
-# T.assert_type!(spell_books.first_or_create(name: 'Fantastic Beasts') { |s| T.assert_type!(s, SpellBook) }, SpellBook) # Ignored until we add support
-# T.assert_type!(spell_books.first_or_create!(name: 'Fantastic Beasts') { |s| T.assert_type!(s, SpellBook) }, SpellBook) # Ignored until we add support
-# T.assert_type!(spell_books.first_or_initialize { |s| T.assert_type!(s, SpellBook) }, SpellBook) # Ignored until we add support
+T.assert_type!(spell_books.new { |s| T.assert_type!(s, SpellBook) }, SpellBook)
+T.assert_type!(spell_books.build { |s| T.assert_type!(s, SpellBook) }, SpellBook)
+T.assert_type!(spell_books.create(name: 'Fantastic Beasts') { |s| T.assert_type!(s, SpellBook) }, SpellBook)
+T.assert_type!(spell_books.create!(name: 'Fantastic Beasts') { |s| T.assert_type!(s, SpellBook) }, SpellBook)
+T.assert_type!(spell_books.first_or_create(name: 'Fantastic Beasts') { |s| T.assert_type!(s, SpellBook) }, SpellBook)
+T.assert_type!(spell_books.first_or_create!(name: 'Fantastic Beasts') { |s| T.assert_type!(s, SpellBook) }, SpellBook)
+T.assert_type!(spell_books.first_or_initialize { |s| T.assert_type!(s, SpellBook) }, SpellBook)
 # spell_books.find_each { |s| T.assert_type!(s, SpellBook) } # TODO: Handle for Rails 6
 # T.assert_type!(spell_books.find_each, T::Enumerator[SpellBook]) # TODO: Handle for Rails 6
 # spell_books.find_in_batches { |s| T.assert_type!(s, T::Array[SpellBook]) } # TODO: Handle for Rails 6
