@@ -19,6 +19,7 @@ class SorbetRails::ActiveRecordRbiFormatter
 
     parlour.root.create_class('ActiveRecord::Base') do |class_rbi|
       create_elem_specific_query_methods(class_rbi, type: 'T.attached_class', class_method: true)
+      create_general_query_methods(class_rbi, class_method: true)
     end
 
     parlour.rbi
@@ -42,6 +43,7 @@ class SorbetRails::ActiveRecordRbiFormatter
       )
 
       create_elem_specific_query_methods(class_rbi, type: 'Elem', class_method: false)
+      create_general_query_methods(class_rbi, class_method: false)
 
       class_rbi.create_method(
         "each",
@@ -69,16 +71,7 @@ class SorbetRails::ActiveRecordRbiFormatter
         return_type: "T::Array[T.type_parameter(:U)]",
       )
 
-      class_rbi.create_method(
-        "exists?",
-        parameters: [ Parameter.new("conditions", type: "T.untyped", default: "nil") ],
-        return_type: "T::Boolean",
-      )
-      class_rbi.create_method('any?', return_type: "T::Boolean")
       class_rbi.create_method('empty?', return_type: "T::Boolean")
-      class_rbi.create_method('many?', return_type: "T::Boolean")
-      class_rbi.create_method('none?', return_type: "T::Boolean")
-      class_rbi.create_method('one?', return_type: "T::Boolean")
     end
 
     parlour.root.create_class("ActiveRecord::AssociationRelation", superclass: "ActiveRecord::Relation") do |class_rbi|
@@ -151,6 +144,11 @@ class SorbetRails::ActiveRecordRbiFormatter
             return_type: "T.nilable(Elem)",
           )
         end
+
+        boolean_methods = %w(any? many?)
+        boolean_methods.each do |boolean_method|
+          class_rbi.create_method(boolean_method, return_type: "T::Boolean")
+        end
       else
         class_rbi.create_method(
           "last",
@@ -158,6 +156,8 @@ class SorbetRails::ActiveRecordRbiFormatter
           return_type: "T.nilable(Elem)",
         )
       end
+
+      class_rbi.create_method('empty?', return_type: "T::Boolean")
     end
 
     parlour.rbi
@@ -249,6 +249,30 @@ class SorbetRails::ActiveRecordRbiFormatter
         return_type: "T::Enumerator[#{inner_type}]",
         class_method: class_method,
         override: true,
+      )
+    end
+  end
+
+  sig {
+    params(
+      class_rbi: Parlour::RbiGenerator::Namespace,
+      class_method: T::Boolean,
+    ).void
+  }
+  def create_general_query_methods(class_rbi, class_method:)
+    class_rbi.create_method(
+      "exists?",
+      parameters: [ Parameter.new("conditions", type: "T.untyped", default: "nil") ],
+      return_type: "T::Boolean",
+      class_method: class_method,
+    )
+
+    boolean_methods = %w(any? many? none? one?)
+    boolean_methods.each do |boolean_method|
+      class_rbi.create_method(
+        boolean_method,
+        return_type: "T::Boolean",
+        class_method: class_method,
       )
     end
   end
