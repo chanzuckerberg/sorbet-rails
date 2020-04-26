@@ -81,6 +81,34 @@ class SorbetRails::ActiveRecordRbiFormatter
       class_rbi.create_method('one?', return_type: "T::Boolean")
     end
 
+    parlour.root.create_class("ActiveRecord::AssociationRelation", superclass: "ActiveRecord::Relation") do |class_rbi|
+      class_rbi.create_constant(
+        "Elem",
+        value: "type_member(fixed: T.untyped)",
+      )
+
+      # Ideally we shouldn't need to define these since this class inherits from
+      # ActiveRecord::Relation but the activerecord.rbi that sorbet generates
+      # defines some methods which sorbet finds instead of the methods inherited
+      # by ActiveRecord::Relation. Some of these methods have different arity or
+      # parameters than the ones defined by `create_elem_specific_query_methods` so
+      # we need to match the signatures in that conflicting rbi.
+      build_methods = %w(new build create create!)
+      build_methods.each do |build_method|
+        class_rbi.create_method(
+          build_method,
+          parameters: [
+            Parameter.new("*args", type: "T.untyped"),
+            Parameter.new(
+              "&block",
+              type: "T.nilable(T.proc.params(object: Elem).void)",
+            ),
+          ],
+          return_type: "Elem",
+        )
+      end
+    end
+
     parlour.root.create_class("ActiveRecord::Associations::CollectionProxy", superclass: "ActiveRecord::Relation") do |class_rbi|
       class_rbi.create_constant(
         "Elem",

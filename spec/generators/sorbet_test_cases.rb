@@ -173,7 +173,7 @@ T.assert_type!(spell_books.to_a, T::Array[SpellBook])
 T.assert_type!(spell_books.empty?, T::Boolean)
 
 # finder methods -- AssociationRelation
-spell_books_query = spell_books.where(id: 1)
+spell_books_query = spell_books.where(wizard_id: wizard.id)
 T.assert_type!(spell_books_query.exists?(name: 'Fantastic Beasts'), T::Boolean)
 T.assert_type!(spell_books_query.find(spell_book.id), SpellBook)
 T.assert_type!(spell_books_query.first!, SpellBook)
@@ -189,13 +189,13 @@ T.assert_type!(spell_books_query.find_by_id!(spell_book.id), SpellBook)
 T.assert_type!(spell_books_query.find_or_initialize_by(name: 'Fantastic Beasts') { |s| T.assert_type!(s, SpellBook) }, SpellBook)
 T.assert_type!(spell_books_query.find_or_create_by(name: 'Fantastic Beasts') { |s| T.assert_type!(s, SpellBook) }, SpellBook)
 T.assert_type!(spell_books_query.find_or_create_by!(name: 'Fantastic Beasts') { |s| T.assert_type!(s, SpellBook) }, SpellBook)
-# T.assert_type!(spell_books_query.new { |s| T.assert_type!(s, SpellBook) }, SpellBook) # Ignored until we add support
-# T.assert_type!(spell_books_query.build { |s| T.assert_type!(s, SpellBook) }, SpellBook) # Ignored until we add support # Ignored until we add support
-# T.assert_type!(spell_books_query.create(name: 'Fantastic Beasts') { |s| T.assert_type!(s, SpellBook) }, SpellBook) # Ignored until we add support
-# T.assert_type!(spell_books_query.create!(name: 'Fantastic Beasts') { |s| T.assert_type!(s, SpellBook) }, SpellBook) # Ignored until we add support
-# T.assert_type!(spell_books_query.first_or_create(name: 'Fantastic Beasts') { |s| T.assert_type!(s, SpellBook) }, SpellBook) # Ignored until we add support
-# T.assert_type!(spell_books_query.first_or_create!(name: 'Fantastic Beasts') { |s| T.assert_type!(s, SpellBook) }, SpellBook) # Ignored until we add support
-# T.assert_type!(spell_books_query.first_or_initialize { |s| T.assert_type!(s, SpellBook) }, SpellBook) # Ignored until we add support
+T.assert_type!(spell_books_query.new { |s| T.assert_type!(s, SpellBook) }, SpellBook) # Ignored until we add support
+T.assert_type!(spell_books_query.build { |s| T.assert_type!(s, SpellBook) }, SpellBook) # Ignored until we add support # Ignored until we add support
+T.assert_type!(spell_books_query.create(name: 'Fantastic Beasts') { |s| T.assert_type!(s, SpellBook) }, SpellBook) # Ignored until we add support
+T.assert_type!(spell_books_query.create!(name: 'Fantastic Beasts') { |s| T.assert_type!(s, SpellBook) }, SpellBook) # Ignored until we add support
+T.assert_type!(spell_books_query.first_or_create(name: 'Fantastic Beasts') { |s| T.assert_type!(s, SpellBook) }, SpellBook) # Ignored until we add support
+T.assert_type!(spell_books_query.first_or_create!(name: 'Fantastic Beasts') { |s| T.assert_type!(s, SpellBook) }, SpellBook) # Ignored until we add support
+T.assert_type!(spell_books_query.first_or_initialize { |s| T.assert_type!(s, SpellBook) }, SpellBook) # Ignored until we add support
 # spell_books_query.find_each { |s| T.assert_type!(s, SpellBook) } # TODO: Handle for Rails 6
 # T.assert_type!(spell_books_query.find_each, T::Enumerator[SpellBook]) # TODO: Handle for Rails 6
 # spell_books_query.find_in_batches { |s| T.assert_type!(s, T::Array[SpellBook]) } # TODO: Handle for Rails 6

@@ -132,6 +132,22 @@ class ActiveRecord::Relation
   def one?; end
 end
 
+class ActiveRecord::AssociationRelation < ActiveRecord::Relation
+  Elem = type_member(fixed: T.untyped)
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: Elem).void)).returns(Elem) }
+  def new(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: Elem).void)).returns(Elem) }
+  def build(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: Elem).void)).returns(Elem) }
+  def create(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: Elem).void)).returns(Elem) }
+  def create!(*args, &block); end
+end
+
 class ActiveRecord::Associations::CollectionProxy < ActiveRecord::Relation
   Elem = type_member(fixed: T.untyped)
 
