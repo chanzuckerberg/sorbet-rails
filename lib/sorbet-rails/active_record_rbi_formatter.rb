@@ -135,6 +135,29 @@ class SorbetRails::ActiveRecordRbiFormatter
           return_type: "Elem",
         )
       end
+
+      class_rbi.create_method(
+        "find",
+        parameters: [Parameter.new("*args", type: "T.untyped")],
+        return_type: "Elem",
+      )
+
+      if Rails.version =~ /^5\.0/
+        item_methods = %w(first second third third_to_last second_to_last last)
+        item_methods.each do |item_method|
+          class_rbi.create_method(
+            item_method,
+            parameters: [Parameter.new("*args", type: "T.untyped")],
+            return_type: "T.nilable(Elem)",
+          )
+        end
+      else
+        class_rbi.create_method(
+          "last",
+          parameters: [Parameter.new("limit", type: "T.untyped", default: "nil")],
+          return_type: "T.nilable(Elem)",
+        )
+      end
     end
 
     parlour.rbi
