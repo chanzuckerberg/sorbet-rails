@@ -467,24 +467,6 @@ class Squib < Wizard
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Squib::ActiveRecord_Relation) }
   def self.extending(*args, &block); end
-
-  sig { params(conditions: T.untyped).returns(T::Boolean) }
-  def self.exists?(conditions = nil); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def self.any?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def self.many?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def self.none?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def self.one?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def self.empty?(*args); end
 end
 
 class Squib::ActiveRecord_Relation < ActiveRecord::Relation
@@ -632,24 +614,6 @@ class Squib::ActiveRecord_Relation < ActiveRecord::Relation
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Squib::ActiveRecord_Relation) }
   def extending(*args, &block); end
-
-  sig { params(conditions: T.untyped).returns(T::Boolean) }
-  def exists?(conditions = nil); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def any?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def many?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def none?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def one?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def empty?(*args); end
 end
 
 class Squib::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
@@ -797,24 +761,6 @@ class Squib::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelatio
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Squib::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { params(conditions: T.untyped).returns(T::Boolean) }
-  def exists?(conditions = nil); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def any?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def many?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def none?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def one?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def empty?(*args); end
 
   sig { override.params(block: T.proc.params(e: Squib).void).returns(T::Array[Squib]) }
   def each(&block); end
@@ -978,24 +924,6 @@ class Squib::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associati
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Squib::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { params(conditions: T.untyped).returns(T::Boolean) }
-  def exists?(conditions = nil); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def any?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def many?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def none?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def one?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def empty?(*args); end
 
   sig { override.params(block: T.proc.params(e: Squib).void).returns(T::Array[Squib]) }
   def each(&block); end

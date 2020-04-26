@@ -95,4 +95,19 @@ class ActiveRecord::Base
     ).returns(T::Enumerator[T::Array[T.attached_class]])
   end
   def self.find_in_batches(start: nil, finish: nil, batch_size: 1000, error_on_ignore: nil, &block); end
+
+  sig { params(conditions: T.untyped).returns(T::Boolean) }
+  def self.exists?(conditions = nil); end
+
+  sig { returns(T::Boolean) }
+  def self.any?; end
+
+  sig { returns(T::Boolean) }
+  def self.many?; end
+
+  sig { returns(T::Boolean) }
+  def self.none?; end
+
+  sig { returns(T::Boolean) }
+  def self.one?; end
 end
