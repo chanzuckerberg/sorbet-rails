@@ -10,6 +10,9 @@ RSpec.describe 'sorbet' do
       quidditch_position: :seeker,
     )
   end
+  # Needed for `second!` and `third!`
+  let!(:other_wizards) { 2.times { |i| Wizard.create!(name: "Wizard #{i}") } }
+
   let!(:book) do
     SpellBook.create!(
       name: 'Fantastic Beasts',
@@ -17,6 +20,9 @@ RSpec.describe 'sorbet' do
       book_type: :biology,
     )
   end
+  # Needed for `second!` and `third!`
+  let!(:other_books) { 2.times { |i| SpellBook.create!(name: "SpellBook #{i}", wizard: harry) } }
+
   let!(:wand) do
     Wand.create!(
       wizard: harry,
