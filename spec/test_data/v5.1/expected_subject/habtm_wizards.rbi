@@ -385,60 +385,6 @@ class Subject::HABTM_Wizards::ActiveRecord_AssociationRelation < ActiveRecord::A
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Subject::HABTM_Wizards::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
 
-  sig { params(args: T.untyped).returns(Subject::HABTM_Wizards) }
-  def find(*args); end
-
-  sig { params(args: T.untyped).returns(T.nilable(Subject::HABTM_Wizards)) }
-  def find_by(*args); end
-
-  sig { params(args: T.untyped).returns(Subject::HABTM_Wizards) }
-  def find_by!(*args); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Subject::HABTM_Wizards).void)).returns(Subject::HABTM_Wizards) }
-  def find_or_initialize_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Subject::HABTM_Wizards).void)).returns(Subject::HABTM_Wizards) }
-  def find_or_create_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Subject::HABTM_Wizards).void)).returns(Subject::HABTM_Wizards) }
-  def find_or_create_by!(attributes, &block); end
-
-  sig { returns(T.nilable(Subject::HABTM_Wizards)) }
-  def first; end
-
-  sig { returns(Subject::HABTM_Wizards) }
-  def first!; end
-
-  sig { returns(T.nilable(Subject::HABTM_Wizards)) }
-  def second; end
-
-  sig { returns(Subject::HABTM_Wizards) }
-  def second!; end
-
-  sig { returns(T.nilable(Subject::HABTM_Wizards)) }
-  def third; end
-
-  sig { returns(Subject::HABTM_Wizards) }
-  def third!; end
-
-  sig { returns(T.nilable(Subject::HABTM_Wizards)) }
-  def third_to_last; end
-
-  sig { returns(Subject::HABTM_Wizards) }
-  def third_to_last!; end
-
-  sig { returns(T.nilable(Subject::HABTM_Wizards)) }
-  def second_to_last; end
-
-  sig { returns(Subject::HABTM_Wizards) }
-  def second_to_last!; end
-
-  sig { returns(T.nilable(Subject::HABTM_Wizards)) }
-  def last; end
-
-  sig { returns(Subject::HABTM_Wizards) }
-  def last!; end
-
   sig { params(conditions: T.untyped).returns(T::Boolean) }
   def exists?(conditions = nil); end
 
@@ -568,60 +514,6 @@ class Subject::HABTM_Wizards::ActiveRecord_Associations_CollectionProxy < Active
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Subject::HABTM_Wizards::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { params(args: T.untyped).returns(Subject::HABTM_Wizards) }
-  def find(*args); end
-
-  sig { params(args: T.untyped).returns(T.nilable(Subject::HABTM_Wizards)) }
-  def find_by(*args); end
-
-  sig { params(args: T.untyped).returns(Subject::HABTM_Wizards) }
-  def find_by!(*args); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Subject::HABTM_Wizards).void)).returns(Subject::HABTM_Wizards) }
-  def find_or_initialize_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Subject::HABTM_Wizards).void)).returns(Subject::HABTM_Wizards) }
-  def find_or_create_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Subject::HABTM_Wizards).void)).returns(Subject::HABTM_Wizards) }
-  def find_or_create_by!(attributes, &block); end
-
-  sig { returns(T.nilable(Subject::HABTM_Wizards)) }
-  def first; end
-
-  sig { returns(Subject::HABTM_Wizards) }
-  def first!; end
-
-  sig { returns(T.nilable(Subject::HABTM_Wizards)) }
-  def second; end
-
-  sig { returns(Subject::HABTM_Wizards) }
-  def second!; end
-
-  sig { returns(T.nilable(Subject::HABTM_Wizards)) }
-  def third; end
-
-  sig { returns(Subject::HABTM_Wizards) }
-  def third!; end
-
-  sig { returns(T.nilable(Subject::HABTM_Wizards)) }
-  def third_to_last; end
-
-  sig { returns(Subject::HABTM_Wizards) }
-  def third_to_last!; end
-
-  sig { returns(T.nilable(Subject::HABTM_Wizards)) }
-  def second_to_last; end
-
-  sig { returns(Subject::HABTM_Wizards) }
-  def second_to_last!; end
-
-  sig { returns(T.nilable(Subject::HABTM_Wizards)) }
-  def last; end
-
-  sig { returns(Subject::HABTM_Wizards) }
-  def last!; end
 
   sig { params(conditions: T.untyped).returns(T::Boolean) }
   def exists?(conditions = nil); end

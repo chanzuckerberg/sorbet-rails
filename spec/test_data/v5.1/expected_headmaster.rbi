@@ -394,60 +394,6 @@ class Headmaster::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRe
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Headmaster::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
 
-  sig { params(args: T.untyped).returns(Headmaster) }
-  def find(*args); end
-
-  sig { params(args: T.untyped).returns(T.nilable(Headmaster)) }
-  def find_by(*args); end
-
-  sig { params(args: T.untyped).returns(Headmaster) }
-  def find_by!(*args); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Headmaster).void)).returns(Headmaster) }
-  def find_or_initialize_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Headmaster).void)).returns(Headmaster) }
-  def find_or_create_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Headmaster).void)).returns(Headmaster) }
-  def find_or_create_by!(attributes, &block); end
-
-  sig { returns(T.nilable(Headmaster)) }
-  def first; end
-
-  sig { returns(Headmaster) }
-  def first!; end
-
-  sig { returns(T.nilable(Headmaster)) }
-  def second; end
-
-  sig { returns(Headmaster) }
-  def second!; end
-
-  sig { returns(T.nilable(Headmaster)) }
-  def third; end
-
-  sig { returns(Headmaster) }
-  def third!; end
-
-  sig { returns(T.nilable(Headmaster)) }
-  def third_to_last; end
-
-  sig { returns(Headmaster) }
-  def third_to_last!; end
-
-  sig { returns(T.nilable(Headmaster)) }
-  def second_to_last; end
-
-  sig { returns(Headmaster) }
-  def second_to_last!; end
-
-  sig { returns(T.nilable(Headmaster)) }
-  def last; end
-
-  sig { returns(Headmaster) }
-  def last!; end
-
   sig { params(conditions: T.untyped).returns(T::Boolean) }
   def exists?(conditions = nil); end
 
@@ -577,60 +523,6 @@ class Headmaster::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Asso
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Headmaster::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { params(args: T.untyped).returns(Headmaster) }
-  def find(*args); end
-
-  sig { params(args: T.untyped).returns(T.nilable(Headmaster)) }
-  def find_by(*args); end
-
-  sig { params(args: T.untyped).returns(Headmaster) }
-  def find_by!(*args); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Headmaster).void)).returns(Headmaster) }
-  def find_or_initialize_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Headmaster).void)).returns(Headmaster) }
-  def find_or_create_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Headmaster).void)).returns(Headmaster) }
-  def find_or_create_by!(attributes, &block); end
-
-  sig { returns(T.nilable(Headmaster)) }
-  def first; end
-
-  sig { returns(Headmaster) }
-  def first!; end
-
-  sig { returns(T.nilable(Headmaster)) }
-  def second; end
-
-  sig { returns(Headmaster) }
-  def second!; end
-
-  sig { returns(T.nilable(Headmaster)) }
-  def third; end
-
-  sig { returns(Headmaster) }
-  def third!; end
-
-  sig { returns(T.nilable(Headmaster)) }
-  def third_to_last; end
-
-  sig { returns(Headmaster) }
-  def third_to_last!; end
-
-  sig { returns(T.nilable(Headmaster)) }
-  def second_to_last; end
-
-  sig { returns(Headmaster) }
-  def second_to_last!; end
-
-  sig { returns(T.nilable(Headmaster)) }
-  def last; end
-
-  sig { returns(Headmaster) }
-  def last!; end
 
   sig { params(conditions: T.untyped).returns(T::Boolean) }
   def exists?(conditions = nil); end

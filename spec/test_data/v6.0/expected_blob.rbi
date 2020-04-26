@@ -400,60 +400,6 @@ class ActiveStorage::Blob::ActiveRecord_AssociationRelation < ActiveRecord::Asso
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
 
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob) }
-  def find(*args); end
-
-  sig { params(args: T.untyped).returns(T.nilable(ActiveStorage::Blob)) }
-  def find_by(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob) }
-  def find_by!(*args); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActiveStorage::Blob).void)).returns(ActiveStorage::Blob) }
-  def find_or_initialize_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActiveStorage::Blob).void)).returns(ActiveStorage::Blob) }
-  def find_or_create_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActiveStorage::Blob).void)).returns(ActiveStorage::Blob) }
-  def find_or_create_by!(attributes, &block); end
-
-  sig { returns(T.nilable(ActiveStorage::Blob)) }
-  def first; end
-
-  sig { returns(ActiveStorage::Blob) }
-  def first!; end
-
-  sig { returns(T.nilable(ActiveStorage::Blob)) }
-  def second; end
-
-  sig { returns(ActiveStorage::Blob) }
-  def second!; end
-
-  sig { returns(T.nilable(ActiveStorage::Blob)) }
-  def third; end
-
-  sig { returns(ActiveStorage::Blob) }
-  def third!; end
-
-  sig { returns(T.nilable(ActiveStorage::Blob)) }
-  def third_to_last; end
-
-  sig { returns(ActiveStorage::Blob) }
-  def third_to_last!; end
-
-  sig { returns(T.nilable(ActiveStorage::Blob)) }
-  def second_to_last; end
-
-  sig { returns(ActiveStorage::Blob) }
-  def second_to_last!; end
-
-  sig { returns(T.nilable(ActiveStorage::Blob)) }
-  def last; end
-
-  sig { returns(ActiveStorage::Blob) }
-  def last!; end
-
   sig { params(conditions: T.untyped).returns(T::Boolean) }
   def exists?(conditions = nil); end
 
@@ -601,60 +547,6 @@ class ActiveStorage::Blob::ActiveRecord_Associations_CollectionProxy < ActiveRec
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob) }
-  def find(*args); end
-
-  sig { params(args: T.untyped).returns(T.nilable(ActiveStorage::Blob)) }
-  def find_by(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob) }
-  def find_by!(*args); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActiveStorage::Blob).void)).returns(ActiveStorage::Blob) }
-  def find_or_initialize_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActiveStorage::Blob).void)).returns(ActiveStorage::Blob) }
-  def find_or_create_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ActiveStorage::Blob).void)).returns(ActiveStorage::Blob) }
-  def find_or_create_by!(attributes, &block); end
-
-  sig { returns(T.nilable(ActiveStorage::Blob)) }
-  def first; end
-
-  sig { returns(ActiveStorage::Blob) }
-  def first!; end
-
-  sig { returns(T.nilable(ActiveStorage::Blob)) }
-  def second; end
-
-  sig { returns(ActiveStorage::Blob) }
-  def second!; end
-
-  sig { returns(T.nilable(ActiveStorage::Blob)) }
-  def third; end
-
-  sig { returns(ActiveStorage::Blob) }
-  def third!; end
-
-  sig { returns(T.nilable(ActiveStorage::Blob)) }
-  def third_to_last; end
-
-  sig { returns(ActiveStorage::Blob) }
-  def third_to_last!; end
-
-  sig { returns(T.nilable(ActiveStorage::Blob)) }
-  def second_to_last; end
-
-  sig { returns(ActiveStorage::Blob) }
-  def second_to_last!; end
-
-  sig { returns(T.nilable(ActiveStorage::Blob)) }
-  def last; end
-
-  sig { returns(ActiveStorage::Blob) }
-  def last!; end
 
   sig { params(conditions: T.untyped).returns(T::Boolean) }
   def exists?(conditions = nil); end

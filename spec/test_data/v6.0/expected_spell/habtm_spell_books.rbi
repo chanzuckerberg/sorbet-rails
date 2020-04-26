@@ -421,60 +421,6 @@ class Spell::HABTM_SpellBooks::ActiveRecord_AssociationRelation < ActiveRecord::
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Spell::HABTM_SpellBooks::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
 
-  sig { params(args: T.untyped).returns(Spell::HABTM_SpellBooks) }
-  def find(*args); end
-
-  sig { params(args: T.untyped).returns(T.nilable(Spell::HABTM_SpellBooks)) }
-  def find_by(*args); end
-
-  sig { params(args: T.untyped).returns(Spell::HABTM_SpellBooks) }
-  def find_by!(*args); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Spell::HABTM_SpellBooks).void)).returns(Spell::HABTM_SpellBooks) }
-  def find_or_initialize_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Spell::HABTM_SpellBooks).void)).returns(Spell::HABTM_SpellBooks) }
-  def find_or_create_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Spell::HABTM_SpellBooks).void)).returns(Spell::HABTM_SpellBooks) }
-  def find_or_create_by!(attributes, &block); end
-
-  sig { returns(T.nilable(Spell::HABTM_SpellBooks)) }
-  def first; end
-
-  sig { returns(Spell::HABTM_SpellBooks) }
-  def first!; end
-
-  sig { returns(T.nilable(Spell::HABTM_SpellBooks)) }
-  def second; end
-
-  sig { returns(Spell::HABTM_SpellBooks) }
-  def second!; end
-
-  sig { returns(T.nilable(Spell::HABTM_SpellBooks)) }
-  def third; end
-
-  sig { returns(Spell::HABTM_SpellBooks) }
-  def third!; end
-
-  sig { returns(T.nilable(Spell::HABTM_SpellBooks)) }
-  def third_to_last; end
-
-  sig { returns(Spell::HABTM_SpellBooks) }
-  def third_to_last!; end
-
-  sig { returns(T.nilable(Spell::HABTM_SpellBooks)) }
-  def second_to_last; end
-
-  sig { returns(Spell::HABTM_SpellBooks) }
-  def second_to_last!; end
-
-  sig { returns(T.nilable(Spell::HABTM_SpellBooks)) }
-  def last; end
-
-  sig { returns(Spell::HABTM_SpellBooks) }
-  def last!; end
-
   sig { params(conditions: T.untyped).returns(T::Boolean) }
   def exists?(conditions = nil); end
 
@@ -616,60 +562,6 @@ class Spell::HABTM_SpellBooks::ActiveRecord_Associations_CollectionProxy < Activ
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Spell::HABTM_SpellBooks::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { params(args: T.untyped).returns(Spell::HABTM_SpellBooks) }
-  def find(*args); end
-
-  sig { params(args: T.untyped).returns(T.nilable(Spell::HABTM_SpellBooks)) }
-  def find_by(*args); end
-
-  sig { params(args: T.untyped).returns(Spell::HABTM_SpellBooks) }
-  def find_by!(*args); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Spell::HABTM_SpellBooks).void)).returns(Spell::HABTM_SpellBooks) }
-  def find_or_initialize_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Spell::HABTM_SpellBooks).void)).returns(Spell::HABTM_SpellBooks) }
-  def find_or_create_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Spell::HABTM_SpellBooks).void)).returns(Spell::HABTM_SpellBooks) }
-  def find_or_create_by!(attributes, &block); end
-
-  sig { returns(T.nilable(Spell::HABTM_SpellBooks)) }
-  def first; end
-
-  sig { returns(Spell::HABTM_SpellBooks) }
-  def first!; end
-
-  sig { returns(T.nilable(Spell::HABTM_SpellBooks)) }
-  def second; end
-
-  sig { returns(Spell::HABTM_SpellBooks) }
-  def second!; end
-
-  sig { returns(T.nilable(Spell::HABTM_SpellBooks)) }
-  def third; end
-
-  sig { returns(Spell::HABTM_SpellBooks) }
-  def third!; end
-
-  sig { returns(T.nilable(Spell::HABTM_SpellBooks)) }
-  def third_to_last; end
-
-  sig { returns(Spell::HABTM_SpellBooks) }
-  def third_to_last!; end
-
-  sig { returns(T.nilable(Spell::HABTM_SpellBooks)) }
-  def second_to_last; end
-
-  sig { returns(Spell::HABTM_SpellBooks) }
-  def second_to_last!; end
-
-  sig { returns(T.nilable(Spell::HABTM_SpellBooks)) }
-  def last; end
-
-  sig { returns(Spell::HABTM_SpellBooks) }
-  def last!; end
 
   sig { params(conditions: T.untyped).returns(T::Boolean) }
   def exists?(conditions = nil); end
