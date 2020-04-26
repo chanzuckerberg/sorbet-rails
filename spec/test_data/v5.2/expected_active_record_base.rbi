@@ -65,6 +65,15 @@ class ActiveRecord::Base
   sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: T.attached_class).void)).returns(T.attached_class) }
   def self.new(attributes = nil, &block); end
 
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: T.attached_class).void)).returns(T.attached_class) }
+  def self.first_or_create(attributes = nil, &block); end
+
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: T.attached_class).void)).returns(T.attached_class) }
+  def self.first_or_create!(attributes = nil, &block); end
+
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: T.attached_class).void)).returns(T.attached_class) }
+  def self.first_or_initialize(attributes = nil, &block); end
+
   sig do
     override.params(
       start: T.nilable(Integer),

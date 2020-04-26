@@ -81,6 +81,62 @@ class SorbetRails::ActiveRecordRbiFormatter
       class_rbi.create_method('one?', return_type: "T::Boolean")
     end
 
+    parlour.root.create_class("ActiveRecord::AssociationRelation", superclass: "ActiveRecord::Relation") do |class_rbi|
+      class_rbi.create_constant(
+        "Elem",
+        value: "type_member(fixed: T.untyped)",
+      )
+
+      # Ideally we shouldn't need to define these since this class inherits from
+      # ActiveRecord::Relation but the activerecord.rbi that sorbet generates
+      # defines some methods which sorbet finds instead of the methods inherited
+      # by ActiveRecord::Relation. Some of these methods have different arity or
+      # parameters than the ones defined by `create_elem_specific_query_methods` so
+      # we need to match the signatures in that conflicting rbi.
+      build_methods = %w(new build create create!)
+      build_methods.each do |build_method|
+        class_rbi.create_method(
+          build_method,
+          parameters: [
+            Parameter.new("*args", type: "T.untyped"),
+            Parameter.new(
+              "&block",
+              type: "T.nilable(T.proc.params(object: Elem).void)",
+            ),
+          ],
+          return_type: "Elem",
+        )
+      end
+    end
+
+    parlour.root.create_class("ActiveRecord::Associations::CollectionProxy", superclass: "ActiveRecord::Relation") do |class_rbi|
+      class_rbi.create_constant(
+        "Elem",
+        value: "type_member(fixed: T.untyped)",
+      )
+
+      # Ideally we shouldn't need to define these since this class inherits from
+      # ActiveRecord::Relation but the activerecord.rbi that sorbet generates
+      # defines some methods which sorbet finds instead of the methods inherited
+      # by ActiveRecord::Relation. Some of these methods have different arity or
+      # parameters than the ones defined by `create_elem_specific_query_methods` so
+      # we need to match the signatures in that conflicting rbi.
+      build_methods = %w(new build create create!)
+      build_methods.each do |build_method|
+        class_rbi.create_method(
+          build_method,
+          parameters: [
+            Parameter.new("attributes", type: "T.untyped", default: 'nil'),
+            Parameter.new(
+              "&block",
+              type: "T.nilable(T.proc.params(object: Elem).void)",
+            ),
+          ],
+          return_type: "Elem",
+        )
+      end
+    end
+
     parlour.rbi
   end
 
@@ -127,13 +183,16 @@ class SorbetRails::ActiveRecordRbiFormatter
       )
     end
 
-    build_methods = %w(create create! new)
+    build_methods = %w(create create! new build first_or_create first_or_create! first_or_initialize)
     build_methods.each do |build_method|
+      # `build` method doesn't exist on the model, only on the relations
+      next if build_method == 'build' && class_method
+
       # This needs to match the generated method signature in activerecord.rbi and
       # in Rails 5.0 and 5.1 the param is a splat.
       if Rails.version =~ /^5\.(0|1)/ && %w(new build create create!).include?(build_method)
         param = Parameter.new("*args", type: "T.untyped")
-      elsif
+      else
         param = Parameter.new("attributes", type: "T.untyped", default: 'nil')
       end
 
