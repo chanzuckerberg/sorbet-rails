@@ -232,7 +232,6 @@ end
 class SpellBook::ActiveRecord_Relation < ActiveRecord::Relation
   include SpellBook::ActiveRelation_WhereNot
   include SpellBook::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: SpellBook)
@@ -337,7 +336,6 @@ end
 class SpellBook::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
   include SpellBook::ActiveRelation_WhereNot
   include SpellBook::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: SpellBook)
@@ -437,28 +435,10 @@ class SpellBook::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRel
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { override.params(block: T.proc.params(e: SpellBook).void).returns(T::Array[SpellBook]) }
-  def each(&block); end
-
-  sig { params(level: T.nilable(Integer)).returns(T::Array[SpellBook]) }
-  def flatten(level); end
-
-  sig { returns(T::Array[SpellBook]) }
-  def to_a; end
-
-  sig do
-    type_parameters(:U).params(
-        blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),
-    )
-    .returns(T::Array[T.type_parameter(:U)])
-  end
-  def map(&blk); end
 end
 
 class SpellBook::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include SpellBook::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: SpellBook)
@@ -558,23 +538,6 @@ class SpellBook::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Assoc
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { override.params(block: T.proc.params(e: SpellBook).void).returns(T::Array[SpellBook]) }
-  def each(&block); end
-
-  sig { params(level: T.nilable(Integer)).returns(T::Array[SpellBook]) }
-  def flatten(level); end
-
-  sig { returns(T::Array[SpellBook]) }
-  def to_a; end
-
-  sig do
-    type_parameters(:U).params(
-        blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),
-    )
-    .returns(T::Array[T.type_parameter(:U)])
-  end
-  def map(&blk); end
 
   sig { params(records: T.any(SpellBook, T::Array[SpellBook])).returns(T.self_type) }
   def <<(*records); end

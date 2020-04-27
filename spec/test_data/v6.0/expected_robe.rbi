@@ -167,7 +167,6 @@ end
 class Robe::ActiveRecord_Relation < ActiveRecord::Relation
   include Robe::ActiveRelation_WhereNot
   include Robe::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: Robe)
@@ -275,7 +274,6 @@ end
 class Robe::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
   include Robe::ActiveRelation_WhereNot
   include Robe::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: Robe)
@@ -378,28 +376,10 @@ class Robe::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Robe::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { override.params(block: T.proc.params(e: Robe).void).returns(T::Array[Robe]) }
-  def each(&block); end
-
-  sig { params(level: T.nilable(Integer)).returns(T::Array[Robe]) }
-  def flatten(level); end
-
-  sig { returns(T::Array[Robe]) }
-  def to_a; end
-
-  sig do
-    type_parameters(:U).params(
-        blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),
-    )
-    .returns(T::Array[T.type_parameter(:U)])
-  end
-  def map(&blk); end
 end
 
 class Robe::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include Robe::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: Robe)
@@ -502,23 +482,6 @@ class Robe::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associatio
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Robe::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { override.params(block: T.proc.params(e: Robe).void).returns(T::Array[Robe]) }
-  def each(&block); end
-
-  sig { params(level: T.nilable(Integer)).returns(T::Array[Robe]) }
-  def flatten(level); end
-
-  sig { returns(T::Array[Robe]) }
-  def to_a; end
-
-  sig do
-    type_parameters(:U).params(
-        blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),
-    )
-    .returns(T::Array[T.type_parameter(:U)])
-  end
-  def map(&blk); end
 
   sig { params(records: T.any(Robe, T::Array[Robe])).returns(T.self_type) }
   def <<(*records); end

@@ -155,7 +155,6 @@ end
 class Spell::ActiveRecord_Relation < ActiveRecord::Relation
   include Spell::ActiveRelation_WhereNot
   include Spell::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: Spell)
@@ -248,7 +247,6 @@ end
 class Spell::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
   include Spell::ActiveRelation_WhereNot
   include Spell::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: Spell)
@@ -336,28 +334,10 @@ class Spell::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelatio
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Spell::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { override.params(block: T.proc.params(e: Spell).void).returns(T::Array[Spell]) }
-  def each(&block); end
-
-  sig { params(level: T.nilable(Integer)).returns(T::Array[Spell]) }
-  def flatten(level); end
-
-  sig { returns(T::Array[Spell]) }
-  def to_a; end
-
-  sig do
-    type_parameters(:U).params(
-        blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),
-    )
-    .returns(T::Array[T.type_parameter(:U)])
-  end
-  def map(&blk); end
 end
 
 class Spell::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include Spell::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: Spell)
@@ -445,23 +425,6 @@ class Spell::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associati
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Spell::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { override.params(block: T.proc.params(e: Spell).void).returns(T::Array[Spell]) }
-  def each(&block); end
-
-  sig { params(level: T.nilable(Integer)).returns(T::Array[Spell]) }
-  def flatten(level); end
-
-  sig { returns(T::Array[Spell]) }
-  def to_a; end
-
-  sig do
-    type_parameters(:U).params(
-        blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),
-    )
-    .returns(T::Array[T.type_parameter(:U)])
-  end
-  def map(&blk); end
 
   sig { params(records: T.any(Spell, T::Array[Spell])).returns(T.self_type) }
   def <<(*records); end

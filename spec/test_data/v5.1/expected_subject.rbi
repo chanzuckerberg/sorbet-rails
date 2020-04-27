@@ -158,7 +158,6 @@ end
 class Subject::ActiveRecord_Relation < ActiveRecord::Relation
   include Subject::ActiveRelation_WhereNot
   include Subject::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: Subject)
@@ -254,7 +253,6 @@ end
 class Subject::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
   include Subject::ActiveRelation_WhereNot
   include Subject::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: Subject)
@@ -345,28 +343,10 @@ class Subject::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelat
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Subject::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { override.params(block: T.proc.params(e: Subject).void).returns(T::Array[Subject]) }
-  def each(&block); end
-
-  sig { params(level: T.nilable(Integer)).returns(T::Array[Subject]) }
-  def flatten(level); end
-
-  sig { returns(T::Array[Subject]) }
-  def to_a; end
-
-  sig do
-    type_parameters(:U).params(
-        blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),
-    )
-    .returns(T::Array[T.type_parameter(:U)])
-  end
-  def map(&blk); end
 end
 
 class Subject::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include Subject::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: Subject)
@@ -457,23 +437,6 @@ class Subject::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associa
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Subject::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { override.params(block: T.proc.params(e: Subject).void).returns(T::Array[Subject]) }
-  def each(&block); end
-
-  sig { params(level: T.nilable(Integer)).returns(T::Array[Subject]) }
-  def flatten(level); end
-
-  sig { returns(T::Array[Subject]) }
-  def to_a; end
-
-  sig do
-    type_parameters(:U).params(
-        blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),
-    )
-    .returns(T::Array[T.type_parameter(:U)])
-  end
-  def map(&blk); end
 
   sig { params(records: T.any(Subject, T::Array[Subject])).returns(T.self_type) }
   def <<(*records); end

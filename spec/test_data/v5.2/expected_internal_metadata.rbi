@@ -162,7 +162,6 @@ end
 class ActiveRecord::InternalMetadata::ActiveRecord_Relation < ActiveRecord::Relation
   include ActiveRecord::InternalMetadata::ActiveRelation_WhereNot
   include ActiveRecord::InternalMetadata::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: ActiveRecord::InternalMetadata)
@@ -258,7 +257,6 @@ end
 class ActiveRecord::InternalMetadata::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
   include ActiveRecord::InternalMetadata::ActiveRelation_WhereNot
   include ActiveRecord::InternalMetadata::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: ActiveRecord::InternalMetadata)
@@ -349,28 +347,10 @@ class ActiveRecord::InternalMetadata::ActiveRecord_AssociationRelation < ActiveR
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(ActiveRecord::InternalMetadata::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { override.params(block: T.proc.params(e: ActiveRecord::InternalMetadata).void).returns(T::Array[ActiveRecord::InternalMetadata]) }
-  def each(&block); end
-
-  sig { params(level: T.nilable(Integer)).returns(T::Array[ActiveRecord::InternalMetadata]) }
-  def flatten(level); end
-
-  sig { returns(T::Array[ActiveRecord::InternalMetadata]) }
-  def to_a; end
-
-  sig do
-    type_parameters(:U).params(
-        blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),
-    )
-    .returns(T::Array[T.type_parameter(:U)])
-  end
-  def map(&blk); end
 end
 
 class ActiveRecord::InternalMetadata::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include ActiveRecord::InternalMetadata::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: ActiveRecord::InternalMetadata)
@@ -461,23 +441,6 @@ class ActiveRecord::InternalMetadata::ActiveRecord_Associations_CollectionProxy 
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(ActiveRecord::InternalMetadata::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { override.params(block: T.proc.params(e: ActiveRecord::InternalMetadata).void).returns(T::Array[ActiveRecord::InternalMetadata]) }
-  def each(&block); end
-
-  sig { params(level: T.nilable(Integer)).returns(T::Array[ActiveRecord::InternalMetadata]) }
-  def flatten(level); end
-
-  sig { returns(T::Array[ActiveRecord::InternalMetadata]) }
-  def to_a; end
-
-  sig do
-    type_parameters(:U).params(
-        blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),
-    )
-    .returns(T::Array[T.type_parameter(:U)])
-  end
-  def map(&blk); end
 
   sig { params(records: T.any(ActiveRecord::InternalMetadata, T::Array[ActiveRecord::InternalMetadata])).returns(T.self_type) }
   def <<(*records); end

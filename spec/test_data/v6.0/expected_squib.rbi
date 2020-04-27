@@ -510,7 +510,6 @@ end
 class Squib::ActiveRecord_Relation < ActiveRecord::Relation
   include Squib::ActiveRelation_WhereNot
   include Squib::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: Squib)
@@ -729,7 +728,6 @@ end
 class Squib::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
   include Squib::ActiveRelation_WhereNot
   include Squib::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: Squib)
@@ -943,28 +941,10 @@ class Squib::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelatio
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Squib::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { override.params(block: T.proc.params(e: Squib).void).returns(T::Array[Squib]) }
-  def each(&block); end
-
-  sig { params(level: T.nilable(Integer)).returns(T::Array[Squib]) }
-  def flatten(level); end
-
-  sig { returns(T::Array[Squib]) }
-  def to_a; end
-
-  sig do
-    type_parameters(:U).params(
-        blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),
-    )
-    .returns(T::Array[T.type_parameter(:U)])
-  end
-  def map(&blk); end
 end
 
 class Squib::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include Squib::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: Squib)
@@ -1178,23 +1158,6 @@ class Squib::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associati
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Squib::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { override.params(block: T.proc.params(e: Squib).void).returns(T::Array[Squib]) }
-  def each(&block); end
-
-  sig { params(level: T.nilable(Integer)).returns(T::Array[Squib]) }
-  def flatten(level); end
-
-  sig { returns(T::Array[Squib]) }
-  def to_a; end
-
-  sig do
-    type_parameters(:U).params(
-        blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),
-    )
-    .returns(T::Array[T.type_parameter(:U)])
-  end
-  def map(&blk); end
 
   sig { params(records: T.any(Squib, T::Array[Squib])).returns(T.self_type) }
   def <<(*records); end
