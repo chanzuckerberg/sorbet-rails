@@ -101,6 +101,21 @@ class ActiveRecord::Relation
   end
   def find_in_batches(start: nil, finish: nil, batch_size: 1000, error_on_ignore: nil, &block); end
 
+  sig { params(conditions: T.untyped).returns(T::Boolean) }
+  def exists?(conditions = nil); end
+
+  sig { returns(T::Boolean) }
+  def any?; end
+
+  sig { returns(T::Boolean) }
+  def many?; end
+
+  sig { returns(T::Boolean) }
+  def none?; end
+
+  sig { returns(T::Boolean) }
+  def one?; end
+
   sig { override.params(block: T.proc.params(e: Elem).void).returns(T::Array[Elem]) }
   def each(&block); end
 
@@ -113,23 +128,8 @@ class ActiveRecord::Relation
   sig { type_parameters(:U).params(blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U))).returns(T::Array[T.type_parameter(:U)]) }
   def map(&blk); end
 
-  sig { params(conditions: T.untyped).returns(T::Boolean) }
-  def exists?(conditions = nil); end
-
-  sig { returns(T::Boolean) }
-  def any?; end
-
   sig { returns(T::Boolean) }
   def empty?; end
-
-  sig { returns(T::Boolean) }
-  def many?; end
-
-  sig { returns(T::Boolean) }
-  def none?; end
-
-  sig { returns(T::Boolean) }
-  def one?; end
 end
 
 class ActiveRecord::AssociationRelation < ActiveRecord::Relation
@@ -168,4 +168,7 @@ class ActiveRecord::Associations::CollectionProxy < ActiveRecord::Relation
 
   sig { params(limit: T.untyped).returns(T.nilable(Elem)) }
   def last(limit = nil); end
+
+  sig { returns(T::Boolean) }
+  def empty?; end
 end

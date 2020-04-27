@@ -47,7 +47,6 @@ module SorbetRails
         :active_relation_where_not,
         :active_record_attribute,
         :active_record_assoc,
-        :active_record_finder_methods,
         :custom_finder_methods,
         :enumerable_collections,
       ]

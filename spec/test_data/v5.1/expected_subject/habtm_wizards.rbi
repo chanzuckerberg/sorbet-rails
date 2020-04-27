@@ -156,24 +156,6 @@ class Subject::HABTM_Wizards < ActiveRecord::Base
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Subject::HABTM_Wizards::ActiveRecord_Relation) }
   def self.extending(*args, &block); end
-
-  sig { params(conditions: T.untyped).returns(T::Boolean) }
-  def self.exists?(conditions = nil); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def self.any?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def self.many?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def self.none?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def self.one?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def self.empty?(*args); end
 end
 
 class Subject::HABTM_Wizards::ActiveRecord_Relation < ActiveRecord::Relation
@@ -270,24 +252,6 @@ class Subject::HABTM_Wizards::ActiveRecord_Relation < ActiveRecord::Relation
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Subject::HABTM_Wizards::ActiveRecord_Relation) }
   def extending(*args, &block); end
-
-  sig { params(conditions: T.untyped).returns(T::Boolean) }
-  def exists?(conditions = nil); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def any?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def many?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def none?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def one?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def empty?(*args); end
 end
 
 class Subject::HABTM_Wizards::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
@@ -384,24 +348,6 @@ class Subject::HABTM_Wizards::ActiveRecord_AssociationRelation < ActiveRecord::A
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Subject::HABTM_Wizards::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { params(conditions: T.untyped).returns(T::Boolean) }
-  def exists?(conditions = nil); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def any?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def many?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def none?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def one?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def empty?(*args); end
 
   sig { override.params(block: T.proc.params(e: Subject::HABTM_Wizards).void).returns(T::Array[Subject::HABTM_Wizards]) }
   def each(&block); end
@@ -514,24 +460,6 @@ class Subject::HABTM_Wizards::ActiveRecord_Associations_CollectionProxy < Active
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Subject::HABTM_Wizards::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { params(conditions: T.untyped).returns(T::Boolean) }
-  def exists?(conditions = nil); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def any?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def many?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def none?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def one?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def empty?(*args); end
 
   sig { override.params(block: T.proc.params(e: Subject::HABTM_Wizards).void).returns(T::Array[Subject::HABTM_Wizards]) }
   def each(&block); end

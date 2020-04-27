@@ -153,24 +153,6 @@ class SpellBook::HABTM_Spells < ActiveRecord::Base
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::HABTM_Spells::ActiveRecord_Relation) }
   def self.extending(*args, &block); end
-
-  sig { params(conditions: T.untyped).returns(T::Boolean) }
-  def self.exists?(conditions = nil); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def self.any?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def self.many?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def self.none?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def self.one?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def self.empty?(*args); end
 end
 
 class SpellBook::HABTM_Spells::ActiveRecord_Relation < ActiveRecord::Relation
@@ -264,24 +246,6 @@ class SpellBook::HABTM_Spells::ActiveRecord_Relation < ActiveRecord::Relation
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::HABTM_Spells::ActiveRecord_Relation) }
   def extending(*args, &block); end
-
-  sig { params(conditions: T.untyped).returns(T::Boolean) }
-  def exists?(conditions = nil); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def any?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def many?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def none?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def one?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def empty?(*args); end
 end
 
 class SpellBook::HABTM_Spells::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
@@ -375,24 +339,6 @@ class SpellBook::HABTM_Spells::ActiveRecord_AssociationRelation < ActiveRecord::
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::HABTM_Spells::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { params(conditions: T.untyped).returns(T::Boolean) }
-  def exists?(conditions = nil); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def any?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def many?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def none?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def one?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def empty?(*args); end
 
   sig { override.params(block: T.proc.params(e: SpellBook::HABTM_Spells).void).returns(T::Array[SpellBook::HABTM_Spells]) }
   def each(&block); end
@@ -502,24 +448,6 @@ class SpellBook::HABTM_Spells::ActiveRecord_Associations_CollectionProxy < Activ
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::HABTM_Spells::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { params(conditions: T.untyped).returns(T::Boolean) }
-  def exists?(conditions = nil); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def any?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def many?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def none?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def one?(*args); end
-
-  sig { params(args: T.untyped).returns(T::Boolean) }
-  def empty?(*args); end
 
   sig { override.params(block: T.proc.params(e: SpellBook::HABTM_Spells).void).returns(T::Array[SpellBook::HABTM_Spells]) }
   def each(&block); end
