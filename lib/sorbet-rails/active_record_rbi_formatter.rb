@@ -37,6 +37,7 @@ class SorbetRails::ActiveRecordRbiFormatter
     ])
 
     parlour.root.create_class('ActiveRecord::Relation') do |class_rbi|
+      class_rbi.create_include("Enumerable")
       class_rbi.create_constant(
         "Elem",
         value: "type_member(fixed: T.untyped)",
@@ -105,6 +106,20 @@ class SorbetRails::ActiveRecordRbiFormatter
         value: "type_member(fixed: T.untyped)",
       )
 
+      # This _should_ work which would let us remove it from the enumerable_collections
+      # plugin but sorbet has a bug with T.any and generics.
+      # See: https://github.com/sorbet/sorbet/issues/2938
+      # push_methods = %w(<< append push concat)
+      # push_methods.each do |push_method|
+      #   class_rbi.create_method(
+      #     push_method,
+      #     parameters: [
+      #       Parameter.new("*records", type: "T.any(Elem, T::Array[Elem])"),
+      #     ],
+      #     return_type: "T.self_type",
+      #   )
+      # end
+
       # Ideally we shouldn't need to define these since this class inherits from
       # ActiveRecord::Relation but the activerecord.rbi that sorbet generates
       # defines some methods which sorbet finds instead of the methods inherited
@@ -152,6 +167,10 @@ class SorbetRails::ActiveRecordRbiFormatter
           parameters: [Parameter.new("limit", type: "T.untyped", default: "nil")],
           return_type: "T.nilable(Elem)",
         )
+      end
+
+      if Rails.version =~ /^5\.(0|1)/
+        class_rbi.create_method("to_a", return_type: "T::Array[Elem]")
       end
 
       class_rbi.create_method('empty?', return_type: "T::Boolean")
