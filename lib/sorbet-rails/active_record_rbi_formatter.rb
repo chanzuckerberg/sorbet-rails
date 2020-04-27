@@ -45,6 +45,9 @@ class SorbetRails::ActiveRecordRbiFormatter
       create_elem_specific_query_methods(class_rbi, type: 'Elem', class_method: false)
       create_general_query_methods(class_rbi, class_method: false)
 
+      # Many methods that exist on the relation classes also exist on the model class
+      # by delegating to `:all` (e.g. `Model.any?` is really `Model.all.any?`). These
+      # methods (e.g. each, empty?) only exist on the relation classes.
       class_rbi.create_method(
         "each",
         parameters: [
@@ -58,19 +61,13 @@ class SorbetRails::ActiveRecordRbiFormatter
         parameters: [ Parameter.new("level", type: "T.nilable(Integer)") ],
         return_type: "T::Array[Elem]",
       )
-      # this is an escape hatch when there are conflicts in signatures of Enumerable & ActiveRecord
-      class_rbi.create_method(
-        "to_a",
-        return_type: "T::Array[Elem]",
-      )
-
+      class_rbi.create_method("to_a", return_type: "T::Array[Elem]")
       class_rbi.create_method(
         "map",
         type_parameters: [:U],
         parameters: [ Parameter.new("&blk", type: "T.proc.params(arg0: Elem).returns(T.type_parameter(:U))") ],
         return_type: "T::Array[T.type_parameter(:U)]",
       )
-
       class_rbi.create_method('empty?', return_type: "T::Boolean")
     end
 
