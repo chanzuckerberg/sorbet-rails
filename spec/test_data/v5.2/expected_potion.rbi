@@ -356,60 +356,6 @@ class Potion::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelati
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Potion::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
 
-  sig { params(args: T.untyped).returns(Potion) }
-  def find(*args); end
-
-  sig { params(args: T.untyped).returns(T.nilable(Potion)) }
-  def find_by(*args); end
-
-  sig { params(args: T.untyped).returns(Potion) }
-  def find_by!(*args); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Potion).void)).returns(Potion) }
-  def find_or_initialize_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Potion).void)).returns(Potion) }
-  def find_or_create_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Potion).void)).returns(Potion) }
-  def find_or_create_by!(attributes, &block); end
-
-  sig { returns(T.nilable(Potion)) }
-  def first; end
-
-  sig { returns(Potion) }
-  def first!; end
-
-  sig { returns(T.nilable(Potion)) }
-  def second; end
-
-  sig { returns(Potion) }
-  def second!; end
-
-  sig { returns(T.nilable(Potion)) }
-  def third; end
-
-  sig { returns(Potion) }
-  def third!; end
-
-  sig { returns(T.nilable(Potion)) }
-  def third_to_last; end
-
-  sig { returns(Potion) }
-  def third_to_last!; end
-
-  sig { returns(T.nilable(Potion)) }
-  def second_to_last; end
-
-  sig { returns(Potion) }
-  def second_to_last!; end
-
-  sig { returns(T.nilable(Potion)) }
-  def last; end
-
-  sig { returns(Potion) }
-  def last!; end
-
   sig { params(conditions: T.untyped).returns(T::Boolean) }
   def exists?(conditions = nil); end
 
@@ -539,60 +485,6 @@ class Potion::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associat
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Potion::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { params(args: T.untyped).returns(Potion) }
-  def find(*args); end
-
-  sig { params(args: T.untyped).returns(T.nilable(Potion)) }
-  def find_by(*args); end
-
-  sig { params(args: T.untyped).returns(Potion) }
-  def find_by!(*args); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Potion).void)).returns(Potion) }
-  def find_or_initialize_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Potion).void)).returns(Potion) }
-  def find_or_create_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Potion).void)).returns(Potion) }
-  def find_or_create_by!(attributes, &block); end
-
-  sig { returns(T.nilable(Potion)) }
-  def first; end
-
-  sig { returns(Potion) }
-  def first!; end
-
-  sig { returns(T.nilable(Potion)) }
-  def second; end
-
-  sig { returns(Potion) }
-  def second!; end
-
-  sig { returns(T.nilable(Potion)) }
-  def third; end
-
-  sig { returns(Potion) }
-  def third!; end
-
-  sig { returns(T.nilable(Potion)) }
-  def third_to_last; end
-
-  sig { returns(Potion) }
-  def third_to_last!; end
-
-  sig { returns(T.nilable(Potion)) }
-  def second_to_last; end
-
-  sig { returns(Potion) }
-  def second_to_last!; end
-
-  sig { returns(T.nilable(Potion)) }
-  def last; end
-
-  sig { returns(Potion) }
-  def last!; end
 
   sig { params(conditions: T.untyped).returns(T::Boolean) }
   def exists?(conditions = nil); end

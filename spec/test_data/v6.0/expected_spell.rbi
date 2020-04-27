@@ -418,60 +418,6 @@ class Spell::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelatio
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Spell::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
 
-  sig { params(args: T.untyped).returns(Spell) }
-  def find(*args); end
-
-  sig { params(args: T.untyped).returns(T.nilable(Spell)) }
-  def find_by(*args); end
-
-  sig { params(args: T.untyped).returns(Spell) }
-  def find_by!(*args); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Spell).void)).returns(Spell) }
-  def find_or_initialize_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Spell).void)).returns(Spell) }
-  def find_or_create_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Spell).void)).returns(Spell) }
-  def find_or_create_by!(attributes, &block); end
-
-  sig { returns(T.nilable(Spell)) }
-  def first; end
-
-  sig { returns(Spell) }
-  def first!; end
-
-  sig { returns(T.nilable(Spell)) }
-  def second; end
-
-  sig { returns(Spell) }
-  def second!; end
-
-  sig { returns(T.nilable(Spell)) }
-  def third; end
-
-  sig { returns(Spell) }
-  def third!; end
-
-  sig { returns(T.nilable(Spell)) }
-  def third_to_last; end
-
-  sig { returns(Spell) }
-  def third_to_last!; end
-
-  sig { returns(T.nilable(Spell)) }
-  def second_to_last; end
-
-  sig { returns(Spell) }
-  def second_to_last!; end
-
-  sig { returns(T.nilable(Spell)) }
-  def last; end
-
-  sig { returns(Spell) }
-  def last!; end
-
   sig { params(conditions: T.untyped).returns(T::Boolean) }
   def exists?(conditions = nil); end
 
@@ -613,60 +559,6 @@ class Spell::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associati
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Spell::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { params(args: T.untyped).returns(Spell) }
-  def find(*args); end
-
-  sig { params(args: T.untyped).returns(T.nilable(Spell)) }
-  def find_by(*args); end
-
-  sig { params(args: T.untyped).returns(Spell) }
-  def find_by!(*args); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Spell).void)).returns(Spell) }
-  def find_or_initialize_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Spell).void)).returns(Spell) }
-  def find_or_create_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Spell).void)).returns(Spell) }
-  def find_or_create_by!(attributes, &block); end
-
-  sig { returns(T.nilable(Spell)) }
-  def first; end
-
-  sig { returns(Spell) }
-  def first!; end
-
-  sig { returns(T.nilable(Spell)) }
-  def second; end
-
-  sig { returns(Spell) }
-  def second!; end
-
-  sig { returns(T.nilable(Spell)) }
-  def third; end
-
-  sig { returns(Spell) }
-  def third!; end
-
-  sig { returns(T.nilable(Spell)) }
-  def third_to_last; end
-
-  sig { returns(Spell) }
-  def third_to_last!; end
-
-  sig { returns(T.nilable(Spell)) }
-  def second_to_last; end
-
-  sig { returns(Spell) }
-  def second_to_last!; end
-
-  sig { returns(T.nilable(Spell)) }
-  def last; end
-
-  sig { returns(Spell) }
-  def last!; end
 
   sig { params(conditions: T.untyped).returns(T::Boolean) }
   def exists?(conditions = nil); end

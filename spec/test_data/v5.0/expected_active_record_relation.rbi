@@ -162,4 +162,25 @@ class ActiveRecord::Associations::CollectionProxy < ActiveRecord::Relation
 
   sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Elem).void)).returns(Elem) }
   def create!(attributes = nil, &block); end
+
+  sig { params(args: T.untyped).returns(Elem) }
+  def find(*args); end
+
+  sig { params(args: T.untyped).returns(T.nilable(Elem)) }
+  def first(*args); end
+
+  sig { params(args: T.untyped).returns(T.nilable(Elem)) }
+  def second(*args); end
+
+  sig { params(args: T.untyped).returns(T.nilable(Elem)) }
+  def third(*args); end
+
+  sig { params(args: T.untyped).returns(T.nilable(Elem)) }
+  def third_to_last(*args); end
+
+  sig { params(args: T.untyped).returns(T.nilable(Elem)) }
+  def second_to_last(*args); end
+
+  sig { params(args: T.untyped).returns(T.nilable(Elem)) }
+  def last(*args); end
 end

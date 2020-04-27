@@ -583,60 +583,6 @@ class Wand::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
 
-  sig { params(args: T.untyped).returns(Wand) }
-  def find(*args); end
-
-  sig { params(args: T.untyped).returns(T.nilable(Wand)) }
-  def find_by(*args); end
-
-  sig { params(args: T.untyped).returns(Wand) }
-  def find_by!(*args); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Wand).void)).returns(Wand) }
-  def find_or_initialize_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Wand).void)).returns(Wand) }
-  def find_or_create_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Wand).void)).returns(Wand) }
-  def find_or_create_by!(attributes, &block); end
-
-  sig { returns(T.nilable(Wand)) }
-  def first; end
-
-  sig { returns(Wand) }
-  def first!; end
-
-  sig { returns(T.nilable(Wand)) }
-  def second; end
-
-  sig { returns(Wand) }
-  def second!; end
-
-  sig { returns(T.nilable(Wand)) }
-  def third; end
-
-  sig { returns(Wand) }
-  def third!; end
-
-  sig { returns(T.nilable(Wand)) }
-  def third_to_last; end
-
-  sig { returns(Wand) }
-  def third_to_last!; end
-
-  sig { returns(T.nilable(Wand)) }
-  def second_to_last; end
-
-  sig { returns(Wand) }
-  def second_to_last!; end
-
-  sig { returns(T.nilable(Wand)) }
-  def last; end
-
-  sig { returns(Wand) }
-  def last!; end
-
   sig { params(conditions: T.untyped).returns(T::Boolean) }
   def exists?(conditions = nil); end
 
@@ -778,60 +724,6 @@ class Wand::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associatio
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { params(args: T.untyped).returns(Wand) }
-  def find(*args); end
-
-  sig { params(args: T.untyped).returns(T.nilable(Wand)) }
-  def find_by(*args); end
-
-  sig { params(args: T.untyped).returns(Wand) }
-  def find_by!(*args); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Wand).void)).returns(Wand) }
-  def find_or_initialize_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Wand).void)).returns(Wand) }
-  def find_or_create_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Wand).void)).returns(Wand) }
-  def find_or_create_by!(attributes, &block); end
-
-  sig { returns(T.nilable(Wand)) }
-  def first; end
-
-  sig { returns(Wand) }
-  def first!; end
-
-  sig { returns(T.nilable(Wand)) }
-  def second; end
-
-  sig { returns(Wand) }
-  def second!; end
-
-  sig { returns(T.nilable(Wand)) }
-  def third; end
-
-  sig { returns(Wand) }
-  def third!; end
-
-  sig { returns(T.nilable(Wand)) }
-  def third_to_last; end
-
-  sig { returns(Wand) }
-  def third_to_last!; end
-
-  sig { returns(T.nilable(Wand)) }
-  def second_to_last; end
-
-  sig { returns(Wand) }
-  def second_to_last!; end
-
-  sig { returns(T.nilable(Wand)) }
-  def last; end
-
-  sig { returns(Wand) }
-  def last!; end
 
   sig { params(conditions: T.untyped).returns(T::Boolean) }
   def exists?(conditions = nil); end

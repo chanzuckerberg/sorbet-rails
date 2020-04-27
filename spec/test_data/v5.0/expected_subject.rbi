@@ -373,60 +373,6 @@ class Subject::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelat
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Subject::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
 
-  sig { params(args: T.untyped).returns(Subject) }
-  def find(*args); end
-
-  sig { params(args: T.untyped).returns(T.nilable(Subject)) }
-  def find_by(*args); end
-
-  sig { params(args: T.untyped).returns(Subject) }
-  def find_by!(*args); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Subject).void)).returns(Subject) }
-  def find_or_initialize_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Subject).void)).returns(Subject) }
-  def find_or_create_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Subject).void)).returns(Subject) }
-  def find_or_create_by!(attributes, &block); end
-
-  sig { returns(T.nilable(Subject)) }
-  def first; end
-
-  sig { returns(Subject) }
-  def first!; end
-
-  sig { returns(T.nilable(Subject)) }
-  def second; end
-
-  sig { returns(Subject) }
-  def second!; end
-
-  sig { returns(T.nilable(Subject)) }
-  def third; end
-
-  sig { returns(Subject) }
-  def third!; end
-
-  sig { returns(T.nilable(Subject)) }
-  def third_to_last; end
-
-  sig { returns(Subject) }
-  def third_to_last!; end
-
-  sig { returns(T.nilable(Subject)) }
-  def second_to_last; end
-
-  sig { returns(Subject) }
-  def second_to_last!; end
-
-  sig { returns(T.nilable(Subject)) }
-  def last; end
-
-  sig { returns(Subject) }
-  def last!; end
-
   sig { params(conditions: T.untyped).returns(T::Boolean) }
   def exists?(conditions = nil); end
 
@@ -553,60 +499,6 @@ class Subject::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associa
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Subject::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { params(args: T.untyped).returns(Subject) }
-  def find(*args); end
-
-  sig { params(args: T.untyped).returns(T.nilable(Subject)) }
-  def find_by(*args); end
-
-  sig { params(args: T.untyped).returns(Subject) }
-  def find_by!(*args); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Subject).void)).returns(Subject) }
-  def find_or_initialize_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Subject).void)).returns(Subject) }
-  def find_or_create_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Subject).void)).returns(Subject) }
-  def find_or_create_by!(attributes, &block); end
-
-  sig { returns(T.nilable(Subject)) }
-  def first; end
-
-  sig { returns(Subject) }
-  def first!; end
-
-  sig { returns(T.nilable(Subject)) }
-  def second; end
-
-  sig { returns(Subject) }
-  def second!; end
-
-  sig { returns(T.nilable(Subject)) }
-  def third; end
-
-  sig { returns(Subject) }
-  def third!; end
-
-  sig { returns(T.nilable(Subject)) }
-  def third_to_last; end
-
-  sig { returns(Subject) }
-  def third_to_last!; end
-
-  sig { returns(T.nilable(Subject)) }
-  def second_to_last; end
-
-  sig { returns(Subject) }
-  def second_to_last!; end
-
-  sig { returns(T.nilable(Subject)) }
-  def last; end
-
-  sig { returns(Subject) }
-  def last!; end
 
   sig { params(conditions: T.untyped).returns(T::Boolean) }
   def exists?(conditions = nil); end

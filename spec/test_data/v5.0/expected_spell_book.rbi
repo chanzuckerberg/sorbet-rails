@@ -465,60 +465,6 @@ class SpellBook::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRel
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
 
-  sig { params(args: T.untyped).returns(SpellBook) }
-  def find(*args); end
-
-  sig { params(args: T.untyped).returns(T.nilable(SpellBook)) }
-  def find_by(*args); end
-
-  sig { params(args: T.untyped).returns(SpellBook) }
-  def find_by!(*args); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: SpellBook).void)).returns(SpellBook) }
-  def find_or_initialize_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: SpellBook).void)).returns(SpellBook) }
-  def find_or_create_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: SpellBook).void)).returns(SpellBook) }
-  def find_or_create_by!(attributes, &block); end
-
-  sig { returns(T.nilable(SpellBook)) }
-  def first; end
-
-  sig { returns(SpellBook) }
-  def first!; end
-
-  sig { returns(T.nilable(SpellBook)) }
-  def second; end
-
-  sig { returns(SpellBook) }
-  def second!; end
-
-  sig { returns(T.nilable(SpellBook)) }
-  def third; end
-
-  sig { returns(SpellBook) }
-  def third!; end
-
-  sig { returns(T.nilable(SpellBook)) }
-  def third_to_last; end
-
-  sig { returns(SpellBook) }
-  def third_to_last!; end
-
-  sig { returns(T.nilable(SpellBook)) }
-  def second_to_last; end
-
-  sig { returns(SpellBook) }
-  def second_to_last!; end
-
-  sig { returns(T.nilable(SpellBook)) }
-  def last; end
-
-  sig { returns(SpellBook) }
-  def last!; end
-
   sig { params(conditions: T.untyped).returns(T::Boolean) }
   def exists?(conditions = nil); end
 
@@ -654,60 +600,6 @@ class SpellBook::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Assoc
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { params(args: T.untyped).returns(SpellBook) }
-  def find(*args); end
-
-  sig { params(args: T.untyped).returns(T.nilable(SpellBook)) }
-  def find_by(*args); end
-
-  sig { params(args: T.untyped).returns(SpellBook) }
-  def find_by!(*args); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: SpellBook).void)).returns(SpellBook) }
-  def find_or_initialize_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: SpellBook).void)).returns(SpellBook) }
-  def find_or_create_by(attributes, &block); end
-
-  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: SpellBook).void)).returns(SpellBook) }
-  def find_or_create_by!(attributes, &block); end
-
-  sig { returns(T.nilable(SpellBook)) }
-  def first; end
-
-  sig { returns(SpellBook) }
-  def first!; end
-
-  sig { returns(T.nilable(SpellBook)) }
-  def second; end
-
-  sig { returns(SpellBook) }
-  def second!; end
-
-  sig { returns(T.nilable(SpellBook)) }
-  def third; end
-
-  sig { returns(SpellBook) }
-  def third!; end
-
-  sig { returns(T.nilable(SpellBook)) }
-  def third_to_last; end
-
-  sig { returns(SpellBook) }
-  def third_to_last!; end
-
-  sig { returns(T.nilable(SpellBook)) }
-  def second_to_last; end
-
-  sig { returns(SpellBook) }
-  def second_to_last!; end
-
-  sig { returns(T.nilable(SpellBook)) }
-  def last; end
-
-  sig { returns(SpellBook) }
-  def last!; end
 
   sig { params(conditions: T.untyped).returns(T::Boolean) }
   def exists?(conditions = nil); end
