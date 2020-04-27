@@ -150,7 +150,6 @@ end
 class ActiveStorage::Attachment::ActiveRecord_Relation < ActiveRecord::Relation
   include ActiveStorage::Attachment::ActiveRelation_WhereNot
   include ActiveStorage::Attachment::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: ActiveStorage::Attachment)
@@ -258,7 +257,6 @@ end
 class ActiveStorage::Attachment::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
   include ActiveStorage::Attachment::ActiveRelation_WhereNot
   include ActiveStorage::Attachment::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: ActiveStorage::Attachment)
@@ -361,28 +359,10 @@ class ActiveStorage::Attachment::ActiveRecord_AssociationRelation < ActiveRecord
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(ActiveStorage::Attachment::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { override.params(block: T.proc.params(e: ActiveStorage::Attachment).void).returns(T::Array[ActiveStorage::Attachment]) }
-  def each(&block); end
-
-  sig { params(level: T.nilable(Integer)).returns(T::Array[ActiveStorage::Attachment]) }
-  def flatten(level); end
-
-  sig { returns(T::Array[ActiveStorage::Attachment]) }
-  def to_a; end
-
-  sig do
-    type_parameters(:U).params(
-        blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),
-    )
-    .returns(T::Array[T.type_parameter(:U)])
-  end
-  def map(&blk); end
 end
 
 class ActiveStorage::Attachment::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include ActiveStorage::Attachment::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: ActiveStorage::Attachment)
@@ -485,23 +465,6 @@ class ActiveStorage::Attachment::ActiveRecord_Associations_CollectionProxy < Act
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(ActiveStorage::Attachment::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { override.params(block: T.proc.params(e: ActiveStorage::Attachment).void).returns(T::Array[ActiveStorage::Attachment]) }
-  def each(&block); end
-
-  sig { params(level: T.nilable(Integer)).returns(T::Array[ActiveStorage::Attachment]) }
-  def flatten(level); end
-
-  sig { returns(T::Array[ActiveStorage::Attachment]) }
-  def to_a; end
-
-  sig do
-    type_parameters(:U).params(
-        blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),
-    )
-    .returns(T::Array[T.type_parameter(:U)])
-  end
-  def map(&blk); end
 
   sig { params(records: T.any(ActiveStorage::Attachment, T::Array[ActiveStorage::Attachment])).returns(T.self_type) }
   def <<(*records); end

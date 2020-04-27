@@ -153,7 +153,6 @@ end
 class ActiveStorage::Blob::ActiveRecord_Relation < ActiveRecord::Relation
   include ActiveStorage::Blob::ActiveRelation_WhereNot
   include ActiveStorage::Blob::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: ActiveStorage::Blob)
@@ -255,7 +254,6 @@ end
 class ActiveStorage::Blob::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
   include ActiveStorage::Blob::ActiveRelation_WhereNot
   include ActiveStorage::Blob::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: ActiveStorage::Blob)
@@ -352,28 +350,10 @@ class ActiveStorage::Blob::ActiveRecord_AssociationRelation < ActiveRecord::Asso
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { override.params(block: T.proc.params(e: ActiveStorage::Blob).void).returns(T::Array[ActiveStorage::Blob]) }
-  def each(&block); end
-
-  sig { params(level: T.nilable(Integer)).returns(T::Array[ActiveStorage::Blob]) }
-  def flatten(level); end
-
-  sig { returns(T::Array[ActiveStorage::Blob]) }
-  def to_a; end
-
-  sig do
-    type_parameters(:U).params(
-        blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),
-    )
-    .returns(T::Array[T.type_parameter(:U)])
-  end
-  def map(&blk); end
 end
 
 class ActiveStorage::Blob::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include ActiveStorage::Blob::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: ActiveStorage::Blob)
@@ -470,23 +450,6 @@ class ActiveStorage::Blob::ActiveRecord_Associations_CollectionProxy < ActiveRec
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { override.params(block: T.proc.params(e: ActiveStorage::Blob).void).returns(T::Array[ActiveStorage::Blob]) }
-  def each(&block); end
-
-  sig { params(level: T.nilable(Integer)).returns(T::Array[ActiveStorage::Blob]) }
-  def flatten(level); end
-
-  sig { returns(T::Array[ActiveStorage::Blob]) }
-  def to_a; end
-
-  sig do
-    type_parameters(:U).params(
-        blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),
-    )
-    .returns(T::Array[T.type_parameter(:U)])
-  end
-  def map(&blk); end
 
   sig { params(records: T.any(ActiveStorage::Blob, T::Array[ActiveStorage::Blob])).returns(T.self_type) }
   def <<(*records); end

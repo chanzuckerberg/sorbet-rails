@@ -195,6 +195,15 @@ spell_books.each { |s| T.assert_type!(s, SpellBook) }
 spell_books.map { |s| T.assert_type!(s, SpellBook) }
 T.assert_type!(spell_books.to_a, T::Array[SpellBook])
 T.assert_type!(spell_books.empty?, T::Boolean)
+# Push methods
+T.assert_type!(spell_books << spell_book, SpellBook::ActiveRecord_Associations_CollectionProxy)
+T.assert_type!(spell_books << [spell_book], SpellBook::ActiveRecord_Associations_CollectionProxy)
+T.assert_type!(spell_books.append(spell_book), SpellBook::ActiveRecord_Associations_CollectionProxy)
+T.assert_type!(spell_books.append([spell_book]), SpellBook::ActiveRecord_Associations_CollectionProxy)
+T.assert_type!(spell_books.push(spell_book), SpellBook::ActiveRecord_Associations_CollectionProxy)
+T.assert_type!(spell_books.push([spell_book]), SpellBook::ActiveRecord_Associations_CollectionProxy)
+# T.assert_type!(spell_books.concat(spell_book), SpellBook::ActiveRecord_Associations_CollectionProxy) # TODO: In Rails 5.0 and 5.1 this actually returns T::Array
+# T.assert_type!(spell_books.concat([spell_book]), SpellBook::ActiveRecord_Associations_CollectionProxy) # TODO: In Rails 5.0 and 5.1 this actually returns T::Array
 
 # finder methods -- AssociationRelation
 spell_books_query = spell_books.where(wizard_id: wizard.id)

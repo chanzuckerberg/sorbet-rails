@@ -158,7 +158,6 @@ end
 class SpellBook::HABTM_Spells::ActiveRecord_Relation < ActiveRecord::Relation
   include SpellBook::HABTM_Spells::ActiveRelation_WhereNot
   include SpellBook::HABTM_Spells::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: SpellBook::HABTM_Spells)
@@ -251,7 +250,6 @@ end
 class SpellBook::HABTM_Spells::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
   include SpellBook::HABTM_Spells::ActiveRelation_WhereNot
   include SpellBook::HABTM_Spells::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: SpellBook::HABTM_Spells)
@@ -339,28 +337,10 @@ class SpellBook::HABTM_Spells::ActiveRecord_AssociationRelation < ActiveRecord::
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::HABTM_Spells::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { override.params(block: T.proc.params(e: SpellBook::HABTM_Spells).void).returns(T::Array[SpellBook::HABTM_Spells]) }
-  def each(&block); end
-
-  sig { params(level: T.nilable(Integer)).returns(T::Array[SpellBook::HABTM_Spells]) }
-  def flatten(level); end
-
-  sig { returns(T::Array[SpellBook::HABTM_Spells]) }
-  def to_a; end
-
-  sig do
-    type_parameters(:U).params(
-        blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),
-    )
-    .returns(T::Array[T.type_parameter(:U)])
-  end
-  def map(&blk); end
 end
 
 class SpellBook::HABTM_Spells::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include SpellBook::HABTM_Spells::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: SpellBook::HABTM_Spells)
@@ -448,23 +428,6 @@ class SpellBook::HABTM_Spells::ActiveRecord_Associations_CollectionProxy < Activ
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::HABTM_Spells::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { override.params(block: T.proc.params(e: SpellBook::HABTM_Spells).void).returns(T::Array[SpellBook::HABTM_Spells]) }
-  def each(&block); end
-
-  sig { params(level: T.nilable(Integer)).returns(T::Array[SpellBook::HABTM_Spells]) }
-  def flatten(level); end
-
-  sig { returns(T::Array[SpellBook::HABTM_Spells]) }
-  def to_a; end
-
-  sig do
-    type_parameters(:U).params(
-        blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),
-    )
-    .returns(T::Array[T.type_parameter(:U)])
-  end
-  def map(&blk); end
 
   sig { params(records: T.any(SpellBook::HABTM_Spells, T::Array[SpellBook::HABTM_Spells])).returns(T.self_type) }
   def <<(*records); end

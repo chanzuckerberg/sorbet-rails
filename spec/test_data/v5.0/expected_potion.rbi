@@ -129,7 +129,6 @@ end
 class Potion::ActiveRecord_Relation < ActiveRecord::Relation
   include Potion::ActiveRelation_WhereNot
   include Potion::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: Potion)
@@ -222,7 +221,6 @@ end
 class Potion::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
   include Potion::ActiveRelation_WhereNot
   include Potion::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: Potion)
@@ -310,28 +308,10 @@ class Potion::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelati
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Potion::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { override.params(block: T.proc.params(e: Potion).void).returns(T::Array[Potion]) }
-  def each(&block); end
-
-  sig { params(level: T.nilable(Integer)).returns(T::Array[Potion]) }
-  def flatten(level); end
-
-  sig { returns(T::Array[Potion]) }
-  def to_a; end
-
-  sig do
-    type_parameters(:U).params(
-        blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),
-    )
-    .returns(T::Array[T.type_parameter(:U)])
-  end
-  def map(&blk); end
 end
 
 class Potion::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include Potion::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: Potion)
@@ -419,23 +399,6 @@ class Potion::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associat
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Potion::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { override.params(block: T.proc.params(e: Potion).void).returns(T::Array[Potion]) }
-  def each(&block); end
-
-  sig { params(level: T.nilable(Integer)).returns(T::Array[Potion]) }
-  def flatten(level); end
-
-  sig { returns(T::Array[Potion]) }
-  def to_a; end
-
-  sig do
-    type_parameters(:U).params(
-        blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),
-    )
-    .returns(T::Array[T.type_parameter(:U)])
-  end
-  def map(&blk); end
 
   sig { params(records: T.any(Potion, T::Array[Potion])).returns(T.self_type) }
   def <<(*records); end

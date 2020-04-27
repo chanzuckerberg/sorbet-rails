@@ -161,7 +161,6 @@ end
 class Subject::HABTM_Wizards::ActiveRecord_Relation < ActiveRecord::Relation
   include Subject::HABTM_Wizards::ActiveRelation_WhereNot
   include Subject::HABTM_Wizards::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: Subject::HABTM_Wizards)
@@ -257,7 +256,6 @@ end
 class Subject::HABTM_Wizards::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
   include Subject::HABTM_Wizards::ActiveRelation_WhereNot
   include Subject::HABTM_Wizards::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: Subject::HABTM_Wizards)
@@ -348,28 +346,10 @@ class Subject::HABTM_Wizards::ActiveRecord_AssociationRelation < ActiveRecord::A
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Subject::HABTM_Wizards::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { override.params(block: T.proc.params(e: Subject::HABTM_Wizards).void).returns(T::Array[Subject::HABTM_Wizards]) }
-  def each(&block); end
-
-  sig { params(level: T.nilable(Integer)).returns(T::Array[Subject::HABTM_Wizards]) }
-  def flatten(level); end
-
-  sig { returns(T::Array[Subject::HABTM_Wizards]) }
-  def to_a; end
-
-  sig do
-    type_parameters(:U).params(
-        blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),
-    )
-    .returns(T::Array[T.type_parameter(:U)])
-  end
-  def map(&blk); end
 end
 
 class Subject::HABTM_Wizards::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include Subject::HABTM_Wizards::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: Subject::HABTM_Wizards)
@@ -460,23 +440,6 @@ class Subject::HABTM_Wizards::ActiveRecord_Associations_CollectionProxy < Active
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Subject::HABTM_Wizards::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { override.params(block: T.proc.params(e: Subject::HABTM_Wizards).void).returns(T::Array[Subject::HABTM_Wizards]) }
-  def each(&block); end
-
-  sig { params(level: T.nilable(Integer)).returns(T::Array[Subject::HABTM_Wizards]) }
-  def flatten(level); end
-
-  sig { returns(T::Array[Subject::HABTM_Wizards]) }
-  def to_a; end
-
-  sig do
-    type_parameters(:U).params(
-        blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),
-    )
-    .returns(T::Array[T.type_parameter(:U)])
-  end
-  def map(&blk); end
 
   sig { params(records: T.any(Subject::HABTM_Wizards, T::Array[Subject::HABTM_Wizards])).returns(T.self_type) }
   def <<(*records); end

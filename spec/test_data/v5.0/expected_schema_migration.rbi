@@ -132,7 +132,6 @@ end
 class ActiveRecord::SchemaMigration::ActiveRecord_Relation < ActiveRecord::Relation
   include ActiveRecord::SchemaMigration::ActiveRelation_WhereNot
   include ActiveRecord::SchemaMigration::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: ActiveRecord::SchemaMigration)
@@ -225,7 +224,6 @@ end
 class ActiveRecord::SchemaMigration::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
   include ActiveRecord::SchemaMigration::ActiveRelation_WhereNot
   include ActiveRecord::SchemaMigration::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: ActiveRecord::SchemaMigration)
@@ -313,28 +311,10 @@ class ActiveRecord::SchemaMigration::ActiveRecord_AssociationRelation < ActiveRe
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(ActiveRecord::SchemaMigration::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { override.params(block: T.proc.params(e: ActiveRecord::SchemaMigration).void).returns(T::Array[ActiveRecord::SchemaMigration]) }
-  def each(&block); end
-
-  sig { params(level: T.nilable(Integer)).returns(T::Array[ActiveRecord::SchemaMigration]) }
-  def flatten(level); end
-
-  sig { returns(T::Array[ActiveRecord::SchemaMigration]) }
-  def to_a; end
-
-  sig do
-    type_parameters(:U).params(
-        blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),
-    )
-    .returns(T::Array[T.type_parameter(:U)])
-  end
-  def map(&blk); end
 end
 
 class ActiveRecord::SchemaMigration::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include ActiveRecord::SchemaMigration::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: ActiveRecord::SchemaMigration)
@@ -422,23 +402,6 @@ class ActiveRecord::SchemaMigration::ActiveRecord_Associations_CollectionProxy <
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(ActiveRecord::SchemaMigration::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { override.params(block: T.proc.params(e: ActiveRecord::SchemaMigration).void).returns(T::Array[ActiveRecord::SchemaMigration]) }
-  def each(&block); end
-
-  sig { params(level: T.nilable(Integer)).returns(T::Array[ActiveRecord::SchemaMigration]) }
-  def flatten(level); end
-
-  sig { returns(T::Array[ActiveRecord::SchemaMigration]) }
-  def to_a; end
-
-  sig do
-    type_parameters(:U).params(
-        blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),
-    )
-    .returns(T::Array[T.type_parameter(:U)])
-  end
-  def map(&blk); end
 
   sig { params(records: T.any(ActiveRecord::SchemaMigration, T::Array[ActiveRecord::SchemaMigration])).returns(T.self_type) }
   def <<(*records); end

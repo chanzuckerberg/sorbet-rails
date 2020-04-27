@@ -170,7 +170,6 @@ end
 class Headmaster::ActiveRecord_Relation < ActiveRecord::Relation
   include Headmaster::ActiveRelation_WhereNot
   include Headmaster::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: Headmaster)
@@ -266,7 +265,6 @@ end
 class Headmaster::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
   include Headmaster::ActiveRelation_WhereNot
   include Headmaster::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: Headmaster)
@@ -357,28 +355,10 @@ class Headmaster::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRe
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Headmaster::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { override.params(block: T.proc.params(e: Headmaster).void).returns(T::Array[Headmaster]) }
-  def each(&block); end
-
-  sig { params(level: T.nilable(Integer)).returns(T::Array[Headmaster]) }
-  def flatten(level); end
-
-  sig { returns(T::Array[Headmaster]) }
-  def to_a; end
-
-  sig do
-    type_parameters(:U).params(
-        blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),
-    )
-    .returns(T::Array[T.type_parameter(:U)])
-  end
-  def map(&blk); end
 end
 
 class Headmaster::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include Headmaster::CustomFinderMethods
-  include Enumerable
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: Headmaster)
@@ -469,23 +449,6 @@ class Headmaster::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Asso
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Headmaster::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-
-  sig { override.params(block: T.proc.params(e: Headmaster).void).returns(T::Array[Headmaster]) }
-  def each(&block); end
-
-  sig { params(level: T.nilable(Integer)).returns(T::Array[Headmaster]) }
-  def flatten(level); end
-
-  sig { returns(T::Array[Headmaster]) }
-  def to_a; end
-
-  sig do
-    type_parameters(:U).params(
-        blk: T.proc.params(arg0: Elem).returns(T.type_parameter(:U)),
-    )
-    .returns(T::Array[T.type_parameter(:U)])
-  end
-  def map(&blk); end
 
   sig { params(records: T.any(Headmaster, T::Array[Headmaster])).returns(T.self_type) }
   def <<(*records); end
