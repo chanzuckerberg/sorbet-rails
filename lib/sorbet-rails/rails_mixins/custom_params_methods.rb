@@ -1,5 +1,6 @@
 # typed: false
 require 'sorbet-runtime'
+require('sorbet-rails/deprecation.rb')
 
 module SorbetRails::CustomParamsMethods
   include Kernel
@@ -16,6 +17,11 @@ module SorbetRails::CustomParamsMethods
     returns(T.type_parameter(:U))
   }
   def require_typed(key, ta)
+    SorbetRails::TypeAssertDeprecation.deprecation_warning(
+      :require_typed,
+      'Use TypedParams with a T::Struct represents the type of each parameters.'
+    )
+
     val = require(key)
     ta.assert(val)
   rescue TypeError
@@ -35,6 +41,11 @@ module SorbetRails::CustomParamsMethods
     returns(T.type_parameter(:U))
   }
   def fetch_typed(key, ta, *args)
+    SorbetRails::TypeAssertDeprecation.deprecation_warning(
+      :fetch_typed,
+      'Use TypedParams with a T::Struct represents the type of each parameters.'
+    )
+
     val = fetch(key, *args)
     ta.assert(val)
   rescue TypeError
