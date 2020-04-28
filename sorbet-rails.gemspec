@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name          = %q{sorbet-rails}
-  s.version       = "0.6.2"
+  s.version       = "0.6.3"
   s.date          = %q{2019-04-18}
   s.summary       = %q{Set of tools to make Sorbet work with Rails seamlessly.}
   s.authors       = ["Chan Zuckerberg Initiative"]
@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'parlour', '~> 2.0'
   s.add_dependency 'sorbet-runtime', '>= 0.5'
-  s.add_dependency 'sorbet-coerce', '>= 0.2.4'
+  s.add_dependency 'sorbet-coerce', '>= 0.2.6'
   s.add_dependency 'method_source', '>= 0.9.2'
   s.add_dependency 'parser', '>= 2.7'
 
