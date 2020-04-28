@@ -77,11 +77,19 @@ namespace :rails_rbi do
       models_to_generate = models_to_generate - blacklisted_models
     end
 
-    generated_rbis = generate_rbis_for_models(models_to_generate, all_models)
-    generated_rbis.each do |model_name, contents|
-      file_path = Rails.root.join("sorbet", "rails-rbi", "models", "#{model_name.underscore}.rbi")
-      FileUtils.mkdir_p(File.dirname(file_path))
-      File.write(file_path, contents)
+    available_class_names = Set.new(all_models.map { |c| c.name })
+    models_to_generate.each do |model_class|
+      model_class_name = model_class.to_s
+      begin
+        formatter = SorbetRails::ModelRbiFormatter.new(model_class, available_class_names)
+        file_path = Rails.root.join("sorbet", "rails-rbi", "models", "#{model_class_name.underscore}.rbi")
+        FileUtils.mkdir_p(File.dirname(file_path))
+        File.write(file_path, formatter.generate_rbi)
+      rescue StandardError, NotImplementedError => ex
+        puts "---"
+        puts "Error when handling model #{model_class_name}: #{ex}"
+        nil
+      end
     end
   end
 
@@ -143,22 +151,6 @@ namespace :rails_rbi do
       FileUtils.mkdir_p(File.dirname(file_path))
       File.write(file_path, formatter.generate_rbi)
     end
-  end
-
-  def generate_rbis_for_models(model_classes, available_classes)
-    available_class_names = Set.new(available_classes.map { |c| c.name })
-    formatted = model_classes.map do |model_class|
-      model_class_name = model_class.to_s
-      begin
-        formatter = SorbetRails::ModelRbiFormatter.new(model_class, available_class_names)
-        [model_class_name, formatter.generate_rbi]
-      rescue StandardError, NotImplementedError => ex
-        puts "---"
-        puts "Error when handling model #{model_class_name}: #{ex}"
-        nil
-      end
-    end
-    Hash[formatted.compact] # remove models with errors
   end
 
   def blacklisted_models
