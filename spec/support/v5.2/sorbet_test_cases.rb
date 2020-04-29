@@ -29,26 +29,6 @@ T.assert_type!(T.must(wizard.wand).wizard, Wizard)
 T.assert_type!(wizard.spell_books, SpellBook::ActiveRecord_Associations_CollectionProxy)
 T.assert_type!(wizard.spell_book_ids, T::Array[Integer])
 
-# -- model relation
-# default
-T.assert_type!(Wizard.all, Wizard::ActiveRecord_Relation)
-
-# custom scope
-T.assert_type!(Wizard.recent, Wizard::ActiveRecord_Relation)
-
-# enum scope
-T.assert_type!(Wizard.Gryffindor, Wizard::ActiveRecord_Relation)
-
-# ActiveRecord Querying
-T.assert_type!(Wizard.Gryffindor.recent, Wizard::ActiveRecord_Relation)
-T.assert_type!(Wizard.Gryffindor.recent.unscoped, Wizard::ActiveRecord_Relation)
-T.assert_type!(Wizard.where(id: 1), Wizard::ActiveRecord_Relation)
-T.assert_type!(Wizard.where(id: 1).recent, Wizard::ActiveRecord_Relation)
-T.assert_type!(Wizard.where.not(id: 1), Wizard::ActiveRecord_Relation)
-T.assert_type!(Wizard.preload(:spell_books), Wizard::ActiveRecord_Relation)
-T.assert_type!(Wizard.eager_load(:spell_books), Wizard::ActiveRecord_Relation)
-T.assert_type!(Wizard.order(:id), Wizard::ActiveRecord_Relation)
-
 # Finder methods -- Model
 T.assert_type!(Wizard.exists?(name: 'Test'), T::Boolean)
 T.assert_type!(Wizard.find(wizard.id), Wizard)
@@ -90,6 +70,18 @@ T.assert_type!(Wizard.none?, T::Boolean)
 T.assert_type!(Wizard.one?, T::Boolean)
 # T.assert_type!(Wizard.update_all(name: 'Harry Potter'), Integer) # Ignored until we add support
 # T.assert_type!(Wizard.delete_all, Integer) # Ignored until we add support
+# Query methods
+T.assert_type!(Wizard.all, Wizard::ActiveRecord_Relation)
+T.assert_type!(Wizard.recent, Wizard::ActiveRecord_Relation) # Named scope
+T.assert_type!(Wizard.Gryffindor, Wizard::ActiveRecord_Relation) # Enum scope
+T.assert_type!(Wizard.Gryffindor.recent, Wizard::ActiveRecord_Relation)
+T.assert_type!(Wizard.Gryffindor.recent.unscoped, Wizard::ActiveRecord_Relation)
+T.assert_type!(Wizard.where(id: 1), Wizard::ActiveRecord_Relation)
+T.assert_type!(Wizard.where(id: 1).recent, Wizard::ActiveRecord_Relation)
+T.assert_type!(Wizard.where.not(id: 1), Wizard::ActiveRecord_Relation)
+T.assert_type!(Wizard.preload(:spell_books), Wizard::ActiveRecord_Relation)
+T.assert_type!(Wizard.eager_load(:spell_books), Wizard::ActiveRecord_Relation)
+T.assert_type!(Wizard.order(:id), Wizard::ActiveRecord_Relation)
 
 # Finder methods -- ActiveRecord::Relation
 T.assert_type!(Wizard.all.exists?(name: 'Harry Potter'), T::Boolean)
@@ -133,6 +125,18 @@ T.assert_type!(Wizard.all.none?, T::Boolean)
 T.assert_type!(Wizard.all.one?, T::Boolean)
 # T.assert_type!(Wizard.all.update_all(name: 'Harry Potter'), Integer) # Ignored until we add support
 # T.assert_type!(Wizard.all.delete_all, Integer) # Ignored until we add support
+# Query methods
+T.assert_type!(Wizard.all.all, Wizard::ActiveRecord_Relation)
+T.assert_type!(Wizard.all.recent, Wizard::ActiveRecord_Relation) # Named scope
+T.assert_type!(Wizard.all.Gryffindor, Wizard::ActiveRecord_Relation) # Enum scope
+T.assert_type!(Wizard.all.Gryffindor.recent, Wizard::ActiveRecord_Relation)
+T.assert_type!(Wizard.all.Gryffindor.recent.unscoped, Wizard::ActiveRecord_Relation)
+T.assert_type!(Wizard.all.where(id: 1), Wizard::ActiveRecord_Relation)
+T.assert_type!(Wizard.all.where(id: 1).recent, Wizard::ActiveRecord_Relation)
+T.assert_type!(Wizard.all.where.not(id: 1), Wizard::ActiveRecord_Relation)
+T.assert_type!(Wizard.all.preload(:spell_books), Wizard::ActiveRecord_Relation)
+T.assert_type!(Wizard.all.eager_load(:spell_books), Wizard::ActiveRecord_Relation)
+T.assert_type!(Wizard.all.order(:id), Wizard::ActiveRecord_Relation)
 # Enumerable methods
 Wizard.all.each { |w| T.assert_type!(w, Wizard) }
 Wizard.all.map { |w| T.assert_type!(w, Wizard) }
@@ -183,13 +187,18 @@ T.assert_type!(spell_books.none?, T::Boolean)
 T.assert_type!(spell_books.one?, T::Boolean)
 # T.assert_type!(spell_books.update_all(name: 'Fantastic Beasts'), Integer) # Ignored until we add support
 # T.assert_type!(spell_books.delete_all, Integer) # Ignored until we add support
-# CollectionProxy query also typed correctly!
+# Query methods
+T.assert_type!(spell_books.all, SpellBook::ActiveRecord_AssociationRelation)
+T.assert_type!(spell_books.recent, SpellBook::ActiveRecord_AssociationRelation) # Named scope
+T.assert_type!(spell_books.unclassified, SpellBook::ActiveRecord_AssociationRelation) # Enum scope
+T.assert_type!(spell_books.unclassified.recent, SpellBook::ActiveRecord_AssociationRelation)
+T.assert_type!(spell_books.unclassified.recent.unscoped, SpellBook::ActiveRecord_Relation) # Turns back into relation
 T.assert_type!(spell_books.where(id: 1), SpellBook::ActiveRecord_AssociationRelation)
+T.assert_type!(spell_books.where(id: 1).recent, SpellBook::ActiveRecord_AssociationRelation)
+T.assert_type!(spell_books.where.not(id: 1), SpellBook::ActiveRecord_AssociationRelation)
 T.assert_type!(spell_books.preload(:wizard), SpellBook::ActiveRecord_AssociationRelation)
 T.assert_type!(spell_books.eager_load(:wizard), SpellBook::ActiveRecord_AssociationRelation)
 T.assert_type!(spell_books.order(:id), SpellBook::ActiveRecord_AssociationRelation)
-T.assert_type!(spell_books.where.not(id: 1), SpellBook::ActiveRecord_AssociationRelation)
-T.assert_type!(spell_books.biology, SpellBook::ActiveRecord_AssociationRelation)
 # Enumerable methods
 spell_books.each { |s| T.assert_type!(s, SpellBook) }
 spell_books.map { |s| T.assert_type!(s, SpellBook) }
@@ -248,12 +257,18 @@ T.assert_type!(spell_books_query.none?, T::Boolean)
 T.assert_type!(spell_books_query.one?, T::Boolean)
 # T.assert_type!(spell_books_query.update_all(name: 'Fantastic Beasts'), Integer) # Ignored until we add support
 # T.assert_type!(spell_books_query.delete_all, Integer) # Ignored until we add support
-# Query chaining
+# Query methods
+T.assert_type!(spell_books_query.all, SpellBook::ActiveRecord_AssociationRelation)
+T.assert_type!(spell_books_query.recent, SpellBook::ActiveRecord_AssociationRelation) # Named scope
+T.assert_type!(spell_books_query.unclassified, SpellBook::ActiveRecord_AssociationRelation) # Enum scope
+T.assert_type!(spell_books_query.unclassified.recent, SpellBook::ActiveRecord_AssociationRelation)
+T.assert_type!(spell_books_query.unclassified.recent.unscoped, SpellBook::ActiveRecord_Relation) # Turns back into relation
+T.assert_type!(spell_books_query.where(id: 1), SpellBook::ActiveRecord_AssociationRelation)
+T.assert_type!(spell_books_query.where(id: 1).recent, SpellBook::ActiveRecord_AssociationRelation)
+T.assert_type!(spell_books_query.where.not(id: 1), SpellBook::ActiveRecord_AssociationRelation)
 T.assert_type!(spell_books_query.preload(:wizard), SpellBook::ActiveRecord_AssociationRelation)
 T.assert_type!(spell_books_query.eager_load(:wizard), SpellBook::ActiveRecord_AssociationRelation)
 T.assert_type!(spell_books_query.order(:id), SpellBook::ActiveRecord_AssociationRelation)
-T.assert_type!(spell_books_query.where.not(id: 1), SpellBook::ActiveRecord_AssociationRelation)
-T.assert_type!(spell_books_query.biology, SpellBook::ActiveRecord_AssociationRelation)
 # Enumerable methods
 spell_books_query.each { |s| T.assert_type!(s, SpellBook) }
 spell_books_query.map { |s| T.assert_type!(s, SpellBook) }
