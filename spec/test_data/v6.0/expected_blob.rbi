@@ -27,464 +27,242 @@ end
 class ActiveStorage::Blob < ActiveRecord::Base
   include ActiveStorage::Blob::GeneratedAssociationMethods
   extend ActiveStorage::Blob::CustomFinderMethods
+  extend ActiveStorage::Blob::QueryMethodsReturningRelation
   extend T::Sig
   extend T::Generic
   RelationType = T.type_alias { T.any(ActiveStorage::Blob::ActiveRecord_Relation, ActiveStorage::Blob::ActiveRecord_Associations_CollectionProxy, ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
+end
+
+module ActiveStorage::Blob::QueryMethodsReturningRelation
+  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
+  def unattached(*args); end
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def self.unattached(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def self.with_attached_preview_image(*args); end
+  def with_attached_preview_image(*args); end
 
   sig { returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def self.all; end
+  def all; end
 
   sig { params(block: T.nilable(T.proc.void)).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def self.unscoped(&block); end
+  def unscoped(&block); end
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def self.select(*args); end
+  def select(*args); end
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def self.reselect(*args); end
+  def reselect(*args); end
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def self.order(*args); end
+  def order(*args); end
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def self.reorder(*args); end
+  def reorder(*args); end
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def self.group(*args); end
+  def group(*args); end
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def self.limit(*args); end
+  def limit(*args); end
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def self.offset(*args); end
+  def offset(*args); end
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def self.joins(*args); end
+  def joins(*args); end
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def self.left_joins(*args); end
+  def left_joins(*args); end
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def self.left_outer_joins(*args); end
+  def left_outer_joins(*args); end
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def self.where(*args); end
+  def where(*args); end
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def self.rewhere(*args); end
+  def rewhere(*args); end
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def self.preload(*args); end
+  def preload(*args); end
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def self.extract_associated(*args); end
+  def extract_associated(*args); end
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def self.eager_load(*args); end
+  def eager_load(*args); end
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def self.includes(*args); end
+  def includes(*args); end
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def self.from(*args); end
+  def from(*args); end
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def self.lock(*args); end
+  def lock(*args); end
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def self.readonly(*args); end
+  def readonly(*args); end
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def self.or(*args); end
+  def or(*args); end
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def self.having(*args); end
+  def having(*args); end
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def self.create_with(*args); end
+  def create_with(*args); end
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def self.distinct(*args); end
+  def distinct(*args); end
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def self.references(*args); end
+  def references(*args); end
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def self.none(*args); end
+  def none(*args); end
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def self.unscope(*args); end
+  def unscope(*args); end
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def self.optimizer_hints(*args); end
+  def optimizer_hints(*args); end
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def self.merge(*args); end
+  def merge(*args); end
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def self.except(*args); end
+  def except(*args); end
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def self.only(*args); end
+  def only(*args); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def self.extending(*args, &block); end
+  def extending(*args, &block); end
+end
+
+module ActiveStorage::Blob::QueryMethodsReturningAssociationRelation
+  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
+  def unattached(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
+  def with_attached_preview_image(*args); end
+
+  sig { returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
+  def all; end
+
+  sig { params(block: T.nilable(T.proc.void)).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
+  def unscoped(&block); end
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
+  def select(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
+  def reselect(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
+  def order(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
+  def reorder(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
+  def group(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
+  def limit(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
+  def offset(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
+  def joins(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
+  def left_joins(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
+  def left_outer_joins(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
+  def where(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
+  def rewhere(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
+  def preload(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
+  def extract_associated(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
+  def eager_load(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
+  def includes(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
+  def from(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
+  def lock(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
+  def readonly(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
+  def or(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
+  def having(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
+  def create_with(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
+  def distinct(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
+  def references(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
+  def none(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
+  def unscope(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
+  def optimizer_hints(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
+  def merge(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
+  def except(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
+  def only(*args); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
+  def extending(*args, &block); end
 end
 
 class ActiveStorage::Blob::ActiveRecord_Relation < ActiveRecord::Relation
   include ActiveStorage::Blob::ActiveRelation_WhereNot
   include ActiveStorage::Blob::CustomFinderMethods
+  include ActiveStorage::Blob::QueryMethodsReturningRelation
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: ActiveStorage::Blob)
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def unattached(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def with_attached_preview_image(*args); end
-
-  sig { returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def all; end
-
-  sig { params(block: T.nilable(T.proc.void)).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def unscoped(&block); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def select(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def reselect(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def order(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def reorder(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def group(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def limit(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def offset(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def joins(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def left_joins(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def left_outer_joins(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def where(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def rewhere(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def preload(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def extract_associated(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def eager_load(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def includes(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def from(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def lock(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def readonly(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def or(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def having(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def create_with(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def distinct(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def references(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def none(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def unscope(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def optimizer_hints(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def merge(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def except(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def only(*args); end
-
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
-  def extending(*args, &block); end
 end
 
 class ActiveStorage::Blob::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
   include ActiveStorage::Blob::ActiveRelation_WhereNot
   include ActiveStorage::Blob::CustomFinderMethods
+  include ActiveStorage::Blob::QueryMethodsReturningAssociationRelation
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: ActiveStorage::Blob)
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def unattached(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def with_attached_preview_image(*args); end
-
-  sig { returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def all; end
-
-  sig { params(block: T.nilable(T.proc.void)).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def unscoped(&block); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def select(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def reselect(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def order(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def reorder(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def group(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def limit(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def offset(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def joins(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def left_joins(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def left_outer_joins(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def where(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def rewhere(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def preload(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def extract_associated(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def eager_load(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def includes(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def from(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def lock(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def readonly(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def or(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def having(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def create_with(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def distinct(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def references(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def none(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def unscope(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def optimizer_hints(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def merge(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def except(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def only(*args); end
-
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def extending(*args, &block); end
-end
-
-class ActiveStorage::Blob::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
-  include ActiveStorage::Blob::CustomFinderMethods
-  extend T::Sig
-  extend T::Generic
-  Elem = type_member(fixed: ActiveStorage::Blob)
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def unattached(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def with_attached_preview_image(*args); end
-
-  sig { returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def all; end
-
-  sig { params(block: T.nilable(T.proc.void)).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def unscoped(&block); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def select(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def reselect(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def order(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def reorder(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def group(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def limit(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def offset(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def joins(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def left_joins(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def left_outer_joins(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def where(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def rewhere(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def preload(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def extract_associated(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def eager_load(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def includes(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def from(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def lock(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def readonly(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def or(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def having(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def create_with(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def distinct(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def references(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def none(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def unscope(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def optimizer_hints(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def merge(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def except(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def only(*args); end
-
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def extending(*args, &block); end
-
-  sig { params(records: T.any(ActiveStorage::Blob, T::Array[ActiveStorage::Blob])).returns(T.self_type) }
-  def <<(*records); end
-
-  sig { params(records: T.any(ActiveStorage::Blob, T::Array[ActiveStorage::Blob])).returns(T.self_type) }
-  def append(*records); end
-
-  sig { params(records: T.any(ActiveStorage::Blob, T::Array[ActiveStorage::Blob])).returns(T.self_type) }
-  def push(*records); end
-
-  sig { params(records: T.any(ActiveStorage::Blob, T::Array[ActiveStorage::Blob])).returns(T.self_type) }
-  def concat(*records); end
 end
 
 module ActiveStorage::Blob::GeneratedAssociationMethods
@@ -516,4 +294,24 @@ module ActiveStorage::Blob::GeneratedAssociationMethods
 
   sig { params(attachable: T.untyped).returns(T.untyped) }
   def preview_image=(attachable); end
+end
+
+class ActiveStorage::Blob::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
+  include ActiveStorage::Blob::CustomFinderMethods
+  include ActiveStorage::Blob::QueryMethodsReturningAssociationRelation
+  extend T::Sig
+  extend T::Generic
+  Elem = type_member(fixed: ActiveStorage::Blob)
+
+  sig { params(records: T.any(ActiveStorage::Blob, T::Array[ActiveStorage::Blob])).returns(T.self_type) }
+  def <<(*records); end
+
+  sig { params(records: T.any(ActiveStorage::Blob, T::Array[ActiveStorage::Blob])).returns(T.self_type) }
+  def append(*records); end
+
+  sig { params(records: T.any(ActiveStorage::Blob, T::Array[ActiveStorage::Blob])).returns(T.self_type) }
+  def push(*records); end
+
+  sig { params(records: T.any(ActiveStorage::Blob, T::Array[ActiveStorage::Blob])).returns(T.self_type) }
+  def concat(*records); end
 end

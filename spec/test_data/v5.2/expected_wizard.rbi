@@ -378,6 +378,7 @@ class Wizard < ApplicationRecord
   include Wizard::GeneratedAttributeMethods
   include Wizard::GeneratedAssociationMethods
   extend Wizard::CustomFinderMethods
+  extend Wizard::QueryMethodsReturningRelation
   extend T::Sig
   extend T::Generic
   RelationType = T.type_alias { T.any(Wizard::ActiveRecord_Relation, Wizard::ActiveRecord_Associations_CollectionProxy, Wizard::ActiveRecord_AssociationRelation) }
@@ -460,93 +461,6 @@ class Wizard < ApplicationRecord
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
   def self.with_attached_school_photo(*args); end
 
-  sig { returns(Wizard::ActiveRecord_Relation) }
-  def self.all; end
-
-  sig { params(block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
-  def self.unscoped(&block); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
-  def self.select(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
-  def self.order(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
-  def self.reorder(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
-  def self.group(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
-  def self.limit(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
-  def self.offset(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
-  def self.joins(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
-  def self.left_joins(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
-  def self.left_outer_joins(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
-  def self.where(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
-  def self.rewhere(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
-  def self.preload(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
-  def self.eager_load(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
-  def self.includes(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
-  def self.from(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
-  def self.lock(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
-  def self.readonly(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
-  def self.or(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
-  def self.having(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
-  def self.create_with(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
-  def self.distinct(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
-  def self.references(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
-  def self.none(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
-  def self.unscope(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
-  def self.merge(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
-  def self.except(*args); end
-
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
-  def self.extending(*args, &block); end
-
   sig { returns(T.nilable(Wizard::Broom)) }
   def typed_broom; end
 
@@ -587,6 +501,7 @@ end
 class Wizard::ActiveRecord_Relation < ActiveRecord::Relation
   include Wizard::ActiveRelation_WhereNot
   include Wizard::CustomFinderMethods
+  include Wizard::QueryMethodsReturningRelation
   extend T::Sig
   extend T::Generic
   Elem = type_member(fixed: Wizard)
@@ -650,7 +565,158 @@ class Wizard::ActiveRecord_Relation < ActiveRecord::Relation
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
   def with_attached_school_photo(*args); end
+end
 
+class Wizard::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
+  include Wizard::ActiveRelation_WhereNot
+  include Wizard::CustomFinderMethods
+  include Wizard::QueryMethodsReturningAssociationRelation
+  extend T::Sig
+  extend T::Generic
+  Elem = type_member(fixed: Wizard)
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def Gryffindor(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def Hagrid(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def Hufflepuff(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def Ravenclaw(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def Slytherin(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def black_hair(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def blonde_hair(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def broom_firebolt(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def broom_nimbus(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def brown_hair(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def color_blue_eyes(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def color_brown_eyes(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def color_green_eyes(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def quidditch_beater(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def quidditch_chaser(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def quidditch_keeper(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def quidditch_seeker(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def recent(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def with_attached_hats(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def with_attached_school_photo(*args); end
+end
+
+class Wizard::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
+  include Wizard::CustomFinderMethods
+  include Wizard::QueryMethodsReturningAssociationRelation
+  extend T::Sig
+  extend T::Generic
+  Elem = type_member(fixed: Wizard)
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def Gryffindor(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def Hagrid(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def Hufflepuff(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def Ravenclaw(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def Slytherin(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def black_hair(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def blonde_hair(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def broom_firebolt(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def broom_nimbus(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def brown_hair(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def color_blue_eyes(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def color_brown_eyes(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def color_green_eyes(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def quidditch_beater(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def quidditch_chaser(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def quidditch_keeper(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def quidditch_seeker(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def recent(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def with_attached_hats(*args); end
+
+  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
+  def with_attached_school_photo(*args); end
+
+  sig { params(records: T.any(Wizard, T::Array[Wizard])).returns(T.self_type) }
+  def <<(*records); end
+
+  sig { params(records: T.any(Wizard, T::Array[Wizard])).returns(T.self_type) }
+  def append(*records); end
+
+  sig { params(records: T.any(Wizard, T::Array[Wizard])).returns(T.self_type) }
+  def push(*records); end
+
+  sig { params(records: T.any(Wizard, T::Array[Wizard])).returns(T.self_type) }
+  def concat(*records); end
+end
+
+module Wizard::QueryMethodsReturningRelation
   sig { returns(Wizard::ActiveRecord_Relation) }
   def all; end
 
@@ -739,77 +805,11 @@ class Wizard::ActiveRecord_Relation < ActiveRecord::Relation
   def extending(*args, &block); end
 end
 
-class Wizard::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
-  include Wizard::ActiveRelation_WhereNot
-  include Wizard::CustomFinderMethods
-  extend T::Sig
-  extend T::Generic
-  Elem = type_member(fixed: Wizard)
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def Gryffindor(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def Hagrid(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def Hufflepuff(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def Ravenclaw(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def Slytherin(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def black_hair(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def blonde_hair(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def broom_firebolt(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def broom_nimbus(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def brown_hair(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def color_blue_eyes(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def color_brown_eyes(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def color_green_eyes(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def quidditch_beater(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def quidditch_chaser(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def quidditch_keeper(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def quidditch_seeker(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def recent(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def with_attached_hats(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def with_attached_school_photo(*args); end
-
+module Wizard::QueryMethodsReturningAssociationRelation
   sig { returns(Wizard::ActiveRecord_AssociationRelation) }
   def all; end
 
-  sig { params(block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
+  sig { params(block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_Relation) }
   def unscoped(&block); end
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
@@ -892,170 +892,4 @@ class Wizard::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelati
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-end
-
-class Wizard::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
-  include Wizard::CustomFinderMethods
-  extend T::Sig
-  extend T::Generic
-  Elem = type_member(fixed: Wizard)
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def Gryffindor(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def Hagrid(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def Hufflepuff(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def Ravenclaw(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def Slytherin(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def black_hair(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def blonde_hair(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def broom_firebolt(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def broom_nimbus(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def brown_hair(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def color_blue_eyes(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def color_brown_eyes(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def color_green_eyes(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def quidditch_beater(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def quidditch_chaser(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def quidditch_keeper(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def quidditch_seeker(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def recent(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def with_attached_hats(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def with_attached_school_photo(*args); end
-
-  sig { returns(Wizard::ActiveRecord_AssociationRelation) }
-  def all; end
-
-  sig { params(block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def unscoped(&block); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def select(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def order(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def reorder(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def group(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def limit(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def offset(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def joins(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def left_joins(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def left_outer_joins(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def where(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def rewhere(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def preload(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def eager_load(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def includes(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def from(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def lock(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def readonly(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def or(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def having(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def create_with(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def distinct(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def references(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def none(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def unscope(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def merge(*args); end
-
-  sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def except(*args); end
-
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wizard::ActiveRecord_AssociationRelation) }
-  def extending(*args, &block); end
-
-  sig { params(records: T.any(Wizard, T::Array[Wizard])).returns(T.self_type) }
-  def <<(*records); end
-
-  sig { params(records: T.any(Wizard, T::Array[Wizard])).returns(T.self_type) }
-  def append(*records); end
-
-  sig { params(records: T.any(Wizard, T::Array[Wizard])).returns(T.self_type) }
-  def push(*records); end
-
-  sig { params(records: T.any(Wizard, T::Array[Wizard])).returns(T.self_type) }
-  def concat(*records); end
 end
