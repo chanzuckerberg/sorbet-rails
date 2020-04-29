@@ -38,6 +38,16 @@ module SorbetRails::ModelUtils
   end
 
   sig { returns(String) }
+  def model_query_methods_returning_relation_module_name
+    "#{model_class_name}::QueryMethodsReturningRelation"
+  end
+
+  sig { returns(String) }
+  def model_query_methods_returning_assoc_relation_module_name
+    "#{model_class_name}::QueryMethodsReturningAssociationRelation"
+  end
+
+  sig { returns(String) }
   def model_relation_type_alias
     types = [
       self.model_relation_class_name,
@@ -73,9 +83,10 @@ module SorbetRails::ModelUtils
       root: Parlour::RbiGenerator::Namespace,
       method_name: String,
       parameters: T.nilable(T::Array[::Parlour::RbiGenerator::Parameter]),
+      standard_query_method: T::Boolean,
     ).void
   }
-  def add_relation_query_method(root, method_name, parameters: nil)
+  def add_relation_query_method(root, method_name, parameters: nil, standard_query_method: false)
     # a relation querying method will be available on
     # - model (as a class method)
     # - activerecord relation
@@ -84,34 +95,58 @@ module SorbetRails::ModelUtils
     # in case (1) and (2), it returns a Model::ActiveRecord_Relation
     # in case (3) and (4), it returns a Model::ActiveRecord_AssociationRelation
 
-    # force generating these methods because sorbet's hidden-definitions generate & override them
-    model_class_rbi = root.create_class(self.model_class_name)
-    model_class_rbi.create_method(
-      method_name,
-      parameters: parameters,
-      return_type: self.model_relation_class_name,
-      class_method: true,
-    )
+    # 'unscoped' is a special case where it always returns a ActiveRecord_Relation
+    assoc_return_value = method_name == 'unscoped' ? self.model_relation_class_name : self.model_assoc_relation_class_name
 
-    model_relation_rbi = root.create_class(self.model_relation_class_name)
-    model_relation_rbi.create_method(
-      method_name,
-      parameters: parameters,
-      return_type: self.model_relation_class_name,
-    )
+    # We can put methods onto modules which are extended/included by the model
+    # and relation classes which reduces the RBI footprint for an individual
+    # model. However, in Rails 5 query methods that come from scopes or enums
+    # get overridden in hidden-definitions so we need to explicitly define them
+    # on the model and relation classes.
+    if standard_query_method || Rails.version =~ /^6\./
+      relation_module_rbi = root.create_module(self.model_query_methods_returning_relation_module_name)
+      relation_module_rbi.create_method(
+        method_name,
+        parameters: parameters,
+        return_type: self.model_relation_class_name,
+      )
 
-    model_assoc_relation_rbi = root.create_class(self.model_assoc_relation_class_name)
-    model_assoc_relation_rbi.create_method(
-      method_name,
-      parameters: parameters,
-      return_type: self.model_assoc_relation_class_name,
-    )
+      assoc_relation_module_rbi = root.create_module(self.model_query_methods_returning_assoc_relation_module_name)
+      assoc_relation_module_rbi.create_method(
+        method_name,
+        parameters: parameters,
+        return_type: assoc_return_value,
+      )
+    else
+      # force generating these methods because sorbet's hidden-definitions generate & override them
+      model_class_rbi = root.create_class(self.model_class_name)
+      model_class_rbi.create_method(
+        method_name,
+        parameters: parameters,
+        return_type: self.model_relation_class_name,
+        class_method: true,
+      )
 
-    collection_proxy_rbi = root.create_class(self.model_assoc_proxy_class_name)
-    collection_proxy_rbi.create_method(
-      method_name,
-      parameters: parameters,
-      return_type: self.model_assoc_relation_class_name,
-    )
+      model_relation_rbi = root.create_class(self.model_relation_class_name)
+      model_relation_rbi.create_method(
+        method_name,
+        parameters: parameters,
+        return_type: self.model_relation_class_name,
+      )
+
+      model_assoc_relation_rbi = root.create_class(self.model_assoc_relation_class_name)
+      model_assoc_relation_rbi.create_method(
+        method_name,
+        parameters: parameters,
+        return_type: assoc_return_value,
+      )
+
+      collection_proxy_rbi = root.create_class(self.model_assoc_proxy_class_name)
+      collection_proxy_rbi.create_method(
+        method_name,
+        parameters: parameters,
+        return_type: assoc_return_value,
+      )
+    end
   end
 end
