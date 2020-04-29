@@ -73,7 +73,7 @@ It is possible to add custom RBI generation logic for your custom module or gems
 We also add following methods to make type-checking more easily:
 - [`find_n`, `first_n`, `last_n`](https://github.com/chanzuckerberg/sorbet-rails#find-first-and-last)
 - [`pluck_to_tstruct`](#pluck_to_tstruct-instead-of-pluck)
-- [`typed_enum`](#enums)
+- [`typed_enum`](#typed_enum-instead-of-enum)
 - [`Model::RelationType`](#relationtype-alias)
 
 #### `pluck_to_tstruct` instead of `pluck`
@@ -96,7 +96,7 @@ Wizard.all.pluck_to_tstruct(TA[WizardStruct].new)  # T::Array[WizardStruct]
 
 This method is based on [pluck_to_hash](https://github.com/girishso/pluck_to_hash) gem.
 
-#### Enums
+#### `typed_enum` instead of `enum`
 
 If you use [Rails `enum`](https://guides.rubyonrails.org/active_record_querying.html#enums), `sorbet-rails` will generate a corresponding `T::Enum`. It will also include getters, setters, and scope methods in the rbi file it generates.
 
@@ -203,7 +203,7 @@ end
 If it fails to coerce the params into the right type, an `ActionController::BadRequest` exception will be raised with the coercion context for debugging.
 
 Note: The API `TypedParams[...].new.extract!` may seem verbose, but necessary to support this feature. Ideally, the API can be simply `TypedParams.extract!(...)`. However, `sorbet` [doesn't support](http://github.com/sorbet/sorbet/issues/62) defining a method that accept a type and return an instance of the type. If this feature is supported by `sorbet` in the future, it will be easy to codemod to be `TypedParams.extract(...)!` part from your code.
-Note: [`require_typed` and `fetch_typed`](https://github.com/chanzuckerberg/sorbet-rails/blob/v0.5.9.1/README.md) are deprecated in favor of `TypedParams`.
+Note: [`require_typed` and `fetch_typed`](https://github.com/chanzuckerberg/sorbet-rails/blob/v0.5.9.1/README.md) are deprecated in favor of `TypedParams`. They will be removed in v0.7.
 
 ### Routes
 
