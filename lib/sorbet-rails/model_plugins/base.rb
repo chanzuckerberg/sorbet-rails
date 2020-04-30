@@ -35,7 +35,8 @@ module SorbetRails::ModelPlugins
       model_class.validators_on(attribute).any? do |validator|
         validator.is_a?(ActiveModel::Validations::PresenceValidator) &&
           !validator.options.key?(:if) &&
-          !validator.options.key?(:unless)
+          !validator.options.key?(:unless) &&
+          !validator.options.key?(:on)
       end
     end
   end
