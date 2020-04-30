@@ -130,7 +130,15 @@ class SorbetRails::ModelPlugins::ActiveRecordAssoc < SorbetRails::ModelPlugins::
 
   sig { params(reflection: T.untyped).returns(T.nilable(T::Boolean)) }
   def assoc_should_be_untyped?(reflection)
-    polymorphic_assoc?(reflection) || !@available_classes.include?(reflection.klass.name)
+    # For some polymorphic associations (e.g. a has-many-through where the `source`
+    # is polymorphic) we can figure out the type from the class_name or source_type.
+    polymorpic_with_unknowable_klass = (
+      polymorphic_assoc?(reflection) &&
+      !reflection.options.key?(:class_name) &&
+      !reflection.options.key?(:source_type)
+    )
+
+    polymorpic_with_unknowable_klass || !@available_classes.include?(reflection.klass.name)
   end
 
   sig { params(reflection: T.untyped).returns(T.nilable(T::Boolean)) }
