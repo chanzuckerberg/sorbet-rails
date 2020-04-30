@@ -8,8 +8,6 @@ module Wizard::HABTM_Subjects::ActiveRelation_WhereNot
 end
 
 module Wizard::HABTM_Subjects::GeneratedAttributeMethods
-  extend T::Sig
-
   sig { returns(T.nilable(Integer)) }
   def subject_id; end
 
@@ -30,8 +28,6 @@ module Wizard::HABTM_Subjects::GeneratedAttributeMethods
 end
 
 module Wizard::HABTM_Subjects::GeneratedAssociationMethods
-  extend T::Sig
-
   sig { returns(T.nilable(::Wizard)) }
   def left_side; end
 
@@ -67,8 +63,6 @@ class Wizard::HABTM_Subjects < ActiveRecord::Base
   include Wizard::HABTM_Subjects::GeneratedAssociationMethods
   extend Wizard::HABTM_Subjects::CustomFinderMethods
   extend Wizard::HABTM_Subjects::QueryMethodsReturningRelation
-  extend T::Sig
-  extend T::Generic
   RelationType = T.type_alias { T.any(Wizard::HABTM_Subjects::ActiveRecord_Relation, Wizard::HABTM_Subjects::ActiveRecord_Associations_CollectionProxy, Wizard::HABTM_Subjects::ActiveRecord_AssociationRelation) }
 end
 
@@ -278,8 +272,6 @@ class Wizard::HABTM_Subjects::ActiveRecord_Relation < ActiveRecord::Relation
   include Wizard::HABTM_Subjects::ActiveRelation_WhereNot
   include Wizard::HABTM_Subjects::CustomFinderMethods
   include Wizard::HABTM_Subjects::QueryMethodsReturningRelation
-  extend T::Sig
-  extend T::Generic
   Elem = type_member(fixed: Wizard::HABTM_Subjects)
 end
 
@@ -287,16 +279,12 @@ class Wizard::HABTM_Subjects::ActiveRecord_AssociationRelation < ActiveRecord::A
   include Wizard::HABTM_Subjects::ActiveRelation_WhereNot
   include Wizard::HABTM_Subjects::CustomFinderMethods
   include Wizard::HABTM_Subjects::QueryMethodsReturningAssociationRelation
-  extend T::Sig
-  extend T::Generic
   Elem = type_member(fixed: Wizard::HABTM_Subjects)
 end
 
 class Wizard::HABTM_Subjects::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include Wizard::HABTM_Subjects::CustomFinderMethods
   include Wizard::HABTM_Subjects::QueryMethodsReturningAssociationRelation
-  extend T::Sig
-  extend T::Generic
   Elem = type_member(fixed: Wizard::HABTM_Subjects)
 
   sig { params(records: T.any(Wizard::HABTM_Subjects, T::Array[Wizard::HABTM_Subjects])).returns(T.self_type) }

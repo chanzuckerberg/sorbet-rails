@@ -8,8 +8,6 @@ module Potion::ActiveRelation_WhereNot
 end
 
 module Potion::GeneratedAssociationMethods
-  extend T::Sig
-
   sig { returns(T.nilable(::Wizard)) }
   def wizard; end
 
@@ -38,8 +36,6 @@ class Potion < ApplicationRecord
   include Potion::GeneratedAssociationMethods
   extend Potion::CustomFinderMethods
   extend Potion::QueryMethodsReturningRelation
-  extend T::Sig
-  extend T::Generic
   RelationType = T.type_alias { T.any(Potion::ActiveRecord_Relation, Potion::ActiveRecord_Associations_CollectionProxy, Potion::ActiveRecord_AssociationRelation) }
 end
 
@@ -249,8 +245,6 @@ class Potion::ActiveRecord_Relation < ActiveRecord::Relation
   include Potion::ActiveRelation_WhereNot
   include Potion::CustomFinderMethods
   include Potion::QueryMethodsReturningRelation
-  extend T::Sig
-  extend T::Generic
   Elem = type_member(fixed: Potion)
 end
 
@@ -258,16 +252,12 @@ class Potion::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelati
   include Potion::ActiveRelation_WhereNot
   include Potion::CustomFinderMethods
   include Potion::QueryMethodsReturningAssociationRelation
-  extend T::Sig
-  extend T::Generic
   Elem = type_member(fixed: Potion)
 end
 
 class Potion::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include Potion::CustomFinderMethods
   include Potion::QueryMethodsReturningAssociationRelation
-  extend T::Sig
-  extend T::Generic
   Elem = type_member(fixed: Potion)
 
   sig { params(records: T.any(Potion, T::Array[Potion])).returns(T.self_type) }

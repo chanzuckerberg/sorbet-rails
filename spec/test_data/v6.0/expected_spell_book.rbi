@@ -3,8 +3,6 @@
 
 # typed: strong
 module SpellBook::EnumInstanceMethods
-  extend T::Sig
-
   sig { returns(T::Boolean) }
   def unclassified?; end
 
@@ -30,8 +28,6 @@ module SpellBook::ActiveRelation_WhereNot
 end
 
 module SpellBook::GeneratedAttributeMethods
-  extend T::Sig
-
   sig { returns(String) }
   def book_type; end
 
@@ -79,8 +75,6 @@ class SpellBook::BookType < T::Enum
 end
 
 module SpellBook::GeneratedAssociationMethods
-  extend T::Sig
-
   sig { returns(::Spell::ActiveRecord_Associations_CollectionProxy) }
   def spells; end
 
@@ -120,8 +114,6 @@ class SpellBook < ApplicationRecord
   include SpellBook::GeneratedAssociationMethods
   extend SpellBook::CustomFinderMethods
   extend SpellBook::QueryMethodsReturningRelation
-  extend T::Sig
-  extend T::Generic
   RelationType = T.type_alias { T.any(SpellBook::ActiveRecord_Relation, SpellBook::ActiveRecord_Associations_CollectionProxy, SpellBook::ActiveRecord_AssociationRelation) }
 
   sig { returns(T::Hash[T.any(String, Symbol), Integer]) }
@@ -382,8 +374,6 @@ class SpellBook::ActiveRecord_Relation < ActiveRecord::Relation
   include SpellBook::ActiveRelation_WhereNot
   include SpellBook::CustomFinderMethods
   include SpellBook::QueryMethodsReturningRelation
-  extend T::Sig
-  extend T::Generic
   Elem = type_member(fixed: SpellBook)
 end
 
@@ -391,16 +381,12 @@ class SpellBook::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRel
   include SpellBook::ActiveRelation_WhereNot
   include SpellBook::CustomFinderMethods
   include SpellBook::QueryMethodsReturningAssociationRelation
-  extend T::Sig
-  extend T::Generic
   Elem = type_member(fixed: SpellBook)
 end
 
 class SpellBook::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include SpellBook::CustomFinderMethods
   include SpellBook::QueryMethodsReturningAssociationRelation
-  extend T::Sig
-  extend T::Generic
   Elem = type_member(fixed: SpellBook)
 
   sig { params(records: T.any(SpellBook, T::Array[SpellBook])).returns(T.self_type) }

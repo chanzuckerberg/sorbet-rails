@@ -8,8 +8,6 @@ module ActiveStorage::Attachment::ActiveRelation_WhereNot
 end
 
 module ActiveStorage::Attachment::GeneratedAssociationMethods
-  extend T::Sig
-
   sig { returns(::ActiveStorage::Blob) }
   def blob; end
 
@@ -44,8 +42,6 @@ class ActiveStorage::Attachment < ActiveRecord::Base
   include ActiveStorage::Attachment::GeneratedAssociationMethods
   extend ActiveStorage::Attachment::CustomFinderMethods
   extend ActiveStorage::Attachment::QueryMethodsReturningRelation
-  extend T::Sig
-  extend T::Generic
   RelationType = T.type_alias { T.any(ActiveStorage::Attachment::ActiveRecord_Relation, ActiveStorage::Attachment::ActiveRecord_Associations_CollectionProxy, ActiveStorage::Attachment::ActiveRecord_AssociationRelation) }
 end
 
@@ -255,8 +251,6 @@ class ActiveStorage::Attachment::ActiveRecord_Relation < ActiveRecord::Relation
   include ActiveStorage::Attachment::ActiveRelation_WhereNot
   include ActiveStorage::Attachment::CustomFinderMethods
   include ActiveStorage::Attachment::QueryMethodsReturningRelation
-  extend T::Sig
-  extend T::Generic
   Elem = type_member(fixed: ActiveStorage::Attachment)
 end
 
@@ -264,16 +258,12 @@ class ActiveStorage::Attachment::ActiveRecord_AssociationRelation < ActiveRecord
   include ActiveStorage::Attachment::ActiveRelation_WhereNot
   include ActiveStorage::Attachment::CustomFinderMethods
   include ActiveStorage::Attachment::QueryMethodsReturningAssociationRelation
-  extend T::Sig
-  extend T::Generic
   Elem = type_member(fixed: ActiveStorage::Attachment)
 end
 
 class ActiveStorage::Attachment::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include ActiveStorage::Attachment::CustomFinderMethods
   include ActiveStorage::Attachment::QueryMethodsReturningAssociationRelation
-  extend T::Sig
-  extend T::Generic
   Elem = type_member(fixed: ActiveStorage::Attachment)
 
   sig { params(records: T.any(ActiveStorage::Attachment, T::Array[ActiveStorage::Attachment])).returns(T.self_type) }

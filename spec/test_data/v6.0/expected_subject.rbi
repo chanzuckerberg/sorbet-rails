@@ -8,8 +8,6 @@ module Subject::ActiveRelation_WhereNot
 end
 
 module Subject::GeneratedAttributeMethods
-  extend T::Sig
-
   sig { returns(Integer) }
   def id; end
 
@@ -30,8 +28,6 @@ module Subject::GeneratedAttributeMethods
 end
 
 module Subject::GeneratedAssociationMethods
-  extend T::Sig
-
   sig { returns(::Wizard::ActiveRecord_Associations_CollectionProxy) }
   def wizards; end
 
@@ -64,8 +60,6 @@ class Subject < ApplicationRecord
   include Subject::GeneratedAssociationMethods
   extend Subject::CustomFinderMethods
   extend Subject::QueryMethodsReturningRelation
-  extend T::Sig
-  extend T::Generic
   RelationType = T.type_alias { T.any(Subject::ActiveRecord_Relation, Subject::ActiveRecord_Associations_CollectionProxy, Subject::ActiveRecord_AssociationRelation) }
 end
 
@@ -275,8 +269,6 @@ class Subject::ActiveRecord_Relation < ActiveRecord::Relation
   include Subject::ActiveRelation_WhereNot
   include Subject::CustomFinderMethods
   include Subject::QueryMethodsReturningRelation
-  extend T::Sig
-  extend T::Generic
   Elem = type_member(fixed: Subject)
 end
 
@@ -284,16 +276,12 @@ class Subject::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelat
   include Subject::ActiveRelation_WhereNot
   include Subject::CustomFinderMethods
   include Subject::QueryMethodsReturningAssociationRelation
-  extend T::Sig
-  extend T::Generic
   Elem = type_member(fixed: Subject)
 end
 
 class Subject::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include Subject::CustomFinderMethods
   include Subject::QueryMethodsReturningAssociationRelation
-  extend T::Sig
-  extend T::Generic
   Elem = type_member(fixed: Subject)
 
   sig { params(records: T.any(Subject, T::Array[Subject])).returns(T.self_type) }

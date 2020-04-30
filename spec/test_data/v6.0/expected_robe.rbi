@@ -8,8 +8,6 @@ module Robe::ActiveRelation_WhereNot
 end
 
 module Robe::GeneratedAttributeMethods
-  extend T::Sig
-
   sig { returns(Integer) }
   def id; end
 
@@ -30,8 +28,6 @@ module Robe::GeneratedAttributeMethods
 end
 
 module Robe::GeneratedAssociationMethods
-  extend T::Sig
-
   sig { returns(T.nilable(::Wizard)) }
   def wizard; end
 
@@ -61,8 +57,6 @@ class Robe < ApplicationRecord
   include Robe::GeneratedAssociationMethods
   extend Robe::CustomFinderMethods
   extend Robe::QueryMethodsReturningRelation
-  extend T::Sig
-  extend T::Generic
   RelationType = T.type_alias { T.any(Robe::ActiveRecord_Relation, Robe::ActiveRecord_Associations_CollectionProxy, Robe::ActiveRecord_AssociationRelation) }
 end
 
@@ -272,8 +266,6 @@ class Robe::ActiveRecord_Relation < ActiveRecord::Relation
   include Robe::ActiveRelation_WhereNot
   include Robe::CustomFinderMethods
   include Robe::QueryMethodsReturningRelation
-  extend T::Sig
-  extend T::Generic
   Elem = type_member(fixed: Robe)
 end
 
@@ -281,16 +273,12 @@ class Robe::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
   include Robe::ActiveRelation_WhereNot
   include Robe::CustomFinderMethods
   include Robe::QueryMethodsReturningAssociationRelation
-  extend T::Sig
-  extend T::Generic
   Elem = type_member(fixed: Robe)
 end
 
 class Robe::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include Robe::CustomFinderMethods
   include Robe::QueryMethodsReturningAssociationRelation
-  extend T::Sig
-  extend T::Generic
   Elem = type_member(fixed: Robe)
 
   sig { params(records: T.any(Robe, T::Array[Robe])).returns(T.self_type) }

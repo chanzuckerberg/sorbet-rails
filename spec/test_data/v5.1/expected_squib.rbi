@@ -3,8 +3,6 @@
 
 # typed: strong
 module Squib::EnumInstanceMethods
-  extend T::Sig
-
   sig { returns(T::Boolean) }
   def broom_nimbus?; end
 
@@ -114,8 +112,6 @@ module Squib::ActiveRelation_WhereNot
 end
 
 module Squib::GeneratedAttributeMethods
-  extend T::Sig
-
   sig { returns(T.nilable(String)) }
   def broom; end
 
@@ -253,8 +249,6 @@ module Squib::GeneratedAttributeMethods
 end
 
 module Squib::GeneratedAssociationMethods
-  extend T::Sig
-
   sig { returns(T.nilable(::School)) }
   def school; end
 
@@ -309,8 +303,6 @@ class Squib < Wizard
   include Squib::GeneratedAssociationMethods
   extend Squib::CustomFinderMethods
   extend Squib::QueryMethodsReturningRelation
-  extend T::Sig
-  extend T::Generic
   RelationType = T.type_alias { T.any(Squib::ActiveRecord_Relation, Squib::ActiveRecord_Associations_CollectionProxy, Squib::ActiveRecord_AssociationRelation) }
 
   sig { returns(T::Hash[T.any(String, Symbol), String]) }
@@ -390,8 +382,6 @@ class Squib::ActiveRecord_Relation < ActiveRecord::Relation
   include Squib::ActiveRelation_WhereNot
   include Squib::CustomFinderMethods
   include Squib::QueryMethodsReturningRelation
-  extend T::Sig
-  extend T::Generic
   Elem = type_member(fixed: Squib)
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
@@ -453,8 +443,6 @@ class Squib::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelatio
   include Squib::ActiveRelation_WhereNot
   include Squib::CustomFinderMethods
   include Squib::QueryMethodsReturningAssociationRelation
-  extend T::Sig
-  extend T::Generic
   Elem = type_member(fixed: Squib)
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
@@ -515,8 +503,6 @@ end
 class Squib::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include Squib::CustomFinderMethods
   include Squib::QueryMethodsReturningAssociationRelation
-  extend T::Sig
-  extend T::Generic
   Elem = type_member(fixed: Squib)
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }

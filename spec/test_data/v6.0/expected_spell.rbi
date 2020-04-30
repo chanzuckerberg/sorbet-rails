@@ -8,8 +8,6 @@ module Spell::ActiveRelation_WhereNot
 end
 
 module Spell::GeneratedAttributeMethods
-  extend T::Sig
-
   sig { returns(Integer) }
   def id; end
 
@@ -30,8 +28,6 @@ module Spell::GeneratedAttributeMethods
 end
 
 module Spell::GeneratedAssociationMethods
-  extend T::Sig
-
   sig { returns(::SpellBook::ActiveRecord_Associations_CollectionProxy) }
   def spell_books; end
 
@@ -64,8 +60,6 @@ class Spell < ApplicationRecord
   include Spell::GeneratedAssociationMethods
   extend Spell::CustomFinderMethods
   extend Spell::QueryMethodsReturningRelation
-  extend T::Sig
-  extend T::Generic
   RelationType = T.type_alias { T.any(Spell::ActiveRecord_Relation, Spell::ActiveRecord_Associations_CollectionProxy, Spell::ActiveRecord_AssociationRelation) }
 end
 
@@ -275,8 +269,6 @@ class Spell::ActiveRecord_Relation < ActiveRecord::Relation
   include Spell::ActiveRelation_WhereNot
   include Spell::CustomFinderMethods
   include Spell::QueryMethodsReturningRelation
-  extend T::Sig
-  extend T::Generic
   Elem = type_member(fixed: Spell)
 end
 
@@ -284,16 +276,12 @@ class Spell::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelatio
   include Spell::ActiveRelation_WhereNot
   include Spell::CustomFinderMethods
   include Spell::QueryMethodsReturningAssociationRelation
-  extend T::Sig
-  extend T::Generic
   Elem = type_member(fixed: Spell)
 end
 
 class Spell::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include Spell::CustomFinderMethods
   include Spell::QueryMethodsReturningAssociationRelation
-  extend T::Sig
-  extend T::Generic
   Elem = type_member(fixed: Spell)
 
   sig { params(records: T.any(Spell, T::Array[Spell])).returns(T.self_type) }

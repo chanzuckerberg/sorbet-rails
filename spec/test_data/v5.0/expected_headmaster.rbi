@@ -8,8 +8,6 @@ module Headmaster::ActiveRelation_WhereNot
 end
 
 module Headmaster::GeneratedAttributeMethods
-  extend T::Sig
-
   sig { returns(Integer) }
   def id; end
 
@@ -39,8 +37,6 @@ module Headmaster::GeneratedAttributeMethods
 end
 
 module Headmaster::GeneratedAssociationMethods
-  extend T::Sig
-
   sig { returns(::School) }
   def school; end
 
@@ -76,8 +72,6 @@ class Headmaster < ApplicationRecord
   include Headmaster::GeneratedAssociationMethods
   extend Headmaster::CustomFinderMethods
   extend Headmaster::QueryMethodsReturningRelation
-  extend T::Sig
-  extend T::Generic
   RelationType = T.type_alias { T.any(Headmaster::ActiveRecord_Relation, Headmaster::ActiveRecord_Associations_CollectionProxy, Headmaster::ActiveRecord_AssociationRelation) }
 end
 
@@ -257,8 +251,6 @@ class Headmaster::ActiveRecord_Relation < ActiveRecord::Relation
   include Headmaster::ActiveRelation_WhereNot
   include Headmaster::CustomFinderMethods
   include Headmaster::QueryMethodsReturningRelation
-  extend T::Sig
-  extend T::Generic
   Elem = type_member(fixed: Headmaster)
 end
 
@@ -266,16 +258,12 @@ class Headmaster::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRe
   include Headmaster::ActiveRelation_WhereNot
   include Headmaster::CustomFinderMethods
   include Headmaster::QueryMethodsReturningAssociationRelation
-  extend T::Sig
-  extend T::Generic
   Elem = type_member(fixed: Headmaster)
 end
 
 class Headmaster::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include Headmaster::CustomFinderMethods
   include Headmaster::QueryMethodsReturningAssociationRelation
-  extend T::Sig
-  extend T::Generic
   Elem = type_member(fixed: Headmaster)
 
   sig { params(records: T.any(Headmaster, T::Array[Headmaster])).returns(T.self_type) }

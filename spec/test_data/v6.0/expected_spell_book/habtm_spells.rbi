@@ -8,8 +8,6 @@ module SpellBook::HABTM_Spells::ActiveRelation_WhereNot
 end
 
 module SpellBook::HABTM_Spells::GeneratedAttributeMethods
-  extend T::Sig
-
   sig { returns(Integer) }
   def spell_book_id; end
 
@@ -30,8 +28,6 @@ module SpellBook::HABTM_Spells::GeneratedAttributeMethods
 end
 
 module SpellBook::HABTM_Spells::GeneratedAssociationMethods
-  extend T::Sig
-
   sig { returns(T.nilable(::SpellBook)) }
   def left_side; end
 
@@ -67,8 +63,6 @@ class SpellBook::HABTM_Spells < ActiveRecord::Base
   include SpellBook::HABTM_Spells::GeneratedAssociationMethods
   extend SpellBook::HABTM_Spells::CustomFinderMethods
   extend SpellBook::HABTM_Spells::QueryMethodsReturningRelation
-  extend T::Sig
-  extend T::Generic
   RelationType = T.type_alias { T.any(SpellBook::HABTM_Spells::ActiveRecord_Relation, SpellBook::HABTM_Spells::ActiveRecord_Associations_CollectionProxy, SpellBook::HABTM_Spells::ActiveRecord_AssociationRelation) }
 end
 
@@ -278,8 +272,6 @@ class SpellBook::HABTM_Spells::ActiveRecord_Relation < ActiveRecord::Relation
   include SpellBook::HABTM_Spells::ActiveRelation_WhereNot
   include SpellBook::HABTM_Spells::CustomFinderMethods
   include SpellBook::HABTM_Spells::QueryMethodsReturningRelation
-  extend T::Sig
-  extend T::Generic
   Elem = type_member(fixed: SpellBook::HABTM_Spells)
 end
 
@@ -287,16 +279,12 @@ class SpellBook::HABTM_Spells::ActiveRecord_AssociationRelation < ActiveRecord::
   include SpellBook::HABTM_Spells::ActiveRelation_WhereNot
   include SpellBook::HABTM_Spells::CustomFinderMethods
   include SpellBook::HABTM_Spells::QueryMethodsReturningAssociationRelation
-  extend T::Sig
-  extend T::Generic
   Elem = type_member(fixed: SpellBook::HABTM_Spells)
 end
 
 class SpellBook::HABTM_Spells::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include SpellBook::HABTM_Spells::CustomFinderMethods
   include SpellBook::HABTM_Spells::QueryMethodsReturningAssociationRelation
-  extend T::Sig
-  extend T::Generic
   Elem = type_member(fixed: SpellBook::HABTM_Spells)
 
   sig { params(records: T.any(SpellBook::HABTM_Spells, T::Array[SpellBook::HABTM_Spells])).returns(T.self_type) }

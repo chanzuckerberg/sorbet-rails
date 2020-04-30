@@ -8,8 +8,6 @@ module ActiveRecord::InternalMetadata::ActiveRelation_WhereNot
 end
 
 module ActiveRecord::InternalMetadata::GeneratedAttributeMethods
-  extend T::Sig
-
   sig { returns(ActiveSupport::TimeWithZone) }
   def created_at; end
 
@@ -68,8 +66,6 @@ class ActiveRecord::InternalMetadata < ActiveRecord::Base
   include ActiveRecord::InternalMetadata::GeneratedAttributeMethods
   extend ActiveRecord::InternalMetadata::CustomFinderMethods
   extend ActiveRecord::InternalMetadata::QueryMethodsReturningRelation
-  extend T::Sig
-  extend T::Generic
   RelationType = T.type_alias { T.any(ActiveRecord::InternalMetadata::ActiveRecord_Relation, ActiveRecord::InternalMetadata::ActiveRecord_Associations_CollectionProxy, ActiveRecord::InternalMetadata::ActiveRecord_AssociationRelation) }
 end
 
@@ -249,8 +245,6 @@ class ActiveRecord::InternalMetadata::ActiveRecord_Relation < ActiveRecord::Rela
   include ActiveRecord::InternalMetadata::ActiveRelation_WhereNot
   include ActiveRecord::InternalMetadata::CustomFinderMethods
   include ActiveRecord::InternalMetadata::QueryMethodsReturningRelation
-  extend T::Sig
-  extend T::Generic
   Elem = type_member(fixed: ActiveRecord::InternalMetadata)
 end
 
@@ -258,16 +252,12 @@ class ActiveRecord::InternalMetadata::ActiveRecord_AssociationRelation < ActiveR
   include ActiveRecord::InternalMetadata::ActiveRelation_WhereNot
   include ActiveRecord::InternalMetadata::CustomFinderMethods
   include ActiveRecord::InternalMetadata::QueryMethodsReturningAssociationRelation
-  extend T::Sig
-  extend T::Generic
   Elem = type_member(fixed: ActiveRecord::InternalMetadata)
 end
 
 class ActiveRecord::InternalMetadata::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include ActiveRecord::InternalMetadata::CustomFinderMethods
   include ActiveRecord::InternalMetadata::QueryMethodsReturningAssociationRelation
-  extend T::Sig
-  extend T::Generic
   Elem = type_member(fixed: ActiveRecord::InternalMetadata)
 
   sig { params(records: T.any(ActiveRecord::InternalMetadata, T::Array[ActiveRecord::InternalMetadata])).returns(T.self_type) }

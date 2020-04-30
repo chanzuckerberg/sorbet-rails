@@ -8,8 +8,6 @@ module School::ActiveRelation_WhereNot
 end
 
 module School::GeneratedAttributeMethods
-  extend T::Sig
-
   sig { returns(Integer) }
   def id; end
 
@@ -30,8 +28,6 @@ module School::GeneratedAttributeMethods
 end
 
 module School::GeneratedAssociationMethods
-  extend T::Sig
-
   sig { returns(::Headmaster) }
   def headmaster; end
 
@@ -61,8 +57,6 @@ class School < ApplicationRecord
   include School::GeneratedAssociationMethods
   extend School::CustomFinderMethods
   extend School::QueryMethodsReturningRelation
-  extend T::Sig
-  extend T::Generic
   RelationType = T.type_alias { T.any(School::ActiveRecord_Relation, School::ActiveRecord_Associations_CollectionProxy, School::ActiveRecord_AssociationRelation) }
 end
 
@@ -248,8 +242,6 @@ class School::ActiveRecord_Relation < ActiveRecord::Relation
   include School::ActiveRelation_WhereNot
   include School::CustomFinderMethods
   include School::QueryMethodsReturningRelation
-  extend T::Sig
-  extend T::Generic
   Elem = type_member(fixed: School)
 end
 
@@ -257,16 +249,12 @@ class School::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelati
   include School::ActiveRelation_WhereNot
   include School::CustomFinderMethods
   include School::QueryMethodsReturningAssociationRelation
-  extend T::Sig
-  extend T::Generic
   Elem = type_member(fixed: School)
 end
 
 class School::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include School::CustomFinderMethods
   include School::QueryMethodsReturningAssociationRelation
-  extend T::Sig
-  extend T::Generic
   Elem = type_member(fixed: School)
 
   sig { params(records: T.any(School, T::Array[School])).returns(T.self_type) }

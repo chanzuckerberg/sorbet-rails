@@ -3,8 +3,6 @@
 
 # typed: strong
 module Wizard::EnumInstanceMethods
-  extend T::Sig
-
   sig { returns(T::Boolean) }
   def broom_nimbus?; end
 
@@ -114,8 +112,6 @@ module Wizard::ActiveRelation_WhereNot
 end
 
 module Wizard::GeneratedAttributeMethods
-  extend T::Sig
-
   sig { returns(T::Boolean) }
   def broom?; end
 
@@ -293,8 +289,6 @@ class Wizard::QuidditchPosition < T::Enum
 end
 
 module Wizard::GeneratedAssociationMethods
-  extend T::Sig
-
   sig { returns(T.nilable(T.untyped)) }
   def school; end
 
@@ -343,8 +337,6 @@ class Wizard < ApplicationRecord
   include Wizard::GeneratedAssociationMethods
   extend Wizard::CustomFinderMethods
   extend Wizard::QueryMethodsReturningRelation
-  extend T::Sig
-  extend T::Generic
   RelationType = T.type_alias { T.any(Wizard::ActiveRecord_Relation, Wizard::ActiveRecord_Associations_CollectionProxy, Wizard::ActiveRecord_AssociationRelation) }
 
   sig { returns(T::Hash[T.any(String, Symbol), String]) }
@@ -460,8 +452,6 @@ class Wizard::ActiveRecord_Relation < ActiveRecord::Relation
   include Wizard::ActiveRelation_WhereNot
   include Wizard::CustomFinderMethods
   include Wizard::QueryMethodsReturningRelation
-  extend T::Sig
-  extend T::Generic
   Elem = type_member(fixed: Wizard)
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
@@ -523,8 +513,6 @@ class Wizard::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelati
   include Wizard::ActiveRelation_WhereNot
   include Wizard::CustomFinderMethods
   include Wizard::QueryMethodsReturningAssociationRelation
-  extend T::Sig
-  extend T::Generic
   Elem = type_member(fixed: Wizard)
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
@@ -585,8 +573,6 @@ end
 class Wizard::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include Wizard::CustomFinderMethods
   include Wizard::QueryMethodsReturningAssociationRelation
-  extend T::Sig
-  extend T::Generic
   Elem = type_member(fixed: Wizard)
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }

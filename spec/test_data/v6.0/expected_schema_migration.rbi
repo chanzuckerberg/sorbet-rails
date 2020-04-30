@@ -8,8 +8,6 @@ module ActiveRecord::SchemaMigration::ActiveRelation_WhereNot
 end
 
 module ActiveRecord::SchemaMigration::GeneratedAttributeMethods
-  extend T::Sig
-
   sig { returns(String) }
   def version; end
 
@@ -41,8 +39,6 @@ class ActiveRecord::SchemaMigration < ActiveRecord::Base
   include ActiveRecord::SchemaMigration::GeneratedAttributeMethods
   extend ActiveRecord::SchemaMigration::CustomFinderMethods
   extend ActiveRecord::SchemaMigration::QueryMethodsReturningRelation
-  extend T::Sig
-  extend T::Generic
   RelationType = T.type_alias { T.any(ActiveRecord::SchemaMigration::ActiveRecord_Relation, ActiveRecord::SchemaMigration::ActiveRecord_Associations_CollectionProxy, ActiveRecord::SchemaMigration::ActiveRecord_AssociationRelation) }
 end
 
@@ -252,8 +248,6 @@ class ActiveRecord::SchemaMigration::ActiveRecord_Relation < ActiveRecord::Relat
   include ActiveRecord::SchemaMigration::ActiveRelation_WhereNot
   include ActiveRecord::SchemaMigration::CustomFinderMethods
   include ActiveRecord::SchemaMigration::QueryMethodsReturningRelation
-  extend T::Sig
-  extend T::Generic
   Elem = type_member(fixed: ActiveRecord::SchemaMigration)
 end
 
@@ -261,16 +255,12 @@ class ActiveRecord::SchemaMigration::ActiveRecord_AssociationRelation < ActiveRe
   include ActiveRecord::SchemaMigration::ActiveRelation_WhereNot
   include ActiveRecord::SchemaMigration::CustomFinderMethods
   include ActiveRecord::SchemaMigration::QueryMethodsReturningAssociationRelation
-  extend T::Sig
-  extend T::Generic
   Elem = type_member(fixed: ActiveRecord::SchemaMigration)
 end
 
 class ActiveRecord::SchemaMigration::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include ActiveRecord::SchemaMigration::CustomFinderMethods
   include ActiveRecord::SchemaMigration::QueryMethodsReturningAssociationRelation
-  extend T::Sig
-  extend T::Generic
   Elem = type_member(fixed: ActiveRecord::SchemaMigration)
 
   sig { params(records: T.any(ActiveRecord::SchemaMigration, T::Array[ActiveRecord::SchemaMigration])).returns(T.self_type) }

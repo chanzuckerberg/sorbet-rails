@@ -3,8 +3,6 @@
 
 # typed: strong
 module Wand::EnumInstanceMethods
-  extend T::Sig
-
   sig { returns(T::Boolean) }
   def phoenix_feather?; end
 
@@ -36,8 +34,6 @@ module Wand::ActiveRelation_WhereNot
 end
 
 module Wand::GeneratedAttributeMethods
-  extend T::Sig
-
   sig { returns(T::Boolean) }
   def broken; end
 
@@ -167,8 +163,6 @@ class Wand::CoreType < T::Enum
 end
 
 module Wand::GeneratedAssociationMethods
-  extend T::Sig
-
   sig { returns(::Wizard) }
   def wizard; end
 
@@ -199,8 +193,6 @@ class Wand < ApplicationRecord
   include Wand::GeneratedAssociationMethods
   extend Wand::CustomFinderMethods
   extend Wand::QueryMethodsReturningRelation
-  extend T::Sig
-  extend T::Generic
   RelationType = T.type_alias { T.any(Wand::ActiveRecord_Relation, Wand::ActiveRecord_Associations_CollectionProxy, Wand::ActiveRecord_AssociationRelation) }
 
   sig { returns(T::Hash[T.any(String, Symbol), Integer]) }
@@ -232,8 +224,6 @@ class Wand::ActiveRecord_Relation < ActiveRecord::Relation
   include Wand::ActiveRelation_WhereNot
   include Wand::CustomFinderMethods
   include Wand::QueryMethodsReturningRelation
-  extend T::Sig
-  extend T::Generic
   Elem = type_member(fixed: Wand)
 
   sig { params(args: T.untyped).returns(Wand::ActiveRecord_Relation) }
@@ -253,8 +243,6 @@ class Wand::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
   include Wand::ActiveRelation_WhereNot
   include Wand::CustomFinderMethods
   include Wand::QueryMethodsReturningAssociationRelation
-  extend T::Sig
-  extend T::Generic
   Elem = type_member(fixed: Wand)
 
   sig { params(args: T.untyped).returns(Wand::ActiveRecord_AssociationRelation) }
@@ -273,8 +261,6 @@ end
 class Wand::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include Wand::CustomFinderMethods
   include Wand::QueryMethodsReturningAssociationRelation
-  extend T::Sig
-  extend T::Generic
   Elem = type_member(fixed: Wand)
 
   sig { params(args: T.untyped).returns(Wand::ActiveRecord_AssociationRelation) }
