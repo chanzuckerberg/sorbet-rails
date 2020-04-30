@@ -12,11 +12,12 @@ class SorbetRails::ModelPlugins::ActiveRecordNamedScope < SorbetRails::ModelPlug
     # by two criteria:
     # - they are defined in 'activerecord/lib/active_record/scoping/named.rb'
     # - they are not one of the methods actually defined in that file's source.
-    #
-    # These methods are defined within `lib/active_record/scoping/named.rb` and should
-    # be ignored for the purposes of this plugin.
     # See: https://github.com/rails/rails/blob/master/activerecord/lib/active_record/scoping/named.rb
-    non_dynamic_methods = %i(all scope_for_association default_scoped default_extensions scope valid_scope_name?)
+    non_dynamic_methods = (
+      ActiveRecord::Scoping::Named::ClassMethods.instance_methods +
+      ActiveRecord::Scoping::Named::ClassMethods.protected_instance_methods +
+      ActiveRecord::Scoping::Named::ClassMethods.private_instance_methods
+    )
 
     (@model_class.methods - non_dynamic_methods).sort.each do |method_name|
       next unless SorbetRails::Utils.valid_method_name?(method_name.to_s)
