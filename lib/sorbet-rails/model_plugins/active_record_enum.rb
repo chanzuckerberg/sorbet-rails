@@ -9,7 +9,6 @@ class SorbetRails::ModelPlugins::ActiveRecordEnum < SorbetRails::ModelPlugins::B
 
     enum_module_name = model_module_name("EnumInstanceMethods")
     enum_module_rbi = root.create_module(enum_module_name)
-    enum_module_rbi.create_extend("T::Sig")
 
     model_class_rbi = root.create_class(self.model_class_name)
     model_class_rbi.create_include(enum_module_name)

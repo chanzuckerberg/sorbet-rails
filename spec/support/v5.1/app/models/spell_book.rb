@@ -13,4 +13,6 @@ class SpellBook < ApplicationRecord
     biology: 1,
     dark_art: 999,
   }
+
+  scope :recent, -> { where('created_at > ?', 1.month.ago) }
 end

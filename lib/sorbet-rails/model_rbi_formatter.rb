@@ -74,8 +74,7 @@ class SorbetRails::ModelRbiFormatter
       self.model_relation_class_name,
       superclass: "ActiveRecord::Relation",
     )
-    model_relation_rbi.create_extend("T::Sig")
-    model_relation_rbi.create_extend("T::Generic")
+    model_relation_rbi.create_include(self.model_query_methods_returning_relation_module_name)
     model_relation_rbi.create_constant(
       "Elem",
       value: "type_member(fixed: #{model_class_name})",
@@ -85,8 +84,7 @@ class SorbetRails::ModelRbiFormatter
       self.model_assoc_relation_class_name,
       superclass: "ActiveRecord::AssociationRelation",
     )
-    model_assoc_relation_rbi.create_extend("T::Sig")
-    model_assoc_relation_rbi.create_extend("T::Generic")
+    model_assoc_relation_rbi.create_include(self.model_query_methods_returning_assoc_relation_module_name)
     model_assoc_relation_rbi.create_constant(
       "Elem",
       value: "type_member(fixed: #{model_class_name})",
@@ -96,8 +94,7 @@ class SorbetRails::ModelRbiFormatter
       self.model_assoc_proxy_class_name,
       superclass: "ActiveRecord::Associations::CollectionProxy",
     )
-    collection_proxy_rbi.create_extend("T::Sig")
-    collection_proxy_rbi.create_extend("T::Generic")
+    collection_proxy_rbi.create_include(self.model_query_methods_returning_assoc_relation_module_name)
     collection_proxy_rbi.create_constant(
       "Elem",
       value: "type_member(fixed: #{self.model_class_name})",
@@ -107,8 +104,7 @@ class SorbetRails::ModelRbiFormatter
       self.model_class_name,
       superclass: T.must(@model_class.superclass).name,
     )
-    model_rbi.create_extend("T::Sig")
-    model_rbi.create_extend("T::Generic")
+    model_rbi.create_extend(self.model_query_methods_returning_relation_module_name)
     model_rbi.create_type_alias(
       self.model_relation_type_class_name,
       type: self.model_relation_type_alias

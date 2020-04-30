@@ -13,7 +13,6 @@ class SorbetRails::ModelPlugins::ActiveRecordAssoc < SorbetRails::ModelPlugins::
 
     assoc_module_name = self.model_module_name("GeneratedAssociationMethods")
     assoc_module_rbi = root.create_module(assoc_module_name)
-    assoc_module_rbi.create_extend("T::Sig")
 
     model_class_rbi = root.create_class(self.model_class_name)
     model_class_rbi.create_include(assoc_module_name)

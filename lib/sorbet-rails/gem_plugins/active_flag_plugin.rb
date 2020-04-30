@@ -7,7 +7,6 @@ class ActiveFlagPlugin < SorbetRails::ModelPlugins::Base
 
     module_name = self.model_module_name("GeneratedActiveFlagMethods")
     module_rbi = root.create_module(module_name)
-    module_rbi.create_extend("T::Sig")
 
     model_class_rbi = root.create_class(self.model_class_name)
     model_class_rbi.create_include(module_name)

@@ -3,8 +3,6 @@
 
 # typed: strong
 module Squib::EnumInstanceMethods
-  extend T::Sig
-
   sig { returns(T::Boolean) }
   def broom_nimbus?; end
 
@@ -114,8 +112,6 @@ module Squib::ActiveRelation_WhereNot
 end
 
 module Squib::GeneratedAttributeMethods
-  extend T::Sig
-
   sig { returns(T.nilable(String)) }
   def broom; end
 
@@ -274,8 +270,7 @@ class Squib < Wizard
   include Squib::GeneratedAttributeMethods
   include Squib::GeneratedAssociationMethods
   extend Squib::CustomFinderMethods
-  extend T::Sig
-  extend T::Generic
+  extend Squib::QueryMethodsReturningRelation
   RelationType = T.type_alias { T.any(Squib::ActiveRecord_Relation, Squib::ActiveRecord_Associations_CollectionProxy, Squib::ActiveRecord_AssociationRelation) }
 
   sig { returns(T::Hash[T.any(String, Symbol), String]) }
@@ -295,886 +290,447 @@ class Squib < Wizard
 
   sig { returns(T::Hash[T.any(String, Symbol), Integer]) }
   def self.quidditch_positions; end
+end
+
+module Squib::QueryMethodsReturningRelation
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
+  def Gryffindor(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.Gryffindor(*args); end
+  def Hagrid(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.Hagrid(*args); end
+  def Hufflepuff(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.Hufflepuff(*args); end
+  def Ravenclaw(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.Ravenclaw(*args); end
+  def Slytherin(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.Slytherin(*args); end
+  def black_hair(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.black_hair(*args); end
+  def blonde_hair(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.blonde_hair(*args); end
+  def broom_firebolt(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.broom_firebolt(*args); end
+  def broom_nimbus(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.broom_nimbus(*args); end
+  def brown_hair(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.brown_hair(*args); end
+  def color_blue_eyes(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.color_blue_eyes(*args); end
+  def color_brown_eyes(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.color_brown_eyes(*args); end
+  def color_green_eyes(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.color_green_eyes(*args); end
+  def not_Gryffindor(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.not_Gryffindor(*args); end
+  def not_Hagrid(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.not_Hagrid(*args); end
+  def not_Hufflepuff(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.not_Hufflepuff(*args); end
+  def not_Ravenclaw(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.not_Ravenclaw(*args); end
+  def not_Slytherin(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.not_Slytherin(*args); end
+  def not_black_hair(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.not_black_hair(*args); end
+  def not_blonde_hair(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.not_blonde_hair(*args); end
+  def not_broom_firebolt(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.not_broom_firebolt(*args); end
+  def not_broom_nimbus(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.not_broom_nimbus(*args); end
+  def not_brown_hair(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.not_brown_hair(*args); end
+  def not_color_blue_eyes(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.not_color_blue_eyes(*args); end
+  def not_color_brown_eyes(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.not_color_brown_eyes(*args); end
+  def not_color_green_eyes(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.not_color_green_eyes(*args); end
+  def not_quidditch_beater(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.not_quidditch_beater(*args); end
+  def not_quidditch_chaser(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.not_quidditch_chaser(*args); end
+  def not_quidditch_keeper(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.not_quidditch_keeper(*args); end
+  def not_quidditch_seeker(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.not_quidditch_seeker(*args); end
+  def quidditch_beater(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.quidditch_beater(*args); end
+  def quidditch_chaser(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.quidditch_chaser(*args); end
+  def quidditch_keeper(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.quidditch_keeper(*args); end
+  def quidditch_seeker(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.quidditch_seeker(*args); end
+  def recent(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.recent(*args); end
+  def with_attached_hats(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.with_attached_hats(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.with_attached_school_photo(*args); end
+  def with_attached_school_photo(*args); end
 
   sig { returns(Squib::ActiveRecord_Relation) }
-  def self.all; end
+  def all; end
 
   sig { params(block: T.nilable(T.proc.void)).returns(Squib::ActiveRecord_Relation) }
-  def self.unscoped(&block); end
+  def unscoped(&block); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.select(*args); end
+  def select(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.reselect(*args); end
+  def reselect(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.order(*args); end
+  def order(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.reorder(*args); end
+  def reorder(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.group(*args); end
+  def group(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.limit(*args); end
+  def limit(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.offset(*args); end
+  def offset(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.joins(*args); end
+  def joins(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.left_joins(*args); end
+  def left_joins(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.left_outer_joins(*args); end
+  def left_outer_joins(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.where(*args); end
+  def where(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.rewhere(*args); end
+  def rewhere(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.preload(*args); end
+  def preload(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.extract_associated(*args); end
+  def extract_associated(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.eager_load(*args); end
+  def eager_load(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.includes(*args); end
+  def includes(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.from(*args); end
+  def from(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.lock(*args); end
+  def lock(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.readonly(*args); end
+  def readonly(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.or(*args); end
+  def or(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.having(*args); end
+  def having(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.create_with(*args); end
+  def create_with(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.distinct(*args); end
+  def distinct(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.references(*args); end
+  def references(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.none(*args); end
+  def none(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.unscope(*args); end
+  def unscope(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.optimizer_hints(*args); end
+  def optimizer_hints(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.merge(*args); end
+  def merge(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.except(*args); end
+  def except(*args); end
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def self.only(*args); end
+  def only(*args); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Squib::ActiveRecord_Relation) }
-  def self.extending(*args, &block); end
+  def extending(*args, &block); end
+end
+
+module Squib::QueryMethodsReturningAssociationRelation
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def Gryffindor(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def Hagrid(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def Hufflepuff(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def Ravenclaw(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def Slytherin(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def black_hair(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def blonde_hair(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def broom_firebolt(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def broom_nimbus(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def brown_hair(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def color_blue_eyes(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def color_brown_eyes(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def color_green_eyes(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def not_Gryffindor(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def not_Hagrid(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def not_Hufflepuff(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def not_Ravenclaw(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def not_Slytherin(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def not_black_hair(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def not_blonde_hair(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def not_broom_firebolt(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def not_broom_nimbus(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def not_brown_hair(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def not_color_blue_eyes(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def not_color_brown_eyes(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def not_color_green_eyes(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def not_quidditch_beater(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def not_quidditch_chaser(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def not_quidditch_keeper(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def not_quidditch_seeker(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def quidditch_beater(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def quidditch_chaser(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def quidditch_keeper(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def quidditch_seeker(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def recent(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def with_attached_hats(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def with_attached_school_photo(*args); end
+
+  sig { returns(Squib::ActiveRecord_AssociationRelation) }
+  def all; end
+
+  sig { params(block: T.nilable(T.proc.void)).returns(Squib::ActiveRecord_Relation) }
+  def unscoped(&block); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def select(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def reselect(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def order(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def reorder(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def group(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def limit(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def offset(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def joins(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def left_joins(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def left_outer_joins(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def where(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def rewhere(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def preload(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def extract_associated(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def eager_load(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def includes(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def from(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def lock(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def readonly(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def or(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def having(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def create_with(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def distinct(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def references(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def none(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def unscope(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def optimizer_hints(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def merge(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def except(*args); end
+
+  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
+  def only(*args); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Squib::ActiveRecord_AssociationRelation) }
+  def extending(*args, &block); end
 end
 
 class Squib::ActiveRecord_Relation < ActiveRecord::Relation
   include Squib::ActiveRelation_WhereNot
   include Squib::CustomFinderMethods
-  extend T::Sig
-  extend T::Generic
+  include Squib::QueryMethodsReturningRelation
   Elem = type_member(fixed: Squib)
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def Gryffindor(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def Hagrid(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def Hufflepuff(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def Ravenclaw(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def Slytherin(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def black_hair(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def blonde_hair(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def broom_firebolt(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def broom_nimbus(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def brown_hair(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def color_blue_eyes(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def color_brown_eyes(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def color_green_eyes(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def not_Gryffindor(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def not_Hagrid(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def not_Hufflepuff(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def not_Ravenclaw(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def not_Slytherin(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def not_black_hair(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def not_blonde_hair(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def not_broom_firebolt(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def not_broom_nimbus(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def not_brown_hair(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def not_color_blue_eyes(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def not_color_brown_eyes(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def not_color_green_eyes(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def not_quidditch_beater(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def not_quidditch_chaser(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def not_quidditch_keeper(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def not_quidditch_seeker(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def quidditch_beater(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def quidditch_chaser(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def quidditch_keeper(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def quidditch_seeker(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def recent(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def with_attached_hats(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def with_attached_school_photo(*args); end
-
-  sig { returns(Squib::ActiveRecord_Relation) }
-  def all; end
-
-  sig { params(block: T.nilable(T.proc.void)).returns(Squib::ActiveRecord_Relation) }
-  def unscoped(&block); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def select(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def reselect(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def order(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def reorder(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def group(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def limit(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def offset(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def joins(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def left_joins(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def left_outer_joins(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def where(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def rewhere(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def preload(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def extract_associated(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def eager_load(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def includes(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def from(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def lock(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def readonly(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def or(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def having(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def create_with(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def distinct(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def references(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def none(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def unscope(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def optimizer_hints(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def merge(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def except(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
-  def only(*args); end
-
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Squib::ActiveRecord_Relation) }
-  def extending(*args, &block); end
 end
 
 class Squib::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
   include Squib::ActiveRelation_WhereNot
   include Squib::CustomFinderMethods
-  extend T::Sig
-  extend T::Generic
+  include Squib::QueryMethodsReturningAssociationRelation
   Elem = type_member(fixed: Squib)
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def Gryffindor(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def Hagrid(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def Hufflepuff(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def Ravenclaw(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def Slytherin(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def black_hair(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def blonde_hair(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def broom_firebolt(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def broom_nimbus(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def brown_hair(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def color_blue_eyes(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def color_brown_eyes(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def color_green_eyes(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def not_Gryffindor(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def not_Hagrid(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def not_Hufflepuff(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def not_Ravenclaw(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def not_Slytherin(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def not_black_hair(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def not_blonde_hair(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def not_broom_firebolt(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def not_broom_nimbus(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def not_brown_hair(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def not_color_blue_eyes(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def not_color_brown_eyes(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def not_color_green_eyes(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def not_quidditch_beater(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def not_quidditch_chaser(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def not_quidditch_keeper(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def not_quidditch_seeker(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def quidditch_beater(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def quidditch_chaser(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def quidditch_keeper(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def quidditch_seeker(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def recent(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def with_attached_hats(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def with_attached_school_photo(*args); end
-
-  sig { returns(Squib::ActiveRecord_AssociationRelation) }
-  def all; end
-
-  sig { params(block: T.nilable(T.proc.void)).returns(Squib::ActiveRecord_AssociationRelation) }
-  def unscoped(&block); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def select(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def reselect(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def order(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def reorder(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def group(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def limit(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def offset(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def joins(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def left_joins(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def left_outer_joins(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def where(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def rewhere(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def preload(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def extract_associated(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def eager_load(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def includes(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def from(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def lock(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def readonly(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def or(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def having(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def create_with(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def distinct(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def references(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def none(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def unscope(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def optimizer_hints(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def merge(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def except(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def only(*args); end
-
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Squib::ActiveRecord_AssociationRelation) }
-  def extending(*args, &block); end
-end
-
-class Squib::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
-  include Squib::CustomFinderMethods
-  extend T::Sig
-  extend T::Generic
-  Elem = type_member(fixed: Squib)
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def Gryffindor(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def Hagrid(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def Hufflepuff(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def Ravenclaw(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def Slytherin(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def black_hair(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def blonde_hair(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def broom_firebolt(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def broom_nimbus(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def brown_hair(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def color_blue_eyes(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def color_brown_eyes(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def color_green_eyes(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def not_Gryffindor(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def not_Hagrid(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def not_Hufflepuff(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def not_Ravenclaw(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def not_Slytherin(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def not_black_hair(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def not_blonde_hair(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def not_broom_firebolt(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def not_broom_nimbus(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def not_brown_hair(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def not_color_blue_eyes(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def not_color_brown_eyes(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def not_color_green_eyes(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def not_quidditch_beater(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def not_quidditch_chaser(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def not_quidditch_keeper(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def not_quidditch_seeker(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def quidditch_beater(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def quidditch_chaser(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def quidditch_keeper(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def quidditch_seeker(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def recent(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def with_attached_hats(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def with_attached_school_photo(*args); end
-
-  sig { returns(Squib::ActiveRecord_AssociationRelation) }
-  def all; end
-
-  sig { params(block: T.nilable(T.proc.void)).returns(Squib::ActiveRecord_AssociationRelation) }
-  def unscoped(&block); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def select(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def reselect(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def order(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def reorder(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def group(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def limit(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def offset(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def joins(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def left_joins(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def left_outer_joins(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def where(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def rewhere(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def preload(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def extract_associated(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def eager_load(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def includes(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def from(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def lock(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def readonly(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def or(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def having(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def create_with(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def distinct(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def references(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def none(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def unscope(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def optimizer_hints(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def merge(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def except(*args); end
-
-  sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
-  def only(*args); end
-
-  sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Squib::ActiveRecord_AssociationRelation) }
-  def extending(*args, &block); end
-
-  sig { params(records: T.any(Squib, T::Array[Squib])).returns(T.self_type) }
-  def <<(*records); end
-
-  sig { params(records: T.any(Squib, T::Array[Squib])).returns(T.self_type) }
-  def append(*records); end
-
-  sig { params(records: T.any(Squib, T::Array[Squib])).returns(T.self_type) }
-  def push(*records); end
-
-  sig { params(records: T.any(Squib, T::Array[Squib])).returns(T.self_type) }
-  def concat(*records); end
 end
 
 module Squib::GeneratedAssociationMethods
-  extend T::Sig
-
   sig { returns(::ActiveStorage::Attachment::ActiveRecord_Associations_CollectionProxy) }
   def hats_attachments; end
 
@@ -1246,4 +802,22 @@ module Squib::GeneratedAssociationMethods
 
   sig { params(attachables: T.untyped).returns(T.untyped) }
   def hats=(*attachables); end
+end
+
+class Squib::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
+  include Squib::CustomFinderMethods
+  include Squib::QueryMethodsReturningAssociationRelation
+  Elem = type_member(fixed: Squib)
+
+  sig { params(records: T.any(Squib, T::Array[Squib])).returns(T.self_type) }
+  def <<(*records); end
+
+  sig { params(records: T.any(Squib, T::Array[Squib])).returns(T.self_type) }
+  def append(*records); end
+
+  sig { params(records: T.any(Squib, T::Array[Squib])).returns(T.self_type) }
+  def push(*records); end
+
+  sig { params(records: T.any(Squib, T::Array[Squib])).returns(T.self_type) }
+  def concat(*records); end
 end
