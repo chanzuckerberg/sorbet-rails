@@ -83,10 +83,13 @@ module SorbetRails::ModelUtils
       root: Parlour::RbiGenerator::Namespace,
       method_name: String,
       parameters: T.nilable(T::Array[::Parlour::RbiGenerator::Parameter]),
-      standard_query_method: T::Boolean,
+      # This is meant to indicate the method is a rails-provided query method like
+      # where, limit, etc and not something like a named scope. It should likely
+      # only be set to `true` when called from the ActiveRecordQuerying plugin.
+      builtin_query_method: T::Boolean,
     ).void
   }
-  def add_relation_query_method(root, method_name, parameters: nil, standard_query_method: false)
+  def add_relation_query_method(root, method_name, parameters: nil, builtin_query_method: false)
     # a relation querying method will be available on
     # - model (as a class method)
     # - activerecord relation
@@ -103,7 +106,7 @@ module SorbetRails::ModelUtils
     # model. However, in Rails 5 query methods that come from scopes or enums
     # get overridden in hidden-definitions so we need to explicitly define them
     # on the model and relation classes.
-    if standard_query_method || Rails.version =~ /^6\./
+    if builtin_query_method || Rails.version =~ /^6\./
       relation_module_rbi = root.create_module(self.model_query_methods_returning_relation_module_name)
       relation_module_rbi.create_method(
         method_name,

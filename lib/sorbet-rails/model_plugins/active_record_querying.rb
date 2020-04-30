@@ -9,7 +9,7 @@ class SorbetRails::ModelPlugins::ActiveRecordQuerying < SorbetRails::ModelPlugin
     add_relation_query_method(
       root,
       "all",
-      standard_query_method: true,
+      builtin_query_method: true,
     )
     add_relation_query_method(
       root,
@@ -17,7 +17,7 @@ class SorbetRails::ModelPlugins::ActiveRecordQuerying < SorbetRails::ModelPlugin
       parameters: [
         Parameter.new("&block", type: "T.nilable(T.proc.void)"),
       ],
-      standard_query_method: true,
+      builtin_query_method: true,
     )
 
     # It's not possible to typedef all methods in ActiveRecord::Querying module to have the
@@ -36,7 +36,7 @@ class SorbetRails::ModelPlugins::ActiveRecordQuerying < SorbetRails::ModelPlugin
         parameters: [
           Parameter.new("*args", type: "T.untyped"),
         ],
-        standard_query_method: true,
+        builtin_query_method: true,
       ) if exists_class_method?(method_name)
     end
 
@@ -47,7 +47,7 @@ class SorbetRails::ModelPlugins::ActiveRecordQuerying < SorbetRails::ModelPlugin
         Parameter.new("*args", type: "T.untyped"),
         Parameter.new("&block", type: "T.nilable(T.proc.void)"),
       ],
-      standard_query_method: true,
+      builtin_query_method: true,
     )
   end
 end
