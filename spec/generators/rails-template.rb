@@ -91,6 +91,8 @@ def create_models
         biology: 1,
         dark_art: 999,
       }
+
+      scope :recent, -> { where('created_at > ?', 1.month.ago) }
     end
   RUBY
 
@@ -133,7 +135,7 @@ def create_models
     class Wizard < ApplicationRecord
       validates :name, length: { minimum: 5 }, presence: true
       # simulate conditional validation
-      validates :parent_email, presence: true, if: -> { false }
+      validates :parent_email, presence: true, if: :Slytherin?
 
       typed_enum house: {
         Gryffindor: 0,
@@ -478,11 +480,6 @@ def create_jobs
 end
 
 def add_sorbet_test_files
-  file "typed-override.yaml", <<~YAML
-    true:
-    - ./sorbet_test_cases.rb
-  YAML
-
   copy_file "./sorbet_test_cases.rb", "sorbet_test_cases.rb"
 end
 
