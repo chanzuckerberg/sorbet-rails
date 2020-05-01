@@ -1,7 +1,7 @@
 PATH
   remote: ../../..
   specs:
-    sorbet-rails (0.6.3)
+    sorbet-rails (0.6.4)
       method_source (>= 0.9.2)
       parlour (~> 2.0)
       parser (>= 2.7)
@@ -81,7 +81,7 @@ GEM
       parser
       rainbow (~> 3.0)
       sorbet-runtime (>= 0.5)
-    parser (2.7.1.1)
+    parser (2.7.1.2)
       ast (~> 2.4.0)
     polyfill (1.8.0)
     puma (3.12.4)
