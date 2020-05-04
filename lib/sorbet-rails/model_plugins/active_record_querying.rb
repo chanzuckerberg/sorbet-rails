@@ -1,4 +1,4 @@
-# typed: strong
+# typed: strict
 require ('sorbet-rails/model_plugins/base')
 class SorbetRails::ModelPlugins::ActiveRecordQuerying < SorbetRails::ModelPlugins::Base
 
@@ -48,6 +48,33 @@ class SorbetRails::ModelPlugins::ActiveRecordQuerying < SorbetRails::ModelPlugin
         Parameter.new("&block", type: "T.nilable(T.proc.void)"),
       ],
       builtin_query_method: true,
+    )
+
+    # These are technically "query methods" but they aren't chainable so instead of
+    # adding conditionals to `add_relation_query_method` to handle this we'll just
+    # handle them here.
+    relation_module_rbi = root.create_module(self.model_query_methods_returning_relation_module_name)
+    create_in_batches_method(relation_module_rbi, inner_type: self.model_relation_class_name)
+
+    assoc_relation_module_rbi = root.create_module(self.model_query_methods_returning_assoc_relation_module_name)
+    create_in_batches_method(assoc_relation_module_rbi, inner_type: self.model_assoc_relation_class_name)
+  end
+
+  private
+
+  sig { params(root: Parlour::RbiGenerator::Namespace, inner_type: String).void }
+  def create_in_batches_method(root, inner_type:)
+    root.create_method(
+      "in_batches",
+      parameters: [
+        Parameter.new("of:", type: "T.nilable(Integer)", default: "1000"),
+        Parameter.new("start:", type: "T.nilable(Integer)", default: "nil"),
+        Parameter.new("finish:", type: "T.nilable(Integer)", default: "nil"),
+        Parameter.new("load:", type: "T.nilable(T::Boolean)", default: "false"),
+        Parameter.new("error_on_ignore:", type: "T.nilable(T::Boolean)", default: "nil"),
+        Parameter.new("&block", type: "T.nilable(T.proc.params(e: #{inner_type}).void)"),
+      ],
+      return_type: "T::Enumerable[#{inner_type}]",
     )
   end
 end
