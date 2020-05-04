@@ -176,10 +176,10 @@ T.assert_type!(spell_books.create!(name: 'Fantastic Beasts') { |s| T.assert_type
 T.assert_type!(spell_books.first_or_create(name: 'Fantastic Beasts') { |s| T.assert_type!(s, SpellBook) }, SpellBook)
 T.assert_type!(spell_books.first_or_create!(name: 'Fantastic Beasts') { |s| T.assert_type!(s, SpellBook) }, SpellBook)
 T.assert_type!(spell_books.first_or_initialize { |s| T.assert_type!(s, SpellBook) }, SpellBook)
-# spell_books.find_each { |s| T.assert_type!(s, SpellBook) } # TODO: Handle for Rails 6
-# T.assert_type!(spell_books.find_each, T::Enumerator[SpellBook]) # TODO: Handle for Rails 6
-# spell_books.find_in_batches { |s| T.assert_type!(s, T::Array[SpellBook]) } # TODO: Handle for Rails 6
-# T.assert_type!(spell_books.find_in_batches, T::Enumerator[T::Array[SpellBook]]) # TODO: Handle for Rails 6
+spell_books.find_each { |s| T.assert_type!(s, SpellBook) }
+T.assert_type!(spell_books.find_each, T::Enumerator[SpellBook])
+spell_books.find_in_batches { |s| T.assert_type!(s, T::Array[SpellBook]) }
+T.assert_type!(spell_books.find_in_batches, T::Enumerator[T::Array[SpellBook]])
 # T.assert_type!(spell_books.destroy_all, T::Array[SpellBook]) # Ignored until we add support
 T.assert_type!(spell_books.any?, T::Boolean)
 T.assert_type!(spell_books.many?, T::Boolean)
@@ -246,10 +246,10 @@ T.assert_type!(spell_books_query.create!(name: 'Fantastic Beasts') { |s| T.asser
 T.assert_type!(spell_books_query.first_or_create(name: 'Fantastic Beasts') { |s| T.assert_type!(s, SpellBook) }, SpellBook) # Ignored until we add support
 T.assert_type!(spell_books_query.first_or_create!(name: 'Fantastic Beasts') { |s| T.assert_type!(s, SpellBook) }, SpellBook) # Ignored until we add support
 T.assert_type!(spell_books_query.first_or_initialize { |s| T.assert_type!(s, SpellBook) }, SpellBook) # Ignored until we add support
-# spell_books_query.find_each { |s| T.assert_type!(s, SpellBook) } # TODO: Handle for Rails 6
-# T.assert_type!(spell_books_query.find_each, T::Enumerator[SpellBook]) # TODO: Handle for Rails 6
-# spell_books_query.find_in_batches { |s| T.assert_type!(s, T::Array[SpellBook]) } # TODO: Handle for Rails 6
-# T.assert_type!(spell_books_query.find_in_batches, T::Enumerator[T::Array[SpellBook]]) # TODO: Handle for Rails 6
+spell_books_query.find_each { |s| T.assert_type!(s, SpellBook) }
+T.assert_type!(spell_books_query.find_each, T::Enumerator[SpellBook])
+spell_books_query.find_in_batches { |s| T.assert_type!(s, T::Array[SpellBook]) }
+T.assert_type!(spell_books_query.find_in_batches, T::Enumerator[T::Array[SpellBook]])
 # T.assert_type!(spell_books_query.destroy_all, T::Array[SpellBook]) # Ignored until we add support
 T.assert_type!(spell_books_query.any?, T::Boolean)
 T.assert_type!(spell_books_query.many?, T::Boolean)
