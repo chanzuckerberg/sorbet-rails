@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/puma/all/puma.rbi
 #
-# puma-4.3.1
+# puma-4.3.3
 
 module Puma
   def self.jruby?; end
@@ -458,6 +458,7 @@ class Puma::Server
   def persistent_timeout; end
   def persistent_timeout=(arg0); end
   def pool_capacity; end
+  def possible_header_injection?(header_value); end
   def process_client(client, buffer); end
   def read_body(env, client, body, cl); end
   def reaping_time; end

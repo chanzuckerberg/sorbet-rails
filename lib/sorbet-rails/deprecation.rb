@@ -1,3 +1,4 @@
+# typed: false
 require 'active_support/deprecation'
 
 module SorbetRails

@@ -1,4 +1,4 @@
-# typed: strong
+# typed: strict
 module SorbetRails
   if defined?(Rails)
     require 'sorbet-rails/railtie'

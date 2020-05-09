@@ -224,14 +224,50 @@ class AwesomePrint::Formatter
   def awesome_struct(s); end
   def awesome_unboundmethod(m); end
   def cast(object, type); end
+  def cast_without_active_record(object, type); end
+  def cast_without_active_support(object, type); end
+  def cast_without_nokogiri(object, type); end
   def cast_without_ostruct(object, type); end
   def convert_to_hash(object); end
   def format(object, type = nil); end
   def initialize(inspector); end
   def inspector; end
   def options; end
+  include AwesomePrint::ActiveRecord
+  include AwesomePrint::ActiveSupport
   include AwesomePrint::Colorize
+  include AwesomePrint::Nokogiri
   include AwesomePrint::OpenStruct
+end
+module AwesomePrint::Logger
+  def ap(object, level = nil); end
+end
+class Logger
+  include AwesomePrint::Logger
+end
+module AwesomePrint::ActiveRecord
+  def awesome_active_record_class(object); end
+  def awesome_active_record_instance(object); end
+  def cast_with_active_record(object, type); end
+  def self.included(base); end
+end
+module AwesomePrint::ActiveSupport
+  def awesome_active_support_time(object); end
+  def awesome_hash_with_indifferent_access(object); end
+  def cast_with_active_support(object, type); end
+  def self.included(base); end
+end
+module AwesomePrint::ActionView
+  def ap(object, options = nil); end
+  def ap_debug(object, options = nil); end
+end
+class ActionView::Base
+  include AwesomePrint::ActionView
+end
+module AwesomePrint::Nokogiri
+  def awesome_nokogiri_xml_node(object); end
+  def cast_with_nokogiri(object, type); end
+  def self.included(base); end
 end
 module AwesomePrint::OpenStruct
   def awesome_open_struct_instance(object); end

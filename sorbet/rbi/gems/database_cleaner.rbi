@@ -7,9 +7,10 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/database_cleaner/all/database_cleaner.rbi
 #
-# database_cleaner-1.8.3
+# database_cleaner-1.8.5
 
 module DatabaseCleaner
+  def called_externally?(file, caller); end
   def deprecate(message); end
   def self.[](*args, &block); end
   def self.add_cleaner(*args, &block); end
@@ -19,6 +20,7 @@ module DatabaseCleaner
   def self.allow_remote_database_url=(arg0); end
   def self.app_root(*args, &block); end
   def self.app_root=(*args, &block); end
+  def self.called_externally?(file, caller); end
   def self.can_detect_orm?; end
   def self.clean!(*args, &block); end
   def self.clean(*args, &block); end
@@ -92,7 +94,6 @@ class DatabaseCleaner::Base
   def adapter_loaded?(orm); end
   def auto_detected?; end
   def autodetect_orm; end
-  def called_externally?(caller); end
   def clean!; end
   def clean(*args, &block); end
   def clean_with!; end
@@ -132,7 +133,6 @@ class DatabaseCleaner::Configuration
   def add_cleaner(orm, opts = nil); end
   def app_root; end
   def app_root=(value); end
-  def called_externally?(caller); end
   def clean!; end
   def clean; end
   def clean_with!(*args); end

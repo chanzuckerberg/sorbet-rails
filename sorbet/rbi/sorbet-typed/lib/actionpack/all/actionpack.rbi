@@ -714,8 +714,10 @@ module ActionDispatch::Routing::Mapper::Resources
     params(
       resources: T.any(String, Symbol),
       as: T.nilable(T.any(String, Symbol)),
+      constraints: T.untyped,
       controller: T.nilable(T.any(String, Symbol)),
       concerns: T.nilable(T.any(Symbol, T::Array[Symbol])),
+      defaults: T.untyped,
       param: T.nilable(Symbol),
       path_names: T.untyped,
       path: T.untyped,
@@ -739,8 +741,10 @@ module ActionDispatch::Routing::Mapper::Resources
   def resources(
     *resources,
     as: nil,
+    constraints: nil,
     controller: nil,
     concerns: nil,
+    defaults: nil,
     param: nil,
     path_names: nil,
     path: nil,
@@ -755,8 +759,8 @@ module ActionDispatch::Routing::Mapper::Resources
 
   # Technically, path doesn't have a default value set. However, this is
   # necessary to allow code like `root to: 'home#index'`.
-  sig { params(path: T.nilable(String), to: T.untyped).returns(T.untyped) }
-  def root(path = T.unsafe(nil), to: nil); end
+  sig { params(path: T.nilable(String), to: T.untyped, as: T.nilable(Symbol)).returns(T.untyped) }
+  def root(path = T.unsafe(nil), to: nil, as: nil); end
 
   sig { returns(T.untyped) }
   def shallow; end
@@ -774,10 +778,11 @@ module AbstractController::Callbacks::ClassMethods
       only: T.nilable(T.any(Symbol, T::Array[Symbol])),
       if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
       unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+      raise: T::Boolean,
       block: T.nilable(T.proc.returns(T.untyped))
     ).void
   end
-  def after_action(*names, except: nil, only: nil, if: nil, unless: nil, &block); end
+  def after_action(*names, except: nil, only: nil, if: nil, unless: nil, raise: true, &block); end
 
   # append_after_action is an alias of after_action
   sig do
@@ -787,10 +792,11 @@ module AbstractController::Callbacks::ClassMethods
       only: T.nilable(T.any(Symbol, T::Array[Symbol])),
       if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
       unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+      raise: T::Boolean,
       block: T.nilable(T.proc.returns(T.untyped))
     ).void
   end
-  def append_after_action(*names, except: nil, only: nil, if: nil, unless: nil, &block); end
+  def append_after_action(*names, except: nil, only: nil, if: nil, unless: nil, raise: true, &block); end
 
   # append_around_action is an alias of around_action
   sig do
@@ -800,10 +806,11 @@ module AbstractController::Callbacks::ClassMethods
       only: T.nilable(T.any(Symbol, T::Array[Symbol])),
       if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
       unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+      raise: T::Boolean,
       block: T.nilable(T.proc.returns(T.untyped))
     ).void
   end
-  def append_around_action(*names, except: nil, only: nil, if: nil, unless: nil, &block); end
+  def append_around_action(*names, except: nil, only: nil, if: nil, unless: nil, raise: true, &block); end
 
   # append_before_action is an alias of before_action
   sig do
@@ -813,10 +820,11 @@ module AbstractController::Callbacks::ClassMethods
       only: T.nilable(T.any(Symbol, T::Array[Symbol])),
       if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
       unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+      raise: T::Boolean,
       block: T.nilable(T.proc.returns(T.untyped))
     ).void
   end
-  def append_before_action(*names, except: nil, only: nil, if: nil, unless: nil, &block); end
+  def append_before_action(*names, except: nil, only: nil, if: nil, unless: nil, raise: true, &block); end
 
   sig do
     params(
@@ -825,10 +833,11 @@ module AbstractController::Callbacks::ClassMethods
       only: T.nilable(T.any(Symbol, T::Array[Symbol])),
       if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
       unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+      raise: T::Boolean,
       block: T.nilable(T.proc.returns(T.untyped))
     ).void
   end
-  def around_action(*names, except: nil, only: nil, if: nil, unless: nil, &block); end
+  def around_action(*names, except: nil, only: nil, if: nil, unless: nil, raise: true, &block); end
 
   sig do
     params(
@@ -837,10 +846,11 @@ module AbstractController::Callbacks::ClassMethods
       only: T.nilable(T.any(Symbol, T::Array[Symbol])),
       if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
       unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+      raise: T::Boolean,
       block: T.nilable(T.proc.returns(T.untyped))
     ).void
   end
-  def before_action(*names, except: nil, only: nil, if: nil, unless: nil, &block); end
+  def before_action(*names, except: nil, only: nil, if: nil, unless: nil, raise: true, &block); end
 
   sig do
     params(
@@ -849,10 +859,11 @@ module AbstractController::Callbacks::ClassMethods
       only: T.nilable(T.any(Symbol, T::Array[Symbol])),
       if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
       unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+      raise: T::Boolean,
       block: T.nilable(T.proc.returns(T.untyped))
     ).void
   end
-  def prepend_after_action(*names, except: nil, only: nil, if: nil, unless: nil, &block); end
+  def prepend_after_action(*names, except: nil, only: nil, if: nil, unless: nil, raise: true, &block); end
 
   sig do
     params(
@@ -861,10 +872,11 @@ module AbstractController::Callbacks::ClassMethods
       only: T.nilable(T.any(Symbol, T::Array[Symbol])),
       if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
       unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+      raise: T::Boolean,
       block: T.nilable(T.proc.returns(T.untyped))
     ).void
   end
-  def prepend_around_action(*names, except: nil, only: nil, if: nil, unless: nil, &block); end
+  def prepend_around_action(*names, except: nil, only: nil, if: nil, unless: nil, raise: true, &block); end
 
   sig do
     params(
@@ -873,10 +885,11 @@ module AbstractController::Callbacks::ClassMethods
       only: T.nilable(T.any(Symbol, T::Array[Symbol])),
       if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
       unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+      raise: T::Boolean,
       block: T.nilable(T.proc.returns(T.untyped))
     ).void
   end
-  def prepend_before_action(*names, except: nil, only: nil, if: nil, unless: nil, &block); end
+  def prepend_before_action(*names, except: nil, only: nil, if: nil, unless: nil, raise: true, &block); end
 
   sig do
     params(
@@ -884,10 +897,11 @@ module AbstractController::Callbacks::ClassMethods
       except: T.nilable(T.any(Symbol, T::Array[Symbol])),
       only: T.nilable(T.any(Symbol, T::Array[Symbol])),
       if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc))
+      unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+      raise: T::Boolean
     ).void
   end
-  def skip_after_action(*names, except: nil, only: nil, if: nil, unless: nil); end
+  def skip_after_action(*names, except: nil, only: nil, if: nil, unless: nil, raise: true); end
 
   sig do
     params(
@@ -895,10 +909,11 @@ module AbstractController::Callbacks::ClassMethods
       except: T.nilable(T.any(Symbol, T::Array[Symbol])),
       only: T.nilable(T.any(Symbol, T::Array[Symbol])),
       if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc))
+      unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+      raise: T::Boolean
     ).void
   end
-  def skip_around_action(*names, except: nil, only: nil, if: nil, unless: nil); end
+  def skip_around_action(*names, except: nil, only: nil, if: nil, unless: nil, raise: true); end
 
   sig do
     params(
@@ -906,10 +921,11 @@ module AbstractController::Callbacks::ClassMethods
       except: T.nilable(T.any(Symbol, T::Array[Symbol])),
       only: T.nilable(T.any(Symbol, T::Array[Symbol])),
       if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc))
+      unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+      raise: T::Boolean
     ).void
   end
-  def skip_before_action(*names, except: nil, only: nil, if: nil, unless: nil); end
+  def skip_before_action(*names, except: nil, only: nil, if: nil, unless: nil, raise: true); end
 end
 
 # https://api.rubyonrails.org/classes/ActionController/MimeResponds.html

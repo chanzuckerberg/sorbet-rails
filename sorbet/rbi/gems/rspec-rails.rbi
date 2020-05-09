@@ -7,33 +7,31 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/rspec-rails/all/rspec-rails.rbi
 #
-# rspec-rails-3.9.0
+# rspec-rails-4.0.0
 
 module RSpec
 end
 module RSpec::Rails
 end
 module RSpec::Rails::FeatureCheck
-  def can_check_pending_migrations?; end
-  def can_maintain_test_schema?; end
-  def has_1_9_hash_syntax?; end
+  def has_action_cable_testing?; end
+  def has_action_mailbox?; end
   def has_action_mailer?; end
+  def has_action_mailer_parameterized?; end
   def has_action_mailer_preview?; end
-  def has_action_mailer_show_preview?; end
+  def has_action_mailer_unified_delivery?; end
   def has_active_job?; end
   def has_active_record?; end
   def has_active_record_migration?; end
-  def has_file_fixture?; end
-  def self.can_check_pending_migrations?; end
-  def self.can_maintain_test_schema?; end
-  def self.has_1_9_hash_syntax?; end
+  def self.has_action_cable_testing?; end
+  def self.has_action_mailbox?; end
   def self.has_action_mailer?; end
+  def self.has_action_mailer_parameterized?; end
   def self.has_action_mailer_preview?; end
-  def self.has_action_mailer_show_preview?; end
+  def self.has_action_mailer_unified_delivery?; end
   def self.has_active_job?; end
   def self.has_active_record?; end
   def self.has_active_record_migration?; end
-  def self.has_file_fixture?; end
   def self.type_metatag(type); end
   def type_metatag(type); end
 end

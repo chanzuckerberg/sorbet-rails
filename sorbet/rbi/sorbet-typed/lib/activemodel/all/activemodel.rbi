@@ -23,6 +23,24 @@ module ActiveModel::Dirty
 end
 
 module ActiveModel::Validations
+  # Returns the `Errors` object that holds all information about attribute
+  # error messages.
+  #
+  # ```ruby
+  # class Person
+  #   include ActiveModel::Validations
+  #
+  #   attr_accessor :name
+  #   validates_presence_of :name
+  # end
+  #
+  # person = Person.new
+  # person.valid? # => false
+  # person.errors # => #<ActiveModel::Errors:0x007fe603816640 @messages={name:["can't be blank"]}>
+  # ```
+  sig { returns(ActiveModel::Errors) }
+  def errors; end
+
   module ClassMethods
     # https://github.com/rails/rails/blob/v5.2.3/activemodel/lib/active_model/validations.rb#L136-L154
     sig do
@@ -69,7 +87,7 @@ module ActiveModel::Validations
         length: T.any(T::Range[T.untyped], T::Hash[T.untyped, T.untyped]),
         numericality: T.any(T::Boolean, T::Hash[T.untyped, T.untyped]),
         on: T.any(Symbol, String, T::Array[T.any(Symbol, String)]),
-        presence: T::Boolean,
+        presence: T.any(T::Boolean, T::Hash[T.untyped, T.untyped]),
         size: T.any(T::Boolean, T::Hash[T.untyped, T.untyped]),
         strict: T::Boolean,
         uniqueness: T.any(T::Boolean, T::Hash[T.untyped, T.untyped]),
@@ -449,4 +467,131 @@ module ActiveModel::Validations::HelperMethods
   end
 
   mixes_in_class_methods(ClassMethods)
+end
+
+class ActiveModel::Errors
+  # Adds `message` to the error messages and used validator type to `details` on `attribute`.
+  # More than one error can be added to the same `attribute`.
+  # If no `message` is supplied, `:invalid` is assumed.
+  #
+  # ```ruby
+  # person.errors.add(:name)
+  # # => ["is invalid"]
+  # person.errors.add(:name, :not_implemented, message: "must be implemented")
+  # # => ["is invalid", "must be implemented"]
+  # ```
+  #
+  # ```ruby
+  # person.errors.messages
+  # # => {:name=>["is invalid", "must be implemented"]}
+  # ```
+  #
+  # ```ruby
+  # person.errors.details
+  # # => {:name=>[{error: :not_implemented}, {error: :invalid}]}
+  # ```
+  #
+  # If `message` is a symbol, it will be translated using the appropriate
+  # scope (see `generate_message`).
+  #
+  # If `message` is a proc, it will be called, allowing for things like
+  # `Time.now` to be used within an error.
+  #
+  # If the `:strict` option is set to `true`, it will raise
+  # ActiveModel::StrictValidationFailed instead of adding the error.
+  # `:strict` option can also be set to any other exception.
+  #
+  # ```ruby
+  # person.errors.add(:name, :invalid, strict: true)
+  # # => ActiveModel::StrictValidationFailed: Name is invalid
+  # person.errors.add(:name, :invalid, strict: NameIsInvalid)
+  # # => NameIsInvalid: Name is invalid
+  #
+  # person.errors.messages # => {}
+  # ```
+  #
+  # `attribute` should be set to `:base` if the error is not
+  # directly associated with a single attribute.
+  #
+  # ```ruby
+  # person.errors.add(:base, :name_or_email_blank,
+  #   message: "either name or email must be present")
+  # person.errors.messages
+  # # => {:base=>["either name or email must be present"]}
+  # person.errors.details
+  # # => {:base=>[{error: :name_or_email_blank}]}
+  # ```
+  sig do
+    params(
+      attribute: Symbol,
+      message: T.any(String, Symbol),
+      options: T::Hash[T.untyped, T.untyped]
+    ).returns(T.untyped)
+  end
+  def add(attribute, message = :invalid, options = {}); end
+
+  # Returns `true` if an error on the attribute with the given message is
+  # present, or `false` otherwise. `message` is treated the same as for `add`.
+  #
+  # ```ruby
+  # person.errors.add :name, :blank
+  # person.errors.added? :name, :blank           # => true
+  # person.errors.added? :name, "can't be blank" # => true
+  # ```
+  #
+  # If the error message requires options, then it returns `true` with
+  # the correct options, or `false` with incorrect or missing options.
+  #
+  # ```ruby
+  # person.errors.add :name, :too_long, { count: 25 }
+  # person.errors.added? :name, :too_long, count: 25                     # => true
+  # person.errors.added? :name, "is too long (maximum is 25 characters)" # => true
+  # person.errors.added? :name, :too_long, count: 24                     # => false
+  # person.errors.added? :name, :too_long                                # => false
+  # person.errors.added? :name, "is too long"                            # => false
+  # ```
+  sig do
+    params(
+      attribute: Symbol,
+      message: T.any(String, Symbol),
+      options: T::Hash[T.untyped, T.untyped]
+    ).returns(T::Boolean)
+  end
+  def added?(attribute, message = :invalid, options = {}); end
+
+  # Returns `true` if an error on the attribute with the given message is
+  # present, or `false` otherwise. `message` is treated the same as for `add`.
+  #
+  # ```ruby
+  # person.errors.add :age
+  # person.errors.add :name, :too_long, { count: 25 }
+  # person.errors.of_kind? :age                                            # => true
+  # person.errors.of_kind? :name                                           # => false
+  # person.errors.of_kind? :name, :too_long                                # => true
+  # person.errors.of_kind? :name, "is too long (maximum is 25 characters)" # => true
+  # person.errors.of_kind? :name, :not_too_long                            # => false
+  # person.errors.of_kind? :name, "is too long"                            # => false
+  # ```
+  sig do
+    params(
+      attribute: Symbol,
+      message: T.any(String, Symbol)
+    ).returns(T::Boolean)
+  end
+  def of_kind?(attribute, message = :invalid); end
+
+  # Returns all the full error messages in an array.
+  #
+  # ```ruby
+  # class Person
+  #   validates_presence_of :name, :address, :email
+  #   validates_length_of :name, in: 5..30
+  # end
+  #
+  # person = Person.create(address: '123 First St.')
+  # person.errors.full_messages
+  # # => ["Name is too short (minimum is 5 characters)", "Name can't be blank", "Email can't be blank"]
+  # ```
+  sig { returns(T::Array[String]) }
+  def full_messages; end
 end
