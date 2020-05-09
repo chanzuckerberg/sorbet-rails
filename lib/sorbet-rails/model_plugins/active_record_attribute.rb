@@ -193,6 +193,9 @@ class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugi
         "T.any(T::Array[T.untyped], T::Boolean, Float, T::Hash[T.untyped, T.untyped], Integer, String)"
       when Object.const_defined?('ActiveRecord::Enum::EnumType') && klass.is_a?(ActiveRecord::Enum::EnumType)
         String
+      # For Postgres UUIDs, they're represented as Strings
+      when Object.const_defined?('ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Uuid') && klass.is_a?(ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Uuid)
+        String
       else
         "T.untyped"
       end
