@@ -85,11 +85,16 @@ class SorbetRails::ActiveRecordRbiFormatter
       # parameters than the ones defined by `create_elem_specific_query_methods` so
       # we need to match the signatures in that conflicting rbi.
       build_methods = %w(new build create create!)
+      if Rails.version =~ /^5\.\d/
+        create_parameter = Parameter.new("*args", type: "T.untyped")
+      else
+        create_parameter = Parameter.new("attributes", type: "T.untyped", default: 'nil')
+      end
       build_methods.each do |build_method|
         class_rbi.create_method(
           build_method,
           parameters: [
-            Parameter.new("*args", type: "T.untyped"),
+            create_parameter,
             Parameter.new(
               "&block",
               type: "T.nilable(T.proc.params(object: Elem).void)",
