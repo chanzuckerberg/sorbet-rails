@@ -106,7 +106,7 @@ module SorbetRails::ModelUtils
     # model. However, in Rails 5 query methods that come from scopes or enums
     # get overridden in hidden-definitions so we need to explicitly define them
     # on the model and relation classes.
-    if builtin_query_method || Rails.version =~ /^6\./
+    if builtin_query_method
       relation_module_rbi = root.create_module(self.model_query_methods_returning_relation_module_name)
       relation_module_rbi.create_method(
         method_name,
