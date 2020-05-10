@@ -52,7 +52,7 @@ class SorbetRails::ModelPlugins::ActiveStorageMethods < SorbetRails::ModelPlugin
     mod.create_method(
       "#{assoc_name}=",
       parameters: [
-        Parameter.new('*attachables', type: 'T.untyped')
+        Parameter.new('attachables', type: 'T.untyped')
       ],
       return_type: 'T.untyped'
     )

@@ -29,15 +29,65 @@ class ActiveStorage::Blob < ActiveRecord::Base
   extend ActiveStorage::Blob::CustomFinderMethods
   extend ActiveStorage::Blob::QueryMethodsReturningRelation
   RelationType = T.type_alias { T.any(ActiveStorage::Blob::ActiveRecord_Relation, ActiveStorage::Blob::ActiveRecord_Associations_CollectionProxy, ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
+  def self.unattached(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
+  def self.with_attached_preview_image(*args); end
 end
 
-module ActiveStorage::Blob::QueryMethodsReturningRelation
+class ActiveStorage::Blob::ActiveRecord_Relation < ActiveRecord::Relation
+  include ActiveStorage::Blob::ActiveRelation_WhereNot
+  include ActiveStorage::Blob::CustomFinderMethods
+  include ActiveStorage::Blob::QueryMethodsReturningRelation
+  Elem = type_member(fixed: ActiveStorage::Blob)
+
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
   def unattached(*args); end
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
   def with_attached_preview_image(*args); end
+end
 
+class ActiveStorage::Blob::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
+  include ActiveStorage::Blob::ActiveRelation_WhereNot
+  include ActiveStorage::Blob::CustomFinderMethods
+  include ActiveStorage::Blob::QueryMethodsReturningAssociationRelation
+  Elem = type_member(fixed: ActiveStorage::Blob)
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
+  def unattached(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
+  def with_attached_preview_image(*args); end
+end
+
+class ActiveStorage::Blob::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
+  include ActiveStorage::Blob::CustomFinderMethods
+  include ActiveStorage::Blob::QueryMethodsReturningAssociationRelation
+  Elem = type_member(fixed: ActiveStorage::Blob)
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
+  def unattached(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
+  def with_attached_preview_image(*args); end
+
+  sig { params(records: T.any(ActiveStorage::Blob, T::Array[ActiveStorage::Blob])).returns(T.self_type) }
+  def <<(*records); end
+
+  sig { params(records: T.any(ActiveStorage::Blob, T::Array[ActiveStorage::Blob])).returns(T.self_type) }
+  def append(*records); end
+
+  sig { params(records: T.any(ActiveStorage::Blob, T::Array[ActiveStorage::Blob])).returns(T.self_type) }
+  def push(*records); end
+
+  sig { params(records: T.any(ActiveStorage::Blob, T::Array[ActiveStorage::Blob])).returns(T.self_type) }
+  def concat(*records); end
+end
+
+module ActiveStorage::Blob::QueryMethodsReturningRelation
   sig { returns(ActiveStorage::Blob::ActiveRecord_Relation) }
   def all; end
 
@@ -139,12 +189,6 @@ module ActiveStorage::Blob::QueryMethodsReturningRelation
 end
 
 module ActiveStorage::Blob::QueryMethodsReturningAssociationRelation
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def unattached(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
-  def with_attached_preview_image(*args); end
-
   sig { returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
   def all; end
 
@@ -245,20 +289,6 @@ module ActiveStorage::Blob::QueryMethodsReturningAssociationRelation
   def extending(*args, &block); end
 end
 
-class ActiveStorage::Blob::ActiveRecord_Relation < ActiveRecord::Relation
-  include ActiveStorage::Blob::ActiveRelation_WhereNot
-  include ActiveStorage::Blob::CustomFinderMethods
-  include ActiveStorage::Blob::QueryMethodsReturningRelation
-  Elem = type_member(fixed: ActiveStorage::Blob)
-end
-
-class ActiveStorage::Blob::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
-  include ActiveStorage::Blob::ActiveRelation_WhereNot
-  include ActiveStorage::Blob::CustomFinderMethods
-  include ActiveStorage::Blob::QueryMethodsReturningAssociationRelation
-  Elem = type_member(fixed: ActiveStorage::Blob)
-end
-
 module ActiveStorage::Blob::GeneratedAssociationMethods
   sig { returns(::ActiveStorage::Attachment::ActiveRecord_Associations_CollectionProxy) }
   def attachments; end
@@ -286,22 +316,4 @@ module ActiveStorage::Blob::GeneratedAssociationMethods
 
   sig { params(attachable: T.untyped).returns(T.untyped) }
   def preview_image=(attachable); end
-end
-
-class ActiveStorage::Blob::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
-  include ActiveStorage::Blob::CustomFinderMethods
-  include ActiveStorage::Blob::QueryMethodsReturningAssociationRelation
-  Elem = type_member(fixed: ActiveStorage::Blob)
-
-  sig { params(records: T.any(ActiveStorage::Blob, T::Array[ActiveStorage::Blob])).returns(T.self_type) }
-  def <<(*records); end
-
-  sig { params(records: T.any(ActiveStorage::Blob, T::Array[ActiveStorage::Blob])).returns(T.self_type) }
-  def append(*records); end
-
-  sig { params(records: T.any(ActiveStorage::Blob, T::Array[ActiveStorage::Blob])).returns(T.self_type) }
-  def push(*records); end
-
-  sig { params(records: T.any(ActiveStorage::Blob, T::Array[ActiveStorage::Blob])).returns(T.self_type) }
-  def concat(*records); end
 end

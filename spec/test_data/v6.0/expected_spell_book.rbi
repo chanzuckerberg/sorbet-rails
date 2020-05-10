@@ -119,6 +119,27 @@ class SpellBook < ApplicationRecord
   sig { returns(T::Hash[T.any(String, Symbol), Integer]) }
   def self.book_types; end
 
+  sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_Relation) }
+  def self.biology(*args); end
+
+  sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_Relation) }
+  def self.dark_art(*args); end
+
+  sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_Relation) }
+  def self.not_biology(*args); end
+
+  sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_Relation) }
+  def self.not_dark_art(*args); end
+
+  sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_Relation) }
+  def self.not_unclassified(*args); end
+
+  sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_Relation) }
+  def self.recent(*args); end
+
+  sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_Relation) }
+  def self.unclassified(*args); end
+
   sig { returns(SpellBook::BookType) }
   def typed_book_type; end
 
@@ -126,7 +147,12 @@ class SpellBook < ApplicationRecord
   def typed_book_type=(value); end
 end
 
-module SpellBook::QueryMethodsReturningRelation
+class SpellBook::ActiveRecord_Relation < ActiveRecord::Relation
+  include SpellBook::ActiveRelation_WhereNot
+  include SpellBook::CustomFinderMethods
+  include SpellBook::QueryMethodsReturningRelation
+  Elem = type_member(fixed: SpellBook)
+
   sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_Relation) }
   def biology(*args); end
 
@@ -147,7 +173,76 @@ module SpellBook::QueryMethodsReturningRelation
 
   sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_Relation) }
   def unclassified(*args); end
+end
 
+class SpellBook::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
+  include SpellBook::ActiveRelation_WhereNot
+  include SpellBook::CustomFinderMethods
+  include SpellBook::QueryMethodsReturningAssociationRelation
+  Elem = type_member(fixed: SpellBook)
+
+  sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_AssociationRelation) }
+  def biology(*args); end
+
+  sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_AssociationRelation) }
+  def dark_art(*args); end
+
+  sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_AssociationRelation) }
+  def not_biology(*args); end
+
+  sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_AssociationRelation) }
+  def not_dark_art(*args); end
+
+  sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_AssociationRelation) }
+  def not_unclassified(*args); end
+
+  sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_AssociationRelation) }
+  def recent(*args); end
+
+  sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_AssociationRelation) }
+  def unclassified(*args); end
+end
+
+class SpellBook::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
+  include SpellBook::CustomFinderMethods
+  include SpellBook::QueryMethodsReturningAssociationRelation
+  Elem = type_member(fixed: SpellBook)
+
+  sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_AssociationRelation) }
+  def biology(*args); end
+
+  sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_AssociationRelation) }
+  def dark_art(*args); end
+
+  sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_AssociationRelation) }
+  def not_biology(*args); end
+
+  sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_AssociationRelation) }
+  def not_dark_art(*args); end
+
+  sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_AssociationRelation) }
+  def not_unclassified(*args); end
+
+  sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_AssociationRelation) }
+  def recent(*args); end
+
+  sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_AssociationRelation) }
+  def unclassified(*args); end
+
+  sig { params(records: T.any(SpellBook, T::Array[SpellBook])).returns(T.self_type) }
+  def <<(*records); end
+
+  sig { params(records: T.any(SpellBook, T::Array[SpellBook])).returns(T.self_type) }
+  def append(*records); end
+
+  sig { params(records: T.any(SpellBook, T::Array[SpellBook])).returns(T.self_type) }
+  def push(*records); end
+
+  sig { params(records: T.any(SpellBook, T::Array[SpellBook])).returns(T.self_type) }
+  def concat(*records); end
+end
+
+module SpellBook::QueryMethodsReturningRelation
   sig { returns(SpellBook::ActiveRecord_Relation) }
   def all; end
 
@@ -249,27 +344,6 @@ module SpellBook::QueryMethodsReturningRelation
 end
 
 module SpellBook::QueryMethodsReturningAssociationRelation
-  sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_AssociationRelation) }
-  def biology(*args); end
-
-  sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_AssociationRelation) }
-  def dark_art(*args); end
-
-  sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_AssociationRelation) }
-  def not_biology(*args); end
-
-  sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_AssociationRelation) }
-  def not_dark_art(*args); end
-
-  sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_AssociationRelation) }
-  def not_unclassified(*args); end
-
-  sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_AssociationRelation) }
-  def recent(*args); end
-
-  sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_AssociationRelation) }
-  def unclassified(*args); end
-
   sig { returns(SpellBook::ActiveRecord_AssociationRelation) }
   def all; end
 
@@ -368,36 +442,4 @@ module SpellBook::QueryMethodsReturningAssociationRelation
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
-end
-
-class SpellBook::ActiveRecord_Relation < ActiveRecord::Relation
-  include SpellBook::ActiveRelation_WhereNot
-  include SpellBook::CustomFinderMethods
-  include SpellBook::QueryMethodsReturningRelation
-  Elem = type_member(fixed: SpellBook)
-end
-
-class SpellBook::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
-  include SpellBook::ActiveRelation_WhereNot
-  include SpellBook::CustomFinderMethods
-  include SpellBook::QueryMethodsReturningAssociationRelation
-  Elem = type_member(fixed: SpellBook)
-end
-
-class SpellBook::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
-  include SpellBook::CustomFinderMethods
-  include SpellBook::QueryMethodsReturningAssociationRelation
-  Elem = type_member(fixed: SpellBook)
-
-  sig { params(records: T.any(SpellBook, T::Array[SpellBook])).returns(T.self_type) }
-  def <<(*records); end
-
-  sig { params(records: T.any(SpellBook, T::Array[SpellBook])).returns(T.self_type) }
-  def append(*records); end
-
-  sig { params(records: T.any(SpellBook, T::Array[SpellBook])).returns(T.self_type) }
-  def push(*records); end
-
-  sig { params(records: T.any(SpellBook, T::Array[SpellBook])).returns(T.self_type) }
-  def concat(*records); end
 end
