@@ -35,10 +35,9 @@ namespace :rails_rbi do
     File.write(file_path, inspector.format(SorbetRails::RoutesRbiFormatter.new))
   end
 
-  desc "Copy custom rbis for ActionController::Parameters, pluck_to_struct, etc."
+  desc "Copy custom rbis for typed_params, pluck_to_struct, etc."
   task custom: :environment do
     copy_bundled_rbi('type_assert.rbi')
-    copy_bundled_rbi('parameters.rbi')
     copy_bundled_rbi('pluck_to_tstruct.rbi')
     copy_bundled_rbi('typed_params.rbi')
 
