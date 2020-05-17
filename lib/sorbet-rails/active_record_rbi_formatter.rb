@@ -271,7 +271,6 @@ class SorbetRails::ActiveRecordRbiFormatter
         ],
         return_type: "T::Enumerator[#{inner_type}]",
         class_method: class_method,
-        override: true,
       )
     end
   end

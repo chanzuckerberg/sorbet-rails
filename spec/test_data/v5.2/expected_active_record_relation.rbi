@@ -81,7 +81,7 @@ class ActiveRecord::Relation
   def first_or_initialize(attributes = nil, &block); end
 
   sig do
-    override.params(
+    params(
       start: T.nilable(Integer),
       finish: T.nilable(Integer),
       batch_size: T.nilable(Integer),
@@ -92,7 +92,7 @@ class ActiveRecord::Relation
   def find_each(start: nil, finish: nil, batch_size: 1000, error_on_ignore: nil, &block); end
 
   sig do
-    override.params(
+    params(
       start: T.nilable(Integer),
       finish: T.nilable(Integer),
       batch_size: T.nilable(Integer),
