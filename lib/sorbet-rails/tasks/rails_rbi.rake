@@ -40,6 +40,7 @@ namespace :rails_rbi do
     copy_bundled_rbi('type_assert.rbi')
     copy_bundled_rbi('pluck_to_tstruct.rbi')
     copy_bundled_rbi('typed_params.rbi')
+    copy_bundled_rbi('typed_enum.rbi')
 
     # These files were previously bundled_rbi but are now generated so this
     # is needed for backwards compatibility with anyone using `rails_rbi:custom`
