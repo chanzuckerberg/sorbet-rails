@@ -381,7 +381,7 @@ module Wand::QueryMethodsReturningRelation
       load: T.nilable(T::Boolean),
       error_on_ignore: T.nilable(T::Boolean),
       block: T.nilable(T.proc.params(e: Wand::ActiveRecord_Relation).void)
-    ).returns(T::Enumerable[Wand::ActiveRecord_Relation])
+    ).returns(ActiveRecord::Batches::BatchEnumerator)
   end
   def in_batches(of: 1000, start: nil, finish: nil, load: false, error_on_ignore: nil, &block); end
 end
@@ -479,7 +479,7 @@ module Wand::QueryMethodsReturningAssociationRelation
       load: T.nilable(T::Boolean),
       error_on_ignore: T.nilable(T::Boolean),
       block: T.nilable(T.proc.params(e: Wand::ActiveRecord_AssociationRelation).void)
-    ).returns(T::Enumerable[Wand::ActiveRecord_AssociationRelation])
+    ).returns(ActiveRecord::Batches::BatchEnumerator)
   end
   def in_batches(of: 1000, start: nil, finish: nil, load: false, error_on_ignore: nil, &block); end
 end

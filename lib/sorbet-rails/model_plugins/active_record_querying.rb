@@ -74,7 +74,7 @@ class SorbetRails::ModelPlugins::ActiveRecordQuerying < SorbetRails::ModelPlugin
         Parameter.new("error_on_ignore:", type: "T.nilable(T::Boolean)", default: "nil"),
         Parameter.new("&block", type: "T.nilable(T.proc.params(e: #{inner_type}).void)"),
       ],
-      return_type: "T::Enumerable[#{inner_type}]",
+      return_type: "ActiveRecord::Batches::BatchEnumerator",
     )
   end
 end

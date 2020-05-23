@@ -174,7 +174,7 @@ module Spell::HABTM_SpellBooks::QueryMethodsReturningRelation
       load: T.nilable(T::Boolean),
       error_on_ignore: T.nilable(T::Boolean),
       block: T.nilable(T.proc.params(e: Spell::HABTM_SpellBooks::ActiveRecord_Relation).void)
-    ).returns(T::Enumerable[Spell::HABTM_SpellBooks::ActiveRecord_Relation])
+    ).returns(ActiveRecord::Batches::BatchEnumerator)
   end
   def in_batches(of: 1000, start: nil, finish: nil, load: false, error_on_ignore: nil, &block); end
 end
@@ -287,7 +287,7 @@ module Spell::HABTM_SpellBooks::QueryMethodsReturningAssociationRelation
       load: T.nilable(T::Boolean),
       error_on_ignore: T.nilable(T::Boolean),
       block: T.nilable(T.proc.params(e: Spell::HABTM_SpellBooks::ActiveRecord_AssociationRelation).void)
-    ).returns(T::Enumerable[Spell::HABTM_SpellBooks::ActiveRecord_AssociationRelation])
+    ).returns(ActiveRecord::Batches::BatchEnumerator)
   end
   def in_batches(of: 1000, start: nil, finish: nil, load: false, error_on_ignore: nil, &block); end
 end

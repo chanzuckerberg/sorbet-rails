@@ -64,7 +64,7 @@ T.assert_type!(Wizard.find_each, T::Enumerator[Wizard])
 Wizard.find_in_batches { |w| T.assert_type!(w, T::Array[Wizard]) }
 T.assert_type!(Wizard.find_in_batches, T::Enumerator[T::Array[Wizard]])
 Wizard.in_batches { |w| T.assert_type!(w, Wizard::ActiveRecord_Relation) }
-T.assert_type!(Wizard.in_batches, T::Enumerable[Wizard::ActiveRecord_Relation])
+T.assert_type!(Wizard.in_batches, ActiveRecord::Batches::BatchEnumerator)
 # T.assert_type!(Wizard.destroy_all, T::Array[Wizard]) # Ignored until we add support
 T.assert_type!(Wizard.any?, T::Boolean)
 T.assert_type!(Wizard.many?, T::Boolean)
