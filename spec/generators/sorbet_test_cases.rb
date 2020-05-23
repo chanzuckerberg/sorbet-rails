@@ -361,44 +361,6 @@ params = ActionController::Parameters.new({
 typed_params = TypedParams[MyActionParams].new.extract!(params)
 T.assert_type!(typed_params, MyActionParams)
 
-# -- require_typed
-T.assert_type!(
-  params.require_typed(:age, TA[Integer].new),
-  Integer,
-)
-T.assert_type!(
-  params.require_typed(:name, TA[String].new),
-  String,
-)
-info = params.require_typed(:info, TA[ActionController::Parameters].new)
-T.assert_type!(info, ActionController::Parameters)
-T.assert_type!(
-  info.require_typed(:friends, TA[T::Array[String]].new),
-  T::Array[String],
-)
-# -- fetch_typed
-T.assert_type!(
-  params.fetch_typed(:age, TA[Integer].new),
-  Integer,
-)
-T.assert_type!(
-  params.fetch_typed(:name, TA[String].new),
-  String,
-)
-T.assert_type!(
-  params.fetch_typed(:nonexistence, TA[String].new, ''),
-  String,
-)
-T.assert_type!(
-  params.fetch_typed(:nonexistence, TA[T.nilable(String)].new, nil),
-  T.nilable(String),
-)
-T.assert_type!(
-  params.fetch_typed(:nonexistence, TA[T::Array[Integer]].new, []),
-  T::Array[Integer],
-)
-
-
 # -- pluck to tstruct
 class WizardStruct < T::Struct
   const :name, String

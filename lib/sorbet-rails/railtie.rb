@@ -50,9 +50,7 @@ class SorbetRails::Railtie < Rails::Railtie
     end
 
     ActiveSupport.on_load(:action_controller) do
-      require "sorbet-rails/rails_mixins/custom_params_methods"
       require "sorbet-rails/rails_mixins/generated_url_helpers"
-      ActionController::Parameters.include SorbetRails::CustomParamsMethods
     end
 
     SorbetRails.register_configured_plugins
