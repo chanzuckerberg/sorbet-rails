@@ -9485,9 +9485,6 @@ class OpenSSL::PKey::EC::Point
 end
 
 class OpenSSL::PKey::RSA
-  def sign_pss(*_); end
-
-  def verify_pss(*_); end
 end
 
 module OpenSSL::SSL
