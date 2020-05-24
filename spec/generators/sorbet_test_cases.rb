@@ -378,21 +378,15 @@ Wizard.all.pluck_to_tstruct(TA[WizardStruct].new).each do |row|
 end
 
 # -- GeneratedUrlHelpers
-class TestHelperWithoutUrlOptions
-  include GeneratedUrlHelpers
-end
-T.assert_type!(TestHelperWithoutUrlOptions.new.test_index_path, String)
-
 class TestHelper
   include GeneratedUrlHelpers
-
-  # need to implement this for the url
-  def default_url_options
-    {
-      protocol: 'http',
-      host: 'localhost',
-      port: 3000,
-    }
-  end
 end
+
+T.assert_type!(TestHelper.new.test_index_path, String)
+# need to set this config for _url methods
+Rails.application.routes.default_url_options = {
+  protocol: 'http',
+  host: 'localhost',
+  port: 3000,
+}
 T.assert_type!(TestHelper.new.test_index_url, String)
