@@ -11,6 +11,5 @@
 # + include GeneratedUrlHelpers
 # end
 #
-module GeneratedUrlHelpers
-  include Rails.application.routes.url_helpers
-end
+# Reference: https://github.com/rails/rails/blob/master/actionpack/lib/action_dispatch/routing/route_set.rb
+GeneratedUrlHelpers = Rails.application.routes.url_helpers

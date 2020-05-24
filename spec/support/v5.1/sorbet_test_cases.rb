@@ -377,8 +377,12 @@ Wizard.all.pluck_to_tstruct(TA[WizardStruct].new).each do |row|
   T.assert_type!(row, WizardStruct)
 end
 
-
 # -- GeneratedUrlHelpers
+class TestHelperWithoutUrlOptions
+  include GeneratedUrlHelpers
+end
+T.assert_type!(TestHelperWithoutUrlOptions.new.test_index_path, String)
+
 class TestHelper
   include GeneratedUrlHelpers
 
@@ -390,10 +394,5 @@ class TestHelper
       port: 3000,
     }
   end
-
-  def test_url_helper
-    T.assert_type!(test_index_path, String)
-    T.assert_type!(test_index_url, String)
-  end
 end
-TestHelper.new.test_url_helper
+T.assert_type!(TestHelper.new.test_index_url, String)
