@@ -36,15 +36,8 @@ class SorbetRails::ModelPlugins::ActiveRecordAssoc < SorbetRails::ModelPlugins::
     assoc_class = assoc_should_be_untyped?(reflection) ? "T.untyped" : "::#{reflection.klass.name}"
     assoc_type = (belongs_to_and_required?(reflection) || has_one_and_required?(reflection)) ? assoc_class : "T.nilable(#{assoc_class})"
 
-    # This needs to match the generated method signature in activerecord.rbi and
-    # in Rails 5.0 and 5.1 the param is a splat.
-    build_param = if Rails.version =~ /^5\./
-      Parameter.new("*args", type: "T.untyped")
-    else
-      Parameter.new("attributes", type: "T.untyped", default: 'nil')
-    end
     params = [
-      build_param,
+      Parameter.new("*args", type: "T.untyped"),
       Parameter.new("&block", type: "T.nilable(T.proc.params(object: #{assoc_class}).void)")
     ]
 
