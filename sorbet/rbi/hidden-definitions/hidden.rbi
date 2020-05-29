@@ -7388,8 +7388,6 @@ class Hash
 
   def transform_values!(); end
 
-  def update(_); end
-
   def with_indifferent_access(); end
 end
 
@@ -9249,7 +9247,6 @@ class Module
 
   def thread_mattr_writer(*syms); end
 
-  def undef_method(*_); end
   DELEGATION_RESERVED_KEYWORDS = ::T.let(nil, ::T.untyped)
   DELEGATION_RESERVED_METHOD_NAMES = ::T.let(nil, ::T.untyped)
   RUBY_RESERVED_KEYWORDS = ::T.let(nil, ::T.untyped)
