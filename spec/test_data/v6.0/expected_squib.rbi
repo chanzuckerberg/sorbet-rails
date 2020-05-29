@@ -1016,14 +1016,14 @@ module Squib::GeneratedAssociationMethods
   sig { returns(T.nilable(::School)) }
   def school; end
 
-  sig { returns(::School) }
-  def build_school; end
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ::School).void)).returns(::School) }
+  def build_school(attributes = nil, &block); end
 
-  sig { returns(::School) }
-  def create_school; end
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ::School).void)).returns(::School) }
+  def create_school(attributes = nil, &block); end
 
-  sig { returns(::School) }
-  def create_school!; end
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ::School).void)).returns(::School) }
+  def create_school!(attributes = nil, &block); end
 
   sig { params(value: T.nilable(::School)).void }
   def school=(value); end
@@ -1031,14 +1031,14 @@ module Squib::GeneratedAssociationMethods
   sig { returns(T.nilable(::ActiveStorage::Attachment)) }
   def school_photo_attachment; end
 
-  sig { returns(::ActiveStorage::Attachment) }
-  def build_school_photo_attachment; end
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ::ActiveStorage::Attachment).void)).returns(::ActiveStorage::Attachment) }
+  def build_school_photo_attachment(attributes = nil, &block); end
 
-  sig { returns(::ActiveStorage::Attachment) }
-  def create_school_photo_attachment; end
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ::ActiveStorage::Attachment).void)).returns(::ActiveStorage::Attachment) }
+  def create_school_photo_attachment(attributes = nil, &block); end
 
-  sig { returns(::ActiveStorage::Attachment) }
-  def create_school_photo_attachment!; end
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ::ActiveStorage::Attachment).void)).returns(::ActiveStorage::Attachment) }
+  def create_school_photo_attachment!(attributes = nil, &block); end
 
   sig { params(value: T.nilable(::ActiveStorage::Attachment)).void }
   def school_photo_attachment=(value); end
@@ -1046,14 +1046,14 @@ module Squib::GeneratedAssociationMethods
   sig { returns(T.nilable(::ActiveStorage::Blob)) }
   def school_photo_blob; end
 
-  sig { returns(::ActiveStorage::Blob) }
-  def build_school_photo_blob; end
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ::ActiveStorage::Blob).void)).returns(::ActiveStorage::Blob) }
+  def build_school_photo_blob(attributes = nil, &block); end
 
-  sig { returns(::ActiveStorage::Blob) }
-  def create_school_photo_blob; end
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ::ActiveStorage::Blob).void)).returns(::ActiveStorage::Blob) }
+  def create_school_photo_blob(attributes = nil, &block); end
 
-  sig { returns(::ActiveStorage::Blob) }
-  def create_school_photo_blob!; end
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ::ActiveStorage::Blob).void)).returns(::ActiveStorage::Blob) }
+  def create_school_photo_blob!(attributes = nil, &block); end
 
   sig { params(value: T.nilable(::ActiveStorage::Blob)).void }
   def school_photo_blob=(value); end
@@ -1079,14 +1079,14 @@ module Squib::GeneratedAssociationMethods
   sig { returns(T.nilable(::Wand)) }
   def wand; end
 
-  sig { returns(::Wand) }
-  def build_wand; end
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ::Wand).void)).returns(::Wand) }
+  def build_wand(attributes = nil, &block); end
 
-  sig { returns(::Wand) }
-  def create_wand; end
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ::Wand).void)).returns(::Wand) }
+  def create_wand(attributes = nil, &block); end
 
-  sig { returns(::Wand) }
-  def create_wand!; end
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ::Wand).void)).returns(::Wand) }
+  def create_wand!(attributes = nil, &block); end
 
   sig { params(value: T.nilable(::Wand)).void }
   def wand=(value); end

@@ -11,14 +11,14 @@ module ActiveStorage::Attachment::GeneratedAssociationMethods
   sig { returns(::ActiveStorage::Blob) }
   def blob; end
 
-  sig { returns(::ActiveStorage::Blob) }
-  def build_blob; end
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ::ActiveStorage::Blob).void)).returns(::ActiveStorage::Blob) }
+  def build_blob(attributes = nil, &block); end
 
-  sig { returns(::ActiveStorage::Blob) }
-  def create_blob; end
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ::ActiveStorage::Blob).void)).returns(::ActiveStorage::Blob) }
+  def create_blob(attributes = nil, &block); end
 
-  sig { returns(::ActiveStorage::Blob) }
-  def create_blob!; end
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ::ActiveStorage::Blob).void)).returns(::ActiveStorage::Blob) }
+  def create_blob!(attributes = nil, &block); end
 
   sig { params(value: ::ActiveStorage::Blob).void }
   def blob=(value); end
@@ -26,14 +26,14 @@ module ActiveStorage::Attachment::GeneratedAssociationMethods
   sig { returns(T.untyped) }
   def record; end
 
-  sig { returns(T.untyped) }
-  def build_record; end
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: T.untyped).void)).returns(T.untyped) }
+  def build_record(attributes = nil, &block); end
 
-  sig { returns(T.untyped) }
-  def create_record; end
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: T.untyped).void)).returns(T.untyped) }
+  def create_record(attributes = nil, &block); end
 
-  sig { returns(T.untyped) }
-  def create_record!; end
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: T.untyped).void)).returns(T.untyped) }
+  def create_record!(attributes = nil, &block); end
 
   sig { params(value: T.untyped).void }
   def record=(value); end

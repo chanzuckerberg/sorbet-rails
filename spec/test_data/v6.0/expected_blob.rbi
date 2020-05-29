@@ -326,14 +326,14 @@ module ActiveStorage::Blob::GeneratedAssociationMethods
   sig { returns(T.nilable(::ActiveStorage::Attachment)) }
   def preview_image_attachment; end
 
-  sig { returns(::ActiveStorage::Attachment) }
-  def build_preview_image_attachment; end
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ::ActiveStorage::Attachment).void)).returns(::ActiveStorage::Attachment) }
+  def build_preview_image_attachment(attributes = nil, &block); end
 
-  sig { returns(::ActiveStorage::Attachment) }
-  def create_preview_image_attachment; end
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ::ActiveStorage::Attachment).void)).returns(::ActiveStorage::Attachment) }
+  def create_preview_image_attachment(attributes = nil, &block); end
 
-  sig { returns(::ActiveStorage::Attachment) }
-  def create_preview_image_attachment!; end
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ::ActiveStorage::Attachment).void)).returns(::ActiveStorage::Attachment) }
+  def create_preview_image_attachment!(attributes = nil, &block); end
 
   sig { params(value: T.nilable(::ActiveStorage::Attachment)).void }
   def preview_image_attachment=(value); end
@@ -341,14 +341,14 @@ module ActiveStorage::Blob::GeneratedAssociationMethods
   sig { returns(T.nilable(::ActiveStorage::Blob)) }
   def preview_image_blob; end
 
-  sig { returns(::ActiveStorage::Blob) }
-  def build_preview_image_blob; end
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ::ActiveStorage::Blob).void)).returns(::ActiveStorage::Blob) }
+  def build_preview_image_blob(attributes = nil, &block); end
 
-  sig { returns(::ActiveStorage::Blob) }
-  def create_preview_image_blob; end
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ::ActiveStorage::Blob).void)).returns(::ActiveStorage::Blob) }
+  def create_preview_image_blob(attributes = nil, &block); end
 
-  sig { returns(::ActiveStorage::Blob) }
-  def create_preview_image_blob!; end
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ::ActiveStorage::Blob).void)).returns(::ActiveStorage::Blob) }
+  def create_preview_image_blob!(attributes = nil, &block); end
 
   sig { params(value: T.nilable(::ActiveStorage::Blob)).void }
   def preview_image_blob=(value); end

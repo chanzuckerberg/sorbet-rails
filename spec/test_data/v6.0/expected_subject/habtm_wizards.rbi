@@ -31,14 +31,14 @@ module Subject::HABTM_Wizards::GeneratedAssociationMethods
   sig { returns(T.nilable(::Subject)) }
   def left_side; end
 
-  sig { returns(::Subject) }
-  def build_left_side; end
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ::Subject).void)).returns(::Subject) }
+  def build_left_side(attributes = nil, &block); end
 
-  sig { returns(::Subject) }
-  def create_left_side; end
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ::Subject).void)).returns(::Subject) }
+  def create_left_side(attributes = nil, &block); end
 
-  sig { returns(::Subject) }
-  def create_left_side!; end
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ::Subject).void)).returns(::Subject) }
+  def create_left_side!(attributes = nil, &block); end
 
   sig { params(value: T.nilable(::Subject)).void }
   def left_side=(value); end
@@ -46,14 +46,14 @@ module Subject::HABTM_Wizards::GeneratedAssociationMethods
   sig { returns(T.nilable(::Wizard)) }
   def wizard; end
 
-  sig { returns(::Wizard) }
-  def build_wizard; end
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ::Wizard).void)).returns(::Wizard) }
+  def build_wizard(attributes = nil, &block); end
 
-  sig { returns(::Wizard) }
-  def create_wizard; end
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ::Wizard).void)).returns(::Wizard) }
+  def create_wizard(attributes = nil, &block); end
 
-  sig { returns(::Wizard) }
-  def create_wizard!; end
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ::Wizard).void)).returns(::Wizard) }
+  def create_wizard!(attributes = nil, &block); end
 
   sig { params(value: T.nilable(::Wizard)).void }
   def wizard=(value); end

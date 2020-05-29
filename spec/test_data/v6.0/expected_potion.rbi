@@ -11,14 +11,14 @@ module Potion::GeneratedAssociationMethods
   sig { returns(T.nilable(::Wizard)) }
   def wizard; end
 
-  sig { returns(::Wizard) }
-  def build_wizard; end
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ::Wizard).void)).returns(::Wizard) }
+  def build_wizard(attributes = nil, &block); end
 
-  sig { returns(::Wizard) }
-  def create_wizard; end
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ::Wizard).void)).returns(::Wizard) }
+  def create_wizard(attributes = nil, &block); end
 
-  sig { returns(::Wizard) }
-  def create_wizard!; end
+  sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ::Wizard).void)).returns(::Wizard) }
+  def create_wizard!(attributes = nil, &block); end
 
   sig { params(value: T.nilable(::Wizard)).void }
   def wizard=(value); end

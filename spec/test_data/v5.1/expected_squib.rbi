@@ -252,14 +252,14 @@ module Squib::GeneratedAssociationMethods
   sig { returns(T.nilable(::School)) }
   def school; end
 
-  sig { returns(::School) }
-  def build_school; end
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::School).void)).returns(::School) }
+  def build_school(*args, &block); end
 
-  sig { returns(::School) }
-  def create_school; end
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::School).void)).returns(::School) }
+  def create_school(*args, &block); end
 
-  sig { returns(::School) }
-  def create_school!; end
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::School).void)).returns(::School) }
+  def create_school!(*args, &block); end
 
   sig { params(value: T.nilable(::School)).void }
   def school=(value); end
@@ -285,14 +285,14 @@ module Squib::GeneratedAssociationMethods
   sig { returns(T.nilable(::Wand)) }
   def wand; end
 
-  sig { returns(::Wand) }
-  def build_wand; end
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::Wand).void)).returns(::Wand) }
+  def build_wand(*args, &block); end
 
-  sig { returns(::Wand) }
-  def create_wand; end
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::Wand).void)).returns(::Wand) }
+  def create_wand(*args, &block); end
 
-  sig { returns(::Wand) }
-  def create_wand!; end
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::Wand).void)).returns(::Wand) }
+  def create_wand!(*args, &block); end
 
   sig { params(value: T.nilable(::Wand)).void }
   def wand=(value); end

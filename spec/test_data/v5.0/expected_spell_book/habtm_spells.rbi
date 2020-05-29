@@ -31,14 +31,14 @@ module SpellBook::HABTM_Spells::GeneratedAssociationMethods
   sig { returns(T.nilable(::SpellBook)) }
   def left_side; end
 
-  sig { returns(::SpellBook) }
-  def build_left_side; end
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::SpellBook).void)).returns(::SpellBook) }
+  def build_left_side(*args, &block); end
 
-  sig { returns(::SpellBook) }
-  def create_left_side; end
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::SpellBook).void)).returns(::SpellBook) }
+  def create_left_side(*args, &block); end
 
-  sig { returns(::SpellBook) }
-  def create_left_side!; end
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::SpellBook).void)).returns(::SpellBook) }
+  def create_left_side!(*args, &block); end
 
   sig { params(value: T.nilable(::SpellBook)).void }
   def left_side=(value); end
@@ -46,14 +46,14 @@ module SpellBook::HABTM_Spells::GeneratedAssociationMethods
   sig { returns(::Spell) }
   def spell; end
 
-  sig { returns(::Spell) }
-  def build_spell; end
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::Spell).void)).returns(::Spell) }
+  def build_spell(*args, &block); end
 
-  sig { returns(::Spell) }
-  def create_spell; end
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::Spell).void)).returns(::Spell) }
+  def create_spell(*args, &block); end
 
-  sig { returns(::Spell) }
-  def create_spell!; end
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::Spell).void)).returns(::Spell) }
+  def create_spell!(*args, &block); end
 
   sig { params(value: ::Spell).void }
   def spell=(value); end

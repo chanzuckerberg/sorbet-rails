@@ -31,14 +31,14 @@ module School::GeneratedAssociationMethods
   sig { returns(::Headmaster) }
   def headmaster; end
 
-  sig { returns(::Headmaster) }
-  def build_headmaster; end
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::Headmaster).void)).returns(::Headmaster) }
+  def build_headmaster(*args, &block); end
 
-  sig { returns(::Headmaster) }
-  def create_headmaster; end
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::Headmaster).void)).returns(::Headmaster) }
+  def create_headmaster(*args, &block); end
 
-  sig { returns(::Headmaster) }
-  def create_headmaster!; end
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::Headmaster).void)).returns(::Headmaster) }
+  def create_headmaster!(*args, &block); end
 
   sig { params(value: ::Headmaster).void }
   def headmaster=(value); end
