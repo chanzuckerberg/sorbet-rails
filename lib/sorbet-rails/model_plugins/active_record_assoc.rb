@@ -41,6 +41,18 @@ class SorbetRails::ModelPlugins::ActiveRecordAssoc < SorbetRails::ModelPlugins::
       return_type: assoc_type,
     )
     assoc_module_rbi.create_method(
+      "build_#{assoc_name}",
+      return_type: assoc_class,
+    )
+    assoc_module_rbi.create_method(
+      "create_#{assoc_name}",
+      return_type: assoc_class,
+    )
+    assoc_module_rbi.create_method(
+      "create_#{assoc_name}!",
+      return_type: assoc_class,
+    )
+    assoc_module_rbi.create_method(
       "#{assoc_name}=",
       parameters: [
         Parameter.new("value", type: assoc_type)
