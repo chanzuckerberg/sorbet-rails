@@ -31,11 +31,29 @@ module Spell::HABTM_SpellBooks::GeneratedAssociationMethods
   sig { returns(T.nilable(::Spell)) }
   def left_side; end
 
+  sig { returns(::Spell) }
+  def build_left_side; end
+
+  sig { returns(::Spell) }
+  def create_left_side; end
+
+  sig { returns(::Spell) }
+  def create_left_side!; end
+
   sig { params(value: T.nilable(::Spell)).void }
   def left_side=(value); end
 
   sig { returns(::SpellBook) }
   def spell_book; end
+
+  sig { returns(::SpellBook) }
+  def build_spell_book; end
+
+  sig { returns(::SpellBook) }
+  def create_spell_book; end
+
+  sig { returns(::SpellBook) }
+  def create_spell_book!; end
 
   sig { params(value: ::SpellBook).void }
   def spell_book=(value); end

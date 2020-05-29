@@ -31,11 +31,29 @@ module Wizard::HABTM_Subjects::GeneratedAssociationMethods
   sig { returns(T.nilable(::Wizard)) }
   def left_side; end
 
+  sig { returns(::Wizard) }
+  def build_left_side; end
+
+  sig { returns(::Wizard) }
+  def create_left_side; end
+
+  sig { returns(::Wizard) }
+  def create_left_side!; end
+
   sig { params(value: T.nilable(::Wizard)).void }
   def left_side=(value); end
 
   sig { returns(T.nilable(::Subject)) }
   def subject; end
+
+  sig { returns(::Subject) }
+  def build_subject; end
+
+  sig { returns(::Subject) }
+  def create_subject; end
+
+  sig { returns(::Subject) }
+  def create_subject!; end
 
   sig { params(value: T.nilable(::Subject)).void }
   def subject=(value); end

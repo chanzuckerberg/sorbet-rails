@@ -31,6 +31,15 @@ module Robe::GeneratedAssociationMethods
   sig { returns(T.nilable(::Wizard)) }
   def wizard; end
 
+  sig { returns(::Wizard) }
+  def build_wizard; end
+
+  sig { returns(::Wizard) }
+  def create_wizard; end
+
+  sig { returns(::Wizard) }
+  def create_wizard!; end
+
   sig { params(value: T.nilable(::Wizard)).void }
   def wizard=(value); end
 end

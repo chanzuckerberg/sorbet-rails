@@ -166,6 +166,15 @@ module Wand::GeneratedAssociationMethods
   sig { returns(::Wizard) }
   def wizard; end
 
+  sig { returns(::Wizard) }
+  def build_wizard; end
+
+  sig { returns(::Wizard) }
+  def create_wizard; end
+
+  sig { returns(::Wizard) }
+  def create_wizard!; end
+
   sig { params(value: ::Wizard).void }
   def wizard=(value); end
 end

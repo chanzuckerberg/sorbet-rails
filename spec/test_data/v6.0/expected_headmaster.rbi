@@ -40,11 +40,29 @@ module Headmaster::GeneratedAssociationMethods
   sig { returns(::School) }
   def school; end
 
+  sig { returns(::School) }
+  def build_school; end
+
+  sig { returns(::School) }
+  def create_school; end
+
+  sig { returns(::School) }
+  def create_school!; end
+
   sig { params(value: ::School).void }
   def school=(value); end
 
   sig { returns(::Wizard) }
   def wizard; end
+
+  sig { returns(::Wizard) }
+  def build_wizard; end
+
+  sig { returns(::Wizard) }
+  def create_wizard; end
+
+  sig { returns(::Wizard) }
+  def create_wizard!; end
 
   sig { params(value: ::Wizard).void }
   def wizard=(value); end

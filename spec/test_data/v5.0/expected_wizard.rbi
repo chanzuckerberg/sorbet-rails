@@ -292,6 +292,15 @@ module Wizard::GeneratedAssociationMethods
   sig { returns(T.nilable(::School)) }
   def school; end
 
+  sig { returns(::School) }
+  def build_school; end
+
+  sig { returns(::School) }
+  def create_school; end
+
+  sig { returns(::School) }
+  def create_school!; end
+
   sig { params(value: T.nilable(::School)).void }
   def school=(value); end
 
@@ -315,6 +324,15 @@ module Wizard::GeneratedAssociationMethods
 
   sig { returns(T.nilable(::Wand)) }
   def wand; end
+
+  sig { returns(::Wand) }
+  def build_wand; end
+
+  sig { returns(::Wand) }
+  def create_wand; end
+
+  sig { returns(::Wand) }
+  def create_wand!; end
 
   sig { params(value: T.nilable(::Wand)).void }
   def wand=(value); end
