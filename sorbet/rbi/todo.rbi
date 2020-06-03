@@ -67,6 +67,14 @@ module ActiveRecord::Type::UnsignedInteger; end
 module ActiveStorage::Blob::Analyzable; end
 module ActiveStorage::Blob::Identifiable; end
 module ActiveStorage::Variant; end
+module ActiveSupport::Benchmarkable; end
+module ActiveSupport::DescendantsTracker; end
+module ActiveSupport::HashWithIndifferentAccess; end
+module ActiveSupport::Multibyte::Chars; end
+module ActiveSupport::SafeBuffer; end
+module ActiveSupport::StringInquirer; end
+module Gem::SilentUI; end
+module Parser::CurrentRuby; end
 module ShrinePlugin::Shrine::Attachment; end
 module ShrinePlugin::Shrine::Plugins::RemoteUrl::AttachmentMethods; end
 module SorbetRails::Utils::Zeitwerk::Loader; end
