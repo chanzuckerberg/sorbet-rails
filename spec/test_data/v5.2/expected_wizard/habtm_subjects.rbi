@@ -31,11 +31,29 @@ module Wizard::HABTM_Subjects::GeneratedAssociationMethods
   sig { returns(T.nilable(::Wizard)) }
   def left_side; end
 
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::Wizard).void)).returns(::Wizard) }
+  def build_left_side(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::Wizard).void)).returns(::Wizard) }
+  def create_left_side(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::Wizard).void)).returns(::Wizard) }
+  def create_left_side!(*args, &block); end
+
   sig { params(value: T.nilable(::Wizard)).void }
   def left_side=(value); end
 
   sig { returns(T.nilable(::Subject)) }
   def subject; end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::Subject).void)).returns(::Subject) }
+  def build_subject(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::Subject).void)).returns(::Subject) }
+  def create_subject(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::Subject).void)).returns(::Subject) }
+  def create_subject!(*args, &block); end
 
   sig { params(value: T.nilable(::Subject)).void }
   def subject=(value); end

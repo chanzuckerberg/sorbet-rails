@@ -1092,17 +1092,44 @@ module Wizard::GeneratedAssociationMethods
   sig { returns(T.nilable(T.untyped)) }
   def school; end
 
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: T.untyped).void)).returns(T.untyped) }
+  def build_school(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: T.untyped).void)).returns(T.untyped) }
+  def create_school(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: T.untyped).void)).returns(T.untyped) }
+  def create_school!(*args, &block); end
+
   sig { params(value: T.nilable(T.untyped)).void }
   def school=(value); end
 
   sig { returns(T.nilable(::ActiveStorage::Attachment)) }
   def school_photo_attachment; end
 
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::ActiveStorage::Attachment).void)).returns(::ActiveStorage::Attachment) }
+  def build_school_photo_attachment(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::ActiveStorage::Attachment).void)).returns(::ActiveStorage::Attachment) }
+  def create_school_photo_attachment(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::ActiveStorage::Attachment).void)).returns(::ActiveStorage::Attachment) }
+  def create_school_photo_attachment!(*args, &block); end
+
   sig { params(value: T.nilable(::ActiveStorage::Attachment)).void }
   def school_photo_attachment=(value); end
 
   sig { returns(T.nilable(::ActiveStorage::Blob)) }
   def school_photo_blob; end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::ActiveStorage::Blob).void)).returns(::ActiveStorage::Blob) }
+  def build_school_photo_blob(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::ActiveStorage::Blob).void)).returns(::ActiveStorage::Blob) }
+  def create_school_photo_blob(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::ActiveStorage::Blob).void)).returns(::ActiveStorage::Blob) }
+  def create_school_photo_blob!(*args, &block); end
 
   sig { params(value: T.nilable(::ActiveStorage::Blob)).void }
   def school_photo_blob=(value); end
@@ -1121,6 +1148,15 @@ module Wizard::GeneratedAssociationMethods
 
   sig { returns(T.nilable(::Wand)) }
   def wand; end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::Wand).void)).returns(::Wand) }
+  def build_wand(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::Wand).void)).returns(::Wand) }
+  def create_wand(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::Wand).void)).returns(::Wand) }
+  def create_wand!(*args, &block); end
 
   sig { params(value: T.nilable(::Wand)).void }
   def wand=(value); end
