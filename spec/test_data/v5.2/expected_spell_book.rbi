@@ -87,6 +87,15 @@ module SpellBook::GeneratedAssociationMethods
   sig { returns(::Wizard) }
   def wizard; end
 
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::Wizard).void)).returns(::Wizard) }
+  def build_wizard(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::Wizard).void)).returns(::Wizard) }
+  def create_wizard(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::Wizard).void)).returns(::Wizard) }
+  def create_wizard!(*args, &block); end
+
   sig { params(value: ::Wizard).void }
   def wizard=(value); end
 end

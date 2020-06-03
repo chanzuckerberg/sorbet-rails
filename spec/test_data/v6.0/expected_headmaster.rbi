@@ -40,11 +40,29 @@ module Headmaster::GeneratedAssociationMethods
   sig { returns(::School) }
   def school; end
 
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::School).void)).returns(::School) }
+  def build_school(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::School).void)).returns(::School) }
+  def create_school(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::School).void)).returns(::School) }
+  def create_school!(*args, &block); end
+
   sig { params(value: ::School).void }
   def school=(value); end
 
   sig { returns(::Wizard) }
   def wizard; end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::Wizard).void)).returns(::Wizard) }
+  def build_wizard(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::Wizard).void)).returns(::Wizard) }
+  def create_wizard(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::Wizard).void)).returns(::Wizard) }
+  def create_wizard!(*args, &block); end
 
   sig { params(value: ::Wizard).void }
   def wizard=(value); end

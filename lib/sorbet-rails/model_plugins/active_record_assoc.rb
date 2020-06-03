@@ -36,9 +36,29 @@ class SorbetRails::ModelPlugins::ActiveRecordAssoc < SorbetRails::ModelPlugins::
     assoc_class = assoc_should_be_untyped?(reflection) ? "T.untyped" : "::#{reflection.klass.name}"
     assoc_type = (belongs_to_and_required?(reflection) || has_one_and_required?(reflection)) ? assoc_class : "T.nilable(#{assoc_class})"
 
+    params = [
+      Parameter.new("*args", type: "T.untyped"),
+      Parameter.new("&block", type: "T.nilable(T.proc.params(object: #{assoc_class}).void)")
+    ]
+
     assoc_module_rbi.create_method(
       assoc_name.to_s,
       return_type: assoc_type,
+    )
+    assoc_module_rbi.create_method(
+      "build_#{assoc_name}",
+      parameters: params,
+      return_type: assoc_class,
+    )
+    assoc_module_rbi.create_method(
+      "create_#{assoc_name}",
+      parameters: params,
+      return_type: assoc_class,
+    )
+    assoc_module_rbi.create_method(
+      "create_#{assoc_name}!",
+      parameters: params,
+      return_type: assoc_class,
     )
     assoc_module_rbi.create_method(
       "#{assoc_name}=",
