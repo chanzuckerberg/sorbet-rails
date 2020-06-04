@@ -18,10 +18,8 @@ module SorbetRails::PluckToTStruct
       raise UnexpectedType.new("pluck_to_tstruct expects a tstruct subclass, given #{tstruct}")
     end
 
-    associations_keys = associations.keys
-    pluck_keys = (tstruct.props.keys - associations_keys) + associations.values
-    keys_to_remove = pluck_keys.select { |key| associations.value?(key) }
-    tstruct_keys = (pluck_keys - keys_to_remove) + associations_keys
+    tstruct_keys = tstruct.props.keys
+    pluck_keys = (tstruct_keys - associations.keys) + associations.values
 
     # loosely based on pluck_to_hash gem
     # https://github.com/girishso/pluck_to_hash/blob/master/lib/pluck_to_hash.rb
