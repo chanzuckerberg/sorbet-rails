@@ -18,10 +18,6 @@ module SorbetRails::PluckToTStruct
       raise UnexpectedType.new("pluck_to_tstruct expects a tstruct subclass, given #{tstruct}")
     end
 
-    unless associations.is_a?(Hash)
-      raise ArgumentError.new("pluck_to_tstruct expects associations to be a Hash of #{tstruct}'s props mapped to an associated table's columns.")
-    end
-
     associations_keys = associations.keys
     pluck_keys = (tstruct.props.keys - associations_keys) + associations.values
     keys_to_remove = pluck_keys.select { |key| associations.value?(key) }
