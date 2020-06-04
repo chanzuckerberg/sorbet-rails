@@ -84,7 +84,7 @@ GEM
     parser (2.7.1.2)
       ast (~> 2.4.0)
     polyfill (1.8.0)
-    puma (3.12.4)
+    puma (3.12.6)
     rack (2.2.2)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -145,7 +145,7 @@ PLATFORMS
 DEPENDENCIES
   byebug
   jbuilder (~> 2.5)
-  puma (~> 3.0)
+  puma (~> 3.12)
   rails (~> 5.0.7)
   sorbet
   sorbet-rails!
