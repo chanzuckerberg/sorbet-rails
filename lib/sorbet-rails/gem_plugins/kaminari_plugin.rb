@@ -35,5 +35,13 @@ class KaminariPlugin < SorbetRails::ModelPlugins::Base
         Parameter.new('num', type: 'Integer')
       ],
     )
+
+    # https://github.com/kaminari/kaminari/blob/c5186f5d9b7f23299d115408e62047447fd3189d/kaminari-core/lib/kaminari/models/configuration_methods.rb#L19
+    model_class_rbi = root.create_class(model_class_name)
+    model_class_rbi.create_method(
+      "default_per_page",
+      return_type: "Integer",
+      class_method: true,
+    )
   end
 end
