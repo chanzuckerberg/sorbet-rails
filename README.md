@@ -97,7 +97,7 @@ Wizard.all.pluck_to_tstruct(TA[WizardStruct].new)  # T::Array[WizardStruct]
 You can also pass a keyword argument called `associations` that represents a mapping of a `T::Struct`'s keys to an associated table's columns.
 ```ruby
 # -- API
-Arel.pluck_to_tstruct(TA[ <TStructSubclass> ].new, asssociations: < Hash<Symbol, String> >)
+Arel.pluck_to_tstruct(TA[ <TStructSubclass> ].new, associations: < Hash<Symbol, String> >)
 
 # -- example
 Class WizardWithWandStruct < T::Struct
