@@ -19,7 +19,14 @@ module SorbetRails::PluckToTStruct
     end
 
     tstruct_keys = tstruct.props.keys
-    pluck_keys = (tstruct_keys - associations.keys) + associations.values
+    associations_keys = associations.keys
+    invalid_keys = associations_keys.reject { |k| tstruct_keys.include?(k) }
+
+    if invalid_keys.any?
+      raise UnexpectedAssociations.new("Argument 'associations' contains keys that don't exist in #{tstruct}: #{invalid_keys.join(", ")}")
+    end
+
+    pluck_keys = (tstruct_keys - associations_keys) + associations.values
 
     # loosely based on pluck_to_hash gem
     # https://github.com/girishso/pluck_to_hash/blob/master/lib/pluck_to_hash.rb
@@ -32,4 +39,5 @@ module SorbetRails::PluckToTStruct
   end
 
   class UnexpectedType < StandardError; end
+  class UnexpectedAssociations < StandardError; end
 end
