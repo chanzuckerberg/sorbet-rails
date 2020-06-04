@@ -79,6 +79,7 @@ build-iPhoneSimulator/
 /spec/support/**/config/credentials.yml.enc
 
 # Ignore sorbet generated files
+/sorbet/rbi/hidden-definitions/
 /spec/support/**/sorbet/*
 /spec/support/**/sorbet/**/*
 
