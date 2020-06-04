@@ -73,7 +73,7 @@ module ActiveSupport::HashWithIndifferentAccess; end
 module ActiveSupport::Multibyte::Chars; end
 module ActiveSupport::SafeBuffer; end
 module ActiveSupport::StringInquirer; end
-module Gem::SilentUI; end
+class Gem::SilentUI; end
 module Parser::CurrentRuby; end
 module ShrinePlugin::Shrine::Attachment; end
 module ShrinePlugin::Shrine::Plugins::RemoteUrl::AttachmentMethods; end
