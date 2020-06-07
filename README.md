@@ -100,7 +100,7 @@ You can also pass a keyword argument called `associations` that represents a map
 Arel.pluck_to_tstruct(TA[ <TStructSubclass> ].new, associations: < Hash<Symbol, String> >)
 
 # -- example
-Class WizardWithWandStruct < T::Struct
+class WizardWithWandStruct < T::Struct
   const :name, String
   const :house, T.nilable(String)
   const :wand_wood_type, String
