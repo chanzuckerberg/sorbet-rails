@@ -104,10 +104,10 @@ class WizardWithWandStruct < T::Struct
   const :name, String
   const :house, T.nilable(String)
   const :wand_wood_type, String
-  
-  Wizard.joins(:wand).pluck_to_tstruct(TA[WizardWithWandStruct].new, associations: { wand_wood_type: "wands.wood_type" })
-  Wizard.all.joins(:wand).pluck_to_tstruct(TA[WizardWithWandStruct].new, associations: { wand_wood_type: "wands.wood_type" })
 end
+
+Wizard.joins(:wand).pluck_to_tstruct(TA[WizardWithWandStruct].new, associations: { wand_wood_type: "wands.wood_type" })
+Wizard.all.joins(:wand).pluck_to_tstruct(TA[WizardWithWandStruct].new, associations: { wand_wood_type: "wands.wood_type" })
 ````
 
 This method is based on [pluck_to_hash](https://github.com/girishso/pluck_to_hash) gem.
