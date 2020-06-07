@@ -20,7 +20,7 @@ module SorbetRails::PluckToTStruct
 
     tstruct_keys = tstruct.props.keys
     associations_keys = associations.keys
-    invalid_keys = associations_keys.reject { |k| tstruct_keys.include?(k) }
+    invalid_keys = associations_keys - tstruct_keys
 
     if invalid_keys.any?
       raise UnexpectedAssociations.new("Argument 'associations' contains keys that don't exist in #{tstruct}: #{invalid_keys.join(", ")}")
