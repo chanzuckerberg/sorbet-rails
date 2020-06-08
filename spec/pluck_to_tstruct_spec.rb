@@ -131,7 +131,10 @@ RSpec.describe SorbetRails::PluckToTStruct do
   context "given associations mappings that don't exist in T::Struct" do
     it 'should raise error' do
       expect {
-        Wizard.pluck_to_tstruct(TA[WizardWithWandT].new, associations: { wood_type: "wands.wood_type", broken: "wands.broken" })
+        Wizard.pluck_to_tstruct(
+          TA[WizardWithWandT].new,
+          associations: { wood_type: "wands.wood_type" }
+        )
       }.to raise_error(SorbetRails::PluckToTStruct::UnexpectedAssociations)
     end
   end
