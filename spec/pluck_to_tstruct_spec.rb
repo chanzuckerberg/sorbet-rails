@@ -124,7 +124,7 @@ RSpec.describe SorbetRails::PluckToTStruct do
   context 'given a wrong type' do
     it 'should raise error' do
       expect {
-        plucked = Wizard.pluck_to_tstruct(TA[String].new)
+        Wizard.pluck_to_tstruct(TA[String].new)
       }.to raise_error(SorbetRails::PluckToTStruct::UnexpectedType)
     end
   end
@@ -132,7 +132,7 @@ RSpec.describe SorbetRails::PluckToTStruct do
   context "given associations mappings that don't exist in T::Struct" do
     it 'should raise error' do
       expect {
-        plucked = Wizard.pluck_to_tstruct(TA[WizardWithWandT].new, associations: { wood_type: "wands.wood_type", broken: "wands.broken" })
+        Wizard.pluck_to_tstruct(TA[WizardWithWandT].new, associations: { wood_type: "wands.wood_type", broken: "wands.broken" })
       }.to raise_error(SorbetRails::PluckToTStruct::UnexpectedAssociations)
     end
   end
