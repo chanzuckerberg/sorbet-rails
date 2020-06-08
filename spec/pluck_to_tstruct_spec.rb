@@ -71,7 +71,6 @@ RSpec.describe SorbetRails::PluckToTStruct do
     const :name, String
     const :house, String
     const :wand_wood_type, String
-    const :wand_broken, Integer
 
     def ==(other)
       return false unless other.is_a?(self.class)
@@ -138,14 +137,11 @@ RSpec.describe SorbetRails::PluckToTStruct do
   end
 
   context 'pluck with associations' do
-    associations = {
-      wand_wood_type: "wands.wood_type",
-      wand_broken: "wands.broken",
-    }
+    associations = { wand_wood_type: "wands.wood_type" }
 
     expected = [
-      WizardWithWandT.new(name: "Harry Potter", house: "Gryffindor", wand_wood_type: "Holly", wand_broken: 1),
-      WizardWithWandT.new(name: "Hermione Granger", house: "Gryffindor", wand_wood_type: "Vine", wand_broken: 1),
+      WizardWithWandT.new(name: "Harry Potter", house: "Gryffindor", wand_wood_type: "Holly"),
+      WizardWithWandT.new(name: "Hermione Granger", house: "Gryffindor", wand_wood_type: "Vine"),
     ]
 
     it_should_behave_like 'pluck_to_tstruct with associations', WizardWithWandT, associations, expected
