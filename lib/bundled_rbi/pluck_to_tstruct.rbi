@@ -6,7 +6,7 @@ module SorbetRails::PluckToTStruct
     type_parameters(:U).
     params(
       ta_struct: ITypeAssert[T.type_parameter(:U)],
-      associations: T::Hash[Symbol, String]
+      associations: T::Hash[Symbol, String],
     ).
     returns(T::Array[T.type_parameter(:U)])
   }
