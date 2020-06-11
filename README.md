@@ -94,6 +94,28 @@ Wizard.pluck_to_tstruct(TA[WizardStruct].new)  # T::Array[WizardStruct]
 Wizard.all.pluck_to_tstruct(TA[WizardStruct].new)  # T::Array[WizardStruct]
 ```
 
+You can also pass a keyword argument called `associations` that represents a mapping of a `T::Struct`'s keys to an associated table's columns.
+```ruby
+# -- API
+Arel.pluck_to_tstruct(TA[ <TStructSubclass> ].new, associations: < Hash<Symbol, String> >)
+
+# -- example
+class WizardWithWandStruct < T::Struct
+  const :name, String
+  const :house, T.nilable(String)
+  const :wand_wood_type, String
+end
+
+Wizard.joins(:wand).pluck_to_tstruct(
+  TA[WizardWithWandStruct].new, 
+  associations: { wand_wood_type: "wands.wood_type" }
+)
+Wizard.all.joins(:wand).pluck_to_tstruct(
+  TA[WizardWithWandStruct].new, 
+  associations: { wand_wood_type: "wands.wood_type" }
+)
+````
+
 This method is based on [pluck_to_hash](https://github.com/girishso/pluck_to_hash) gem.
 
 #### `typed_enum` instead of `enum`

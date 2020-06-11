@@ -6,10 +6,11 @@ module SorbetRails::PluckToTStruct
     type_parameters(:U).
     params(
       ta_struct: ITypeAssert[T.type_parameter(:U)],
+      associations: T::Hash[Symbol, String],
     ).
     returns(T::Array[T.type_parameter(:U)])
   }
-  def pluck_to_tstruct(ta_struct, &blk); end
+  def pluck_to_tstruct(ta_struct, associations: {}); end
 end
 
 class ActiveRecord::Base
