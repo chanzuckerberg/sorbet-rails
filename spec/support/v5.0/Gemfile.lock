@@ -85,7 +85,7 @@ GEM
       ast (~> 2.4.0)
     polyfill (1.8.0)
     puma (3.12.6)
-    rack (2.2.2)
+    rack (2.2.3)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (5.0.7.2)
