@@ -114,4 +114,16 @@ module SorbetRails::ModelColumnUtils
       end
     end
   end
+
+  sig { params(attribute: T.any(String, Symbol)).returns(T::Boolean) }
+  def attribute_has_unconditional_presence_validation?(attribute)
+    model_class_srb = model_class
+    model_class_srb < ActiveRecord::Base &&
+    model_class_srb.validators_on(attribute).any? do |validator|
+      validator.is_a?(ActiveModel::Validations::PresenceValidator) &&
+        !validator.options.key?(:if) &&
+        !validator.options.key?(:unless) &&
+        !validator.options.key?(:on)
+    end
+  end
 end
