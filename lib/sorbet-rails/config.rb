@@ -1,4 +1,7 @@
 # typed: true
+require("sorbet-rails/mailer_rbi_formatter")
+require("sorbet-rails/job_rbi_formatter")
+
 module SorbetRails
   class << self
     extend T::Sig
@@ -37,6 +40,12 @@ module SorbetRails
     sig { returns(T::Array[String]) }
     attr_accessor :extra_helper_includes
 
+    sig { returns(T.class_of(SorbetRails::JobRbiFormatter))}
+    attr_accessor :job_generator_class
+
+    sig { returns(T.class_of(SorbetRails::MailerRbiFormatter))}
+    attr_accessor :mailer_generator_class
+
     sig { void }
     def initialize
       @enabled_gem_plugins = []
@@ -52,6 +61,8 @@ module SorbetRails
       ]
       @enabled_model_plugins << :active_storage_methods if defined?(T.unsafe(ActiveStorage))
       @extra_helper_includes = []
+      @mailer_generator_class = SorbetRails::MailerRbiFormatter
+      @job_generator_class = SorbetRails::JobRbiFormatter
     end
 
     sig { returns(T::Array[Symbol]) }

@@ -107,11 +107,11 @@ class WizardWithWandStruct < T::Struct
 end
 
 Wizard.joins(:wand).pluck_to_tstruct(
-  TA[WizardWithWandStruct].new, 
+  TA[WizardWithWandStruct].new,
   associations: { wand_wood_type: "wands.wood_type" }
 )
 Wizard.all.joins(:wand).pluck_to_tstruct(
-  TA[WizardWithWandStruct].new, 
+  TA[WizardWithWandStruct].new,
   associations: { wand_wood_type: "wands.wood_type" }
 )
 ````
@@ -434,11 +434,13 @@ If you run into the following issue when running rspec, it's likely because you'
        if you're really stuck.
 ```
 
-## Extending Model Generation Task with Custom Plugins
+## Extending RBI Generation logic
+
+### Extending Model Generation Task with Custom Plugins
 
 `sorbet-rails` support a customizable plugin system that you can use to generate additional RBI for each model. This will be useful to generate RBI for methods dynamically added by gems or private concerns. If you write plugins for public gems, please feel free to contribute it to this repo.
 
-### Defining a Custom `ModelPlugin`
+#### Defining a Custom `ModelPlugin`
 
 A custom plugin should be a subclass of `SorbetRails::ModelPlugins::Base`. Each plugin would implement a `generate(root)` method that generate additional rbi for the model.
 
@@ -487,14 +489,14 @@ It is also recommended to check if the generated methods are detected by `sorbet
 
 Check out the [plugins](https://github.com/chanzuckerberg/sorbet-rails/tree/master/lib/sorbet-rails/model_plugins) written for `sorbet-rails`'s own model RBI generation logic for examples.
 
-### Registering new plugins
+#### Registering new plugins
 You can register your plugins in an initializer:
 ```ruby
 # -- config/initializers/sorbet_rails.rb
 SorbetRails::ModelRbiFormatter.register_plugin(MyCustomPlugin)
 ```
 
-### Enabling built-in plugins
+#### Enabling built-in plugins
 
 sorbet-rails comes with a handful of gem plugins that can be enabled in an initializer. You can pass enabled gem plugins to `config.enabled_gem_plugins`, like so:
 
@@ -529,6 +531,29 @@ You can also configure the core model plugins if needed. The default plugins are
 [Shrine]: https://github.com/shrinerb/shrine
 [active_flag]: https://github.com/kenn/active_flag
 [Paperclip]: https://github.com/thoughtbot/paperclip
+
+### Customize Generation Class
+
+For mailer and job rbi generation, you can customize the logic by
+setting the generation class in the config:
+
+```ruby
+SorbetRails.configure do |config|
+  config.job_generator_class = CustomJobRbiGenerator
+  config.mailer_generator_class = CustomMailerRbiGenerator
+end
+```
+
+The custom generator can subclass the [provided generators](lib/bundled_rbi/customizabel_rbi_formatter.rbi) and override the populate_rbi method. For example:
+
+```ruby
+class CustomJobRbiGenerator < SorbetRails::JobRbiFormatter
+  def populate_rbi
+    rbi_generator.root.add_comment("== Custom Generator ==")
+    super
+  end
+end
+```
 
 ## Contributing
 
