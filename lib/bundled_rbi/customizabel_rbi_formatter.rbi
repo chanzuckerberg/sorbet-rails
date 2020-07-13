@@ -4,6 +4,9 @@ module SorbetRails
     extend T::Sig
     Parameter = ::Parlour::RbiGenerator::Parameter
 
+    sig { returns(T.class_of(ActionMailer::Base)) }
+    attr_reader :mailer_class
+
     sig { returns(Parlour::RbiGenerator) }
     def rbi_generator; end
 
