@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/parlour/all/parlour.rbi
 #
-# parlour-2.0.0
+# parlour-2.1.0
 
 module Parlour
 end
@@ -31,7 +31,6 @@ module Parlour::Debugging::Tree
   extend T::Sig
 end
 module Kernel
-  def then; end
 end
 class Parlour::Plugin
   def generate(*args, &blk); end
@@ -302,6 +301,8 @@ class Parlour::TypeParser::NodePath
   extend T::Sig
 end
 class Parlour::TypeParser::IntermediateSig < T::Struct
+  def __t_props_generated_deserialize(*args); end
+  def __t_props_generated_serialize(*args); end
   def abstract; end
   def abstract=(val); end
   def final; end
@@ -315,6 +316,8 @@ class Parlour::TypeParser::IntermediateSig < T::Struct
   def return_type; end
   def return_type=(val); end
   def self.inherited(s); end
+  def type_parameters; end
+  def type_parameters=(val); end
   extend T::Props::ClassMethods
   extend T::Props::Plugin::ClassMethods
   extend T::Props::Plugin::ClassMethods

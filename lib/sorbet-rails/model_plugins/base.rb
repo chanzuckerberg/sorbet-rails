@@ -29,15 +29,5 @@ module SorbetRails::ModelPlugins
       @model_class = T.let(model_class, T.class_of(ActiveRecord::Base))
       @available_classes = T.let(available_classes, T::Set[String])
     end
-
-    sig { params(attribute: T.any(String, Symbol)).returns(T::Boolean) }
-    def attribute_has_unconditional_presence_validation?(attribute)
-      model_class.validators_on(attribute).any? do |validator|
-        validator.is_a?(ActiveModel::Validations::PresenceValidator) &&
-          !validator.options.key?(:if) &&
-          !validator.options.key?(:unless) &&
-          !validator.options.key?(:on)
-      end
-    end
   end
 end

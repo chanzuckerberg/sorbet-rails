@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/railties/all/railties.rbi
 #
-# railties-5.2.4.1
+# railties-5.2.4.2
 
 module Rails
   def self.app_class; end
@@ -329,6 +329,21 @@ class Rails::Railtie::Configuration
   def to_prepare_blocks; end
   def watchable_dirs; end
   def watchable_files; end
+end
+class Rails::Engine::Configuration < Rails::Railtie::Configuration
+  def autoload_once_paths; end
+  def autoload_once_paths=(arg0); end
+  def autoload_paths; end
+  def autoload_paths=(arg0); end
+  def eager_load_paths; end
+  def eager_load_paths=(arg0); end
+  def generators; end
+  def initialize(root = nil); end
+  def middleware; end
+  def middleware=(arg0); end
+  def paths; end
+  def root; end
+  def root=(value); end
 end
 class SourceAnnotationExtractor
   def display(results, options = nil); end

@@ -1,14 +1,17 @@
 # typed: strict
+require('sorbet-rails/model_column_utils')
 module SorbetRails::ModelUtils
   extend T::Sig
   extend T::Helpers
+  include SorbetRails::ModelColumnUtils
 
   abstract!
 
   # if we're a HABTM class then model_class is an anonymous class (see the rails link below) and
   # i'm not sure how to explain that to sorbet other than T.class_of(Class).
-  sig { abstract.returns(T.any(T.class_of(ActiveRecord::Base), T.class_of(Class))) }
-  def model_class; end
+  # This is also defined in ModelColumnUtils
+  # sig { abstract.returns(T.any(T.class_of(ActiveRecord::Base), T.class_of(Class))) }
+  # def model_class; end
 
   sig { returns(T::Boolean) }
   def habtm_class?

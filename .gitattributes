@@ -1,4 +1,3 @@
-lib/sorbet/* linguist-generated
 spec/test_data/* linguist-generated
 spec/support/* linguist-generated
-
+sorbet/* linguist-generated
