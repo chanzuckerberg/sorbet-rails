@@ -134,10 +134,11 @@ class SorbetRails::ModelPlugins::ActiveRecordAssoc < SorbetRails::ModelPlugins::
       return_type: relation_class,
     )
     unless assoc_should_be_untyped?(reflection)
+      puts "Reflection: #{reflection} #{reflection.klass} #{reflection.klass.table_exists?}"
       if reflection.klass.table_exists?
         # Normally the id_type is an Integer, but it could be a String if using
         # UUIDs.
-        id_type = SorbetRails::ModelPlugins::ActiveRecordAttribute.new(reflection.klass, @available_classes).type_for_column_def(reflection.klass.columns_hash['id']).to_s
+        id_type = type_for_column_def(reflection.klass.columns_hash["id"]).to_s
       else
         id_type = "T.untyped"
       end

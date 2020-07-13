@@ -125,7 +125,7 @@ class SorbetRails::ModelRbiFormatter
         generator.current_plugin = plugin
         plugin.generate(generator.root)
       rescue Exception => e
-        raise e unless allow_failure
+        raise e # unless allow_failure
         puts "!!! Plugin #{plugin.class.name} threw an exception: #{e}"
       end
     end
