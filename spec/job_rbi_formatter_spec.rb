@@ -1,5 +1,5 @@
 require 'rails_helper'
-require 'sorbet-rails/mailer_rbi_formatter'
+require 'sorbet-rails/job_rbi_formatter'
 
 RSpec.describe SorbetRails::MailerRbiFormatter do
 

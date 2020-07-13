@@ -70,7 +70,7 @@ end
 # File uses File::SEPARATOR by default but will also use File::ALT_SEPARATOR if it's not nil
 FILE_SEPARATOR_RE = Regexp.union(*[File::SEPARATOR, File::ALT_SEPARATOR].compact).freeze
 
-def expect_files(base_dir:, files:)
+def expect_files(base_dir:, files:, expected_file_prefix: "expected")
   dirs = Set.new([base_dir])
   # if any files contain file separators then include those paths in our globbing as well
   files.each do |f|
@@ -92,7 +92,7 @@ def expect_files(base_dir:, files:)
     generated = File.read(file_path)
     # expect there is the same file in test_data folder
     path_from_dir = pathname.relative_path_from(base_dir).to_path
-    expect_match_file(generated, "expected_#{path_from_dir}")
+    expect_match_file(generated, "#{expected_file_prefix}_#{path_from_dir}")
     path_from_dir
   end
 

@@ -47,7 +47,7 @@ namespace :rails_rbi do
     Rake::Task['rails_rbi:active_record'].invoke
   end
 
-  desc "Generate rbis for rails mailers"
+  desc "Generate rbis for rails active_record base"
   task :active_record, [:root_dir] => :environment do |t, args|
     formatter = SorbetRails::ActiveRecordRbiFormatter.new
     FileUtils.mkdir_p(Rails.root.join("sorbet", "rails-rbi"))
@@ -129,7 +129,7 @@ namespace :rails_rbi do
         "mailers",
         "#{mailer_class.name.underscore}.rbi",
       )
-      formatter = SorbetRails::MailerRbiFormatter.new(mailer_class)
+      formatter = ::SorbetRails.config.mailer_generator_class.new(mailer_class)
       FileUtils.mkdir_p(File.dirname(file_path))
       File.write(file_path, formatter.generate_rbi)
     end
@@ -147,7 +147,7 @@ namespace :rails_rbi do
         "jobs",
         "#{job_class.name.underscore}.rbi",
       )
-      formatter = SorbetRails::JobRbiFormatter.new(job_class)
+      formatter = ::SorbetRails.config.job_generator_class.new(job_class)
       FileUtils.mkdir_p(File.dirname(file_path))
       File.write(file_path, formatter.generate_rbi)
     end
