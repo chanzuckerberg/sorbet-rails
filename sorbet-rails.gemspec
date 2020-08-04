@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
     `git ls-files -z`.split("\x0").select { |f| f.match(%r{^(test|spec|features)/}) }
   end
 
-  s.add_dependency 'parlour', '~> 2.0'
+  s.add_dependency 'parlour', '~> 4.0'
   s.add_dependency 'sorbet-runtime', '>= 0.5'
   s.add_dependency 'sorbet-coerce', '>= 0.2.6'
   s.add_dependency 'method_source', '>= 0.9.2'
