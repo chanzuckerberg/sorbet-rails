@@ -136,12 +136,14 @@ ie.
 Will generate this enum:
 
 ```ruby
-class Wizard::House < T::Enum
-  enums do
-    Gryffindor = new('Gryffindor')
-    Hufflepuff = new('Hufflepuff')
-    Ravenclaw = new('Ravenclaw')
-    Slytherin = new('Slytherin')
+class Wizard
+  class House < T::Enum
+    enums do
+      Gryffindor = new('Gryffindor')
+      Hufflepuff = new('Hufflepuff')
+      Ravenclaw = new('Ravenclaw')
+      Slytherin = new('Slytherin')
+    end
   end
 end
 ```
