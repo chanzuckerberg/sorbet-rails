@@ -32,7 +32,7 @@ module SorbetRails
           method_def = @mailer_class.instance_method(mailer_method)
           parameters = SorbetRails::SorbetUtils.parameters_from_method_def(method_def)
           mailer_rbi.create_method(
-            mailer_method,
+            mailer_method.to_s,
             parameters: parameters,
             return_type: 'ActionMailer::MessageDelivery',
             class_method: true,
