@@ -27,7 +27,7 @@ module SorbetRails
         'Please rerun bundle exec rake rails_rbi:jobs to regenerate.'
       ])
 
-      @rbi_generator.root.create_class(@job_class.name) do |job_rbi|
+      @rbi_generator.root.create_class(T.must(@job_class.name)) do |job_rbi|
         method_def = @job_class.instance_method(:perform)
         parameters = SorbetRails::SorbetUtils.parameters_from_method_def(method_def)
         job_rbi.create_method(

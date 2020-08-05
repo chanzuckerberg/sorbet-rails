@@ -27,7 +27,7 @@ module SorbetRails
         'Please rerun bundle exec rake rails_rbi:mailers to regenerate.'
       ])
 
-      @rbi_generator.root.create_class(@mailer_class.name) do |mailer_rbi|
+      @rbi_generator.root.create_class(T.must(@mailer_class.name)) do |mailer_rbi|
         @mailer_class.action_methods.to_a.sort.each do |mailer_method|
           method_def = @mailer_class.instance_method(mailer_method)
           parameters = SorbetRails::SorbetUtils.parameters_from_method_def(method_def)
