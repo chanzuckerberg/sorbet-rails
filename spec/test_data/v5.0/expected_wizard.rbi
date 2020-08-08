@@ -230,64 +230,6 @@ module Wizard::GeneratedAttributeMethods
   def updated_at?; end
 end
 
-class Wizard::Broom < T::Enum
-  enums do
-    Nimbus = new(%q{nimbus})
-    Firebolt = new(%q{firebolt})
-  end
-
-end
-
-class Wizard::EyeColor < T::Enum
-  enums do
-    Brown = new(%q{brown})
-    Green = new(%q{green})
-    Blue = new(%q{blue})
-  end
-
-end
-
-class Wizard::HairColor < T::Enum
-  enums do
-    Brown = new(%q{brown})
-    Black = new(%q{black})
-    Blonde = new(%q{blonde})
-  end
-
-end
-
-class Wizard::House < T::Enum
-  enums do
-    Gryffindor = new(%q{Gryffindor})
-    Hufflepuff = new(%q{Hufflepuff})
-    Ravenclaw = new(%q{Ravenclaw})
-    Slytherin = new(%q{Slytherin})
-  end
-
-end
-
-class Wizard::ProfessorEnum < T::Enum
-  enums do
-    SeverusSnape = new(%q{Severus Snape})
-    MinervaMcGonagall = new(%q{Minerva McGonagall})
-    PomonaSprout = new(%q{Pomona Sprout})
-    FiliusFlitwick = new(%q{Filius Flitwick})
-    Hagrid = new(%q{Hagrid})
-    AlastorMadEyeMoody = new(%q{Alastor 'Mad-Eye' Moody})
-  end
-
-end
-
-class Wizard::QuidditchPosition < T::Enum
-  enums do
-    Keeper = new(%q{keeper})
-    Seeker = new(%q{seeker})
-    Beater = new(%q{beater})
-    Chaser = new(%q{chaser})
-  end
-
-end
-
 module Wizard::GeneratedAssociationMethods
   sig { returns(T.nilable(::School)) }
   def school; end
@@ -470,6 +412,64 @@ class Wizard < ApplicationRecord
 
   sig { params(value: T.nilable(Wizard::QuidditchPosition)).void }
   def typed_quidditch_position=(value); end
+
+  class Broom < T::Enum
+    enums do
+      Nimbus = new(%q{nimbus})
+      Firebolt = new(%q{firebolt})
+    end
+
+  end
+
+  class EyeColor < T::Enum
+    enums do
+      Brown = new(%q{brown})
+      Green = new(%q{green})
+      Blue = new(%q{blue})
+    end
+
+  end
+
+  class HairColor < T::Enum
+    enums do
+      Brown = new(%q{brown})
+      Black = new(%q{black})
+      Blonde = new(%q{blonde})
+    end
+
+  end
+
+  class House < T::Enum
+    enums do
+      Gryffindor = new(%q{Gryffindor})
+      Hufflepuff = new(%q{Hufflepuff})
+      Ravenclaw = new(%q{Ravenclaw})
+      Slytherin = new(%q{Slytherin})
+    end
+
+  end
+
+  class ProfessorEnum < T::Enum
+    enums do
+      SeverusSnape = new(%q{Severus Snape})
+      MinervaMcGonagall = new(%q{Minerva McGonagall})
+      PomonaSprout = new(%q{Pomona Sprout})
+      FiliusFlitwick = new(%q{Filius Flitwick})
+      Hagrid = new(%q{Hagrid})
+      AlastorMadEyeMoody = new(%q{Alastor 'Mad-Eye' Moody})
+    end
+
+  end
+
+  class QuidditchPosition < T::Enum
+    enums do
+      Keeper = new(%q{keeper})
+      Seeker = new(%q{seeker})
+      Beater = new(%q{beater})
+      Chaser = new(%q{chaser})
+    end
+
+  end
 end
 
 class Wizard::ActiveRecord_Relation < ActiveRecord::Relation
