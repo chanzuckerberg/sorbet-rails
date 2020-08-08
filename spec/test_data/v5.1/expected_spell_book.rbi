@@ -65,15 +65,6 @@ module SpellBook::GeneratedAttributeMethods
   def wizard_id?; end
 end
 
-class SpellBook::BookType < T::Enum
-  enums do
-    Unclassified = new(%q{unclassified})
-    Biology = new(%q{biology})
-    DarkArt = new(%q{dark_art})
-  end
-
-end
-
 module SpellBook::GeneratedAssociationMethods
   sig { returns(::Spell::ActiveRecord_Associations_CollectionProxy) }
   def spells; end
@@ -145,6 +136,15 @@ class SpellBook < ApplicationRecord
 
   sig { params(value: SpellBook::BookType).void }
   def typed_book_type=(value); end
+
+  class BookType < T::Enum
+    enums do
+      Unclassified = new(%q{unclassified})
+      Biology = new(%q{biology})
+      DarkArt = new(%q{dark_art})
+    end
+
+  end
 end
 
 class SpellBook::ActiveRecord_Relation < ActiveRecord::Relation

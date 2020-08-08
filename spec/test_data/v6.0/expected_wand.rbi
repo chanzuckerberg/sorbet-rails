@@ -170,16 +170,6 @@ module Wand::GeneratedAttributeMethods
   def wood_type?; end
 end
 
-class Wand::CoreType < T::Enum
-  enums do
-    PhoenixFeather = new(%q{phoenix_feather})
-    DragonHeartstring = new(%q{dragon_heartstring})
-    UnicornTailHair = new(%q{unicorn_tail_hair})
-    BasiliskHorn = new(%q{basilisk_horn})
-  end
-
-end
-
 module Wand::GeneratedAssociationMethods
   sig { returns(::Wizard) }
   def wizard; end
@@ -254,6 +244,16 @@ class Wand < ApplicationRecord
 
   sig { params(value: T.nilable(Wand::CoreType)).void }
   def typed_core_type=(value); end
+
+  class CoreType < T::Enum
+    enums do
+      PhoenixFeather = new(%q{phoenix_feather})
+      DragonHeartstring = new(%q{dragon_heartstring})
+      UnicornTailHair = new(%q{unicorn_tail_hair})
+      BasiliskHorn = new(%q{basilisk_horn})
+    end
+
+  end
 
   sig { returns(T::Array[Wand]) }
   def self.mythicals; end

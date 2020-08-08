@@ -73,18 +73,18 @@ class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugi
         # do not generate the methods for enums in strict_mode
         should_skip_setter_getter = config.strict_mode
 
-        t_enum_type = "#{model_class_name}::#{config.class_name}"
-
-        # define T::Enum class & values
-        enum_values = T.must(model_defined_enums[column_name])
-        t_enum_values = @model_class.gen_typed_enum_values(enum_values.keys)
-        root.create_enum_class(
-          t_enum_type,
-          enums: t_enum_values.map { |k, v| [v, "%q{#{k}}"] },
-        )
+        root.create_class(model_class_name) do |model_class|
+          # define T::Enum class & values
+          enum_values = T.must(model_defined_enums[column_name])
+          t_enum_values = @model_class.gen_typed_enum_values(enum_values.keys)
+          model_class.create_enum_class(
+            config.class_name,
+            enums: t_enum_values.map { |k, v| [v, "%q{#{k}}"] },
+          )
+        end
 
         # define t_enum setter/getter
-        assignable_type = t_enum_type
+        assignable_type = "#{model_class_name}::#{config.class_name}"
         assignable_type = "T.nilable(#{assignable_type})" if nilable_column
         # add directly to model_class_rbi because they are included
         # by sorbet's hidden.rbi
