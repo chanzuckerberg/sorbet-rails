@@ -137,7 +137,7 @@ class SorbetRails::ModelPlugins::ActiveRecordAssoc < SorbetRails::ModelPlugins::
       if reflection.klass.table_exists?
         # Normally the id_type is an Integer, but it could be a String if using
         # UUIDs.
-        id_type = type_for_column_def(reflection.klass.columns_hash["id"]).to_s
+        id_type = type_for_column_def(reflection.klass.columns_hash[reflection.klass.primary_key]).to_s
       else
         id_type = "T.untyped"
       end
