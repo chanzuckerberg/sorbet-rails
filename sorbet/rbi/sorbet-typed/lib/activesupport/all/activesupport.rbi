@@ -226,13 +226,13 @@ class String
   sig { params(position: Integer).returns(String) }
   def to(position); end
 
-  sig { returns(Date) }
+  sig { returns(T.nilable(Date)) }
   def to_date; end
 
-  sig { returns(DateTime) }
+  sig { returns(T.nilable(DateTime)) }
   def to_datetime; end
 
-  sig { params(form: Symbol).returns(Time) }
+  sig { params(form: Symbol).returns(T.nilable(Time)) }
   def to_time(form = :local); end
 
   sig { params(truncate_at: Integer, separator: T.nilable(T.any(String, Regexp)), omission: String).returns(String) }
