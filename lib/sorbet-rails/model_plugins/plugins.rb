@@ -84,6 +84,9 @@ module SorbetRails::ModelPlugins
     when :attr_json
       require('sorbet-rails/gem_plugins/attr_json_plugin')
       AttrJsonPlugin
+    when :flag_shih_tzu
+      require('sorbet-rails/gem_plugins/flag_shih_tzu_plugin')
+      FlagShihTzuPlugin
     else
       raise UnrecognizedPluginName.new(
         "Unrecognized plugin with name: #{plugin_name}. Please check available plugins in the
