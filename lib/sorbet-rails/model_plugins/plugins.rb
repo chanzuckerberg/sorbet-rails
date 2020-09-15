@@ -81,6 +81,9 @@ module SorbetRails::ModelPlugins
     when :paperclip
       require('sorbet-rails/gem_plugins/paperclip_plugin')
       PaperclipPlugin
+    when :attr_json
+      require('sorbet-rails/gem_plugins/attr_json_plugin')
+      AttrJsonPlugin
     else
       raise UnrecognizedPluginName.new(
         "Unrecognized plugin with name: #{plugin_name}. Please check available plugins in the
