@@ -2,7 +2,10 @@
 class FlagShihTzuPlugin < SorbetRails::ModelPlugins::Base
   sig { override.params(root: Parlour::RbiGenerator::Namespace).void }
   def generate(root)
-    return unless @model_class.include?(::FlagShihTzu)
+    unless @model_class.include?(::FlagShihTzu) &&
+             @model_class.flag_mapping.present?
+      return
+    end
 
     custom_module_name = self.model_module_name("GeneratedFlagShihTzuMethods")
     custom_module_rbi = root.create_module(custom_module_name)
