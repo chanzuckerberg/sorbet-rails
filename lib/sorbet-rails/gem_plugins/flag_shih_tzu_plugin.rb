@@ -2,10 +2,7 @@
 class FlagShihTzuPlugin < SorbetRails::ModelPlugins::Base
   sig { override.params(root: Parlour::RbiGenerator::Namespace).void }
   def generate(root)
-    unless @model_class.include?(::FlagShihTzu) &&
-             @model_class.flag_mapping.present?
-      return
-    end
+    return unless @model_class.include?(::FlagShihTzu)
 
     custom_module_name = self.model_module_name("GeneratedFlagShihTzuMethods")
     custom_module_rbi = root.create_module(custom_module_name)
@@ -17,19 +14,23 @@ class FlagShihTzuPlugin < SorbetRails::ModelPlugins::Base
     # then create custom methods, constants, etc. for this module.
     add_class_methods(custom_module_rbi)
 
-    @model_class
-      .flag_columns
-      .each do |column|
-        add_methods_for_column(column, custom_module_rbi)
-      end
-
-    @model_class
-      .flag_mapping
-      .each do |column, flags|
-        flags.keys.each do |flag_key|
-          add_methods_for_flag(column, flag_key, custom_module_rbi)
+    if @model_class.flag_columns.present?
+      @model_class
+        .flag_columns
+        .each do |column|
+          add_methods_for_column(column, custom_module_rbi)
         end
-      end
+    end
+
+    if @model_class.flag_mapping.present?
+      @model_class
+        .flag_mapping
+        .each do |column, flags|
+          flags.keys.each do |flag_key|
+            add_methods_for_flag(column, flag_key, custom_module_rbi)
+          end
+        end
+    end
   end
 
   private
@@ -73,8 +74,9 @@ class FlagShihTzuPlugin < SorbetRails::ModelPlugins::Base
                                     returns: 'T::Hash[String, T::Hash[Symbol, T.untyped]]',
                                     class_method: true)
 
-    # https://github.com/pboling/flag_shih_tzu#updating-flag-column-by-raw-sql
-    @model_class
+    if @model_class.flag_mapping.present?
+      # https://github.com/pboling/flag_shih_tzu#updating-flag-column-by-raw-sql
+      @model_class
         .flag_mapping
         .flat_map { |_, flags| flags.keys }
         .each do |flag_key|
@@ -94,6 +96,7 @@ class FlagShihTzuPlugin < SorbetRails::ModelPlugins::Base
                                           returns: 'String',
                                           class_method: true)
         end
+    end
   end
 
   # https://github.com/pboling/flag_shih_tzu#generated-boolean-patterned-instance-methods
