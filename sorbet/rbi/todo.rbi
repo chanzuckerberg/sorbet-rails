@@ -10,6 +10,7 @@ module ::AttrJson::AttributeDefinition; end
 module ::AttrJson::Record; end
 module ::AttrJson::Record::Dirty; end
 module ::Elasticsearch::Model; end
+module ::FlagShihTzu; end
 module ::FriendlyId; end
 module ::Kaminari; end
 module ::Kaminari::ActiveRecordModelExtension; end
