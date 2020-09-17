@@ -110,6 +110,7 @@ class AttrJsonPlugin < SorbetRails::ModelPlugins::Base
 
     case type
     when 'datetime' then 'T.nilable(DateTime)'
+    when 'decimal' then 'T.nilable(BigDecimal)'
     else "T.nilable(#{type.camelize})"
     end
   end
