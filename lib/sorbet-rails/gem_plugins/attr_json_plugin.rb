@@ -81,7 +81,7 @@ class AttrJsonPlugin < SorbetRails::ModelPlugins::Base
         parameters: [
           ::Parlour::RbiGenerator::Parameter.new(
             'value',
-            type: definition_type
+            type: 'T.untyped'
           )
         ],
         returns: definition_type
