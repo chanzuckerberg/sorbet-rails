@@ -100,7 +100,7 @@ class AttrJsonPlugin < SorbetRails::ModelPlugins::Base
     if definition.array_type?
       "T::Array[#{type_to_class(definition.type.base_type.type.to_s)}]"
     else
-      type_to_class(definition.type.type.to_s)
+      "T.nilable(#{type_to_class(definition.type.type.to_s)})"
     end
   end
 
@@ -109,9 +109,9 @@ class AttrJsonPlugin < SorbetRails::ModelPlugins::Base
     return 'T.untyped' unless type.present?
 
     case type
-    when 'datetime' then 'T.nilable(DateTime)'
-    when 'decimal' then 'T.nilable(BigDecimal)'
-    else "T.nilable(#{type.camelize})"
+    when 'datetime' then 'DateTime'
+    when 'decimal' then 'BigDecimal'
+    else type.camelize
     end
   end
 end
