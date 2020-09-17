@@ -26,9 +26,11 @@ class FlagShihTzuPlugin < SorbetRails::ModelPlugins::Base
       @model_class
         .flag_mapping
         .each do |column, flags|
-          flags.keys.each do |flag_key|
-            add_methods_for_flag(column, flag_key, custom_module_rbi)
-          end
+          flags.keys
+            .select { |flag_key| really_has_the_flag?(flag_key) }
+            .each  do |flag_key|
+              add_methods_for_flag(column, flag_key, custom_module_rbi)
+            end
         end
     end
   end
@@ -75,11 +77,13 @@ class FlagShihTzuPlugin < SorbetRails::ModelPlugins::Base
                                     class_method: true)
 
     if @model_class.flag_mapping.present?
-      # https://github.com/pboling/flag_shih_tzu#updating-flag-column-by-raw-sql
+      # https://github.com/pboling/flag_shih_tzu#support-for-manually-building-conditions
       @model_class
         .flag_mapping
         .flat_map { |_, flags| flags.keys }
         .each do |flag_key|
+          next unless really_has_the_flag?(flag_key)
+
           custom_module_rbi.create_method(
             "#{flag_key}_condition",
             parameters: [
@@ -92,9 +96,17 @@ class FlagShihTzuPlugin < SorbetRails::ModelPlugins::Base
             class_method: true
           )
 
-          custom_module_rbi.create_method("not_#{flag_key}_condition",
-                                          returns: 'String',
-                                          class_method: true)
+          custom_module_rbi.create_method(
+            "not_#{flag_key}_condition",
+            parameters: [
+              ::Parlour::RbiGenerator::Parameter.new(
+                'options',
+                type: 'T.nilable(T::Hash[Symbol, T.untyped])'
+              )
+            ],
+            returns: 'String',
+            class_method: true
+          )
         end
     end
   end
@@ -160,5 +172,9 @@ class FlagShihTzuPlugin < SorbetRails::ModelPlugins::Base
       custom_module_rbi.create_method("#{flag_key}!", returns: 'T::Boolean')
       custom_module_rbi.create_method("not_#{flag_key}!", returns: 'T::Boolean')
     end
+  end
+
+  def really_has_the_flag?(flag_name)
+    @model_class.respond_to?("#{flag_name}_condition")
   end
 end
