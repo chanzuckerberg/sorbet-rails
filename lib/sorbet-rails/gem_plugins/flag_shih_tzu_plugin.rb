@@ -1,4 +1,4 @@
-# typed: strong
+# typed: false
 class FlagShihTzuPlugin < SorbetRails::ModelPlugins::Base
   sig { override.params(root: Parlour::RbiGenerator::Namespace).void }
   def generate(root)
@@ -37,6 +37,7 @@ class FlagShihTzuPlugin < SorbetRails::ModelPlugins::Base
 
   private
 
+  sig { params(custom_module_rbi: Parlour::RbiGenerator::ModuleNamespace).void }
   def add_class_methods(custom_module_rbi)
     # https://github.com/pboling/flag_shih_tzu/blob/6a3f1c5f62bd56aa932252eef935826c9674b096/lib/flag_shih_tzu.rb#L12
     custom_module_rbi.create_method('flag_options',
@@ -112,6 +113,7 @@ class FlagShihTzuPlugin < SorbetRails::ModelPlugins::Base
   end
 
   # https://github.com/pboling/flag_shih_tzu#generated-boolean-patterned-instance-methods
+  sig { params(column: String, custom_module_rbi: Parlour::RbiGenerator::ModuleNamespace).void }
   def add_methods_for_column(column, custom_module_rbi)
     custom_module_rbi.create_method("all_#{column}",
                                     returns: 'T::Array[Symbol]')
@@ -137,6 +139,7 @@ class FlagShihTzuPlugin < SorbetRails::ModelPlugins::Base
   end
 
   # https://github.com/pboling/flag_shih_tzu#generated-boolean-patterned-instance-methods
+  sig { params(column: String, flag_key: Symbol, custom_module_rbi: Parlour::RbiGenerator::ModuleNamespace).void }
   def add_methods_for_flag(column, flag_key, custom_module_rbi)
     custom_module_rbi.create_method(flag_key.to_s, returns: 'T::Boolean')
     custom_module_rbi.create_method("#{flag_key}?", returns: 'T::Boolean')
@@ -174,6 +177,7 @@ class FlagShihTzuPlugin < SorbetRails::ModelPlugins::Base
     end
   end
 
+  sig { params(flag_name: Symbol).returns(T::Boolean) }
   def really_has_the_flag?(flag_name)
     @model_class.respond_to?("#{flag_name}_condition")
   end
