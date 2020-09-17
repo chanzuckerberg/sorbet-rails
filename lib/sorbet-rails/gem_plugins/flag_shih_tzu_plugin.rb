@@ -4,21 +4,26 @@ class FlagShihTzuPlugin < SorbetRails::ModelPlugins::Base
   def generate(root)
     return unless @model_class.include?(::FlagShihTzu)
 
-    custom_module_name = self.model_module_name("GeneratedFlagShihTzuMethods")
-    custom_module_rbi = root.create_module(custom_module_name)
+    obj_custom_module_name = self.model_module_name("GeneratedFlagShihTzuMethods")
+    obj_custom_module_rbi  = root.create_module(obj_custom_module_name)
+
+    klass_custom_module_name = self.model_module_name("GeneratedFlagShihTzuClassMethods")
+    klass_custom_module_rbi  = root.create_module(klass_custom_module_name)
+
 
     # here we re-create the model class!
     model_class_rbi = root.create_class(self.model_class_name)
-    model_class_rbi.create_extend(custom_module_name)
+    model_class_rbi.create_include(obj_custom_module_name)
+    model_class_rbi.create_extend(klass_custom_module_name)
 
     # then create custom methods, constants, etc. for this module.
-    add_class_methods(custom_module_rbi)
+    add_class_methods(klass_custom_module_rbi)
 
     if @model_class.flag_columns.present?
       @model_class
         .flag_columns
         .each do |column|
-          add_methods_for_column(column, custom_module_rbi)
+          add_methods_for_column(column, obj_custom_module_rbi)
         end
     end
 
@@ -29,7 +34,7 @@ class FlagShihTzuPlugin < SorbetRails::ModelPlugins::Base
           flags.keys
             .select { |flag_key| really_has_the_flag?(flag_key) }
             .each  do |flag_key|
-              add_methods_for_flag(column, flag_key, custom_module_rbi)
+              add_methods_for_flag(column, flag_key, obj_custom_module_rbi)
             end
         end
     end
@@ -41,18 +46,15 @@ class FlagShihTzuPlugin < SorbetRails::ModelPlugins::Base
   def add_class_methods(custom_module_rbi)
     # https://github.com/pboling/flag_shih_tzu/blob/6a3f1c5f62bd56aa932252eef935826c9674b096/lib/flag_shih_tzu.rb#L12
     custom_module_rbi.create_method('flag_options',
-                                    returns: 'T::Hash[String, T::Hash[Symbol, T.untyped]]',
-                                    class_method: true)
+                                    returns: 'T::Hash[String, T::Hash[Symbol, T.untyped]]')
 
     # https://github.com/pboling/flag_shih_tzu/blob/6a3f1c5f62bd56aa932252eef935826c9674b096/lib/flag_shih_tzu.rb#L13
     custom_module_rbi.create_method('flag_mapping',
-                                    returns: 'T::Hash[String, T::Hash[Symbol, Integer]]',
-                                    class_method: true)
+                                    returns: 'T::Hash[String, T::Hash[Symbol, Integer]]')
 
     # https://github.com/pboling/flag_shih_tzu/blob/6a3f1c5f62bd56aa932252eef935826c9674b096/lib/flag_shih_tzu.rb#L14
     custom_module_rbi.create_method('flag_columns',
-                                    returns: 'T::Array[Symbol]',
-                                    class_method: true)
+                                    returns: 'T::Array[Symbol]')
 
     # https://github.com/pboling/flag_shih_tzu#updating-flag-column-by-raw-sql
     custom_module_rbi.create_method('set_flag_sql',
@@ -74,8 +76,7 @@ class FlagShihTzuPlugin < SorbetRails::ModelPlugins::Base
                                         type: 'T.any(String, Symbol)'
                                       )
                                     ],
-                                    returns: 'T::Hash[String, T::Hash[Symbol, T.untyped]]',
-                                    class_method: true)
+                                    returns: 'T::Hash[String, T::Hash[Symbol, T.untyped]]')
 
     if @model_class.flag_mapping.present?
       # https://github.com/pboling/flag_shih_tzu#support-for-manually-building-conditions
@@ -93,8 +94,7 @@ class FlagShihTzuPlugin < SorbetRails::ModelPlugins::Base
                 type: 'T.nilable(T::Hash[Symbol, T.untyped])'
               )
             ],
-            returns: 'String',
-            class_method: true
+            returns: 'String'
           )
 
           custom_module_rbi.create_method(
@@ -105,8 +105,7 @@ class FlagShihTzuPlugin < SorbetRails::ModelPlugins::Base
                 type: 'T.nilable(T::Hash[Symbol, T.untyped])'
               )
             ],
-            returns: 'String',
-            class_method: true
+            returns: 'String'
           )
         end
     end
