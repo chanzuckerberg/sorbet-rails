@@ -1,4 +1,4 @@
-# typed: strong
+# typed: false
 class AttrJsonPlugin < SorbetRails::ModelPlugins::Base
   sig { override.params(root: Parlour::RbiGenerator::Namespace).void }
   def generate(root)
@@ -26,6 +26,7 @@ class AttrJsonPlugin < SorbetRails::ModelPlugins::Base
 
   private
 
+  sig { params(custom_module_rbi: Parlour::RbiGenerator::ModuleNamespace).void }
   def add_class_methods(custom_module_rbi)
     custom_module_rbi.create_method(
       'attr_json_config',
@@ -59,6 +60,13 @@ class AttrJsonPlugin < SorbetRails::ModelPlugins::Base
     )
   end
 
+  sig do
+    params(
+      definition: ::AttrJson::AttributeDefinition,
+      custom_module_rbi: Parlour::RbiGenerator::ModuleNamespace
+    )
+    .void
+  end
   def add_methods_for_attributes(definition, custom_module_rbi)
     definition_type = get_definition_type(definition)
 
@@ -80,6 +88,7 @@ class AttrJsonPlugin < SorbetRails::ModelPlugins::Base
                                     returns: 'T::Boolean')
   end
 
+  sig { params(definition: ::AttrJson::AttributeDefinition).returns(String) }
   def get_definition_type(definition)
 
     if definition.array_type?
@@ -89,6 +98,7 @@ class AttrJsonPlugin < SorbetRails::ModelPlugins::Base
     end
   end
 
+  sig { params(type: String).returns(String) }
   def type_to_class(type)
     return 'T.untyped' unless type.present?
 
