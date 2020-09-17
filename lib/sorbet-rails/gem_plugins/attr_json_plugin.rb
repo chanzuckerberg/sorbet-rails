@@ -4,23 +4,31 @@ class AttrJsonPlugin < SorbetRails::ModelPlugins::Base
   def generate(root)
     return unless @model_class.include?(::AttrJson::Record)
 
-    custom_module_name = self.model_module_name("GeneratedAttrJsonMethods")
-    custom_module_rbi = root.create_module(custom_module_name)
+    # Module for instance methods
+    obj_custom_module_name = self.model_module_name("GeneratedAttrJsonMethods")
+    obj_custom_module_rbi = root.create_module(obj_custom_module_name)
+
+    # Module for class methods
+    klass_custom_module_name = self.model_module_name("GeneratedAttrJsonClassMethods")
+    klass_custom_module_rbi = root.create_module(klass_custom_module_name)
 
     # here we re-create the model class!
     model_class_rbi = root.create_class(self.model_class_name)
-    model_class_rbi.create_extend(custom_module_name)
+    model_class_rbi.create_include(obj_custom_module_name)
+    model_class_rbi.create_extend(klass_custom_module_name)
 
     # then create custom methods, constants, etc. for this module.
-    add_class_methods(custom_module_rbi)
+    add_class_methods(klass_custom_module_rbi)
 
     @model_class.attr_json_registry.definitions.each do |definition|
-      add_methods_for_attributes(definition, custom_module_rbi)
+      add_methods_for_attributes(definition, obj_custom_module_rbi)
     end
 
     if @model_class.include?(::AttrJson::Record::Dirty)
-      custom_module_rbi.create_method('attr_json_changes',
-                                      returns: 'AttrJson::Record::Dirty::Implementation')
+      obj_custom_module_rbi.create_method(
+        'attr_json_changes',
+        returns: 'AttrJson::Record::Dirty::Implementation'
+      )
     end
   end
 
@@ -33,11 +41,10 @@ class AttrJsonPlugin < SorbetRails::ModelPlugins::Base
       parameters: [
         ::Parlour::RbiGenerator::Parameter.new(
           'new_values',
-          type: 'T.nilable(T::Hash(Symbol, T.untyped))'
+          type: 'T.nilable(T::Hash[Symbol, T.untyped])'
         )
       ],
-      returns: 'T::Hash(Symbol, T.untyped)',
-      class_method: true
+      returns: 'T::Hash[Symbol, T.untyped]'
     )
 
     custom_module_rbi.create_method(
@@ -55,8 +62,7 @@ class AttrJsonPlugin < SorbetRails::ModelPlugins::Base
           '**options',
           type: 'T.untyped'
         )
-      ],
-      class_method: true
+      ]
     )
   end
 
@@ -103,8 +109,8 @@ class AttrJsonPlugin < SorbetRails::ModelPlugins::Base
     return 'T.untyped' unless type.present?
 
     case type
-    when 'datetime' then 'DateTime'
-    else type.camelize
+    when 'datetime' then 'T.nilable(DateTime)'
+    else "T.nilable(#{type.camelize})"
     end
   end
 end
