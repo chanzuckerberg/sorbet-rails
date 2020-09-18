@@ -84,7 +84,7 @@ class AttrJsonPlugin < SorbetRails::ModelPlugins::Base
             type: 'T.untyped'
           )
         ],
-        returns: definition_type
+        returns: 'T.untyped'
     )
 
     custom_module_rbi.create_method(definition.name.to_s,
