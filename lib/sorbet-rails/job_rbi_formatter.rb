@@ -34,11 +34,13 @@ module SorbetRails
           "perform_later",
           parameters: parameters,
           class_method: true,
+          return_type: @job_class.name,
         )
         job_rbi.create_method(
           "perform_now",
           parameters: parameters,
           class_method: true,
+          return_type: @job_class.name,
         )
         # Override the signature for "set" so that we can support it
         # At run-time, this method returns a `ActiveJob::ConfiguredJob` but
