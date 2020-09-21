@@ -312,7 +312,11 @@ T.assert_type!(Wand.mythicals, T::Array[Wand])
 T.assert_type!(HogwartsAcceptanceMailer.notify(wizard), ActionMailer::MessageDelivery)
 
 # Jobs
-AwardHousePointHourglasses.perform_later(student: wizard, point: 10)
+T.assert_type!(
+  AwardHousePointHourglasses.perform_later(student: wizard, point: 10),
+  AwardHousePointHourglasses
+)
+
 AwardHousePointHourglasses.perform_now(student: wizard, point: 10)
 AwardHousePointHourglasses.
   set(queue: :daily, wait: 5.minutes).
