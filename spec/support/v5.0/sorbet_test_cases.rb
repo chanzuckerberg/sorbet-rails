@@ -316,7 +316,6 @@ T.assert_type!(
   AwardHousePointHourglasses.perform_later(student: wizard, point: 10),
   AwardHousePointHourglasses
 )
-
 AwardHousePointHourglasses.perform_now(student: wizard, point: 10)
 AwardHousePointHourglasses.
   set(queue: :daily, wait: 5.minutes).
@@ -324,7 +323,6 @@ AwardHousePointHourglasses.
 AwardHousePointHourglasses.
   set(priority: 10, wait_until: Time.now.tomorrow).
   perform_later(student: wizard, point: 10)
-
 
 T.assert_type!(wizard.broom_nimbus?, T::Boolean)
 T.assert_type!(wizard.color_brown_eyes?, T::Boolean)
