@@ -74,24 +74,43 @@ class AttrJsonPlugin < SorbetRails::ModelPlugins::Base
     .void
   end
   def add_methods_for_attributes(definition, custom_module_rbi)
+    # set methods can receive an argument of any type because attr_json will try
+    # to parse to the correct type. Example:
+    #
+    # class Post < ApplicationRecord
+    #   ...
+    #   attr_json :my_datetime, :datetime
+    # end
+    #
+    # > p = Post.new
+    # > (p.my_datetime = '2020-02-02').class
+    # => String
+    # > p.my_datetime.class
+    # => Time
+    #
+    # Also, the setter type return is the same as its argument type (before parse).
+    custom_module_rbi.create_method(
+      "#{definition.name}=",
+      parameters: [
+        ::Parlour::RbiGenerator::Parameter.new(
+          'value',
+          type: 'T.untyped'
+        )
+      ],
+      returns: 'T.untyped'
+    )
+
     definition_type = get_definition_type(definition)
 
     custom_module_rbi.create_method(
-        "#{definition.name}=",
-        parameters: [
-          ::Parlour::RbiGenerator::Parameter.new(
-            'value',
-            type: 'T.untyped'
-          )
-        ],
-        returns: 'T.untyped'
+      definition.name.to_s,
+      returns: definition_type
     )
 
-    custom_module_rbi.create_method(definition.name.to_s,
-                                    returns: definition_type)
-
-    custom_module_rbi.create_method("#{definition.name}?",
-                                    returns: 'T::Boolean')
+    custom_module_rbi.create_method(
+      "#{definition.name}?",
+      returns: 'T::Boolean'
+    )
   end
 
   sig { params(definition: ::AttrJson::AttributeDefinition).returns(String) }
@@ -109,7 +128,7 @@ class AttrJsonPlugin < SorbetRails::ModelPlugins::Base
     return 'T.untyped' unless type.present?
 
     case type
-    when 'datetime' then 'DateTime'
+    when 'datetime' then 'Time'
     when 'decimal' then 'BigDecimal'
     else type.camelize
     end
