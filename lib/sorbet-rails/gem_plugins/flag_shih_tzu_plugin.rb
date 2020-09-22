@@ -33,7 +33,7 @@ class FlagShihTzuPlugin < SorbetRails::ModelPlugins::Base
         .each do |column, flags|
           flags.keys
             .select { |flag_key| really_has_the_flag?(flag_key) }
-            .each  do |flag_key|
+            .each do |flag_key|
               add_methods_for_flag(column, flag_key, obj_custom_module_rbi)
             end
         end
@@ -45,38 +45,46 @@ class FlagShihTzuPlugin < SorbetRails::ModelPlugins::Base
   sig { params(custom_module_rbi: Parlour::RbiGenerator::ModuleNamespace).void }
   def add_class_methods(custom_module_rbi)
     # https://github.com/pboling/flag_shih_tzu/blob/6a3f1c5f62bd56aa932252eef935826c9674b096/lib/flag_shih_tzu.rb#L12
-    custom_module_rbi.create_method('flag_options',
-                                    returns: 'T::Hash[String, T::Hash[Symbol, T.untyped]]')
+    custom_module_rbi.create_method(
+      'flag_options',
+      returns: 'T::Hash[String, T::Hash[Symbol, T.untyped]]'
+    )
 
     # https://github.com/pboling/flag_shih_tzu/blob/6a3f1c5f62bd56aa932252eef935826c9674b096/lib/flag_shih_tzu.rb#L13
-    custom_module_rbi.create_method('flag_mapping',
-                                    returns: 'T::Hash[String, T::Hash[Symbol, Integer]]')
+    custom_module_rbi.create_method(
+      'flag_mapping',
+      returns: 'T::Hash[String, T::Hash[Symbol, Integer]]'
+    )
 
     # https://github.com/pboling/flag_shih_tzu/blob/6a3f1c5f62bd56aa932252eef935826c9674b096/lib/flag_shih_tzu.rb#L14
-    custom_module_rbi.create_method('flag_columns',
-                                    returns: 'T::Array[Symbol]')
+    custom_module_rbi.create_method(
+      'flag_columns',
+      returns: 'T::Array[Symbol]'
+    )
 
     # https://github.com/pboling/flag_shih_tzu#updating-flag-column-by-raw-sql
-    custom_module_rbi.create_method('set_flag_sql',
-                                    parameters: [
-                                      ::Parlour::RbiGenerator::Parameter.new(
-                                        'flag',
-                                        type: 'Symbol'
-                                      ),
-                                      ::Parlour::RbiGenerator::Parameter.new(
-                                        'value',
-                                        type: 'T::Boolean'
-                                      ),
-                                      ::Parlour::RbiGenerator::Parameter.new(
-                                        'colmn',
-                                        type: 'T.nilable(String)'
-                                      ),
-                                      ::Parlour::RbiGenerator::Parameter.new(
-                                        'custom_table_name',
-                                        type: 'T.any(String, Symbol)'
-                                      )
-                                    ],
-                                    returns: 'T::Hash[String, T::Hash[Symbol, T.untyped]]')
+    custom_module_rbi.create_method(
+      'set_flag_sql',
+      parameters: [
+        ::Parlour::RbiGenerator::Parameter.new(
+          'flag',
+          type: 'Symbol'
+        ),
+        ::Parlour::RbiGenerator::Parameter.new(
+          'value',
+          type: 'T::Boolean'
+        ),
+        ::Parlour::RbiGenerator::Parameter.new(
+          'colmn',
+          type: 'T.nilable(String)'
+        ),
+        ::Parlour::RbiGenerator::Parameter.new(
+          'custom_table_name',
+          type: 'T.any(String, Symbol)'
+        )
+      ],
+      returns: 'T::Hash[String, T::Hash[Symbol, T.untyped]]'
+    )
 
     if @model_class.flag_mapping.present?
       # https://github.com/pboling/flag_shih_tzu#support-for-manually-building-conditions
@@ -114,26 +122,36 @@ class FlagShihTzuPlugin < SorbetRails::ModelPlugins::Base
   # https://github.com/pboling/flag_shih_tzu#generated-boolean-patterned-instance-methods
   sig { params(column: String, custom_module_rbi: Parlour::RbiGenerator::ModuleNamespace).void }
   def add_methods_for_column(column, custom_module_rbi)
-    custom_module_rbi.create_method("all_#{column}",
-                                    returns: 'T::Array[Symbol]')
+    custom_module_rbi.create_method(
+      "all_#{column}",
+      returns: 'T::Array[Symbol]'
+    )
 
-    custom_module_rbi.create_method("selected_#{column}",
-                                    returns: 'T::Array[Symbol]')
+    custom_module_rbi.create_method(
+      "selected_#{column}",
+      returns: 'T::Array[Symbol]'
+    )
 
-    custom_module_rbi.create_method("select_all_#{column}",
-                                    returns: 'T::Array[Symbol]')
+    custom_module_rbi.create_method(
+      "select_all_#{column}",
+      returns: 'T::Array[Symbol]'
+    )
 
-    custom_module_rbi.create_method("unselect_all_#{column}",
-                                    returns: 'T::Array[Symbol]')
+    custom_module_rbi.create_method(
+      "unselect_all_#{column}",
+      returns: 'T::Array[Symbol]'
+    )
 
-    custom_module_rbi.create_method("selected_#{column}=",
-                                    parameters: [
-                                      ::Parlour::RbiGenerator::Parameter.new(
-                                        'chosen_flags',
-                                        type: 'T.nilable(T::Array[Symbol])'
-                                      )
-                                    ],
-                                    returns: 'T::Array[Symbol]')
+    custom_module_rbi.create_method(
+      "selected_#{column}=",
+      parameters: [
+        ::Parlour::RbiGenerator::Parameter.new(
+          'chosen_flags',
+          type: 'T.nilable(T::Array[Symbol])'
+        )
+      ],
+      returns: 'T::Array[Symbol]'
+    )
 
   end
 
