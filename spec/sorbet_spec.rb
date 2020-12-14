@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'open3'
 
-RSpec.describe 'sorbet' do
+RSpec.xdescribe 'sorbet' do
   let!(:harry) do
     Wizard.create!(
       name: 'Harry Potter',
@@ -42,11 +42,6 @@ RSpec.describe 'sorbet' do
       chdir: Rails.root.to_path,
     )
 
-    stdout, stderr, status = Open3.capture3(
-      'bundle', 'exec', 'srb', 'tc',
-      chdir: Rails.root.to_path,
-    )
-
     if status != 0
       puts "================================="
       puts "stdout #{stdout}"
@@ -54,6 +49,11 @@ RSpec.describe 'sorbet' do
       puts "srb-init doesn't produce clean build: #{status}. This will affect sorbet tests."
       puts "================================="
     end
+
+    stdout, stderr, status = Open3.capture3(
+      'bundle', 'exec', 'srb', 'tc',
+      chdir: Rails.root.to_path,
+    )
 
     # Ensure sorbet_test_cases.rb is set to `typed: true` since srb init may
     # set it to false.
