@@ -89,6 +89,9 @@ ActiveRecord::Schema.define(version: 2019_06_20_000014) do
     t.integer "hair_length"
     t.string "type", default: "Wizard", null: false
     t.integer "school_id"
+    t.text "owl_results"
+    t.text "pets"
+    t.text "patronus_characteristics"
   end
 
   add_foreign_key "wizards", "schools"

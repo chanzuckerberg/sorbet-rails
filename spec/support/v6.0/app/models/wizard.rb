@@ -47,6 +47,10 @@ class Wizard < ApplicationRecord
     blue: 2,
   }, _prefix: :color, _suffix: :eyes
 
+  serialize :owl_results, Hash
+  serialize :pets, Array
+  serialize :patronus_characteristics, JSON
+
   has_one :wand
   has_many :spell_books
   # habtm which is optional at the db level

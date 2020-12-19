@@ -305,6 +305,17 @@ T.assert_type!(Wizard::House::Hufflepuff, Wizard::House)
 T.assert_type!(Wizard::House::Ravenclaw, Wizard::House)
 T.assert_type!(Wizard::House::Slytherin, Wizard::House)
 
+# Serialization
+T.assert_type!(
+  wizard.owl_results,
+  T.any(T::Array[T.untyped], T::Boolean, Float, T::Hash[T.untyped, T.untyped], Integer, String)
+)
+T.assert_type!(
+  wizard.patronus_characteristics,
+  T.any(T::Array[T.untyped], T::Boolean, Float, T::Hash[String, T.untyped], Integer, String)
+)
+T.assert_type!(wizard.pets, T::Array[T.untyped])
+
 # Mythical plugin
 T.assert_type!(Wand.mythicals, T::Array[Wand])
 
