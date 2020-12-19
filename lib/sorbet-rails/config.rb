@@ -54,6 +54,7 @@ module SorbetRails
         :active_record_named_scope,
         :active_record_querying,
         :active_relation_where_not,
+        :active_record_serialization,
         :active_record_attribute,
         :active_record_assoc,
         :custom_finder_methods,

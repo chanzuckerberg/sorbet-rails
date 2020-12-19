@@ -180,6 +180,10 @@ def create_models
         blue: 2,
       }, _prefix: :color, _suffix: :eyes
 
+      serialize :owl_results, Hash
+      serialize :pets, Array
+      serialize :patronus_characteristics, JSON
+
       has_one :wand
       has_many :spell_books
       # habtm which is optional at the db level
@@ -413,6 +417,16 @@ def create_migrations
           t.references :school
           t.references :wizard
         end
+      end
+    end
+  RUBY
+
+  file "db/migrate/20190620000015_add_serialized_to_wizards.rb", <<~RUBY
+    class AddSerializedToWizards < #{migration_superclass}
+      def change
+        add_column :wizards, :owl_results, :text # Hash
+        add_column :wizards, :pets, :text # Array
+        add_column :wizards, :patronus_characteristics, :text # serialized as JSON, but not a JSON column type
       end
     end
   RUBY

@@ -29,5 +29,13 @@ module SorbetRails::ModelPlugins
       @model_class = T.let(model_class, T.class_of(ActiveRecord::Base))
       @available_classes = T.let(available_classes, T::Set[String])
     end
+
+    sig { params(column_name: String).returns(T.nilable(Class)) }
+    def serialization_coder_for_column(column_name)
+      column_type = @model_class.type_for_attribute(column_name)
+      return unless column_type.is_a?(ActiveRecord::Type::Serialized)
+
+      column_type.coder.try(:object_class) || Object
+    end
   end
 end
