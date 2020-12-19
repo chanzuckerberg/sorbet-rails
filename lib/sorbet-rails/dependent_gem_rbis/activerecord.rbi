@@ -12,6 +12,9 @@ class ActiveRecord::Base < Object
   sig { returns(T::Hash[String, T.untyped]) }
   def self.columns_hash; end
 
+  sig { params(column_name: String).returns(T.nilable(T.any(ActiveModel::Type::Value, ActiveRecord::Type::Serialized))) }
+  def self.type_for_attribute(column_name); end
+
   sig { returns(T::Hash[String, T.untyped]) }
   def self.reflections; end
 
