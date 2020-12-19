@@ -111,6 +111,35 @@ module Wizard::ActiveRelation_WhereNot
   def not(opts, *rest); end
 end
 
+module Wizard::GeneratedSerializationMethods
+  sig { returns(T.nilable(T::Hash[T.untyped, T.untyped])) }
+  def owl_results; end
+
+  sig { params(value: T.nilable(T::Hash[T.untyped, T.untyped])).void }
+  def owl_results=(value); end
+
+  sig { returns(T::Boolean) }
+  def owl_results?; end
+
+  sig { returns(T.nilable(T.any(T::Array[T.untyped], T::Boolean, Float, T::Hash[T.untyped, T.untyped], Integer, String))) }
+  def patronus_characteristics; end
+
+  sig { params(value: T.nilable(T.any(T::Array[T.untyped], T::Boolean, Float, T::Hash[T.untyped, T.untyped], Integer, String))).void }
+  def patronus_characteristics=(value); end
+
+  sig { returns(T::Boolean) }
+  def patronus_characteristics?; end
+
+  sig { returns(T.nilable(T::Array[T.untyped])) }
+  def pets; end
+
+  sig { params(value: T.nilable(T::Array[T.untyped])).void }
+  def pets=(value); end
+
+  sig { returns(T::Boolean) }
+  def pets?; end
+end
+
 module Wizard::GeneratedAttributeMethods
   sig { returns(T::Boolean) }
   def broom?; end
@@ -359,6 +388,7 @@ end
 
 class Wizard < ApplicationRecord
   include Wizard::EnumInstanceMethods
+  include Wizard::GeneratedSerializationMethods
   include Wizard::GeneratedAttributeMethods
   include Wizard::GeneratedAssociationMethods
   extend Wizard::CustomFinderMethods

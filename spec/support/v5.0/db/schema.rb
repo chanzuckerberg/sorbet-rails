@@ -87,6 +87,9 @@ ActiveRecord::Schema.define(version: 20190620000014) do
     t.integer  "hair_length"
     t.string   "type",               default: "Wizard", null: false
     t.integer  "school_id"
+    t.text "owl_results"
+    t.text "pets"
+    t.text "patronus_characteristics"
   end
 
 end
