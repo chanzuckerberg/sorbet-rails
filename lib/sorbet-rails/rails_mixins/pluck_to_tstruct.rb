@@ -3,6 +3,9 @@ require 'sorbet-runtime'
 
 module SorbetRails::PluckToTStruct
   extend T::Sig
+
+  NILCLASS_STRING = "NilClass".freeze
+
   sig {
     type_parameters(:U).
     params(
@@ -18,7 +21,8 @@ module SorbetRails::PluckToTStruct
       raise UnexpectedType.new("pluck_to_tstruct expects a tstruct subclass, given #{tstruct}")
     end
 
-    tstruct_keys = tstruct.props.keys
+    tstruct_props = tstruct.props
+    tstruct_keys = tstruct_props.keys
     associations_keys = associations.keys
     invalid_keys = associations_keys - tstruct_keys
 
@@ -33,8 +37,40 @@ module SorbetRails::PluckToTStruct
     keys_one = pluck_keys.size == 1
     pluck(*pluck_keys).map do |row|
       row = [row] if keys_one
-      value = Hash[tstruct_keys.zip(row)]
+      value = Hash[map_nil_values_to_default(tstruct_props, tstruct_keys.zip(row))]
       tstruct.new(value)
+    end
+  end
+
+  sig {params(type_object: T::Types::Base).returns(T::Boolean)}
+  private def nilable?(type_object)
+    return false unless type_object.is_a?(T::Types::Union)
+
+    type_object.types.any? { |type| type.name == NILCLASS_STRING }
+  end
+
+  sig {
+    params(
+      tstruct_props: T::Hash[Symbol, T.untyped],
+      zipped_rows: T::Array[[Symbol, T.untyped]]
+    )
+    .returns(T::Array[[Symbol, T.untyped]])
+  }
+  private def map_nil_values_to_default(tstruct_props, zipped_rows)
+    # we use the default value defined on a prop if
+    # 1. the plucked value is nil
+    # 2. the props type isn't nilable
+    # 3. the prop has a default
+    zipped_rows.map do |key, value|
+      next [key, value] unless value.nil?
+
+      type_object = tstruct_props.dig(key, :type_object)
+      next [key, value] if nilable?(type_object)
+
+      default = tstruct_props.dig(key, :default)
+      next [key, value] unless default
+
+      [key, default]
     end
   end
 
