@@ -64,11 +64,11 @@ module SorbetRails::PluckToTStruct
     zipped_rows.map do |key, value|
       next [key, value] unless value.nil?
 
-      type_object = tstruct_props.dig(key, :type_object)
-      next [key, value] if nilable?(type_object)
-
       default = tstruct_props.dig(key, :default)
       next [key, value] unless default
+
+      type_object = tstruct_props.dig(key, :type_object)
+      next [key, value] if nilable?(type_object)
 
       [key, default]
     end
