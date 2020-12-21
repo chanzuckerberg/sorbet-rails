@@ -1,6 +1,6 @@
 require 'rails_helper'
 require 'sorbet-rails/model_rbi_formatter'
-require "tstruct_comparable"
+require 'tstruct_comparable'
 
 RSpec.describe SorbetRails::PluckToTStruct do
   let!(:harry) do
