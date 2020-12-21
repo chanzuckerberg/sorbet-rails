@@ -74,7 +74,7 @@ RSpec.describe SorbetRails::PluckToTStruct do
 
     def ==(other)
       return false unless other.is_a?(self.class)
-      name == other.name && house == other.house
+      name == other.name && house == other.house && wand_wood_type == other.wand_wood_type
     end
 
     def eql?(other)
@@ -86,12 +86,30 @@ RSpec.describe SorbetRails::PluckToTStruct do
     const :name, String
     const :house, String
     const :parent_email, String, default: "hagrid@hogwarts.com"
+
+    def ==(other)
+      return false unless other.is_a?(self.class)
+      name == other.name && house == other.house && parent_email == other.parent_email
+    end
+
+    def eql?(other)
+      self == other
+    end
   end
 
   class WizardWithDefaultNilableParentEmailT < T::Struct
     const :name, String
     const :house, String
     const :parent_email, T.nilable(String), default: "hagrid@hogwarts.com"
+
+    def ==(other)
+      return false unless other.is_a?(self.class)
+      name == other.name && house == other.house && parent_email == other.parent_email
+    end
+
+    def eql?(other)
+      self == other
+    end
   end
 
   shared_examples 'pluck_to_tstruct' do |struct_type, expected_values|
