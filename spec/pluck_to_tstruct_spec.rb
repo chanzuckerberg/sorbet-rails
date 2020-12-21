@@ -1,5 +1,6 @@
 require 'rails_helper'
 require 'sorbet-rails/model_rbi_formatter'
+require "tstruct_comparable"
 
 RSpec.describe SorbetRails::PluckToTStruct do
   let!(:harry) do
@@ -41,75 +42,40 @@ RSpec.describe SorbetRails::PluckToTStruct do
   end
 
   class WizardName < T::Struct
+    include TStructComparable
+
     const :name, String
-
-    def ==(other)
-      return false unless other.is_a?(self.class)
-      name == other.name
-    end
-
-    def eql?(other)
-      self == other
-    end
   end
 
   class WizardT < T::Struct
+    include TStructComparable
+
     const :name, String
     const :house, String
-
-    def ==(other)
-      return false unless other.is_a?(self.class)
-      name == other.name && house == other.house
-    end
-
-    def eql?(other)
-      self == other
-    end
   end
 
   class WizardWithWandT < T::Struct
+    include TStructComparable
+
     const :name, String
     const :house, String
     const :wand_wood_type, String
-
-    def ==(other)
-      return false unless other.is_a?(self.class)
-      name == other.name && house == other.house && wand_wood_type == other.wand_wood_type
-    end
-
-    def eql?(other)
-      self == other
-    end
   end
 
   class WizardWithDefaultParentEmailT < T::Struct
+    include TStructComparable
+
     const :name, String
     const :house, String
     const :parent_email, String, default: "hagrid@hogwarts.com"
-
-    def ==(other)
-      return false unless other.is_a?(self.class)
-      name == other.name && house == other.house && parent_email == other.parent_email
-    end
-
-    def eql?(other)
-      self == other
-    end
   end
 
   class WizardWithDefaultNilableParentEmailT < T::Struct
+    include TStructComparable
+
     const :name, String
     const :house, String
     const :parent_email, T.nilable(String), default: "hagrid@hogwarts.com"
-
-    def ==(other)
-      return false unless other.is_a?(self.class)
-      name == other.name && house == other.house && parent_email == other.parent_email
-    end
-
-    def eql?(other)
-      self == other
-    end
   end
 
   shared_examples 'pluck_to_tstruct' do |struct_type, expected_values|
