@@ -82,6 +82,18 @@ RSpec.describe SorbetRails::PluckToTStruct do
     end
   end
 
+  class WizardWithDefaultParentEmailT < T::Struct
+    const :name, String
+    const :house, String
+    const :parent_email, String, default: "hagrid@hogwarts.com"
+  end
+
+  class WizardWithDefaultNilableParentEmailT < T::Struct
+    const :name, String
+    const :house, String
+    const :parent_email, T.nilable(String), default: "hagrid@hogwarts.com"
+  end
+
   shared_examples 'pluck_to_tstruct' do |struct_type, expected_values|
     it 'plucks correctly from ActiveRecord model' do
       plucked = Wizard.pluck_to_tstruct(TA[struct_type].new)
@@ -148,5 +160,35 @@ RSpec.describe SorbetRails::PluckToTStruct do
     ]
 
     it_should_behave_like 'pluck_to_tstruct with associations', WizardWithWandT, associations, expected
+  end
+
+  context 'uses default value if prop type is not nilable and has default value' do
+    it_should_behave_like 'pluck_to_tstruct', WizardWithDefaultParentEmailT, [
+      WizardWithDefaultParentEmailT.new(
+        name: "Harry Potter",
+        house: "Gryffindor",
+        parent_email: "hagrid@hogwarts.com"
+      ),
+      WizardWithDefaultParentEmailT.new(
+        name: "Hermione Granger",
+        house: "Gryffindor",
+        parent_email: "hagrid@hogwarts.com"
+      ),
+    ]
+  end
+
+  context 'doesnt use default value if prop type is nilable even with a default value' do
+    it_should_behave_like 'pluck_to_tstruct', WizardWithDefaultNilableParentEmailT, [
+      WizardWithDefaultNilableParentEmailT.new(
+        name: "Harry Potter",
+        house: "Gryffindor",
+        parent_email: nil
+      ),
+      WizardWithDefaultNilableParentEmailT.new(
+        name: "Hermione Granger",
+        house: "Gryffindor",
+        parent_email: nil
+      ),
+    ]
   end
 end
