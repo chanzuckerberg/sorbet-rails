@@ -59,8 +59,9 @@ module SorbetRails::PluckToTStruct
   private def map_nil_values_to_default(tstruct_props, zipped_rows)
     # we use the default value defined on a prop if
     # 1. the plucked value is nil
-    # 2. the props type isn't nilable
-    # 3. the prop has a default
+    # 2. the prop has a default
+    # 3. the prop's type isn't nilable
+
     zipped_rows.map do |key, value|
       next [key, value] unless value.nil?
 
