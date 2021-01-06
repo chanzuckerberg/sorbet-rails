@@ -130,6 +130,7 @@ class AttrJsonPlugin < SorbetRails::ModelPlugins::Base
     case type
     when 'datetime' then 'Time'
     when 'decimal' then 'BigDecimal'
+    when 'boolean' then 'T::Boolean'
     else type.camelize
     end
   end
