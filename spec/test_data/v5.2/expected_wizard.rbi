@@ -264,6 +264,9 @@ module Wizard::GeneratedAssociationMethods
   sig { params(value: T.nilable(::School)).void }
   def school=(value); end
 
+  sig { returns(T.nilable(::School)) }
+  def reload_school; end
+
   sig { returns(T.nilable(::ActiveStorage::Attachment)) }
   def school_photo_attachment; end
 
@@ -279,6 +282,9 @@ module Wizard::GeneratedAssociationMethods
   sig { params(value: T.nilable(::ActiveStorage::Attachment)).void }
   def school_photo_attachment=(value); end
 
+  sig { returns(T.nilable(::ActiveStorage::Attachment)) }
+  def reload_school_photo_attachment; end
+
   sig { returns(T.nilable(::ActiveStorage::Blob)) }
   def school_photo_blob; end
 
@@ -293,6 +299,9 @@ module Wizard::GeneratedAssociationMethods
 
   sig { params(value: T.nilable(::ActiveStorage::Blob)).void }
   def school_photo_blob=(value); end
+
+  sig { returns(T.nilable(::ActiveStorage::Blob)) }
+  def reload_school_photo_blob; end
 
   sig { returns(::SpellBook::ActiveRecord_Associations_CollectionProxy) }
   def spell_books; end
@@ -326,6 +335,9 @@ module Wizard::GeneratedAssociationMethods
 
   sig { params(value: T.nilable(::Wand)).void }
   def wand=(value); end
+
+  sig { returns(T.nilable(::Wand)) }
+  def reload_wand; end
 end
 
 module Wizard::CustomFinderMethods
