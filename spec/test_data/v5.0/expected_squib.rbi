@@ -264,6 +264,9 @@ module Squib::GeneratedAssociationMethods
   sig { params(value: T.nilable(::School)).void }
   def school=(value); end
 
+  sig { returns(T.nilable(::School)) }
+  def reload_school; end
+
   sig { returns(::SpellBook::ActiveRecord_Associations_CollectionProxy) }
   def spell_books; end
 
@@ -296,6 +299,9 @@ module Squib::GeneratedAssociationMethods
 
   sig { params(value: T.nilable(::Wand)).void }
   def wand=(value); end
+
+  sig { returns(T.nilable(::Wand)) }
+  def reload_wand; end
 end
 
 module Squib::CustomFinderMethods

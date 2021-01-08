@@ -167,6 +167,9 @@ module Wand::GeneratedAssociationMethods
 
   sig { params(value: ::Wizard).void }
   def wizard=(value); end
+
+  sig { returns(::Wizard) }
+  def reload_wizard; end
 end
 
 module Wand::CustomFinderMethods
