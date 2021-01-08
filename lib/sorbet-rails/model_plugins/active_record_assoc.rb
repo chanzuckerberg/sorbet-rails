@@ -67,6 +67,10 @@ class SorbetRails::ModelPlugins::ActiveRecordAssoc < SorbetRails::ModelPlugins::
       ],
       return_type: nil,
     )
+    assoc_module_rbi.create_method(
+      "reload_#{assoc_name}",
+      return_type: assoc_type,
+    )
   end
 
   sig { params(reflection: T.untyped).returns(T::Boolean) }
