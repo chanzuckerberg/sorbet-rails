@@ -42,6 +42,9 @@ module School::GeneratedAssociationMethods
 
   sig { params(value: ::Headmaster).void }
   def headmaster=(value); end
+
+  sig { returns(::Headmaster) }
+  def reload_headmaster; end
 end
 
 module School::CustomFinderMethods

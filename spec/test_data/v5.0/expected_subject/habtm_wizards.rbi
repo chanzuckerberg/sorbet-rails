@@ -43,6 +43,9 @@ module Subject::HABTM_Wizards::GeneratedAssociationMethods
   sig { params(value: T.nilable(::Subject)).void }
   def left_side=(value); end
 
+  sig { returns(T.nilable(::Subject)) }
+  def reload_left_side; end
+
   sig { returns(T.nilable(::Wizard)) }
   def wizard; end
 
@@ -57,6 +60,9 @@ module Subject::HABTM_Wizards::GeneratedAssociationMethods
 
   sig { params(value: T.nilable(::Wizard)).void }
   def wizard=(value); end
+
+  sig { returns(T.nilable(::Wizard)) }
+  def reload_wizard; end
 end
 
 module Subject::HABTM_Wizards::CustomFinderMethods

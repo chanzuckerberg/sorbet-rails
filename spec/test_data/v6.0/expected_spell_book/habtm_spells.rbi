@@ -43,6 +43,9 @@ module SpellBook::HABTM_Spells::GeneratedAssociationMethods
   sig { params(value: T.nilable(::SpellBook)).void }
   def left_side=(value); end
 
+  sig { returns(T.nilable(::SpellBook)) }
+  def reload_left_side; end
+
   sig { returns(::Spell) }
   def spell; end
 
@@ -57,6 +60,9 @@ module SpellBook::HABTM_Spells::GeneratedAssociationMethods
 
   sig { params(value: ::Spell).void }
   def spell=(value); end
+
+  sig { returns(::Spell) }
+  def reload_spell; end
 end
 
 module SpellBook::HABTM_Spells::CustomFinderMethods
