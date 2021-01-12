@@ -181,6 +181,7 @@ def create_models
       }, _prefix: :color, _suffix: :eyes
 
       serialize :owl_results, Hash
+      serialize :newt_subjects # no specific data type, uses the default YAML Object coder
       serialize :pets, Array
       serialize :patronus_characteristics, JSON
 
@@ -425,6 +426,7 @@ def create_migrations
     class AddSerializedToWizards < #{migration_superclass}
       def change
         add_column :wizards, :owl_results, :text # Hash
+        add_column :wizards, :newt_subjects, :text # generic
         add_column :wizards, :pets, :text # Array
         add_column :wizards, :patronus_characteristics, :text # serialized as JSON, but not a JSON column type
       end

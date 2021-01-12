@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(version: 2019_06_20_000015) do
     t.string "type", default: "Wizard", null: false
     t.integer "school_id"
     t.text "owl_results"
+    t.text "newt_subjects"
     t.text "pets"
     t.text "patronus_characteristics"
   end

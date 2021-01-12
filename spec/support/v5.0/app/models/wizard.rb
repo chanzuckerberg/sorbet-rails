@@ -48,6 +48,7 @@ class Wizard < ApplicationRecord
   }, _prefix: :color, _suffix: :eyes
 
   serialize :owl_results, Hash
+  serialize :newt_subjects # no specific data type, uses the default YAML Object coder
   serialize :pets, Array
   serialize :patronus_characteristics, JSON
 
