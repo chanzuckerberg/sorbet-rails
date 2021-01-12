@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190620000014) do
+ActiveRecord::Schema.define(version: 20190620000015) do
 
   create_table "headmasters", force: :cascade do |t|
     t.integer "school_id"
@@ -78,18 +78,19 @@ ActiveRecord::Schema.define(version: 20190620000014) do
     t.integer  "professor"
     t.string   "parent_email"
     t.text     "notes"
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
     t.string   "broom"
     t.integer  "quidditch_position"
     t.integer  "hair_color"
     t.integer  "eye_color"
     t.integer  "hair_length"
-    t.string   "type",               default: "Wizard", null: false
+    t.string   "type",                     default: "Wizard", null: false
     t.integer  "school_id"
-    t.text "owl_results"
-    t.text "pets"
-    t.text "patronus_characteristics"
+    t.text     "owl_results"
+    t.text     "newt_subjects"
+    t.text     "pets"
+    t.text     "patronus_characteristics"
   end
 
 end

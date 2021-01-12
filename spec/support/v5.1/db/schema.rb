@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190620000014) do
+ActiveRecord::Schema.define(version: 20190620000015) do
 
   create_table "headmasters", force: :cascade do |t|
     t.integer "school_id"
@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(version: 20190620000014) do
     t.string "type", default: "Wizard", null: false
     t.integer "school_id"
     t.text "owl_results"
+    t.text "newt_subjects"
     t.text "pets"
     t.text "patronus_characteristics"
   end

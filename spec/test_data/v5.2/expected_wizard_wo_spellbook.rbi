@@ -112,6 +112,15 @@ module Wizard::ActiveRelation_WhereNot
 end
 
 module Wizard::GeneratedSerializationMethods
+  sig { returns(T.nilable(T.any(T::Array[T.untyped], T::Boolean, Float, T::Hash[T.untyped, T.untyped], Integer, String))) }
+  def newt_subjects; end
+
+  sig { params(value: T.nilable(T.any(T::Array[T.untyped], T::Boolean, Float, T::Hash[T.untyped, T.untyped], Integer, String))).void }
+  def newt_subjects=(value); end
+
+  sig { returns(T::Boolean) }
+  def newt_subjects?; end
+
   sig { returns(T.nilable(T::Hash[T.untyped, T.untyped])) }
   def owl_results; end
 
