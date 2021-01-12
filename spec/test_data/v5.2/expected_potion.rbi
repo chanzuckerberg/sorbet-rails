@@ -22,6 +22,9 @@ module Potion::GeneratedAssociationMethods
 
   sig { params(value: T.nilable(::Wizard)).void }
   def wizard=(value); end
+
+  sig { returns(T.nilable(::Wizard)) }
+  def reload_wizard; end
 end
 
 module Potion::CustomFinderMethods

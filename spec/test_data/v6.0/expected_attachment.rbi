@@ -23,6 +23,9 @@ module ActiveStorage::Attachment::GeneratedAssociationMethods
   sig { params(value: ::ActiveStorage::Blob).void }
   def blob=(value); end
 
+  sig { returns(::ActiveStorage::Blob) }
+  def reload_blob; end
+
   sig { returns(T.untyped) }
   def record; end
 
@@ -37,6 +40,9 @@ module ActiveStorage::Attachment::GeneratedAssociationMethods
 
   sig { params(value: T.untyped).void }
   def record=(value); end
+
+  sig { returns(T.untyped) }
+  def reload_record; end
 end
 
 module ActiveStorage::Attachment::CustomFinderMethods

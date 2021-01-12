@@ -338,6 +338,9 @@ module ActiveStorage::Blob::GeneratedAssociationMethods
   sig { params(value: T.nilable(::ActiveStorage::Attachment)).void }
   def preview_image_attachment=(value); end
 
+  sig { returns(T.nilable(::ActiveStorage::Attachment)) }
+  def reload_preview_image_attachment; end
+
   sig { returns(T.nilable(::ActiveStorage::Blob)) }
   def preview_image_blob; end
 
@@ -352,6 +355,9 @@ module ActiveStorage::Blob::GeneratedAssociationMethods
 
   sig { params(value: T.nilable(::ActiveStorage::Blob)).void }
   def preview_image_blob=(value); end
+
+  sig { returns(T.nilable(::ActiveStorage::Blob)) }
+  def reload_preview_image_blob; end
 
   sig { returns(T.nilable(ActiveStorage::Attached::One)) }
   def preview_image; end
