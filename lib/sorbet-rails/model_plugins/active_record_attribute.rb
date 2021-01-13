@@ -25,7 +25,7 @@ class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugi
           column_def,
         )
       elsif serialization_coder_for_column(column_name)
-        next # handled by the ActiveRecordSerialization plugin
+        next # handled by the ActiveRecordSerializedAttribute plugin
       else
         column_type = type_for_column_def(column_def)
         attribute_module_rbi.create_method(

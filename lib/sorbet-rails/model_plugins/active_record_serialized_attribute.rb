@@ -1,13 +1,13 @@
 # typed: strict
 require ('sorbet-rails/model_plugins/base')
-class SorbetRails::ModelPlugins::ActiveRecordSerialization < SorbetRails::ModelPlugins::Base
+class SorbetRails::ModelPlugins::ActiveRecordSerializedAttribute < SorbetRails::ModelPlugins::Base
 
   sig { override.params(root: Parlour::RbiGenerator::Namespace).void }
   def generate(root)
     columns_hash = @model_class.table_exists? ? @model_class.columns_hash : {}
     return unless any_serialized_columns?(columns_hash)
 
-    serialize_module_name = self.model_module_name('GeneratedSerializationMethods')
+    serialize_module_name = self.model_module_name('GeneratedSerializedAttributeMethods')
     serialize_module_rbi = root.create_module(serialize_module_name)
 
     model_class_rbi = root.create_class(self.model_class_name)

@@ -111,7 +111,7 @@ module Wizard::ActiveRelation_WhereNot
   def not(opts, *rest); end
 end
 
-module Wizard::GeneratedSerializationMethods
+module Wizard::GeneratedSerializedAttributeMethods
   sig { returns(T.nilable(T.any(T::Array[T.untyped], T::Boolean, Float, T::Hash[T.untyped, T.untyped], Integer, String))) }
   def newt_subjects; end
 
@@ -397,7 +397,7 @@ end
 
 class Wizard < ApplicationRecord
   include Wizard::EnumInstanceMethods
-  include Wizard::GeneratedSerializationMethods
+  include Wizard::GeneratedSerializedAttributeMethods
   include Wizard::GeneratedAttributeMethods
   include Wizard::GeneratedAssociationMethods
   extend Wizard::CustomFinderMethods
