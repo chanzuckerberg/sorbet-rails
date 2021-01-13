@@ -6,7 +6,7 @@ require('sorbet-rails/model_plugins/active_relation_where_not')
 require('sorbet-rails/model_plugins/active_record_named_scope')
 require('sorbet-rails/model_plugins/active_record_attribute')
 require('sorbet-rails/model_plugins/active_record_assoc')
-require('sorbet-rails/model_plugins/active_record_serialization')
+require('sorbet-rails/model_plugins/active_record_serialized_attribute')
 require('sorbet-rails/model_plugins/custom_finder_methods')
 require('sorbet-rails/model_plugins/enumerable_collections')
 require('sorbet-rails/model_plugins/active_storage_methods')
@@ -48,8 +48,8 @@ module SorbetRails::ModelPlugins
       ActiveRecordQuerying
     when :active_relation_where_not
       ActiveRelationWhereNot
-    when :active_record_serialization
-      ActiveRecordSerialization
+    when :active_record_serialized_attribute
+      ActiveRecordSerializedAttribute
     when :active_record_attribute
       ActiveRecordAttribute
     when :active_record_assoc

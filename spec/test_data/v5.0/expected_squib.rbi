@@ -111,7 +111,7 @@ module Squib::ActiveRelation_WhereNot
   def not(opts, *rest); end
 end
 
-module Squib::GeneratedSerializationMethods
+module Squib::GeneratedSerializedAttributeMethods
   sig { returns(T.nilable(T.any(T::Array[T.untyped], T::Boolean, Float, T::Hash[T.untyped, T.untyped], Integer, String))) }
   def newt_subjects; end
 
@@ -361,7 +361,7 @@ end
 
 class Squib < Wizard
   include Squib::EnumInstanceMethods
-  include Squib::GeneratedSerializationMethods
+  include Squib::GeneratedSerializedAttributeMethods
   include Squib::GeneratedAttributeMethods
   include Squib::GeneratedAssociationMethods
   extend Squib::CustomFinderMethods
