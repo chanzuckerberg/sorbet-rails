@@ -308,7 +308,7 @@ T.assert_type!(Wizard::House::Slytherin, Wizard::House)
 # Serialization
 T.assert_type!(
   wizard.owl_results,
-  T.nilable(T.any(T::Hash[T.untyped, T.untyped]))
+  T.nilable(T::Hash[T.untyped, T.untyped])
 )
 T.assert_type!(
   wizard.newt_subjects,
