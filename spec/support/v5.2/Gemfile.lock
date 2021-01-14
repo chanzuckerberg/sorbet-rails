@@ -1,7 +1,7 @@
 PATH
   remote: ../../..
   specs:
-    sorbet-rails (0.7.2)
+    sorbet-rails (0.7.3)
       method_source (>= 0.9.2)
       parlour (>= 4.0.1)
       parser (>= 2.7)
@@ -84,12 +84,12 @@ GEM
     nio4r (2.5.2)
     nokogiri (1.10.9)
       mini_portile2 (~> 2.4.0)
-    parlour (4.0.1)
+    parlour (5.0.0)
       commander (~> 4.5)
       parser
       rainbow (~> 3.0)
       sorbet-runtime (>= 0.5)
-    parser (2.7.2.0)
+    parser (3.0.0.0)
       ast (~> 2.4.1)
     polyfill (1.9.0)
     puma (3.12.6)
@@ -125,7 +125,7 @@ GEM
     safe_type (1.1.1)
     sorbet (0.5.5480)
       sorbet-static (= 0.5.5480)
-    sorbet-coerce (0.2.7)
+    sorbet-coerce (0.3.0)
       polyfill (~> 1.8)
       safe_type (~> 1.1, >= 1.1.1)
       sorbet (>= 0.4.4704)
