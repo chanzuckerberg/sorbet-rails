@@ -137,16 +137,20 @@ class SorbetRails::ModelPlugins::ActiveRecordAssoc < SorbetRails::ModelPlugins::
       assoc_name.to_s,
       return_type: relation_class,
     )
-    id_column = reflection.klass.primary_key
-    # For DB views, the PK column would not exist.
-    id_column = reflection.klass.columns_hash[id_column] if id_column
-    if id_column && !assoc_should_be_untyped?(reflection)
+    unless assoc_should_be_untyped?(reflection)
+      id_type = "T.untyped"
+
       if reflection.klass.table_exists?
-        # Normally the id_type is an Integer, but it could be a String if using
-        # UUIDs.
-        id_type = type_for_column_def(id_column).to_s
-      else
-        id_type = "T.untyped"
+        # For DB views, the PK column would not exist.
+        id_column = reflection.klass.primary_key
+
+        if id_column
+          id_column_def = reflection.klass.columns_hash[id_column]
+
+          # Normally the id_type is an Integer, but it could be a String if using
+          # UUIDs.
+          id_type = type_for_column_def(id_column_def).to_s if id_column_def
+        end
       end
 
       assoc_module_rbi.create_method(
