@@ -1,4 +1,4 @@
-# typed: strong
+# typed: strict
 class Headmaster < ApplicationRecord
   belongs_to :school, required: false
   belongs_to :wizard, optional: true
