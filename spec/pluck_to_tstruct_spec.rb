@@ -1,5 +1,6 @@
 require 'rails_helper'
 require 'sorbet-rails/model_rbi_formatter'
+require 'tstruct_comparable'
 
 RSpec.describe SorbetRails::PluckToTStruct do
   let!(:harry) do
@@ -41,45 +42,40 @@ RSpec.describe SorbetRails::PluckToTStruct do
   end
 
   class WizardName < T::Struct
+    include TStructComparable
+
     const :name, String
-
-    def ==(other)
-      return false unless other.is_a?(self.class)
-      name == other.name
-    end
-
-    def eql?(other)
-      self == other
-    end
   end
 
   class WizardT < T::Struct
+    include TStructComparable
+
     const :name, String
     const :house, String
-
-    def ==(other)
-      return false unless other.is_a?(self.class)
-      name == other.name && house == other.house
-    end
-
-    def eql?(other)
-      self == other
-    end
   end
 
   class WizardWithWandT < T::Struct
+    include TStructComparable
+
     const :name, String
     const :house, String
     const :wand_wood_type, String
+  end
 
-    def ==(other)
-      return false unless other.is_a?(self.class)
-      name == other.name && house == other.house
-    end
+  class WizardWithDefaultParentEmailT < T::Struct
+    include TStructComparable
 
-    def eql?(other)
-      self == other
-    end
+    const :name, String
+    const :house, String
+    const :parent_email, String, default: "hagrid@hogwarts.com"
+  end
+
+  class WizardWithDefaultNilableParentEmailT < T::Struct
+    include TStructComparable
+
+    const :name, String
+    const :house, String
+    const :parent_email, T.nilable(String), default: "hagrid@hogwarts.com"
   end
 
   shared_examples 'pluck_to_tstruct' do |struct_type, expected_values|
@@ -148,5 +144,35 @@ RSpec.describe SorbetRails::PluckToTStruct do
     ]
 
     it_should_behave_like 'pluck_to_tstruct with associations', WizardWithWandT, associations, expected
+  end
+
+  context 'uses default value if prop type is not nilable and has default value' do
+    it_should_behave_like 'pluck_to_tstruct', WizardWithDefaultParentEmailT, [
+      WizardWithDefaultParentEmailT.new(
+        name: "Harry Potter",
+        house: "Gryffindor",
+        parent_email: "hagrid@hogwarts.com"
+      ),
+      WizardWithDefaultParentEmailT.new(
+        name: "Hermione Granger",
+        house: "Gryffindor",
+        parent_email: "hagrid@hogwarts.com"
+      ),
+    ]
+  end
+
+  context 'doesnt use default value if prop type is nilable even with a default value' do
+    it_should_behave_like 'pluck_to_tstruct', WizardWithDefaultNilableParentEmailT, [
+      WizardWithDefaultNilableParentEmailT.new(
+        name: "Harry Potter",
+        house: "Gryffindor",
+        parent_email: nil
+      ),
+      WizardWithDefaultNilableParentEmailT.new(
+        name: "Hermione Granger",
+        house: "Gryffindor",
+        parent_email: nil
+      ),
+    ]
   end
 end

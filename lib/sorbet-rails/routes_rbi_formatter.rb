@@ -28,6 +28,10 @@ class SorbetRails::RoutesRbiFormatter
       klass.create_include('GeneratedUrlHelpers')
     end
 
+    @parlour.root.create_class('ActionController::API') do |klass|
+      klass.create_include('GeneratedUrlHelpers')
+    end
+
     @parlour.root.create_module('ActionView::Helpers') do |mod|
       mod.create_include('GeneratedUrlHelpers')
     end
