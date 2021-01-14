@@ -1,3 +1,4 @@
+# typed: true
 class AddSerializedToWizards < ActiveRecord::Migration[5.2]
   def change
     add_column :wizards, :owl_results, :text # Hash
