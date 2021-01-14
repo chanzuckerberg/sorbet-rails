@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'open3'
 
-RSpec.xdescribe 'sorbet' do
+RSpec.describe 'sorbet' do
   let!(:harry) do
     Wizard.create!(
       name: 'Harry Potter',
