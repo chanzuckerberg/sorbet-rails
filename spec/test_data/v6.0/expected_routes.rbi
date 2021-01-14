@@ -5,6 +5,10 @@ class ActionController::Base
   include GeneratedUrlHelpers
 end
 
+class ActionController::API
+  include GeneratedUrlHelpers
+end
+
 module ActionView::Helpers
   include GeneratedUrlHelpers
 end
