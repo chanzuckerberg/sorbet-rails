@@ -42,7 +42,7 @@ class SorbetRails::ModelRbiFormatter
     end
 
     generator = Parlour::RbiGenerator.new(break_params: 3)
-    run_plugins(plugin_instances, generator, allow_failure: true)
+    run_plugins(plugin_instances, generator)
     # Generate the base after the plugins because when ConflictResolver merge the modules,
     # it'll put the modules at the last position merged. Putting the base stuff
     # last will keep the order consistent and minimize changes when new plugins are added.
@@ -115,11 +115,11 @@ class SorbetRails::ModelRbiFormatter
     params(
       plugins: T::Array[Parlour::Plugin],
       generator: Parlour::RbiGenerator,
-      allow_failure: T::Boolean,
     ).
     void
   }
-  def run_plugins(plugins, generator, allow_failure: true)
+  def run_plugins(plugins, generator)
+    allow_failure = ENV["SBR_DEBUG_MODE"] == "true"
     plugins.each do |plugin|
       begin
         generator.current_plugin = plugin
