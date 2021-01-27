@@ -43,8 +43,8 @@ Add `sorbet-rails` to the [`:default` group](https://bundler.io/v2.0/guides/grou
 
 4. Update hidden-definition files and automatically upgrade each file's typecheck level:
 ```sh
-❯ srb rbi hidden-definitions
-❯ srb rbi suggest-typed
+❯ bundle exec srb rbi hidden-definitions
+❯ bundle exec srb rbi suggest-typed
 ```
 Because we've generated RBI files for routes, models, and helpers, a lot more files should be typecheckable now. Many methods in `hidden.rbi` may be removed because they are now typed.
 
