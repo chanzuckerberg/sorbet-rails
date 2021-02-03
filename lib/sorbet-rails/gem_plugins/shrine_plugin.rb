@@ -45,7 +45,7 @@ class ShrinePlugin < SorbetRails::ModelPlugins::Base
             parameters: [
               ::Parlour::RbiGenerator::Parameter.new(
                 "url",
-                type: T.untyped # TODO likely T.nilable(String)
+                type: "T.untyped" # TODO likely T.nilable(String)
               ),
             ],
           )
