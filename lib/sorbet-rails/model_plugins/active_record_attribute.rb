@@ -13,6 +13,7 @@ class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugi
     model_class_rbi = root.create_class(self.model_class_name)
     model_class_rbi.create_include(attribute_module_name)
     model_defined_enums = @model_class.defined_enums
+    model_descendants = @model_class.descendants
 
     columns_hash.sort.each do |column_name, column_def|
       if model_defined_enums.has_key?(column_name)
@@ -24,6 +25,8 @@ class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugi
           column_name,
           column_def,
         )
+      elsif model_descendants.any? && column_name == :type # STI
+        generate_sti_type(model_descendants, attribute_module_rbi)
       elsif serialization_coder_for_column(column_name)
         next # handled by the ActiveRecordSerializedAttribute plugin
       else
@@ -46,6 +49,40 @@ class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugi
         return_type: "T::Boolean",
       )
     end
+  end
+
+  sig {
+    params(
+      descendants: T::Array[String],
+      attribute_module_rbi:  Parlour::RbiGenerator::Namespace,
+    ).void
+  }
+  def generate_sti_type(descendants, attribute_module_rbi)
+    enum_name = 'TypeSTI'
+    types = descendants.map { |model| model.split('::').last }
+    root.create_class(model_class_name) do |model_class|
+      # define T::Enum class & values
+      t_enum_values = @model_class.gen_typed_enum_values(types)
+      model_class.create_enum_class(
+        enum_name,
+        enums: t_enum_values.map { |k, v| [v, "%q{#{k}}"] },
+      )
+    end
+    type = "#{model_class_name}::#{enum_name}"
+
+    attribute_module_rbi.create_method(
+      'type',
+      return_type: type,
+    )
+    attribute_module_rbi.create_method(
+      "type=",
+      parameters: [Parameter.new("value", type: type)],
+      return_type: nil
+    )
+    attribute_module_rbi.create_method(
+      "type?",
+      return_type: "T::Boolean",
+    )
   end
 
   sig {
