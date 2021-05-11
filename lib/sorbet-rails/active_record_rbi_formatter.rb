@@ -38,10 +38,10 @@ class SorbetRails::ActiveRecordRbiFormatter
 
     parlour.root.create_class('ActiveRecord::Relation') do |class_rbi|
       class_rbi.create_include("Enumerable")
-      class_rbi.create_constant(
-        "Elem",
-        value: "type_member(fixed: T.untyped)",
-      )
+      # class_rbi.create_constant(
+      #   "Elem",
+      #   value: "type_member(fixed: T.untyped)",
+      # )
 
       create_elem_specific_query_methods(class_rbi, type: 'Elem', class_method: false)
       create_general_query_methods(class_rbi, class_method: false)
