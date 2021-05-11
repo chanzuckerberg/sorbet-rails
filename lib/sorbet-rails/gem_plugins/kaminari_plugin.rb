@@ -43,5 +43,25 @@ class KaminariPlugin < SorbetRails::ModelPlugins::Base
       return_type: "Integer",
       class_method: true,
     )
+
+    # https://github.com/kaminari/kaminari/blob/c5186f5d9b7f23299d115408e62047447fd3189d/kaminari-core/lib/kaminari/models/page_scope_methods.rb#L82
+    model_relation_rbi = root.create_class(self.model_relation_class_name)
+    model_relation_rbi.create_method(
+      'last_page?',
+      parameters: nil,
+      return_type: 'T::Boolean',
+    )
+    model_assoc_relation_rbi = root.create_class(self.model_assoc_relation_class_name)
+    model_assoc_relation_rbi.create_method(
+      'last_page?',
+      parameters: nil,
+      return_type: 'T::Boolean',
+    )
+    collection_proxy_rbi = root.create_class(self.model_assoc_proxy_class_name)
+    collection_proxy_rbi.create_method(
+      'last_page?',
+      parameters: nil,
+      return_type: 'T::Boolean',
+    )
   end
 end
