@@ -3,7 +3,6 @@
 # Please rerun bundle exec rake rails_rbi:active_record to regenerate.
 class ActiveRecord::Relation
   include Enumerable
-  Elem = type_member(fixed: T.untyped)
 
   sig { params(args: T.untyped).returns(Elem) }
   def find(*args); end
