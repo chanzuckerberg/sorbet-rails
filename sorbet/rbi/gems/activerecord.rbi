@@ -884,7 +884,7 @@ class ActiveRecord::Type::UnsignedInteger < ActiveModel::Type::Integer
   def max_value; end
   def min_value; end
 end
-class ActiveRecord::Type::Serialized < Anonymous_Delegator_14
+class ActiveRecord::Type::Serialized < ActiveModel::Type::Value
   def accessor; end
   def assert_valid_value(value); end
   def changed_in_place?(raw_old_value, value); end
