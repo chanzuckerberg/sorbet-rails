@@ -36,7 +36,6 @@ RSpec.configure do |config|
     next if ENV["DISABLE_DATABASE_CLEANER"] == 'true'
     DatabaseCleaner.clean_with(:truncation, {
       pre_count: true,
-      reset_ids: false,
       except: %w(ar_internal_metadata),
     })
   end
@@ -46,10 +45,7 @@ RSpec.configure do |config|
       example.run
       next
     end
-    DatabaseCleaner.strategy = :truncation, {
-      pre_count: true,
-      reset_ids: false,
-    }
+    DatabaseCleaner.strategy = :truncation, { pre_count: true }
     DatabaseCleaner.start
     example.run
     DatabaseCleaner.clean
