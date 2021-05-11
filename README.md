@@ -43,8 +43,8 @@ Add `sorbet-rails` to the [`:default` group](https://bundler.io/v2.0/guides/grou
 
 4. Update hidden-definition files and automatically upgrade each file's typecheck level:
 ```sh
-❯ srb rbi hidden-definitions
-❯ srb rbi suggest-typed
+❯ bundle exec srb rbi hidden-definitions
+❯ bundle exec srb rbi suggest-typed
 ```
 Because we've generated RBI files for routes, models, and helpers, a lot more files should be typecheckable now. Many methods in `hidden.rbi` may be removed because they are now typed.
 
@@ -523,6 +523,7 @@ These are the currently-supported gems and their symbolized names:
 | [active_flag]| `:active_flag` |
 | [Paperclip]  | `:paperclip` |
 | [AttrJson]  | `:attr_json` |
+| [FlagShihTzu]  | `:flag_shih_tzu` |
 
 You can also configure the core model plugins if needed. The default plugins are defined in the [config](https://github.com/chanzuckerberg/sorbet-rails/blob/master/lib/sorbet-rails/config.rb). For the full list of plugin symbols, check out [here](https://github.com/chanzuckerberg/sorbet-rails/blob/master/lib/sorbet-rails/model_plugins/plugins.rb).
 
@@ -535,6 +536,7 @@ You can also configure the core model plugins if needed. The default plugins are
 [active_flag]: https://github.com/kenn/active_flag
 [Paperclip]: https://github.com/thoughtbot/paperclip
 [AttrJson]: https://github.com/jrochkind/attr_json
+[FlagShihTzu]: https://github.com/pboling/flag_shih_tzu
 
 ### Customize Generation Class
 
