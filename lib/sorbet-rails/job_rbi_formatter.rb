@@ -80,7 +80,7 @@ module SorbetRails
 
     sig { returns(String) }
     def generate_rbi
-      puts "-- Generate sigs for mailer #{@job_class.name} --"
+      puts "-- Generate sigs for ActiveJob #{@job_class.name} --"
       populate_rbi
       @rbi_generator.rbi
     end
