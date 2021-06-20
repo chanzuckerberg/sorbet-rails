@@ -1,4 +1,4 @@
-# typed: strong
+# typed: false
 class AasmPlugin < SorbetRails::ModelPlugins::Base
   sig { override.params(root: Parlour::RbiGenerator::Namespace).void }
   def generate(root)
