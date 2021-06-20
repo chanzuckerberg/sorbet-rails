@@ -87,6 +87,9 @@ module SorbetRails::ModelPlugins
     when :flag_shih_tzu
       require('sorbet-rails/gem_plugins/flag_shih_tzu_plugin')
       FlagShihTzuPlugin
+    when :aasm
+      require('sorbet-rails/gem_plugins/aasm_plugin')
+      AasmPlugin
     else
       raise UnrecognizedPluginName.new(
         "Unrecognized plugin with name: #{plugin_name}. Please check available plugins in the

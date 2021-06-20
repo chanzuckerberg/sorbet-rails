@@ -2,8 +2,8 @@
 #   srb rbi todo
 
 # typed: strong
+module ::AASM; end
 module ::Anonymous_Delegator_13; end
-module ::Anonymous_Delegator_14; end
 module ::Anonymous_Delegator_18; end
 module ::Anonymous_Delegator_3; end
 module ::AttrJson::AttributeDefinition; end
