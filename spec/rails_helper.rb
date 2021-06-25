@@ -19,6 +19,8 @@ rails_folder =
     "v5.1"
   when "6.0"
     "v6.0"
+  when "6.1"
+    "v6.1"
   else
     "v5.2"
   end
