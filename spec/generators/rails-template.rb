@@ -127,7 +127,7 @@ def create_models
 
   # A nasty hack to add has_one_attached and has_many_attached to the models/wizard.rb file.
   attachments = nil
-  if ['5.2', '6.0'].include?(ENV["RAILS_VERSION"])
+  if ['5.2', '6.0', '6.1'].include?(ENV["RAILS_VERSION"])
     attachments = "has_one_attached :school_photo\n  has_many_attached :hats"
   end
 
