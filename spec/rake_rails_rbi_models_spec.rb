@@ -29,12 +29,19 @@ RSpec.describe 'rake rails_rbi:models', type: :task do
       ]
     )
     if Object.const_defined?('ActiveStorage')
+      files = [
+        'attachment.rbi',
+        'blob.rbi',
+      ]
+      if ENV["RAILS_VERSION"] == '6.1'
+        files += [
+          'record.rbi',
+          'variant_record.rbi',
+        ]
+      end
       expect_files(
         base_dir: generated_dir_path.join('active_storage'),
-        files: [
-          'attachment.rbi',
-          'blob.rbi',
-        ],
+        files: files,
       )
     end
     if Object.const_defined?('ActiveRecord::InternalMetadata')

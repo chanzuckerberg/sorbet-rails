@@ -1,0 +1,24 @@
+sorbet_test_cases.rb:124: Argument does not have asserted type `T::Enumerable[Wizard::ActiveRecord_Relation]` https://srb.help/7007
+     124 |T.assert_type!(Wizard.all.in_batches, T::Enumerable[Wizard::ActiveRecord_Relation])
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  Got `ActiveRecord::Batches::BatchEnumerator` originating from:
+    sorbet_test_cases.rb:124:
+     124 |T.assert_type!(Wizard.all.in_batches, T::Enumerable[Wizard::ActiveRecord_Relation])
+                         ^^^^^^^^^^^^^^^^^^^^^
+
+sorbet_test_cases.rb:188: Argument does not have asserted type `T::Enumerable[SpellBook::ActiveRecord_AssociationRelation]` https://srb.help/7007
+     188 |T.assert_type!(spell_books.in_batches, T::Enumerable[SpellBook::ActiveRecord_AssociationRelation])
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  Got `ActiveRecord::Batches::BatchEnumerator` originating from:
+    sorbet_test_cases.rb:188:
+     188 |T.assert_type!(spell_books.in_batches, T::Enumerable[SpellBook::ActiveRecord_AssociationRelation])
+                         ^^^^^^^^^^^^^^^^^^^^^^
+
+sorbet_test_cases.rb:260: Argument does not have asserted type `T::Enumerable[SpellBook::ActiveRecord_AssociationRelation]` https://srb.help/7007
+     260 |T.assert_type!(spell_books_query.in_batches, T::Enumerable[SpellBook::ActiveRecord_AssociationRelation])
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  Got `ActiveRecord::Batches::BatchEnumerator` originating from:
+    sorbet_test_cases.rb:260:
+     260 |T.assert_type!(spell_books_query.in_batches, T::Enumerable[SpellBook::ActiveRecord_AssociationRelation])
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Errors: 3

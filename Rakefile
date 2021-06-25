@@ -10,11 +10,22 @@ namespace :update_spec do
 
   desc "Generate Rails apps for all versions."
   task :all do |t, args|
+    Rake::Task['update_spec:v6_1'].invoke
     Rake::Task['update_spec:v6_0'].invoke
     Rake::Task['update_spec:v5_2'].invoke
   end
 
-  desc "Delete the Rails 6 spec directory and regenerate it."
+  desc "Delete the Rails 6.1 spec directory and regenerate it."
+  task :v6_1 do |t, args|
+    Bundler.with_clean_env do
+      FileUtils.rm_rf 'spec/support/v6.1' if File.directory?('spec/support/v6.1')
+      system("gem install rails -v 6.1.4")
+      system("rails _6.1.4_ -v")
+      system("RAILS_VERSION='6.1' rails _6.1.4_ new --template spec/generators/rails-template.rb spec/support/v6.0 --skip-javascript --skip-action-cable --skip-test --skip-sprockets --skip-spring --skip-bootsnap --skip-listen")
+    end
+  end
+
+  desc "Delete the Rails 6.0 spec directory and regenerate it."
   task :v6_0 do |t, args|
     Bundler.with_clean_env do
       FileUtils.rm_rf 'spec/support/v6.0' if File.directory?('spec/support/v6.0')
