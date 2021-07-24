@@ -15,7 +15,7 @@ module ActiveRecord::Sanitization::ClassMethods
   alias :sanitize_sql :sanitize_sql_for_conditions
 
   sig { params(assignments: T.any(T::Array[T.untyped], T::Hash[T.untyped, T.untyped], String), default_table_name: String).returns(String) }
-  def sanitize_sql_for_assignment(assignments, default_table_name)
+  def sanitize_sql_for_assignment(assignments, default_table_name = table_name)
   end
 
   sig { params(condition: T.any(T::Array[T.untyped], String)).returns(String) }
