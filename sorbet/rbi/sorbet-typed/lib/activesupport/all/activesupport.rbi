@@ -5,7 +5,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/edit/master/lib/activesupport/all/activesupport.rbi
 #
-# typed: false
+# typed: strong
 
 module ActiveSupport
   sig { params(kind: Symbol, blk: T.proc.bind(T.untyped).void).void }
@@ -15,6 +15,9 @@ end
 class Object
   sig { params(duck: T.any(String, Symbol)).returns(T::Boolean) }
   def acts_like?(duck); end
+
+  sig { params(options: T.untyped).returns(T::Hash[String, T.untyped]) }
+  def as_json(options = nil); end
 
   sig {returns(T::Boolean)}
   def blank?; end
@@ -39,6 +42,11 @@ class Object
 
   sig { returns(T::Boolean) }
   def present?; end
+
+  def require_dependency(file_name, message = "No such file to load -- %s.rb"); end
+
+  sig { params(options: T.untyped).returns(String) }
+  def to_json(options = nil); end
 
   sig { returns(String) }
   def to_param; end
@@ -84,8 +92,14 @@ class Method
 end
 
 class NilClass
-  sig { returns(T::Boolean) }
+  sig { returns(TrueClass) }
   def duplicable?; end
+
+  sig { returns(NilClass) }
+  def dup; end
+
+  sig { returns(NilClass) }
+  def deep_dup; end
 
   sig do
     params(
@@ -104,6 +118,18 @@ class NilClass
     ).returns(NilClass)
   end
   def try!(method_name = nil, *args, &b); end
+
+  sig { returns(NilClass) }
+  def presence; end
+
+  sig { returns(FalseClass) }
+  def present?; end
+
+  sig { returns(TrueClass) }
+  def blank?; end
+
+  sig { returns(NilClass) }
+  def to_param; end
 end
 
 class String
@@ -182,8 +208,8 @@ class String
   sig { returns(ActiveSupport::Multibyte::Chars) }
   def mb_chars; end
 
-  sig { params(separator: String, preserve_case: T::Boolean).returns(String) }
-  def parameterize(separator: "-", preserve_case: false); end
+  sig { params(separator: String, preserve_case: T::Boolean, locale: Symbol).returns(String) }
+  def parameterize(separator: "-", preserve_case: false, locale: nil); end
 
   sig { params(count: T.nilable(Integer), locale: Symbol).returns(String) }
   def pluralize(count = nil, locale = :en); end
@@ -226,13 +252,13 @@ class String
   sig { params(position: Integer).returns(String) }
   def to(position); end
 
-  sig { returns(Date) }
+  sig { returns(T.nilable(Date)) }
   def to_date; end
 
-  sig { returns(DateTime) }
+  sig { returns(T.nilable(DateTime)) }
   def to_datetime; end
 
-  sig { params(form: Symbol).returns(Time) }
+  sig { params(form: Symbol).returns(T.nilable(Time)) }
   def to_time(form = :local); end
 
   sig { params(truncate_at: Integer, separator: T.nilable(T.any(String, Regexp)), omission: String).returns(String) }
@@ -258,13 +284,13 @@ class Array
   sig { returns(T::Hash[T.untyped, T.untyped]) }
   def extract_options!; end
 
-  sig { returns(Elem) }
+  sig { returns(T.nilable(Elem)) }
   def fifth; end
 
-  sig { returns(Elem) }
+  sig { returns(T.nilable(Elem)) }
   def forty_two; end
 
-  sig { returns(Elem) }
+  sig { returns(T.nilable(Elem)) }
   def fourth; end
 
   sig { params(position: Integer).returns(T::Array[T.untyped]) }
@@ -279,10 +305,10 @@ class Array
   sig { returns(T.untyped) }
   def inquiry; end
 
-  sig { returns(Elem) }
+  sig { returns(T.nilable(Elem)) }
   def second; end
 
-  sig { returns(Elem) }
+  sig { returns(T.nilable(Elem)) }
   def second_to_last; end
 
   sig do
@@ -293,10 +319,10 @@ class Array
   end
   def split(value = nil, &blk); end
 
-  sig { returns(Elem) }
+  sig { returns(T.nilable(Elem)) }
   def third; end
 
-  sig { returns(Elem) }
+  sig { returns(T.nilable(Elem)) }
   def third_to_last; end
 
   sig { params(position: Integer).returns(T::Array[T.untyped]) }
@@ -304,7 +330,7 @@ class Array
 
   # to_default_s is an alias of the core method 'to_s'
   sig {returns(String)}
-  def to_defaul_s; end
+  def to_default_s; end
 
   sig { params(format: Symbol).returns(String) }
   def to_formatted_s(format = :default); end
@@ -330,12 +356,22 @@ class Array
 
   sig { params(elements: T.untyped).returns(T.untyped) }
   def without(*elements); end
+
+  sig { params(object: T.untyped).returns(T::Array[T.untyped]) }
+  def self.wrap(object); end
+end
+
+class ActiveSupport::BacktraceCleaner
+  sig { params(backtrace: T::Array[String], kind: Symbol).returns(T::Array[String]) }
+  def clean(backtrace, kind = :silent); end
 end
 
 module ActiveSupport::NumberHelper
+  extend(::ActiveSupport::NumberHelper)
+
   sig do
     params(
-      number: T.any(Integer, Float, String),
+      number: T.any(Numeric, String),
       locale: Symbol,
       precision: T.nilable(Integer),
       unit: String,
@@ -349,7 +385,7 @@ module ActiveSupport::NumberHelper
 
   sig do
     params(
-      number: T.any(Integer, Float, String),
+      number: T.any(Numeric, String),
       locale: Symbol,
       delimiter: String,
       separator: String,
@@ -360,7 +396,7 @@ module ActiveSupport::NumberHelper
 
   sig do
     params(
-      number: T.any(Integer, Float, String),
+      number: T.any(Numeric, String),
       locale: Symbol,
       precision: T.nilable(Integer),
       significant: T::Boolean,
@@ -375,7 +411,7 @@ module ActiveSupport::NumberHelper
 
   sig do
     params(
-      number: T.any(Integer, Float, String),
+      number: T.any(Numeric, String),
       locale: Symbol,
       precision: T.nilable(Integer),
       significant: T::Boolean,
@@ -388,7 +424,7 @@ module ActiveSupport::NumberHelper
 
   sig do
     params(
-      number: T.any(Integer, Float, String),
+      number: T.any(Numeric, String),
       locale: Symbol,
       precision: T.nilable(Integer),
       significant: T::Boolean,
@@ -402,7 +438,7 @@ module ActiveSupport::NumberHelper
 
   sig do
     params(
-      number: T.any(Integer, Float, String),
+      number: T.any(Numeric, String),
       area_code: T::Boolean,
       delimiter: String,
       extension: T.nilable(Integer),
@@ -414,7 +450,7 @@ module ActiveSupport::NumberHelper
 
   sig do
     params(
-      number: T.any(Integer, Float, String),
+      number: T.any(Numeric, String),
       locale: Symbol,
       precision: T.nilable(Integer),
       significant: T::Boolean,
@@ -427,6 +463,8 @@ module ActiveSupport::NumberHelper
 end
 
 module ActiveSupport::Inflector
+  extend(::ActiveSupport::Inflector)
+
   sig do
     params(
       term: String,
@@ -511,10 +549,22 @@ module ActiveSupport::Inflector
   def upcase_first(string); end
 end
 
+class ActiveSupport::InheritableOptions < ::ActiveSupport::OrderedOptions
+  K = type_member(fixed: T.untyped)
+  V = type_member(fixed: T.untyped)
+  Elem = type_member(fixed: T.untyped)
+
+  def initialize(parent = T.unsafe(nil)); end
+
+  def inheritable_copy; end
+end
+
 # defines some of the methods at https://github.com/rails/rails/blob/v6.0.0/activesupport/lib/active_support/core_ext/time/calculations.rb
 # these get added to Time, but are available on TimeWithZone thanks to https://github.com/rails/rails/blob/v6.0.0/activesupport/lib/active_support/time_with_zone.rb#L520
 # this is not a complete definition!
 class ActiveSupport::TimeWithZone
+  include(::DateAndTime::Calculations)
+
   sig { returns(ActiveSupport::TimeWithZone) }
   def midnight; end
 
@@ -600,7 +650,7 @@ class ActiveSupport::TimeWithZone
   def period; end
 
   # Returns the simultaneous time in `Time.zone`, or the specified zone.
-  sig { params(new_zone: T.untyped).returns(Time) }
+  sig { params(new_zone: T.untyped).returns(ActiveSupport::TimeWithZone) }
   def in_time_zone(new_zone = ::Time.zone); end
 
   # Returns a `Time` instance of the simultaneous time in the system timezone.
@@ -881,6 +931,9 @@ class ActiveSupport::TimeWithZone
   sig { returns(Rational) }
   def to_r; end
 
+  sig { returns(Date) }
+  def to_date; end
+
   # Returns an instance of DateTime with the timezone's UTC offset
   #
   # ```ruby
@@ -901,15 +954,226 @@ class ActiveSupport::TimeWithZone
   # The options parameter takes a hash with any of these keys: :years, :months, :weeks, :days, :hours, :minutes, :seconds.
   # If advancing by a value of variable length (i.e., years, weeks, months, days), move forward from `time`, otherwise move forward
   # from utc, for accuracy when moving across DST boundaries.
-  sig { params(options: T::Hash[Symbol, T.any(Integer, Float)]).returns(ActiveSupport::TimeWithZone) }
+  sig { params(options: T::Hash[Symbol, Numeric]).returns(ActiveSupport::TimeWithZone) }
   def advance(options); end
+
+  sig { params(options: T::Hash[Symbol, T.untyped]).returns(ActiveSupport::TimeWithZone) }
+  def change(options); end
 end
+
+module DateAndTime::Calculations
+  sig { params(date_or_time: T.any(Date, Time, DateTime)).returns(T::Boolean) }
+  def after?(date_or_time); end
+
+  # Would ideally be typed as returning T::Range[T.self_type] but
+  # it looks like you can't have T.self_type inside a generic.
+  def all_day; end
+  def all_month; end
+  def all_quarter; end
+  def all_week(start_day = T.unsafe(nil)); end
+  def all_year; end
+
+  sig { returns(T.self_type) }
+  def at_beginning_of_month; end
+
+  sig { returns(T.self_type) }
+  def at_beginning_of_quarter; end
+
+  sig { params(start_day: Symbol).returns(T.self_type) }
+  def at_beginning_of_week(start_day = T.unsafe(nil)); end
+
+  sig { returns(T.self_type) }
+  def at_beginning_of_year; end
+
+  sig { returns(T.self_type) }
+  def at_end_of_month; end
+
+  sig { returns(T.self_type) }
+  def at_end_of_quarter; end
+
+  sig { params(start_day: Symbol).returns(T.self_type) }
+  def at_end_of_week(start_day = T.unsafe(nil)); end
+
+  sig { returns(T.self_type) }
+  def at_end_of_year; end
+
+  sig { params(date_or_time: T.any(Date, Time, DateTime)).returns(T::Boolean) }
+  def before?(date_or_time); end
+
+  sig { returns(T.self_type) }
+  def beginning_of_month; end
+
+  sig { returns(T.self_type) }
+  def beginning_of_quarter; end
+
+  sig { params(start_day: Symbol).returns(T.self_type) }
+  def beginning_of_week(start_day = T.unsafe(nil)); end
+
+  sig { returns(T.self_type) }
+  def beginning_of_year; end
+
+  sig { params(days: Numeric).returns(T.self_type) }
+  def days_ago(days); end
+
+  sig { params(days: Numeric).returns(T.self_type) }
+  def days_since(days); end
+
+  sig { params(start_day: Symbol).returns(T.self_type) }
+  def days_to_week_start(start_day = T.unsafe(nil)); end
+
+  sig { returns(T.self_type) }
+  def end_of_month; end
+
+  sig { returns(T.self_type) }
+  def end_of_quarter; end
+
+  sig { params(start_day: Symbol).returns(T.self_type) }
+  def end_of_week(start_day = T.unsafe(nil)); end
+
+  sig { returns(T.self_type) }
+  def end_of_year; end
+
+  sig { returns(T::Boolean) }
+  def future?; end
+
+  sig { returns(T.self_type) }
+  def last_month; end
+
+  sig { returns(T.self_type) }
+  def last_quarter; end
+
+  sig { params(start_day: Symbol, same_time: T::Boolean).returns(T.self_type) }
+  def last_week(start_day = T.unsafe(nil), same_time: T.unsafe(nil)); end
+
+  sig { returns(T.self_type) }
+  def last_weekday; end
+
+  sig { returns(T.self_type) }
+  def last_year; end
+
+  sig { returns(T.self_type) }
+  def monday; end
+
+  sig { params(months: Numeric).returns(T.self_type) }
+  def months_ago(months); end
+
+  sig { params(months: Numeric).returns(T.self_type) }
+  def months_since(months); end
+
+  sig { params(day_of_week: Symbol).returns(T.self_type) }
+  def next_occurring(day_of_week); end
+
+  sig { returns(T.self_type) }
+  def next_quarter; end
+
+  sig { params(given_day_in_next_week: Symbol, same_time: T::Boolean).returns(T.self_type) }
+  def next_week(given_day_in_next_week = T.unsafe(nil), same_time: T.unsafe(nil)); end
+
+  sig { returns(T.self_type) }
+  def next_weekday; end
+
+  sig { returns(T::Boolean) }
+  def on_weekday?; end
+
+  sig { returns(T::Boolean) }
+  def on_weekend?; end
+
+  sig { returns(T::Boolean) }
+  def past?; end
+
+  sig { params(day_of_week: Symbol).returns(T.self_type) }
+  def prev_occurring(day_of_week); end
+
+  sig { returns(T.self_type) }
+  def prev_quarter; end
+
+  sig { params(start_day: Symbol, same_time: T::Boolean).returns(T.self_type) }
+  def prev_week(start_day = T.unsafe(nil), same_time: T.unsafe(nil)); end
+
+  sig { returns(T.self_type) }
+  def prev_weekday; end
+
+  sig { returns(T.self_type) }
+  def sunday; end
+
+  sig { returns(T::Boolean) }
+  def today?; end
+
+  sig { returns(T.self_type) }
+  def tomorrow; end
+
+  sig { params(weeks: Numeric).returns(T.self_type) }
+  def weeks_ago(weeks); end
+
+  sig { params(weeks: Numeric).returns(T.self_type) }
+  def weeks_since(weeks); end
+
+  sig { params(years: Numeric).returns(T.self_type) }
+  def years_ago(years); end
+
+  sig { params(years: Numeric).returns(T.self_type) }
+  def years_since(years); end
+
+  sig { returns(T.self_type) }
+  def yesterday; end
+
+  private
+
+  def copy_time_to(other); end
+  def days_span(day); end
+  def first_hour(date_or_time); end
+  def last_hour(date_or_time); end
+end
+
+DateAndTime::Calculations::DAYS_INTO_WEEK = T.let(T.unsafe(nil), T::Hash[T.untyped, T.untyped])
+
+DateAndTime::Calculations::WEEKEND_DAYS = T.let(T.unsafe(nil), T::Array[T.untyped])
 
 # defines some of the methods at https://github.com/rails/rails/blob/v6.0.0/activesupport/lib/active_support/core_ext/date
 # this is not a complete definition!
 class Date
+  include(::DateAndTime::Calculations)
+
+  DATE_FORMATS = T.let(nil, T::Hash[Symbol, T.untyped])
+
   sig { params(options: T::Hash[Symbol, Integer]).returns(Date) }
   def advance(options); end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def midnight; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def beginning_of_day; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def at_midnight; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def at_beginning_of_day; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def middle_of_day; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def midday; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def noon; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def at_midday; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def at_noon; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def at_middle_of_day; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def at_end_of_day; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def end_of_day; end
 
   # these are the sigs for Date- in the stdlib
   # https://github.com/sorbet/sorbet/blob/3910f6cfd9935c9b42e2135e32e15ab8a6e5b9be/rbi/stdlib/date.rbi#L373
@@ -920,11 +1184,30 @@ class Date
   # these sigs are added for activesupport users
   sig {params(arg0: ActiveSupport::Duration).returns(T.self_type)}
   def -(arg0); end
+
+  sig { params(format: Symbol).returns(String) }
+  def to_formatted_s(format = :default); end
+
+  sig { returns(Integer) }
+  def to_i; end
+
+  class << self
+    sig { returns(T.attached_class) }
+    def tomorrow; end
+
+    sig { returns(T.attached_class) }
+    def yesterday; end
+
+    sig { returns(T.attached_class) }
+    def current; end
+  end
 end
 
 # defines some of the methods at https://github.com/rails/rails/blob/v6.0.0/activesupport/lib/active_support/core_ext/time
 # this is not a complete definition!
 class Time
+  include(::DateAndTime::Calculations)
+
   sig { returns(Time) }
   def midnight; end
 
@@ -958,6 +1241,12 @@ class Time
   sig { returns(Time) }
   def at_middle_of_day; end
 
+  sig { returns(Time) }
+  def at_end_of_day; end
+
+  sig { returns(Time) }
+  def end_of_day; end
+
   # https://github.com/rails/rails/blob/v6.0.0/activesupport/lib/active_support/core_ext/date_and_time/zones.rb
   # returns Time in the case zone is passed nil and ActiveSupport::TimeWithZone otherwise
   sig { params(zone: T.nilable(T.any(String, ActiveSupport::TimeZone))).returns(T.any(ActiveSupport::TimeWithZone, Time)) }
@@ -982,6 +1271,12 @@ class Time
   # these sigs are added for activesupport users
   sig { params(arg0: ActiveSupport::Duration).returns(Time) }
   def -(arg0); end
+
+  sig { params(format: Symbol).returns(String) }
+  def to_formatted_s(format = :default); end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def self.current; end
 
   # Returns the TimeZone for the current request, if this has been set (via Time.zone=).
   # If `Time.zone` has not been set for the current request, returns the TimeZone specified in `config.time_zone`.
@@ -1023,7 +1318,7 @@ class ActiveSupport::TimeZone
   # numeric value it is either the hour offset, or the second offset, of the
   # timezone to find. (The first one with that offset will be returned.)
   # Returns `nil` if no such time zone is known to the system.
-  sig { params(arg: T.any(String, Numeric, ActiveSupport::Duration)).returns(ActiveSupport::TimeZone) }
+  sig { params(arg: T.any(String, Numeric, ActiveSupport::Duration)).returns(T.nilable(ActiveSupport::TimeZone)) }
   def self.[](arg); end
 
   # Returns an array of all TimeZone objects. There are multiple
@@ -1078,42 +1373,53 @@ end
 # defines some of the methods at https://github.com/rails/rails/tree/v6.0.0/activesupport/lib/active_support/core_ext/hash
 # this is not a complete definition!
 class Hash
-  sig { returns(T::Hash[String, T.untyped]) }
+  sig { params(other_hash: T::Hash[T.untyped, T.untyped]).returns(T::Hash[T.untyped, T.untyped]) }
+  def deep_merge(other_hash, &block); end
+
+  sig { params(keys: T.untyped).returns(T.self_type) }
+  def except(*keys); end
+
+  sig { returns(T::Hash[String, V]) }
   def stringify_keys; end
 
-  sig { returns(T::Hash[String, T.untyped]) }
+  sig { returns(T::Hash[String, V]) }
   def stringify_keys!; end
 
-  sig { returns(T::Hash[String, T.untyped]) }
+  sig { returns(T::Hash[String, V]) }
   def deep_stringify_keys; end
 
-  sig { returns(T::Hash[String, T.untyped]) }
+  sig { returns(T::Hash[String, V]) }
   def deep_stringify_keys!; end
 
-  sig { returns(T::Hash[Symbol, T.untyped]) }
+  sig { returns(T::Hash[Symbol, V]) }
   def symbolize_keys; end
 
-  sig { returns(T::Hash[Symbol, T.untyped]) }
+  sig { returns(T::Hash[Symbol, V]) }
   def symbolize_keys!; end
 
-  sig { returns(T::Hash[Symbol, T.untyped]) }
+  sig { returns(T::Hash[Symbol, V]) }
   def deep_symbolize_keys; end
 
-  sig { returns(T::Hash[Symbol, T.untyped]) }
+  sig { returns(T::Hash[Symbol, V]) }
   def deep_symbolize_keys!; end
 
   # in an ideal world, `arg` would be the type of all keys, the 1st `T.untyped` would be
   # the type of keys your block returns, and the 2nd `T.untyped` would be the type of values
   # that the hash had.
-  sig { params(block: T.proc.params(arg: T.untyped).void).returns(T::Hash[T.untyped, T.untyped]) }
+  sig { params(block: T.proc.params(arg: T.untyped).void).returns(T::Hash[T.untyped, V]) }
   def deep_transform_keys(&block); end
 
-  sig { params(block: T.proc.params(arg: T.untyped).void).returns(T::Hash[T.untyped, T.untyped]) }
+  sig { params(block: T.proc.params(arg: T.untyped).void).returns(T::Hash[T.untyped, V]) }
   def deep_transform_keys!(&block); end
 
-  sig { returns(T::Hash[Symbol, T.untyped]) }
+  sig { returns(T::Hash[Symbol, V]) }
   def to_options; end
+
+  sig { params(namespace: T.untyped).returns(String) }
+  def to_query(namespace = nil); end
 end
+
+HashWithIndifferentAccess = ActiveSupport::HashWithIndifferentAccess
 
 class Integer
   # Returns a Duration instance matching the number of months provided.
@@ -1310,6 +1616,14 @@ module Enumerable
     )
   end
   def index_by(&block); end
+
+  sig { params(object: Object).returns(T::Boolean) }
+  def exclude?(object); end
+
+  sig { returns(T::Boolean) }
+  def many?(&block); end
+
+  def pluck(*keys); end
 end
 
 class ActiveSupport::Duration
@@ -1413,16 +1727,124 @@ class ActiveSupport::Duration
   sig { params(precision: T.nilable(Integer)).returns(String) }
   def iso8601(precision: nil); end
 
-  sig { returns(ActiveSupport::TimeWithZone) }
-  def from_now; end
+  sig { params(time: T.any(ActiveSupport::TimeWithZone, Date)).returns(ActiveSupport::TimeWithZone) }
+  def from_now(time = Time.current); end
 
-  sig { returns(ActiveSupport::TimeWithZone) }
-  def ago; end
+  sig { params(time: T.any(ActiveSupport::TimeWithZone, Date)).returns(ActiveSupport::TimeWithZone) }
+  def ago(time = Time.current); end
+
+  sig { returns(Numeric) }
+  def value; end
 end
 
 module Benchmark
-  extend T::Sig
-
   sig { params(block: T.proc.void).returns(Float) }
   def self.ms(&block); end
 end
+
+ActiveSupport::Cache::FileStore::DIR_FORMATTER = T.let(T.unsafe(nil), String)
+
+ActiveSupport::Cache::FileStore::FILENAME_MAX_SIZE = T.let(T.unsafe(nil), Integer)
+
+ActiveSupport::Cache::FileStore::FILEPATH_MAX_SIZE = T.let(T.unsafe(nil), Integer)
+
+ActiveSupport::Cache::FileStore::GITKEEP_FILES = T.let(T.unsafe(nil), T::Array[T.untyped])
+
+ActiveSupport::Cache::MemoryStore::PER_ENTRY_OVERHEAD = T.let(T.unsafe(nil), Integer)
+
+module ActiveSupport::Callbacks
+  mixes_in_class_methods(::ActiveSupport::Callbacks::ClassMethods)
+end
+
+module ActiveSupport::Callbacks::ClassMethods; end
+
+module ActiveSupport::Concern; end
+
+module ActiveSupport::Configurable
+  mixes_in_class_methods(::ActiveSupport::Configurable::ClassMethods)
+end
+
+module ActiveSupport::Configurable::ClassMethods; end
+
+class ActiveSupport::Configurable::Configuration < ::ActiveSupport::InheritableOptions
+  K = type_member(fixed: T.untyped)
+  V = type_member(fixed: T.untyped)
+  Elem = type_member(fixed: T.untyped)
+end
+
+ActiveSupport::Deprecation::DEFAULT_BEHAVIORS = T.let(T.unsafe(nil), T::Hash[T.untyped, T.untyped])
+
+module ActiveSupport::Deprecation::InstanceDelegator
+  mixes_in_class_methods(::ActiveSupport::Deprecation::InstanceDelegator::OverrideDelegators)
+end
+
+module ActiveSupport::Deprecation::InstanceDelegator::OverrideDelegators; end
+
+ActiveSupport::Deprecation::Reporting::RAILS_GEM_ROOT = T.let(T.unsafe(nil), String)
+
+class ActiveSupport::DeprecationException < ::StandardError
+end
+
+class ActiveSupport::HashWithIndifferentAccess < Hash
+  K = type_member(fixed: T.any(String, Symbol))
+  V = type_member(fixed: T.untyped)
+  Elem = type_member(fixed: T.untyped)
+end
+
+ActiveSupport::JSON::DATETIME_REGEX = T.let(T.unsafe(nil), Regexp)
+
+ActiveSupport::JSON::DATE_REGEX = T.let(T.unsafe(nil), Regexp)
+
+ActiveSupport::LogSubscriber::BLACK = T.let(T.unsafe(nil), String)
+
+ActiveSupport::LogSubscriber::BLUE = T.let(T.unsafe(nil), String)
+
+ActiveSupport::LogSubscriber::BOLD = T.let(T.unsafe(nil), String)
+
+ActiveSupport::LogSubscriber::CLEAR = T.let(T.unsafe(nil), String)
+
+ActiveSupport::LogSubscriber::CYAN = T.let(T.unsafe(nil), String)
+
+ActiveSupport::LogSubscriber::GREEN = T.let(T.unsafe(nil), String)
+
+ActiveSupport::LogSubscriber::MAGENTA = T.let(T.unsafe(nil), String)
+
+ActiveSupport::LogSubscriber::RED = T.let(T.unsafe(nil), String)
+
+ActiveSupport::LogSubscriber::WHITE = T.let(T.unsafe(nil), String)
+
+ActiveSupport::LogSubscriber::YELLOW = T.let(T.unsafe(nil), String)
+
+ActiveSupport::Multibyte::Unicode::NORMALIZATION_FORMS = T.let(T.unsafe(nil), T::Array[T.untyped])
+
+ActiveSupport::Multibyte::Unicode::NORMALIZATION_FORM_ALIASES = T.let(T.unsafe(nil), T::Hash[T.untyped, T.untyped])
+
+ActiveSupport::Multibyte::Unicode::UNICODE_VERSION = T.let(T.unsafe(nil), String)
+
+class ActiveSupport::OrderedHash < ::Hash
+  K = type_member(fixed: T.untyped)
+  V = type_member(fixed: T.untyped)
+  Elem = type_member(fixed: T.untyped)
+end
+
+class ActiveSupport::OrderedOptions < ::Hash
+  K = type_member(fixed: T.untyped)
+  V = type_member(fixed: T.untyped)
+  Elem = type_member(fixed: T.untyped)
+end
+
+ActiveSupport::ParameterFilter::FILTERED = T.let(T.unsafe(nil), String)
+
+module ActiveSupport::Rescuable
+  mixes_in_class_methods(::ActiveSupport::Rescuable::ClassMethods)
+end
+
+module ActiveSupport::Rescuable::ClassMethods
+  # https://github.com/rails/rails/blob/5-2-stable/activesupport/lib/active_support/rescuable.rb#L51
+  sig { params(klasses: Class, with: T.nilable(Symbol), block: T.nilable(T.proc.params(error: T.untyped).void)).void }
+  def rescue_from(*klasses, with: T.unsafe(nil), &block); end
+end
+
+ActiveSupport::SafeBuffer::UNSAFE_STRING_METHODS = T.let(T.unsafe(nil), T::Array[T.untyped])
+
+ActiveSupport::SafeBuffer::UNSAFE_STRING_METHODS_WITH_BACKREF = T.let(T.unsafe(nil), T::Array[T.untyped])

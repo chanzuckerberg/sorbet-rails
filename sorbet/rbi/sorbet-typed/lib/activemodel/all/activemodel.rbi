@@ -7,22 +7,64 @@
 #
 # typed: strong
 
+module ActiveModel::AttributeMethods
+  mixes_in_class_methods(::ActiveModel::AttributeMethods::ClassMethods)
+end
+
+module ActiveModel::AttributeMethods::ClassMethods; end
+
+ActiveModel::AttributeMethods::AttrNames::DEF_SAFE_NAME = T.let(T.unsafe(nil), Regexp)
+
+ActiveModel::AttributeMethods::CALL_COMPILABLE_REGEXP = T.let(T.unsafe(nil), Regexp)
+
+ActiveModel::AttributeMethods::NAME_COMPILABLE_REGEXP = T.let(T.unsafe(nil), Regexp)
+
+module ActiveModel::Conversion
+  mixes_in_class_methods(::ActiveModel::Conversion::ClassMethods)
+end
+
+module ActiveModel::Conversion::ClassMethods; end
+
 module ActiveModel::Dirty
-  extend T::Sig
+  include(::ActiveModel::AttributeMethods)
+
   sig { params(attr: Symbol, from: T.untyped, to: T.untyped).returns(T::Boolean) }
   def attribute_changed?(attr, from: nil, to: nil); end
 
   sig { params(attr_name: Symbol).returns(T::Boolean) }
   def attribute_changed_in_place?(attr_name); end
 
-  sig { params(attr_name: Symbol).returns(T::Boolean) }
-  def attribute_previously_changed?(attr_name); end
+  sig { params(attr_name: Symbol, options: T.untyped).returns(T::Boolean) }
+  def attribute_previously_changed?(attr_name, **options); end
 
   sig { returns(T::Boolean) }
   def changed?; end
+
+  sig { returns(T::Hash[T.any(Symbol, String), T.untyped]) }
+  def previous_changes; end
+end
+
+class ActiveModel::ForbiddenAttributesError < ::StandardError
+end
+
+module ActiveModel::Model
+  include(::ActiveModel::AttributeAssignment)
+  extend(::ActiveSupport::Concern)
+
+  include(::ActiveSupport::Callbacks)
+  include(::ActiveModel::Validations::HelperMethods)
+  include(::ActiveModel::Validations)
+  include(::ActiveModel::Conversion)
 end
 
 module ActiveModel::Validations
+  extend(::ActiveSupport::Concern)
+
+  include(::ActiveSupport::Callbacks)
+  include(::ActiveModel::Validations::HelperMethods)
+
+  mixes_in_class_methods(::ActiveModel::Validations::ClassMethods)
+
   # Returns the `Errors` object that holds all information about attribute
   # error messages.
   #
@@ -41,86 +83,100 @@ module ActiveModel::Validations
   sig { returns(ActiveModel::Errors) }
   def errors; end
 
-  module ClassMethods
-    # https://github.com/rails/rails/blob/v5.2.3/activemodel/lib/active_model/validations.rb#L136-L154
-    sig do
-      params(
-        names: T.any(Symbol, String),
-        if: T.any(Symbol, String, T.proc.params(arg0: T.untyped).returns(T::Boolean)),
-        on: T.any(Symbol, String, T::Array[T.any(Symbol, String)]),
-        prepend: T::Boolean,
-        unless: T.any(Symbol, String, T.proc.params(arg0: T.untyped).returns(T::Boolean)),
-      ).void
-    end
-    def validate(
-      *names,
-      if: nil,
-      on: nil,
-      prepend: false,
-      unless: nil
-    ); end
+  sig { params(context: T.untyped).returns(T::Boolean) }
+  def invalid?(context = T.unsafe(nil)); end
 
-    # https://github.com/rails/rails/blob/v5.2.3/activemodel/lib/active_model/validations/validates.rb#L75-L105
-    sig do
-      params(
-        names: T.any(Symbol, String), # a splat of at least one attribute name
-        absence: T.any(T::Boolean, T::Hash[T.untyped, T.untyped]),
-        acceptance: T.any(T::Boolean, T::Hash[T.untyped, T.untyped]),
-        allow_blank: T::Boolean,
-        allow_nil: T::Boolean,
-        confirmation: T.any(T::Boolean, T::Hash[T.untyped, T.untyped]),
-        # `exclusion` and `inclusion` are tricky to type without better support
-        # for overloading and shapes. Value can be anything that responds to
-        # `include?` (e.g. (1..3)), or a hash having an `in` or `within` key,
-        # like { in: [1, 2, 3], ... }
-        exclusion: T::Enumerable[T.untyped],
-        # `format` hash must additionally contain either :with or :without keys.
-        # Alternatively, it can be a Regexp.
-        format: T.any(T::Hash[T.untyped, T.untyped], Regexp),
-        if: T.any(Symbol, String, T.proc.params(arg0: T.untyped).returns(T::Boolean)),
-        # `exclusion` and `inclusion` are tricky to type without better support
-        # for overloading and shapes. Value can be anything that responds to
-        # `include?` (e.g. (1..3)), or a hash having an `in` or `within` key,
-        # like { in: [1, 2, 3], ... }
-        inclusion: T::Enumerable[T.untyped],
-        # if Hash, must contain :in, :within, :maximum, :minimum, or :is keys
-        length: T.any(T::Range[T.untyped], T::Hash[T.untyped, T.untyped]),
-        numericality: T.any(T::Boolean, T::Hash[T.untyped, T.untyped]),
-        on: T.any(Symbol, String, T::Array[T.any(Symbol, String)]),
-        presence: T.any(T::Boolean, T::Hash[T.untyped, T.untyped]),
-        size: T.any(T::Boolean, T::Hash[T.untyped, T.untyped]),
-        strict: T::Boolean,
-        uniqueness: T.any(T::Boolean, T::Hash[T.untyped, T.untyped]),
-        unless: T.any(Symbol, String, T.proc.params(arg0: T.untyped).returns(T::Boolean)),
-        kwargs: T.untyped
-      ).void
-    end
-    def validates(
-      *names,
-      absence: false,
-      acceptance: {},
-      allow_blank: false,
-      allow_nil: false,
-      confirmation: false,
-      exclusion: [],
-      format: {},
-      if: nil,
-      inclusion: [],
-      length: {},
-      numericality: false,
-      on: :_,
-      presence: false,
-      size: false,
-      strict: false,
-      uniqueness: false,
-      unless: :_,
-      **kwargs
-    )
-    end
-  end
-
-  mixes_in_class_methods(ClassMethods)
+  sig { params(context: T.untyped).returns(T::Boolean) }
+  def valid?(context = T.unsafe(nil)); end
 end
+
+module ActiveModel::Validations::ClassMethods
+  # https://github.com/rails/rails/blob/v5.2.3/activemodel/lib/active_model/validations.rb#L136-L154
+  sig do
+    params(
+      names: T.any(Symbol, String),
+      if: T.any(Symbol, String, T.proc.params(arg0: T.untyped).returns(T::Boolean)),
+      on: T.any(Symbol, String, T::Array[T.any(Symbol, String)]),
+      prepend: T::Boolean,
+      unless: T.any(Symbol, String, T.proc.params(arg0: T.untyped).returns(T::Boolean)),
+    ).void
+  end
+  def validate(
+    *names,
+    if: nil,
+    on: nil,
+    prepend: false,
+    unless: nil
+  ); end
+
+  # https://github.com/rails/rails/blob/v5.2.3/activemodel/lib/active_model/validations/validates.rb#L75-L105
+  sig do
+    params(
+      names: T.any(Symbol, String), # a splat of at least one attribute name
+      absence: T.any(T::Boolean, T::Hash[T.untyped, T.untyped]),
+      acceptance: T.any(T::Boolean, T::Hash[T.untyped, T.untyped]),
+      allow_blank: T::Boolean,
+      allow_nil: T::Boolean,
+      confirmation: T.any(T::Boolean, T::Hash[T.untyped, T.untyped]),
+      # `exclusion` and `inclusion` are tricky to type without better support
+      # for overloading and shapes. Value can be anything that responds to
+      # `include?` (e.g. (1..3)), or a hash having an `in` or `within` key,
+      # like { in: [1, 2, 3], ... }
+      exclusion: T::Enumerable[T.untyped],
+      # `format` hash must additionally contain either :with or :without keys.
+      # Alternatively, it can be a Regexp.
+      format: T.any(T::Hash[T.untyped, T.untyped], Regexp),
+      if: T.any(Symbol, String, T.proc.params(arg0: T.untyped).returns(T::Boolean)),
+      # `exclusion` and `inclusion` are tricky to type without better support
+      # for overloading and shapes. Value can be anything that responds to
+      # `include?` (e.g. (1..3)), or a hash having an `in` or `within` key,
+      # like { in: [1, 2, 3], ... }
+      inclusion: T::Enumerable[T.untyped],
+      # if Hash, must contain :in, :within, :maximum, :minimum, or :is keys
+      length: T.any(T::Range[T.untyped], T::Hash[T.untyped, T.untyped]),
+      numericality: T.any(T::Boolean, T::Hash[T.untyped, T.untyped]),
+      on: T.any(Symbol, String, T::Array[T.any(Symbol, String)]),
+      presence: T.any(T::Boolean, T::Hash[T.untyped, T.untyped]),
+      size: T.any(T::Boolean, T::Hash[T.untyped, T.untyped]),
+      strict: T::Boolean,
+      uniqueness: T.any(T::Boolean, T::Hash[T.untyped, T.untyped]),
+      unless: T.any(Symbol, String, T.proc.params(arg0: T.untyped).returns(T::Boolean)),
+      kwargs: T.untyped
+    ).void
+  end
+  def validates(
+    *names,
+    absence: false,
+    acceptance: {},
+    allow_blank: false,
+    allow_nil: false,
+    confirmation: false,
+    exclusion: [],
+    format: {},
+    if: nil,
+    inclusion: [],
+    length: {},
+    numericality: false,
+    on: :_,
+    presence: false,
+    size: false,
+    strict: false,
+    uniqueness: false,
+    unless: :_,
+    **kwargs
+  )
+  end
+end
+
+ActiveModel::Validations::ClassMethods::VALID_OPTIONS_FOR_VALIDATE = T.let(T.unsafe(nil), T::Array[T.untyped])
+
+module ActiveModel::SecurePassword
+  mixes_in_class_methods(::ActiveModel::SecurePassword::ClassMethods)
+end
+
+module ActiveModel::SecurePassword::ClassMethods; end
+
+ActiveModel::SecurePassword::MAX_PASSWORD_LENGTH_ALLOWED = T.let(T.unsafe(nil), Integer)
 
 class ActiveModel::Type::Value
   extend T::Sig
@@ -133,19 +189,52 @@ class ActiveModel::Type::Value
 end
 
 class ActiveModel::Type::Boolean < ActiveModel::Type::Value
-  sig { params(arg0: T.untyped).returns(T.nilable(T::Boolean))}
+  sig { params(arg0: T.untyped).returns(T.nilable(T::Boolean)) }
   def cast(arg0); end
 end
 
 class ActiveModel::Type::ImmutableString < ActiveModel::Type::Value
-  sig { params(arg0: T.untyped).returns(T.nilable(String))}
+  sig { params(arg0: T.untyped).returns(T.nilable(String)) }
+  def cast(arg0); end
+end
+class ActiveModel::Type::String < ActiveModel::Type::ImmutableString; end
+
+class ActiveModel::Type::Integer < ActiveModel::Type::Value
+  sig { params(arg0: T.untyped).returns(T.nilable(Integer)) }
+  def cast(arg0); end
+end
+class ActiveModel::Type::BigInteger < ActiveModel::Type::Integer; end
+
+class ActiveModel::Type::Binary < ActiveModel::Type::Value
+  sig { params(arg0: T.untyped).returns(T.nilable(String)) }
   def cast(arg0); end
 end
 
-class ActiveModel::Type::String < ActiveModel::Type::ImmutableString
-  sig { params(arg0: T.untyped).returns(T.nilable(String))}
+class ActiveModel::Type::Decimal < ActiveModel::Type::Value
+  sig { params(arg0: T.untyped).returns(T.nilable(BigDecimal)) }
   def cast(arg0); end
 end
+
+class ActiveModel::Type::Float < ActiveModel::Type::Value
+  sig { params(arg0: T.untyped).returns(T.nilable(Float)) }
+  def cast(arg0); end
+end
+
+class ActiveModel::Type::Date < ::ActiveModel::Type::Value
+  sig { params(arg0: T.untyped).returns(T.nilable(Date)) }
+  def cast(arg0); end
+end
+
+class ActiveModel::Type::DateTime < ::ActiveModel::Type::Value
+  sig { params(arg0: T.untyped).returns(T.nilable(DateTime)) }
+  def cast(arg0); end
+end
+
+module ActiveModel::Validations::Callbacks
+  mixes_in_class_methods(::ActiveModel::Validations::Callbacks::ClassMethods)
+end
+
+module ActiveModel::Validations::Callbacks::ClassMethods; end
 
 module ActiveModel::Validations::HelperMethods
   # A type alias for the in/within parameters on the
@@ -469,7 +558,23 @@ module ActiveModel::Validations::HelperMethods
   mixes_in_class_methods(ClassMethods)
 end
 
+ActiveModel::Validations::NumericalityValidator::CHECKS = T.let(T.unsafe(nil), T::Hash[T.untyped, T.untyped])
+
+ActiveModel::Validations::NumericalityValidator::HEXADECIMAL_REGEX = T.let(T.unsafe(nil), Regexp)
+
+ActiveModel::Validations::NumericalityValidator::INTEGER_REGEX = T.let(T.unsafe(nil), Regexp)
+
+ActiveModel::Validations::NumericalityValidator::RESERVED_OPTIONS = T.let(T.unsafe(nil), T::Array[T.untyped])
+
 class ActiveModel::Errors
+  include Enumerable
+  Elem = type_member(fixed: T.untyped)
+
+  sig { params(key: T.any(String, Symbol)).returns(T::Array[String]) }
+  def [](key); end
+
+  def each(&blk); end
+
   # Adds `message` to the error messages and used validator type to `details` on `attribute`.
   # More than one error can be added to the same `attribute`.
   # If no `message` is supplied, `:invalid` is assumed.
@@ -523,7 +628,7 @@ class ActiveModel::Errors
   # ```
   sig do
     params(
-      attribute: Symbol,
+      attribute: T.any(Symbol, String),
       message: T.any(String, Symbol),
       options: T::Hash[T.untyped, T.untyped]
     ).returns(T.untyped)
@@ -594,4 +699,17 @@ class ActiveModel::Errors
   # ```
   sig { returns(T::Array[String]) }
   def full_messages; end
+
+  sig { returns(T::Hash[Symbol, T::Array[String]]) }
+  def messages; end
+
+  sig { params(args: T.untyped, block: T.untyped).returns(T::Boolean) }
+  def empty?(*args, &block); end
+
+  sig { params(full_messages: T::Boolean).returns(T::Hash[Symbol, T::Array[String]]) }
+  def to_hash(full_messages = false); end
 end
+
+ActiveModel::Errors::CALLBACKS_OPTIONS = T.let(T.unsafe(nil), T::Array[T.untyped])
+
+ActiveModel::Errors::MESSAGE_OPTIONS = T.let(T.unsafe(nil), T::Array[T.untyped])
