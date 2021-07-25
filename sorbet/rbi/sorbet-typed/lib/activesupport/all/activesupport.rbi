@@ -5,7 +5,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/edit/master/lib/activesupport/all/activesupport.rbi
 #
-# typed: strong
+# typed: false
 
 module ActiveSupport
   sig { params(kind: Symbol, blk: T.proc.bind(T.untyped).void).void }
