@@ -79,7 +79,8 @@ RSpec.describe 'sorbet' do
 
   it 'returns expected sorbet tc result' do
     stdout, stderr, status = Open3.capture3(
-      'bundle', 'exec', 'srb', 'tc',
+      # 'bundle', 'exec', 'srb', 'tc',
+      'srb', 'tc',
       chdir: Rails.root.to_path,
     )
     expected_file_path = 'expected_srb_tc_output.txt'
