@@ -5,7 +5,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/edit/master/lib/activemodel/all/activemodel.rbi
 #
-# typed: strong
+# typed: false
 
 module ActiveModel::AttributeMethods
   mixes_in_class_methods(::ActiveModel::AttributeMethods::ClassMethods)

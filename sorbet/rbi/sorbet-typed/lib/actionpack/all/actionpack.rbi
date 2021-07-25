@@ -5,7 +5,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/edit/master/lib/actionpack/all/actionpack.rbi
 #
-# typed: strong
+# typed: ignore
 
 # https://github.com/rails/rails/blob/5-2-stable/actionpack/lib/action_controller.rb
 module ActionController; end

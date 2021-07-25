@@ -5,7 +5,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/edit/master/lib/tzinfo/~>1.1/tzinfo.rbi
 #
-# typed: strong
+# typed: false
 
 module TZInfo
 end
