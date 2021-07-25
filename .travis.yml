@@ -1,34 +1,28 @@
 language: ruby
 env:
   matrix:
-  - RAILS_VERSION=5.0
-  - RAILS_VERSION=5.1
   - RAILS_VERSION=5.2
   - RAILS_VERSION=6.0
   global:
     secure: S3rpBSDgDQjhA11/80dZ4RUlBP3XLJWOgvcl1eySFdXqHCZGS5p8Fa97yEvZHWiPInUTNhdvyQ5LHlgzu1CCZ9+MOykpEgYo+1yIueriv9Ia5PUNFbwhRp2eBkluSUMPNPOxf15mUlgAGdScnssRL9zftYel29dw4yg+BQnnkLOqpnLO7wHTjouEmp7M8Y/1j0ScIZ0tZL1ovDq70Lst+TJKHm4jdBbwoNmILIwNBgnzZT1LdAuaXVHEmwLvy0GLvClewuSmToJ4jyjuJorCjyMhyoBLrutSuN4KaJcSlP/LVtH4ZCFkFDayDMiVcSyUE3asSnL3yxGL0K99lgwNk4D58WWic7N+0UKnGoiMQOHC9EIsQKaxfXMOpO+Cq5wYhgmFzPGF4iL6ZBNCehcc+ToBojprmJw/0Ev71OS2YGvu5SZpYco5AvJeR73IUA2K0rjUEeY3gXm60aIac09kQuuminN3hUkJ894YoA35B8IEU0uW2uL5n/vX2Y8SD6RV8csbKlhpJmphYYWQQOYjHuFoW4MVnnrFHq6YIUDQpi6/We3I4xH3kvfjIpSemrYOmfF4PPXCarWA7ryI9ytR7BloQ0NQH7hqp1hbKN86LAy8zanW08xNOrxI7VDdbtV1k6mf+wiV1W2Vo54HYEDIw0+jwmW/uKWatTyRo5AUsMc=
 rvm:
-- 2.4
 - 2.5
 - 2.6
 - 2.7
+- 3.0
 - ruby-head
 matrix:
   include:
-  - rvm: 2.5
-    env: RAILS_VERSION=5.2 SORBET_VERSION=0.5.6210
-  exclude:
-  - rvm: 2.3
-    env: RAILS_VERSION=6.0
-  - rvm: 2.4
-    env: RAILS_VERSION=6.0
+  - rvm: 2.7
+    env: RAILS_VERSION=6.0 SORBET_VERSION=0.5.6210
   allow_failures:
   - rvm: ruby-head
-  - rvm: 2.7
+  - rvm: 3.0
+    env: RAILS_VERSION=5.2
+  - rvm: 3.0
     env: RAILS_VERSION=6.0
 before_install:
-- gem install bundler -v 2.0.1 --no-doc
-- gem install bundler -v 1.17.3 --no-doc
+- gem install bundler -v 2.2.24 --no-doc
 script:
 - bundle exec srb tc
 - "./spec/bin/run_spec.sh"

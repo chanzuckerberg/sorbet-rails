@@ -313,11 +313,8 @@ def create_migrations
         add_column :wands, :broken_at,      :datetime, null: true
         add_column :wands, :chosen_at_date, :date
         add_column :wands, :chosen_at_time, :time
-        # JSON column type is only supported on 5.2 or higher
-        unless ['5.0', '5.1'].include?(ENV['RAILS_VERSION'])
-          add_column :wands, :spell_history,  :json
-          add_column :wands, :maker_info,     :json,    null: false, default: '{}'
-        end
+        add_column :wands, :spell_history,  :json
+        add_column :wands, :maker_info,     :json,    null: false, default: '{}'
       end
     end
   RUBY
@@ -506,20 +503,6 @@ end
 
 # Main setup
 source_paths
-
-if ['5.0'].include?(ENV["RAILS_VERSION"])
-  File.open('Gemfile', 'r+') do |f|
-    out = ""
-    f.each do |line|
-      # We remove sdoc and web-console because they misbehave.
-      # sqlite needs to be limited to 1.3.x or it won't work.
-      out << line.gsub("gem 'sqlite3'", "gem 'sqlite3', '~> 1.3.6'") unless line =~ /gem \'(sdoc|web-console)\'.*/
-    end
-    f.pos = 0
-    f.print out
-    f.truncate(f.pos)
-  end
-end
 
 add_gems
 
