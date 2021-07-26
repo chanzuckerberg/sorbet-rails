@@ -65,9 +65,9 @@ module Minitest::Assertions
   sig do
     params(
       exp: T.untyped
-    ).returns(TrueClass)
+    ).returns(StandardError)
   end
-  def assert_raises(*exp); end
+  def assert_raises(*exp, &block); end
 
   sig { params(test: T.untyped, msg: T.nilable(String)).returns(TrueClass) }
   def refute(test, msg = nil); end

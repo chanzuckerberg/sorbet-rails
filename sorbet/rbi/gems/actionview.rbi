@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/actionview/all/actionview.rbi
 #
-# actionview-5.2.4.2
+# actionview-5.2.6
 
 module ActionView
   def self.eager_load!; end

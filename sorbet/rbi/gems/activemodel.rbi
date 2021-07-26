@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/activemodel/all/activemodel.rbi
 #
-# activemodel-5.2.4.2
+# activemodel-5.2.6
 
 module ActiveModel
   def self.eager_load!; end
@@ -248,6 +248,63 @@ class ActiveModel::UnknownAttributeError < NoMethodError
   def initialize(record, attribute); end
   def record; end
 end
+module ActiveModel::Callbacks
+  def _define_after_model_callback(klass, callback); end
+  def _define_around_model_callback(klass, callback); end
+  def _define_before_model_callback(klass, callback); end
+  def define_model_callbacks(*callbacks); end
+  def self.extended(base); end
+end
+class ActiveModel::Attribute::UserProvidedDefault < ActiveModel::Attribute::FromUser
+  def initialize(name, value, type, database_default); end
+  def marshal_dump; end
+  def marshal_load(values); end
+  def user_provided_value; end
+  def value_before_type_cast; end
+  def with_type(type); end
+end
+class ActiveModel::Name
+  def !~(*args, &block); end
+  def <=>(*args, &block); end
+  def ==(arg); end
+  def ===(arg); end
+  def =~(*args, &block); end
+  def _singularize(string); end
+  def as_json(*args, &block); end
+  def cache_key; end
+  def collection; end
+  def element; end
+  def eql?(*args, &block); end
+  def human(options = nil); end
+  def i18n_key; end
+  def initialize(klass, namespace = nil, name = nil); end
+  def name; end
+  def param_key; end
+  def plural; end
+  def route_key; end
+  def singular; end
+  def singular_route_key; end
+  def to_s(*args, &block); end
+  def to_str(*args, &block); end
+  include Comparable
+end
+module ActiveModel::Naming
+  def model_name; end
+  def self.extended(base); end
+  def self.model_name_from_record_or_class(record_or_class); end
+  def self.param_key(record_or_class); end
+  def self.plural(record_or_class); end
+  def self.route_key(record_or_class); end
+  def self.singular(record_or_class); end
+  def self.singular_route_key(record_or_class); end
+  def self.uncountable?(record_or_class); end
+end
+module ActiveModel::Translation
+  def human_attribute_name(attribute, options = nil); end
+  def i18n_scope; end
+  def lookup_ancestors; end
+  include ActiveModel::Naming
+end
 module ActiveModel::Type
   def self.default_value; end
   def self.lookup(*args, **kwargs); end
@@ -428,4 +485,257 @@ class ActiveModel::Type::Registration
   def initialize(name, block, **arg2); end
   def matches?(type_name, *args, **kwargs); end
   def name; end
+end
+class ActiveModel::ForbiddenAttributesError < StandardError
+end
+module ActiveModel::ForbiddenAttributesProtection
+  def sanitize_for_mass_assignment(attributes); end
+  def sanitize_forbidden_attributes(attributes); end
+end
+module ActiveModel::AttributeAssignment
+  def _assign_attribute(k, v); end
+  def _assign_attributes(attributes); end
+  def assign_attributes(new_attributes); end
+  def attributes=(new_attributes); end
+  include ActiveModel::ForbiddenAttributesProtection
+end
+module ActiveModel::Conversion
+  def to_key; end
+  def to_model; end
+  def to_param; end
+  def to_partial_path; end
+  extend ActiveSupport::Concern
+end
+module ActiveModel::Conversion::ClassMethods
+  def _to_partial_path; end
+end
+module ActiveModel::Validations
+  def errors; end
+  def initialize_dup(other); end
+  def invalid?(context = nil); end
+  def raise_validation_error; end
+  def read_attribute_for_validation(*arg0); end
+  def run_validations!; end
+  def valid?(context = nil); end
+  def validate!(context = nil); end
+  def validate(context = nil); end
+  def validates_with(*args, &block); end
+  extend ActiveSupport::Concern
+end
+module ActiveModel::Validations::ClassMethods
+  def _parse_validates_options(options); end
+  def _validates_default_keys; end
+  def attribute_method?(attribute); end
+  def clear_validators!; end
+  def inherited(base); end
+  def validate(*args, &block); end
+  def validates!(*attributes); end
+  def validates(*attributes); end
+  def validates_each(*attr_names, &block); end
+  def validates_with(*args, &block); end
+  def validators; end
+  def validators_on(*attributes); end
+end
+module ActiveModel::Validations::Clusivity
+  def check_validity!; end
+  def delimiter; end
+  def include?(record, value); end
+  def inclusion_method(enumerable); end
+end
+class ActiveModel::Validator
+  def initialize(options = nil); end
+  def kind; end
+  def options; end
+  def self.kind; end
+  def validate(record); end
+end
+class ActiveModel::EachValidator < ActiveModel::Validator
+  def attributes; end
+  def check_validity!; end
+  def initialize(options); end
+  def validate(record); end
+  def validate_each(record, attribute, value); end
+end
+class ActiveModel::BlockValidator < ActiveModel::EachValidator
+  def initialize(options, &block); end
+  def validate_each(record, attribute, value); end
+end
+class ActiveModel::Validations::InclusionValidator < ActiveModel::EachValidator
+  def validate_each(record, attribute, value); end
+  include ActiveModel::Validations::Clusivity
+end
+module ActiveModel::Validations::HelperMethods
+  def _merge_attributes(attr_names); end
+  def validates_absence_of(*attr_names); end
+  def validates_acceptance_of(*attr_names); end
+  def validates_confirmation_of(*attr_names); end
+  def validates_exclusion_of(*attr_names); end
+  def validates_format_of(*attr_names); end
+  def validates_inclusion_of(*attr_names); end
+  def validates_length_of(*attr_names); end
+  def validates_numericality_of(*attr_names); end
+  def validates_presence_of(*attr_names); end
+  def validates_size_of(*attr_names); end
+end
+class ActiveModel::Validations::AbsenceValidator < ActiveModel::EachValidator
+  def validate_each(record, attr_name, value); end
+end
+class ActiveModel::Validations::NumericalityValidator < ActiveModel::EachValidator
+  def allow_only_integer?(record); end
+  def check_validity!; end
+  def filtered_options(value); end
+  def is_hexadecimal_literal?(raw_value); end
+  def is_integer?(raw_value); end
+  def is_number?(raw_value); end
+  def parse_as_number(raw_value); end
+  def record_attribute_changed_in_place?(record, attr_name); end
+  def validate_each(record, attr_name, value); end
+end
+module ActiveModel::Validations::Callbacks
+  def run_validations!; end
+  extend ActiveSupport::Concern
+end
+module ActiveModel::Validations::Callbacks::ClassMethods
+  def after_validation(*args, &block); end
+  def before_validation(*args, &block); end
+end
+class ActiveModel::Validations::ExclusionValidator < ActiveModel::EachValidator
+  def validate_each(record, attribute, value); end
+  include ActiveModel::Validations::Clusivity
+end
+class ActiveModel::Validations::ConfirmationValidator < ActiveModel::EachValidator
+  def confirmation_value_equal?(record, attribute, value, confirmed); end
+  def initialize(options); end
+  def setup!(klass); end
+  def validate_each(record, attribute, value); end
+end
+class ActiveModel::Validations::FormatValidator < ActiveModel::EachValidator
+  def check_options_validity(name); end
+  def check_validity!; end
+  def option_call(record, name); end
+  def record_error(record, attribute, name, value); end
+  def regexp_using_multiline_anchors?(regexp); end
+  def validate_each(record, attribute, value); end
+end
+class ActiveModel::Validations::PresenceValidator < ActiveModel::EachValidator
+  def validate_each(record, attr_name, value); end
+end
+class ActiveModel::Validations::LengthValidator < ActiveModel::EachValidator
+  def check_validity!; end
+  def initialize(options); end
+  def skip_nil_check?(key); end
+  def validate_each(record, attribute, value); end
+end
+class ActiveModel::Validations::AcceptanceValidator < ActiveModel::EachValidator
+  def acceptable_option?(value); end
+  def initialize(options); end
+  def setup!(klass); end
+  def validate_each(record, attribute, value); end
+end
+class ActiveModel::Validations::AcceptanceValidator::LazilyDefineAttributes < Module
+  def initialize(attribute_definition); end
+end
+class ActiveModel::Validations::AcceptanceValidator::AttributeDefinition
+  def attributes; end
+  def convert_to_reader_name(method_name); end
+  def define_on(klass); end
+  def initialize(attributes); end
+  def matches?(method_name); end
+end
+class ActiveModel::Validations::WithValidator < ActiveModel::EachValidator
+  def validate_each(record, attr, val); end
+end
+class ActiveModel::ValidationError < StandardError
+  def initialize(model); end
+  def model; end
+end
+class ActiveModel::AttributeMutationTracker
+  def any_changes?; end
+  def attr_names; end
+  def attributes; end
+  def change_to_attribute(attr_name); end
+  def changed?(attr_name, from: nil, to: nil); end
+  def changed_attribute_names; end
+  def changed_in_place?(attr_name); end
+  def changed_values; end
+  def changes; end
+  def force_change(attr_name); end
+  def forced_changes; end
+  def forget_change(attr_name); end
+  def initialize(attributes); end
+  def original_value(attr_name); end
+end
+class ActiveModel::NullMutationTracker
+  def any_changes?(*arg0); end
+  def change_to_attribute(attr_name); end
+  def changed?(*arg0); end
+  def changed_attribute_names(*arg0); end
+  def changed_in_place?(*arg0); end
+  def changed_values(*arg0); end
+  def changes(*arg0); end
+  def force_change(*arg0); end
+  def forget_change(*arg0); end
+  def original_value(*arg0); end
+  def self.allocate; end
+  def self.new(*arg0); end
+  extend Singleton::SingletonClassMethods
+  include Singleton
+end
+module ActiveModel::Dirty
+  def attribute_change(attr); end
+  def attribute_changed?(attr, from: nil, to: nil); end
+  def attribute_changed_by_setter?(attr_name); end
+  def attribute_changed_in_place?(attr_name); end
+  def attribute_previous_change(attr); end
+  def attribute_previously_changed?(attr); end
+  def attribute_was(attr); end
+  def attribute_will_change!(attr); end
+  def attributes_changed_by_setter; end
+  def cache_changed_attributes; end
+  def changed; end
+  def changed?; end
+  def changed_attributes; end
+  def changes; end
+  def changes_applied; end
+  def changes_include?(attr_name); end
+  def clear_attribute_change(attr_name); end
+  def clear_attribute_changes(attr_names); end
+  def clear_changed_attributes_cache; end
+  def clear_changes_information; end
+  def forget_attribute_assignments; end
+  def initialize_dup(other); end
+  def mutations_before_last_save; end
+  def mutations_from_database; end
+  def previous_changes; end
+  def previous_changes_include?(attr_name); end
+  def restore_attribute!(attr); end
+  def restore_attributes(attributes = nil); end
+  def set_attribute_was(attr, old_value); end
+  extend ActiveSupport::Concern
+  include ActiveModel::AttributeMethods
+end
+module ActiveModel::SecurePassword
+  def self.min_cost; end
+  def self.min_cost=(arg0); end
+  extend ActiveSupport::Concern
+end
+module ActiveModel::SecurePassword::ClassMethods
+  def has_secure_password(options = nil); end
+end
+module ActiveModel::SecurePassword::InstanceMethodsOnActivation
+  def authenticate(unencrypted_password); end
+  def password; end
+  def password=(unencrypted_password); end
+  def password_confirmation=(unencrypted_password); end
+end
+module ActiveModel::Serialization
+  def read_attribute_for_serialization(*arg0); end
+  def serializable_add_includes(options = nil); end
+  def serializable_hash(options = nil); end
+end
+module ActiveModel::Serializers::JSON
+  def as_json(options = nil); end
+  def from_json(json, include_root = nil); end
+  extend ActiveSupport::Concern
+  include ActiveModel::Serialization
 end

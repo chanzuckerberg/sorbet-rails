@@ -7,15 +7,15 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/simplecov/all/simplecov.rbi
 #
-# simplecov-0.18.5
+# simplecov-0.21.2
 
 module SimpleCov
   def self.adapt_coverage_result; end
   def self.add_not_loaded_files(result); end
   def self.at_exit_behavior; end
   def self.clear_result; end
-  def self.collate(result_filenames, profile = nil, &block); end
-  def self.exit_exception; end
+  def self.collate(result_filenames, profile = nil, ignore_timeout: nil, &block); end
+  def self.exit_and_report_previous_error(exit_status); end
   def self.exit_status_from_exception; end
   def self.external_at_exit; end
   def self.external_at_exit=(arg0); end
@@ -27,29 +27,33 @@ module SimpleCov
   def self.load_adapter(name); end
   def self.load_profile(name); end
   def self.lookup_corresponding_ruby_coverage_name(criterion); end
-  def self.minimum_coverage_violated(result); end
+  def self.make_parallel_tests_available; end
   def self.pid; end
   def self.pid=(arg0); end
+  def self.previous_error?(error_exit_status); end
+  def self.probably_running_parallel_tests?; end
   def self.process_coverage_result; end
-  def self.process_result(result, exit_status); end
+  def self.process_result(result); end
+  def self.process_results_and_report_error; end
+  def self.ready_to_process_results?; end
   def self.remove_useless_results; end
-  def self.report_minimum_violated(violations); end
   def self.result; end
   def self.result?; end
-  def self.result_exit_status(result, covered_percent); end
+  def self.result_exit_status(result); end
   def self.result_with_not_loaded_files; end
+  def self.round_coverage(coverage); end
   def self.run_exit_tasks!; end
   def self.running; end
   def self.running=(arg0); end
-  def self.set_exit_exception; end
   def self.start(profile = nil, &block); end
   def self.start_coverage_measurement; end
   def self.start_coverage_with_criteria; end
   def self.wait_for_other_processes; end
-  def self.write_last_run(covered_percent); end
+  def self.write_last_run(result); end
   extend SimpleCov::Configuration
 end
 module SimpleCov::Formatter
+  def self.from_env(env); end
 end
 class SimpleCov::Formatter::MultiFormatter
   def self.[](*args); end
@@ -63,6 +67,7 @@ module SimpleCov::Configuration
   def add_filter(filter_argument = nil, &filter_proc); end
   def add_group(group_name, filter_argument = nil, &filter_proc); end
   def at_exit(&block); end
+  def at_fork(&block); end
   def branch_coverage?; end
   def branch_coverage_supported?; end
   def clear_coverage_criteria; end
@@ -75,6 +80,8 @@ module SimpleCov::Configuration
   def coverage_path; end
   def coverage_start_arguments_supported?; end
   def enable_coverage(criterion); end
+  def enable_for_subprocesses(value = nil); end
+  def enabled_for_subprocesses?; end
   def filters; end
   def filters=(arg0); end
   def formatter(formatter = nil); end
@@ -90,13 +97,15 @@ module SimpleCov::Configuration
   def minimum_possible_coverage_exceeded(coverage_option); end
   def nocov_token(nocov_token = nil); end
   def parse_filter(filter_argument = nil, &filter_proc); end
+  def primary_coverage(criterion = nil); end
   def print_error_status; end
   def print_error_status=(arg0); end
   def profiles; end
   def project_name(new_name = nil); end
   def raise_if_criterion_disabled(criterion); end
   def raise_if_criterion_unsupported(criterion); end
-  def refuse_coverage_drop; end
+  def raise_on_invalid_coverage(coverage, coverage_setting); end
+  def refuse_coverage_drop(*criteria); end
   def root(root = nil); end
   def skip_token(nocov_token = nil); end
   def track_files(glob); end
@@ -115,6 +124,45 @@ class SimpleCov::CoverageStatistics
   def total; end
 end
 module SimpleCov::ExitCodes
+end
+module SimpleCov::ExitCodes::ExitCodeHandling
+  def call(result, coverage_limits:); end
+  def coverage_checks(result, coverage_limits); end
+  def self.call(result, coverage_limits:); end
+  def self.coverage_checks(result, coverage_limits); end
+end
+class SimpleCov::ExitCodes::MaximumCoverageDropCheck
+  def compute_coverage_drop_data; end
+  def coverage_drop_violations; end
+  def drop_percent(criterion); end
+  def exit_code; end
+  def failing?; end
+  def initialize(result, maximum_coverage_drop); end
+  def last_coverage(criterion); end
+  def last_run; end
+  def maximum_coverage_drop; end
+  def report; end
+  def result; end
+end
+class SimpleCov::ExitCodes::MinimumCoverageByFileCheck
+  def compute_minimum_coverage_data; end
+  def exit_code; end
+  def failing?; end
+  def initialize(result, minimum_coverage_by_file); end
+  def minimum_coverage_by_file; end
+  def minimum_violations; end
+  def report; end
+  def result; end
+end
+class SimpleCov::ExitCodes::MinimumOverallCoverageCheck
+  def calculate_minimum_violations; end
+  def exit_code; end
+  def failing?; end
+  def initialize(result, minimum_coverage); end
+  def minimum_coverage; end
+  def minimum_violations; end
+  def report; end
+  def result; end
 end
 class SimpleCov::Profiles < Hash
   def define(name, &blk); end
@@ -203,8 +251,10 @@ end
 class SimpleCov::FileList
   def branch_covered_percent; end
   def compute_coverage_statistics; end
+  def compute_coverage_statistics_by_file; end
   def count(*args, &block); end
   def coverage_statistics; end
+  def coverage_statistics_by_file; end
   def covered_branches; end
   def covered_lines; end
   def covered_percent; end
@@ -229,12 +279,11 @@ class SimpleCov::FileList
   include Enumerable
 end
 class SimpleCov::Result
-  def adapt_pre_simplecov_0_18_result(result); end
-  def adapt_result(result); end
   def command_name; end
   def command_name=(arg0); end
   def coverage; end
   def coverage_statistics(*args, &block); end
+  def coverage_statistics_by_file(*args, &block); end
   def covered_branches(*args, &block); end
   def covered_lines(*args, &block); end
   def covered_percent(*args, &block); end
@@ -247,12 +296,11 @@ class SimpleCov::Result
   def filter!; end
   def format!; end
   def groups; end
-  def initialize(original_result); end
+  def initialize(original_result, command_name: nil, created_at: nil); end
   def least_covered_file(*args, &block); end
   def missed_branches(*args, &block); end
   def missed_lines(*args, &block); end
   def original_result; end
-  def pre_simplecov_0_18_result?(result); end
   def self.from_hash(hash); end
   def source_files; end
   def to_hash; end
@@ -296,17 +344,26 @@ class SimpleCov::LinesClassifier
   def self.whitespace_line?(line); end
 end
 module SimpleCov::ResultMerger
-  def self.clear_resultset; end
-  def self.merge_and_store(*results); end
-  def self.merge_results(*results); end
+  def self.adapt_pre_simplecov_0_18_result(result); end
+  def self.adapt_result(result); end
+  def self.create_result(command_names, coverage); end
+  def self.merge_and_store(*file_paths, ignore_timeout: nil); end
+  def self.merge_coverage(*results); end
+  def self.merge_results(*file_paths, ignore_timeout: nil); end
+  def self.merge_valid_results(results, ignore_timeout: nil); end
   def self.merged_result; end
-  def self.results; end
-  def self.resultset; end
+  def self.parse_file(path); end
+  def self.parse_json(content); end
+  def self.pre_simplecov_0_18_result?(result); end
+  def self.read_file(path); end
+  def self.read_resultset; end
   def self.resultset_path; end
   def self.resultset_writelock; end
   def self.store_result(result); end
-  def self.stored_data; end
   def self.synchronize_resultset; end
+  def self.time_since_result_creation(data); end
+  def self.valid_results(file_path, ignore_timeout: nil); end
+  def self.within_merge_timeout?(data); end
 end
 module SimpleCov::CommandGuesser
   def self.from_command_line_options; end
@@ -354,6 +411,7 @@ module SimpleCov::Combine::ResultsCombiner
 end
 module SimpleCov::UselessResultsRemover
   def self.call(coverage_result); end
+  def self.root_regx; end
 end
 module SimpleCov::SimulateCoverage
   def call(absolute_path); end

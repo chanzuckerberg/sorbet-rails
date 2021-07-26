@@ -25,7 +25,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rspec', '~> 3.8', '>= 3.8'
   # Debugging
   s.add_development_dependency 'awesome_print', '~>1.8.0', '>=1.8.0'
-  s.add_development_dependency 'byebug', '~>11.0.1', '>=11.0.1'
+  s.add_development_dependency 'byebug', '~>11.1.3', '>=11.1.3'
 
   # for testing a gem with a rails app (controller specs)
   s.add_development_dependency 'rspec-rails', '>=3.8.2'

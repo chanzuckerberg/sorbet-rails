@@ -6,7 +6,7 @@ wd="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 current_dir=$(pwd)
 
 if [[ -z $RAILS_VERSION ]]; then
-  rails_dir="$wd/../support/v5.2"
+  rails_dir="$wd/../support/v6.0"
 else
   rails_dir="$wd/../support/v$RAILS_VERSION"
 fi
@@ -15,7 +15,10 @@ fi
 rm $wd/../../Gemfile.lock 2>/dev/null # clean up Gemfile.lock first
 bundle install
 
+echo "===================================================================="
+echo "Run test for folder:"
 echo $rails_dir
+echo "===================================================================="
 
 # update gems in rails_dir
 cd $rails_dir

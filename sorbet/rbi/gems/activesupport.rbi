@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/activesupport/all/activesupport.rbi
 #
-# activesupport-5.2.4.2
+# activesupport-5.2.6
 
 class Array
   def as_json(options = nil); end
@@ -18,9 +18,13 @@ class Array
   def forty_two; end
   def fourth; end
   def from(position); end
+  def in_groups(number, fill_with = nil); end
+  def in_groups_of(number, fill_with = nil); end
+  def inquiry; end
   def second; end
   def second_to_last; end
-  def self.wrap(object); end
+  def self.[](*arg0); end
+  def split(value = nil); end
   def third; end
   def third_to_last; end
   def to(position); end
@@ -59,8 +63,8 @@ class Hash
   def reverse_merge!(other_hash); end
   def reverse_merge(other_hash); end
   def reverse_update(other_hash); end
-  def self.from_trusted_xml(xml); end
-  def self.try_convert(arg0); end
+  def self.[](*arg0); end
+  def self.from_xml(xml, disallowed_types = nil); end
   def slice!(*keys); end
   def stringify_keys!; end
   def stringify_keys; end
@@ -173,7 +177,6 @@ class ActiveSupport::Deprecation
   def self.gem_name(*args, &block); end
   def self.gem_name=(arg); end
   def self.initialize(*args, &block); end
-  def self.instance; end
   def self.silence(*args, &block); end
   def self.silenced(*args, &block); end
   def self.silenced=(arg); end
@@ -1231,6 +1234,7 @@ class IO
 end
 class Range
   def as_json(options = nil); end
+  def overlaps?(other); end
   def sum(identity = nil); end
 end
 class URI::Generic
@@ -1862,4 +1866,31 @@ class ActiveSupport::Multibyte::Chars
   def upcase; end
   def wrapped_string; end
   include Comparable
+end
+class ActiveSupport::StringInquirer < String
+  def method_missing(method_name, *arguments); end
+  def respond_to_missing?(method_name, include_private = nil); end
+end
+class ActiveSupport::ArrayInquirer < Array
+  def any?(*candidates); end
+  def method_missing(name, *args); end
+  def respond_to_missing?(name, include_private = nil); end
+end
+module ActiveSupport::RangeWithFormat
+  def to_default_s(format = nil); end
+  def to_formatted_s(format = nil); end
+  def to_s(format = nil); end
+end
+module ActiveSupport::CompareWithRange
+  def ===(value); end
+  def cover?(value); end
+  def include?(value); end
+end
+module ActiveSupport::IncludeTimeWithZone
+  def include?(value); end
+end
+module ActiveSupport::EachTimeWithZone
+  def each(&block); end
+  def ensure_iteration_allowed; end
+  def step(n = nil, &block); end
 end

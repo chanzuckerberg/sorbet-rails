@@ -42,3 +42,7 @@ module ActiveModel::Validations
     def validators_on(*attributes); end
   end
 end
+
+class ActiveRecord::Type::Serialized
+  def coder; end
+end

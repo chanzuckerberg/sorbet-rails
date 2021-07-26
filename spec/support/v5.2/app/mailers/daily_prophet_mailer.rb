@@ -1,4 +1,4 @@
-# typed: strong
+# typed: ignore
 class DailyProphetMailer < ApplicationMailer
   extend T::Sig
 

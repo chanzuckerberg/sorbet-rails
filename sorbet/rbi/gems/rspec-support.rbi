@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/rspec-support/all/rspec-support.rbi
 #
-# rspec-support-3.9.3
+# rspec-support-3.10.2
 
 module RSpec
   extend RSpec::Support::Warnings

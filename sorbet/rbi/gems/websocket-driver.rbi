@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/websocket-driver/all/websocket-driver.rbi
 #
-# websocket-driver-0.7.1
+# websocket-driver-0.7.5
 
 module WebSocket::Mask
   def self.mask(arg0, arg1); end
@@ -28,7 +28,7 @@ class WebSocket::Driver
   def queue(message); end
   def ready_state; end
   def self.client(socket, options = nil); end
-  def self.encode(string, encoding = nil); end
+  def self.encode(data, encoding = nil); end
   def self.rack(socket, options = nil); end
   def self.server(socket, options = nil); end
   def self.validate_options(options, valid_keys); end
