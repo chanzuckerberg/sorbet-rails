@@ -1,4 +1,4 @@
-# typed: false
+# typed: ignore
 class HogwartsAcceptanceMailer < ApplicationMailer
   extend T::Sig
 

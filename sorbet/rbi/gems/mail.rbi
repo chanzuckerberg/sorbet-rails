@@ -247,7 +247,6 @@ class Mail::Configuration
   def param_encode_language(value = nil); end
   def retriever_method(method = nil, settings = nil); end
   def self.allocate; end
-  def self.instance; end
   def self.new(*arg0); end
   extend Singleton::SingletonClassMethods
   include Singleton

@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/rspec-mocks/all/rspec-mocks.rbi
 #
-# rspec-mocks-3.9.1
+# rspec-mocks-3.10.2
 
 module RSpec
 end
@@ -200,6 +200,7 @@ class RSpec::Mocks::Proxy
   def as_null_object; end
   def build_expectation(method_name); end
   def check_for_unexpected_arguments(expectation); end
+  def ensure_can_be_proxied!(object); end
   def ensure_implemented(*_args); end
   def find_almost_matching_expectation(method_name, *args); end
   def find_almost_matching_stub(method_name, *args); end

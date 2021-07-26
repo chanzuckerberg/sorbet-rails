@@ -121,7 +121,7 @@ T.assert_type!(Wizard.all.find_each, T::Enumerator[Wizard])
 Wizard.all.find_in_batches { |w| T.assert_type!(w, T::Array[Wizard]) }
 T.assert_type!(Wizard.all.find_in_batches, T::Enumerator[T::Array[Wizard]])
 Wizard.all.in_batches { |w| T.assert_type!(w, Wizard::ActiveRecord_Relation) }
-T.assert_type!(Wizard.all.in_batches, T::Enumerable[Wizard::ActiveRecord_Relation])
+T.assert_type!(Wizard.all.in_batches, ActiveRecord::Batches::BatchEnumerator)
 # T.assert_type!(Wizard.all.destroy_all, T::Array[Wizard]) # Ignored until we add support
 T.assert_type!(Wizard.all.any?, T::Boolean)
 T.assert_type!(Wizard.all.many?, T::Boolean)
@@ -185,7 +185,7 @@ T.assert_type!(spell_books.find_each, T::Enumerator[SpellBook])
 spell_books.find_in_batches { |s| T.assert_type!(s, T::Array[SpellBook]) }
 T.assert_type!(spell_books.find_in_batches, T::Enumerator[T::Array[SpellBook]])
 spell_books.in_batches { |s| T.assert_type!(s, SpellBook::ActiveRecord_AssociationRelation) }
-T.assert_type!(spell_books.in_batches, T::Enumerable[SpellBook::ActiveRecord_AssociationRelation])
+T.assert_type!(spell_books.in_batches, ActiveRecord::Batches::BatchEnumerator)
 # T.assert_type!(spell_books.destroy_all, T::Array[SpellBook]) # Ignored until we add support
 T.assert_type!(spell_books.any?, T::Boolean)
 T.assert_type!(spell_books.many?, T::Boolean)
@@ -257,7 +257,7 @@ T.assert_type!(spell_books_query.find_each, T::Enumerator[SpellBook])
 spell_books_query.find_in_batches { |s| T.assert_type!(s, T::Array[SpellBook]) }
 T.assert_type!(spell_books_query.find_in_batches, T::Enumerator[T::Array[SpellBook]])
 spell_books_query.in_batches { |s| T.assert_type!(s, SpellBook::ActiveRecord_AssociationRelation) }
-T.assert_type!(spell_books_query.in_batches, T::Enumerable[SpellBook::ActiveRecord_AssociationRelation])
+T.assert_type!(spell_books_query.in_batches, ActiveRecord::Batches::BatchEnumerator)
 # T.assert_type!(spell_books_query.destroy_all, T::Array[SpellBook]) # Ignored until we add support
 T.assert_type!(spell_books_query.any?, T::Boolean)
 T.assert_type!(spell_books_query.many?, T::Boolean)

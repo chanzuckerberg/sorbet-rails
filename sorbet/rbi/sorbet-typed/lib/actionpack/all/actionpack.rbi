@@ -5,23 +5,317 @@
 #
 #   https://github.com/sorbet/sorbet-typed/edit/master/lib/actionpack/all/actionpack.rbi
 #
-# typed: strong
+# typed: ignore
 
-class ActionController::Base < ActionController::Metal
+# https://github.com/rails/rails/blob/5-2-stable/actionpack/lib/action_controller.rb
+module ActionController; end
+
+# https://api.rubyonrails.org/classes/AbstractController/Callbacks/ClassMethods.html
+module AbstractController::Callbacks::ClassMethods
+  sig do
+    params(
+      names: T.any(Symbol, Proc),
+      except: T.nilable(T.any(Symbol, T::Array[Symbol])),
+      only: T.nilable(T.any(Symbol, T::Array[Symbol])),
+      if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+      unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+      raise: T::Boolean,
+      block: T.nilable(T.proc.returns(T.untyped))
+    ).void
+  end
+  def after_action(*names, except: nil, only: nil, if: nil, unless: nil, raise: true, &block); end
+
+  # append_after_action is an alias of after_action
+  sig do
+    params(
+      names: T.any(Symbol, Proc),
+      except: T.nilable(T.any(Symbol, T::Array[Symbol])),
+      only: T.nilable(T.any(Symbol, T::Array[Symbol])),
+      if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+      unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+      raise: T::Boolean,
+      block: T.nilable(T.proc.returns(T.untyped))
+    ).void
+  end
+  def append_after_action(*names, except: nil, only: nil, if: nil, unless: nil, raise: true, &block); end
+
+  # append_around_action is an alias of around_action
+  sig do
+    params(
+      names: T.any(Symbol, Proc),
+      except: T.nilable(T.any(Symbol, T::Array[Symbol])),
+      only: T.nilable(T.any(Symbol, T::Array[Symbol])),
+      if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+      unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+      raise: T::Boolean,
+      block: T.nilable(T.proc.returns(T.untyped))
+    ).void
+  end
+  def append_around_action(*names, except: nil, only: nil, if: nil, unless: nil, raise: true, &block); end
+
+  # append_before_action is an alias of before_action
+  sig do
+    params(
+      names: T.any(Symbol, Proc),
+      except: T.nilable(T.any(Symbol, T::Array[Symbol])),
+      only: T.nilable(T.any(Symbol, T::Array[Symbol])),
+      if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+      unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+      raise: T::Boolean,
+      block: T.nilable(T.proc.returns(T.untyped))
+    ).void
+  end
+  def append_before_action(*names, except: nil, only: nil, if: nil, unless: nil, raise: true, &block); end
+
+  sig do
+    params(
+      names: T.any(Symbol, Proc),
+      except: T.nilable(T.any(Symbol, T::Array[Symbol])),
+      only: T.nilable(T.any(Symbol, T::Array[Symbol])),
+      if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+      unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+      raise: T::Boolean,
+      block: T.nilable(T.proc.returns(T.untyped))
+    ).void
+  end
+  def around_action(*names, except: nil, only: nil, if: nil, unless: nil, raise: true, &block); end
+
+  sig do
+    params(
+      names: T.any(Symbol, Proc),
+      except: T.nilable(T.any(Symbol, T::Array[Symbol])),
+      only: T.nilable(T.any(Symbol, T::Array[Symbol])),
+      if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+      unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+      raise: T::Boolean,
+      block: T.nilable(T.proc.returns(T.untyped))
+    ).void
+  end
+  def before_action(*names, except: nil, only: nil, if: nil, unless: nil, raise: true, &block); end
+
+  sig do
+    params(
+      names: T.any(Symbol, Proc),
+      except: T.nilable(T.any(Symbol, T::Array[Symbol])),
+      only: T.nilable(T.any(Symbol, T::Array[Symbol])),
+      if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+      unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+      raise: T::Boolean,
+      block: T.nilable(T.proc.returns(T.untyped))
+    ).void
+  end
+  def prepend_after_action(*names, except: nil, only: nil, if: nil, unless: nil, raise: true, &block); end
+
+  sig do
+    params(
+      names: T.any(Symbol, Proc),
+      except: T.nilable(T.any(Symbol, T::Array[Symbol])),
+      only: T.nilable(T.any(Symbol, T::Array[Symbol])),
+      if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+      unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+      raise: T::Boolean,
+      block: T.nilable(T.proc.returns(T.untyped))
+    ).void
+  end
+  def prepend_around_action(*names, except: nil, only: nil, if: nil, unless: nil, raise: true, &block); end
+
+  sig do
+    params(
+      names: T.any(Symbol, Proc),
+      except: T.nilable(T.any(Symbol, T::Array[Symbol])),
+      only: T.nilable(T.any(Symbol, T::Array[Symbol])),
+      if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+      unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+      raise: T::Boolean,
+      block: T.nilable(T.proc.returns(T.untyped))
+    ).void
+  end
+  def prepend_before_action(*names, except: nil, only: nil, if: nil, unless: nil, raise: true, &block); end
+
+  sig do
+    params(
+      names: T.any(Symbol, Proc),
+      except: T.nilable(T.any(Symbol, T::Array[Symbol])),
+      only: T.nilable(T.any(Symbol, T::Array[Symbol])),
+      if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+      unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+      raise: T::Boolean
+    ).void
+  end
+  def skip_after_action(*names, except: nil, only: nil, if: nil, unless: nil, raise: true); end
+
+  sig do
+    params(
+      names: T.any(Symbol, Proc),
+      except: T.nilable(T.any(Symbol, T::Array[Symbol])),
+      only: T.nilable(T.any(Symbol, T::Array[Symbol])),
+      if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+      unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+      raise: T::Boolean
+    ).void
+  end
+  def skip_around_action(*names, except: nil, only: nil, if: nil, unless: nil, raise: true); end
+
+  sig do
+    params(
+      names: T.any(Symbol, Proc),
+      except: T.nilable(T.any(Symbol, T::Array[Symbol])),
+      only: T.nilable(T.any(Symbol, T::Array[Symbol])),
+      if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+      unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+      raise: T::Boolean
+    ).void
+  end
+  def skip_before_action(*names, except: nil, only: nil, if: nil, unless: nil, raise: true); end
 end
 
-class AbstractController::Base < Object
+class AbstractController::Base
+end
+
+module AbstractController::Helpers
+  mixes_in_class_methods(::AbstractController::Helpers::ClassMethods)
+end
+
+module AbstractController::Helpers::ClassMethods; end
+
+module AbstractController::UrlFor
+  mixes_in_class_methods(::AbstractController::UrlFor::ClassMethods)
+end
+
+module AbstractController::UrlFor::ClassMethods; end
+
+class ActionController::Base < ::ActionController::Metal
+  include(::ActiveSupport::Rescuable)
+end
+
+class ActionController::API
+  MODULES = T.let(T.unsafe(nil), T::Array[T.untyped])
+end
+
+ActionController::Base::MODULES = T.let(T.unsafe(nil), T::Array[T.untyped])
+
+ActionController::Base::PROTECTED_IVARS = T.let(T.unsafe(nil), T::Set[T.untyped])
+
+module ActionController::Flash::ClassMethods
+  sig { params(types: Symbol).void }
+  def add_flash_types(*types); end
+end
+
+module ActionController::Helpers
+  mixes_in_class_methods(::ActionController::Helpers::ClassMethods)
+end
+
+module ActionController::Helpers::ClassMethods
+  sig { returns(ActionView::Base) }
+  def helpers; end
+end
+
+class ActionController::InvalidAuthenticityToken < ::ActionController::ActionControllerError
+end
+
+class ActionController::InvalidCrossOriginRequest < ::ActionController::ActionControllerError
 end
 
 class ActionController::Metal < AbstractController::Base
+  sig { returns(ActionController::Parameters) }
+  def params; end
+
+  def params=(val); end
+  def performed?; end
+
   sig { returns(ActionDispatch::Request) }
-  def request(); end
+  def request; end
+
+  def request=(_); end
+  def reset_session; end
 
   sig { returns(ActionDispatch::Response) }
-  def response(); end
+  def response; end
+end
 
+# https://api.rubyonrails.org/classes/ActionController/MimeResponds.html
+module ActionController::MimeResponds
+  sig do
+    params(
+      mimes: T.nilable(Symbol),
+      block: T.nilable(T.proc.params(arg0: ActionController::MimeResponds::Collector).void)
+    ).void
+  end
+  def respond_to(*mimes, &block); end
+end
+
+ActionController::Renderer::DEFAULTS = T.let(T.unsafe(nil), T::Hash[T.untyped, T.untyped])
+
+ActionController::Renderer::IDENTITY = T.let(T.unsafe(nil), Proc)
+
+ActionController::Renderer::RACK_KEY_TRANSLATION = T.let(T.unsafe(nil), T::Hash[T.untyped, T.untyped])
+
+ActionController::Renderer::RACK_VALUE_TRANSLATION = T.let(T.unsafe(nil), T::Hash[T.untyped, T.untyped])
+
+module ActionController::Renderers
+  mixes_in_class_methods(::ActionController::Renderers::ClassMethods)
+end
+
+module ActionController::Renderers::ClassMethods; end
+
+ActionController::Renderers::RENDERERS = T.let(T.unsafe(nil), T::Set[T.untyped])
+
+module ActionController::Rendering
+  mixes_in_class_methods(::ActionController::Rendering::ClassMethods)
+end
+
+module ActionController::Rendering::ClassMethods; end
+
+ActionController::Rendering::RENDER_FORMATS_IN_PRIORITY = T.let(T.unsafe(nil), T::Array[T.untyped])
+
+module ActionController::RequestForgeryProtection
+  private
+
+  # https://github.com/rails/rails/blob/5-2-stable/actionpack/lib/action_controller/metal/request_forgery_protection.rb#L435
+  sig { returns(T::Boolean) }
+  def protect_against_forgery?; end
+
+  # https://github.com/rails/rails/blob/5-2-stable/actionpack/lib/action_controller/metal/request_forgery_protection.rb#L307
+  sig { params(form_options: T::Hash[T.untyped, T.untyped]).returns(String)  }
+  def form_authenticity_token(form_options: {}); end
+end
+
+module ActionController::RequestForgeryProtection::ClassMethods
+  sig do
+    params(
+      only: T.any(T::Array[Symbol], Symbol),
+      except: T.nilable(T.any(T::Array[Symbol], Symbol)),
+      if: T.untyped,
+      unless: T.untyped,
+      prepend: T.untyped,
+      with: T.nilable(Symbol),
+      exception: T.untyped,
+      reset_session: T.untyped,
+      null_session: T.untyped
+    ).void
+  end
+  def protect_from_forgery(only: nil, except: nil, if: nil, unless: nil, prepend: false, with: nil, exception: nil, reset_session: nil, null_session: nil); end
+
+  sig { params(options: T::Hash[T.untyped, T.untyped]).void }
+  def skip_forgery_protection(options = T.unsafe(nil)); end
+end
+
+ActionController::RespondToMismatchError::DEFAULT_MESSAGE = T.let(T.unsafe(nil), String)
+
+ActionController::SessionOverflowError::DEFAULT_MESSAGE = T.let(T.unsafe(nil), String)
+
+module ActionController::StrongParameters
   sig { returns(ActionController::Parameters) }
-  def params(); end
+  def params; end
+end
+
+class ActionController::UnknownFormat < ::ActionController::ActionControllerError
+end
+
+class ActionController::UnknownHttpMethod < ::ActionController::ActionControllerError
+end
+
+class ActionController::UrlGenerationError < ::ActionController::ActionControllerError
 end
 
 module ActionDispatch::Http::Parameters
@@ -32,6 +326,11 @@ module ActionDispatch::Http::Parameters
   sig { returns(ActionController::Parameters) }
   def params(); end
 end
+
+class ActionDispatch::RemoteIp::IpSpoofAttackError < ::StandardError
+end
+
+ActionDispatch::RemoteIp::TRUSTED_PROXIES = T.let(T.unsafe(nil), T::Array[T.untyped])
 
 class ActionDispatch::Request
   # Provides access to the request's HTTP headers, for example:
@@ -119,11 +418,90 @@ class ActionDispatch::Request
   def local?; end
 end
 
-class ActionDispatch::Response
+ActionDispatch::Response::CONTENT_TYPE = T.let(T.unsafe(nil), String)
+
+ActionDispatch::Response::CONTENT_TYPE_PARSER = T.let(T.unsafe(nil), Regexp)
+
+ActionDispatch::Response::LOCATION = T.let(T.unsafe(nil), String)
+
+ActionDispatch::Response::NO_CONTENT_CODES = T.let(T.unsafe(nil), T::Array[T.untyped])
+
+ActionDispatch::Response::NullContentTypeHeader = T.let(T.unsafe(nil), ActionDispatch::Response::ContentTypeHeader)
+
+ActionDispatch::Response::SET_COOKIE = T.let(T.unsafe(nil), String)
+
+ActionDispatch::Http::Cache::Request::HTTP_IF_MODIFIED_SINCE = T.let(T.unsafe(nil), String)
+
+ActionDispatch::Http::Cache::Request::HTTP_IF_NONE_MATCH = T.let(T.unsafe(nil), String)
+
+ActionDispatch::Http::Cache::Response::DATE = T.let(T.unsafe(nil), String)
+
+ActionDispatch::Http::Cache::Response::DEFAULT_CACHE_CONTROL = T.let(T.unsafe(nil), String)
+
+ActionDispatch::Http::Cache::Response::LAST_MODIFIED = T.let(T.unsafe(nil), String)
+
+ActionDispatch::Http::Cache::Response::MUST_REVALIDATE = T.let(T.unsafe(nil), String)
+
+ActionDispatch::Http::Cache::Response::NO_CACHE = T.let(T.unsafe(nil), String)
+
+ActionDispatch::Http::Cache::Response::PRIVATE = T.let(T.unsafe(nil), String)
+
+ActionDispatch::Http::Cache::Response::PUBLIC = T.let(T.unsafe(nil), String)
+
+ActionDispatch::Http::Cache::Response::SPECIAL_KEYS = T.let(T.unsafe(nil), T::Set[T.untyped])
+
+ActionDispatch::Http::ContentDisposition::RFC_5987_ESCAPED_CHAR = T.let(T.unsafe(nil), Regexp)
+
+ActionDispatch::Http::ContentDisposition::TRADITIONAL_ESCAPED_CHAR = T.let(T.unsafe(nil), Regexp)
+
+ActionDispatch::Http::FilterParameters::ENV_MATCH = T.let(T.unsafe(nil), T::Array[T.untyped])
+
+ActionDispatch::Http::FilterParameters::KV_RE = T.let(T.unsafe(nil), String)
+
+ActionDispatch::Http::FilterParameters::NULL_ENV_FILTER = T.let(T.unsafe(nil), ActiveSupport::ParameterFilter)
+
+ActionDispatch::Http::FilterParameters::NULL_PARAM_FILTER = T.let(T.unsafe(nil), ActiveSupport::ParameterFilter)
+
+ActionDispatch::Http::FilterParameters::PAIR_RE = T.let(T.unsafe(nil), Regexp)
+
+ActionDispatch::Http::FilterRedirect::FILTERED = T.let(T.unsafe(nil), String)
+
+ActionDispatch::Http::Headers::CGI_VARIABLES = T.let(T.unsafe(nil), T::Set[T.untyped])
+
+ActionDispatch::Http::Headers::DEFAULT = T.let(T.unsafe(nil), Object)
+
+ActionDispatch::Http::Headers::HTTP_HEADER = T.let(T.unsafe(nil), Regexp)
+
+ActionDispatch::Http::MimeNegotiation::BROWSER_LIKE_ACCEPTS = T.let(T.unsafe(nil), Regexp)
+
+ActionDispatch::Http::MimeNegotiation::RESCUABLE_MIME_FORMAT_ERRORS = T.let(T.unsafe(nil), T::Array[T.untyped])
+
+ActionDispatch::Http::ParameterFilter = ActiveSupport::ParameterFilter
+
+module ActionDispatch::Http::Parameters
+  mixes_in_class_methods(::ActionDispatch::Http::Parameters::ClassMethods)
 end
 
-class ActionDispatch::Http::Headers
+module ActionDispatch::Http::Parameters::ClassMethods; end
+
+ActionDispatch::Http::Parameters::DEFAULT_PARSERS = T.let(T.unsafe(nil), T::Hash[T.untyped, T.untyped])
+
+ActionDispatch::Http::Parameters::PARAMETERS_KEY = T.let(T.unsafe(nil), String)
+
+class ActionDispatch::Http::Parameters::ParseError < ::StandardError
 end
+
+ActionDispatch::Http::URL::HOST_REGEXP = T.let(T.unsafe(nil), Regexp)
+
+ActionDispatch::Http::URL::IP_HOST_REGEXP = T.let(T.unsafe(nil), Regexp)
+
+ActionDispatch::Http::URL::PROTOCOL_REGEXP = T.let(T.unsafe(nil), Regexp)
+
+ActionDispatch::Http::Headers::CGI_VARIABLES = T.let(T.unsafe(nil), T::Set[T.untyped])
+
+ActionDispatch::Http::Headers::DEFAULT = T.let(T.unsafe(nil), Object)
+
+ActionDispatch::Http::Headers::HTTP_HEADER = T.let(T.unsafe(nil), Regexp)
 
 class ActionController::Parameters
   sig { params(other: ActionController::Parameters).returns(T::Boolean) }
@@ -367,46 +745,9 @@ class ActionController::Parameters
   def values_at(*keys); end
 end
 
-module ActionController::StrongParameters
-  sig { returns(ActionController::Parameters) }
-  def params; end
-end
-
 class ActionDispatch::Routing::RouteSet
   sig { params(blk: T.proc.bind(ActionDispatch::Routing::Mapper).void).void }
   def draw(&blk); end
-end
-
-module ActionController::Flash::ClassMethods
-  sig { params(types: Symbol).void }
-  def add_flash_types(*types); end
-end
-
-module ActionController::RequestForgeryProtection::ClassMethods
-  sig do
-    params(
-      only: T.any(T::Array[Symbol], Symbol),
-      except: T.nilable(T.any(T::Array[Symbol], Symbol)),
-      if: T.untyped,
-      unless: T.untyped,
-      prepend: T.untyped,
-      with: T.nilable(Symbol),
-      exception: T.untyped,
-      reset_session: T.untyped,
-      null_session: T.untyped
-    ).void
-  end
-  def protect_from_forgery(
-    only: nil,
-    except: nil,
-    if: nil,
-    unless: nil,
-    prepend: false,
-    with: nil,
-    exception: nil,
-    reset_session: nil,
-    null_session: nil
-  ); end
 end
 
 module ActionDispatch::Routing::Mapper::HttpHelpers
@@ -458,7 +799,7 @@ module ActionDispatch::Routing::Mapper::HttpHelpers
       module: T.nilable(T.any(String, Symbol)),
       as: T.nilable(T.any(String, Symbol)),
       via: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      to: T.nilable(T.any(String, Symbol, T.proc.returns(T.untyped))),
+      to: T.nilable(T.any(String, Symbol, T.proc.params(arg0: T.untyped).returns(T.untyped))),
       on: T.nilable(Symbol),
       constraints: T.untyped,
       defaults: T.nilable(T::Hash[T.untyped, T.untyped]),
@@ -769,186 +1110,20 @@ module ActionDispatch::Routing::Mapper::Resources
   def shallow?; end
 end
 
-# https://api.rubyonrails.org/classes/AbstractController/Callbacks/ClassMethods.html
-module AbstractController::Callbacks::ClassMethods
-  sig do
-    params(
-      names: Symbol,
-      except: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      only: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      raise: T::Boolean,
-      block: T.nilable(T.proc.returns(T.untyped))
-    ).void
-  end
-  def after_action(*names, except: nil, only: nil, if: nil, unless: nil, raise: true, &block); end
+Mime::ALL = T.let(T.unsafe(nil), Mime::AllType)
 
-  # append_after_action is an alias of after_action
-  sig do
-    params(
-      names: Symbol,
-      except: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      only: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      raise: T::Boolean,
-      block: T.nilable(T.proc.returns(T.untyped))
-    ).void
-  end
-  def append_after_action(*names, except: nil, only: nil, if: nil, unless: nil, raise: true, &block); end
+Mime::EXTENSION_LOOKUP = T.let(T.unsafe(nil), T::Hash[T.untyped, T.untyped])
 
-  # append_around_action is an alias of around_action
-  sig do
-    params(
-      names: Symbol,
-      except: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      only: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      raise: T::Boolean,
-      block: T.nilable(T.proc.returns(T.untyped))
-    ).void
-  end
-  def append_around_action(*names, except: nil, only: nil, if: nil, unless: nil, raise: true, &block); end
+Mime::LOOKUP = T.let(T.unsafe(nil), T::Hash[T.untyped, T.untyped])
 
-  # append_before_action is an alias of before_action
-  sig do
-    params(
-      names: Symbol,
-      except: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      only: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      raise: T::Boolean,
-      block: T.nilable(T.proc.returns(T.untyped))
-    ).void
-  end
-  def append_before_action(*names, except: nil, only: nil, if: nil, unless: nil, raise: true, &block); end
+Mime::SET = T.let(T.unsafe(nil), Mime::Mimes)
 
-  sig do
-    params(
-      names: Symbol,
-      except: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      only: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      raise: T::Boolean,
-      block: T.nilable(T.proc.returns(T.untyped))
-    ).void
-  end
-  def around_action(*names, except: nil, only: nil, if: nil, unless: nil, raise: true, &block); end
+Mime::Type::MIME_NAME = T.let(T.unsafe(nil), String)
 
-  sig do
-    params(
-      names: Symbol,
-      except: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      only: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      raise: T::Boolean,
-      block: T.nilable(T.proc.returns(T.untyped))
-    ).void
-  end
-  def before_action(*names, except: nil, only: nil, if: nil, unless: nil, raise: true, &block); end
+Mime::Type::MIME_PARAMETER = T.let(T.unsafe(nil), String)
 
-  sig do
-    params(
-      names: Symbol,
-      except: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      only: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      raise: T::Boolean,
-      block: T.nilable(T.proc.returns(T.untyped))
-    ).void
-  end
-  def prepend_after_action(*names, except: nil, only: nil, if: nil, unless: nil, raise: true, &block); end
+Mime::Type::MIME_PARAMETER_KEY = T.let(T.unsafe(nil), String)
 
-  sig do
-    params(
-      names: Symbol,
-      except: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      only: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      raise: T::Boolean,
-      block: T.nilable(T.proc.returns(T.untyped))
-    ).void
-  end
-  def prepend_around_action(*names, except: nil, only: nil, if: nil, unless: nil, raise: true, &block); end
+Mime::Type::MIME_PARAMETER_VALUE = T.let(T.unsafe(nil), String)
 
-  sig do
-    params(
-      names: Symbol,
-      except: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      only: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      raise: T::Boolean,
-      block: T.nilable(T.proc.returns(T.untyped))
-    ).void
-  end
-  def prepend_before_action(*names, except: nil, only: nil, if: nil, unless: nil, raise: true, &block); end
-
-  sig do
-    params(
-      names: Symbol,
-      except: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      only: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      raise: T::Boolean
-    ).void
-  end
-  def skip_after_action(*names, except: nil, only: nil, if: nil, unless: nil, raise: true); end
-
-  sig do
-    params(
-      names: Symbol,
-      except: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      only: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      raise: T::Boolean
-    ).void
-  end
-  def skip_around_action(*names, except: nil, only: nil, if: nil, unless: nil, raise: true); end
-
-  sig do
-    params(
-      names: Symbol,
-      except: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      only: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      raise: T::Boolean
-    ).void
-  end
-  def skip_before_action(*names, except: nil, only: nil, if: nil, unless: nil, raise: true); end
-end
-
-# https://api.rubyonrails.org/classes/ActionController/MimeResponds.html
-module ActionController::MimeResponds
-  sig do
-    params(
-      mimes: T.nilable(Symbol),
-      block: T.nilable(T.proc.params(arg0: ActionController::MimeResponds::Collector).void)
-    ).void
-  end
-  def respond_to(*mimes, &block); end
-end
-
-class ActionController::MimeResponds::Collector
-  sig { params(block: T.nilable(T.proc.void)).void }
-  def html(&block); end
-
-  sig { params(block: T.nilable(T.proc.void)).void }
-  def js(&block); end
-
-  sig { params(block: T.nilable(T.proc.void)).void }
-  def json(&block); end
-
-  sig { params(block: T.nilable(T.proc.void)).void }
-  def xml(&block); end
-end
+Mime::Type::MIME_REGEXP = T.let(T.unsafe(nil), Regexp)
