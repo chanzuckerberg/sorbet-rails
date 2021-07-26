@@ -40,8 +40,6 @@ module ActiveStorage::Attachment; end
 module ActiveStorage::Blob::Analyzable; end
 module ActiveStorage::Blob::Identifiable; end
 module ActiveStorage::Variant; end
-module Mail::CheckDeliveryParams; end
-module Mail::Ruby19; end
 module Parser::CurrentRuby; end
 module ShrinePlugin::Shrine::Attachment; end
 module ShrinePlugin::Shrine::Plugins::RemoteUrl::AttachmentMethods; end
@@ -51,3 +49,13 @@ module T::Private::Abstract::Hooks; end
 module T::Private::Methods::MethodHooks; end
 module T::Private::Methods::Signature; end
 module T::Private::Methods::SingletonMethodHooks; end
+
+# ---
+# Somehow locally sorbet doesn't detect these missing classes
+# actionpack.rbi from sorbet-typed
+class Anonymous_Delegator_1; end
+class Anonymous_Delegator_3; end
+class ActiveRecord::ConnectionAdapters::Column; end
+class ActiveRecord::Type::Time; end
+class ActiveRecord::ConnectionAdapters::ColumnDefinition; end
+module ActiveRecord::ConnectionHandling; end
