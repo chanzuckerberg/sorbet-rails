@@ -2,6 +2,7 @@
 #   srb rbi todo
 
 # typed: strong
+module ::AASM; end
 module ::AttrJson::AttributeDefinition; end
 module ::AttrJson::Record; end
 module ::AttrJson::Record::Dirty; end
