@@ -90,6 +90,9 @@ module SorbetRails::ModelPlugins
     when :aasm
       require('sorbet-rails/gem_plugins/aasm_plugin')
       AasmPlugin
+    when :money_rails
+      require('sorbet-rails/gem_plugins/money_rails_plugin')
+      MoneyRailsPlugin
     else
       raise UnrecognizedPluginName.new(
         "Unrecognized plugin with name: #{plugin_name}. Please check available plugins in the
