@@ -35,7 +35,11 @@ module SorbetRails::ModelPlugins
       column_type = @model_class.type_for_attribute(column_name)
       return unless column_type.is_a?(ActiveRecord::Type::Serialized)
 
-      column_type.coder.try(:object_class) || Object
+      if column_type.coder.respond_to?(:object_class)
+        column_type.coder.object_class
+      else
+        Object
+      end
     end
   end
 end
