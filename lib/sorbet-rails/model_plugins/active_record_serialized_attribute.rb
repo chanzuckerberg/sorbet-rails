@@ -60,9 +60,8 @@ class SorbetRails::ModelPlugins::ActiveRecordSerializedAttribute < SorbetRails::
       # ActiveSupport::JSON.encode/ActiveSupport::JSON.decode
       # note that Hash keys are Strings since this is JSON
       'T.any(T::Array[T.untyped], T::Boolean, Float, T::Hash[String, T.untyped], Integer, String)'
-    else
-      # unknown uses YAML.load/YAML.dump
+    when 'Object', ''
       'T.any(T::Array[T.untyped], T::Boolean, Float, T::Hash[T.untyped, T.untyped], Integer, String)'
-    end
+      serialization_coder.to_s
   end
 end
