@@ -48,7 +48,7 @@ module Spell::CustomFinderMethods
   sig { params(args: T::Array[T.any(Integer, String)]).returns(T::Array[Spell]) }
   def find_n(*args); end
 
-  sig { params(id: Integer).returns(T.nilable(Spell)) }
+  sig { params(id: T.nilable(Integer)).returns(T.nilable(Spell)) }
   def find_by_id(id); end
 
   sig { params(id: Integer).returns(Spell) }

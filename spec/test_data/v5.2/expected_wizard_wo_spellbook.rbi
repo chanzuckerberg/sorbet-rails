@@ -130,10 +130,10 @@ module Wizard::GeneratedSerializedAttributeMethods
   sig { returns(T::Boolean) }
   def owl_results?; end
 
-  sig { returns(T.nilable(T.any(T::Array[T.untyped], T::Boolean, Float, T::Hash[T.untyped, T.untyped], Integer, String))) }
+  sig { returns(T.nilable(ActiveRecord::Coders::JSON)) }
   def patronus_characteristics; end
 
-  sig { params(value: T.nilable(T.any(T::Array[T.untyped], T::Boolean, Float, T::Hash[T.untyped, T.untyped], Integer, String))).void }
+  sig { params(value: T.nilable(ActiveRecord::Coders::JSON)).void }
   def patronus_characteristics=(value); end
 
   sig { returns(T::Boolean) }
@@ -382,7 +382,7 @@ module Wizard::CustomFinderMethods
   sig { params(args: T::Array[T.any(Integer, String)]).returns(T::Array[Wizard]) }
   def find_n(*args); end
 
-  sig { params(id: Integer).returns(T.nilable(Wizard)) }
+  sig { params(id: T.nilable(Integer)).returns(T.nilable(Wizard)) }
   def find_by_id(id); end
 
   sig { params(id: Integer).returns(Wizard) }
