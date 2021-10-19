@@ -1,6 +1,6 @@
 # sorbet-rails
 [![Gem Version](https://badge.fury.io/rb/sorbet-rails.svg)](https://badge.fury.io/rb/sorbet-rails)
-[![Build Status](https://travis-ci.com/chanzuckerberg/sorbet-rails.svg?branch=master)](https://travis-ci.com/chanzuckerberg/sorbet-rails)
+[![Build Status](https://github.com/chanzuckerberg/sorbet-rails/actions/workflows/ci-master.yml/badge.svg)](https://github.com/chanzuckerberg/sorbet-rails)
 [![codecov](https://codecov.io/gh/chanzuckerberg/sorbet-rails/branch/master/graph/badge.svg)](https://codecov.io/gh/chanzuckerberg/sorbet-rails)
 
 A set of tools to make the [Sorbet](https://sorbet.org) typechecker work with Ruby on Rails seamlessly.
