@@ -64,5 +64,6 @@ class SorbetRails::ModelPlugins::ActiveRecordSerializedAttribute < SorbetRails::
       'T.any(T::Array[T.untyped], T::Boolean, Float, T::Hash[T.untyped, T.untyped], Integer, String)'
     else
       serialization_coder.to_s
+    end
   end
 end
