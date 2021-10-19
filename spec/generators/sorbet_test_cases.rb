@@ -329,7 +329,7 @@ T.assert_type!(
 )
 T.assert_type!(
   wizard.patronus_characteristics,
-  T.nilable(T.any(T::Array[T.untyped], T::Boolean, Float, T::Hash[String, T.untyped], Integer, String))
+  T.nilable(ActiveRecord::Coders::JSON),
 )
 T.assert_type!(wizard.pets, T.nilable(T::Array[T.untyped]))
 
