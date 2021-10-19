@@ -1,0 +1,23 @@
+name: publish-gem
+
+on:
+  pull_request: # test with pull request
+  # push:
+  #   branches: # Trigger only on the main branch to avoid duplicate runs on PR branches
+  #     - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      CI: true
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Release Gem
+      uses: cadwallion/publish-rubygems-action@master
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        RUBYGEMS_API_KEY: ${{secrets.RUBYGEMS_API_KEY}}
+        RELEASE_COMMAND: rake release
