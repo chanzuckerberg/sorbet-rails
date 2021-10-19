@@ -1,0 +1,29 @@
+name: ci
+
+on:
+  push:
+    branches: # Trigger only on the main branch to avoid duplicate runs on PR branches
+      - master
+  pull_request: # Trigger All PRs
+
+jobs:
+  rspec:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby: [2.5, 2.6, 2.7]
+        rails: [5.2, 6.0, 6.1]
+
+    env:
+      RAILS_VERSION: ${{ matrix.rails }}
+      CI: true
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby }}
+        # bundler-cache: true -- this messes up some dynamic constants
+    - run: "./spec/bin/run_spec.sh"
