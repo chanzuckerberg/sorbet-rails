@@ -57,7 +57,7 @@ module School::CustomFinderMethods
   sig { params(args: T::Array[T.any(Integer, String)]).returns(T::Array[School]) }
   def find_n(*args); end
 
-  sig { params(id: Integer).returns(T.nilable(School)) }
+  sig { params(id: T.nilable(Integer)).returns(T.nilable(School)) }
   def find_by_id(id); end
 
   sig { params(id: Integer).returns(School) }

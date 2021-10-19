@@ -75,7 +75,7 @@ module Wizard::HABTM_Subjects::CustomFinderMethods
   sig { params(args: T::Array[T.any(Integer, String)]).returns(T::Array[Wizard::HABTM_Subjects]) }
   def find_n(*args); end
 
-  sig { params(id: Integer).returns(T.nilable(Wizard::HABTM_Subjects)) }
+  sig { params(id: T.nilable(Integer)).returns(T.nilable(Wizard::HABTM_Subjects)) }
   def find_by_id(id); end
 
   sig { params(id: Integer).returns(Wizard::HABTM_Subjects) }

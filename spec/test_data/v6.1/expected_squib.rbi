@@ -296,7 +296,7 @@ module Squib::CustomFinderMethods
   sig { params(args: T::Array[T.any(Integer, String)]).returns(T::Array[Squib]) }
   def find_n(*args); end
 
-  sig { params(id: Integer).returns(T.nilable(Squib)) }
+  sig { params(id: T.nilable(Integer)).returns(T.nilable(Squib)) }
   def find_by_id(id); end
 
   sig { params(id: Integer).returns(Squib) }

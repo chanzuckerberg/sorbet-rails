@@ -104,7 +104,7 @@ module SpellBook::CustomFinderMethods
   sig { params(args: T::Array[T.any(Integer, String)]).returns(T::Array[SpellBook]) }
   def find_n(*args); end
 
-  sig { params(id: Integer).returns(T.nilable(SpellBook)) }
+  sig { params(id: T.nilable(Integer)).returns(T.nilable(SpellBook)) }
   def find_by_id(id); end
 
   sig { params(id: Integer).returns(SpellBook) }

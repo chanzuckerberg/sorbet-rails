@@ -39,7 +39,7 @@ class SorbetRails::ModelPlugins::CustomFinderMethods < SorbetRails::ModelPlugins
     # allow common cases find_by_id
     custom_module_rbi.create_method(
       "find_by_id",
-      parameters: [ Parameter.new("id", type: "Integer") ],
+      parameters: [ Parameter.new("id", type: "T.nilable(Integer)") ],
       return_type: "T.nilable(#{self.model_class_name})",
     )
     custom_module_rbi.create_method(
