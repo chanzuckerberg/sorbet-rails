@@ -1,7 +1,9 @@
-name: ci
+name: ci-master
 
 on:
-  pull_request: # Trigger All PRs
+  push:
+    branches: # Trigger only on the main branch to avoid duplicate runs on PR branches
+      - master
 
 jobs:
   rspec:
