@@ -17,6 +17,14 @@ class ActionMailer::Base
   include GeneratedUrlHelpers
 end
 
+class ActionDispatch::IntegrationTest
+  include GeneratedUrlHelpers
+end
+
+class ActionDispatch::SystemTestCase
+  include GeneratedUrlHelpers
+end
+
 module GeneratedUrlHelpers
   # Sigs for route /test/index(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
