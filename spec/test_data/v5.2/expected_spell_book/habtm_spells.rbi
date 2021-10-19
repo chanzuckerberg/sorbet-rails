@@ -75,7 +75,7 @@ module SpellBook::HABTM_Spells::CustomFinderMethods
   sig { params(args: T::Array[T.any(Integer, String)]).returns(T::Array[SpellBook::HABTM_Spells]) }
   def find_n(*args); end
 
-  sig { params(id: Integer).returns(T.nilable(SpellBook::HABTM_Spells)) }
+  sig { params(id: T.nilable(Integer)).returns(T.nilable(SpellBook::HABTM_Spells)) }
   def find_by_id(id); end
 
   sig { params(id: Integer).returns(SpellBook::HABTM_Spells) }
