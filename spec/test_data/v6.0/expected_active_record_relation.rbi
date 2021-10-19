@@ -101,20 +101,20 @@ class ActiveRecord::Relation
   end
   def find_in_batches(start: nil, finish: nil, batch_size: 1000, error_on_ignore: nil, &block); end
 
+  sig { params(block: T.nilable(T.proc.params(e: Elem).returns(T::Boolean))).returns(T::Boolean) }
+  def any?(&block); end
+
+  sig { params(block: T.nilable(T.proc.params(e: Elem).returns(T::Boolean))).returns(T::Boolean) }
+  def many?(&block); end
+
+  sig { params(block: T.nilable(T.proc.params(e: Elem).returns(T::Boolean))).returns(T::Boolean) }
+  def none?(&block); end
+
+  sig { params(block: T.nilable(T.proc.params(e: Elem).returns(T::Boolean))).returns(T::Boolean) }
+  def one?(&block); end
+
   sig { params(conditions: T.untyped).returns(T::Boolean) }
   def exists?(conditions = nil); end
-
-  sig { returns(T::Boolean) }
-  def any?; end
-
-  sig { returns(T::Boolean) }
-  def many?; end
-
-  sig { returns(T::Boolean) }
-  def none?; end
-
-  sig { returns(T::Boolean) }
-  def one?; end
 
   sig { override.params(block: T.proc.params(e: Elem).void).returns(T::Array[Elem]) }
   def each(&block); end

@@ -96,18 +96,18 @@ class ActiveRecord::Base
   end
   def self.find_in_batches(start: nil, finish: nil, batch_size: 1000, error_on_ignore: nil, &block); end
 
+  sig { params(block: T.nilable(T.proc.params(e: T.attached_class).returns(T::Boolean))).returns(T::Boolean) }
+  def self.any?(&block); end
+
+  sig { params(block: T.nilable(T.proc.params(e: T.attached_class).returns(T::Boolean))).returns(T::Boolean) }
+  def self.many?(&block); end
+
+  sig { params(block: T.nilable(T.proc.params(e: T.attached_class).returns(T::Boolean))).returns(T::Boolean) }
+  def self.none?(&block); end
+
+  sig { params(block: T.nilable(T.proc.params(e: T.attached_class).returns(T::Boolean))).returns(T::Boolean) }
+  def self.one?(&block); end
+
   sig { params(conditions: T.untyped).returns(T::Boolean) }
   def self.exists?(conditions = nil); end
-
-  sig { returns(T::Boolean) }
-  def self.any?; end
-
-  sig { returns(T::Boolean) }
-  def self.many?; end
-
-  sig { returns(T::Boolean) }
-  def self.none?; end
-
-  sig { returns(T::Boolean) }
-  def self.one?; end
 end

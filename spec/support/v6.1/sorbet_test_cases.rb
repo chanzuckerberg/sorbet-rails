@@ -121,12 +121,17 @@ T.assert_type!(Wizard.all.find_each, T::Enumerator[Wizard])
 Wizard.all.find_in_batches { |w| T.assert_type!(w, T::Array[Wizard]) }
 T.assert_type!(Wizard.all.find_in_batches, T::Enumerator[T::Array[Wizard]])
 Wizard.all.in_batches { |w| T.assert_type!(w, Wizard::ActiveRecord_Relation) }
-T.assert_type!(Wizard.all.in_batches, T::Enumerable[Wizard::ActiveRecord_Relation])
+T.assert_type!(Wizard.all.in_batches, ActiveRecord::Batches::BatchEnumerator)
 # T.assert_type!(Wizard.all.destroy_all, T::Array[Wizard]) # Ignored until we add support
 T.assert_type!(Wizard.all.any?, T::Boolean)
 T.assert_type!(Wizard.all.many?, T::Boolean)
 T.assert_type!(Wizard.all.none?, T::Boolean)
 T.assert_type!(Wizard.all.one?, T::Boolean)
+T.assert_type!(Wizard.all.any? { |r| r.id > 1 }, T::Boolean)
+T.assert_type!(Wizard.all.many? { |r| r.id > 1 }, T::Boolean)
+T.assert_type!(Wizard.all.none? { |r| r.id > 1 }, T::Boolean)
+T.assert_type!(Wizard.all.one? { |r| r.id > 1 }, T::Boolean)
+
 # T.assert_type!(Wizard.all.update_all(name: 'Harry Potter'), Integer) # Ignored until we add support
 # T.assert_type!(Wizard.all.delete_all, Integer) # Ignored until we add support
 # Query methods
@@ -185,12 +190,16 @@ T.assert_type!(spell_books.find_each, T::Enumerator[SpellBook])
 spell_books.find_in_batches { |s| T.assert_type!(s, T::Array[SpellBook]) }
 T.assert_type!(spell_books.find_in_batches, T::Enumerator[T::Array[SpellBook]])
 spell_books.in_batches { |s| T.assert_type!(s, SpellBook::ActiveRecord_AssociationRelation) }
-T.assert_type!(spell_books.in_batches, T::Enumerable[SpellBook::ActiveRecord_AssociationRelation])
+T.assert_type!(spell_books.in_batches, ActiveRecord::Batches::BatchEnumerator)
 # T.assert_type!(spell_books.destroy_all, T::Array[SpellBook]) # Ignored until we add support
 T.assert_type!(spell_books.any?, T::Boolean)
 T.assert_type!(spell_books.many?, T::Boolean)
 T.assert_type!(spell_books.none?, T::Boolean)
 T.assert_type!(spell_books.one?, T::Boolean)
+T.assert_type!(spell_books.any? { |r| r.id > 1 }, T::Boolean)
+T.assert_type!(spell_books.many? { |r| r.id > 1 }, T::Boolean)
+T.assert_type!(spell_books.none? { |r| r.id > 1 }, T::Boolean)
+T.assert_type!(spell_books.one? { |r| r.id > 1 }, T::Boolean)
 # T.assert_type!(spell_books.update_all(name: 'Fantastic Beasts'), Integer) # Ignored until we add support
 # T.assert_type!(spell_books.delete_all, Integer) # Ignored until we add support
 # Query methods
@@ -257,12 +266,16 @@ T.assert_type!(spell_books_query.find_each, T::Enumerator[SpellBook])
 spell_books_query.find_in_batches { |s| T.assert_type!(s, T::Array[SpellBook]) }
 T.assert_type!(spell_books_query.find_in_batches, T::Enumerator[T::Array[SpellBook]])
 spell_books_query.in_batches { |s| T.assert_type!(s, SpellBook::ActiveRecord_AssociationRelation) }
-T.assert_type!(spell_books_query.in_batches, T::Enumerable[SpellBook::ActiveRecord_AssociationRelation])
+T.assert_type!(spell_books_query.in_batches, ActiveRecord::Batches::BatchEnumerator)
 # T.assert_type!(spell_books_query.destroy_all, T::Array[SpellBook]) # Ignored until we add support
 T.assert_type!(spell_books_query.any?, T::Boolean)
 T.assert_type!(spell_books_query.many?, T::Boolean)
 T.assert_type!(spell_books_query.none?, T::Boolean)
 T.assert_type!(spell_books_query.one?, T::Boolean)
+T.assert_type!(spell_books_query.any? { |r| r.id > 1 }, T::Boolean)
+T.assert_type!(spell_books_query.many? { |r| r.id > 1 }, T::Boolean)
+T.assert_type!(spell_books_query.none? { |r| r.id > 1 }, T::Boolean)
+T.assert_type!(spell_books_query.one? { |r| r.id > 1 }, T::Boolean)
 # T.assert_type!(spell_books_query.update_all(name: 'Fantastic Beasts'), Integer) # Ignored until we add support
 # T.assert_type!(spell_books_query.delete_all, Integer) # Ignored until we add support
 # Query methods

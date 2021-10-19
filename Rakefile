@@ -47,7 +47,7 @@ namespace :update_spec do
 
   desc "Update sorbet_test_cases.rb in all the Rails apps in spec/support."
   task :sorbet_test_cases do |t, args|
-    ['v6.0', 'v5.2'].each do |version|
+    ['v6.1', 'v6.0', 'v5.2'].each do |version|
       FileUtils.cp("spec/generators/sorbet_test_cases.rb", "spec/support/#{version}/sorbet_test_cases.rb")
     end
   end
