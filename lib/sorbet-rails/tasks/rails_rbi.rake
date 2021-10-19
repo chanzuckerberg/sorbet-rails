@@ -16,12 +16,12 @@ namespace :rails_rbi do
     FileUtils.rm_rf(rails_rbi_root_path)
 
     # run all rake tasks
-    Rake::Task['rails_rbi:routes'].invoke
-    Rake::Task['rails_rbi:models'].invoke
-    Rake::Task['rails_rbi:helpers'].invoke
-    Rake::Task['rails_rbi:mailers'].invoke
-    Rake::Task['rails_rbi:jobs'].invoke
-    Rake::Task['rails_rbi:custom'].invoke
+    Rake::Task[rails_rbi_task_name(t, 'routes')].invoke
+    Rake::Task[rails_rbi_task_name(t, 'models')].invoke
+    Rake::Task[rails_rbi_task_name(t, 'helpers')].invoke
+    Rake::Task[rails_rbi_task_name(t, 'mailers')].invoke
+    Rake::Task[rails_rbi_task_name(t, 'jobs')].invoke
+    Rake::Task[rails_rbi_task_name(t, 'custom')].invoke
   end
 
   desc "Generate rbis for rails routes"
@@ -36,7 +36,7 @@ namespace :rails_rbi do
   end
 
   desc "Copy custom rbis for typed_params, pluck_to_struct, etc."
-  task custom: :environment do
+  task custom: :environment do |t, args|
     copy_bundled_rbi('type_assert.rbi')
     copy_bundled_rbi('pluck_to_tstruct.rbi')
     copy_bundled_rbi('typed_params.rbi')
@@ -44,7 +44,7 @@ namespace :rails_rbi do
 
     # These files were previously bundled_rbi but are now generated so this
     # is needed for backwards compatibility with anyone using `rails_rbi:custom`
-    Rake::Task['rails_rbi:active_record'].invoke
+    Rake::Task[rails_rbi_task_name(t, 'active_record')].invoke
   end
 
   desc "Generate rbis for rails active_record base"
@@ -181,5 +181,9 @@ namespace :rails_rbi do
     copy_to_path = Rails.root.join("sorbet", "rails-rbi", filename)
     FileUtils.mkdir_p(File.dirname(copy_to_path))
     FileUtils.cp(bundled_rbi_file_path, copy_to_path)
+  end
+
+  def rails_rbi_task_name(current_task, target_task_suffix)
+    current_task.to_s.sub(/\w+$/, target_task_suffix)
   end
 end
