@@ -127,6 +127,11 @@ T.assert_type!(Wizard.all.any?, T::Boolean)
 T.assert_type!(Wizard.all.many?, T::Boolean)
 T.assert_type!(Wizard.all.none?, T::Boolean)
 T.assert_type!(Wizard.all.one?, T::Boolean)
+T.assert_type!(Wizard.all.any? { |r| r.id > 1 }, T::Boolean)
+T.assert_type!(Wizard.all.many? { |r| r.id > 1 }, T::Boolean)
+T.assert_type!(Wizard.all.none? { |r| r.id > 1 }, T::Boolean)
+T.assert_type!(Wizard.all.one? { |r| r.id > 1 }, T::Boolean)
+
 # T.assert_type!(Wizard.all.update_all(name: 'Harry Potter'), Integer) # Ignored until we add support
 # T.assert_type!(Wizard.all.delete_all, Integer) # Ignored until we add support
 # Query methods
@@ -191,6 +196,10 @@ T.assert_type!(spell_books.any?, T::Boolean)
 T.assert_type!(spell_books.many?, T::Boolean)
 T.assert_type!(spell_books.none?, T::Boolean)
 T.assert_type!(spell_books.one?, T::Boolean)
+T.assert_type!(spell_books.any? { |r| r.id > 1 }, T::Boolean)
+T.assert_type!(spell_books.many? { |r| r.id > 1 }, T::Boolean)
+T.assert_type!(spell_books.none? { |r| r.id > 1 }, T::Boolean)
+T.assert_type!(spell_books.one? { |r| r.id > 1 }, T::Boolean)
 # T.assert_type!(spell_books.update_all(name: 'Fantastic Beasts'), Integer) # Ignored until we add support
 # T.assert_type!(spell_books.delete_all, Integer) # Ignored until we add support
 # Query methods
@@ -263,6 +272,10 @@ T.assert_type!(spell_books_query.any?, T::Boolean)
 T.assert_type!(spell_books_query.many?, T::Boolean)
 T.assert_type!(spell_books_query.none?, T::Boolean)
 T.assert_type!(spell_books_query.one?, T::Boolean)
+T.assert_type!(spell_books_query.any? { |r| r.id > 1 }, T::Boolean)
+T.assert_type!(spell_books_query.many? { |r| r.id > 1 }, T::Boolean)
+T.assert_type!(spell_books_query.none? { |r| r.id > 1 }, T::Boolean)
+T.assert_type!(spell_books_query.one? { |r| r.id > 1 }, T::Boolean)
 # T.assert_type!(spell_books_query.update_all(name: 'Fantastic Beasts'), Integer) # Ignored until we add support
 # T.assert_type!(spell_books_query.delete_all, Integer) # Ignored until we add support
 # Query methods

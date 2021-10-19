@@ -273,6 +273,18 @@ class SorbetRails::ActiveRecordRbiFormatter
         class_method: class_method,
       )
     end
+
+    boolean_methods = %w(any? many? none? one?)
+    boolean_methods.each do |boolean_method|
+      class_rbi.create_method(
+        boolean_method,
+        parameters: [
+          Parameter.new("&block", type: "T.nilable(T.proc.params(e: #{type}).returns(T::Boolean))"),
+        ],
+        return_type: "T::Boolean",
+        class_method: class_method,
+      )
+    end
   end
 
   sig {
@@ -288,14 +300,5 @@ class SorbetRails::ActiveRecordRbiFormatter
       return_type: "T::Boolean",
       class_method: class_method,
     )
-
-    boolean_methods = %w(any? many? none? one?)
-    boolean_methods.each do |boolean_method|
-      class_rbi.create_method(
-        boolean_method,
-        return_type: "T::Boolean",
-        class_method: class_method,
-      )
-    end
   end
 end
