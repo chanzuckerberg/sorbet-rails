@@ -80,9 +80,6 @@ module Robe::QueryMethodsReturningRelation
   def unscoped(&block); end
 
   sig { params(args: T.untyped).returns(Robe::ActiveRecord_Relation) }
-  def select(*args); end
-
-  sig { params(args: T.untyped).returns(Robe::ActiveRecord_Relation) }
   def reselect(*args); end
 
   sig { params(args: T.untyped).returns(Robe::ActiveRecord_Relation) }
@@ -168,6 +165,12 @@ module Robe::QueryMethodsReturningRelation
 
   sig { params(args: T.untyped).returns(Robe::ActiveRecord_Relation) }
   def only(*args); end
+
+  sig { params(block: T.proc.params(e: Robe).returns(T::Boolean)).returns(T::Array[Robe]) }
+  def select(&block); end
+
+  sig { params(args: T.any(String, Symbol)).returns(Robe::ActiveRecord_Relation) }
+  def select_columns(*args); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Robe::ActiveRecord_Relation) }
   def extending(*args, &block); end
@@ -193,9 +196,6 @@ module Robe::QueryMethodsReturningAssociationRelation
   def unscoped(&block); end
 
   sig { params(args: T.untyped).returns(Robe::ActiveRecord_AssociationRelation) }
-  def select(*args); end
-
-  sig { params(args: T.untyped).returns(Robe::ActiveRecord_AssociationRelation) }
   def reselect(*args); end
 
   sig { params(args: T.untyped).returns(Robe::ActiveRecord_AssociationRelation) }
@@ -281,6 +281,12 @@ module Robe::QueryMethodsReturningAssociationRelation
 
   sig { params(args: T.untyped).returns(Robe::ActiveRecord_AssociationRelation) }
   def only(*args); end
+
+  sig { params(block: T.proc.params(e: Robe).returns(T::Boolean)).returns(T::Array[Robe]) }
+  def select(&block); end
+
+  sig { params(args: T.any(String, Symbol)).returns(Robe::ActiveRecord_AssociationRelation) }
+  def select_columns(*args); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Robe::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
