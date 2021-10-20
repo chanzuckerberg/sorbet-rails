@@ -16,8 +16,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Release Gem
-      uses: cadwallion/publish-rubygems-action@master
-      env:
-        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        RUBYGEMS_API_KEY: ${{secrets.RUBYGEMS_API_KEY}}
-        RELEASE_COMMAND: rake release
+      uses: dawidd6/action-publish-gem@v1
+      with:
+        api_key: ${{secrets.RUBYGEMS_API_KEY}}

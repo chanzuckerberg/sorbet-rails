@@ -2,8 +2,6 @@ source 'https://rubygems.org'
 
 gemspec
 
-gem 'rspec', '3.8.0'
-
 group :test do
   gem 'simplecov', require: false
   gem 'codecov', require: false
