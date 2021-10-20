@@ -1,10 +1,10 @@
 name: publish-gem
 
 on:
-  # pull_request: # test with pull request
-  push:
-    branches: # Trigger only on the main branch to avoid duplicate runs on PR branches
-      - master
+  pull_request: # test with pull request
+  # push:
+  #   branches: # Trigger only on the main branch to avoid duplicate runs on PR branches
+  #     - master
 
 jobs:
   build:
