@@ -1,10 +1,10 @@
 name: publish-gem
 
 on:
-  pull_request: # test with pull request
-  # push:
-  #   branches: # Trigger only on the main branch to avoid duplicate runs on PR branches
-  #     - master
+  # pull_request: # test with pull request
+  push:
+    branches: # Trigger only on the main branch to avoid duplicate runs on PR branches
+      - master
 
 jobs:
   build:
@@ -12,10 +12,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - run: |
-        git rev-list --count HEAD
-        git log --pretty=oneline | wc -l
-        git log
     - name: Release Gem
       uses: dawidd6/action-publish-gem@v1
       with:
