@@ -10,11 +10,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    env:
-      CI: true
-
     steps:
     - uses: actions/checkout@v2
+    - run: |
+        git rev-list --count HEAD
+        git log --pretty=oneline | wc -l
+        git log
     - name: Release Gem
       uses: dawidd6/action-publish-gem@v1
       with:
