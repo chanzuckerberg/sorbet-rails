@@ -25,7 +25,8 @@ class SorbetRails::ModelPlugins::ActiveRecordQuerying < SorbetRails::ModelPlugin
     # <Model>::Relation class.
     # rails/activerecord/lib/active_record/querying.rb
     model_query_relation_methods = [
-      :select, :reselect, :order, :reorder, :group, :limit, :offset, :joins, :left_joins, :left_outer_joins,
+      # :select,
+      :reselect, :order, :reorder, :group, :limit, :offset, :joins, :left_joins, :left_outer_joins,
       :where, :rewhere, :preload, :extract_associated, :eager_load, :includes, :from, :lock, :readonly, :or,
       :having, :create_with, :distinct, :references, :none, :unscope, :optimizer_hints, :merge, :except, :only,
     ]
@@ -38,6 +39,29 @@ class SorbetRails::ModelPlugins::ActiveRecordQuerying < SorbetRails::ModelPlugin
         ],
         builtin_query_method: true,
       ) if exists_class_method?(method_name)
+    end
+    if exists_class_method?("select")
+      # `select` can be used with a block to return an array, or with a list of column name
+      # to return a relation object that can be chained.
+      # I've seen usage of `select` with a block more often than with a list of column name.
+      # here we define select as taking a block, and add a `select_column` method for the other usage
+      add_relation_query_method(
+        root,
+        "select",
+        parameters: [
+          Parameter.new("&block", type: "T.proc.params(e: #{self.model_class_name}).returns(T::Boolean)"),
+        ],
+        builtin_query_method: true,
+        custom_return_value: "T::Array[#{self.model_class_name}]",
+      )
+      add_relation_query_method(
+        root,
+        "select_columns", # select_column is injected by sorbet-rails
+        parameters: [
+          Parameter.new("*args", type: "T.any(String, Symbol)"),
+        ],
+        builtin_query_method: true,
+      )
     end
 
     add_relation_query_method(

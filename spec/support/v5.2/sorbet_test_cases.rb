@@ -84,6 +84,8 @@ T.assert_type!(Wizard.where.not(id: 1), Wizard::ActiveRecord_Relation)
 T.assert_type!(Wizard.preload(:spell_books), Wizard::ActiveRecord_Relation)
 T.assert_type!(Wizard.eager_load(:spell_books), Wizard::ActiveRecord_Relation)
 T.assert_type!(Wizard.order(:id), Wizard::ActiveRecord_Relation)
+T.assert_type!(Wizard.select { |r| r.id == 1 }, T::Array[Wizard])
+T.assert_type!(Wizard.select_columns(:id, :name), Wizard::ActiveRecord_Relation)
 
 # Finder methods -- ActiveRecord::Relation
 T.assert_type!(Wizard.all.exists?(name: 'Harry Potter'), T::Boolean)
@@ -146,6 +148,8 @@ T.assert_type!(Wizard.all.where.not(id: 1), Wizard::ActiveRecord_Relation)
 T.assert_type!(Wizard.all.preload(:spell_books), Wizard::ActiveRecord_Relation)
 T.assert_type!(Wizard.all.eager_load(:spell_books), Wizard::ActiveRecord_Relation)
 T.assert_type!(Wizard.all.order(:id), Wizard::ActiveRecord_Relation)
+T.assert_type!(Wizard.all.select { |r| r.id == 1 }, T::Array[Wizard])
+T.assert_type!(Wizard.all.select_columns(:id, :name), Wizard::ActiveRecord_Relation)
 # Enumerable methods
 Wizard.all.each { |w| T.assert_type!(w, Wizard) }
 Wizard.all.map { |w| T.assert_type!(w, Wizard) }
@@ -214,6 +218,9 @@ T.assert_type!(spell_books.where.not(id: 1), SpellBook::ActiveRecord_Association
 T.assert_type!(spell_books.preload(:wizard), SpellBook::ActiveRecord_AssociationRelation)
 T.assert_type!(spell_books.eager_load(:wizard), SpellBook::ActiveRecord_AssociationRelation)
 T.assert_type!(spell_books.order(:id), SpellBook::ActiveRecord_AssociationRelation)
+T.assert_type!(spell_books.select { |r| r.id == 1 }, T::Array[SpellBook])
+T.assert_type!(spell_books.select_columns(:id, :name), SpellBook::ActiveRecord_AssociationRelation)
+
 # Enumerable methods
 spell_books.each { |s| T.assert_type!(s, SpellBook) }
 spell_books.map { |s| T.assert_type!(s, SpellBook) }
@@ -290,6 +297,8 @@ T.assert_type!(spell_books_query.where.not(id: 1), SpellBook::ActiveRecord_Assoc
 T.assert_type!(spell_books_query.preload(:wizard), SpellBook::ActiveRecord_AssociationRelation)
 T.assert_type!(spell_books_query.eager_load(:wizard), SpellBook::ActiveRecord_AssociationRelation)
 T.assert_type!(spell_books_query.order(:id), SpellBook::ActiveRecord_AssociationRelation)
+T.assert_type!(spell_books.select { |r| r.id == 1 }, T::Array[SpellBook])
+T.assert_type!(spell_books.select_columns(:id, :name), SpellBook::ActiveRecord_AssociationRelation)
 # Enumerable methods
 spell_books_query.each { |s| T.assert_type!(s, SpellBook) }
 spell_books_query.map { |s| T.assert_type!(s, SpellBook) }

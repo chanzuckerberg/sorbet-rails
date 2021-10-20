@@ -411,8 +411,16 @@ Model.unscoped.scoping do … end
 
 ### `select` with a block
 
-The [`select` method](https://apidock.com/rails/v4.0.2/ActiveRecord/QueryMethods/select) in Rails has two modes: it can be given a list of symbols, in which case rails will only return the given columns from the database, or it can be given a block, in which case it acts like [`Enumerable.select`](https://ruby-doc.org/core-2.6.4/Enumerable.html) and returns an array. We have chosen to support the first use case. If you want to pass a block to `select`, you can simply call `to_a` before you do. Note that this would be done within the `select` call anyway, so the performance penalty will be minimal.
+The [`select` method](https://apidock.com/rails/v4.0.2/ActiveRecord/QueryMethods/select) in Rails has two modes: it can be given a list of symbols, in which case rails will only return the given columns from the database, or it can be given a block, in which case it acts like [`Enumerable.select`](https://ruby-doc.org/core-2.6.4/Enumerable.html) and returns an array.
 
+We have chosen to support `select` with a block as the primary use case, since it is a more prevalent use of this method. We provide `select_columns` as an alternative if you want to select a list of columns.
+
+```
+Model.select { |record| record.id > 1} # valid, returns an array
+Model.select_columns(:id, :name) # valid, returns an association
+
+Model.select(:id, :name) # sorbet error, use `select_column` instead
+```
 ### `flatten` an array of relation
 
 When you call `flatten` on an array of ActiveRecord::Relation, sorbet [doesn't recognize](https://github.com/sorbet/sorbet/issues/2767) that it will flatten the relation and return an array of model. The work around is to call `to_a` on the relation first.
