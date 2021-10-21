@@ -154,7 +154,7 @@ module ActiveStorage::Attachment::QueryMethodsReturningRelation
   sig { params(block: T.proc.params(e: ActiveStorage::Attachment).returns(T::Boolean)).returns(T::Array[ActiveStorage::Attachment]) }
   def select(&block); end
 
-  sig { params(args: T.any(String, Symbol)).returns(ActiveStorage::Attachment::ActiveRecord_Relation) }
+  sig { params(args: T.any(String, Symbol, T::Array[T.any(String, Symbol)])).returns(ActiveStorage::Attachment::ActiveRecord_Relation) }
   def select_columns(*args); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(ActiveStorage::Attachment::ActiveRecord_Relation) }
@@ -258,7 +258,7 @@ module ActiveStorage::Attachment::QueryMethodsReturningAssociationRelation
   sig { params(block: T.proc.params(e: ActiveStorage::Attachment).returns(T::Boolean)).returns(T::Array[ActiveStorage::Attachment]) }
   def select(&block); end
 
-  sig { params(args: T.any(String, Symbol)).returns(ActiveStorage::Attachment::ActiveRecord_AssociationRelation) }
+  sig { params(args: T.any(String, Symbol, T::Array[T.any(String, Symbol)])).returns(ActiveStorage::Attachment::ActiveRecord_AssociationRelation) }
   def select_columns(*args); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(ActiveStorage::Attachment::ActiveRecord_AssociationRelation) }

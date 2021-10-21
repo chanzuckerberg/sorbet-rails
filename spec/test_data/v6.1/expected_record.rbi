@@ -127,7 +127,7 @@ module ActiveStorage::Record::QueryMethodsReturningRelation
   sig { params(block: T.proc.params(e: ActiveStorage::Record).returns(T::Boolean)).returns(T::Array[ActiveStorage::Record]) }
   def select(&block); end
 
-  sig { params(args: T.any(String, Symbol)).returns(ActiveStorage::Record::ActiveRecord_Relation) }
+  sig { params(args: T.any(String, Symbol, T::Array[T.any(String, Symbol)])).returns(ActiveStorage::Record::ActiveRecord_Relation) }
   def select_columns(*args); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(ActiveStorage::Record::ActiveRecord_Relation) }
@@ -243,7 +243,7 @@ module ActiveStorage::Record::QueryMethodsReturningAssociationRelation
   sig { params(block: T.proc.params(e: ActiveStorage::Record).returns(T::Boolean)).returns(T::Array[ActiveStorage::Record]) }
   def select(&block); end
 
-  sig { params(args: T.any(String, Symbol)).returns(ActiveStorage::Record::ActiveRecord_AssociationRelation) }
+  sig { params(args: T.any(String, Symbol, T::Array[T.any(String, Symbol)])).returns(ActiveStorage::Record::ActiveRecord_AssociationRelation) }
   def select_columns(*args); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(ActiveStorage::Record::ActiveRecord_AssociationRelation) }

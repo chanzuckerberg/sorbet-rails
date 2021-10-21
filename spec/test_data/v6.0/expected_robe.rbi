@@ -169,7 +169,7 @@ module Robe::QueryMethodsReturningRelation
   sig { params(block: T.proc.params(e: Robe).returns(T::Boolean)).returns(T::Array[Robe]) }
   def select(&block); end
 
-  sig { params(args: T.any(String, Symbol)).returns(Robe::ActiveRecord_Relation) }
+  sig { params(args: T.any(String, Symbol, T::Array[T.any(String, Symbol)])).returns(Robe::ActiveRecord_Relation) }
   def select_columns(*args); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Robe::ActiveRecord_Relation) }
@@ -285,7 +285,7 @@ module Robe::QueryMethodsReturningAssociationRelation
   sig { params(block: T.proc.params(e: Robe).returns(T::Boolean)).returns(T::Array[Robe]) }
   def select(&block); end
 
-  sig { params(args: T.any(String, Symbol)).returns(Robe::ActiveRecord_AssociationRelation) }
+  sig { params(args: T.any(String, Symbol, T::Array[T.any(String, Symbol)])).returns(Robe::ActiveRecord_AssociationRelation) }
   def select_columns(*args); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Robe::ActiveRecord_AssociationRelation) }

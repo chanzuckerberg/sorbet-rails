@@ -157,7 +157,7 @@ module School::QueryMethodsReturningRelation
   sig { params(block: T.proc.params(e: School).returns(T::Boolean)).returns(T::Array[School]) }
   def select(&block); end
 
-  sig { params(args: T.any(String, Symbol)).returns(School::ActiveRecord_Relation) }
+  sig { params(args: T.any(String, Symbol, T::Array[T.any(String, Symbol)])).returns(School::ActiveRecord_Relation) }
   def select_columns(*args); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(School::ActiveRecord_Relation) }
@@ -261,7 +261,7 @@ module School::QueryMethodsReturningAssociationRelation
   sig { params(block: T.proc.params(e: School).returns(T::Boolean)).returns(T::Array[School]) }
   def select(&block); end
 
-  sig { params(args: T.any(String, Symbol)).returns(School::ActiveRecord_AssociationRelation) }
+  sig { params(args: T.any(String, Symbol, T::Array[T.any(String, Symbol)])).returns(School::ActiveRecord_AssociationRelation) }
   def select_columns(*args); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(School::ActiveRecord_AssociationRelation) }

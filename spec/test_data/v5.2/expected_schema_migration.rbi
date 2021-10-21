@@ -127,7 +127,7 @@ module ActiveRecord::SchemaMigration::QueryMethodsReturningRelation
   sig { params(block: T.proc.params(e: ActiveRecord::SchemaMigration).returns(T::Boolean)).returns(T::Array[ActiveRecord::SchemaMigration]) }
   def select(&block); end
 
-  sig { params(args: T.any(String, Symbol)).returns(ActiveRecord::SchemaMigration::ActiveRecord_Relation) }
+  sig { params(args: T.any(String, Symbol, T::Array[T.any(String, Symbol)])).returns(ActiveRecord::SchemaMigration::ActiveRecord_Relation) }
   def select_columns(*args); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(ActiveRecord::SchemaMigration::ActiveRecord_Relation) }
@@ -231,7 +231,7 @@ module ActiveRecord::SchemaMigration::QueryMethodsReturningAssociationRelation
   sig { params(block: T.proc.params(e: ActiveRecord::SchemaMigration).returns(T::Boolean)).returns(T::Array[ActiveRecord::SchemaMigration]) }
   def select(&block); end
 
-  sig { params(args: T.any(String, Symbol)).returns(ActiveRecord::SchemaMigration::ActiveRecord_AssociationRelation) }
+  sig { params(args: T.any(String, Symbol, T::Array[T.any(String, Symbol)])).returns(ActiveRecord::SchemaMigration::ActiveRecord_AssociationRelation) }
   def select_columns(*args); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(ActiveRecord::SchemaMigration::ActiveRecord_AssociationRelation) }
