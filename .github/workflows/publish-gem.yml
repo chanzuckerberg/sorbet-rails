@@ -1,10 +1,10 @@
 name: publish-gem
 
 on:
-  # pull_request: # test with pull request
-  push:
-    branches: # Trigger only on the main branch to avoid duplicate runs on PR branches
-      - master
+  pull_request: # test with pull request
+  # push:
+  #   branches: # Trigger only on the main branch to avoid duplicate runs on PR branches
+  #     - master
 
 jobs:
   build:
@@ -17,7 +17,7 @@ jobs:
     - uses: actions/checkout@v2
     - uses: ruby/setup-ruby@v1
       with:
-        ruby-version: ${{ matrix.ruby }}
+        ruby-version: 2.7
         # bundler-cache: true -- this messes up some dynamic constants
     - run: "./spec/bin/run_spec.sh"
     - run: bundle exec srb tc
