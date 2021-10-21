@@ -59,9 +59,6 @@ module Potion::QueryMethodsReturningRelation
   def unscoped(&block); end
 
   sig { params(args: T.untyped).returns(Potion::ActiveRecord_Relation) }
-  def select(*args); end
-
-  sig { params(args: T.untyped).returns(Potion::ActiveRecord_Relation) }
   def reselect(*args); end
 
   sig { params(args: T.untyped).returns(Potion::ActiveRecord_Relation) }
@@ -147,6 +144,12 @@ module Potion::QueryMethodsReturningRelation
 
   sig { params(args: T.untyped).returns(Potion::ActiveRecord_Relation) }
   def only(*args); end
+
+  sig { params(block: T.proc.params(e: Potion).returns(T::Boolean)).returns(T::Array[Potion]) }
+  def select(&block); end
+
+  sig { params(args: T.any(String, Symbol)).returns(Potion::ActiveRecord_Relation) }
+  def select_columns(*args); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Potion::ActiveRecord_Relation) }
   def extending(*args, &block); end
@@ -172,9 +175,6 @@ module Potion::QueryMethodsReturningAssociationRelation
   def unscoped(&block); end
 
   sig { params(args: T.untyped).returns(Potion::ActiveRecord_AssociationRelation) }
-  def select(*args); end
-
-  sig { params(args: T.untyped).returns(Potion::ActiveRecord_AssociationRelation) }
   def reselect(*args); end
 
   sig { params(args: T.untyped).returns(Potion::ActiveRecord_AssociationRelation) }
@@ -260,6 +260,12 @@ module Potion::QueryMethodsReturningAssociationRelation
 
   sig { params(args: T.untyped).returns(Potion::ActiveRecord_AssociationRelation) }
   def only(*args); end
+
+  sig { params(block: T.proc.params(e: Potion).returns(T::Boolean)).returns(T::Array[Potion]) }
+  def select(&block); end
+
+  sig { params(args: T.any(String, Symbol)).returns(Potion::ActiveRecord_AssociationRelation) }
+  def select_columns(*args); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Potion::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end

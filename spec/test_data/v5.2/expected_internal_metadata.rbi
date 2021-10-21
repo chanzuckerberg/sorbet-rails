@@ -77,9 +77,6 @@ module ActiveRecord::InternalMetadata::QueryMethodsReturningRelation
   def unscoped(&block); end
 
   sig { params(args: T.untyped).returns(ActiveRecord::InternalMetadata::ActiveRecord_Relation) }
-  def select(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveRecord::InternalMetadata::ActiveRecord_Relation) }
   def order(*args); end
 
   sig { params(args: T.untyped).returns(ActiveRecord::InternalMetadata::ActiveRecord_Relation) }
@@ -153,6 +150,12 @@ module ActiveRecord::InternalMetadata::QueryMethodsReturningRelation
 
   sig { params(args: T.untyped).returns(ActiveRecord::InternalMetadata::ActiveRecord_Relation) }
   def except(*args); end
+
+  sig { params(block: T.proc.params(e: ActiveRecord::InternalMetadata).returns(T::Boolean)).returns(T::Array[ActiveRecord::InternalMetadata]) }
+  def select(&block); end
+
+  sig { params(args: T.any(String, Symbol)).returns(ActiveRecord::InternalMetadata::ActiveRecord_Relation) }
+  def select_columns(*args); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(ActiveRecord::InternalMetadata::ActiveRecord_Relation) }
   def extending(*args, &block); end
@@ -178,9 +181,6 @@ module ActiveRecord::InternalMetadata::QueryMethodsReturningAssociationRelation
   def unscoped(&block); end
 
   sig { params(args: T.untyped).returns(ActiveRecord::InternalMetadata::ActiveRecord_AssociationRelation) }
-  def select(*args); end
-
-  sig { params(args: T.untyped).returns(ActiveRecord::InternalMetadata::ActiveRecord_AssociationRelation) }
   def order(*args); end
 
   sig { params(args: T.untyped).returns(ActiveRecord::InternalMetadata::ActiveRecord_AssociationRelation) }
@@ -254,6 +254,12 @@ module ActiveRecord::InternalMetadata::QueryMethodsReturningAssociationRelation
 
   sig { params(args: T.untyped).returns(ActiveRecord::InternalMetadata::ActiveRecord_AssociationRelation) }
   def except(*args); end
+
+  sig { params(block: T.proc.params(e: ActiveRecord::InternalMetadata).returns(T::Boolean)).returns(T::Array[ActiveRecord::InternalMetadata]) }
+  def select(&block); end
+
+  sig { params(args: T.any(String, Symbol)).returns(ActiveRecord::InternalMetadata::ActiveRecord_AssociationRelation) }
+  def select_columns(*args); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(ActiveRecord::InternalMetadata::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end

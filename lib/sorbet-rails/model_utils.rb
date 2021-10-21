@@ -90,9 +90,16 @@ module SorbetRails::ModelUtils
       # where, limit, etc and not something like a named scope. It should likely
       # only be set to `true` when called from the ActiveRecordQuerying plugin.
       builtin_query_method: T::Boolean,
+      custom_return_value: String,
     ).void
   }
-  def add_relation_query_method(root, method_name, parameters: nil, builtin_query_method: false)
+  def add_relation_query_method(
+    root,
+    method_name,
+    parameters: nil,
+    builtin_query_method: false,
+    custom_return_value: nil
+  )
     # a relation querying method will be available on
     # - model (as a class method)
     # - activerecord relation
@@ -114,14 +121,14 @@ module SorbetRails::ModelUtils
       relation_module_rbi.create_method(
         method_name,
         parameters: parameters,
-        return_type: self.model_relation_class_name,
+        return_type: custom_return_value || self.model_relation_class_name,
       )
 
       assoc_relation_module_rbi = root.create_module(self.model_query_methods_returning_assoc_relation_module_name)
       assoc_relation_module_rbi.create_method(
         method_name,
         parameters: parameters,
-        return_type: assoc_return_value,
+        return_type: custom_return_value || assoc_return_value,
       )
     else
       # force generating these methods because sorbet's hidden-definitions generate & override them
@@ -129,7 +136,7 @@ module SorbetRails::ModelUtils
       model_class_rbi.create_method(
         method_name,
         parameters: parameters,
-        return_type: self.model_relation_class_name,
+        return_type: custom_return_value || self.model_relation_class_name,
         class_method: true,
       )
 
@@ -137,21 +144,21 @@ module SorbetRails::ModelUtils
       model_relation_rbi.create_method(
         method_name,
         parameters: parameters,
-        return_type: self.model_relation_class_name,
+        return_type: custom_return_value || self.model_relation_class_name,
       )
 
       model_assoc_relation_rbi = root.create_class(self.model_assoc_relation_class_name)
       model_assoc_relation_rbi.create_method(
         method_name,
         parameters: parameters,
-        return_type: assoc_return_value,
+        return_type: custom_return_value || assoc_return_value,
       )
 
       collection_proxy_rbi = root.create_class(self.model_assoc_proxy_class_name)
       collection_proxy_rbi.create_method(
         method_name,
         parameters: parameters,
-        return_type: assoc_return_value,
+        return_type: custom_return_value || assoc_return_value,
       )
     end
   end
