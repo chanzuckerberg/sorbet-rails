@@ -15,7 +15,6 @@ jobs:
 
     env:
       RAILS_VERSION: ${{ matrix.rails }}
-      CI: true
 
     steps:
     - uses: actions/checkout@v2
@@ -24,3 +23,4 @@ jobs:
         ruby-version: ${{ matrix.ruby }}
         # bundler-cache: true -- this messes up some dynamic constants
     - run: "./spec/bin/run_spec.sh"
+    - run: bundle exec srb tc

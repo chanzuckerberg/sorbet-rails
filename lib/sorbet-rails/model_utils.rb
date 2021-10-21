@@ -90,7 +90,7 @@ module SorbetRails::ModelUtils
       # where, limit, etc and not something like a named scope. It should likely
       # only be set to `true` when called from the ActiveRecordQuerying plugin.
       builtin_query_method: T::Boolean,
-      custom_return_value: String,
+      custom_return_value: T.nilable(String),
     ).void
   }
   def add_relation_query_method(
