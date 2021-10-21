@@ -196,7 +196,7 @@ module Headmaster::QueryMethodsReturningRelation
   sig { params(block: T.proc.params(e: Headmaster).returns(T::Boolean)).returns(T::Array[Headmaster]) }
   def select(&block); end
 
-  sig { params(args: T.any(String, Symbol)).returns(Headmaster::ActiveRecord_Relation) }
+  sig { params(args: T.any(String, Symbol, T::Array[T.any(String, Symbol)])).returns(Headmaster::ActiveRecord_Relation) }
   def select_columns(*args); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Headmaster::ActiveRecord_Relation) }
@@ -312,7 +312,7 @@ module Headmaster::QueryMethodsReturningAssociationRelation
   sig { params(block: T.proc.params(e: Headmaster).returns(T::Boolean)).returns(T::Array[Headmaster]) }
   def select(&block); end
 
-  sig { params(args: T.any(String, Symbol)).returns(Headmaster::ActiveRecord_AssociationRelation) }
+  sig { params(args: T.any(String, Symbol, T::Array[T.any(String, Symbol)])).returns(Headmaster::ActiveRecord_AssociationRelation) }
   def select_columns(*args); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Headmaster::ActiveRecord_AssociationRelation) }

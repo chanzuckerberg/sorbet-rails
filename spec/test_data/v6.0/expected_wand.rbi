@@ -463,7 +463,7 @@ module Wand::QueryMethodsReturningRelation
   sig { params(block: T.proc.params(e: Wand).returns(T::Boolean)).returns(T::Array[Wand]) }
   def select(&block); end
 
-  sig { params(args: T.any(String, Symbol)).returns(Wand::ActiveRecord_Relation) }
+  sig { params(args: T.any(String, Symbol, T::Array[T.any(String, Symbol)])).returns(Wand::ActiveRecord_Relation) }
   def select_columns(*args); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::ActiveRecord_Relation) }
@@ -579,7 +579,7 @@ module Wand::QueryMethodsReturningAssociationRelation
   sig { params(block: T.proc.params(e: Wand).returns(T::Boolean)).returns(T::Array[Wand]) }
   def select(&block); end
 
-  sig { params(args: T.any(String, Symbol)).returns(Wand::ActiveRecord_AssociationRelation) }
+  sig { params(args: T.any(String, Symbol, T::Array[T.any(String, Symbol)])).returns(Wand::ActiveRecord_AssociationRelation) }
   def select_columns(*args); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Wand::ActiveRecord_AssociationRelation) }

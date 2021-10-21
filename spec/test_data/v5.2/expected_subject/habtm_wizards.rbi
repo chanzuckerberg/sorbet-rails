@@ -175,7 +175,7 @@ module Subject::HABTM_Wizards::QueryMethodsReturningRelation
   sig { params(block: T.proc.params(e: Subject::HABTM_Wizards).returns(T::Boolean)).returns(T::Array[Subject::HABTM_Wizards]) }
   def select(&block); end
 
-  sig { params(args: T.any(String, Symbol)).returns(Subject::HABTM_Wizards::ActiveRecord_Relation) }
+  sig { params(args: T.any(String, Symbol, T::Array[T.any(String, Symbol)])).returns(Subject::HABTM_Wizards::ActiveRecord_Relation) }
   def select_columns(*args); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Subject::HABTM_Wizards::ActiveRecord_Relation) }
@@ -279,7 +279,7 @@ module Subject::HABTM_Wizards::QueryMethodsReturningAssociationRelation
   sig { params(block: T.proc.params(e: Subject::HABTM_Wizards).returns(T::Boolean)).returns(T::Array[Subject::HABTM_Wizards]) }
   def select(&block); end
 
-  sig { params(args: T.any(String, Symbol)).returns(Subject::HABTM_Wizards::ActiveRecord_AssociationRelation) }
+  sig { params(args: T.any(String, Symbol, T::Array[T.any(String, Symbol)])).returns(Subject::HABTM_Wizards::ActiveRecord_AssociationRelation) }
   def select_columns(*args); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Subject::HABTM_Wizards::ActiveRecord_AssociationRelation) }

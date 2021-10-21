@@ -303,7 +303,7 @@ module SpellBook::QueryMethodsReturningRelation
   sig { params(block: T.proc.params(e: SpellBook).returns(T::Boolean)).returns(T::Array[SpellBook]) }
   def select(&block); end
 
-  sig { params(args: T.any(String, Symbol)).returns(SpellBook::ActiveRecord_Relation) }
+  sig { params(args: T.any(String, Symbol, T::Array[T.any(String, Symbol)])).returns(SpellBook::ActiveRecord_Relation) }
   def select_columns(*args); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::ActiveRecord_Relation) }
@@ -407,7 +407,7 @@ module SpellBook::QueryMethodsReturningAssociationRelation
   sig { params(block: T.proc.params(e: SpellBook).returns(T::Boolean)).returns(T::Array[SpellBook]) }
   def select(&block); end
 
-  sig { params(args: T.any(String, Symbol)).returns(SpellBook::ActiveRecord_AssociationRelation) }
+  sig { params(args: T.any(String, Symbol, T::Array[T.any(String, Symbol)])).returns(SpellBook::ActiveRecord_AssociationRelation) }
   def select_columns(*args); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::ActiveRecord_AssociationRelation) }

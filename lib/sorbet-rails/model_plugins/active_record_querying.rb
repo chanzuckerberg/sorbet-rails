@@ -58,7 +58,7 @@ class SorbetRails::ModelPlugins::ActiveRecordQuerying < SorbetRails::ModelPlugin
         root,
         "select_columns", # select_column is injected by sorbet-rails
         parameters: [
-          Parameter.new("*args", type: "T.any(String, Symbol)"),
+          Parameter.new("*args", type: "T.any(String, Symbol, T::Array[T.any(String, Symbol)])"),
         ],
         builtin_query_method: true,
       )

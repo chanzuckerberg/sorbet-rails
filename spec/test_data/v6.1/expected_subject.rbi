@@ -160,7 +160,7 @@ module Subject::QueryMethodsReturningRelation
   sig { params(block: T.proc.params(e: Subject).returns(T::Boolean)).returns(T::Array[Subject]) }
   def select(&block); end
 
-  sig { params(args: T.any(String, Symbol)).returns(Subject::ActiveRecord_Relation) }
+  sig { params(args: T.any(String, Symbol, T::Array[T.any(String, Symbol)])).returns(Subject::ActiveRecord_Relation) }
   def select_columns(*args); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Subject::ActiveRecord_Relation) }
@@ -276,7 +276,7 @@ module Subject::QueryMethodsReturningAssociationRelation
   sig { params(block: T.proc.params(e: Subject).returns(T::Boolean)).returns(T::Array[Subject]) }
   def select(&block); end
 
-  sig { params(args: T.any(String, Symbol)).returns(Subject::ActiveRecord_AssociationRelation) }
+  sig { params(args: T.any(String, Symbol, T::Array[T.any(String, Symbol)])).returns(Subject::ActiveRecord_AssociationRelation) }
   def select_columns(*args); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Subject::ActiveRecord_AssociationRelation) }
