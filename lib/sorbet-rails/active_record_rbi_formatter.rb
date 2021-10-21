@@ -279,7 +279,7 @@ class SorbetRails::ActiveRecordRbiFormatter
       class_rbi.create_method(
         boolean_method,
         parameters: [
-          Parameter.new("&block", type: "T.nilable(T.proc.params(e: #{type}).returns(T::Boolean))"),
+          Parameter.new("&block", type: "T.nilable(T.proc.params(e: #{type}).returns(T.nilable(T::Boolean)))"),
         ],
         return_type: "T::Boolean",
         class_method: class_method,
