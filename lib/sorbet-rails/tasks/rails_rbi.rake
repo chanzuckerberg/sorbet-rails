@@ -60,8 +60,11 @@ namespace :rails_rbi do
   end
 
   desc "Generate rbis for rails models. Pass models name to regenerate rbi for only the given models."
-  task models: :environment do |t, args|
-    SorbetRails::Utils.rails_eager_load_all!
+  # mharris
+  # task models: :environment do |t, args|
+  task :models do |t, args|
+    # mharris
+    # SorbetRails::Utils.rails_eager_load_all!
 
     all_models = Set.new(ActiveRecord::Base.descendants + whitelisted_models - blacklisted_models)
 
@@ -82,7 +85,9 @@ namespace :rails_rbi do
       model_class_name = model_class.to_s
       begin
         formatter = SorbetRails::ModelRbiFormatter.new(model_class, available_class_names)
-        file_path = Rails.root.join("sorbet", "rails-rbi", "models", "#{model_class_name.underscore}.rbi")
+        # mharris
+        # file_path = Rails.root.join("sorbet", "rails-rbi", "models", "#{model_class_name.underscore}.rbi")
+        file_path = "sorbet/rails-rbi/models/#{model_class_name.underscore}.rbi"
         FileUtils.mkdir_p(File.dirname(file_path))
         File.write(file_path, formatter.generate_rbi)
       rescue StandardError, NotImplementedError => ex
