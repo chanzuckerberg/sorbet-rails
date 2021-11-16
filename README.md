@@ -433,6 +433,14 @@ arr = [Model.recent, Model.old].flatten # T::Array[Model::ActiveRecord_Relation]
 arr = [Model.recent, Model.old].map(&:to_a).flatten # T::Array[Model]
 ```
 
+`flat_map` has a similar issue.
+
+```ruby
+foo.bars.flat_map { |b| b.scope } # T::Array[T.untyped]
+
+foo.bars.flat_map { |b| b.scope.to_a } # T::Array[Scope]
+```
+
 ### Avoid `and_call_original` in rspecs
 
 If you run into the following issue when running rspec, it's likely because you're using `expect(:method_name).and_call_original` to mock a method in RSpec. We've found the double mock doesn't interact well with Sorbet's sig wrapper and caused flaky spec. The spec should be rewritten to expect the outcome of the method instead. (It still works with `expect(:method_name)` and `expect(:method_name).and_return(...)`
