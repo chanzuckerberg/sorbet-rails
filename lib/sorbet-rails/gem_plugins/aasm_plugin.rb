@@ -38,12 +38,17 @@ class AasmPlugin < SorbetRails::ModelPlugins::Base
       )
     end
 
-    # - If you have a state like :baz, you get these methods:
-    # - `baz?`
+    # - If you have a state like :baz, you get:
+    # - a method `baz?`
+    # - a constant `STATE_BAZ`
     aasm_states.each do |state|
       model_rbi.create_method(
         "#{state}?",
         return_type: 'T::Boolean'
+      )
+
+      root.create_module(
+        "#{model_class_name}::STATE_#{state.to_s.upcase}"
       )
     end
   end
