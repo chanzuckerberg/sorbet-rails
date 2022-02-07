@@ -365,6 +365,7 @@ Following are the list of attribute dynamic methods and their static counterpart
 - `<attribute>_was` -> `attribute_was(<attribute>)`
 - `saved_change_to_<attribute>?` -> `saved_change_to_attribute?(<attribute>)`
 - `<attribute>_before_type_cast` -> `read_attribute_before_type_cast(<attribute>)`
+- `will_save_change_to_<attribute>?` -> `will_save_change_to_attribute?(<attribute>)`
 
 ### `after_commit` and other callbacks
 
