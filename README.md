@@ -287,6 +287,7 @@ specific environment group (eg. `development` only).
 
 - Model: The gem provides some helper method to a model to make type-checking easier:
   - `find_n`, `first_n`, `last_n`
+  - `where_missing`
   - `pluck_to_tstruct`
   - `typed_enum`
 
@@ -454,6 +455,18 @@ If you run into the following issue when running rspec, it's likely because you'
        lambda or somehow else your `sig` wasn't actually applied to the method. Contact #dev-productivity
        if you're really stuck.
 ```
+
+### `where.missing` does not exist on `ActiveRecord::Relation`  ###
+
+The [`where` method](https://apidock.com/rails/ActiveRecord/QueryMethods/where) in Rails has two modes: it can be passed no arguments where it will return an `ActiveRecord::QueryMethods::WhereChain` object, or when given arguments, returns an `ActiveRecord::Relation` object. By default we've opted to support `where` with arguments and have provided a `where_missing` method to avoid conflicts during static typing.
+
+```
+Wizard.where.missing(:wand) # sorbet error, use `where_missing` instead
+
+Wizard.where_missing(:wand) # valid, returns a relation
+```
+
+**Note:** `where.missing` / `where_missing` are only available in Rails 6.1 or above
 
 ## Extending RBI Generation logic
 
