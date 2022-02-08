@@ -6,7 +6,7 @@ class SorbetRails::ModelPlugins::ActiveRelationWhereMissing < SorbetRails::Model
   def generate(root)
     # https://api.rubyonrails.org/v6.1.4/classes/ActiveRecord/QueryMethods/WhereChain.html#method-i-missing
     # where.missing is only available in Rails 6.1 and above
-    return if Rails.version =~ /^5\./ || Rails.version =~ /^6\.0/
+    return if Rails.version >= "6.1"
 
     where_missing_module_name = self.model_module_name("ActiveRelation_WhereMissing")
     where_not_module_rbi = root.create_module(where_missing_module_name)
