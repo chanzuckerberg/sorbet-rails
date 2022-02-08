@@ -80,7 +80,7 @@ RSpec.describe SorbetRails::CustomFinderMethods do
 
   context 'test where_missing' do
     # where.missing is only available in Rails 6.1 and above
-    if Rails.version >= "6.1"
+    if Rails.version < "6.1"
       it 'raises an error' do
         expect { Wizard.where_missing(:wand) }.to raise_error(NoMethodError)
       end
