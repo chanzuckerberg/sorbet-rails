@@ -17,7 +17,7 @@ module SorbetRails::ModelColumnUtils
       type = base_type.to_s
       # A nullable array column should be T.nilable(T::Array[column_type]) not T::Array[T.nilable(column_type)]
       type = "T::Array[#{type}]" if array_type
-      type = "T.nilable(#{type})" if nilable
+      type = "T.nilable(#{type})" if nilable && type != "T.untyped"
       type
     end
   end

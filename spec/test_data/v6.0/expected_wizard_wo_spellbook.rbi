@@ -1134,7 +1134,7 @@ module Wizard::GeneratedAssociationMethods
   sig { params(value: T::Enumerable[::ActiveStorage::Blob]).void }
   def hats_blobs=(value); end
 
-  sig { returns(T.nilable(T.untyped)) }
+  sig { returns(T.untyped) }
   def school; end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: T.untyped).void)).returns(T.untyped) }
@@ -1146,10 +1146,10 @@ module Wizard::GeneratedAssociationMethods
   sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: T.untyped).void)).returns(T.untyped) }
   def create_school!(*args, &block); end
 
-  sig { params(value: T.nilable(T.untyped)).void }
+  sig { params(value: T.untyped).void }
   def school=(value); end
 
-  sig { returns(T.nilable(T.untyped)) }
+  sig { returns(T.untyped) }
   def reload_school; end
 
   sig { returns(T.nilable(::ActiveStorage::Attachment)) }
