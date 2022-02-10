@@ -34,7 +34,7 @@ class SorbetRails::ModelPlugins::ActiveRecordAssoc < SorbetRails::ModelPlugins::
   def populate_single_assoc_getter_setter(assoc_module_rbi, assoc_name, reflection)
     # TODO allow people to specify the possible values of polymorphic associations
     assoc_class = assoc_should_be_untyped?(reflection) ? "T.untyped" : "::#{reflection.klass.name}"
-    assoc_type = (belongs_to_and_required?(reflection) || has_one_and_required?(reflection)) ? assoc_class : "T.nilable(#{assoc_class})"
+    assoc_type = (belongs_to_and_required?(reflection) || has_one_and_required?(reflection) || assoc_class == "T.untyped") ? assoc_class : "T.nilable(#{assoc_class})"
 
     params = [
       Parameter.new("*args", type: "T.untyped"),
