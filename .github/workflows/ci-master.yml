@@ -4,6 +4,8 @@ on:
   push:
     branches: # Trigger only on the main branch to avoid duplicate runs on PR branches
       - master
+  schedule: # trigger once a week to ensure that CI works even after dependent gem updates
+    - cron: 0 0 * * 1
 
 jobs:
   rspec:
