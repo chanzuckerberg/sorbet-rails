@@ -77,4 +77,27 @@ RSpec.describe SorbetRails::CustomFinderMethods do
       expect(wizards_3).to eq([harry, ron, hermione])
     end
   end
+
+  context 'test where_missing' do
+    # where.missing is only available in Rails 6.1 and above
+    if Rails.version < "6.1"
+      it 'raises an error' do
+        expect { Wizard.where_missing(:wand) }.to raise_error(NoMethodError)
+      end
+    else
+      it 'works with no arguments' do
+        missing_with_no_args = Wizard.where_missing
+        all_wizards = Wizard.all
+
+        expect(missing_with_no_args).to eq(all_wizards)
+      end
+
+      it 'retrieves wizards with missing wands' do
+        elder_wand = Wand.create!(wizard: harry, wood_type: :holly, core_type: :phoenix_feather)
+        wizards_without_wands = Wizard.where_missing(:wand).to_a
+
+        expect(wizards_without_wands).to eq(Wizard.all.to_a - [harry])
+      end
+    end
+  end
 end

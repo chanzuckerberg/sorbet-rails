@@ -64,6 +64,19 @@ class SorbetRails::ModelPlugins::ActiveRecordQuerying < SorbetRails::ModelPlugin
       )
     end
 
+    # https://api.rubyonrails.org/v6.1.4/classes/ActiveRecord/QueryMethods/WhereChain.html#method-i-missing
+    # where.missing is only available in Rails 6.1 and above
+    if Rails.version >= "6.1"
+      add_relation_query_method(
+        root,
+        "where_missing", # where_missing is injected by sorbet-rails
+        parameters: [
+          Parameter.new("*args", type: "Symbol"),
+        ],
+        builtin_query_method: true,
+      )
+    end
+
     add_relation_query_method(
       root,
       "extending",
