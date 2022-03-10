@@ -12,6 +12,7 @@ jobs:
 
     env:
       RAILS_VERSION: 6.0
+      CI: true
 
     steps:
     - uses: actions/checkout@v2
