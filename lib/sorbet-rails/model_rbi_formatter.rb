@@ -80,7 +80,7 @@ class SorbetRails::ModelRbiFormatter
     model_relation_rbi.create_include(self.model_query_methods_returning_relation_module_name)
     model_relation_rbi.create_constant(
       "Elem",
-      value: "type_member(fixed: #{model_class_name})",
+      value: "type_member {{fixed: #{model_class_name}}}",
     )
 
     model_assoc_relation_rbi = root.create_class(
@@ -90,7 +90,7 @@ class SorbetRails::ModelRbiFormatter
     model_assoc_relation_rbi.create_include(self.model_query_methods_returning_assoc_relation_module_name)
     model_assoc_relation_rbi.create_constant(
       "Elem",
-      value: "type_member(fixed: #{model_class_name})",
+      value: "type_member {{fixed: #{model_class_name}}}",
     )
 
     collection_proxy_rbi = root.create_class(
@@ -100,7 +100,7 @@ class SorbetRails::ModelRbiFormatter
     collection_proxy_rbi.create_include(self.model_query_methods_returning_assoc_relation_module_name)
     collection_proxy_rbi.create_constant(
       "Elem",
-      value: "type_member(fixed: #{self.model_class_name})",
+      value: "type_member {{fixed: #{self.model_class_name}}}",
     )
 
     model_rbi = root.create_class(
