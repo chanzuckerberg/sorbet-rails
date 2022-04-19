@@ -254,7 +254,7 @@ class Wand::ActiveRecord_Relation < ActiveRecord::Relation
   include Wand::ActiveRelation_WhereNot
   include Wand::CustomFinderMethods
   include Wand::QueryMethodsReturningRelation
-  Elem = type_member(fixed: Wand)
+  Elem = type_member {{fixed: Wand}}
 
   sig { params(args: T.untyped).returns(Wand::ActiveRecord_Relation) }
   def basilisk_horn(*args); end
@@ -273,7 +273,7 @@ class Wand::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
   include Wand::ActiveRelation_WhereNot
   include Wand::CustomFinderMethods
   include Wand::QueryMethodsReturningAssociationRelation
-  Elem = type_member(fixed: Wand)
+  Elem = type_member {{fixed: Wand}}
 
   sig { params(args: T.untyped).returns(Wand::ActiveRecord_AssociationRelation) }
   def basilisk_horn(*args); end
@@ -291,7 +291,7 @@ end
 class Wand::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include Wand::CustomFinderMethods
   include Wand::QueryMethodsReturningAssociationRelation
-  Elem = type_member(fixed: Wand)
+  Elem = type_member {{fixed: Wand}}
 
   sig { params(args: T.untyped).returns(Wand::ActiveRecord_AssociationRelation) }
   def basilisk_horn(*args); end

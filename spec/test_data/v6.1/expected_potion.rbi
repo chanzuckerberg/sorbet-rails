@@ -293,20 +293,20 @@ class Potion::ActiveRecord_Relation < ActiveRecord::Relation
   include Potion::ActiveRelation_WhereNot
   include Potion::CustomFinderMethods
   include Potion::QueryMethodsReturningRelation
-  Elem = type_member(fixed: Potion)
+  Elem = type_member {{fixed: Potion}}
 end
 
 class Potion::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
   include Potion::ActiveRelation_WhereNot
   include Potion::CustomFinderMethods
   include Potion::QueryMethodsReturningAssociationRelation
-  Elem = type_member(fixed: Potion)
+  Elem = type_member {{fixed: Potion}}
 end
 
 class Potion::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include Potion::CustomFinderMethods
   include Potion::QueryMethodsReturningAssociationRelation
-  Elem = type_member(fixed: Potion)
+  Elem = type_member {{fixed: Potion}}
 
   sig { params(records: T.any(Potion, T::Array[Potion])).returns(T.self_type) }
   def <<(*records); end

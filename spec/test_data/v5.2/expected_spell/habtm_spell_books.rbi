@@ -302,20 +302,20 @@ class Spell::HABTM_SpellBooks::ActiveRecord_Relation < ActiveRecord::Relation
   include Spell::HABTM_SpellBooks::ActiveRelation_WhereNot
   include Spell::HABTM_SpellBooks::CustomFinderMethods
   include Spell::HABTM_SpellBooks::QueryMethodsReturningRelation
-  Elem = type_member(fixed: Spell::HABTM_SpellBooks)
+  Elem = type_member {{fixed: Spell::HABTM_SpellBooks}}
 end
 
 class Spell::HABTM_SpellBooks::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
   include Spell::HABTM_SpellBooks::ActiveRelation_WhereNot
   include Spell::HABTM_SpellBooks::CustomFinderMethods
   include Spell::HABTM_SpellBooks::QueryMethodsReturningAssociationRelation
-  Elem = type_member(fixed: Spell::HABTM_SpellBooks)
+  Elem = type_member {{fixed: Spell::HABTM_SpellBooks}}
 end
 
 class Spell::HABTM_SpellBooks::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include Spell::HABTM_SpellBooks::CustomFinderMethods
   include Spell::HABTM_SpellBooks::QueryMethodsReturningAssociationRelation
-  Elem = type_member(fixed: Spell::HABTM_SpellBooks)
+  Elem = type_member {{fixed: Spell::HABTM_SpellBooks}}
 
   sig { params(records: T.any(Spell::HABTM_SpellBooks, T::Array[Spell::HABTM_SpellBooks])).returns(T.self_type) }
   def <<(*records); end

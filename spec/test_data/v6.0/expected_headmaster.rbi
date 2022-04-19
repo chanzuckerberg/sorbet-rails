@@ -335,20 +335,20 @@ class Headmaster::ActiveRecord_Relation < ActiveRecord::Relation
   include Headmaster::ActiveRelation_WhereNot
   include Headmaster::CustomFinderMethods
   include Headmaster::QueryMethodsReturningRelation
-  Elem = type_member(fixed: Headmaster)
+  Elem = type_member {{fixed: Headmaster}}
 end
 
 class Headmaster::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
   include Headmaster::ActiveRelation_WhereNot
   include Headmaster::CustomFinderMethods
   include Headmaster::QueryMethodsReturningAssociationRelation
-  Elem = type_member(fixed: Headmaster)
+  Elem = type_member {{fixed: Headmaster}}
 end
 
 class Headmaster::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include Headmaster::CustomFinderMethods
   include Headmaster::QueryMethodsReturningAssociationRelation
-  Elem = type_member(fixed: Headmaster)
+  Elem = type_member {{fixed: Headmaster}}
 
   sig { params(records: T.any(Headmaster, T::Array[Headmaster])).returns(T.self_type) }
   def <<(*records); end

@@ -446,7 +446,7 @@ class Squib::ActiveRecord_Relation < ActiveRecord::Relation
   include Squib::ActiveRelation_WhereNot
   include Squib::CustomFinderMethods
   include Squib::QueryMethodsReturningRelation
-  Elem = type_member(fixed: Squib)
+  Elem = type_member {{fixed: Squib}}
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_Relation) }
   def Gryffindor(*args); end
@@ -564,7 +564,7 @@ class Squib::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelatio
   include Squib::ActiveRelation_WhereNot
   include Squib::CustomFinderMethods
   include Squib::QueryMethodsReturningAssociationRelation
-  Elem = type_member(fixed: Squib)
+  Elem = type_member {{fixed: Squib}}
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
   def Gryffindor(*args); end
@@ -681,7 +681,7 @@ end
 class Squib::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include Squib::CustomFinderMethods
   include Squib::QueryMethodsReturningAssociationRelation
-  Elem = type_member(fixed: Squib)
+  Elem = type_member {{fixed: Squib}}
 
   sig { params(args: T.untyped).returns(Squib::ActiveRecord_AssociationRelation) }
   def Gryffindor(*args); end

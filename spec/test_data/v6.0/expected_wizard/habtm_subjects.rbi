@@ -326,20 +326,20 @@ class Wizard::HABTM_Subjects::ActiveRecord_Relation < ActiveRecord::Relation
   include Wizard::HABTM_Subjects::ActiveRelation_WhereNot
   include Wizard::HABTM_Subjects::CustomFinderMethods
   include Wizard::HABTM_Subjects::QueryMethodsReturningRelation
-  Elem = type_member(fixed: Wizard::HABTM_Subjects)
+  Elem = type_member {{fixed: Wizard::HABTM_Subjects}}
 end
 
 class Wizard::HABTM_Subjects::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
   include Wizard::HABTM_Subjects::ActiveRelation_WhereNot
   include Wizard::HABTM_Subjects::CustomFinderMethods
   include Wizard::HABTM_Subjects::QueryMethodsReturningAssociationRelation
-  Elem = type_member(fixed: Wizard::HABTM_Subjects)
+  Elem = type_member {{fixed: Wizard::HABTM_Subjects}}
 end
 
 class Wizard::HABTM_Subjects::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include Wizard::HABTM_Subjects::CustomFinderMethods
   include Wizard::HABTM_Subjects::QueryMethodsReturningAssociationRelation
-  Elem = type_member(fixed: Wizard::HABTM_Subjects)
+  Elem = type_member {{fixed: Wizard::HABTM_Subjects}}
 
   sig { params(records: T.any(Wizard::HABTM_Subjects, T::Array[Wizard::HABTM_Subjects])).returns(T.self_type) }
   def <<(*records); end

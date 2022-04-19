@@ -308,20 +308,20 @@ class Robe::ActiveRecord_Relation < ActiveRecord::Relation
   include Robe::ActiveRelation_WhereNot
   include Robe::CustomFinderMethods
   include Robe::QueryMethodsReturningRelation
-  Elem = type_member(fixed: Robe)
+  Elem = type_member {{fixed: Robe}}
 end
 
 class Robe::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
   include Robe::ActiveRelation_WhereNot
   include Robe::CustomFinderMethods
   include Robe::QueryMethodsReturningAssociationRelation
-  Elem = type_member(fixed: Robe)
+  Elem = type_member {{fixed: Robe}}
 end
 
 class Robe::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include Robe::CustomFinderMethods
   include Robe::QueryMethodsReturningAssociationRelation
-  Elem = type_member(fixed: Robe)
+  Elem = type_member {{fixed: Robe}}
 
   sig { params(records: T.any(Robe, T::Array[Robe])).returns(T.self_type) }
   def <<(*records); end
