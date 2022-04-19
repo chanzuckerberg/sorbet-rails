@@ -979,7 +979,7 @@ end
 
 class ActiveRecord::Result
   include(::Enumerable)
-  Elem = type_member(fixed: T.untyped)
+  Elem = type_member {{fixed: T.untyped}}
 end
 
 ActiveRecord::Type::BigInteger = ActiveModel::Type::BigInteger
@@ -1610,7 +1610,7 @@ end
 ActiveRecord::LogSubscriber::IGNORE_PAYLOAD_NAMES = T.let(T.unsafe(nil), T::Array[T.untyped])
 
 class ActiveRecord::Relation
-  Elem = type_member(fixed: T.untyped)
+  Elem = type_member {{fixed: T.untyped}}
 
   sig { returns(Integer) }
   def delete_all; end
