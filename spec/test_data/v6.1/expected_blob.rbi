@@ -41,7 +41,7 @@ class ActiveStorage::Blob::ActiveRecord_Relation < ActiveRecord::Relation
   include ActiveStorage::Blob::ActiveRelation_WhereNot
   include ActiveStorage::Blob::CustomFinderMethods
   include ActiveStorage::Blob::QueryMethodsReturningRelation
-  Elem = type_member(fixed: ActiveStorage::Blob)
+  Elem = type_member {{fixed: ActiveStorage::Blob}}
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_Relation) }
   def unattached(*args); end
@@ -54,7 +54,7 @@ class ActiveStorage::Blob::ActiveRecord_AssociationRelation < ActiveRecord::Asso
   include ActiveStorage::Blob::ActiveRelation_WhereNot
   include ActiveStorage::Blob::CustomFinderMethods
   include ActiveStorage::Blob::QueryMethodsReturningAssociationRelation
-  Elem = type_member(fixed: ActiveStorage::Blob)
+  Elem = type_member {{fixed: ActiveStorage::Blob}}
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
   def unattached(*args); end
@@ -66,7 +66,7 @@ end
 class ActiveStorage::Blob::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include ActiveStorage::Blob::CustomFinderMethods
   include ActiveStorage::Blob::QueryMethodsReturningAssociationRelation
-  Elem = type_member(fixed: ActiveStorage::Blob)
+  Elem = type_member {{fixed: ActiveStorage::Blob}}
 
   sig { params(args: T.untyped).returns(ActiveStorage::Blob::ActiveRecord_AssociationRelation) }
   def unattached(*args); end

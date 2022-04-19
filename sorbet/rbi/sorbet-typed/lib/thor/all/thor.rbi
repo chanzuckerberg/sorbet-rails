@@ -361,7 +361,7 @@ module Thor::Base::ClassMethods
 end
 
 class Thor::Command < ::Struct
-  Elem = type_member(fixed: T.untyped)
+  Elem = type_member {{fixed: T.untyped}}
 
   def initialize(name, description, long_description, usage, options = T.unsafe(nil)); end
 
@@ -392,9 +392,9 @@ module Thor::CoreExt
 end
 
 class Thor::CoreExt::HashWithIndifferentAccess < ::Hash
-  K = type_member(fixed: T.untyped)
-  V = type_member(fixed: T.untyped)
-  Elem = type_member(fixed: T.untyped)
+  K = type_member {{fixed: T.untyped}}
+  V = type_member {{fixed: T.untyped}}
+  Elem = type_member {{fixed: T.untyped}}
 
   def initialize(hash = T.unsafe(nil)); end
 
@@ -420,7 +420,7 @@ end
 Thor::Correctable = DidYouMean::Correctable
 
 class Thor::DynamicCommand < ::Thor::Command
-  Elem = type_member(fixed: T.untyped)
+  Elem = type_member {{fixed: T.untyped}}
 
   def initialize(name, options = T.unsafe(nil)); end
 
@@ -473,7 +473,7 @@ end
 Thor::HELP_MAPPINGS = T.let(T.unsafe(nil), T::Array[T.untyped])
 
 class Thor::HiddenCommand < ::Thor::Command
-  Elem = type_member(fixed: T.untyped)
+  Elem = type_member {{fixed: T.untyped}}
 
   def hidden?; end
 end

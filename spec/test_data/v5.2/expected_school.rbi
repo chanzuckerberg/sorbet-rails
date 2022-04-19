@@ -284,20 +284,20 @@ class School::ActiveRecord_Relation < ActiveRecord::Relation
   include School::ActiveRelation_WhereNot
   include School::CustomFinderMethods
   include School::QueryMethodsReturningRelation
-  Elem = type_member(fixed: School)
+  Elem = type_member {{fixed: School}}
 end
 
 class School::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
   include School::ActiveRelation_WhereNot
   include School::CustomFinderMethods
   include School::QueryMethodsReturningAssociationRelation
-  Elem = type_member(fixed: School)
+  Elem = type_member {{fixed: School}}
 end
 
 class School::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include School::CustomFinderMethods
   include School::QueryMethodsReturningAssociationRelation
-  Elem = type_member(fixed: School)
+  Elem = type_member {{fixed: School}}
 
   sig { params(records: T.any(School, T::Array[School])).returns(T.self_type) }
   def <<(*records); end

@@ -275,20 +275,20 @@ class Spell::ActiveRecord_Relation < ActiveRecord::Relation
   include Spell::ActiveRelation_WhereNot
   include Spell::CustomFinderMethods
   include Spell::QueryMethodsReturningRelation
-  Elem = type_member(fixed: Spell)
+  Elem = type_member {{fixed: Spell}}
 end
 
 class Spell::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
   include Spell::ActiveRelation_WhereNot
   include Spell::CustomFinderMethods
   include Spell::QueryMethodsReturningAssociationRelation
-  Elem = type_member(fixed: Spell)
+  Elem = type_member {{fixed: Spell}}
 end
 
 class Spell::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include Spell::CustomFinderMethods
   include Spell::QueryMethodsReturningAssociationRelation
-  Elem = type_member(fixed: Spell)
+  Elem = type_member {{fixed: Spell}}
 
   sig { params(records: T.any(Spell, T::Array[Spell])).returns(T.self_type) }
   def <<(*records); end

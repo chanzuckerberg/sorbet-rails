@@ -163,7 +163,7 @@ class SpellBook::ActiveRecord_Relation < ActiveRecord::Relation
   include SpellBook::ActiveRelation_WhereNot
   include SpellBook::CustomFinderMethods
   include SpellBook::QueryMethodsReturningRelation
-  Elem = type_member(fixed: SpellBook)
+  Elem = type_member {{fixed: SpellBook}}
 
   sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_Relation) }
   def biology(*args); end
@@ -191,7 +191,7 @@ class SpellBook::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRel
   include SpellBook::ActiveRelation_WhereNot
   include SpellBook::CustomFinderMethods
   include SpellBook::QueryMethodsReturningAssociationRelation
-  Elem = type_member(fixed: SpellBook)
+  Elem = type_member {{fixed: SpellBook}}
 
   sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_AssociationRelation) }
   def biology(*args); end
@@ -218,7 +218,7 @@ end
 class SpellBook::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include SpellBook::CustomFinderMethods
   include SpellBook::QueryMethodsReturningAssociationRelation
-  Elem = type_member(fixed: SpellBook)
+  Elem = type_member {{fixed: SpellBook}}
 
   sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_AssociationRelation) }
   def biology(*args); end

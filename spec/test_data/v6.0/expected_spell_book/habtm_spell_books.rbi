@@ -171,7 +171,7 @@ class SpellBook::HABTM_SpellBooks::ActiveRecord_Relation < ActiveRecord::Relatio
   include Enumerable
   extend T::Sig
   extend T::Generic
-  Elem = type_member(fixed: SpellBook::HABTM_SpellBooks)
+  Elem = type_member {{fixed: SpellBook::HABTM_SpellBooks}}
 
   sig { returns(SpellBook::HABTM_SpellBooks::ActiveRecord_Relation) }
   def all; end
@@ -297,7 +297,7 @@ class SpellBook::HABTM_SpellBooks::ActiveRecord_AssociationRelation < ActiveReco
   include Enumerable
   extend T::Sig
   extend T::Generic
-  Elem = type_member(fixed: SpellBook::HABTM_SpellBooks)
+  Elem = type_member {{fixed: SpellBook::HABTM_SpellBooks}}
 
   sig { returns(SpellBook::HABTM_SpellBooks::ActiveRecord_AssociationRelation) }
   def all; end
@@ -493,7 +493,7 @@ class SpellBook::HABTM_SpellBooks::ActiveRecord_Associations_CollectionProxy < A
   include Enumerable
   extend T::Sig
   extend T::Generic
-  Elem = type_member(fixed: SpellBook::HABTM_SpellBooks)
+  Elem = type_member {{fixed: SpellBook::HABTM_SpellBooks}}
 
   sig { returns(SpellBook::HABTM_SpellBooks::ActiveRecord_AssociationRelation) }
   def all; end

@@ -552,7 +552,7 @@ class Wizard::ActiveRecord_Relation < ActiveRecord::Relation
   include Wizard::ActiveRelation_WhereNot
   include Wizard::CustomFinderMethods
   include Wizard::QueryMethodsReturningRelation
-  Elem = type_member(fixed: Wizard)
+  Elem = type_member {{fixed: Wizard}}
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_Relation) }
   def Alastor_Mad_Eye_Moody(*args); end
@@ -700,7 +700,7 @@ class Wizard::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelati
   include Wizard::ActiveRelation_WhereNot
   include Wizard::CustomFinderMethods
   include Wizard::QueryMethodsReturningAssociationRelation
-  Elem = type_member(fixed: Wizard)
+  Elem = type_member {{fixed: Wizard}}
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
   def Alastor_Mad_Eye_Moody(*args); end
@@ -847,7 +847,7 @@ end
 class Wizard::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include Wizard::CustomFinderMethods
   include Wizard::QueryMethodsReturningAssociationRelation
-  Elem = type_member(fixed: Wizard)
+  Elem = type_member {{fixed: Wizard}}
 
   sig { params(args: T.untyped).returns(Wizard::ActiveRecord_AssociationRelation) }
   def Alastor_Mad_Eye_Moody(*args); end

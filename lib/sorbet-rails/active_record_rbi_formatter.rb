@@ -40,7 +40,7 @@ class SorbetRails::ActiveRecordRbiFormatter
       class_rbi.create_include("Enumerable")
       # class_rbi.create_constant(
       #   "Elem",
-      #   value: "type_member(fixed: T.untyped)",
+      #   value: "type_member {{fixed: T.untyped}}",
       # )
 
       create_elem_specific_query_methods(class_rbi, type: 'Elem', class_method: false)
@@ -75,7 +75,7 @@ class SorbetRails::ActiveRecordRbiFormatter
     parlour.root.create_class("ActiveRecord::AssociationRelation", superclass: "ActiveRecord::Relation") do |class_rbi|
       class_rbi.create_constant(
         "Elem",
-        value: "type_member(fixed: T.untyped)",
+        value: "type_member {{fixed: T.untyped}}",
       )
 
       # Ideally we shouldn't need to define these since this class inherits from
@@ -110,7 +110,7 @@ class SorbetRails::ActiveRecordRbiFormatter
     parlour.root.create_class("ActiveRecord::Associations::CollectionProxy", superclass: "ActiveRecord::Relation") do |class_rbi|
       class_rbi.create_constant(
         "Elem",
-        value: "type_member(fixed: T.untyped)",
+        value: "type_member {{fixed: T.untyped}}",
       )
 
       # This _should_ work which would let us remove it from the enumerable_collections

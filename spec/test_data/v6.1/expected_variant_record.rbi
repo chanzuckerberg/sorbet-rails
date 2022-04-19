@@ -38,7 +38,7 @@ class ActiveStorage::VariantRecord::ActiveRecord_Relation < ActiveRecord::Relati
   include ActiveStorage::VariantRecord::ActiveRelation_WhereNot
   include ActiveStorage::VariantRecord::CustomFinderMethods
   include ActiveStorage::VariantRecord::QueryMethodsReturningRelation
-  Elem = type_member(fixed: ActiveStorage::VariantRecord)
+  Elem = type_member {{fixed: ActiveStorage::VariantRecord}}
 
   sig { params(args: T.untyped).returns(ActiveStorage::VariantRecord::ActiveRecord_Relation) }
   def with_attached_image(*args); end
@@ -48,7 +48,7 @@ class ActiveStorage::VariantRecord::ActiveRecord_AssociationRelation < ActiveRec
   include ActiveStorage::VariantRecord::ActiveRelation_WhereNot
   include ActiveStorage::VariantRecord::CustomFinderMethods
   include ActiveStorage::VariantRecord::QueryMethodsReturningAssociationRelation
-  Elem = type_member(fixed: ActiveStorage::VariantRecord)
+  Elem = type_member {{fixed: ActiveStorage::VariantRecord}}
 
   sig { params(args: T.untyped).returns(ActiveStorage::VariantRecord::ActiveRecord_AssociationRelation) }
   def with_attached_image(*args); end
@@ -57,7 +57,7 @@ end
 class ActiveStorage::VariantRecord::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include ActiveStorage::VariantRecord::CustomFinderMethods
   include ActiveStorage::VariantRecord::QueryMethodsReturningAssociationRelation
-  Elem = type_member(fixed: ActiveStorage::VariantRecord)
+  Elem = type_member {{fixed: ActiveStorage::VariantRecord}}
 
   sig { params(args: T.untyped).returns(ActiveStorage::VariantRecord::ActiveRecord_AssociationRelation) }
   def with_attached_image(*args); end

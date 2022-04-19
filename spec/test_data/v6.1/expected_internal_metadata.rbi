@@ -311,20 +311,20 @@ class ActiveRecord::InternalMetadata::ActiveRecord_Relation < ActiveRecord::Rela
   include ActiveRecord::InternalMetadata::ActiveRelation_WhereNot
   include ActiveRecord::InternalMetadata::CustomFinderMethods
   include ActiveRecord::InternalMetadata::QueryMethodsReturningRelation
-  Elem = type_member(fixed: ActiveRecord::InternalMetadata)
+  Elem = type_member {{fixed: ActiveRecord::InternalMetadata}}
 end
 
 class ActiveRecord::InternalMetadata::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
   include ActiveRecord::InternalMetadata::ActiveRelation_WhereNot
   include ActiveRecord::InternalMetadata::CustomFinderMethods
   include ActiveRecord::InternalMetadata::QueryMethodsReturningAssociationRelation
-  Elem = type_member(fixed: ActiveRecord::InternalMetadata)
+  Elem = type_member {{fixed: ActiveRecord::InternalMetadata}}
 end
 
 class ActiveRecord::InternalMetadata::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include ActiveRecord::InternalMetadata::CustomFinderMethods
   include ActiveRecord::InternalMetadata::QueryMethodsReturningAssociationRelation
-  Elem = type_member(fixed: ActiveRecord::InternalMetadata)
+  Elem = type_member {{fixed: ActiveRecord::InternalMetadata}}
 
   sig { params(records: T.any(ActiveRecord::InternalMetadata, T::Array[ActiveRecord::InternalMetadata])).returns(T.self_type) }
   def <<(*records); end

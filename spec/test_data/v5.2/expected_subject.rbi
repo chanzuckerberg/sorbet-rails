@@ -275,20 +275,20 @@ class Subject::ActiveRecord_Relation < ActiveRecord::Relation
   include Subject::ActiveRelation_WhereNot
   include Subject::CustomFinderMethods
   include Subject::QueryMethodsReturningRelation
-  Elem = type_member(fixed: Subject)
+  Elem = type_member {{fixed: Subject}}
 end
 
 class Subject::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelation
   include Subject::ActiveRelation_WhereNot
   include Subject::CustomFinderMethods
   include Subject::QueryMethodsReturningAssociationRelation
-  Elem = type_member(fixed: Subject)
+  Elem = type_member {{fixed: Subject}}
 end
 
 class Subject::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
   include Subject::CustomFinderMethods
   include Subject::QueryMethodsReturningAssociationRelation
-  Elem = type_member(fixed: Subject)
+  Elem = type_member {{fixed: Subject}}
 
   sig { params(records: T.any(Subject, T::Array[Subject])).returns(T.self_type) }
   def <<(*records); end

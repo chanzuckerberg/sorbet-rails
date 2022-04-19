@@ -133,7 +133,7 @@ class ActiveRecord::Relation
 end
 
 class ActiveRecord::AssociationRelation < ActiveRecord::Relation
-  Elem = type_member(fixed: T.untyped)
+  Elem = type_member {{fixed: T.untyped}}
 
   sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Elem).void)).returns(Elem) }
   def new(attributes = nil, &block); end
@@ -149,7 +149,7 @@ class ActiveRecord::AssociationRelation < ActiveRecord::Relation
 end
 
 class ActiveRecord::Associations::CollectionProxy < ActiveRecord::Relation
-  Elem = type_member(fixed: T.untyped)
+  Elem = type_member {{fixed: T.untyped}}
 
   sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Elem).void)).returns(Elem) }
   def new(attributes = nil, &block); end

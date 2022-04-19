@@ -182,7 +182,7 @@ class Wizard::HABTM_Subjects::ActiveRecord_Relation < ActiveRecord::Relation
   include Enumerable
   extend T::Sig
   extend T::Generic
-  Elem = type_member(fixed: Wizard::HABTM_Subjects)
+  Elem = type_member {{fixed: Wizard::HABTM_Subjects}}
 
   sig { returns(Wizard::HABTM_Subjects::ActiveRecord_Relation) }
   def all; end
@@ -296,7 +296,7 @@ class Wizard::HABTM_Subjects::ActiveRecord_AssociationRelation < ActiveRecord::A
   include Enumerable
   extend T::Sig
   extend T::Generic
-  Elem = type_member(fixed: Wizard::HABTM_Subjects)
+  Elem = type_member {{fixed: Wizard::HABTM_Subjects}}
 
   sig { returns(Wizard::HABTM_Subjects::ActiveRecord_AssociationRelation) }
   def all; end
@@ -480,7 +480,7 @@ class Wizard::HABTM_Subjects::ActiveRecord_Associations_CollectionProxy < Active
   include Enumerable
   extend T::Sig
   extend T::Generic
-  Elem = type_member(fixed: Wizard::HABTM_Subjects)
+  Elem = type_member {{fixed: Wizard::HABTM_Subjects}}
 
   sig { returns(Wizard::HABTM_Subjects::ActiveRecord_AssociationRelation) }
   def all; end
