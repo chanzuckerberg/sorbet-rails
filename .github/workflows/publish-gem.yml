@@ -3,22 +3,11 @@ name: publish-gem
 on:
   workflow_dispatch:
 
-
 jobs:
   build:
     runs-on: ubuntu-latest
 
-    env:
-      RAILS_VERSION: 6.0
-
     steps:
-    - uses: actions/checkout@v2
-    - uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: 2.7
-        # bundler-cache: true -- this messes up some dynamic constants
-    - run: "./spec/bin/run_spec.sh"
-    - run: bundle exec srb tc
     - name: Release Gem
       uses: dawidd6/action-publish-gem@v1
       with:
