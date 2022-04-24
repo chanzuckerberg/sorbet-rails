@@ -6,9 +6,12 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Release Gem
-      uses: dawidd6/action-publish-gem@v1
-      with:
-        api_key: ${{secrets.RUBYGEMS_API_KEY}}
+      - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7
+      - name: Release Gem
+        uses: dawidd6/action-publish-gem@v1
+        with:
+          api_key: ${{secrets.RUBYGEMS_API_KEY}}
