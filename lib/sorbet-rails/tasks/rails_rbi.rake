@@ -26,6 +26,9 @@ namespace :rails_rbi do
 
   desc "Generate rbis for rails routes"
   task :routes, [:root_dir] => :environment do |t, args|
+    # Skip ActionDispatch if not included
+    next unless defined?(ActionDispatch)
+
     all_routes = Rails.application.routes.routes
     require "action_dispatch/routing/inspector"
     inspector = ActionDispatch::Routing::RoutesInspector.new(all_routes)
@@ -61,6 +64,9 @@ namespace :rails_rbi do
 
   desc "Generate rbis for rails models. Pass models name to regenerate rbi for only the given models."
   task models: :environment do |t, args|
+    # Skip ActiveRecord if not included
+    next unless defined?(ActiveRecord)
+
     SorbetRails::Utils.rails_eager_load_all!
 
     all_models = Set.new(ActiveRecord::Base.descendants + whitelisted_models - blacklisted_models)
@@ -95,6 +101,9 @@ namespace :rails_rbi do
 
   desc "Generate rbis for rails helpers."
   task helpers: :environment do |t, args|
+    # Skip ActionController if not included
+    next unless defined?(ActionController)
+
     SorbetRails::Utils.rails_eager_load_all!
 
     # API controller does not include ActionController::Helpers
@@ -120,6 +129,9 @@ namespace :rails_rbi do
 
   desc "Generate rbis for rails mailers"
   task :mailers, [:root_dir] => :environment do |t, args|
+    # Skip ActiveRecord if not included
+    next unless defined?(ActionMailer)
+
     SorbetRails::Utils.rails_eager_load_all!
     all_mailers = ActionMailer::Base.descendants
 
@@ -138,6 +150,9 @@ namespace :rails_rbi do
 
   desc "Generate rbis for rails mailers"
   task :jobs, [:root_dir] => :environment do |t, args|
+    # Skip ActiveJob if not included
+    next unless defined?(ActiveJob)
+
     SorbetRails::Utils.rails_eager_load_all!
     all_jobs = ActiveJob::Base.descendants
 
