@@ -58,6 +58,12 @@ class ActiveRecord::Relation
   sig { returns(Elem) }
   def last!; end
 
+  sig { returns(T.nilable(Elem)) }
+  def take; end
+
+  sig { returns(Elem) }
+  def take!; end
+
   sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: Elem).void)).returns(Elem) }
   def create(attributes = nil, &block); end
 

@@ -56,6 +56,12 @@ class ActiveRecord::Base
   sig { returns(T.attached_class) }
   def self.last!; end
 
+  sig { returns(T.nilable(T.attached_class)) }
+  def self.take; end
+
+  sig { returns(T.attached_class) }
+  def self.take!; end
+
   sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: T.attached_class).void)).returns(T.attached_class) }
   def self.create(attributes = nil, &block); end
 
