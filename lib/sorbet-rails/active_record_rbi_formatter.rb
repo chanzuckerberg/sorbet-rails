@@ -220,7 +220,7 @@ class SorbetRails::ActiveRecordRbiFormatter
       )
     end
 
-    item_methods = %w(first first! second second! third third! third_to_last third_to_last! second_to_last second_to_last! last last!)
+    item_methods = %w(first first! second second! third third! third_to_last third_to_last! second_to_last second_to_last! last last! take take!)
     item_methods.each do |item_method|
       class_rbi.create_method(
         item_method,
