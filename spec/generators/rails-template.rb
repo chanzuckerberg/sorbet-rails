@@ -125,12 +125,6 @@ def create_models
     end
   RUBY
 
-  # A nasty hack to add has_one_attached and has_many_attached to the models/wizard.rb file.
-  attachments = nil
-  if ['5.2', '6.0', '6.1'].include?(ENV["RAILS_VERSION"])
-    attachments = "has_one_attached :school_photo\n  has_many_attached :hats"
-  end
-
   file "app/models/wizard.rb", <<~RUBY
     class Wizard < ApplicationRecord
       validates :name, length: { minimum: 5 }, presence: true
@@ -194,7 +188,8 @@ def create_models
       belongs_to :school, optional: true
 
       scope :recent, -> { where('created_at > ?', 1.month.ago) }
-      #{attachments}
+      has_one_attached :school_photo
+      has_many_attached :hats
     end
   RUBY
 

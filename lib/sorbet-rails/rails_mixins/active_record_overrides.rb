@@ -55,7 +55,7 @@ module ::ActiveRecord::Enum
   sig { params(definitions: T::Hash[Symbol, T.untyped]).void }
   def _define_enum(definitions)
     ActiveRecordOverrides.instance.store_enum_call(self, definitions)
-    old_enum(definitions)
+    old_enum(**definitions)
   end
 
   sig { params(definitions: T::Hash[Symbol, T.untyped]).void }
