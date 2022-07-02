@@ -70,7 +70,7 @@ The generation task currently creates the following signatures:
 
 It is possible to add custom RBI generation logic for your custom module or gems via the plugin system. Check out the [plugins section](#extending-model-generation-task-with-custom-plugins) below if you are interested.
 
-We also add following methods to make type-checking more easily:
+We also add following methods to make type-checking easier:
 - [`find_n`, `first_n`, `last_n`](https://github.com/chanzuckerberg/sorbet-rails#find-first-and-last)
 - [`pluck_to_tstruct`](#pluck_to_tstruct-instead-of-pluck)
 - [`typed_enum`](#typed_enum-instead-of-enum)
