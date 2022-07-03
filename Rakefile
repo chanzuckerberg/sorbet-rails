@@ -10,9 +10,35 @@ namespace :update_spec do
 
   desc "Generate Rails apps for all versions."
   task :all do |t, args|
+    Rake::Task['update_spec:v7_0'].invoke
     Rake::Task['update_spec:v6_1'].invoke
     Rake::Task['update_spec:v6_0'].invoke
     Rake::Task['update_spec:v5_2'].invoke
+  end
+
+  desc "Delete the Rails 7.0 spec directory and regenerate it."
+  task :v7_0 do |t, args|
+    Bundler.with_clean_env do
+      FileUtils.rm_rf 'spec/support/v7.0' if File.directory?('spec/support/v7.0')
+      system("gem install rails -v 7.0.3")
+      system("rails _7.0.3_ -v")
+      command = [
+        "RAILS_VERSION='7.0'",
+        "rails _7.0.3_ new",
+        "--template spec/generators/rails-template.rb",
+        "spec/support/v7.0",
+        "--skip-action-cable",
+        "--skip-action-text",
+        "--skip-asset-pipeline",
+        "--skip-bootsnap",
+        "--skip-hotwire",
+        "--skip-javascript",
+        "--skip-listen",
+        "--skip-spring",
+        "--skip-test"
+      ].join(" ")
+      system(command)
+    end
   end
 
   desc "Delete the Rails 6.1 spec directory and regenerate it."
@@ -47,7 +73,7 @@ namespace :update_spec do
 
   desc "Update sorbet_test_cases.rb in all the Rails apps in spec/support."
   task :sorbet_test_cases do |t, args|
-    ['v6.1', 'v6.0', 'v5.2'].each do |version|
+    ['v7.0', 'v6.1', 'v6.0', 'v5.2'].each do |version|
       FileUtils.cp("spec/generators/sorbet_test_cases.rb", "spec/support/#{version}/sorbet_test_cases.rb")
     end
   end

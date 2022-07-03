@@ -33,7 +33,7 @@ RSpec.describe 'rake rails_rbi:models', type: :task do
         'attachment.rbi',
         'blob.rbi',
       ]
-      if ENV["RAILS_VERSION"] == '6.1'
+      if Rails.gem_version >= Gem::Version.new('6.1.0')
         files += [
           'record.rbi',
           'variant_record.rbi',

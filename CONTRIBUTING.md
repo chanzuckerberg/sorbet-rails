@@ -90,6 +90,7 @@ You can also switch to a version of Rails with `RAILS_VERSION`:
 ❯ RAILS_VERSION=5.2 ./spec/bin/run_spec.sh
 ❯ RAILS_VERSION=6.0 ./spec/bin/run_spec.sh
 ❯ RAILS_VERSION=6.1 ./spec/bin/run_spec.sh
+❯ RAILS_VERSION=7.0 ./spec/bin/run_spec.sh
 ```
 
 #### Debugging
