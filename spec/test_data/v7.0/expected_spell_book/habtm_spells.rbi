@@ -193,6 +193,9 @@ module SpellBook::HABTM_Spells::QueryMethodsReturningRelation
   sig { params(args: Symbol).returns(SpellBook::HABTM_Spells::ActiveRecord_Relation) }
   def where_missing(*args); end
 
+  sig { params(column: Symbol, values: T::Array[T.untyped]).returns(SpellBook::HABTM_Spells::ActiveRecord_Relation) }
+  def in_order_of(column, values); end
+
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::HABTM_Spells::ActiveRecord_Relation) }
   def extending(*args, &block); end
 
@@ -311,6 +314,9 @@ module SpellBook::HABTM_Spells::QueryMethodsReturningAssociationRelation
 
   sig { params(args: Symbol).returns(SpellBook::HABTM_Spells::ActiveRecord_AssociationRelation) }
   def where_missing(*args); end
+
+  sig { params(column: Symbol, values: T::Array[T.untyped]).returns(SpellBook::HABTM_Spells::ActiveRecord_AssociationRelation) }
+  def in_order_of(column, values); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(SpellBook::HABTM_Spells::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
