@@ -178,6 +178,7 @@ GEM
       sorbet-runtime (>= 0.4.4704)
     sorbet-runtime (0.5.10139)
     sorbet-static (0.5.10139-universal-darwin-20)
+    sorbet-static (0.5.10139-universal-darwin-21)
     sqlite3 (1.4.4)
     strscan (3.0.3)
     thor (1.2.1)
@@ -196,6 +197,7 @@ GEM
 
 PLATFORMS
   x86_64-darwin-20
+  x86_64-darwin-21
 
 DEPENDENCIES
   debug

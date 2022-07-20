@@ -86,6 +86,8 @@ T.assert_type!(Wizard.eager_load(:spell_books), Wizard::ActiveRecord_Relation)
 T.assert_type!(Wizard.order(:id), Wizard::ActiveRecord_Relation)
 T.assert_type!(Wizard.select { |r| r.id == 1 }, T::Array[Wizard])
 T.assert_type!(Wizard.select_columns(:id, :name), Wizard::ActiveRecord_Relation)
+T.assert_type!(Wizard.where_missing(:wand), Wizard::ActiveRecord_Relation)
+T.assert_type!(Wizard.in_order_of(:id, [1, 2, 3]), Wizard::ActiveRecord_Relation)
 
 # Finder methods -- ActiveRecord::Relation
 T.assert_type!(Wizard.all.exists?(name: 'Harry Potter'), T::Boolean)
@@ -150,6 +152,9 @@ T.assert_type!(Wizard.all.eager_load(:spell_books), Wizard::ActiveRecord_Relatio
 T.assert_type!(Wizard.all.order(:id), Wizard::ActiveRecord_Relation)
 T.assert_type!(Wizard.all.select { |r| r.id == 1 }, T::Array[Wizard])
 T.assert_type!(Wizard.all.select_columns(:id, :name), Wizard::ActiveRecord_Relation)
+T.assert_type!(Wizard.all.where_missing(:wand), Wizard::ActiveRecord_Relation)
+T.assert_type!(Wizard.all.in_order_of(:id, [1, 2, 3]), Wizard::ActiveRecord_Relation)
+
 # Enumerable methods
 Wizard.all.each { |w| T.assert_type!(w, Wizard) }
 Wizard.all.map { |w| T.assert_type!(w, Wizard) }
@@ -206,6 +211,7 @@ T.assert_type!(spell_books.none? { |r| r.id > 1 }, T::Boolean)
 T.assert_type!(spell_books.one? { |r| r.id > 1 }, T::Boolean)
 # T.assert_type!(spell_books.update_all(name: 'Fantastic Beasts'), Integer) # Ignored until we add support
 # T.assert_type!(spell_books.delete_all, Integer) # Ignored until we add support
+
 # Query methods
 T.assert_type!(spell_books.all, SpellBook::ActiveRecord_AssociationRelation)
 T.assert_type!(spell_books.recent, SpellBook::ActiveRecord_AssociationRelation) # Named scope
@@ -220,6 +226,8 @@ T.assert_type!(spell_books.eager_load(:wizard), SpellBook::ActiveRecord_Associat
 T.assert_type!(spell_books.order(:id), SpellBook::ActiveRecord_AssociationRelation)
 T.assert_type!(spell_books.select { |r| r.id == 1 }, T::Array[SpellBook])
 T.assert_type!(spell_books.select_columns(:id, :name), SpellBook::ActiveRecord_AssociationRelation)
+T.assert_type!(spell_books.where_missing(:wizard), SpellBook::ActiveRecord_AssociationRelation)
+T.assert_type!(spell_books.in_order_of(:id, [1, 2, 3]), SpellBook::ActiveRecord_AssociationRelation)
 
 # Enumerable methods
 spell_books.each { |s| T.assert_type!(s, SpellBook) }

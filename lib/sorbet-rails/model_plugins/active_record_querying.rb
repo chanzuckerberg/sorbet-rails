@@ -30,6 +30,7 @@ class SorbetRails::ModelPlugins::ActiveRecordQuerying < SorbetRails::ModelPlugin
       :where, :rewhere, :preload, :extract_associated, :eager_load, :includes, :from, :lock, :readonly, :or,
       :having, :create_with, :distinct, :references, :none, :unscope, :optimizer_hints, :merge, :except, :only,
     ]
+
     model_query_relation_methods.each do |method_name|
       add_relation_query_method(
         root,
@@ -72,6 +73,19 @@ class SorbetRails::ModelPlugins::ActiveRecordQuerying < SorbetRails::ModelPlugin
         "where_missing", # where_missing is injected by sorbet-rails
         parameters: [
           Parameter.new("*args", type: "Symbol"),
+        ],
+        builtin_query_method: true,
+      )
+    end
+
+    # https://api.rubyonrails.org/v7.0.0/classes/ActiveRecord/QueryMethods.html#method-i-in_order_of
+    if Rails.version >= "7.0"
+      add_relation_query_method(
+        root,
+        "in_order_of",
+        parameters: [
+          Parameter.new("column", type: "Symbol"),
+          Parameter.new("values", type: "T::Array[T.untyped]")
         ],
         builtin_query_method: true,
       )
