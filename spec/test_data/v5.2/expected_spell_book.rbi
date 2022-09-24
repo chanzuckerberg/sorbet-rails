@@ -29,6 +29,15 @@ end
 
 module SpellBook::GeneratedAttributeMethods
   sig { returns(String) }
+  def book_category; end
+
+  sig { params(value: T.any(Integer, String, Symbol)).void }
+  def book_category=(value); end
+
+  sig { returns(T::Boolean) }
+  def book_category?; end
+
+  sig { returns(String) }
   def book_type; end
 
   sig { params(value: T.any(Integer, String, Symbol)).void }
@@ -54,6 +63,15 @@ module SpellBook::GeneratedAttributeMethods
 
   sig { returns(T::Boolean) }
   def name?; end
+
+  sig { returns(String) }
+  def title; end
+
+  sig { params(value: T.any(String, Symbol)).void }
+  def title=(value); end
+
+  sig { returns(T::Boolean) }
+  def title?; end
 
   sig { returns(Integer) }
   def wizard_id; end
@@ -133,6 +151,12 @@ class SpellBook < ApplicationRecord
 
   sig { params(args: T.untyped).returns(SpellBook::ActiveRecord_Relation) }
   def self.unclassified(*args); end
+
+  sig { returns(SpellBook::BookType) }
+  def typed_book_category; end
+
+  sig { params(value: SpellBook::BookType).void }
+  def typed_book_category=(value); end
 
   sig { returns(SpellBook::BookType) }
   def typed_book_type; end

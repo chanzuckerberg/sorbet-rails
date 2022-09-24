@@ -92,6 +92,9 @@ def create_models
         dark_art: 999,
       }
 
+      alias_attribute :title, :name
+      alias_attribute :book_category, :book_type
+
       scope :recent, -> { where('created_at > ?', 1.month.ago) }
     end
   RUBY
@@ -178,6 +181,8 @@ def create_models
       serialize :newt_subjects # no specific data type, uses the default YAML Object coder
       serialize :pets, Array
       serialize :patronus_characteristics, JSON
+
+      alias_attribute :ordinary_wizarding_level_results, :owl_results
 
       has_one :wand
       has_many :spell_books

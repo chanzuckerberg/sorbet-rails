@@ -13,7 +13,13 @@ class SorbetRails::ModelPlugins::ActiveRecordSerializedAttribute < SorbetRails::
     model_class_rbi = root.create_class(self.model_class_name)
     model_class_rbi.create_include(serialize_module_name)
 
-    columns_hash.sort.each do |column_name, column_def|
+    model_defined_aliases = @model_class.send(:attribute_aliases)
+    column_names = columns_hash.keys
+    aliases_hash = model_class_columns_to_aliases(column_names, model_defined_aliases)
+    attributes_and_aliases_hash = model_class_attributes_and_aliases(columns_hash, aliases_hash)
+
+    attributes_and_aliases_hash.sort.each do |attribute_name, column_def|
+      column_name = column_def.name || attribute_name
       serialization_coder = serialization_coder_for_column(column_name)
       next unless serialization_coder
 
@@ -21,12 +27,12 @@ class SorbetRails::ModelPlugins::ActiveRecordSerializedAttribute < SorbetRails::
       attr_type = attr_types_for_coder(serialization_coder)
 
       serialize_module_rbi.create_method(
-        column_name.to_s,
+        attribute_name.to_s,
         return_type: ColumnType.new(base_type: attr_type, nilable: nilable).to_s,
       )
 
       serialize_module_rbi.create_method(
-        "#{column_name}=",
+        "#{attribute_name}=",
         parameters: [
           Parameter.new('value', type: ColumnType.new(base_type: attr_type, nilable: nilable).to_s)
         ],
@@ -34,7 +40,7 @@ class SorbetRails::ModelPlugins::ActiveRecordSerializedAttribute < SorbetRails::
       )
 
       serialize_module_rbi.create_method(
-        "#{column_name}?",
+        "#{attribute_name}?",
         return_type: 'T::Boolean',
       )
     end

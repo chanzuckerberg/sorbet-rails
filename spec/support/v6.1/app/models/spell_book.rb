@@ -14,5 +14,8 @@ class SpellBook < ApplicationRecord
     dark_art: 999,
   }
 
+  alias_attribute :title, :name
+  alias_attribute :book_category, :book_type
+
   scope :recent, -> { where('created_at > ?', 1.month.ago) }
 end

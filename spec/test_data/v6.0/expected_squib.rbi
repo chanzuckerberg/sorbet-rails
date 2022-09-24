@@ -122,6 +122,15 @@ module Squib::GeneratedSerializedAttributeMethods
   def newt_subjects?; end
 
   sig { returns(T.nilable(T::Hash[T.untyped, T.untyped])) }
+  def ordinary_wizarding_level_results; end
+
+  sig { params(value: T.nilable(T::Hash[T.untyped, T.untyped])).void }
+  def ordinary_wizarding_level_results=(value); end
+
+  sig { returns(T::Boolean) }
+  def ordinary_wizarding_level_results?; end
+
+  sig { returns(T.nilable(T::Hash[T.untyped, T.untyped])) }
   def owl_results; end
 
   sig { params(value: T.nilable(T::Hash[T.untyped, T.untyped])).void }
