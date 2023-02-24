@@ -42,6 +42,8 @@ class SorbetUtilsExampleClass
   def method_with_missing_args_name(p1, *); end
 
   def method_with_missing_kwargs_name(p1, **); end
+
+  def method_with_forward_everything(...); end
 end
 
 RSpec.describe SorbetRails::SorbetUtils do
@@ -171,5 +173,24 @@ RSpec.describe SorbetRails::SorbetUtils do
       Parameter.new('p1', type: 'T.untyped'),
       Parameter.new('**_', type: 'T.untyped'),
     ])
+  end
+
+  it 'works when using forward everything syntax' do
+    method_def = SorbetUtilsExampleClass.instance_method(:method_with_forward_everything)
+    parameters = SorbetRails::SorbetUtils.parameters_from_method_def(method_def)
+
+    # Ruby 3.2 changed now the forwarding syntax gets parsed to include kwargs
+    if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('3.2.0')
+      expect(parameters).to match_array([
+        Parameter.new('*_', type: 'T.untyped'),
+        Parameter.new('**_', type: 'T.untyped'),
+        Parameter.new('&_', type: 'T.untyped'),
+      ])
+    else
+      expect(parameters).to match_array([
+        Parameter.new('*_', type: 'T.untyped'),
+        Parameter.new('&_', type: 'T.untyped'),
+      ])
+    end
   end
 end
