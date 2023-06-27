@@ -31,13 +31,14 @@ module SorbetRails::PluckToTStruct
     end
 
     pluck_keys = (tstruct_keys - associations_keys) + associations.values
+    tstruct_keys_in_pluck_order = tstruct_keys - associations_keys + associations_keys
 
     # loosely based on pluck_to_hash gem
     # https://github.com/girishso/pluck_to_hash/blob/master/lib/pluck_to_hash.rb
     keys_one = pluck_keys.size == 1
     pluck(*pluck_keys).map do |row|
       row = [row] if keys_one
-      value = Hash[map_nil_values_to_default(tstruct_props, tstruct_keys.zip(row))]
+      value = Hash[map_nil_values_to_default(tstruct_props, tstruct_keys_in_pluck_order.zip(row))]
       tstruct.new(value)
     end
   end

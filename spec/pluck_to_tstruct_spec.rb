@@ -58,8 +58,8 @@ RSpec.describe SorbetRails::PluckToTStruct do
     include TStructComparable
 
     const :name, String
-    const :house, String
     const :wand_wood_type, String
+    const :house, String
   end
 
   class WizardWithDefaultParentEmailT < T::Struct
