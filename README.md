@@ -1,3 +1,6 @@
+# Notice
+This repository is no longer maintained and will be sunset. The Sorbet community has [endorsed](https://sorbet.org/blog/2022/07/27/srb-tapioca) the [Tapioca gem](https://github.com/Shopify/tapioca) for generating RBI's, including those for Rails. Please consider migrating over! 
+
 # sorbet-rails
 [![Gem Version](https://badge.fury.io/rb/sorbet-rails.svg)](https://badge.fury.io/rb/sorbet-rails)
 [![Build Status](https://github.com/chanzuckerberg/sorbet-rails/actions/workflows/ci-master.yml/badge.svg)](https://github.com/chanzuckerberg/sorbet-rails)
