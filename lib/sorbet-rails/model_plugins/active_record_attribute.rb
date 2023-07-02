@@ -12,28 +12,38 @@ class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugi
 
     model_class_rbi = root.create_class(self.model_class_name)
     model_class_rbi.create_include(attribute_module_name)
-    model_defined_enums = @model_class.defined_enums
 
-    columns_hash.sort.each do |column_name, column_def|
+    model_defined_enums = @model_class.defined_enums
+    model_defined_aliases = @model_class.send(:attribute_aliases)
+    column_names = columns_hash.keys
+    aliases_hash = model_class_columns_to_aliases(column_names, model_defined_aliases)
+    attributes_and_aliases_hash = model_class_attributes_and_aliases(columns_hash, aliases_hash)
+
+    attributes_and_aliases_hash.sort.each do |attribute_name, column_def|
+      column_name = column_def.name
+
       if model_defined_enums.has_key?(column_name)
         generate_enum_methods(
-          root,
-          model_class_rbi,
-          attribute_module_rbi,
-          model_defined_enums,
-          column_name,
-          column_def,
+          root: root,
+          model_class_rbi: model_class_rbi,
+          attribute_module_rbi: attribute_module_rbi,
+          model_defined_enums: model_defined_enums,
+          attribute_name: attribute_name,
+          column_name: column_name.presence || attribute_name,
+          column_def: column_def,
         )
       elsif serialization_coder_for_column(column_name)
         next # handled by the ActiveRecordSerializedAttribute plugin
       else
         column_type = type_for_column_def(column_def)
+
         attribute_module_rbi.create_method(
-          column_name.to_s,
+          attribute_name.to_s,
           return_type: column_type.to_s,
         )
+
         attribute_module_rbi.create_method(
-          "#{column_name}=",
+          "#{attribute_name}=",
           parameters: [
             Parameter.new("value", type: value_type_for_attr_writer(column_type))
           ],
@@ -42,11 +52,13 @@ class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugi
       end
 
       attribute_module_rbi.create_method(
-        "#{column_name}?",
+        "#{attribute_name}?",
         return_type: "T::Boolean",
       )
     end
   end
+
+  private
 
   sig {
     params(
@@ -54,17 +66,19 @@ class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugi
       model_class_rbi: Parlour::RbiGenerator::Namespace,
       attribute_module_rbi:  Parlour::RbiGenerator::Namespace,
       model_defined_enums: T::Hash[String, T::Hash[String, T.untyped]],
+      attribute_name: String,
       column_name: String,
       column_def: T.untyped,
     ).void
   }
   def generate_enum_methods(
-    root,
-    model_class_rbi,
-    attribute_module_rbi,
-    model_defined_enums,
-    column_name,
-    column_def
+    root:,
+    model_class_rbi:,
+    attribute_module_rbi:,
+    model_defined_enums:,
+    attribute_name:,
+    column_name:,
+    column_def:
   )
     should_skip_setter_getter = false
     nilable_column = nilable_column?(column_def)
@@ -91,11 +105,11 @@ class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugi
         # add directly to model_class_rbi because they are included
         # by sorbet's hidden.rbi
         model_class_rbi.create_method(
-          "typed_#{column_name}",
+          "typed_#{attribute_name}",
           return_type: assignable_type,
         )
         model_class_rbi.create_method(
-          "typed_#{column_name}=",
+          "typed_#{attribute_name}=",
           parameters: [
             Parameter.new("value", type: assignable_type)
           ],
@@ -112,11 +126,11 @@ class SorbetRails::ModelPlugins::ActiveRecordAttribute < SorbetRails::ModelPlugi
       return_type = "T.nilable(#{return_type})" if nilable_column
 
       attribute_module_rbi.create_method(
-        column_name.to_s,
+        attribute_name.to_s,
         return_type: return_type,
       )
       attribute_module_rbi.create_method(
-        "#{column_name}=",
+        "#{attribute_name}=",
         parameters: [
           Parameter.new("value", type: assignable_type)
         ],

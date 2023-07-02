@@ -8,6 +8,17 @@ T.assert_type!(wizard, Wizard)
 # -- model columns
 T.assert_type!(wizard.name, T.nilable(String))
 
+spell_book = wizard.spell_books.first!
+T.assert_type!(spell_book, SpellBook)
+
+# -- alias attributes
+T.assert_type!(spell_book.title, String) # standard alias attribute
+T.assert_type!(spell_book.book_category, String) # enum alias attribute
+T.assert_type!(
+  wizard.ordinary_wizarding_level_results, # serialized alias attribute
+  T.nilable(T::Hash[T.untyped, T.untyped])
+)
+
 # -- time/date columns
 T.assert_type!(wizard.created_at, ActiveSupport::TimeWithZone)
 T.assert_type!(wand.broken_at, T.nilable(Time))
@@ -161,7 +172,6 @@ T.assert_type!(Wizard.all.to_a, T::Array[Wizard])
 T.assert_type!(Wizard.all.empty?, T::Boolean)
 
 # Finder methods -- CollectionProxy
-spell_book = wizard.spell_books.first!
 spell_books = wizard.spell_books
 T.assert_type!(spell_books.exists?(name: 'Fantastic Beasts'), T::Boolean)
 T.assert_type!(spell_books.find(spell_book.id), SpellBook)

@@ -52,6 +52,8 @@ class Wizard < ApplicationRecord
   serialize :pets, Array
   serialize :patronus_characteristics, JSON
 
+  alias_attribute :ordinary_wizarding_level_results, :owl_results
+
   has_one :wand
   has_many :spell_books
   # habtm which is optional at the db level
